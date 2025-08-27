@@ -1,0 +1,501 @@
+complaint_id,complaint_text,area,department,priority,eta_days
+1,Irregular water supply in Hadapsar,Hadapsar,Sanitation,High,4
+2,Garbage not collected in Viman Nagar,Viman Nagar,Waste Management,Medium,4
+3,Irregular water supply in Wagholi,Wagholi,Road Maintenance,Low,4
+4,No electricity since morning in Camp,Camp,Sanitation,Low,2
+5,Overflowing garbage bin in Wagholi,Wagholi,Waste Management,Medium,6
+6,Overflowing garbage bin in Aundh,Aundh,Water Supply,Medium,2
+7,Garbage not collected in Kharadi,Kharadi,Road Maintenance,Medium,3
+8,Water leakage reported in Pimpri,Pimpri,Waste Management,Medium,7
+9,Drainage system is blocked in Camp,Camp,Waste Management,High,4
+10,No electricity since morning in Viman Nagar,Viman Nagar,Waste Management,Low,3
+11,Overflowing garbage bin in Camp,Camp,Road Maintenance,Medium,2
+12,Open manhole reported in Aundh,Aundh,Water Supply,Medium,7
+13,Road has major potholes in Pimpri,Pimpri,Electricity,High,4
+14,Overflowing garbage bin in Kharadi,Kharadi,Waste Management,Medium,1
+15,Streetlight not working in Pimpri,Pimpri,Water Supply,High,4
+16,Drainage system is blocked in Pimpri,Pimpri,Sanitation,High,1
+17,Water leakage reported in Hadapsar,Hadapsar,Waste Management,High,1
+18,No electricity since morning in Camp,Camp,Electricity,Low,2
+19,No electricity since morning in Baner,Baner,Electricity,Medium,6
+20,Streetlight not working in Baner,Baner,Sanitation,Medium,3
+21,Drainage system is blocked in Kothrud,Kothrud,Electricity,Medium,7
+22,Water leakage reported in Kothrud,Kothrud,Road Maintenance,High,1
+23,Water leakage reported in Kothrud,Kothrud,Road Maintenance,Medium,5
+24,Drainage system is blocked in Wagholi,Wagholi,Electricity,Medium,1
+25,Irregular water supply in Hadapsar,Hadapsar,Sanitation,Medium,1
+26,Streetlight not working in Baner,Baner,Waste Management,High,6
+27,Water leakage reported in Kothrud,Kothrud,Road Maintenance,Medium,5
+28,Open manhole reported in Baner,Baner,Water Supply,Medium,1
+29,Broken footpath in Camp,Camp,Sanitation,High,2
+30,No electricity since morning in Aundh,Aundh,Water Supply,Medium,2
+31,Irregular water supply in Kharadi,Kharadi,Sanitation,High,5
+32,Road has major potholes in Wagholi,Wagholi,Road Maintenance,High,2
+33,Streetlight not working in Kothrud,Kothrud,Water Supply,High,3
+34,Irregular water supply in Camp,Camp,Electricity,Medium,4
+35,No electricity since morning in Shivaji Nagar,Shivaji Nagar,Water Supply,High,3
+36,Open manhole reported in Camp,Camp,Road Maintenance,Medium,2
+37,Road has major potholes in Pimpri,Pimpri,Road Maintenance,Medium,4
+38,Open manhole reported in Hadapsar,Hadapsar,Electricity,Medium,3
+39,Streetlight not working in Viman Nagar,Viman Nagar,Water Supply,Medium,2
+40,Irregular water supply in Camp,Camp,Road Maintenance,Medium,5
+41,Broken footpath in Wagholi,Wagholi,Road Maintenance,Medium,2
+42,Broken footpath in Kharadi,Kharadi,Water Supply,Medium,5
+43,Streetlight not working in Baner,Baner,Road Maintenance,Medium,3
+44,Overflowing garbage bin in Pimpri,Pimpri,Waste Management,Medium,1
+45,Drainage system is blocked in Aundh,Aundh,Waste Management,Medium,2
+46,Road has major potholes in Shivaji Nagar,Shivaji Nagar,Water Supply,Medium,1
+47,Drainage system is blocked in Kothrud,Kothrud,Waste Management,High,2
+48,No electricity since morning in Viman Nagar,Viman Nagar,Waste Management,Medium,1
+49,Overflowing garbage bin in Baner,Baner,Road Maintenance,High,7
+50,Overflowing garbage bin in Viman Nagar,Viman Nagar,Road Maintenance,Medium,4
+51,Open manhole reported in Baner,Baner,Waste Management,Medium,7
+52,Water leakage reported in Viman Nagar,Viman Nagar,Road Maintenance,Medium,2
+53,Road has major potholes in Shivaji Nagar,Shivaji Nagar,Waste Management,High,5
+54,Open manhole reported in Wagholi,Wagholi,Sanitation,Medium,2
+55,Irregular water supply in Baner,Baner,Water Supply,Medium,2
+56,Garbage not collected in Kothrud,Kothrud,Water Supply,Medium,3
+57,Open manhole reported in Kothrud,Kothrud,Road Maintenance,Medium,7
+58,Road has major potholes in Baner,Baner,Sanitation,High,2
+59,Overflowing garbage bin in Kharadi,Kharadi,Electricity,High,4
+60,Garbage not collected in Wagholi,Wagholi,Water Supply,High,5
+61,Garbage not collected in Wagholi,Wagholi,Electricity,High,2
+62,Irregular water supply in Aundh,Aundh,Road Maintenance,Low,5
+63,Irregular water supply in Hadapsar,Hadapsar,Waste Management,Medium,7
+64,Water leakage reported in Pimpri,Pimpri,Water Supply,High,7
+65,Open manhole reported in Camp,Camp,Electricity,Medium,6
+66,Overflowing garbage bin in Viman Nagar,Viman Nagar,Road Maintenance,Medium,6
+67,Irregular water supply in Pimpri,Pimpri,Water Supply,High,2
+68,Broken footpath in Kharadi,Kharadi,Electricity,Medium,7
+69,Drainage system is blocked in Hadapsar,Hadapsar,Waste Management,Medium,1
+70,No electricity since morning in Pimpri,Pimpri,Water Supply,High,2
+71,Garbage not collected in Viman Nagar,Viman Nagar,Water Supply,Medium,5
+72,Drainage system is blocked in Aundh,Aundh,Road Maintenance,Medium,5
+73,Water leakage reported in Pimpri,Pimpri,Road Maintenance,Low,2
+74,Road has major potholes in Kothrud,Kothrud,Electricity,High,5
+75,Irregular water supply in Camp,Camp,Sanitation,High,5
+76,Garbage not collected in Camp,Camp,Electricity,Low,3
+77,Drainage system is blocked in Camp,Camp,Waste Management,Medium,6
+78,Water leakage reported in Baner,Baner,Electricity,High,1
+79,Water leakage reported in Hadapsar,Hadapsar,Waste Management,Medium,4
+80,No electricity since morning in Pimpri,Pimpri,Electricity,Medium,5
+81,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Waste Management,High,2
+82,Irregular water supply in Viman Nagar,Viman Nagar,Electricity,High,1
+83,Overflowing garbage bin in Baner,Baner,Road Maintenance,Medium,5
+84,Overflowing garbage bin in Shivaji Nagar,Shivaji Nagar,Water Supply,Low,5
+85,Broken footpath in Aundh,Aundh,Electricity,Medium,4
+86,Road has major potholes in Aundh,Aundh,Road Maintenance,Medium,5
+87,Garbage not collected in Aundh,Aundh,Water Supply,Low,5
+88,Overflowing garbage bin in Wagholi,Wagholi,Sanitation,Medium,1
+89,Irregular water supply in Pimpri,Pimpri,Sanitation,High,5
+90,Water leakage reported in Pimpri,Pimpri,Sanitation,High,7
+91,Overflowing garbage bin in Kothrud,Kothrud,Sanitation,Medium,2
+92,No electricity since morning in Hadapsar,Hadapsar,Waste Management,Medium,2
+93,Irregular water supply in Baner,Baner,Road Maintenance,Low,5
+94,Overflowing garbage bin in Pimpri,Pimpri,Road Maintenance,Medium,2
+95,Water leakage reported in Kharadi,Kharadi,Water Supply,High,3
+96,Irregular water supply in Shivaji Nagar,Shivaji Nagar,Electricity,Medium,6
+97,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Medium,5
+98,Drainage system is blocked in Wagholi,Wagholi,Water Supply,Low,5
+99,Road has major potholes in Camp,Camp,Electricity,Medium,3
+100,Streetlight not working in Shivaji Nagar,Shivaji Nagar,Sanitation,Medium,6
+101,Streetlight not working in Pimpri,Pimpri,Waste Management,Medium,3
+102,Broken footpath in Wagholi,Wagholi,Water Supply,Low,3
+103,Garbage not collected in Hadapsar,Hadapsar,Sanitation,Medium,1
+104,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Medium,7
+105,Road has major potholes in Aundh,Aundh,Electricity,Medium,4
+106,Open manhole reported in Wagholi,Wagholi,Electricity,Medium,2
+107,Open manhole reported in Camp,Camp,Electricity,High,4
+108,No electricity since morning in Baner,Baner,Water Supply,Low,6
+109,Water leakage reported in Kothrud,Kothrud,Waste Management,Medium,4
+110,Garbage not collected in Hadapsar,Hadapsar,Sanitation,Medium,2
+111,Streetlight not working in Wagholi,Wagholi,Waste Management,High,1
+112,No electricity since morning in Baner,Baner,Electricity,Medium,6
+113,Garbage not collected in Wagholi,Wagholi,Sanitation,Low,4
+114,Irregular water supply in Pimpri,Pimpri,Road Maintenance,High,2
+115,Road has major potholes in Kharadi,Kharadi,Road Maintenance,Low,1
+116,Water leakage reported in Aundh,Aundh,Electricity,Medium,7
+117,Broken footpath in Kharadi,Kharadi,Waste Management,Medium,2
+118,Garbage not collected in Aundh,Aundh,Water Supply,Medium,1
+119,Overflowing garbage bin in Camp,Camp,Water Supply,Low,3
+120,Road has major potholes in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Low,4
+121,Overflowing garbage bin in Pimpri,Pimpri,Electricity,Medium,2
+122,Overflowing garbage bin in Hadapsar,Hadapsar,Waste Management,Medium,2
+123,Irregular water supply in Kothrud,Kothrud,Sanitation,Medium,6
+124,Open manhole reported in Hadapsar,Hadapsar,Sanitation,High,1
+125,Road has major potholes in Kothrud,Kothrud,Sanitation,Low,1
+126,Broken footpath in Aundh,Aundh,Sanitation,High,3
+127,Drainage system is blocked in Camp,Camp,Road Maintenance,Medium,4
+128,Garbage not collected in Kharadi,Kharadi,Sanitation,Low,5
+129,Broken footpath in Baner,Baner,Water Supply,Medium,3
+130,Water leakage reported in Camp,Camp,Water Supply,Medium,3
+131,Open manhole reported in Wagholi,Wagholi,Road Maintenance,Medium,5
+132,Drainage system is blocked in Pimpri,Pimpri,Road Maintenance,High,1
+133,Road has major potholes in Aundh,Aundh,Water Supply,Medium,6
+134,Streetlight not working in Aundh,Aundh,Waste Management,Medium,3
+135,Overflowing garbage bin in Aundh,Aundh,Electricity,High,5
+136,Broken footpath in Viman Nagar,Viman Nagar,Waste Management,Medium,7
+137,Water leakage reported in Camp,Camp,Sanitation,Medium,7
+138,Open manhole reported in Viman Nagar,Viman Nagar,Sanitation,Medium,5
+139,No electricity since morning in Viman Nagar,Viman Nagar,Road Maintenance,High,5
+140,Broken footpath in Aundh,Aundh,Electricity,Medium,4
+141,Drainage system is blocked in Pimpri,Pimpri,Water Supply,Medium,3
+142,Road has major potholes in Hadapsar,Hadapsar,Waste Management,High,4
+143,No electricity since morning in Baner,Baner,Electricity,Medium,6
+144,Streetlight not working in Pimpri,Pimpri,Water Supply,Medium,4
+145,Streetlight not working in Viman Nagar,Viman Nagar,Road Maintenance,High,1
+146,Streetlight not working in Aundh,Aundh,Water Supply,High,1
+147,Garbage not collected in Baner,Baner,Electricity,Medium,4
+148,Irregular water supply in Camp,Camp,Water Supply,High,4
+149,Irregular water supply in Aundh,Aundh,Waste Management,Medium,2
+150,Streetlight not working in Hadapsar,Hadapsar,Sanitation,Medium,1
+151,Water leakage reported in Wagholi,Wagholi,Sanitation,Low,7
+152,Road has major potholes in Camp,Camp,Sanitation,Medium,4
+153,Broken footpath in Kharadi,Kharadi,Road Maintenance,Medium,6
+154,No electricity since morning in Hadapsar,Hadapsar,Waste Management,Medium,2
+155,Irregular water supply in Baner,Baner,Electricity,Medium,5
+156,Garbage not collected in Wagholi,Wagholi,Sanitation,Low,2
+157,Open manhole reported in Kharadi,Kharadi,Road Maintenance,Medium,6
+158,Streetlight not working in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,6
+159,Overflowing garbage bin in Camp,Camp,Road Maintenance,High,6
+160,Open manhole reported in Kharadi,Kharadi,Waste Management,Medium,4
+161,Water leakage reported in Wagholi,Wagholi,Electricity,Medium,1
+162,Drainage system is blocked in Hadapsar,Hadapsar,Road Maintenance,High,6
+163,Broken footpath in Baner,Baner,Electricity,Medium,1
+164,No electricity since morning in Viman Nagar,Viman Nagar,Sanitation,Low,2
+165,Overflowing garbage bin in Kothrud,Kothrud,Water Supply,High,6
+166,Drainage system is blocked in Viman Nagar,Viman Nagar,Sanitation,Medium,4
+167,No electricity since morning in Kharadi,Kharadi,Water Supply,Medium,6
+168,Water leakage reported in Aundh,Aundh,Water Supply,High,1
+169,Water leakage reported in Hadapsar,Hadapsar,Sanitation,High,2
+170,Drainage system is blocked in Aundh,Aundh,Electricity,High,6
+171,No electricity since morning in Hadapsar,Hadapsar,Water Supply,Medium,5
+172,Streetlight not working in Wagholi,Wagholi,Water Supply,Medium,7
+173,Irregular water supply in Camp,Camp,Road Maintenance,High,3
+174,Irregular water supply in Hadapsar,Hadapsar,Waste Management,High,5
+175,Overflowing garbage bin in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,6
+176,No electricity since morning in Kharadi,Kharadi,Water Supply,High,7
+177,Open manhole reported in Aundh,Aundh,Water Supply,Medium,4
+178,Irregular water supply in Shivaji Nagar,Shivaji Nagar,Electricity,High,1
+179,Broken footpath in Pimpri,Pimpri,Water Supply,Medium,7
+180,Broken footpath in Viman Nagar,Viman Nagar,Waste Management,Medium,7
+181,Overflowing garbage bin in Viman Nagar,Viman Nagar,Sanitation,Medium,5
+182,Road has major potholes in Aundh,Aundh,Electricity,High,2
+183,Open manhole reported in Pimpri,Pimpri,Road Maintenance,High,5
+184,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Water Supply,High,6
+185,No electricity since morning in Camp,Camp,Sanitation,Low,4
+186,Broken footpath in Camp,Camp,Waste Management,Low,5
+187,Irregular water supply in Kothrud,Kothrud,Road Maintenance,Low,7
+188,Drainage system is blocked in Camp,Camp,Sanitation,Medium,1
+189,Broken footpath in Wagholi,Wagholi,Waste Management,High,4
+190,Garbage not collected in Hadapsar,Hadapsar,Sanitation,High,3
+191,Irregular water supply in Pimpri,Pimpri,Road Maintenance,Medium,7
+192,No electricity since morning in Kharadi,Kharadi,Sanitation,Medium,7
+193,Drainage system is blocked in Aundh,Aundh,Sanitation,High,7
+194,Streetlight not working in Pimpri,Pimpri,Water Supply,High,6
+195,Garbage not collected in Camp,Camp,Waste Management,Medium,2
+196,Drainage system is blocked in Viman Nagar,Viman Nagar,Sanitation,Medium,3
+197,Road has major potholes in Baner,Baner,Electricity,Low,6
+198,Irregular water supply in Hadapsar,Hadapsar,Road Maintenance,High,4
+199,Open manhole reported in Pimpri,Pimpri,Sanitation,Low,3
+200,Irregular water supply in Camp,Camp,Electricity,High,3
+201,Streetlight not working in Pimpri,Pimpri,Water Supply,Medium,4
+202,Open manhole reported in Pimpri,Pimpri,Waste Management,Medium,3
+203,Road has major potholes in Kharadi,Kharadi,Water Supply,Medium,2
+204,Water leakage reported in Camp,Camp,Waste Management,Medium,5
+205,Water leakage reported in Kharadi,Kharadi,Electricity,High,7
+206,No electricity since morning in Camp,Camp,Electricity,Medium,4
+207,Road has major potholes in Pimpri,Pimpri,Waste Management,Low,4
+208,Broken footpath in Wagholi,Wagholi,Waste Management,Medium,7
+209,Overflowing garbage bin in Wagholi,Wagholi,Sanitation,High,6
+210,No electricity since morning in Pimpri,Pimpri,Road Maintenance,Medium,1
+211,Streetlight not working in Baner,Baner,Road Maintenance,Low,4
+212,Drainage system is blocked in Camp,Camp,Water Supply,Low,2
+213,Open manhole reported in Viman Nagar,Viman Nagar,Sanitation,Low,1
+214,Streetlight not working in Pimpri,Pimpri,Electricity,Medium,4
+215,Drainage system is blocked in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,5
+216,Irregular water supply in Viman Nagar,Viman Nagar,Electricity,High,1
+217,Road has major potholes in Kharadi,Kharadi,Sanitation,Medium,1
+218,Broken footpath in Viman Nagar,Viman Nagar,Road Maintenance,Medium,6
+219,Irregular water supply in Shivaji Nagar,Shivaji Nagar,Water Supply,Medium,7
+220,Road has major potholes in Camp,Camp,Waste Management,Low,7
+221,Open manhole reported in Hadapsar,Hadapsar,Sanitation,Medium,1
+222,Irregular water supply in Pimpri,Pimpri,Road Maintenance,Medium,4
+223,Streetlight not working in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Medium,1
+224,Drainage system is blocked in Aundh,Aundh,Road Maintenance,High,3
+225,Irregular water supply in Aundh,Aundh,Road Maintenance,Medium,6
+226,Drainage system is blocked in Kothrud,Kothrud,Water Supply,High,5
+227,Garbage not collected in Viman Nagar,Viman Nagar,Water Supply,High,4
+228,Overflowing garbage bin in Wagholi,Wagholi,Road Maintenance,Medium,6
+229,No electricity since morning in Kothrud,Kothrud,Sanitation,Medium,6
+230,Streetlight not working in Camp,Camp,Electricity,Medium,3
+231,Water leakage reported in Camp,Camp,Road Maintenance,Low,4
+232,Overflowing garbage bin in Kharadi,Kharadi,Water Supply,High,7
+233,Overflowing garbage bin in Baner,Baner,Road Maintenance,High,1
+234,Overflowing garbage bin in Hadapsar,Hadapsar,Water Supply,Medium,4
+235,Broken footpath in Aundh,Aundh,Sanitation,Medium,5
+236,Streetlight not working in Aundh,Aundh,Waste Management,High,5
+237,Garbage not collected in Wagholi,Wagholi,Sanitation,Medium,6
+238,Overflowing garbage bin in Kothrud,Kothrud,Water Supply,High,5
+239,Broken footpath in Viman Nagar,Viman Nagar,Water Supply,Medium,1
+240,Broken footpath in Shivaji Nagar,Shivaji Nagar,Electricity,High,5
+241,Drainage system is blocked in Baner,Baner,Waste Management,Medium,2
+242,Road has major potholes in Pimpri,Pimpri,Waste Management,Low,2
+243,Open manhole reported in Wagholi,Wagholi,Road Maintenance,Medium,1
+244,Garbage not collected in Pimpri,Pimpri,Sanitation,Medium,3
+245,Road has major potholes in Kharadi,Kharadi,Electricity,High,2
+246,Road has major potholes in Camp,Camp,Electricity,High,5
+247,Water leakage reported in Camp,Camp,Sanitation,Medium,4
+248,No electricity since morning in Baner,Baner,Sanitation,Medium,2
+249,No electricity since morning in Wagholi,Wagholi,Water Supply,Medium,6
+250,Streetlight not working in Aundh,Aundh,Electricity,High,2
+251,Open manhole reported in Shivaji Nagar,Shivaji Nagar,Waste Management,Low,5
+252,Garbage not collected in Shivaji Nagar,Shivaji Nagar,Water Supply,High,4
+253,Overflowing garbage bin in Viman Nagar,Viman Nagar,Waste Management,High,7
+254,Overflowing garbage bin in Camp,Camp,Road Maintenance,High,5
+255,Broken footpath in Wagholi,Wagholi,Sanitation,Low,5
+256,Drainage system is blocked in Kothrud,Kothrud,Electricity,High,1
+257,Water leakage reported in Camp,Camp,Electricity,High,5
+258,Broken footpath in Baner,Baner,Electricity,Medium,6
+259,Road has major potholes in Kharadi,Kharadi,Sanitation,Medium,3
+260,Broken footpath in Baner,Baner,Electricity,Medium,6
+261,Drainage system is blocked in Hadapsar,Hadapsar,Sanitation,Medium,6
+262,Broken footpath in Shivaji Nagar,Shivaji Nagar,Sanitation,High,3
+263,Irregular water supply in Kharadi,Kharadi,Sanitation,Medium,5
+264,No electricity since morning in Shivaji Nagar,Shivaji Nagar,Electricity,Medium,2
+265,Road has major potholes in Aundh,Aundh,Water Supply,High,1
+266,Broken footpath in Pimpri,Pimpri,Waste Management,Low,2
+267,No electricity since morning in Aundh,Aundh,Road Maintenance,Medium,6
+268,Overflowing garbage bin in Shivaji Nagar,Shivaji Nagar,Waste Management,High,7
+269,Streetlight not working in Baner,Baner,Waste Management,High,4
+270,Open manhole reported in Pimpri,Pimpri,Electricity,Medium,6
+271,Overflowing garbage bin in Viman Nagar,Viman Nagar,Road Maintenance,Medium,4
+272,Overflowing garbage bin in Baner,Baner,Water Supply,Low,7
+273,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Low,3
+274,Water leakage reported in Baner,Baner,Water Supply,High,1
+275,Road has major potholes in Camp,Camp,Sanitation,High,5
+276,Irregular water supply in Hadapsar,Hadapsar,Electricity,Medium,4
+277,Broken footpath in Shivaji Nagar,Shivaji Nagar,Water Supply,High,5
+278,Garbage not collected in Shivaji Nagar,Shivaji Nagar,Sanitation,Medium,6
+279,Broken footpath in Hadapsar,Hadapsar,Waste Management,Low,3
+280,Road has major potholes in Baner,Baner,Water Supply,Medium,3
+281,Overflowing garbage bin in Aundh,Aundh,Water Supply,Low,5
+282,Open manhole reported in Wagholi,Wagholi,Sanitation,Low,3
+283,Water leakage reported in Hadapsar,Hadapsar,Waste Management,High,2
+284,Overflowing garbage bin in Wagholi,Wagholi,Water Supply,High,4
+285,Garbage not collected in Baner,Baner,Road Maintenance,Low,1
+286,Broken footpath in Kothrud,Kothrud,Waste Management,High,5
+287,Road has major potholes in Kothrud,Kothrud,Road Maintenance,Medium,2
+288,Overflowing garbage bin in Kothrud,Kothrud,Water Supply,Medium,6
+289,Overflowing garbage bin in Pimpri,Pimpri,Road Maintenance,Medium,5
+290,Broken footpath in Kharadi,Kharadi,Waste Management,High,3
+291,Broken footpath in Pimpri,Pimpri,Electricity,High,4
+292,No electricity since morning in Kharadi,Kharadi,Sanitation,Medium,3
+293,Open manhole reported in Pimpri,Pimpri,Electricity,High,2
+294,No electricity since morning in Camp,Camp,Waste Management,Low,5
+295,Irregular water supply in Camp,Camp,Sanitation,Low,4
+296,No electricity since morning in Baner,Baner,Waste Management,Low,3
+297,Irregular water supply in Aundh,Aundh,Water Supply,Medium,5
+298,Drainage system is blocked in Aundh,Aundh,Waste Management,Medium,3
+299,Streetlight not working in Hadapsar,Hadapsar,Sanitation,High,5
+300,Road has major potholes in Hadapsar,Hadapsar,Road Maintenance,Low,2
+301,Irregular water supply in Shivaji Nagar,Shivaji Nagar,Waste Management,High,7
+302,Drainage system is blocked in Wagholi,Wagholi,Sanitation,Medium,4
+303,Streetlight not working in Hadapsar,Hadapsar,Electricity,Low,7
+304,Drainage system is blocked in Baner,Baner,Water Supply,Medium,5
+305,Garbage not collected in Wagholi,Wagholi,Sanitation,High,7
+306,Overflowing garbage bin in Kothrud,Kothrud,Electricity,Medium,3
+307,Broken footpath in Shivaji Nagar,Shivaji Nagar,Electricity,High,1
+308,Irregular water supply in Baner,Baner,Electricity,Medium,7
+309,Streetlight not working in Viman Nagar,Viman Nagar,Road Maintenance,Medium,3
+310,Irregular water supply in Wagholi,Wagholi,Road Maintenance,Medium,4
+311,Streetlight not working in Camp,Camp,Water Supply,Medium,6
+312,Irregular water supply in Hadapsar,Hadapsar,Waste Management,High,3
+313,Broken footpath in Hadapsar,Hadapsar,Waste Management,High,6
+314,Streetlight not working in Kothrud,Kothrud,Sanitation,Medium,4
+315,Open manhole reported in Camp,Camp,Electricity,Low,7
+316,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Sanitation,Medium,7
+317,Open manhole reported in Kharadi,Kharadi,Waste Management,Medium,1
+318,Open manhole reported in Kothrud,Kothrud,Waste Management,High,5
+319,Broken footpath in Pimpri,Pimpri,Electricity,Medium,3
+320,Garbage not collected in Viman Nagar,Viman Nagar,Road Maintenance,High,3
+321,Overflowing garbage bin in Viman Nagar,Viman Nagar,Waste Management,Medium,4
+322,No electricity since morning in Hadapsar,Hadapsar,Waste Management,Low,2
+323,Streetlight not working in Viman Nagar,Viman Nagar,Road Maintenance,Medium,2
+324,No electricity since morning in Kothrud,Kothrud,Electricity,Medium,4
+325,Streetlight not working in Baner,Baner,Road Maintenance,Medium,7
+326,Streetlight not working in Kothrud,Kothrud,Sanitation,Medium,3
+327,Garbage not collected in Hadapsar,Hadapsar,Water Supply,Low,1
+328,Garbage not collected in Kothrud,Kothrud,Electricity,Medium,4
+329,Road has major potholes in Viman Nagar,Viman Nagar,Electricity,Medium,7
+330,Open manhole reported in Kothrud,Kothrud,Sanitation,High,1
+331,Drainage system is blocked in Hadapsar,Hadapsar,Sanitation,Low,5
+332,Garbage not collected in Viman Nagar,Viman Nagar,Water Supply,Medium,2
+333,Irregular water supply in Wagholi,Wagholi,Sanitation,High,5
+334,Garbage not collected in Wagholi,Wagholi,Electricity,High,4
+335,Drainage system is blocked in Kharadi,Kharadi,Sanitation,High,5
+336,Water leakage reported in Pimpri,Pimpri,Road Maintenance,Medium,6
+337,No electricity since morning in Shivaji Nagar,Shivaji Nagar,Road Maintenance,High,5
+338,Garbage not collected in Camp,Camp,Sanitation,High,4
+339,Water leakage reported in Kharadi,Kharadi,Road Maintenance,High,2
+340,Irregular water supply in Kothrud,Kothrud,Electricity,Medium,1
+341,Broken footpath in Viman Nagar,Viman Nagar,Road Maintenance,Medium,3
+342,Garbage not collected in Kothrud,Kothrud,Electricity,Medium,7
+343,Irregular water supply in Aundh,Aundh,Water Supply,High,3
+344,Water leakage reported in Baner,Baner,Water Supply,Medium,6
+345,Water leakage reported in Kothrud,Kothrud,Water Supply,High,7
+346,Open manhole reported in Hadapsar,Hadapsar,Waste Management,Medium,1
+347,Road has major potholes in Viman Nagar,Viman Nagar,Water Supply,Medium,3
+348,Road has major potholes in Aundh,Aundh,Water Supply,Low,4
+349,No electricity since morning in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,4
+350,Broken footpath in Aundh,Aundh,Electricity,High,2
+351,No electricity since morning in Kharadi,Kharadi,Water Supply,Medium,7
+352,Irregular water supply in Wagholi,Wagholi,Waste Management,Medium,4
+353,Drainage system is blocked in Shivaji Nagar,Shivaji Nagar,Road Maintenance,High,3
+354,Open manhole reported in Baner,Baner,Road Maintenance,Medium,3
+355,Broken footpath in Camp,Camp,Waste Management,Medium,7
+356,No electricity since morning in Camp,Camp,Water Supply,High,6
+357,Drainage system is blocked in Kharadi,Kharadi,Waste Management,High,1
+358,Drainage system is blocked in Kothrud,Kothrud,Water Supply,Medium,7
+359,Irregular water supply in Pimpri,Pimpri,Electricity,Medium,1
+360,Irregular water supply in Hadapsar,Hadapsar,Road Maintenance,High,7
+361,Open manhole reported in Wagholi,Wagholi,Road Maintenance,Low,3
+362,Open manhole reported in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Medium,6
+363,No electricity since morning in Hadapsar,Hadapsar,Road Maintenance,Medium,7
+364,Overflowing garbage bin in Hadapsar,Hadapsar,Road Maintenance,Low,2
+365,Streetlight not working in Viman Nagar,Viman Nagar,Sanitation,Medium,2
+366,Road has major potholes in Wagholi,Wagholi,Electricity,Low,6
+367,Water leakage reported in Baner,Baner,Sanitation,Medium,1
+368,Drainage system is blocked in Hadapsar,Hadapsar,Water Supply,Medium,1
+369,Streetlight not working in Camp,Camp,Sanitation,Medium,3
+370,Streetlight not working in Wagholi,Wagholi,Electricity,High,6
+371,No electricity since morning in Aundh,Aundh,Road Maintenance,Medium,6
+372,Water leakage reported in Kothrud,Kothrud,Waste Management,High,1
+373,Streetlight not working in Kothrud,Kothrud,Electricity,High,4
+374,Streetlight not working in Shivaji Nagar,Shivaji Nagar,Road Maintenance,High,5
+375,Irregular water supply in Camp,Camp,Road Maintenance,High,6
+376,Overflowing garbage bin in Kharadi,Kharadi,Road Maintenance,Low,7
+377,Broken footpath in Kharadi,Kharadi,Sanitation,High,3
+378,Broken footpath in Camp,Camp,Sanitation,High,6
+379,Streetlight not working in Shivaji Nagar,Shivaji Nagar,Water Supply,Medium,5
+380,No electricity since morning in Baner,Baner,Water Supply,High,2
+381,Water leakage reported in Wagholi,Wagholi,Road Maintenance,High,7
+382,Open manhole reported in Viman Nagar,Viman Nagar,Waste Management,High,1
+383,Broken footpath in Hadapsar,Hadapsar,Waste Management,Medium,2
+384,Overflowing garbage bin in Aundh,Aundh,Road Maintenance,Low,1
+385,Irregular water supply in Pimpri,Pimpri,Electricity,Medium,5
+386,Open manhole reported in Kothrud,Kothrud,Water Supply,Low,2
+387,Irregular water supply in Viman Nagar,Viman Nagar,Sanitation,Medium,4
+388,Open manhole reported in Aundh,Aundh,Sanitation,Medium,2
+389,Water leakage reported in Wagholi,Wagholi,Road Maintenance,Medium,7
+390,Garbage not collected in Kharadi,Kharadi,Road Maintenance,Low,4
+391,Streetlight not working in Aundh,Aundh,Electricity,High,2
+392,Road has major potholes in Aundh,Aundh,Sanitation,High,2
+393,Garbage not collected in Pimpri,Pimpri,Waste Management,High,1
+394,Overflowing garbage bin in Aundh,Aundh,Water Supply,Low,5
+395,Irregular water supply in Camp,Camp,Road Maintenance,High,5
+396,No electricity since morning in Hadapsar,Hadapsar,Waste Management,Low,3
+397,Irregular water supply in Aundh,Aundh,Road Maintenance,High,7
+398,Broken footpath in Kharadi,Kharadi,Sanitation,High,2
+399,Broken footpath in Pimpri,Pimpri,Road Maintenance,Medium,5
+400,Open manhole reported in Kharadi,Kharadi,Water Supply,Medium,7
+401,Overflowing garbage bin in Baner,Baner,Sanitation,Medium,2
+402,No electricity since morning in Hadapsar,Hadapsar,Waste Management,Low,5
+403,Irregular water supply in Pimpri,Pimpri,Waste Management,High,6
+404,Broken footpath in Kothrud,Kothrud,Electricity,Low,5
+405,Broken footpath in Kothrud,Kothrud,Water Supply,High,4
+406,Drainage system is blocked in Kharadi,Kharadi,Waste Management,Medium,2
+407,No electricity since morning in Kharadi,Kharadi,Waste Management,Low,3
+408,Irregular water supply in Hadapsar,Hadapsar,Electricity,Medium,3
+409,Garbage not collected in Viman Nagar,Viman Nagar,Water Supply,Low,6
+410,Road has major potholes in Wagholi,Wagholi,Water Supply,Low,6
+411,Streetlight not working in Pimpri,Pimpri,Waste Management,Medium,2
+412,Streetlight not working in Hadapsar,Hadapsar,Electricity,Medium,5
+413,Garbage not collected in Camp,Camp,Waste Management,High,6
+414,No electricity since morning in Shivaji Nagar,Shivaji Nagar,Water Supply,Low,6
+415,Drainage system is blocked in Aundh,Aundh,Water Supply,Low,3
+416,Water leakage reported in Camp,Camp,Sanitation,Medium,2
+417,Open manhole reported in Camp,Camp,Road Maintenance,Medium,5
+418,Overflowing garbage bin in Shivaji Nagar,Shivaji Nagar,Electricity,High,3
+419,Road has major potholes in Kothrud,Kothrud,Water Supply,Medium,7
+420,Open manhole reported in Wagholi,Wagholi,Waste Management,Medium,4
+421,Irregular water supply in Pimpri,Pimpri,Waste Management,Medium,2
+422,Broken footpath in Viman Nagar,Viman Nagar,Road Maintenance,Medium,7
+423,Broken footpath in Kharadi,Kharadi,Sanitation,Medium,2
+424,Broken footpath in Aundh,Aundh,Waste Management,Medium,6
+425,Open manhole reported in Baner,Baner,Road Maintenance,Medium,7
+426,Drainage system is blocked in Viman Nagar,Viman Nagar,Water Supply,Medium,2
+427,Road has major potholes in Camp,Camp,Electricity,Medium,3
+428,Road has major potholes in Wagholi,Wagholi,Sanitation,Medium,7
+429,Garbage not collected in Wagholi,Wagholi,Water Supply,High,4
+430,No electricity since morning in Hadapsar,Hadapsar,Waste Management,High,6
+431,Garbage not collected in Baner,Baner,Sanitation,Low,7
+432,Irregular water supply in Baner,Baner,Water Supply,Medium,1
+433,Drainage system is blocked in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,1
+434,Streetlight not working in Baner,Baner,Sanitation,High,5
+435,Streetlight not working in Viman Nagar,Viman Nagar,Waste Management,Medium,3
+436,Broken footpath in Baner,Baner,Waste Management,High,4
+437,Irregular water supply in Shivaji Nagar,Shivaji Nagar,Electricity,Medium,2
+438,Overflowing garbage bin in Wagholi,Wagholi,Road Maintenance,Medium,7
+439,Garbage not collected in Camp,Camp,Water Supply,Low,4
+440,Garbage not collected in Viman Nagar,Viman Nagar,Water Supply,Medium,2
+441,Overflowing garbage bin in Baner,Baner,Water Supply,Medium,1
+442,No electricity since morning in Camp,Camp,Water Supply,Medium,5
+443,Road has major potholes in Viman Nagar,Viman Nagar,Sanitation,Medium,7
+444,Streetlight not working in Hadapsar,Hadapsar,Road Maintenance,Low,2
+445,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,6
+446,Streetlight not working in Aundh,Aundh,Sanitation,Medium,4
+447,Garbage not collected in Pimpri,Pimpri,Sanitation,High,3
+448,No electricity since morning in Kharadi,Kharadi,Waste Management,High,3
+449,Streetlight not working in Viman Nagar,Viman Nagar,Sanitation,High,6
+450,Road has major potholes in Wagholi,Wagholi,Waste Management,High,3
+451,Open manhole reported in Hadapsar,Hadapsar,Road Maintenance,Medium,7
+452,Overflowing garbage bin in Camp,Camp,Electricity,Low,2
+453,Road has major potholes in Shivaji Nagar,Shivaji Nagar,Waste Management,High,2
+454,Overflowing garbage bin in Baner,Baner,Road Maintenance,Medium,6
+455,Garbage not collected in Aundh,Aundh,Sanitation,Medium,7
+456,No electricity since morning in Pimpri,Pimpri,Water Supply,High,3
+457,Streetlight not working in Kharadi,Kharadi,Electricity,Medium,6
+458,No electricity since morning in Hadapsar,Hadapsar,Water Supply,Medium,4
+459,Broken footpath in Baner,Baner,Sanitation,High,6
+460,Water leakage reported in Viman Nagar,Viman Nagar,Water Supply,Low,3
+461,Open manhole reported in Baner,Baner,Electricity,Medium,7
+462,Streetlight not working in Kharadi,Kharadi,Water Supply,High,3
+463,No electricity since morning in Baner,Baner,Electricity,Medium,1
+464,Overflowing garbage bin in Viman Nagar,Viman Nagar,Road Maintenance,High,5
+465,Streetlight not working in Viman Nagar,Viman Nagar,Water Supply,High,6
+466,Streetlight not working in Wagholi,Wagholi,Road Maintenance,Medium,1
+467,Irregular water supply in Shivaji Nagar,Shivaji Nagar,Water Supply,Low,5
+468,Water leakage reported in Aundh,Aundh,Road Maintenance,Low,2
+469,Open manhole reported in Aundh,Aundh,Sanitation,Low,4
+470,Broken footpath in Camp,Camp,Waste Management,Medium,3
+471,Garbage not collected in Shivaji Nagar,Shivaji Nagar,Road Maintenance,Medium,2
+472,Drainage system is blocked in Kothrud,Kothrud,Road Maintenance,High,6
+473,Water leakage reported in Hadapsar,Hadapsar,Road Maintenance,High,3
+474,Overflowing garbage bin in Camp,Camp,Electricity,Medium,2
+475,Broken footpath in Aundh,Aundh,Sanitation,Medium,5
+476,Broken footpath in Camp,Camp,Electricity,Medium,1
+477,Drainage system is blocked in Aundh,Aundh,Water Supply,High,7
+478,Water leakage reported in Shivaji Nagar,Shivaji Nagar,Waste Management,Medium,1
+479,Broken footpath in Pimpri,Pimpri,Water Supply,Low,4
+480,Overflowing garbage bin in Pimpri,Pimpri,Waste Management,High,7
+481,Open manhole reported in Hadapsar,Hadapsar,Sanitation,Medium,4
+482,Overflowing garbage bin in Aundh,Aundh,Road Maintenance,Medium,2
+483,No electricity since morning in Wagholi,Wagholi,Waste Management,Medium,5
+484,Streetlight not working in Aundh,Aundh,Sanitation,Medium,2
+485,Overflowing garbage bin in Hadapsar,Hadapsar,Road Maintenance,High,2
+486,Open manhole reported in Hadapsar,Hadapsar,Water Supply,Medium,4
+487,Irregular water supply in Kothrud,Kothrud,Water Supply,Medium,3
+488,No electricity since morning in Viman Nagar,Viman Nagar,Waste Management,Low,6
+489,Garbage not collected in Hadapsar,Hadapsar,Waste Management,Medium,7
+490,Road has major potholes in Hadapsar,Hadapsar,Waste Management,Medium,6
+491,Irregular water supply in Viman Nagar,Viman Nagar,Road Maintenance,Medium,6
+492,Broken footpath in Kharadi,Kharadi,Water Supply,Medium,1
+493,Irregular water supply in Baner,Baner,Road Maintenance,Medium,6
+494,Drainage system is blocked in Viman Nagar,Viman Nagar,Waste Management,High,6
+495,Garbage not collected in Kharadi,Kharadi,Water Supply,Medium,7
+496,Road has major potholes in Kothrud,Kothrud,Electricity,Medium,7
+497,Drainage system is blocked in Kharadi,Kharadi,Water Supply,Low,7
+498,Streetlight not working in Wagholi,Wagholi,Electricity,High,6
+499,Open manhole reported in Kothrud,Kothrud,Road Maintenance,Medium,2
+500,Water leakage reported in Aundh,Aundh,Road Maintenance,Medium,5
