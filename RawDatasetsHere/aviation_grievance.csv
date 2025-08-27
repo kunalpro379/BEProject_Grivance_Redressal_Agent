@@ -1,0 +1,259 @@
+category,subcategory,type,totalReceived,activeGrievancesWithoutEscalation,activeGrievancesWithEscalation,closedGrievancesWithoutEscalation,closedGrievancesWithEscalation,successfulTransferIn,successfulTransferOut,grievancesWithoutRatings,grievancesWithRatings,grievancesWithVeryGoodRating,grievanceswithgoodrating,grievancesWithOKRating,grievancesWithBadRating,grievancesWithVeryBadRating,twitterGrievances,facebookGrievances,grievancesAdditionalInfoProvided,grievancesAdditionalInfoNotProvided,grievancesWithoutFeedback,grievancesWithFeedback,grievancesWithFeedbackIssueNotResolved,grievancesWithFeedbackIssueResolved
+Airline,Aeroflot,"Flight Delays",11,11,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0
+Airline,Aeroflot,Maintenance,3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airline,Aeroflot,Other,14,14,NA,NA,NA,0,0,0,0,0,0,0,0,0,1,0,5,14,14,0,0,0
+Airline,Aeroflot,"Person With Disability",5,5,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airline,Aeroflot,"Ticketing, Fares &amp; Refunds",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,Aerologic,Baggage,6,6,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0
+Airline,Aerologic,"Flight Delays",7,7,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,7,7,0,0,0
+Airline,Aerologic,"Person With Disability",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,Aerologic,"Ticketing, Fares &amp; Refunds",4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,"Air Arabia",Cleanliness,4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,"Air Arabia","Flight Delays",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Arabia",Maintenance,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Arabia",Meal,3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airline,"Air Arabia",Other,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Arabia","Staff / Crew Behavior",4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,"Air Astana",Baggage,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Astana","Check-in &amp; Boarding",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Astana","Staff / Crew Behavior",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Astana","Ticketing, Fares &amp; Refunds",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Austral","Flight Delays",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Austral",Maintenance,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Austral",Meal,66,65,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,66,66,0,0,0
+Airline,"Air Austral",Other,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Austral","Person With Disability",3,3,NA,NA,NA,4,1,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airline,"Air Canada",Baggage,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Canada",Cleanliness,15,14,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,15,15,0,0,0
+Airline,"Air Canada",Meal,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Canada",Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air China",Cleanliness,14,14,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"Air Costa","Flight Delays",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Costa",Meal,14,14,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"Air France (AF)",Cleanliness,140,1,NA,NA,NA,13,24,23,5,1,0,1,2,1,1,0,15,140,134,6,3,3
+Airline,"Air France (AF)",Maintenance,17,1,NA,NA,NA,0,0,3,3,2,0,0,1,0,0,0,1,17,15,2,1,1
+Airline,"Air France (AF)",Meal,20,0,NA,NA,NA,1,1,2,2,0,0,2,0,0,0,0,3,20,18,2,0,2
+Airline,"Air France (AF)",Other,35,0,NA,NA,NA,5,5,16,2,1,1,0,0,0,0,0,2,35,33,2,1,1
+Airline,"Air France (AF)","Ticketing, Fares &amp; Refunds",18,2,NA,NA,NA,0,0,4,1,0,0,1,0,0,2,0,1,18,16,2,1,1
+Airline,"Air France (AF)","Check-in &amp; Boarding",16,0,NA,NA,NA,0,0,2,1,1,0,0,0,0,0,0,0,16,15,1,1,0
+Airline,"Air France (AF)","Person With Disability",8,0,NA,NA,NA,0,2,2,1,1,0,0,0,0,0,0,1,8,7,1,1,0
+Airline,"Air France (AF)",Baggage,18,0,NA,NA,NA,4,1,0,0,0,0,0,0,0,0,0,0,18,18,0,0,0
+Airline,"Air France (AF)","Flight Delays",6,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0
+Airline,"Air France (AF)","Staff / Crew Behavior",13,1,NA,NA,NA,4,3,3,0,0,0,0,0,0,0,0,0,13,13,0,0,0
+Airline,"Air France (IN)",Cleanliness,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air France (IN)","Flight Delays",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air France (IN)",Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air India",Baggage,6,6,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0
+Airline,"Air India",Cleanliness,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air India",Meal,4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,"Air India",Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air India","Ticketing, Fares &amp; Refunds",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Air Manas","Staff / Crew Behavior",14,13,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"Air Mauritius",Cleanliness,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Air Mauritius",Meal,17,17,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,17,17,0,0,0
+Airline,"Air Pegasus","Staff / Crew Behavior",15,15,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,15,15,0,0,0
+Airline,"Air Seychelles","Staff / Crew Behavior",14,13,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"AirAsia India",Cleanliness,17,17,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,17,17,0,0,0
+Airline,"AirAsia India",Maintenance,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"AirAsia India",Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"All Nippon Airways","Flight Delays",16,16,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,16,16,0,0,0
+Airline,"Alliance Air","Staff / Crew Behavior",14,14,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"Ariana Afgan","Flight Delays",12,12,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,12,12,0,0,0
+Airline,"Asiana Airlines","Check-in &amp; Boarding",14,13,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"Austrian Airlines","Check-in &amp; Boarding",12,12,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,12,12,0,0,0
+Airline,"Bangkok Airways","Staff / Crew Behavior",15,14,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,15,15,0,0,0
+Airline,"Bhutan Airlines","Check-in &amp; Boarding",14,13,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"Biman Bangladesh","Person With Disability",14,14,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0
+Airline,"British Airways","Check-in &amp; Boarding",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"British Airways",Cleanliness,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Cathay Pacific","Check-in &amp; Boarding",2,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Cathay Pacific","Person With Disability",2,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"Cathay Pacific","Ticketing, Fares &amp; Refunds",2,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,1,2,2,0,0,0
+Airline,"China Airlines Ltd","Staff / Crew Behavior",16,16,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,16,16,0,0,0
+Airline,"China Eastern Airlines","Person With Disability",13,12,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,13,13,0,0,0
+Airline,"China Southern",Cleanliness,13,13,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,13,13,0,0,0
+Airline,"Dragon Air",Maintenance,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Emirates Airline",Baggage,3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airline,"Emirates Airline",Meal,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Fly Dubai",Baggage,219,1,NA,NA,NA,17,5,4,10,2,2,6,0,0,0,0,6,219,206,13,9,4
+Airline,"Fly Dubai","Staff / Crew Behavior",7,1,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,7,5,2,0,2
+Airline,"Fly Dubai",Cleanliness,13,0,NA,NA,NA,0,3,1,1,0,1,0,0,0,0,0,3,13,12,1,1,0
+Airline,"Fly Dubai","Flight Delays",30,1,NA,NA,NA,7,7,1,0,0,0,0,0,0,0,0,2,30,28,2,2,0
+Airline,"Fly Dubai",Meal,12,0,NA,NA,NA,0,0,3,1,1,0,0,0,0,0,0,0,12,11,1,1,0
+Airline,"Fly Dubai",Other,11,0,NA,NA,NA,1,1,2,0,0,0,0,0,0,0,0,1,11,10,1,1,0
+Airline,"Fly Dubai","Person With Disability",9,2,NA,NA,NA,2,0,0,1,1,0,0,0,0,0,0,1,9,8,1,1,0
+Airline,"Fly Dubai","Ticketing, Fares &amp; Refunds",13,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,13,12,1,1,0
+Airline,"Fly Dubai","Check-in &amp; Boarding",10,1,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,1,10,10,0,0,0
+Airline,"Fly Dubai",Maintenance,6,2,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,1,6,6,0,0,0
+Airline,GoAir,"Person With Disability",5,0,NA,NA,NA,2,0,1,1,1,0,0,0,0,0,0,3,5,4,1,1,0
+Airline,GoAir,Baggage,5,0,NA,NA,NA,0,2,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airline,GoAir,"Check-in &amp; Boarding",2,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,GoAir,Maintenance,5,0,NA,NA,NA,1,0,1,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airline,GoAir,Meal,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,GoAir,Other,3,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airline,GoAir,"Staff / Crew Behavior",2,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,IndiGo,Baggage,13,13,NA,NA,NA,1,0,0,0,0,0,0,0,0,0,0,0,13,13,0,0,0
+Airline,IndiGo,"Check-in &amp; Boarding",4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,IndiGo,"Flight Delays",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,IndiGo,Maintenance,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,IndiGo,Meal,4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,IndiGo,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,IndiGo,"Person With Disability",1,1,NA,NA,NA,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,IndiGo,"Staff / Crew Behavior",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"IndiGo Airlines Test",Baggage,179,16,NA,NA,NA,6,8,6,2,2,0,0,0,0,0,0,3,179,177,2,2,0
+Airline,"IndiGo Airlines Test",Maintenance,6,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,1,6,5,1,1,0
+Airline,"IndiGo Airlines Test","Person With Disability",14,2,NA,NA,NA,2,0,1,0,0,0,0,0,0,0,0,1,14,13,1,1,0
+Airline,"IndiGo Airlines Test","Check-in &amp; Boarding",20,0,NA,NA,NA,0,0,3,0,0,0,0,0,0,0,0,5,20,20,0,0,0
+Airline,"IndiGo Airlines Test",Cleanliness,13,1,NA,NA,NA,0,2,1,0,0,0,0,0,0,0,0,0,13,13,0,0,0
+Airline,"IndiGo Airlines Test","Flight Delays",9,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0
+Airline,"IndiGo Airlines Test",Meal,29,2,NA,NA,NA,3,2,0,0,0,0,0,0,0,0,0,1,29,29,0,0,0
+Airline,"IndiGo Airlines Test",Other,7,0,NA,NA,NA,0,1,0,0,0,0,0,0,0,0,0,0,7,7,0,0,0
+Airline,"IndiGo Airlines Test","Staff / Crew Behavior",10,0,NA,NA,NA,1,1,0,0,0,0,0,0,0,0,0,0,10,10,0,0,0
+Airline,"IndiGo Airlines Test","Ticketing, Fares &amp; Refunds",4,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airline,"Jet Airways",Cleanliness,13,13,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,13,13,13,0,0,0
+Airline,"Nepal Airlines Corporation",Maintenance,1,0,NA,NA,NA,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,0
+Airline,"Singapore Airlines",Baggage,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,SpiceJet,Baggage,5,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airline,SpiceJet,"Check-in &amp; Boarding",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,SpiceJet,Cleanliness,2,0,NA,NA,NA,1,1,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,SpiceJet,"Flight Delays",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,SpiceJet,Maintenance,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,SpiceJet,Other,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,SpiceJet,"Ticketing, Fares &amp; Refunds",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,TestIndigo,Baggage,5,0,NA,NA,NA,0,0,2,0,0,0,0,0,0,0,0,2,5,5,0,0,0
+Airline,TestIndigo,"Check-in &amp; Boarding",2,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,TestIndigo,Cleanliness,3,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airline,TestIndigo,"Flight Delays",8,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,3,8,8,0,0,0
+Airline,TestIndigo,Maintenance,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,TestIndigo,Meal,1,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0
+Airline,TestIndigo,Other,2,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,1,2,2,0,0,0
+Airline,TestIndigo,"Staff / Crew Behavior",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,TestIndigo,"Ticketing, Fares &amp; Refunds",2,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airline,"United Airlines","Flight Delays",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0
+Airline,"United Airlines",Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airline,"Virgin Atlantic Airlines",Baggage,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,"Air Worthiness",3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+DGCA,DGCA,"Carriage by air of person with disability and/or person with reduced mobility",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,"Engineering Training School",4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+DGCA,DGCA,Examination,7,7,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,7,7,0,0,0
+DGCA,DGCA,"Facilities to be provided to passengers by airlines due to denied boarding, cancellation of flights and delays in flights",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,"Facilities/Courtesies to esteemed travelling public at airports",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,"Flying School",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,License,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,MRO,5,5,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+DGCA,DGCA,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+DGCA,DGCA,"Permits &amp; Permissions",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Customs,Aizwal,Arrival,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Aizwal,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Akola,Arrival,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Akola,Departure,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Amritsar,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Bengaluru,Arrival,3,0,NA,NA,NA,0,0,1,2,0,1,0,0,1,0,0,0,3,1,2,1,1
+Customs,Bengaluru,Departure,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Bengaluru,Other,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Customs,Kannur,Arrival,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Immigration,Balurghat,Departure,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Immigration,Guwahati,Departure,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Immigration,Kannur,Departure,1,0,NA,NA,NA,0,0,0,1,0,0,0,1,0,0,0,0,1,0,1,0,1
+Immigration,Thiruvananthapuram,Arrival,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+BCAS,BCAS,"Entry Passes",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+BCAS,BCAS,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+BCAS,BCAS,"Security Clearances",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+BCAS,BCAS,"Security Program Approval",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Agartala,"Person With Disability",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Agartala,"Taxi / Parking",4,4,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airport,Agartala,"Trolly / Ameniites / Buggy / Wifi",3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airport,Agra,"Baggage / Lost &amp; Found ",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Agra,"Cleanliness / Hygiene",5,5,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airport,Agra,"Person With Disability",3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airport,Ahmedabad,"Air Conditioning / Maintenance",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Ahmedabad,"Cleanliness / Hygiene",5,5,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airport,Ahmedabad,Other,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airport,Ahmedabad,"Signages / Flight Display",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airport,Ahmedabad,"Staff / Crew behavoiur",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airport,Aizwal,"Baggage / Lost &amp; Found ",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Aizwal,"Cleanliness / Hygiene",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Aizwal,"Seating / Waiting Area",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Aizwal,"Trolly / Ameniites / Buggy / Wifi",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Akola,"Air Conditioning / Maintenance",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airport,Akola,"Cleanliness / Hygiene",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Akola,Other,2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airport,Akola,"Retail Shops / Food &amp; Beverage",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Allahabad,"Baggage / Lost &amp; Found ",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Allahabad,"Cleanliness / Hygiene",3,3,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airport,Allahabad,"Retail Shops / Food &amp; Beverage",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Amritsar,"Cleanliness / Hygiene",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Amritsar,"Seating / Waiting Area",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Amritsar,"Staff / Crew behavoiur",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Aurangabad,"Air Conditioning / Maintenance",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Aurangabad,"Signages / Flight Display",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Bagdogra,"Cleanliness / Hygiene",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Balurghat,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Belgaum,Other,32,1,NA,NA,NA,3,3,9,2,0,0,1,1,0,0,0,1,32,29,3,2,1
+Airport,Belgaum,"Person With Disability",118,6,NA,NA,NA,8,31,6,5,2,0,2,1,0,0,0,7,118,112,6,3,3
+Airport,Belgaum,"Taxi / Parking",9,0,NA,NA,NA,3,3,1,1,1,0,0,0,0,0,0,2,9,8,1,0,1
+Airport,Belgaum,"Baggage / Lost &amp; Found ",55,1,NA,NA,NA,0,0,2,2,1,0,1,0,0,0,0,1,55,52,3,3,0
+Airport,Belgaum,"Seating / Waiting Area",38,1,NA,NA,NA,3,8,4,0,0,0,0,0,0,0,0,7,38,37,1,1,0
+Airport,Belgaum,"Air Conditioning / Maintenance",13,0,NA,NA,NA,1,2,0,0,0,0,0,0,0,0,0,0,13,13,0,0,0
+Airport,Belgaum,"Cleanliness / Hygiene",34,0,NA,NA,NA,6,4,6,0,0,0,0,0,0,0,0,2,34,34,0,0,0
+Airport,Belgaum,"Retail Shops / Food &amp; Beverage",17,0,NA,NA,NA,0,0,4,0,0,0,0,0,0,0,0,1,17,17,0,0,0
+Airport,Belgaum,"Signages / Flight Display",8,0,NA,NA,NA,6,7,0,0,0,0,0,0,0,0,0,0,8,8,0,0,0
+Airport,Belgaum,"Staff / Crew behavoiur",23,4,NA,NA,NA,4,3,3,0,0,0,0,0,0,0,0,3,23,23,0,0,0
+Airport,Belgaum,"Trolly / Ameniites / Buggy / Wifi",7,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,1,7,7,0,0,0
+Airport,Bengaluru,Other,6,0,NA,NA,NA,0,0,1,1,0,0,1,0,0,0,0,2,6,5,1,0,1
+Airport,Bengaluru,"Cleanliness / Hygiene",20,2,NA,NA,NA,0,0,1,1,0,0,0,1,0,0,0,5,20,19,1,1,0
+Airport,Bengaluru,"Air Conditioning / Maintenance",6,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,2,6,6,0,0,0
+Airport,Bengaluru,"Baggage / Lost &amp; Found ",14,1,NA,NA,NA,0,0,3,0,0,0,0,0,0,0,0,2,14,14,0,0,0
+Airport,Bengaluru,"Person With Disability",12,4,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,3,12,12,0,0,0
+Airport,Bengaluru,"Retail Shops / Food &amp; Beverage",10,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,4,10,10,0,0,0
+Airport,Bengaluru,"Seating / Waiting Area",21,1,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,4,21,21,0,0,0
+Airport,Bengaluru,"Signages / Flight Display",10,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,3,10,10,0,0,0
+Airport,Bengaluru,"Staff / Crew behavoiur",9,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,4,9,9,0,0,0
+Airport,Bengaluru,"Taxi / Parking",14,0,NA,NA,NA,0,0,2,0,0,0,0,0,0,0,0,2,14,14,0,0,0
+Airport,Bengaluru,"Trolly / Ameniites / Buggy / Wifi",8,0,NA,NA,NA,0,0,2,0,0,0,0,0,0,0,0,4,8,8,0,0,0
+Airport,Bhatinda,"Seating / Waiting Area",1,0,NA,NA,NA,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0
+Airport,Bhatinda,"Staff / Crew behavoiur",1,1,NA,NA,NA,1,3,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Bhatinda,"Taxi / Parking",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0
+Airport,Bhavnagar,"Staff / Crew behavoiur",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Airport,Bhopal,"Air Conditioning / Maintenance",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Bhopal,"Staff / Crew behavoiur",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Calicut,"Signages / Flight Display",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Chennai,Other,1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Delhi,"Retail Shops / Food &amp; Beverage",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Dibrugarh,"Seating / Waiting Area",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Goa,"Air Conditioning / Maintenance",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kochi,Other,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kochi,"Retail Shops / Food &amp; Beverage",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kochi,"Staff / Crew behavoiur",4,0,NA,NA,NA,3,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0
+Airport,Kolkata,"Taxi / Parking",13,0,NA,NA,NA,1,4,0,2,2,0,0,0,0,0,0,2,13,11,2,2,0
+Airport,Kolkata,NA,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kolkata,"Air Conditioning / Maintenance",5,0,NA,NA,NA,2,1,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0
+Airport,Kolkata,Cleanliness,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kolkata,"Cleanliness / Hygiene",13,0,NA,NA,NA,4,8,0,1,0,0,0,1,0,0,0,2,13,13,0,0,0
+Airport,Kolkata,Maintenance,1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kolkata,Other,22,1,NA,NA,NA,15,15,1,1,0,0,0,0,1,0,0,4,22,22,0,0,0
+Airport,Kolkata,"Retail Shops / Food &amp; Beverage",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kolkata,"Seating / Waiting Area",8,0,NA,NA,NA,1,0,1,0,0,0,0,0,0,0,0,1,8,8,0,0,0
+Airport,Kolkata,"Signages / Flight Display",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Kolkata,"Staff / Crew behavoiur",8,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,8,8,0,0,0
+Airport,Kolkata,"Trolly / Ameniites / Buggy / Wifi",3,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0
+Airport,Malda,"Taxi / Parking",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Mumbai,"Staff / Crew behavoiur",3,0,NA,NA,NA,0,1,0,0,0,0,0,0,0,0,0,2,3,2,1,0,1
+Airport,Mumbai,"Baggage / Lost &amp; Found ",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Mumbai,"Cleanliness / Hygiene",2,0,NA,NA,NA,2,0,0,0,0,0,0,0,0,0,0,1,2,2,0,0,0
+Airport,Mumbai,Other,27,0,NA,NA,NA,12,0,0,0,0,0,0,0,0,0,0,0,27,27,0,0,0
+Airport,Mumbai,"Person With Disability",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Mumbai,"Trolly / Ameniites / Buggy / Wifi",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Mysore,"Baggage / Lost &amp; Found ",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Mysore,"Person With Disability",1,1,NA,NA,NA,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Mysore,"Taxi / Parking",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Thiruvananthapuram,"Cleanliness / Hygiene",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Airport,Thiruvananthapuram,"Staff / Crew behavoiur",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Security,Aizwal,"Boarding Gate",2,2,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0
+Security,Aurangabad,"Boarding Gate",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0
+Security,Bengaluru,"Boarding Gate",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Security,Goa,"Terminal Entry",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Security,Mangalore,"Boarding Gate",1,1,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Security,Vadodara,"Boarding Gate",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Security,Varanasi,"Security Check",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+Security,Vijayawada,"Security Check",1,0,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0

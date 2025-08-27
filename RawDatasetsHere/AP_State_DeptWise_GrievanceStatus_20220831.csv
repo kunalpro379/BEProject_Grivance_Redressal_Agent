@@ -1,0 +1,103 @@
+﻿HOD Name,State Department,RECEIVED,In Progress (TOTAL),In Progress (WITHIN SLA),In Progress (BEYOND SLA),Redressed (TOTAL),Redressed (WITHIN SLA),Redressed (BEYOND SLA),Reopen (PENDING),Reopen (REDRESSED),TOTAL REOPEN(%)
+Revenue (CCLA),Revenue,10455,11,9,2,9711,9331,380,23,710,7
+Panchayati Raj,Panchayat Raj And Rural Development,3963,6,0,6,3486,3394,92,11,460,12
+Grama Volunteers / Ward Volunteers and Village Secretariats / Ward Secretariats,Grama Volunteers/Ward Volunteers And Village Secretariats/Ward Secretariats,3518,0,0,0,3089,3005,84,10,419,12
+Police (DGP),Home,2917,0,0,0,2503,1905,598,4,410,14
+Municipal Administration,Municipal Administration And Urban Development,2539,0,0,0,2309,2262,47,0,230,9
+AP State Housing Corporation Ltd,Housing,1651,0,0,0,1627,1590,37,0,24,1
+Dr YSR Aarogyasri Health Care Trust,"Health, Medical & Family Welfare",1418,0,0,0,1389,1387,2,0,29,2
+AP Vaidya Vidhana Parishad,"Health, Medical & Family Welfare",1182,0,0,0,1142,1111,31,0,40,3
+Agriculture,Agriculture And Co-operation,1075,0,0,0,863,834,29,29,183,20
+Survey Settlements and Land Records,Revenue,900,0,0,0,798,763,35,4,98,11
+Rural Development,Panchayat Raj And Rural Development,538,4,0,4,445,420,25,1,88,17
+AP Southern Power Distribution Co Ltd (SPDCL),Energy,522,0,0,0,469,466,3,0,53,10
+AP Eastern Power Distribution Co Ltd (EPDCL),Energy,521,0,0,0,488,473,15,0,33,6
+School Education,Human Resources (School Education),463,7,0,7,427,361,66,0,29,6
+AP Social Welfare Residential Educational Institutions Society (APSWREIS),Social Welfare,443,1,0,1,421,410,11,0,21,5
+AP Central Power Distribution Co Ltd (CPDCL),Energy,399,1,0,1,361,354,7,0,37,9
+Civil Supplies,"Consumer Affairs, Food and Civil Supplies",360,0,0,0,349,331,18,1,10,3
+Samagra Shiksha,Human Resources (School Education),360,2,0,2,338,189,149,0,20,6
+Society For Elimination Of Rural Poverty,Panchayat Raj And Rural Development,341,1,0,1,323,191,132,0,17,5
+Women Development and Child Welfare,"Women, Children, Disabled and Senior Citizens",293,0,0,0,281,276,5,0,12,4
+AP Township And Infrastructure Development Corporation,Municipal Administration And Urban Development,271,1,0,1,236,231,5,33,1,13
+Special Enforcement Bureau,General Administration,266,0,0,0,247,196,51,1,18,7
+Family Welfare,"Health, Medical & Family Welfare",255,0,0,0,231,214,17,0,24,9
+Animal Husbandry,"Animal Husbandry, Dairy Development and Fisheries",245,0,0,0,230,225,5,0,15,6
+Rural Water Supply Engineering,Panchayat Raj And Rural Development,215,2,0,2,192,190,2,7,14,10
+Roads and Buildings (E-in-C),"Transport, Roads and Buildings",212,2,0,2,179,176,3,0,31,15
+Water Resources (E-In-C),Water Resources,211,0,0,0,183,178,5,2,26,13
+Registration and Stamps,Revenue,188,0,0,0,172,156,16,0,16,9
+Marketing,Agriculture And Co-operation,172,1,0,1,141,138,3,30,0,18
+Public Health,"Health, Medical & Family Welfare",160,0,0,0,147,140,7,0,13,8
+AP State Road Transport Corporation (APSRTC),"Transport, Roads and Buildings",143,0,0,0,124,124,0,0,19,13
+Transport,"Transport, Roads and Buildings",126,0,0,0,110,108,2,0,16,13
+Fisheries,"Animal Husbandry, Dairy Development and Fisheries",125,0,0,0,111,107,4,5,9,11
+Mines And Geology,Industries and Commerce,120,1,0,1,98,94,4,0,21,18
+Medical Education,"Health, Medical & Family Welfare",104,0,0,0,96,96,0,0,8,8
+Panchayati Raj Engineering,Panchayat Raj And Rural Development,95,0,0,0,82,79,3,13,0,14
+Endowment,Revenue,92,0,0,0,86,84,2,0,6,7
+Horticulture,Agriculture And Co-operation,75,0,0,0,53,52,1,0,22,29
+MJPAPBBCW Residential Education Society,Backward Classes Welfare,68,0,0,0,60,54,6,0,8,12
+Disaster Management,Disaster Management,65,0,0,0,53,38,15,3,9,18
+Social Welfare,Social Welfare,58,0,0,0,53,43,10,3,2,9
+Forest (PCCF),"Environment, Forest, Science And Technology",54,0,0,0,48,46,2,5,1,11
+Prohibition and Excise,Revenue,53,0,0,0,49,49,0,0,4,8
+Legal Metrology,"Consumer Affairs, Food and Civil Supplies",51,0,0,0,51,8,43,0,0,0
+Employment and Training,Department of Skills Development and Training,49,0,0,0,44,43,1,0,5,10
+Tribal Welfare Engineering,Tribal Welfare,40,0,0,0,39,38,1,0,1,3
+AP Pollution Control Board,"Environment, Forest, Science And Technology",39,0,0,0,36,36,0,2,1,8
+BC Welfare,Backward Classes Welfare,39,0,0,0,36,31,5,0,3,8
+AP State Skill Development Corporation,Department of Skills Development and Training,38,0,0,0,37,32,5,0,1,3
+Tribal Welfare,Tribal Welfare,35,1,0,1,32,32,0,0,2,6
+AP Scheduled Castes Cooperative Finance Corporation (APSCCFC),Social Welfare,35,0,0,0,34,31,3,0,1,3
+Labour,"Labour, Factories, Boilers & Insurance Medical Services",31,1,0,1,25,20,5,0,5,17
+AP State Council for Higher Education,Human Resources (Higher Education),30,16,0,16,11,3,8,1,2,21
+"Differently Abled, Senior Citizens & Transgender","Women, Children, Disabled and Senior Citizens",30,0,0,0,26,20,6,0,4,13
+Collegiate Education,Human Resources (Higher Education),30,3,0,3,26,10,16,0,1,4
+Electronics Delivery Services,Grama Volunteers/Ward Volunteers And Village Secretariats/Ward Secretariats,29,2,0,2,27,19,8,0,0,0
+AP State Civil Supplies Corporation,"Consumer Affairs, Food and Civil Supplies",28,0,0,0,24,21,3,0,4,14
+National Highways Authority of India (NHAI),"Transport, Roads and Buildings",28,28,0,28,0,0,0,0,0,0
+Handlooms & Textiles,"Industries, Infrastructure, Investment and Commerce",27,2,0,2,25,22,3,0,0,0
+Cooperation And Cooperative Societies,Agriculture And Co-operation,21,0,0,0,18,17,1,1,2,14
+AP BC Cooperative Finance Corporation,Backward Classes Welfare,19,0,0,0,19,16,3,0,0,0
+Treasuries & Accounts,Finance,18,0,0,0,15,12,3,0,3,17
+AP Scheduled Tribes Cooperative Finance Corporation,Tribal Welfare,17,0,0,0,17,16,1,0,0,0
+Andhra Pradesh Industrial Infrastructure Corporation (APIIC),Industries and Commerce,16,0,0,0,14,14,0,0,2,13
+Board of Intermediate Education,Human Resources (School Education),14,0,0,0,14,13,1,0,0,0
+AP State Wakf Board,Minorities Welfare,13,1,0,1,12,12,0,0,0,0
+AP State Aids Control Society,"Health, Medical & Family Welfare",13,0,0,0,12,11,1,0,1,8
+"Industries, Commerce And Export Promotion","Industries, Infrastructure, Investment and Commerce",12,2,0,2,9,9,0,0,1,10
+Technical Education,Department of Skills Development and Training,11,0,0,0,11,8,3,0,0,0
+Kapu Welfare and Development Corporation,Backward Classes Welfare,10,9,0,9,1,0,1,0,0,0
+Amaravati Metropolitan Region Development Authority,Municipal Administration And Urban Development,10,0,0,0,9,9,0,0,1,10
+"Society for Social Audit, Accountability and Transparency(SSAAT-AP)",Panchayat Raj And Rural Development,10,0,0,0,10,10,0,0,0,0
+Tribal Welfare Residential Educational Institutions Society,Tribal Welfare,10,0,0,0,10,9,1,0,0,0
+Institute of Preventive medicine (IPM) & Food Safety,"Health, Medical & Family Welfare",9,0,0,0,8,6,2,1,0,11
+Sainik Welfare,Home,8,0,0,0,8,6,2,0,0,0
+Intermediate Education,Human Resources (School Education),8,1,0,1,6,6,0,1,0,14
+Mission For Elimination Of Poverty In Municipal Areas (MEPMA),Municipal Administration And Urban Development,7,0,0,0,7,7,0,0,0,0
+AP Housing Board,Municipal Administration And Urban Development,7,0,0,0,7,0,7,0,0,0
+Tirumala Tirupati Devasthanam (TTD),Revenue,6,0,0,0,6,4,2,0,0,0
+Sports Authority of AP,"Youth Advancement, Tourism And Culture",6,0,0,0,6,5,1,0,0,0
+AP State Irrigation Development Corporation,Water Resources,6,0,0,0,6,5,1,0,0,0
+AP State Christian (Minorities) Finance Corporation,Minorities Welfare,5,0,0,0,5,3,2,0,0,0
+Fire Services,Home,4,0,0,0,3,2,1,0,1,25
+Factories,"Labour, Factories, Boilers & Insurance Medical Services",4,0,0,0,3,1,2,0,1,25
+AP State Minorities Finance Corporation Ltd,Minorities Welfare,4,0,0,0,4,2,2,0,0,0
+Minorities Welfare,Minorities Welfare,4,0,0,0,3,2,1,0,1,25
+Damodaram Sanjivayya National Law University,Law,3,3,0,3,0,0,0,0,0,0
+Youth Services,"Youth Advancement, Tourism And Culture",3,0,0,0,3,3,0,0,0,0
+Acharya N.G.Ranga Agricultural University(ANGRAU),Agriculture And Co-operation,3,0,0,0,3,0,3,0,0,0
+A.P.Paramedical Board,"Health, Medical & Family Welfare",3,0,0,0,3,0,3,0,0,0
+Commercial Taxes,Revenue,3,0,0,0,3,3,0,0,0,0
+Economics and Statistics,Planning,3,0,0,0,3,3,0,0,0,0
+Ground Water,Water Resources,2,0,0,0,2,1,1,0,0,0
+Sugar And Cane,"Industries, Infrastructure, Investment and Commerce",2,0,0,0,2,2,0,0,0,0
+AP Micro Irrigation Project(APMIP),Agriculture And Co-operation,2,0,0,0,2,2,0,0,0,0
+State Audit,Finance,2,0,0,0,2,1,1,0,0,0
+Adult Education,Human Resources (School Education),1,0,0,0,1,1,0,0,0,0
+Amaravati Development Corporation,Municipal Administration And Urban Development,1,0,0,0,1,0,1,0,0,0
+Dr. YSR University of Health Sciences,"Health, Medical And Family Welfare",1,0,0,0,1,0,1,0,0,0
+AP State Creativity And Culture Commission,"Youth Advancement, Tourism And Culture",1,1,0,1,0,0,0,0,0,0
+Government Life Insurance,Finance,1,0,0,0,1,1,0,0,0,0
+AP Tourism Development Corporation,"Youth Advancement, Tourism And Culture",1,1,0,1,0,0,0,0,0,0
