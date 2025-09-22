@@ -172,11 +172,11 @@ const FeaturesSection = () => {
             to create transparent, efficient governance solutions.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4 text-lg rounded-xl group hover:scale-105 transition-all duration-300" onClick={() => window.location.href = '/citizen-portal/auth'}>
+            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4 text-lg rounded-xl group hover:scale-105 transition-all duration-300" onClick={() => window.location.href = '/citizen-portal/authentication'}>
               Get Started as Citizen
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform ml-2" />
             </Button>
-            <Button variant="outline" className="px-8 py-4 text-lg rounded-xl hover:scale-105 transition-all duration-300" onClick={() => window.location.href = '/officials-portal/login'}>
+            <Button variant="outline" className="px-8 py-4 text-lg rounded-xl hover:scale-105 transition-all duration-300" onClick={() => window.location.href = '/officials-portal/authentication'}>
               Access Officials Portal
             </Button>
           </div>

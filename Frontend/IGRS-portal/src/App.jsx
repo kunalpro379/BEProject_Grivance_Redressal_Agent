@@ -155,10 +155,6 @@ function App() {
           } />
 
           {/* Officials Portal Routes */}
-          <Route
-            path="/officials-portal/login"
-            element={<Navigate to="/officials-portal/authentication" replace />}
-          />
 
           {isAuthenticated && userRole === "official" ? (
             <Route path="/officials-portal" element={<Layout userRole={userRole} onLogout={handleLogout} userAuth={userData} />}>

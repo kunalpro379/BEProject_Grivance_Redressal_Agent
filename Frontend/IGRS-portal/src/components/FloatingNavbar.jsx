@@ -44,11 +44,11 @@ const FloatingNavbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-3">
-          <Button variant="outline" size="sm" className="text-sm border-gray-600 text-gray-200 hover:text-white" onClick={() => window.location.href = '/citizen-portal/auth'}>
+          <Button variant="outline" size="sm" className="text-sm border-gray-600 text-gray-200 hover:text-white" onClick={() => window.location.href = '/citizen-portal/authentication'}>
             Citizen Portal
             <ArrowRight className="h-4 w-4 ml-1" />
           </Button>
-          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm" onClick={() => window.location.href = '/officials-portal/login'}>
+          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm" onClick={() => window.location.href = '/officials-portal/authentication'}>
             Officials Portal
             <ArrowRight className="h-4 w-4 ml-1" />
           </Button>
@@ -77,11 +77,11 @@ const FloatingNavbar = () => {
               About
             </a>
             <div className="flex flex-col space-y-2 pt-2">
-              <Button variant="outline" size="sm" className="w-full justify-center text-sm border-gray-600 text-gray-200 hover:text-white" onClick={() => window.location.href = '/citizen-portal/auth'}>
+              <Button variant="outline" size="sm" className="w-full justify-center text-sm border-gray-600 text-gray-200 hover:text-white" onClick={() => window.location.href = '/citizen-portal/authentication'}>
                 Citizen Portal
                 <ArrowRight className="h-4 w-4 ml-1" />
               </Button>
-              <Button size="sm" className="w-full justify-center bg-yellow-500 hover:bg-yellow-600 text-white text-sm" onClick={() => window.location.href = '/officials-portal/login'}>
+              <Button size="sm" className="w-full justify-center bg-yellow-500 hover:bg-yellow-600 text-white text-sm" onClick={() => window.location.href = '/officials-portal/authentication'}>
                 Officials Portal
                 <ArrowRight className="h-4 w-4 ml-1" />
               </Button>

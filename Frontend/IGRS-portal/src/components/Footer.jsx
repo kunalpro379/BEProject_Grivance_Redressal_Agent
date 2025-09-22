@@ -80,15 +80,15 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button 
                 className="bg-white text-gray-900 border-white hover:bg-gray-100 group"
-                onClick={() => window.location.href = '/login'}
+                onClick={() => window.location.href = '/citizen-portal/authentication'}
               >
                 Citizen Portal Access
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform ml-2" />
               </Button>
               <Button 
-                variant="outline" 
+                variant="outline"
                 className="bg-transparent text-white border-gray-600 hover:bg-gray-700 group"
-                onClick={() => window.location.href = '/login'}
+                onClick={() => window.location.href = '/officials-portal/authentication'}
               >
                 Officials Portal Access
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform ml-2" />
