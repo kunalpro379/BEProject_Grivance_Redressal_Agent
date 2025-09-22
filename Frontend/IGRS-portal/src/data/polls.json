@@ -1,0 +1,265 @@
+{
+    "stats": {
+      "activeDiscussions": 45,
+      "totalContributors": 289,
+      "issuesResolved": 156,
+      "activeOfficials": 23,
+      "responseRate": "82%",
+      "avgResolutionTime": "12 days",
+      "topCategories": [
+        {"name": "Infrastructure", "count": 125, "trend": "up"},
+        {"name": "Healthcare", "count": 89, "trend": "down"},
+        {"name": "Education", "count": 78, "trend": "stable"},
+        {"name": "Sanitation", "count": 67, "trend": "up"},
+        {"name": "Transport", "count": 56, "trend": "stable"}
+      ],
+      "userSatisfaction": 4.2,
+      "newIssuesThisWeek": 23
+    },
+    "recentActivity": [
+      {
+        "id": "ACT1001",
+        "type": "issue_resolved",
+        "title": "Pothole on SV Road filled",
+        "category": "Infrastructure",
+        "timestamp": "2025-02-10T14:30:00Z",
+        "user": "Citizen_Amit"
+      },
+      {
+        "id": "ACT1002",
+        "type": "new_poll",
+        "title": "New Poll: Best Time for Garbage Collection",
+        "category": "Sanitation",
+        "timestamp": "2025-02-10T11:15:00Z",
+        "user": "BMC_Officer"
+      },
+      {
+        "id": "ACT1003",
+        "type": "official_comment",
+        "title": "MSEDCL_Engineer responded to power outage issue",
+        "category": "Infrastructure",
+        "timestamp": "2025-02-10T10:00:00Z",
+        "user": "MSEDCL_Engineer"
+      },
+      {
+        "id": "ACT1004",
+        "type": "issue_raised",
+        "title": "New Issue: Street Light not working near Andheri Station",
+        "category": "Infrastructure",
+        "timestamp": "2025-02-10T09:45:00Z",
+        "user": "MumbaiLocalUser"
+      }
+    ],
+    "trendingIssues": [
+      {
+        "id": "ISS_78",
+        "title": "Water Logging at Sion Circle during rains",
+        "category": "Infrastructure",
+        "upvotes": 45,
+        "comments": 23,
+        "status": "under_review",
+        "assignedTo": "BMC_Commissioner"
+      },
+      {
+        "id": "ISS_82",
+        "title": "Irregular Schedule of BEST Bus Number 314",
+        "category": "Transport",
+        "upvotes": 38,
+        "comments": 19,
+        "status": "acknowledged",
+        "assignedTo": "WR_Official"
+      },
+      {
+        "id": "ISS_91",
+        "title": "Overflowing Garbage Bin near Linking Road Market",
+        "category": "Sanitation",
+        "upvotes": 34,
+        "comments": 15,
+        "status": "in_progress",
+        "assignedTo": "BMC_Commissioner"
+      }
+    ],
+    "officials": [
+      {
+        "username": "BMC_Commissioner",
+        "name": "I.S. Chahal",
+        "designation": "Municipal Commissioner",
+        "department": "Brihanmumbai Municipal Corporation",
+        "verified": true,
+        "responseRate": "68%",
+        "avgResponseTime": "3 hours",
+        "issuesResolved": 89,
+        "userRating": 4.1
+      },
+      {
+        "username": "WR_Official",
+        "name": "Sanjay Kumar",
+        "designation": "Divisional Manager",
+        "department": "Western Railway",
+        "verified": true,
+        "responseRate": "75%",
+        "avgResponseTime": "6 hours",
+        "issuesResolved": 45,
+        "userRating": 3.8
+      },
+      {
+        "username": "MSEDCL_Engineer",
+        "name": "Rajendra Patil",
+        "designation": "Executive Engineer",
+        "department": "MSEDCL",
+        "verified": true,
+        "responseRate": "71%",
+        "avgResponseTime": "8 hours",
+        "issuesResolved": 67,
+        "userRating": 4.3
+      },
+      {
+        "username": "RTO_Official",
+        "name": "Vikram Singh",
+        "designation": "RTO Officer",
+        "department": "Transport Department",
+        "verified": true,
+        "responseRate": "69%",
+        "avgResponseTime": "12 hours",
+        "issuesResolved": 34,
+        "userRating": 3.9
+      },
+      {
+        "username": "Education_Dept",
+        "name": "Anjali Deshpande",
+        "designation": "Deputy Education Officer",
+        "department": "Education Department",
+        "verified": true,
+        "responseRate": "81%",
+        "avgResponseTime": "5 hours",
+        "issuesResolved": 28,
+        "userRating": 4.5
+      }
+    ],
+    "activePolls": [
+      {
+        "id": 4,
+        "question": "Best Time for Garbage Collection",
+        "description": "What time is most convenient for garbage collection in your area?",
+        "endDate": "2025-02-15T23:59:59Z",
+        "category": "Sanitation",
+        "options": [
+          {"text": "Morning 7-9 AM", "votes": 234, "percentage": 35},
+          {"text": "Evening 6-8 PM", "votes": 189, "percentage": 28},
+          {"text": "Afternoon 2-4 PM", "votes": 156, "percentage": 23},
+          {"text": "Any time", "votes": 98, "percentage": 14}
+        ],
+        "totalVotes": 677,
+        "tags": ["Sanitation", "GarbageCollection"]
+      },
+      {
+        "id": 5,
+        "question": "Priority for Public Transport Improvement",
+        "description": "Which transport system needs immediate improvement?",
+        "endDate": "2025-02-20T23:59:59Z",
+        "category": "Transport",
+        "options": [
+          {"text": "Local Trains", "votes": 345, "percentage": 42},
+          {"text": "BEST Buses", "votes": 234, "percentage": 28},
+          {"text": "Auto Rickshaws", "votes": 156, "percentage": 19},
+          {"text": "Metro", "votes": 89, "percentage": 11}
+        ],
+        "totalVotes": 824,
+        "tags": ["Transport", "PublicTransport"]
+      },
+      {
+        "id": 6,
+        "question": "Most Needed Public Facility",
+        "description": "Which public facility is most needed in your area?",
+        "endDate": "2025-02-25T23:59:59Z",
+        "category": "Infrastructure",
+        "options": [
+          {"text": "Public Park", "votes": 267, "percentage": 32},
+          {"text": "Community Hall", "votes": 189, "percentage": 23},
+          {"text": "Library", "votes": 156, "percentage": 19},
+          {"text": "Sports Complex", "votes": 223, "percentage": 27}
+        ],
+        "totalVotes": 835,
+        "tags": ["Infrastructure", "PublicFacility"]
+      },
+      {
+        "id": 8,
+        "question": "Digital Services Improvement Priority",
+        "description": "Which government digital service should be improved first?",
+        "endDate": "2025-03-01T23:59:59Z",
+        "category": "Technology",
+        "options": [
+          {"text": "Online Bill Payments", "votes": 145, "percentage": 31},
+          {"text": "Certificate Applications (Caste, Income)", "votes": 167, "percentage": 35},
+          {"text": "Public Grievance Portal", "votes": 98, "percentage": 21},
+          {"text": "Property Tax Services", "votes": 67, "percentage": 14}
+        ],
+        "totalVotes": 477,
+        "tags": ["DigitalIndia", "Technology"]
+      }
+    ],
+    "closedPolls": [
+      {
+        "id": 7,
+        "question": "Preferred Water Supply Timing",
+        "description": "What time would you prefer for water supply?",
+        "endDate": "2025-01-30T23:59:59Z",
+        "category": "Infrastructure",
+        "options": [
+          {"text": "Morning (6-8 AM)", "votes": 450, "percentage": 38},
+          {"text": "Evening (6-8 PM)", "votes": 289, "percentage": 24},
+          {"text": "Both times", "votes": 467, "percentage": 39}
+        ],
+        "totalVotes": 1206,
+        "tags": ["WaterSupply", "Infrastructure"],
+        "winner": "Both times",
+        "actionTaken": "BMC announced revised schedule for 30% of wards."
+      },
+      {
+        "id": 3,
+        "question": "Priority for Park Maintenance",
+        "description": "Which aspect of public parks needs most attention?",
+        "endDate": "2025-01-25T23:59:59Z",
+        "category": "Infrastructure",
+        "options": [
+          {"text": "Lawn & Plant Maintenance", "votes": 278, "percentage": 33},
+          {"text": "Children's Play Equipment", "votes": 312, "percentage": 37},
+          {"text": "Walking Tracks", "votes": 187, "percentage": 22},
+          {"text": "Lighting & Security", "votes": 78, "percentage": 9}
+        ],
+        "totalVotes": 855,
+        "tags": ["Parks", "PublicSpace"],
+        "winner": "Children's Play Equipment",
+        "actionTaken": "Funds allocated for new play equipment in 15 major parks."
+      }
+    ],
+    "userLeaderboard": [
+      {
+        "rank": 1,
+        "username": "ActiveCitizen",
+        "name": "Priya Sharma",
+        "points": 1250,
+        "issuesRaised": 23,
+        "issuesResolved": 15,
+        "helpfulComments": 45
+      },
+      {
+        "rank": 2,
+        "username": "MumbaiPulse",
+        "name": "Rohan Mehta",
+        "points": 1100,
+        "issuesRaised": 18,
+        "issuesResolved": 12,
+        "helpfulComments": 38
+      },
+      {
+        "rank": 3,
+        "username": "CityGuardian",
+        "name": "Arun Kumar",
+        "points": 980,
+        "issuesRaised": 15,
+        "issuesResolved": 10,
+        "helpfulComments": 42
+      }
+    ]
+  }

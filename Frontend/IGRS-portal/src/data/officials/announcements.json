@@ -1,0 +1,519 @@
+{
+    "announcements": [
+      {
+        "id": "ANC-001",
+        "title": "Emergency Repair Work on Eastern Freeway",
+        "author": "Rajesh Sharma",
+        "department": "Mumbai Metropolitan Region Development Authority (MMRDA)",
+        "content": {
+          "en": "Critical repair work will be carried out on the Eastern Freeway between Orange Gate and Ghatkopar from February 20th to February 25th, 2024, from 11 PM to 5 AM. Expect significant delays. Please use alternative routes.",
+          "hi": "पूर्वीय फ्रीवे पर ऑरेंज गेट से घाटकोपर के बीच 20 फरवरी से 25 फरवरी, 2024 तक, रात 11 बजे से सुबह 5 बजे तक महत्वपूर्ण मरम्मत कार्य किया जाएगा। काफी देरी की अपेक्षा है। कृपया वैकल्पिक मार्गों का उपयोग करें।",
+          "mr": "ऑरेंज गेट ते घाटकोपर दरम्यान पूर्वीय फ्रीवे वर 20 फेब्रुवारी ते 25 फेब्रुवारी, 2024 दरम्यान, रात्री 11 वाजता ते सकाळी 5 वाजता महत्त्वाचे दुरुस्ती काम केले जाईल. लक्षणीय विलंबाची अपेक्षा आहे. कृपया पर्यायी मार्गांचा वापर करा."
+        },
+        "attachments": [
+          {
+            "name": "traffic-diversion-plan.pdf",
+            "url": "https://mumbaitraffic.gov.in/pdfs/anc-001-diversion.pdf"
+          },
+          {
+            "name": "project-details.pdf",
+            "url": "https://mmrda.gov.in/pdfs/anc-001-project.pdf"
+          }
+        ],
+        "views": 210,
+        "acknowledged": 67,
+        "created_at": "2024-02-15T10:30:00Z",
+        "expires": "2024-02-26T00:00:00Z"
+      },
+      {
+        "id": "ANC-002",
+        "title": "Introduction of New Property Tax Assessment System",
+        "author": "Priya Patil",
+        "department": "Brihanmumbai Municipal Corporation (BMC)",
+        "content": {
+          "en": "The BMC is launching a new, transparent online system for property tax assessment and payment effective April 1st, 2024. All citizens are requested to update their property details on the portal by March 31st.",
+          "hi": "बीएमसी 1 अप्रैल, 2024 से संपत्ति कर मूल्यांकन और भुगतान के लिए एक नई, पारदर्शी ऑनलाइन प्रणाली शुरू कर रही है। सभी नागरिकों से अनुरोध है कि वे 31 मार्च तक पोर्टल पर अपने संपत्ति का विवरण अपडेट करें।",
+          "mr": "बीएमसी १ एप्रिल, २०२४ पासून मालमत्ता कर आकारणी आणि पेमेंट साठी एक नवीन, पारदर्शी ऑनलाइन प्रणाली सुरू करत आहे. सर्व नागरिकांना विनंती की ३१ मार्च पर्यंत पोर्टलवर त्यांच्या मालमत्तेचा तपशील अद्यतनित करावा."
+        },
+        "attachments": [
+          {
+            "name": "new-tax-system-guide.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-002-guide.pdf"
+          }
+        ],
+        "views": 450,
+        "acknowledged": 89,
+        "created_at": "2024-02-10T09:15:00Z",
+        "expires": "2024-04-30T00:00:00Z"
+      },
+      {
+        "id": "ANC-003",
+        "title": "Public Hearing for Coastal Road Project Phase-II",
+        "author": "Vikram Mehta",
+        "department": "Environment Department, Govt. of Maharashtra",
+        "content": {
+          "en": "A public hearing regarding the environmental impact of Coastal Road Project Phase-II (Nariman Point to Kandivali) will be held on March 5th, 2024, at 11 AM in the Town Hall, Fort. All concerned citizens and stakeholders are invited.",
+          "hi": "कोस्टल रोड प्रोजेक्ट चरण-द्वितीय (नरीमन प्वाइंट से कांदिवली) के पर्यावरणीय प्रभाव पर एक सार्वजनिक सुनवाई 5 मार्च, 2024 को सुबह 11 बजे टाउन हॉल, फोर्ट में आयोजित की जाएगी। सभी संबंधित नागरिक और हितधारक आमंत्रित हैं।",
+          "mr": "कोस्टल रोड प्रकल्प टप्पा-दुसरा (नरीमन पॉईंट ते कांदिवली) याच्या पर्यावरणीय प्रभावावरील सार्वजनिक सुनावणी ५ मार्च, २०२४ रोजी सकाळी ११ वाजता टाउन हॉल, फोर्ट येथे होणार आहे. सर्व संबंधित नागरिक आणि हितधारक आमंत्रित आहेत."
+        },
+        "attachments": [
+          {
+            "name": "public-hearing-agenda.pdf",
+            "url": "https://environment.maharashtra.gov.in/pdfs/anc-003-agenda.pdf"
+          },
+          {
+            "name": "environment-impact-report.pdf",
+            "url": "https://environment.maharashtra.gov.in/pdfs/anc-003-eia.pdf"
+          }
+        ],
+        "views": 320,
+        "acknowledged": 45,
+        "created_at": "2024-02-18T14:00:00Z",
+        "expires": "2024-03-06T00:00:00Z"
+      },
+      {
+        "id": "ANC-001",
+        "title": "Emergency Repair Work on Eastern Freeway",
+        "author": "Rajesh Sharma",
+        "department": "Mumbai Metropolitan Region Development Authority (MMRDA)",
+        "content": {
+          "en": "Critical repair work will be carried out on the Eastern Freeway between Orange Gate and Ghatkopar from February 20th to February 25th, 2024, from 11 PM to 5 AM. Expect significant delays. Please use alternative routes.",
+          "hi": "पूर्वीय फ्रीवे पर ऑरेंज गेट से घाटकोपर के बीच 20 फरवरी से 25 फरवरी, 2024 तक, रात 11 बजे से सुबह 5 बजे तक महत्वपूर्ण मरम्मत कार्य किया जाएगा। काफी देरी की अपेक्षा है। कृपया वैकल्पिक मार्गों का उपयोग करें।",
+          "mr": "ऑरेंज गेट ते घाटकोपर दरम्यान पूर्वीय फ्रीवे वर 20 फेब्रुवारी ते 25 फेब्रुवारी, 2024 दरम्यान, रात्री 11 वाजता ते सकाळी 5 वाजता महत्त्वाचे दुरुस्ती काम केले जाईल. लक्षणीय विलंबाची अपेक्षा आहे. कृपया पर्यायी मार्गांचा वापर करा."
+        },
+        "attachments": [
+          {
+            "name": "traffic-diversion-plan.pdf",
+            "url": "https://mumbaitraffic.gov.in/pdfs/anc-001-diversion.pdf"
+          },
+          {
+            "name": "project-details.pdf",
+            "url": "https://mmrda.gov.in/pdfs/anc-001-project.pdf"
+          }
+        ],
+        "views": 210,
+        "acknowledged": 67,
+        "created_at": "2024-02-15T10:30:00Z",
+        "expires": "2024-02-26T00:00:00Z"
+      },
+      {
+        "id": "ANC-002",
+        "title": "Introduction of New Property Tax Assessment System",
+        "author": "Priya Patil",
+        "department": "Brihanmumbai Municipal Corporation (BMC)",
+        "content": {
+          "en": "The BMC is launching a new, transparent online system for property tax assessment and payment effective April 1st, 2024. All citizens are requested to update their property details on the portal by March 31st.",
+          "hi": "बीएमसी 1 अप्रैल, 2024 से संपत्ति कर मूल्यांकन और भुगतान के लिए एक नई, पारदर्शी ऑनलाइन प्रणाली शुरू कर रही है। सभी नागरिकों से अनुरोध है कि वे 31 मार्च तक पोर्टल पर अपने संपत्ति का विवरण अपडेट करें।",
+          "mr": "बीएमसी १ एप्रिल, २०२४ पासून मालमत्ता कर आकारणी आणि पेमेंट साठी एक नवीन, पारदर्शी ऑनलाइन प्रणाली सुरू करत आहे. सर्व नागरिकांना विनंती की ३१ मार्च पर्यंत पोर्टलवर त्यांच्या मालमत्तेचा तपशील अद्यतनित करावा."
+        },
+        "attachments": [
+          {
+            "name": "new-tax-system-guide.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-002-guide.pdf"
+          }
+        ],
+        "views": 450,
+        "acknowledged": 89,
+        "created_at": "2024-02-10T09:15:00Z",
+        "expires": "2024-04-30T00:00:00Z"
+      },
+      {
+        "id": "ANC-003",
+        "title": "Public Hearing for Coastal Road Project Phase-II",
+        "author": "Vikram Mehta",
+        "department": "Environment Department, Govt. of Maharashtra",
+        "content": {
+          "en": "A public hearing regarding the environmental impact of Coastal Road Project Phase-II (Nariman Point to Kandivali) will be held on March 5th, 2024, at 11 AM in the Town Hall, Fort. All concerned citizens and stakeholders are invited.",
+          "hi": "कोस्टल रोड प्रोजेक्ट चरण-द्वितीय (नरीमन प्वाइंट से कांदिवली) के पर्यावरणीय प्रभाव पर एक सार्वजनिक सुनवाई 5 मार्च, 2024 को सुबह 11 बजे टाउन हॉल, फोर्ट में आयोजित की जाएगी। सभी संबंधित नागरिक और हितधारक आमंत्रित हैं।",
+          "mr": "कोस्टल रोड प्रकल्प टप्पा-दुसरा (नरीमन पॉईंट ते कांदिवली) याच्या पर्यावरणीय प्रभावावरील सार्वजनिक सुनावणी ५ मार्च, २०२४ रोजी सकाळी ११ वाजता टाउन हॉल, फोर्ट येथे होणार आहे. सर्व संबंधित नागरिक आणि हितधारक आमंत्रित आहेत."
+        },
+        "attachments": [
+          {
+            "name": "public-hearing-agenda.pdf",
+            "url": "https://environment.maharashtra.gov.in/pdfs/anc-003-agenda.pdf"
+          },
+          {
+            "name": "environment-impact-report.pdf",
+            "url": "https://environment.maharashtra.gov.in/pdfs/anc-003-eia.pdf"
+          }
+        ],
+        "views": 320,
+        "acknowledged": 45,
+        "created_at": "2024-02-18T14:00:00Z",
+        "expires": "2024-03-06T00:00:00Z"
+      },
+      {
+        "id": "ANC-004",
+        "title": "Water Supply Interruption in Western Suburbs",
+        "author": "Anil Joshi",
+        "department": "BMC Water Supply Department",
+        "content": {
+          "en": "Water supply will be temporarily interrupted in Bandra, Khar, and Santa Cruz areas on February 22nd, 2024, from 10 AM to 6 PM for pipeline maintenance work. Please store water accordingly.",
+          "hi": "पाइपलाइन रखरखाव कार्य के लिए बांद्रा, खार और सांता क्रूज क्षेत्रों में 22 फरवरी, 2024 को सुबह 10 बजे से शाम 6 बजे तक जल आपूर्ति अस्थायी रूप से बाधित होगी। कृपया तदनुसार पानी संग्रहित करें।",
+          "mr": "पाइपलाइन देखभाल कामासाठी बांद्रा, खार आणि सांता क्रूज भागात २२ फेब्रुवारी, २०२४ रोजी सकाळी १० वाजता ते संध्याकाळी ६ वाजेपर्यंत पाणीपुरवठा तात्पुरता खंडित होईल. कृपया त्यानुसार पाणी साठवा."
+        },
+        "attachments": [
+          {
+            "name": "maintenance-schedule.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-004-schedule.pdf"
+          }
+        ],
+        "views": 890,
+        "acknowledged": 234,
+        "created_at": "2024-02-19T08:00:00Z",
+        "expires": "2024-02-23T00:00:00Z"
+      },
+      {
+        "id": "ANC-005",
+        "title": "GST Registration Camp for Small Businesses",
+        "author": "Meena Desai",
+        "department": "Commercial Tax Department, Maharashtra",
+        "content": {
+          "en": "A special GST registration camp for small businesses and shopkeepers will be organized at Andheri West Ward Office from February 25th to 28th, 2024. Free consultation and assistance will be provided.",
+          "hi": "छोटे व्यवसायों और दुकानदारों के लिए एक विशेष जीएसटी पंजीकरण शिविर 25 फरवरी से 28 फरवरी, 2024 तक अंधेरी वेस्ट वार्ड कार्यालय में आयोजित किया जाएगा। निःशुल्क परामर्श और सहायता प्रदान की जाएगी।",
+          "mr": "लहान व्यवसाय आणि दुकानदारांसाठी एक विशेष जीएसटी नोंदणी शिबिर २५ फेब्रुवारी ते २८ फेब्रुवारी, २०२४ दरम्यान अंधेरी वेस्ट प्रभाग कार्यालयात आयोजित करण्यात येईल. विनामूल्य सल्ला आणि सहाय्य पुरवले जाईल."
+        },
+        "attachments": [
+          {
+            "name": "gst-camp-brochure.pdf",
+            "url": "https://mahagst.gov.in/pdfs/anc-005-brochure.pdf"
+          },
+          {
+            "name": "required-documents.pdf",
+            "url": "https://mahagst.gov.in/pdfs/anc-005-documents.pdf"
+          }
+        ],
+        "views": 567,
+        "acknowledged": 123,
+        "created_at": "2024-02-14T11:20:00Z",
+        "expires": "2024-02-29T00:00:00Z"
+      },
+      {
+        "id": "ANC-006",
+        "title": "Metro Line 7 Inauguration Schedule",
+        "author": "Sanjay Verma",
+        "department": "Mumbai Metro Rail Corporation (MMRC)",
+        "content": {
+          "en": "Metro Line 7 (Dahisar East to Andheri East) will be inaugurated on March 1st, 2024. Commercial operations will begin from March 2nd, 2024. Fare details and timetable attached.",
+          "hi": "मेट्रो लाइन 7 (दहिसर ईस्ट से अंधेरी ईस्ट) का उद्घाटन 1 मार्च, 2024 को किया जाएगा। वाणिज्यिक संचालन 2 मार्च, 2024 से शुरू होगा। किराया विवरण और समय सारणी संलग्न है।",
+          "mr": "मेट्रो लाइन ७ (दहिसर पूर्व ते अंधेरी पूर्व) चे उद्घाटन १ मार्च, २०२४ रोजी होणार आहे. वाणिज्यिक कार्यवाही २ मार्च, २०२४ पासून सुरू होईल. दर तपशील आणि वेळापत्रक संलग्न आहे."
+        },
+        "attachments": [
+          {
+            "name": "fare-chart.pdf",
+            "url": "https://mmrcl.com/pdfs/anc-006-fare.pdf"
+          },
+          {
+            "name": "time-table.pdf",
+            "url": "https://mmrcl.com/pdfs/anc-006-timetable.pdf"
+          }
+        ],
+        "views": 2100,
+        "acknowledged": 456,
+        "created_at": "2024-02-20T15:30:00Z",
+        "expires": "2024-03-31T00:00:00Z"
+      },
+      {
+        "id": "ANC-007",
+        "title": "Property Document Verification Drive",
+        "author": "Rahul Kapoor",
+        "department": "Mumbai Suburban Collector Office",
+        "content": {
+          "en": "Special drive for verification and mutation of property documents at suburban collector office from February 20th to March 10th, 2024. Fast-track processing for applications submitted during this period.",
+          "hi": "उपनगरीय कलेक्टर कार्यालय में 20 फरवरी से 10 मार्च, 2024 तक संपत्ति दस्तावेजों के सत्यापन और म्यूटेशन के लिए विशेष अभियान। इस अवधि के दौरान जमा किए गए आवेदनों के लिए फास्ट-ट्रैक प्रसंस्करण।",
+          "mr": "२० फेब्रुवारी ते १० मार्च, २०२४ दरम्यान उपनगरीय जिल्हाधिकारी कार्यालयात मालमत्ता कागदपत्रे तपासणी आणि बदलासाठी विशेष मोहीम. या कालावधीत सादर केलेल्या अर्जांसाठी द्रुत प्रक्रिया."
+        },
+        "attachments": [
+          {
+            "name": "verification-process.pdf",
+            "url": "https://collectormumbai.gov.in/pdfs/anc-007-process.pdf"
+          }
+        ],
+        "views": 789,
+        "acknowledged": 189,
+        "created_at": "2024-02-16T09:45:00Z",
+        "expires": "2024-03-11T00:00:00Z"
+      },
+      {
+        "id": "ANC-008",
+        "title": "Healthcare Scheme for Senior Citizens",
+        "author": "Dr. Anjali Mehta",
+        "department": "Public Health Department, MCGM",
+        "content": {
+          "en": "New healthcare scheme 'Senior Care Plus' launched for citizens above 65 years. Registration begins from March 1st, 2024. Includes free health checkups and discounted medicines.",
+          "hi": "65 वर्ष से अधिक उम्र के नागरिकों के लिए नई स्वास्थ्य देखभाल योजना 'सीनियर केयर प्लस' लॉन्च की गई। पंजीकरण 1 मार्च, 2024 से शुरू होगा। इसमें निःशुल्क स्वास्थ्य जांच और छूट पर दवाएं शामिल हैं।",
+          "mr": "६५ वर्षांपेक्षा जास्त वयाच्या नागरिकांसाठी नवीन आरोग्य योजना 'सिनियर केअर प्लस' सुरू करण्यात आली आहे. नोंदणी १ मार्च, २०२४ पासून सुरू होईल. यात विनामूल्य आरोग्य तपासणी आणि सवलतीत औषधे समाविष्ट आहेत."
+        },
+        "attachments": [
+          {
+            "name": "scheme-details.pdf",
+            "url": "https://health.mcgm.gov.in/pdfs/anc-008-scheme.pdf"
+          },
+          {
+            "name": "registration-form.pdf",
+            "url": "https://health.mcgm.gov.in/pdfs/anc-008-form.pdf"
+          }
+        ],
+        "views": 1200,
+        "acknowledged": 345,
+        "created_at": "2024-02-12T14:20:00Z",
+        "expires": "2024-04-01T00:00:00Z"
+      },
+      {
+        "id": "ANC-009",
+        "title": "Digital Literacy Program for Women",
+        "author": "Neha Singh",
+        "department": "Women & Child Development Department",
+        "content": {
+          "en": "Free digital literacy program for women aged 18-45 years. Courses include basic computer skills, internet usage, and digital banking. Registration open at all ward offices.",
+          "hi": "18-45 वर्ष की महिलाओं के लिए निःशुल्क डिजिटल साक्षरता कार्यक्रम। पाठ्यक्रमों में बुनियादी कंप्यूटर कौशल, इंटरनेट उपयोग और डिजिटल बैंकिंग शामिल हैं। सभी वार्ड कार्यालयों में पंजीकरण खुले हैं।",
+          "mr": "१८ ते ४५ वर्ष वयोगटातील महिलांसाठी विनामूल्य डिजिटल साक्षरता कार्यक्रम. अभ्यासक्रमात मूलभूत संगणक कौशल्य, इंटरनेट वापर आणि डिजिटल बँकिंग समाविष्ट आहे. सर्व प्रभाग कार्यालयांमध्ये नोंदणी उघडी आहे."
+        },
+        "attachments": [
+          {
+            "name": "program-brochure.pdf",
+            "url": "https://wcd.maharashtra.gov.in/pdfs/anc-009-brochure.pdf"
+          }
+        ],
+        "views": 654,
+        "acknowledged": 167,
+        "created_at": "2024-02-18T10:15:00Z",
+        "expires": "2024-03-15T00:00:00Z"
+      },
+      {
+        "id": "ANC-010",
+        "title": "Traffic Diversion for Marathon 2024",
+        "author": "Police Commissioner Office",
+        "department": "Mumbai Traffic Police",
+        "content": {
+          "en": "Major traffic diversions will be implemented on February 25th, 2024, from 5 AM to 11 AM for Mumbai Marathon 2024. Marine Drive and surrounding areas will be affected.",
+          "hi": "मुंबई मैराथन 2024 के लिए 25 फरवरी, 2024 को सुबह 5 बजे से 11 बजे तक प्रमुख यातायात मोड़ लागू किए जाएंगे। मरीन ड्राइव और आसपास के क्षेत्र प्रभावित होंगे।",
+          "mr": "मुंबई मॅरेथॉन २०२४ साठी २५ फेब्रुवारी, २०२४ रोजी सकाळी ५ वाजता ते ११ वाजेपर्यंत मोठ्या प्रमाणात वाहतूक मार्ग बदल लागू केले जातील. मरीन ड्राइव्ह आणि आजूबाजूचे भाग प्रभावित होतील."
+        },
+        "attachments": [
+          {
+            "name": "diversion-map.pdf",
+            "url": "https://mumbaipolice.gov.in/pdfs/anc-010-diversion.pdf"
+          },
+          {
+            "name": "alternative-routes.pdf",
+            "url": "https://mumbaipolice.gov.in/pdfs/anc-010-routes.pdf"
+          }
+        ],
+        "views": 1850,
+        "acknowledged": 278,
+        "created_at": "2024-02-19T16:00:00Z",
+        "expires": "2024-02-26T00:00:00Z"
+      },
+      {
+        "id": "ANC-011",
+        "title": "Waste Segregation Awareness Campaign",
+        "author": "Environmental Officer",
+        "department": "BMC Solid Waste Management",
+        "content": {
+          "en": "Intensive awareness campaign on waste segregation starting March 1st, 2024. Fines will be imposed for non-compliance from April 1st, 2024.",
+          "hi": "1 मार्च, 2024 से कचरा पृथक्करण पर गहन जागरूकता अभियान शुरू होगा। अनुपालन न करने पर 1 अप्रैल, 2024 से जुर्माना लगाया जाएगा।",
+          "mr": "१ मार्च, २०२४ पासून कचरा विभाजनावर गहन जागृती मोहीम सुरू होईल. अनुपालन न केल्यास १ एप्रिल, २०२४ पासून दंड आकारला जाईल."
+        },
+        "attachments": [
+          {
+            "name": "segregation-guidelines.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-011-guidelines.pdf"
+          }
+        ],
+        "views": 923,
+        "acknowledged": 156,
+        "created_at": "2024-02-17T11:30:00Z",
+        "expires": "2024-04-30T00:00:00Z"
+      },
+      {
+        "id": "ANC-012",
+        "title": "Renewal of Hawker Licenses",
+        "author": "License Department",
+        "department": "BMC License Department",
+        "content": {
+          "en": "All street vendors must renew their licenses by March 31st, 2024. New applications also being accepted. Camp offices set up in all zones.",
+          "hi": "सभी स्ट्रीट वेंडर्स को 31 मार्च, 2024 तक अपना लाइसेंस नवीनीकृत करना होगा। नए आवेदन भी स्वीकार किए जा रहे हैं। सभी जोनों में कैंप कार्यालय स्थापित किए गए हैं।",
+          "mr": "सर्व रस्ता विक्रेत्यांनी ३१ मार्च, २०२४ पर्यंत त्यांचे परवाने नूतनीकरण करणे अनिवार्य आहे. नवीन अर्ज देखील स्वीकारले जात आहेत. सर्व झोनमध्ये शिबिर कार्यालये स्थापित केली आहेत."
+        },
+        "attachments": [
+          {
+            "name": "renewal-process.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-012-renewal.pdf"
+          }
+        ],
+        "views": 678,
+        "acknowledged": 89,
+        "created_at": "2024-02-13T13:45:00Z",
+        "expires": "2024-04-01T00:00:00Z"
+      },
+      {
+        "id": "ANC-013",
+        "title": "Property Tax Rebate Scheme",
+        "author": "Tax Commissioner",
+        "department": "BMC Assessment & Collection",
+        "content": {
+          "en": "15% rebate on property tax for payments made before March 31st, 2024. Online payment portal now available with instant receipt generation.",
+          "hi": "31 मार्च, 2024 से पहले किए गए भुगतान पर संपत्ति कर में 15% की छूट। ऑनलाइन भुगतान पोर्टल अब तत्काल रसीद जनरेशन के साथ उपलब्ध है।",
+          "mr": "३१ मार्च, २०२४ पूर्वी केलेल्या पेमेंटसाठी मालमत्ता करावर १५% सूट. ऑनलाइन पेमेंट पोर्टल आता त्वरित पावती निर्मितीसह उपलब्ध आहे."
+        },
+        "attachments": [
+          {
+            "name": "rebate-details.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-013-rebate.pdf"
+          }
+        ],
+        "views": 1450,
+        "acknowledged": 567,
+        "created_at": "2024-02-01T10:00:00Z",
+        "expires": "2024-04-01T00:00:00Z"
+      },
+      {
+        "id": "ANC-014",
+        "title": "Building Repair Permission Fast-Track",
+        "author": "Building Proposals Department",
+        "department": "BMC Building Proposals",
+        "content": {
+          "en": "Fast-track approval for building repair permissions in old buildings. Decision within 15 days for complete applications. Online application mandatory.",
+          "hi": "पुरानी इमारतों में भवन मरम्मत अनुमति के लिए फास्ट-ट्रैक स्वीकृति। पूर्ण आवेदनों के लिए 15 दिनों के भीतर निर्णय। ऑनलाइन आवेदन अनिवार्य है।",
+          "mr": "जुन्या इमारतींमधील इमारत दुरुस्ती परवानग्यांसाठी द्रुत मंजुरी. पूर्ण अर्जासाठी १५ दिवसांत निर्णय. ऑनलाइन अर्ज अनिवार्य."
+        },
+        "attachments": [
+          {
+            "name": "fast-track-process.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-014-process.pdf"
+          }
+        ],
+        "views": 432,
+        "acknowledged": 78,
+        "created_at": "2024-02-20T09:00:00Z",
+        "expires": "2024-12-31T00:00:00Z"
+      },
+      {
+        "id": "ANC-015",
+        "title": "Rainwater Harvesting Subsidy",
+        "author": "Environmental Engineer",
+        "department": "BMC Environment Department",
+        "content": {
+          "en": "50% subsidy on rainwater harvesting system installation for residential buildings. Apply before April 30th, 2024. Technical guidance provided free of cost.",
+          "hi": "आवासीय भवनों के लिए वर्षा जल संचयन प्रणाली स्थापना पर 50% अनुदान। 30 अप्रैल, 2024 से पहले आवेदन करें। निःशुल्क तकनीकी मार्गदर्शन प्रदान किया जाता है।",
+          "mr": "निवासी इमारतींसाठी पावसाचे पाणी संठेवण प्रणाली स्थापनेवर ५०% अनुदान. ३० एप्रिल, २०२४ पूर्वी अर्ज करा. विनामूल्य तांत्रिक मार्गदर्शन पुरवले जाते."
+        },
+        "attachments": [
+          {
+            "name": "subsidy-scheme.pdf",
+            "url": "https://portal.mcgm.gov.in/pdfs/anc-015-subsidy.pdf"
+          }
+        ],
+        "views": 789,
+        "acknowledged": 134,
+        "created_at": "2024-02-15T14:20:00Z",
+        "expires": "2024-05-01T00:00:00Z"
+      },
+      {
+        "id": "ANC-016",
+        "title": "Fire Safety Audit Compliance",
+        "author": "Chief Fire Officer",
+        "department": "Mumbai Fire Brigade",
+        "content": {
+          "en": "All commercial buildings above 15 meters height must complete fire safety audit by June 30th, 2024. Non-compliance will lead to sealing of premises.",
+          "hi": "15 मीटर से अधिक ऊंचाई की सभी वाणिज्यिक इमारतों को 30 जून, 2024 तक अग्नि सुरक्षा ऑडिट पूरा करना होगा। अनुपालन न करने पर परिसर को सील कर दिया जाएगा।",
+          "mr": "१५ मीटरपेक्षा जास्त उंचीच्या सर्व वाणिज्यिक इमारतींनी ३० जून, २०२४ पर्यंत अग्निशामक सुरक्षा ऑडिट पूर्ण करणे अनिवार्य आहे. अनुपालन न केल्यास परिसर सील केला जाईल."
+        },
+        "attachments": [
+          {
+            "name": "safety-guidelines.pdf",
+            "url": "https://mumbaifire.gov.in/pdfs/anc-016-guidelines.pdf"
+          }
+        ],
+        "views": 567,
+        "acknowledged": 189,
+        "created_at": "2024-02-18T15:30:00Z",
+        "expires": "2024-07-01T00:00:00Z"
+      },
+      {
+        "id": "ANC-017",
+        "title": "School Admission Process for EWS Category",
+        "author": "Education Officer",
+        "department": "Education Department, MCGM",
+        "content": {
+          "en": "Online admission process for Economically Weaker Section (EWS) category in private schools begins March 15th, 2024. Documents verification at designated centers.",
+          "hi": "निजी स्कूलों में आर्थिक रूप से कमजोर वर्ग (EWS) श्रेणी के लिए ऑनलाइन प्रवेश प्रक्रिया 15 मार्च, 2024 से शुरू होगी। निर्दिष्ट केंद्रों पर दस्तावेज़ सत्यापन।",
+          "mr": "खाजगी शाळांमध्ये आर्थिक दुर्बल घटक (EWS) श्रेणीसाठी ऑनलाइन प्रवेश प्रक्रिया १५ मार्च, २०२४ पासून सुरू होईल. निर्दिष्ट केंद्रांवर कागदपत्रे तपासणी."
+        },
+        "attachments": [
+          {
+            "name": "admission-guidelines.pdf",
+            "url": "https://education.mcgm.gov.in/pdfs/anc-017-admission.pdf"
+          }
+        ],
+        "views": 1234,
+        "acknowledged": 256,
+        "created_at": "2024-02-14T12:00:00Z",
+        "expires": "2024-04-15T00:00:00Z"
+      },
+      {
+        "id": "ANC-018",
+        "title": "Mobile App for Grievance Redressal",
+        "author": "IT Department",
+        "department": "MCGM IT Department",
+        "content": {
+          "en": "New mobile app 'MCGM Citizens' launched for grievance registration and tracking. Available on Play Store and App Store. Real-time status updates.",
+          "hi": "शिकायत पंजीकरण और ट्रैकिंग के लिए नया मोबाइल ऐप 'MCGM Citizens' लॉन्च किया गया। प्ले स्टोर और ऐप स्टोर पर उपलब्ध है। रियल-टाइम स्टेटस अपडेट।",
+          "mr": "तक्रार नोंदणी आणि ट्रॅकिंगसाठी नवीन मोबाइल ॲप 'MCGM नागरिक' लाँच करण्यात आला आहे. प्ले स्टोअर आणि ॲप स्टोअरवर उपलब्ध. रिअल-वेळ स्थिती अद्यतने."
+        },
+        "attachments": [
+          {
+            "name": "app-user-guide.pdf",
+            "url": "https://mcgm.gov.in/pdfs/anc-018-guide.pdf"
+          }
+        ],
+        "views": 876,
+        "acknowledged": 145,
+        "created_at": "2024-02-19T10:45:00Z",
+        "expires": "2024-12-31T00:00:00Z"
+      },
+      {
+        "id": "ANC-019",
+        "title": "Heritage Building Conservation Guidelines",
+        "author": "Heritage Committee",
+        "department": "Mumbai Heritage Conservation Committee",
+        "content": {
+          "en": "New guidelines issued for conservation of heritage buildings in South Mumbai. Special permits required for any modification work. Technical committee approval mandatory.",
+          "hi": "दक्षिण मुंबई में विरासत भवनों के संरक्षण के लिए नए दिशा-निर्देश जारी किए गए हैं। किसी भी संशोधन कार्य के लिए विशेष परमिट की आवश्यकता होती है। तकनीकी समिति की स्वीकृति अनिवार्य है।",
+          "mr": "दक्षिण मुंबईतील वारसा इमारतींच्या जतनासाठी नवीन मार्गदर्शक तत्त्वे जारी करण्यात आली आहेत. कोणत्याही सुधारणा कामासाठी विशेष परवाने आवश्यक आहेत. तांत्रिक समितीची मंजुरी अनिवार्य."
+        },
+        "attachments": [
+          {
+            "name": "conservation-guidelines.pdf",
+            "url": "https://heritage.mumbai.gov.in/pdfs/anc-019-guidelines.pdf"
+          }
+        ],
+        "views": 345,
+        "acknowledged": 67,
+        "created_at": "2024-02-16T16:20:00Z",
+        "expires": "2025-02-16T00:00:00Z"
+      },
+      {
+        "id": "ANC-020",
+        "title": "Disaster Management Preparedness Drill",
+        "author": "Disaster Management Cell",
+        "department": "Mumbai Disaster Management Authority",
+        "content": {
+          "en": "City-wide disaster preparedness drill on March 10th, 2024, from 10 AM to 12 PM. Emergency sirens will be tested. Citizens requested not to panic.",
+          "hi": "10 मार्च, 2024 को सुबह 10 बजे से 12 बजे तक शहर-व्यापी आपदा तैयारी अभ्यास। आपातकालीन सायरन का परीक्षण किया जाएगा। नागरिकों से अनुरोध है कि घबराएं नहीं।",
+          "mr": "१० मार्च, २०२४ रोजी सकाळी १० वाजता ते १२ वाजेपर्यंत शहरव्यापी आपत्ती तयारी सराव. आणीबाणी सायरेणची चाचणी घेण्यात येईल. नागरिकांनी घाबरू नये अशी विनंती."
+        },
+        "attachments": [
+          {
+            "name": "drill-schedule.pdf",
+            "url": "https://disastermgmt.mumbai.gov.in/pdfs/anc-020-schedule.pdf"
+          }
+        ],
+        "views": 987,
+        "acknowledged": 178,
+        "created_at": "2024-02-20T08:30:00Z",
+        "expires": "2024-03-11T00:00:00Z"
+      }
+    ]
+  }

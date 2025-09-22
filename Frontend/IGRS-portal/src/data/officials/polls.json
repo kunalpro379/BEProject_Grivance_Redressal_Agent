@@ -1,0 +1,61 @@
+{
+    "polls": [
+      {
+        "id": "POLL-001",
+        "question": {
+          "en": "Which issue should be prioritized for improvement in your ward?",
+          "hi": "आपके वार्ड में सुधार के लिए किस मुद्दे को प्राथमिकता दी जानी चाहिए?",
+          "mr": "तुमच्या प्रभागात सुधारण्यासाठी कोणत्या समस्येला प्राधान्य दिले पाहिजे?"
+        },
+        "options": {
+          "en": ["Road Quality", "Waste Management", "Water Supply", "Street Lighting"],
+          "hi": ["सड़क की गुणवत्ता", "कचरा प्रबंधन", "जल आपूर्ति", "स्ट्रीट लाइटिंग"],
+          "mr": ["रस्त्याची गुणवत्ता", "कचरा व्यवस्थापन", "पाणीपुरवठा", "रस्त्यावरील दिवे"]
+        },
+        "author": "Current User",
+        "department": "BMC Ward G-North",
+        "votes": [450, 890, 600, 210],
+        "total_votes": 2150,
+        "created_at": "2024-02-17T08:00:00Z",
+        "expires": "2024-02-24T23:59:00Z"
+      },
+      {
+        "id": "POLL-002",
+        "question": {
+          "en": "How satisfied are you with the new property tax portal?",
+          "hi": "आप नए संपत्ति कर पोर्टल से कितने संतुष्ट हैं?",
+          "mr": "नवीन मालमत्ता कर पोर्टलबद्दल तुम्ही किती समाधानी आहात?"
+        },
+        "options": {
+          "en": ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very Dissatisfied"],
+          "hi": ["बहुत संतुष्ट", "संतुष्ट", "तटस्थ", "असंतुष्ट", "बहुत असंतुष्ट"],
+          "mr": ["खूप समाधानी", "समाधानी", "तटस्थ", "असमाधानी", "खूप असमाधानी"]
+        },
+        "author": "Priya Patil",
+        "department": "BMC Assessment & Collection Department",
+        "votes": [120, 300, 450, 280, 150],
+        "total_votes": 1300,
+        "created_at": "2024-02-05T12:00:00Z",
+        "expires": "2024-02-29T23:59:00Z"
+      },
+      {
+        "id": "POLL-003",
+        "question": {
+          "en": "Which day is most convenient for a weekend public grievance redressal camp?",
+          "hi": "सप्ताहांत पर जन शिकायत निवारण शिविर के लिए कौन सा दिन सबसे सुविधाजनक है?",
+          "mr": "वीकेंडवर सार्वजनिक ग्राहक तक्रार निवारण शिबिरासाठी कोणता दिवस सर्वात सोयीचा आहे?"
+        },
+        "options": {
+          "en": ["Saturday", "Sunday"],
+          "hi": ["शनिवार", "रविवार"],
+          "mr": ["शनिवार", "रविवार"]
+        },
+        "author": "Rajesh Singh",
+        "department": "Public Grievance Cell, MCGM",
+        "votes": [750, 920],
+        "total_votes": 1670,
+        "created_at": "2024-02-20T09:30:00Z",
+        "expires": "2024-02-27T23:59:00Z"
+      }
+    ]
+  }

@@ -1,0 +1,35 @@
+{
+    "history": [
+      {
+        "announcement_id": "ANC-001",
+        "activity": [
+          {
+            "action": "Created",
+            "user": "Rajesh Sharma",
+            "timestamp": "2024-02-15T10:30:00Z"
+          },
+          {
+            "action": "Published",
+            "user": "System",
+            "timestamp": "2024-02-15T10:35:00Z"
+          },
+          {
+            "action": "Viewed by 100+ users",
+            "user": "System",
+            "timestamp": "2024-02-15T14:00:00Z"
+          },
+          {
+            "action": "Acknowledgment reminder sent to department heads",
+            "user": "System",
+            "timestamp": "2024-02-16T09:00:00Z"
+          },
+          {
+            "action": "Edited (Updated end date)",
+            "user": "Rajesh Sharma",
+            "timestamp": "2024-02-18T11:00:00Z",
+            "notes": "Extended work by one day due to rain."
+          }
+        ]
+      }
+    ]
+  }

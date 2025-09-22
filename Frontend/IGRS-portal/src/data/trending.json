@@ -1,0 +1,38 @@
+{
+  "trending": [
+    {
+      "type": "discussion",
+      "id": 1,
+      "title": "Severe Waterlogging in Andheri East",
+      "upvotes": 234,
+      "replies": 12,
+      "priority": "high",
+      "timestamp": "2025-09-22T10:30:00Z"
+    },
+    {
+      "type": "discussion",
+      "id": 4,
+      "title": "School Infrastructure Development Plan",
+      "upvotes": 156,
+      "replies": 8,
+      "priority": "medium",
+      "timestamp": "2025-09-18T09:15:00Z"
+    },
+    {
+      "type": "poll",
+      "id": 3,
+      "title": "School Infrastructure Priority",
+      "totalVotes": 804,
+      "endDate": "2025-02-10T23:59:59Z"
+    },
+    {
+      "type": "discussion",
+      "id": 3,
+      "title": "Healthcare Center Proposal for Borivali",
+      "upvotes": 89,
+      "replies": 3,
+      "priority": "medium",
+      "timestamp": "2025-09-20T11:00:00Z"
+    }
+  ]
+}

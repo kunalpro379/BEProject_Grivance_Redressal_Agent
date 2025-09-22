@@ -1,0 +1,697 @@
+{
+    "grievances": [
+    {
+    "id": "MUM-GRV-10001",
+    "timestamp": "2023-10-26T08:30:00Z",
+    "category": "Water Supply",
+    "subCategory": "Low Pressure",
+    "description": "No water supply on the 5th floor between 9 AM - 11 AM daily for the past week.",
+    "ward": "K-West",
+    "location": {
+    "address": "S.V. Road, Andheri West",
+    "latitude": 19.1364,
+    "longitude": 72.8296
+    },
+    "citizenId": "CTZ-58734",
+    "status": "Resolved",
+    "statusHistory": [
+    {
+    "status": "Filed",
+    "timestamp": "2023-10-26T08:30:00Z"
+    },
+    {
+    "status": "In Progress",
+    "timestamp": "2023-10-26T14:15:00Z"
+    },
+    {
+    "status": "Resolved",
+    "timestamp": "2023-10-27T11:00:00Z"
+    }
+    ],
+    "resolutionTimeHours": 26.5,
+    "assignedDepartment": "Water Works Dept."
+    },
+    {
+    "id": "MUM-GRV-10002",
+    "timestamp": "2023-10-26T09:45:00Z",
+    "category": "Garbage",
+    "subCategory": "Overflowing Bin",
+    "description": "Community garbage bin near station is overflowing, causing smell and stray animals.",
+    "ward": "T",
+    "location": {
+    "address": "Near Mulund Station (West)",
+    "latitude": 19.1715,
+    "longitude": 72.9560
+    },
+    "citizenId": "CTZ-44128",
+    "status": "In Progress",
+    "statusHistory": [
+    {
+    "status": "Filed",
+    "timestamp": "2023-10-26T09:45:00Z"
+    },
+    {
+    "status": "In Progress",
+    "timestamp": "2023-10-26T16:30:00Z"
+    }
+    ],
+    "resolutionTimeHours": null,
+    "assignedDepartment": "Solid Waste Management"
+    },
+    {
+    "id": "MUM-GRV-10003",
+    "timestamp": "2023-10-25T18:20:00Z",
+    "category": "Street Lights",
+    "subCategory": "Not Working",
+    "description": "Pole No. L-42 on the inner road has been dark for 3 nights, security concern.",
+    "ward": "R-Central",
+    "location": {
+    "address": "Sainath Nagar, Borivali East",
+    "latitude": 19.2295,
+    "longitude": 72.8597
+    },
+    "citizenId": "CTZ-87301",
+    "status": "Resolved",
+    "statusHistory": [
+    {
+    "status": "Filed",
+    "timestamp": "2023-10-25T18:20:00Z"
+    },
+    {
+    "status": "In Progress",
+    "timestamp": "2023-10-26T10:00:00Z"
+    },
+    {
+    "status": "Resolved",
+    "timestamp": "2023-10-26T21:15:00Z"
+    }
+    ],
+    "resolutionTimeHours": 27.0,
+    "assignedDepartment": "Electrical Dept."
+    },
+    {
+    "id": "MUM-GRV-10004",
+    "timestamp": "2023-10-27T07:15:00Z",
+    "category": "Roads & Footpaths",
+    "subCategory": "Pothole",
+    "description": "Large pothole near the bus stop causing traffic jams and risk to two-wheelers.",
+    "ward": "F-North",
+    "location": {
+    "address": "Junction of Dadoji Konddev Marg",
+    "latitude": 19.0732,
+    "longitude": 72.8826
+    },
+    "citizenId": "CTZ-11245",
+    "status": "New",
+    "statusHistory": [
+    {
+    "status": "Filed",
+    "timestamp": "2023-10-27T07:15:00Z"
+    }
+    ],
+    "resolutionTimeHours": null,
+    "assignedDepartment": "Roads and Traffic Dept."
+    },
+    {
+    "id": "MUM-GRV-10005",
+    "timestamp": "2023-10-24T12:00:00Z",
+    "category": "Water Supply",
+    "subCategory": "Leakage",
+    "description": "Continuous water leakage from a main pipeline on the roadside, water wastage.",
+    "ward": "H-West",
+    "location": {
+    "address": "Turner Road, Bandra West",
+    "latitude": 19.0552,
+    "longitude": 72.8252
+    },
+    "citizenId": "CTZ-99012",
+    "status": "Resolved",
+    "statusHistory": [
+    {
+    "status": "Filed",
+    "timestamp": "2023-10-24T12:00:00Z"
+    },
+    {
+    "status": "In Progress",
+    "timestamp": "2023-10-24T13:45:00Z"
+    },
+    {
+    "status": "Resolved",
+    "timestamp": "2023-10-25T17:30:00Z"
+    }
+    ],
+    "resolutionTimeHours": 29.5,
+    "assignedDepartment": "Water Works Dept."
+    },
+          {
+            "id": "MUM-GRV-10006",
+            "timestamp": "2023-10-23T21:10:00Z",
+            "category": "Sewage & Drainage",
+            "subCategory": "Blocked Drain",
+            "description": "Sewage water overflowing from a blocked drain on the main road, causing inconvenience and health hazard.",
+            "ward": "L",
+            "location": {
+              "address": "Kurla West, near Kurla Depot",
+              "latitude": 19.0728,
+              "longitude": 72.8826
+            },
+            "citizenId": "CTZ-22378",
+            "status": "Resolved",
+            "statusHistory": [
+              {
+                "status": "Filed",
+                "timestamp": "2023-10-23T21:10:00Z"
+              },
+              {
+                "status": "In Progress",
+                "timestamp": "2023-10-24T09:45:00Z"
+              },
+              {
+                "status": "Resolved",
+                "timestamp": "2023-10-24T18:20:00Z"
+              }
+            ],
+            "resolutionTimeHours": 21.17,
+            "assignedDepartment": "Sewage Operations"
+          },
+          {
+            "id": "MUM-GRV-10007",
+            "timestamp": "2023-10-27T14:55:00Z",
+            "category": "Noise Pollution",
+            "subCategory": "Construction Work",
+            "description": "Illegal construction work ongoing past 10 PM, using heavy machinery causing extreme noise.",
+            "ward": "P-North",
+            "location": {
+              "address": "Malad West, near Evershine Nagar",
+              "latitude": 19.1880,
+              "longitude": 72.8480
+            },
+            "citizenId": "CTZ-55691",
+            "status": "In Progress",
+            "statusHistory": [
+              {
+                "status": "Filed",
+                "timestamp": "2023-10-27T14:55:00Z"
+              },
+              {
+                "status": "In Progress",
+                "timestamp": "2023-10-28T11:30:00Z"
+              }
+            ],
+            "resolutionTimeHours": null,
+            "assignedDepartment": "Building & Factories Dept."
+          },
+          {
+            "id": "MUM-GRV-10008",
+            "timestamp": "2023-10-25T11:20:00Z",
+            "category": "Parks & Gardens",
+            "subCategory": "Maintenance",
+            "description": "Children's play area in the public park is broken and unsafe. Swings are damaged.",
+            "ward": "N",
+            "location": {
+              "address": "Ghatkopar East, Rajawadi Garden",
+              "latitude": 19.0882,
+              "longitude": 72.9083
+            },
+            "citizenId": "CTZ-33467",
+            "status": "Resolved",
+            "statusHistory": [
+              {
+                "status": "Filed",
+                "timestamp": "2023-10-25T11:20:00Z"
+              },
+              {
+                "status": "In Progress",
+                "timestamp": "2023-10-26T15:10:00Z"
+              },
+              {
+                "status": "Resolved",
+                "timestamp": "2023-10-28T10:00:00Z"
+              }
+            ],
+            "resolutionTimeHours": 70.67,
+            "assignedDepartment": "Gardens Dept."
+          },
+          {
+            "id": "MUM-GRV-10009",
+            "timestamp": "2023-10-26T17:40:00Z",
+            "category": "Garbage",
+            "subCategory": "Uncleared Waste",
+            "description": "Daily garbage collection has been missed for two days in a row, waste piling up in society compound.",
+            "ward": "H-East",
+            "location": {
+              "address": "Bandra East, Kalanagar",
+              "latitude": 19.0550,
+              "longitude": 72.8430
+            },
+            "citizenId": "CTZ-77842",
+            "status": "New",
+            "statusHistory": [
+              {
+                "status": "Filed",
+                "timestamp": "2023-10-26T17:40:00Z"
+              }
+            ],
+            "resolutionTimeHours": null,
+            "assignedDepartment": "Solid Waste Management"
+          },
+          {
+            "id": "MUM-GRV-10010",
+            "timestamp": "2023-10-24T08:00:00Z",
+            "category": "Property Tax",
+            "subCategory": "Bill Discrepancy",
+            "description": "Received an inflated property tax bill with incorrect carpet area calculation.",
+            "ward": "G-South",
+            "location": {
+              "address": "Worli, Dr. Annie Besant Road",
+              "latitude": 19.0176,
+              "longitude": 72.8210
+            },
+            "citizenId": "CTZ-90125",
+            "status": "Resolved",
+            "statusHistory": [
+              {
+                "status": "Filed",
+                "timestamp": "2023-10-24T08:00:00Z"
+              },
+              {
+                "status": "In Progress",
+                "timestamp": "2023-10-24T12:15:00Z"
+              },
+              {
+                "status": "Resolved",
+                "timestamp": "2023-10-26T14:45:00Z"
+              }
+            ],
+            "resolutionTimeHours": 54.75,
+            "assignedDepartment": "Assessment & Collection Dept."
+  },
+              {
+                "id": "MUM-GRV-10011",
+                "timestamp": "2023-10-28T07:45:00Z",
+                "category": "Water Supply",
+                "subCategory": "No Water",
+                "description": "Complete water cut in the entire building since yesterday evening. No tanker arranged by BMC.",
+                "ward": "R-South",
+                "location": {
+                  "address": "Kandivali West, Thakur Complex",
+                  "latitude": 19.2099,
+                  "longitude": 72.8397
+                },
+                "citizenId": "CTZ-66234",
+                "status": "In Progress",
+                "statusHistory": [
+                  {
+                    "status": "Filed",
+                    "timestamp": "2023-10-28T07:45:00Z"
+                  },
+                  {
+                    "status": "In Progress",
+                    "timestamp": "2023-10-28T13:20:00Z"
+                  }
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "Water Works Dept."
+              },
+              {
+                "id": "MUM-GRV-10012",
+                "timestamp": "2023-10-27T20:15:00Z",
+                "category": "Illegal Construction",
+                "subCategory": "Unauthorized Slum",
+                "description": "New slum dwellings being constructed overnight on a vacant government plot, encroaching on the footpath.",
+                "ward": "M-West",
+                "location": {
+                  "address": "Chembur East, near Govandi Station",
+                  "latitude": 19.0589,
+                  "longitude": 72.8990
+                },
+                "citizenId": "CTZ-11589",
+                "status": "New",
+                "statusHistory": [
+                  {
+                    "status": "Filed",
+                    "timestamp": "2023-10-27T20:15:00Z"
+                  }
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "Building & Factories Dept."
+              },
+              {
+                "id": "MUM-GRV-10013",
+                "timestamp": "2023-10-25T15:30:00Z",
+                "category": "Roads & Footpaths",
+                "subCategory": "Illegal Parking",
+                "description": "Cars and trucks are constantly parked illegally on both sides of the service road, blocking traffic.",
+                "ward": "P-South",
+                "location": {
+                  "address": "Goregaon East, Aarey Road",
+                  "latitude": 19.1590,
+                  "longitude": 72.8556
+                },
+                "citizenId": "CTZ-44901",
+                "status": "Resolved",
+                "statusHistory": [
+                  {
+                    "status": "Filed",
+                    "timestamp": "2023-10-25T15:30:00Z"
+                  },
+                  {
+                    "status": "In Progress",
+                    "timestamp": "2023-10-26T10:45:00Z"
+                  },
+                  {
+                    "status": "Resolved",
+                    "timestamp": "2023-10-26T19:00:00Z"
+                  }
+                ],
+                "resolutionTimeHours": 27.5,
+                "assignedDepartment": "Roads and Traffic Dept."
+              },
+              {
+                "id": "MUM-GRV-10014",
+                "timestamp": "2023-10-26T12:05:00Z",
+                "category": "Street Lights",
+                "subCategory": "Flickering Light",
+                "description": "Street light pole number F-18 is flickering continuously, needs immediate electrical repair.",
+                "ward": "F-South",
+                "location": {
+                  "address": "Parel, Lower Parel",
+                  "latitude": 19.0087,
+                  "longitude": 72.8297
+                },
+                "citizenId": "CTZ-77320",
+                "status": "Resolved",
+                "statusHistory": [
+                  {
+                    "status": "Filed",
+                    "timestamp": "2023-10-26T12:05:00Z"
+                  },
+                  {
+                    "status": "In Progress",
+                    "timestamp": "2023-10-27T09:00:00Z"
+                  },
+                  {
+                    "status": "Resolved",
+                    "timestamp": "2023-10-27T16:30:00Z"
+                  }
+                ],
+                "resolutionTimeHours": 28.42,
+                "assignedDepartment": "Electrical Dept."
+              },
+              {
+                "id": "MUM-GRV-10015",
+                "timestamp": "2023-10-28T09:00:00Z",
+                "category": "Garbage",
+                "subCategory": "Stray Animals",
+                "description": "Stray cows and dogs are scattering garbage from an open dump yard near the market area.",
+                "ward": "N",
+                "location": {
+                  "address": "Ghatkopar West, near station",
+                  "latitude": 19.0850,
+                  "longitude": 72.9040
+                },
+                "citizenId": "CTZ-28663",
+                "status": "New",
+                "statusHistory": [
+                  {
+                    "status": "Filed",
+                    "timestamp": "2023-10-28T09:00:00Z"
+                  }
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "Solid Waste Management"
+              },
+              {
+                "id": "MUM-GRV-10016",
+                "timestamp": "2023-10-22T10:30:00Z",
+                "category": "Sewage & Drainage",
+                "subCategory": "Manhole Overflow",
+                "description": "Sewage water is overflowing from a damaged manhole, creating a foul smell and health hazard.",
+                "ward": "E",
+                "location": {
+                  "address": "Byculla, Jerbai Wadia Road",
+                  "latitude": 18.9790,
+                  "longitude": 72.8317
+                },
+                "citizenId": "CTZ-45012",
+                "status": "Resolved",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-22T10:30:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-22T15:45:00Z"},
+                  {"status": "Resolved", "timestamp": "2023-10-23T12:00:00Z"}
+                ],
+                "resolutionTimeHours": 25.5,
+                "assignedDepartment": "Sewage Operations"
+              },
+              {
+                "id": "MUM-GRV-10017",
+                "timestamp": "2023-10-28T14:20:00Z",
+                "category": "Noise Pollution",
+                "subCategory": "Loudspeakers",
+                "description": "Temple using loudspeakers beyond permitted time and above permitted decibel levels.",
+                "ward": "G-North",
+                "location": {
+                  "address": "Dadar West, near Shivaji Park",
+                  "latitude": 19.0419,
+                  "longitude": 72.8394
+                },
+                "citizenId": "CTZ-67123",
+                "status": "In Progress",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-28T14:20:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-29T11:15:00Z"}
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "License Dept."
+              },
+              {
+                "id": "MUM-GRV-10018",
+                "timestamp": "2023-10-27T08:15:00Z",
+                "category": "Parks & Gardens",
+                "subCategory": "Grass Cutting",
+                "description": "Overgrown grass and bushes in the public garden, attracting mosquitoes and snakes.",
+                "ward": "S",
+                "location": {
+                  "address": "Bhandup West, near Jain Temple",
+                  "latitude": 19.1463,
+                  "longitude": 72.9302
+                },
+                "citizenId": "CTZ-88945",
+                "status": "New",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-27T08:15:00Z"}
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "Gardens Dept."
+              },
+              {
+                "id": "MUM-GRV-10019",
+                "timestamp": "2023-10-26T19:40:00Z",
+                "category": "Water Supply",
+                "subCategory": "Dirty Water",
+                "description": "Brown, muddy water is being supplied through the municipal pipeline for the past 3 days.",
+                "ward": "K-East",
+                "location": {
+                  "address": "Andheri East, J.B. Nagar",
+                  "latitude": 19.1200,
+                  "longitude": 72.8497
+                },
+                "citizenId": "CTZ-33456",
+                "status": "Resolved",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-26T19:40:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-27T10:30:00Z"},
+                  {"status": "Resolved", "timestamp": "2023-10-28T14:00:00Z"}
+                ],
+                "resolutionTimeHours": 42.33,
+                "assignedDepartment": "Water Works Dept."
+              },
+              {
+                "id": "MUM-GRV-10020",
+                "timestamp": "2023-10-25T16:55:00Z",
+                "category": "Roads & Footpaths",
+                "subCategory": "Footpath Encroachment",
+                "description": "Street vendors have completely occupied the footpath, forcing pedestrians to walk on the road.",
+                "ward": "L",
+                "location": {
+                  "address": "Kurla West, near station",
+                  "latitude": 19.0650,
+                  "longitude": 72.8800
+                },
+                "citizenId": "CTZ-55678",
+                "status": "Resolved",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-25T16:55:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-26T12:20:00Z"},
+                  {"status": "Resolved", "timestamp": "2023-10-27T16:00:00Z"}
+                ],
+                "resolutionTimeHours": 47.08,
+                "assignedDepartment": "License Dept."
+              },
+              {
+                "id": "MUM-GRV-10021",
+                "timestamp": "2023-10-28T06:30:00Z",
+                "category": "Garbage",
+                "subCategory": "Burning Waste",
+                "description": "People are regularly burning plastic and garbage in an open plot, causing air pollution.",
+                "ward": "M-East",
+                "location": {
+                  "address": "Deonar, near dumping ground",
+                  "latitude": 19.1000,
+                  "longitude": 72.9000
+                },
+                "citizenId": "CTZ-99234",
+                "status": "In Progress",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-28T06:30:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-28T14:45:00Z"}
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "Solid Waste Management"
+              },
+              {
+                "id": "MUM-GRV-10022",
+                "timestamp": "2023-10-24T13:25:00Z",
+                "category": "Street Lights",
+                "subCategory": "Damaged Pole",
+                "description": "Street light pole is bent and about to fall, posing danger to pedestrians and vehicles.",
+                "ward": "R-North",
+                "location": {
+                  "address": "Dahisar East, near railway crossing",
+                  "latitude": 19.2500,
+                  "longitude": 72.8600
+                },
+                "citizenId": "CTZ-77889",
+                "status": "Resolved",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-24T13:25:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-24T17:30:00Z"},
+                  {"status": "Resolved", "timestamp": "2023-10-25T11:45:00Z"}
+                ],
+                "resolutionTimeHours": 22.33,
+                "assignedDepartment": "Electrical Dept."
+              },
+              {
+                "id": "MUM-GRV-10023",
+                "timestamp": "2023-10-27T11:45:00Z",
+                "category": "Illegal Construction",
+                "subCategory": "Unauthorized Floor",
+                "description": "Under-construction building is adding an extra floor without proper permission and approval.",
+                "ward": "P-North",
+                "location": {
+                  "address": "Malad West, Orlem Church Road",
+                  "latitude": 19.1800,
+                  "longitude": 72.8400
+                },
+                "citizenId": "CTZ-11223",
+                "status": "New",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-27T11:45:00Z"}
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "Building & Factories Dept."
+              },
+              {
+                "id": "MUM-GRV-10024",
+                "timestamp": "2023-10-23T08:00:00Z",
+                "category": "Property Tax",
+                "subCategory": "Online Payment Issue",
+                "description": "Unable to pay property tax online due to technical error in the portal, showing incorrect amount.",
+                "ward": "C",
+                "location": {
+                  "address": "Marine Lines, near station",
+                  "latitude": 18.9500,
+                  "longitude": 72.8200
+                },
+                "citizenId": "CTZ-44556",
+                "status": "Resolved",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-23T08:00:00Z"},
+                  {"status": "In Progress", "timestamp": "2023-10-23T12:30:00Z"},
+                  {"status": "Resolved", "timestamp": "2023-10-24T15:00:00Z"}
+                ],
+                "resolutionTimeHours": 31.0,
+                "assignedDepartment": "Assessment & Collection Dept."
+              },
+              {
+                "id": "MUM-GRV-10025",
+                "timestamp": "2023-10-28T16:00:00Z",
+                "category": "Others",
+                "subCategory": "Stray Cattle",
+                "description": "Stray cattle roaming on main road causing traffic jams and accidents, especially during peak hours.",
+                "ward": "T",
+                "location": {
+                  "address": "Mulund West, near check naka",
+                  "latitude": 19.1700,
+                  "longitude": 72.9500
+                },
+                "citizenId": "CTZ-66778",
+                "status": "New",
+                "statusHistory": [
+                  {"status": "Filed", "timestamp": "2023-10-28T16:00:00Z"}
+                ],
+                "resolutionTimeHours": null,
+                "assignedDepartment": "General Administration"
+              }
+  ],
+  "metadata": {
+    "totalGrievances": 25,
+    "lastUpdated": "2023-10-29T00:00:00Z",
+    "wards": [
+      {
+        "wardCode": "A",
+        "wardName": "Fort, Churchgate",
+        "geoJson": {"type": "FeatureCollection", "features": []}
+      },
+      {
+        "wardCode": "K-West",
+        "wardName": "Andheri West, Vile Parle West",
+        "geoJson": {"type": "FeatureCollection", "features": []}
+      },
+      {
+        "wardCode": "R-Central",
+        "wardName": "Borivali East",
+        "geoJson": {"type": "FeatureCollection", "features": []}
+      },
+      {
+        "wardCode": "T",
+        "wardName": "Mulund West",
+        "geoJson": {"type": "FeatureCollection", "features": []}
+      },
+      {
+        "wardCode": "H-West",
+        "wardName": "Bandra West, Khar West",
+        "geoJson": {"type": "FeatureCollection", "features": []}
+      },
+      {
+        "wardCode": "F-North",
+        "wardName": "Matunga, Sion",
+        "geoJson": {"type": "FeatureCollection", "features": []}
+      }
+    ],
+    "categories": [
+      "Water Supply",
+      "Garbage",
+      "Street Lights",
+      "Roads & Footpaths",
+      "Sewage & Drainage",
+      "Parks & Gardens",
+      "Illegal Construction",
+      "Noise Pollution",
+      "Property Tax",
+      "Others"
+    ],
+    "departments": [
+      "Water Works Dept.",
+      "Solid Waste Management",
+      "Electrical Dept.",
+      "Roads and Traffic Dept.",
+      "Sewage Operations",
+      "Gardens Dept.",
+      "Building & Factories Dept.",
+      "License Dept.",
+      "Assessment & Collection Dept.",
+      "General Administration"
+    ]
+  }
+}      

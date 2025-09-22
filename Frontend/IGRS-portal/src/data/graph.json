@@ -1,0 +1,65 @@
+{
+    "monthlyProgress": [
+      {
+        "month": "Jan",
+        "totalGrievances": 120,
+        "resolved": 98
+      },
+      {
+        "month": "Feb",
+        "totalGrievances": 145,
+        "resolved": 110
+      },
+      {
+        "month": "Mar",
+        "totalGrievances": 160,
+        "resolved": 130
+      },
+      {
+        "month": "Apr",
+        "totalGrievances": 135,
+        "resolved": 105
+      },
+      {
+        "month": "May",
+        "totalGrievances": 150,
+        "resolved": 120
+      },
+      {
+        "month": "Jun",
+        "totalGrievances": 140,
+        "resolved": 115
+      },
+      {
+        "month": "Jul",
+        "totalGrievances": 155,
+        "resolved": 125
+      },
+      {
+        "month": "Aug",
+        "totalGrievances": 165,
+        "resolved": 140
+      },
+      {
+        "month": "Sep",
+        "totalGrievances": 170,
+        "resolved": 145
+      },
+      {
+        "month": "Oct",
+        "totalGrievances": 160,
+        "resolved": 135
+      },
+      {
+        "month": "Nov",
+        "totalGrievances": 150,
+        "resolved": 125
+      },
+      {
+        "month": "Dec",
+        "totalGrievances": 155,
+        "resolved": 130
+      }
+    ]
+  }
+  
