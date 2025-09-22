@@ -1,5 +1,23 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../integrations/supabase/client';
+
+// Mock test credentials for demo purposes
+const testCredentials = {
+  'citizen@test.com': {
+    password: 'citizen123',
+    name: 'John Citizen',
+    phone: '+91-9876543210',
+    address: '123 Main Street, Mumbai',
+    user_type: 'citizen'
+  },
+  'official@test.com': {
+    password: 'official123',
+    name: 'Jane Official',
+    phone: '+91-9876543211',
+    department: 'Public Works',
+    designation: 'Assistant Engineer',
+    user_type: 'official'
+  }
+};
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -7,118 +25,135 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set up auth state listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        setLoading(false);
-      }
-    );
-
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    // Check for existing session in localStorage
+    const userData = localStorage.getItem('userData');
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    
+    if (userData && isAuthenticated === 'true') {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      setSession({ user: parsedUser });
+    }
+    
+    setLoading(false);
   }, []);
 
   const signUp = async (email, password, userType, profileData) => {
-    const redirectUrl = `${window.location.origin}/`;
-    
-    const { data, error } = await supabase.auth.signUp({
+    // Mock signup - simulate success
+    const mockUser = {
+      id: Date.now().toString(),
       email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl
-      }
-    });
-
-    if (!error && data.user) {
-      // Create profile after successful signup
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert([
-          {
-            user_id: data.user.id,
-            user_type: userType,
-            email: email,
-            ...profileData
-          }
-        ]);
-      
-      if (profileError) {
-        console.error('Profile creation error:', profileError);
-      }
-    }
-
-    return { error };
+      user_type: userType,
+      ...profileData
+    };
+    
+    // Store user data
+    localStorage.setItem('userData', JSON.stringify(mockUser));
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userRole', userType);
+    
+    setUser(mockUser);
+    setSession({ user: mockUser });
+    
+    return { error: null };
   };
 
   const signIn = async (email, password) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    // Check test credentials first
+    const testUser = testCredentials[email];
+    
+    if (testUser && testUser.password === password) {
+      const userData = {
+        id: Date.now().toString(),
+        email,
+        ...testUser
+      };
+      
+      localStorage.setItem('userData', JSON.stringify(userData));
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', testUser.user_type);
+      
+      setUser(userData);
+      setSession({ user: userData });
+      
+      return { error: null };
+    }
+    
+    // For demo purposes, allow any credentials
+    const userData = {
+      id: Date.now().toString(),
       email,
-      password,
-    });
-    return { error };
+      name: 'Demo User',
+      user_type: 'citizen'
+    };
+    
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userRole', 'citizen');
+    
+    setUser(userData);
+    setSession({ user: userData });
+    
+    return { error: null };
   };
 
   const signInWithGoogle = async () => {
-    const redirectUrl = `${window.location.origin}/`;
+    // Mock Google sign-in
+    const userData = {
+      id: Date.now().toString(),
+      email: 'google.user@gmail.com',
+      name: 'Google User',
+      user_type: 'citizen'
+    };
     
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: redirectUrl
-      }
-    });
-    return { error };
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userRole', 'citizen');
+    
+    setUser(userData);
+    setSession({ user: userData });
+    
+    return { error: null };
   };
 
   const signInWithOtp = async (email) => {
-    const redirectUrl = `${window.location.origin}/`;
-    
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: redirectUrl
-      }
-    });
-    return { error };
+    // Mock OTP request - always succeed
+    return { error: null };
   };
 
   const verifyOtp = async (email, token) => {
-    const { error } = await supabase.auth.verifyOtp({
+    // Mock OTP verification - always succeed for demo
+    const userData = {
+      id: Date.now().toString(),
       email,
-      token,
-      type: 'email'
-    });
-    return { error };
+      name: 'OTP User',
+      user_type: 'citizen'
+    };
+    
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userRole', 'citizen');
+    
+    setUser(userData);
+    setSession({ user: userData });
+    
+    return { error: null };
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    return { error };
+    localStorage.removeItem('userData');
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userRole');
+    
+    setUser(null);
+    setSession(null);
+    
+    return { error: null };
   };
 
   const getCurrentProfile = async () => {
     if (!user) return null;
-    
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('user_id', user.id)
-      .maybeSingle();
-    
-    if (error) {
-      console.error('Error fetching profile:', error);
-      return null;
-    }
-    
-    return data;
+    return user;
   };
 
   return {

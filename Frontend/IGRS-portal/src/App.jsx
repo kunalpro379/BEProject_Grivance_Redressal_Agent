@@ -13,7 +13,6 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import TaskManagement from './pages/TaskManagement';
 import Feedback from "./pages/Feedback";
 import Landing from "./pages/Landing";
-import CitizenAuth from "./pages/CitizenAuth";
 import CitizenAuthPage from "./pages/CitizenAuthPage";
 import OfficialAuthPage from "./pages/OfficialAuthPage";
 import CitizenHome from "./pages/CitizenHome";
@@ -110,19 +109,6 @@ function App() {
             )}
           />
 
-          {/* Legacy unified authentication route */}
-          <Route
-            path="/authentication"
-            element={isAuthenticated ? (
-              userRole === "citizen" ? (
-                <Navigate to="/citizen-portal/dashboard" replace />
-              ) : (
-                <Navigate to="/officials-portal/dashboard" replace />
-              )
-            ) : (
-              <CitizenAuth onLogin={(data) => handleLogin(data.role || "citizen", data)} />
-            )}
-          />
           {/* Aliases per request */}
           <Route path="/citizens-portal/dashboard" element={<Navigate to="/citizen-portal/dashboard" replace />} />
           <Route path="/oficials-portal/dashboard" element={<Navigate to="/officials-portal/dashboard" replace />} />
