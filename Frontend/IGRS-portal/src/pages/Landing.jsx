@@ -20,8 +20,6 @@ const Landing = () => {
         <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-green-100/50 to-transparent" />
       </div>
       <FloatingNavbar />
-      {/* Spacer to prevent hero from hiding behind navbar on small screens */}
-      <div className="h-20 md:h-0" />
       <HeroSection />
       <FeaturesSection />
       <AnimatedCard />

@@ -16,10 +16,10 @@ const FloatingNavbar = () => {
 
   return (
     <nav
-      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 top-4 w-[96%] md:w-[90%] max-w-7xl ${
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 top-2 w-[96%] md:w-[90%] max-w-7xl ${
         isScrolled
-          ? "bg-black/90 backdrop-blur-md shadow-2xl border border-gray-700"
-          : "bg-black/80 backdrop-blur-sm shadow-xl border border-gray-700"
+          ? "bg-black shadow-2xl border-2 border-white"
+          : "bg-black shadow-xl border-2 border-white"
       } px-4 md:px-6 py-3 rounded-2xl`}
     >
       <div className="flex items-center justify-between">

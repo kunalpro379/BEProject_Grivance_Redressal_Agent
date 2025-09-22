@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, User, Phone, Building, Shield, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, Phone, Building, Home } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
 const CitizenAuthPage = () => {
@@ -103,54 +103,36 @@ const CitizenAuthPage = () => {
         />
       </div>
 
-      {/* Back to Home Button */}
+      {/* Home Button */}
       <button
         onClick={() => navigate('/')}
-        className="absolute top-6 left-6 z-20 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg hover:bg-white transition-colors"
+        className="absolute top-6 left-6 z-20 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200"
       >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Home
+        <Home className="w-5 h-5 text-gray-700" />
       </button>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-md lg:max-w-4xl mx-auto px-4 my-8 lg:my-0">
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-8">
+      <div className="relative z-10 w-full max-w-xs lg:max-w-sm mx-auto px-4 my-6 lg:my-0">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl border border-white/20 p-4">
           {/* Header */}
-          <div className="text-center lg:text-left mb-8">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6">
-                <div className="flex items-center justify-center lg:justify-start mb-4 lg:mb-0">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg">
-                    <Shield className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-                <div className="mb-2">
-                  <p className="text-lg font-medium text-gray-700 mb-1">महाराष्ट्र शासन</p>
-                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">Citizen Portal</h1>
-                  <p className="text-gray-600 mt-2">Access your citizen portal account</p>
-                </div>
+          <div className="text-center mb-4">
+            <div className="flex items-center justify-center mb-3">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg overflow-hidden bg-white">
+                <img src="/logo.png" alt="IGRS Logo" className="w-12 h-12 object-contain" />
               </div>
-              <div className="hidden lg:block">
-                <div className="text-right">
-                  <p className="text-sm text-gray-500 mb-2">Quick Access</p>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => navigate('/officials-portal/authentication')}
-                      className="block w-full px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                    >
-                      Officials Portal
-                    </button>
-                  </div>
-                </div>
-              </div>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-1">महाराष्ट्र शासन</p>
+              <h1 className="text-xl font-bold text-gray-900">Citizen Portal</h1>
+              <p className="text-gray-600 mt-1 text-xs">Access your citizen portal account</p>
             </div>
           </div>
 
           {/* Toggle Buttons */}
-          <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
+          <div className="flex bg-gray-100 rounded-lg p-1 mb-4">
             <button
               onClick={() => setIsLogin(true)}
-              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              className={`flex-1 py-1.5 px-3 rounded-md text-xs font-medium transition-colors ${
                 isLogin
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
@@ -160,7 +142,7 @@ const CitizenAuthPage = () => {
             </button>
             <button
               onClick={() => setIsLogin(false)}
-              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              className={`flex-1 py-1.5 px-3 rounded-md text-xs font-medium transition-colors ${
                 !isLogin
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
@@ -171,11 +153,11 @@ const CitizenAuthPage = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {!isLogin && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Full Name</label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <input
@@ -190,7 +172,7 @@ const CitizenAuthPage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Phone Number</label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <input
@@ -205,7 +187,7 @@ const CitizenAuthPage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Address</label>
                   <div className="relative">
                     <Building className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <input
@@ -223,7 +205,7 @@ const CitizenAuthPage = () => {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <label className="block text-xs font-medium text-gray-700 mb-1">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
@@ -239,7 +221,7 @@ const CitizenAuthPage = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <label className="block text-xs font-medium text-gray-700 mb-1">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
@@ -263,7 +245,7 @@ const CitizenAuthPage = () => {
 
             {!isLogin && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Confirm Password</label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                   <input
@@ -283,7 +265,7 @@ const CitizenAuthPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                className="w-full bg-blue-600 text-white py-2 px-3 text-sm rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
               >
                 {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Create Account')}
               </button>
@@ -300,12 +282,12 @@ const CitizenAuthPage = () => {
           </div>
 
           {/* Switch to Officials */}
-          <div className="mt-6 text-center lg:hidden">
-            <p className="text-sm text-gray-600">
+          <div className="mt-4 text-center">
+            <p className="text-xs text-gray-600">
               Are you an official?{' '}
               <button
                 onClick={() => navigate('/officials-portal/authentication')}
-                className="text-blue-600 hover:text-blue-700 font-medium"
+                className="text-blue-600 hover:text-blue-700 font-medium underline"
               >
                 Access Officials Portal
               </button>

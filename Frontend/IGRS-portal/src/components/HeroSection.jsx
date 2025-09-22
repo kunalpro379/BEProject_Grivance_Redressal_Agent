@@ -89,23 +89,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes logoRotate {
-          0% { transform: rotateY(0deg); }
-          100% { transform: rotateY(360deg); }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.6; }
-        }
-      `}</style>
-      <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
       {/* Indian flag inspired gradient with fine white grid */}
       <div className="absolute inset-0 z-0">
         {/* Soft tri-color gradient (saffron → white → green) */}
