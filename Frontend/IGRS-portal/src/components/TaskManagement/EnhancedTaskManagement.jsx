@@ -28,6 +28,7 @@ const EnhancedTaskManagement = () => {
   const [filters, setFilters] = useState({});
   const [selectedTask, setSelectedTask] = useState(null);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [mobileActiveTab, setMobileActiveTab] = useState('pending');
 
   // Process data
   const { taskManagement } = dashboardData;
@@ -105,26 +106,26 @@ const EnhancedTaskManagement = () => {
   const StatCard = ({ icon: Icon, title, value, change, color, trend }) => (
     <motion.div
       whileHover={{ y: -2 }}
-      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700"
+      className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-lg border border-gray-100 dark:border-gray-700 min-h-[100px] sm:min-h-[120px]"
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className={`p-3 rounded-lg ${color}`}>
-            <Icon className="h-6 w-6 text-white" />
+      <div className="flex flex-col h-full">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <div className={`p-2 sm:p-3 rounded-lg ${color}`}>
+            <Icon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-white" />
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
-          </div>
+          {change && (
+            <div className={`flex items-center space-x-1 ${trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-gray-500'}`}>
+              {trend === 'up' ? <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" /> : 
+               trend === 'down' ? <ArrowDownRight className="h-3 w-3 sm:h-4 sm:w-4" /> : 
+               <Minus className="h-3 w-3 sm:h-4 sm:w-4" />}
+              <span className="text-xs sm:text-sm font-medium">{change}</span>
+            </div>
+          )}
         </div>
-        {change && (
-          <div className={`flex items-center space-x-1 ${trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-gray-500'}`}>
-            {trend === 'up' ? <ArrowUpRight className="h-4 w-4" /> : 
-             trend === 'down' ? <ArrowDownRight className="h-4 w-4" /> : 
-             <Minus className="h-4 w-4" />}
-            <span className="text-sm font-medium">{change}</span>
-          </div>
-        )}
+        <div className="flex-1 flex flex-col justify-center">
+          <p className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1">{value}</p>
+          <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 leading-tight">{title}</p>
+        </div>
       </div>
     </motion.div>
   );
@@ -341,30 +342,40 @@ const EnhancedTaskManagement = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Task Management Dashboard</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
+        <div className="mb-4 sm:mb-6 lg:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-3 sm:gap-4">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white leading-tight" style={{ 
+                fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive, handwriting, serif',
+                fontStyle: 'italic',
+                letterSpacing: '0.5px'
+              }}>
+                Task Management Dashboard
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed" style={{ 
+                fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive, handwriting, serif',
+                fontStyle: 'italic',
+                letterSpacing: '0.3px'
+              }}>
                 Monitor, assign, and track all municipal tasks and grievances
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <Plus className="h-4 w-4" />
-                <span>New Task</span>
+            <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+              <button className="flex items-center justify-center px-2 sm:px-3 md:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs sm:text-sm md:text-base">
+                <Plus className="h-4 w-4 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline ml-2">New Task</span>
               </button>
-              <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-                <Settings className="h-5 w-5" />
+              <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" title="Settings">
+                <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
           </div>
 
           {/* Stats Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-4 sm:mb-6">
             <StatCard
               icon={Target}
               title="Total Tasks"
@@ -409,8 +420,8 @@ const EnhancedTaskManagement = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex space-x-1 bg-white dark:bg-gray-800 rounded-lg p-1 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3 sm:gap-4">
+          <div className="flex space-x-1 bg-white rounded-lg p-1 sm:p-2 shadow-sm border border-gray-200 w-full">
             {[
               { key: 'overview', label: 'Overview', icon: BarChart3 },
               { key: 'tasks', label: 'All Tasks', icon: Target },
@@ -422,28 +433,30 @@ const EnhancedTaskManagement = () => {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-colors ${
+                className={`flex items-center justify-center px-2 sm:px-3 md:px-4 py-2 sm:py-3 rounded-md transition-colors flex-1 ${
                   activeTab === tab.key
-                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    ? 'bg-black text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
+                title={tab.label}
               >
-                <tab.icon className="h-4 w-4" />
-                <span>{tab.label}</span>
+                <tab.icon className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                <span className="hidden lg:inline text-xs sm:text-sm font-medium ml-2">{tab.label}</span>
               </button>
             ))}
           </div>
 
           {(activeTab === 'tasks' || activeTab === 'kanban') && (
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-1 bg-white dark:bg-gray-800 rounded-lg p-1 shadow-sm">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="flex items-center space-x-1 bg-white rounded-lg p-1 shadow-sm border border-gray-200">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-2 rounded-md transition-colors ${
                     viewMode === 'grid'
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                      ? 'bg-black text-white shadow-md'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
+                  title="Grid View"
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </button>
@@ -451,9 +464,10 @@ const EnhancedTaskManagement = () => {
                   onClick={() => setViewMode('list')}
                   className={`p-2 rounded-md transition-colors ${
                     viewMode === 'list'
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                      ? 'bg-black text-white shadow-md'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
+                  title="List View"
                 >
                   <List className="h-4 w-4" />
                 </button>
@@ -461,6 +475,191 @@ const EnhancedTaskManagement = () => {
             </div>
           )}
         </div>
+
+        {/* Mobile Task Status Tabs - Only show on kanban tab */}
+        {activeTab === 'kanban' && (
+          <div className="lg:hidden mb-4">
+            <div className="mb-4">
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Task Board</h2>
+              <p className="text-sm text-gray-600">Tap on any button below to view tasks by status</p>
+            </div>
+          {/* Tab Headers */}
+          <div className="grid grid-cols-2 gap-2 mb-4">
+            <button
+              onClick={() => setMobileActiveTab('alldepartments')}
+              className={`flex flex-col items-center p-4 rounded-lg border-2 transition-colors ${
+                mobileActiveTab === 'alldepartments' 
+                  ? 'bg-purple-50 border-purple-200 text-purple-700' 
+                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <div className="text-2xl font-bold">{stats.total}</div>
+              <div className="text-sm font-medium">All Departments</div>
+              <div className="text-xs text-gray-500">Total tasks</div>
+            </button>
+            
+            <button
+              onClick={() => setMobileActiveTab('pending')}
+              className={`flex flex-col items-center p-4 rounded-lg border-2 transition-colors ${
+                mobileActiveTab === 'pending' 
+                  ? 'bg-red-50 border-red-200 text-red-700' 
+                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <div className="text-2xl font-bold">{stats.pending}</div>
+              <div className="text-sm font-medium">Pending</div>
+              <div className="text-xs text-gray-500">No tasks in pending</div>
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-2 mb-4">
+            <button
+              onClick={() => setMobileActiveTab('inprogress')}
+              className={`flex flex-col items-center p-4 rounded-lg border-2 transition-colors ${
+                mobileActiveTab === 'inprogress' 
+                  ? 'bg-blue-50 border-blue-200 text-blue-700' 
+                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <div className="text-2xl font-bold">{stats.inProgress}</div>
+              <div className="text-sm font-medium">In Progress</div>
+              <div className="text-xs text-gray-500">Active tasks</div>
+            </button>
+            
+            <button
+              onClick={() => setMobileActiveTab('completed')}
+              className={`flex flex-col items-center p-4 rounded-lg border-2 transition-colors ${
+                mobileActiveTab === 'completed' 
+                  ? 'bg-green-50 border-green-200 text-green-700' 
+                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <div className="text-2xl font-bold">{stats.completed}</div>
+              <div className="text-sm font-medium">Completed</div>
+              <div className="text-xs text-gray-500">Finished tasks</div>
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="bg-white rounded-lg border border-gray-200 p-4 min-h-[400px] max-h-[500px] overflow-y-auto">
+            {mobileActiveTab === 'alldepartments' && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">All Departments Overview</h3>
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                    <div className="text-2xl font-bold text-purple-600">{stats.total}</div>
+                    <div className="text-sm text-purple-700">Total Tasks</div>
+                  </div>
+                  <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                    <div className="text-2xl font-bold text-blue-600">{stats.inProgress}</div>
+                    <div className="text-sm text-blue-700">In Progress</div>
+                  </div>
+                  <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                    <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
+                    <div className="text-sm text-green-700">Completed</div>
+                  </div>
+                  <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                    <div className="text-2xl font-bold text-red-600">{stats.escalated}</div>
+                    <div className="text-sm text-red-700">Escalated</div>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {filteredTasks.slice(0, 5).map((task) => (
+                    <div key={task.id} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900">{task.title}</h4>
+                          <p className="text-sm text-gray-600">{task.department} • {task.assignedTo}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className={`text-xs px-2 py-1 rounded-full ${
+                            task.status === 'Completed' ? 'bg-green-100 text-green-800' :
+                            task.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
+                            'bg-gray-100 text-gray-800'
+                          }`}>
+                            {task.status}
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1">{task.progress}%</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {filteredTasks.length > 5 && (
+                    <div className="text-center text-sm text-gray-500">
+                      +{filteredTasks.length - 5} more tasks
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {mobileActiveTab === 'pending' && (
+              <div className="text-center py-8">
+                <div className="text-6xl mb-4">📋</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No Pending Tasks</h3>
+                <p className="text-gray-600 text-sm">All tasks are either in progress or completed</p>
+              </div>
+            )}
+            
+            {mobileActiveTab === 'inprogress' && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">In Progress Tasks ({stats.inProgress})</h3>
+                <div className="space-y-3">
+                  {filteredTasks.filter(task => task.status === 'In Progress').slice(0, 5).map((task) => (
+                    <div key={task.id} className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900">{task.title}</h4>
+                          <p className="text-sm text-gray-600">{task.department} • {task.assignedTo}</p>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <div className="w-20 bg-blue-200 rounded-full h-2">
+                              <div 
+                                className="bg-blue-600 h-2 rounded-full"
+                                style={{ width: `${task.progress}%` }}
+                              />
+                            </div>
+                            <span className="text-xs text-blue-600 font-medium">{task.progress}%</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs text-gray-500">{task.dueDate}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {filteredTasks.filter(task => task.status === 'In Progress').length > 5 && (
+                    <div className="text-center text-sm text-gray-500">
+                      +{filteredTasks.filter(task => task.status === 'In Progress').length - 5} more tasks
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {mobileActiveTab === 'completed' && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Completed Tasks ({stats.completed})</h3>
+                <div className="space-y-3">
+                  {filteredTasks.filter(task => task.status === 'Completed').map((task) => (
+                    <div key={task.id} className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900">{task.title}</h4>
+                          <p className="text-sm text-gray-600">{task.department} • {task.assignedTo}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-green-600">100%</div>
+                          <div className="text-xs text-gray-500">{task.dueDate}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        )}
 
         {/* Task Filters */}
         {(activeTab === 'tasks' || activeTab === 'kanban') && (

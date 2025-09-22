@@ -34,7 +34,11 @@ import {
   User,
   LogOut,
   ChevronDown,
-  Plus
+  Plus,
+  X,
+  Upload,
+  Image,
+  File
 } from "lucide-react";
 
 const CitizenDashboard = ({ userAuth, onLogout }) => {
@@ -45,6 +49,63 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Dashboard");
+  const [isGrievanceModalOpen, setIsGrievanceModalOpen] = useState(false);
+  const [grievanceForm, setGrievanceForm] = useState({
+    category: '',
+    age: '',
+    city: '',
+    title: '',
+    description: '',
+    proof: null
+  });
+
+  const grievanceCategories = [
+    'Infrastructure',
+    'Healthcare',
+    'Education',
+    'Transport',
+    'Sanitation',
+    'Water Supply',
+    'Electricity',
+    'Roads & Highways',
+    'Public Safety',
+    'Environment',
+    'Housing',
+    'Other'
+  ];
+
+  const handleGrievanceFormChange = (field, value) => {
+    setGrievanceForm(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setGrievanceForm(prev => ({
+        ...prev,
+        proof: file
+      }));
+    }
+  };
+
+  const handleSubmitGrievance = (e) => {
+    e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log('Grievance submitted:', grievanceForm);
+    alert('Grievance submitted successfully!');
+    setIsGrievanceModalOpen(false);
+    setGrievanceForm({
+      category: '',
+      age: '',
+      city: '',
+      title: '',
+      description: '',
+      proof: null
+    });
+  };
   
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -204,16 +265,57 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
     // Default dashboard content
     return (
       <main className="flex-1 p-2 sm:p-4 md:p-6 relative z-10 overflow-y-auto">
-          {/* Overview Section */}
+          {/* Hero Section with Create Grievance Button */}
         <div className="mb-6 md:mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900">Overview</h2>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <option>Last month</option>
-                <option>Last week</option>
-                <option>Last year</option>
-              </select>
+          <div className="relative bg-white rounded-xl p-6 md:p-8 border-2 border-gray-200 shadow-lg overflow-hidden">
+            {/* Subtle Pattern Background */}
+            <div className="absolute inset-0 opacity-5">
+              <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
+                <defs>
+                  <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="10" cy="10" r="1.5" fill="currentColor"/>
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#dots)" />
+              </svg>
             </div>
+            
+            {/* Geometric Pattern Overlay */}
+            <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+              <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
+                <polygon points="50,0 100,50 50,100 0,50" fill="currentColor" />
+              </svg>
+            </div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between">
+              <div className="mb-4 md:mb-0">
+                <h1 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800" style={{ fontFamily: 'Brush Script MT, cursive, serif' }}>
+                  Welcome, {userAuth?.username || 'Citizen'}
+                </h1>
+                <p className="text-gray-600 text-lg" style={{ fontFamily: 'Brush Script MT, cursive, serif' }}>
+                  Your voice matters. Submit grievances and track their progress.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsGrievanceModalOpen(true)}
+                className="group relative bg-gray-900 text-white hover:bg-gray-800 px-8 py-4 rounded-xl font-semibold flex items-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Plus className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">Create Grievance</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Overview Section */}
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Overview</h2>
+            <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Last month</option>
+              <option>Last week</option>
+              <option>Last year</option>
+            </select>
+          </div>
 
             {/* Stats Cards */}
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
@@ -629,6 +731,171 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
                 <div className="flex items-center justify-end gap-2">
                   <button type="button" onClick={() => setIsFeedbackOpen(false)} className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50">Cancel</button>
                   <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Send Feedback</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Grievance Submission Modal */}
+        {isGrievanceModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[95vh] overflow-y-auto shadow-2xl border border-gray-200">
+              {/* Enhanced Header */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between rounded-t-2xl">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-gray-100 rounded-xl">
+                    <FileText className="w-6 h-6 text-gray-700" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Brush Script MT, cursive, serif' }}>
+                      Submit Your Grievance
+                    </h2>
+                    <p className="text-sm text-gray-600">Help us serve you better</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsGrievanceModalOpen(false)}
+                  className="p-3 hover:bg-gray-100 rounded-xl transition-colors group"
+                >
+                  <X className="w-5 h-5 text-gray-500 group-hover:text-gray-700" />
+                </button>
+              </div>
+              
+              <form onSubmit={handleSubmitGrievance} className="p-8 space-y-8">
+                {/* Category Selection */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    Category *
+                  </label>
+                  <select
+                    required
+                    value={grievanceForm.category}
+                    onChange={(e) => handleGrievanceFormChange('category', e.target.value)}
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition-all duration-200 bg-gray-50 hover:bg-white"
+                  >
+                    <option value="">Choose a category that best describes your issue</option>
+                    {grievanceCategories.map(category => (
+                      <option key={category} value={category}>{category}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Age and City */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                      Your Age *
+                    </label>
+                    <input
+                      type="number"
+                      required
+                      min="18"
+                      max="100"
+                      value={grievanceForm.age}
+                      onChange={(e) => handleGrievanceFormChange('age', e.target.value)}
+                      className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition-all duration-200 bg-gray-50 hover:bg-white"
+                      placeholder="Enter your age"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                      City *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={grievanceForm.city}
+                      onChange={(e) => handleGrievanceFormChange('city', e.target.value)}
+                      className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition-all duration-200 bg-gray-50 hover:bg-white"
+                      placeholder="Enter your city"
+                    />
+                  </div>
+                </div>
+
+                {/* Title */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    Title *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={grievanceForm.title}
+                    onChange={(e) => handleGrievanceFormChange('title', e.target.value)}
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition-all duration-200 bg-gray-50 hover:bg-white"
+                    placeholder="Brief title of your grievance"
+                  />
+                </div>
+
+                {/* Description */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    Description *
+                  </label>
+                  <textarea
+                    required
+                    rows="5"
+                    value={grievanceForm.description}
+                    onChange={(e) => handleGrievanceFormChange('description', e.target.value)}
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition-all duration-200 bg-gray-50 hover:bg-white resize-none"
+                    placeholder="Describe your grievance in detail. Include specific information about when, where, and how the issue occurred..."
+                  />
+                </div>
+
+                {/* File Upload */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    Proof/Evidence (Optional)
+                  </label>
+                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-gray-400 transition-all duration-300 bg-gray-50 hover:bg-white group">
+                    <input
+                      type="file"
+                      id="proof-upload"
+                      accept="image/*,.pdf,.doc,.docx"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                    <label htmlFor="proof-upload" className="cursor-pointer">
+                      <div className="flex flex-col items-center">
+                        <div className="p-4 bg-gray-200 rounded-full mb-4 group-hover:bg-gray-300 transition-colors">
+                          <Upload className="w-8 h-8 text-gray-600" />
+                        </div>
+                        <p className="text-base font-medium text-gray-700 mb-2">Click to upload files or drag and drop</p>
+                        <p className="text-sm text-gray-500">Images, PDF, DOC (Max 10MB)</p>
+                      </div>
+                    </label>
+                    {grievanceForm.proof && (
+                      <div className="mt-4 flex items-center justify-center gap-3 text-sm bg-gray-100 px-4 py-3 rounded-lg">
+                        <File className="w-5 h-5 text-gray-600" />
+                        <span className="font-medium text-gray-700">{grievanceForm.proof.name}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit Buttons */}
+                <div className="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
+                  <button
+                    type="button"
+                    onClick={() => setIsGrievanceModalOpen(false)}
+                    className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-8 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-200 flex items-center gap-3 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    <FileText className="w-5 h-5" />
+                    Submit Grievance
+                  </button>
                 </div>
               </form>
             </div>

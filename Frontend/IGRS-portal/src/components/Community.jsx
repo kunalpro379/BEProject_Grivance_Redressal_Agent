@@ -34,6 +34,7 @@ const Community = () => {
   const [activeTab, setActiveTab] = useState('discussions');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showAllDiscussions, setShowAllDiscussions] = useState(false);
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   const tabs = [
     { id: 'discussions', label: 'Discussions', icon: MessageSquare },
@@ -94,7 +95,41 @@ const Community = () => {
       {/* Mobile-Responsive LeetCode-style Tag Categories */}
       <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
         <div className="flex flex-wrap gap-2">
-          {categories.map(category => (
+          {/* Show first 3 categories */}
+          {categories.slice(0, 3).map(category => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors ${
+                selectedCategory === category.id
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+              }`}
+            >
+              <span className="hidden sm:inline">{category.label}</span>
+              <span className="sm:hidden">{category.label.split(' ')[0]}</span>
+              <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+                selectedCategory === category.id
+                  ? 'bg-blue-700 text-blue-100'
+                  : 'bg-gray-200 text-gray-600'
+              }`}>
+                {category.count}
+              </span>
+            </button>
+          ))}
+
+          {/* Show More Button - only if there are more than 3 categories */}
+          {categories.length > 3 && (
+            <button
+              onClick={() => setShowMoreFilters(!showMoreFilters)}
+              className="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors bg-gray-100 text-gray-700 border border-gray-300 hover:bg-gray-200"
+            >
+              {showMoreFilters ? 'Show Less' : 'Show More'}
+            </button>
+          )}
+
+          {/* Show remaining categories when expanded */}
+          {showMoreFilters && categories.slice(3).map(category => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
@@ -161,10 +196,10 @@ const Community = () => {
       {/* Discussions List */}
       <div className="space-y-4">
         {filteredDiscussions.map(discussion => (
-          <div key={discussion.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-2 mb-2">
+          <div key={discussion.id} className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 md:p-6 hover:shadow-md transition-shadow">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 sm:mb-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-2">
                   <span className={`px-2 py-1 text-xs font-medium rounded-full border ${getPriorityColor(discussion.priority)}`}>
                     {discussion.priority?.toUpperCase()}
                   </span>
@@ -172,44 +207,44 @@ const Community = () => {
                     {discussion.category}
                   </span>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{discussion.title}</h3>
-                <p className="text-sm sm:text-base text-gray-600 mb-3 line-clamp-3">{discussion.content}</p>
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{discussion.title}</h3>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-3 line-clamp-3">{discussion.content}</p>
                 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 md:gap-4 text-xs sm:text-sm text-gray-500">
                   <div className="flex items-center gap-1">
-                    <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>{discussion.author.username}</span>
+                    <Users className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate">{discussion.author.username}</span>
                     {discussion.author.verified && (
-                      <UserCheck className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
+                      <UserCheck className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
                     )}
                   </div>
                   <div className="flex items-center gap-1">
-                    <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span className="truncate">{discussion.location}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <Clock className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span>{formatDate(discussion.timestamp)}</span>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-4 border-t border-gray-100 gap-3 sm:gap-0">
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-3 sm:pt-4 border-t border-gray-100 gap-2 sm:gap-3 md:gap-0">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <div className="flex items-center gap-1 text-gray-600">
-                  <ThumbsUp className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="text-sm">{discussion.upvotes}</span>
+                  <ThumbsUp className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="text-xs sm:text-sm">{discussion.upvotes}</span>
                 </div>
                 <div className="flex items-center gap-1 text-gray-600">
-                  <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="text-sm">{discussion.replies} replies</span>
+                  <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="text-xs sm:text-sm">{discussion.replies} replies</span>
                 </div>
               </div>
               
               <div className="flex flex-wrap gap-1">
                 {discussion.tags.slice(0, 3).map(tag => (
-                  <span key={tag} className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded">
+                  <span key={tag} className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded truncate max-w-20 sm:max-w-none">
                     #{tag}
                   </span>
                 ))}
@@ -563,32 +598,32 @@ const Community = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Community Hub</h1>
-          <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Connect, discuss, and collaborate with citizens and officials</p>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'Brush Script MT, cursive, serif' }}>Community Hub</h1>
+          <p className="text-sm sm:text-base text-gray-600 leading-relaxed italic tracking-wide" style={{ fontFamily: 'Brush Script MT, cursive, serif' }}>Connect, discuss, and collaborate with citizens and officials</p>
         </div>
 
         {/* Mobile-Responsive Tab Navigation */}
-        <div className="border-b border-gray-200 mb-6 sm:mb-8">
-          <nav className="flex space-x-2 sm:space-x-8 overflow-x-auto">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex space-x-1 bg-white rounded-lg p-1 sm:p-2 shadow-sm border border-gray-200 w-full">
             {tabs.map(tab => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-1 sm:gap-2 py-3 sm:py-4 px-2 sm:px-1 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors ${
+                  className={`flex items-center justify-center px-2 sm:px-3 md:px-4 py-2 sm:py-3 rounded-md transition-colors flex-1 ${
                     activeTab === tab.id
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? 'bg-black text-white shadow-md'
+                      : 'bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
+                  title={tab.label}
                 >
-                  <Icon className="w-4 h-4 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">{tab.label}</span>
-                  <span className="sm:hidden text-xs">{tab.label.split(' ')[0]}</span>
+                  <Icon className="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0" />
+                  <span className="hidden md:inline text-xs sm:text-sm font-medium ml-2">{tab.label}</span>
                 </button>
               );
             })}
-          </nav>
+          </div>
         </div>
 
         {/* Tab Content */}

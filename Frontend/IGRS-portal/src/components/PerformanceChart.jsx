@@ -5,17 +5,17 @@ import { ArrowRight } from 'lucide-react';
 import graphData from '../data/graph.json';
 
 const PerformanceChart = ({ data, onShowMore }) => {
-  // Normalize data source: prefer prop, else use graph.json
+  // Normalize data source: prioritize graph.json data
   const chartData = useMemo(() => {
-    if (data?.monthlyTrend) {
-      return data.monthlyTrend;
-    }
     if (graphData?.monthlyProgress) {
       return graphData.monthlyProgress.map(item => ({
         month: item.month,
         grievances: item.totalGrievances,
         resolved: item.resolved
       }));
+    }
+    if (data?.monthlyTrend) {
+      return data.monthlyTrend;
     }
     return [];
   }, [data]);

@@ -1,0 +1,101 @@
+message,district,urgency,intent,department,grievance_level
+Noise pollution from construction is unbearable.,South,High,Suggestion,Transportation,Critical
+Water supply is irregular in our locality.,North,Low,Complaint,Parks and Recreation,Minor
+There is a garbage collection issue in our district.,East,Medium,Request,Public Works,Moderate
+There is a garbage collection issue in our district.,Central,Medium,Complaint,Parks and Recreation,Moderate
+Public park is not maintained properly.,South,Low,Request,Transportation,Minor
+Streetlights are not working in my neighborhood.,West,Low,Request,Health Services,Minor
+The road in my area is full of potholes.,North,High,Request,Parks and Recreation,Critical
+The school facilities are inadequate.,East,Low,Suggestion,Transportation,Minor
+Water supply is irregular in our locality.,East,High,Suggestion,Parks and Recreation,Critical
+We need more public transport options.,North,Low,Suggestion,Parks and Recreation,Minor
+Traffic congestion is increasing every day.,Central,Low,Suggestion,Public Works,Minor
+Streetlights are not working in my neighborhood.,West,High,Complaint,Transportation,Critical
+Streetlights are not working in my neighborhood.,South,Medium,Request,Waste Management,Moderate
+The road in my area is full of potholes.,North,Low,Suggestion,Health Services,Minor
+Public park is not maintained properly.,South,High,Request,Parks and Recreation,Critical
+Healthcare services are lacking in our area.,North,Low,Complaint,Transportation,Minor
+Public park is not maintained properly.,Central,Low,Complaint,Public Works,Minor
+Traffic congestion is increasing every day.,North,High,Suggestion,Parks and Recreation,Critical
+Streetlights are not working in my neighborhood.,South,High,Suggestion,Parks and Recreation,Critical
+Water supply is irregular in our locality.,North,Low,Suggestion,Parks and Recreation,Minor
+Streetlights are not working in my neighborhood.,East,Medium,Complaint,Waste Management,Moderate
+Healthcare services are lacking in our area.,West,Low,Complaint,Public Works,Minor
+Streetlights are not working in my neighborhood.,West,Low,Request,Transportation,Minor
+Healthcare services are lacking in our area.,East,Medium,Complaint,Transportation,Moderate
+We need more public transport options.,South,Low,Request,Health Services,Minor
+We need more public transport options.,North,High,Suggestion,Public Works,Critical
+Healthcare services are lacking in our area.,West,High,Complaint,Parks and Recreation,Critical
+Streetlights are not working in my neighborhood.,West,Low,Complaint,Public Works,Minor
+Healthcare services are lacking in our area.,South,Medium,Request,Public Works,Moderate
+Noise pollution from construction is unbearable.,North,High,Suggestion,Waste Management,Critical
+Public park is not maintained properly.,West,High,Complaint,Transportation,Critical
+Healthcare services are lacking in our area.,Central,Medium,Suggestion,Health Services,Moderate
+Traffic congestion is increasing every day.,Central,Low,Complaint,Waste Management,Minor
+The road in my area is full of potholes.,East,Medium,Request,Parks and Recreation,Moderate
+Water supply is irregular in our locality.,East,Medium,Suggestion,Waste Management,Moderate
+Noise pollution from construction is unbearable.,West,High,Complaint,Health Services,Critical
+Noise pollution from construction is unbearable.,West,Medium,Suggestion,Health Services,Moderate
+There is a garbage collection issue in our district.,North,High,Complaint,Waste Management,Critical
+Public park is not maintained properly.,East,High,Suggestion,Transportation,Critical
+Water supply is irregular in our locality.,North,High,Request,Transportation,Critical
+The road in my area is full of potholes.,South,Low,Suggestion,Transportation,Minor
+Traffic congestion is increasing every day.,North,High,Suggestion,Public Works,Critical
+Healthcare services are lacking in our area.,North,Low,Suggestion,Parks and Recreation,Minor
+Public park is not maintained properly.,South,Low,Request,Public Works,Minor
+We need more public transport options.,East,Low,Request,Health Services,Minor
+Streetlights are not working in my neighborhood.,North,Medium,Suggestion,Transportation,Moderate
+Streetlights are not working in my neighborhood.,West,High,Request,Transportation,Critical
+Healthcare services are lacking in our area.,South,High,Complaint,Parks and Recreation,Critical
+We need more public transport options.,West,Medium,Complaint,Health Services,Moderate
+Noise pollution from construction is unbearable.,West,Low,Complaint,Public Works,Minor
+Streetlights are not working in my neighborhood.,North,Low,Complaint,Public Works,Minor
+The road in my area is full of potholes.,West,Low,Request,Public Works,Minor
+Traffic congestion is increasing every day.,East,Medium,Suggestion,Waste Management,Moderate
+Streetlights are not working in my neighborhood.,South,High,Request,Parks and Recreation,Critical
+Public park is not maintained properly.,South,Low,Request,Transportation,Minor
+Public park is not maintained properly.,South,High,Suggestion,Waste Management,Critical
+The school facilities are inadequate.,Central,High,Complaint,Public Works,Critical
+Streetlights are not working in my neighborhood.,Central,Low,Request,Transportation,Minor
+Streetlights are not working in my neighborhood.,North,High,Suggestion,Public Works,Critical
+The school facilities are inadequate.,North,Low,Suggestion,Waste Management,Minor
+Water supply is irregular in our locality.,East,Medium,Request,Parks and Recreation,Moderate
+Noise pollution from construction is unbearable.,South,High,Request,Parks and Recreation,Critical
+The school facilities are inadequate.,North,Low,Suggestion,Public Works,Minor
+Noise pollution from construction is unbearable.,West,Medium,Request,Parks and Recreation,Moderate
+Water supply is irregular in our locality.,Central,High,Request,Parks and Recreation,Critical
+Healthcare services are lacking in our area.,North,Low,Request,Transportation,Minor
+Healthcare services are lacking in our area.,South,Medium,Complaint,Transportation,Moderate
+The school facilities are inadequate.,East,Low,Complaint,Transportation,Minor
+Streetlights are not working in my neighborhood.,North,Medium,Request,Waste Management,Moderate
+The school facilities are inadequate.,South,High,Request,Public Works,Critical
+Noise pollution from construction is unbearable.,North,High,Request,Health Services,Critical
+Streetlights are not working in my neighborhood.,East,Low,Suggestion,Public Works,Minor
+Streetlights are not working in my neighborhood.,West,Low,Request,Health Services,Minor
+Noise pollution from construction is unbearable.,West,High,Complaint,Parks and Recreation,Critical
+Public park is not maintained properly.,South,Low,Complaint,Transportation,Minor
+Streetlights are not working in my neighborhood.,South,High,Suggestion,Public Works,Critical
+Healthcare services are lacking in our area.,Central,Low,Suggestion,Waste Management,Minor
+Noise pollution from construction is unbearable.,North,Medium,Request,Health Services,Moderate
+Public park is not maintained properly.,Central,Medium,Complaint,Health Services,Moderate
+Noise pollution from construction is unbearable.,East,Medium,Complaint,Public Works,Moderate
+The school facilities are inadequate.,West,High,Suggestion,Parks and Recreation,Critical
+Streetlights are not working in my neighborhood.,Central,Low,Complaint,Waste Management,Minor
+Traffic congestion is increasing every day.,East,Medium,Request,Waste Management,Moderate
+There is a garbage collection issue in our district.,South,Low,Complaint,Waste Management,Minor
+Noise pollution from construction is unbearable.,East,Medium,Suggestion,Transportation,Moderate
+Public park is not maintained properly.,Central,High,Complaint,Health Services,Critical
+Noise pollution from construction is unbearable.,South,Medium,Complaint,Health Services,Moderate
+Healthcare services are lacking in our area.,East,Low,Request,Waste Management,Minor
+There is a garbage collection issue in our district.,West,Low,Suggestion,Transportation,Minor
+Water supply is irregular in our locality.,South,Low,Suggestion,Public Works,Minor
+Water supply is irregular in our locality.,East,Medium,Suggestion,Public Works,Moderate
+There is a garbage collection issue in our district.,East,High,Request,Parks and Recreation,Critical
+The road in my area is full of potholes.,West,High,Suggestion,Parks and Recreation,Critical
+The road in my area is full of potholes.,North,Low,Request,Public Works,Minor
+Healthcare services are lacking in our area.,West,Medium,Request,Transportation,Moderate
+Healthcare services are lacking in our area.,West,High,Complaint,Public Works,Critical
+Streetlights are not working in my neighborhood.,South,Medium,Suggestion,Waste Management,Moderate
+Streetlights are not working in my neighborhood.,East,High,Suggestion,Parks and Recreation,Critical
+We need more public transport options.,North,Low,Complaint,Public Works,Minor
+Healthcare services are lacking in our area.,North,Medium,Suggestion,Public Works,Moderate

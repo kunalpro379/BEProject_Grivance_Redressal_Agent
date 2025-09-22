@@ -39,28 +39,32 @@ const TaskStats = () => {
   ];
 
   return (
-    <div className="w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="w-full grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
       {stats.map((stat) => (
         <motion.div
           key={stat.title}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`${stat.bg} p-4 sm:p-6 rounded-lg transition-all duration-300 w-50`}
+          className={`${stat.bg} p-3 sm:p-4 md:p-6 rounded-lg transition-all duration-300 min-h-[100px] sm:min-h-[120px]`}
         >
-          <div className="flex items-center justify-between">
-            <stat.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${stat.color}`} />
-            <span className={`text-xs sm:text-sm font-medium ${
-              stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'
-            }`}>
-              {stat.change}
-            </span>
+          <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <stat.icon className={`h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 ${stat.color}`} />
+              <span className={`text-xs sm:text-sm font-medium ${
+                stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'
+              }`}>
+                {stat.change}
+              </span>
+            </div>
+            <div className="flex-1 flex flex-col justify-center">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                {stat.value}
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-tight">
+                {stat.title}
+              </p>
+            </div>
           </div>
-          <h3 className="mt-3 sm:mt-4 text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-            {stat.value}
-          </h3>
-          <p className="mt-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-            {stat.title}
-          </p>
         </motion.div>
       ))}
     </div>

@@ -9,14 +9,14 @@ const TaskKanbanBoard = ({ tasks = [] }) => {
   const [draggedTask, setDraggedTask] = useState(null);
 
   const columns = [
-    { id: 'pending', title: 'Pending', color: 'bg-gray-100', count: 0 },
+    { id: 'Pending', title: 'Pending', color: 'bg-gray-100', count: 0 },
     { id: 'In Progress', title: 'In Progress', color: 'bg-blue-100', count: 0 },
     { id: 'Completed', title: 'Completed', color: 'bg-green-100', count: 0 }
   ];
 
   // Group tasks by status
   const groupedTasks = tasks.reduce((acc, task) => {
-    const status = task.status === 'Active' ? 'pending' : task.status;
+    const status = task.status;
     if (!acc[status]) acc[status] = [];
     acc[status].push(task);
     return acc;
@@ -99,11 +99,11 @@ const TaskKanbanBoard = ({ tasks = [] }) => {
   );
 
   const Column = ({ column }) => (
-    <div className="flex-1 min-w-80">
+    <div className="flex-1 min-w-72 sm:min-w-80">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <h3 className="font-semibold text-gray-900">{column.title}</h3>
-          <span className="bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded-full">
+          <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{column.title}</h3>
+          <span className="bg-gray-200 text-gray-700 text-xs sm:text-sm px-2 py-1 rounded-full">
             {column.count}
           </span>
         </div>
@@ -113,7 +113,7 @@ const TaskKanbanBoard = ({ tasks = [] }) => {
       </div>
 
       <div 
-        className={`${column.color} rounded-lg p-3 min-h-96 space-y-3`}
+        className={`${column.color} rounded-lg p-2 sm:p-3 min-h-80 sm:min-h-96 space-y-2 sm:space-y-3`}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
@@ -132,8 +132,8 @@ const TaskKanbanBoard = ({ tasks = [] }) => {
         {column.count === 0 && (
           <div className="flex items-center justify-center h-32 text-gray-400">
             <div className="text-center">
-              <div className="text-2xl mb-2">📋</div>
-              <p className="text-sm">No tasks in {column.title.toLowerCase()}</p>
+              <div className="text-4xl mb-2">📋</div>
+              <p className="text-sm font-medium">No tasks in {column.title.toLowerCase()}</p>
             </div>
           </div>
         )}
@@ -142,10 +142,10 @@ const TaskKanbanBoard = ({ tasks = [] }) => {
   );
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">Task Board</h2>
-        <div className="flex items-center space-x-2">
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-6 shadow-lg">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-4">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Task Board</h2>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
           <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
             <option>All Departments</option>
             <option>Water</option>
@@ -153,14 +153,14 @@ const TaskKanbanBoard = ({ tasks = [] }) => {
             <option>Electricity</option>
             <option>Sanitation</option>
           </select>
-          <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          <button className="flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             <Plus className="h-4 w-4" />
             <span>Add Task</span>
           </button>
         </div>
       </div>
 
-      <div className="flex space-x-6 overflow-x-auto pb-4">
+      <div className="flex space-x-3 sm:space-x-6 overflow-x-auto pb-4">
         {columns.map((column) => (
           <Column key={column.id} column={column} />
         ))}

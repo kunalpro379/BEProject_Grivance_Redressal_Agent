@@ -26,6 +26,7 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('all');
   const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [showMoreDepartments, setShowMoreDepartments] = useState(false);
   
   // Modal states
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -189,83 +190,87 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
     
     return (
       <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200">
-        <div className="p-6">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-blue-50 rounded-lg">
-                <Bell className="w-5 h-5 text-blue-600" />
+        <div className="p-3 sm:p-4 md:p-6">
+          <div className="flex items-start justify-between mb-3 sm:mb-4">
+            <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+              <div className="p-2 bg-blue-50 rounded-lg flex-shrink-0">
+                <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base line-clamp-2">{item.title}</h3>
                 {/* Highlighted chips for metadata */}
-                <div className="mt-1 space-y-1 text-sm">
-                  <div className="inline-flex items-center gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-blue-200 bg-blue-50 text-blue-700">
-                    <User className="w-4 h-4 flex-shrink-0" />
+                <div className="mt-1 space-y-1 text-xs sm:text-sm">
+                  <div className="inline-flex items-center gap-1 sm:gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-blue-200 bg-blue-50 text-blue-700">
+                    <User className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span className="truncate">{item.author}</span>
                   </div>
-                  <div className="inline-flex items-center gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-indigo-200 bg-indigo-50 text-indigo-700">
-                    <Building className="w-4 h-4 flex-shrink-0" />
+                  <div className="inline-flex items-center gap-1 sm:gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-indigo-200 bg-indigo-50 text-indigo-700">
+                    <Building className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span className="truncate">{item.department}</span>
                   </div>
-                  <div className="inline-flex items-center gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-gray-200 bg-gray-50 text-gray-700">
-                    <Calendar className="w-4 h-4 flex-shrink-0" />
+                  <div className="inline-flex items-center gap-1 sm:gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-gray-200 bg-gray-50 text-gray-700">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span className="truncate">{formatDate(item.created_at)}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="flex items-center gap-1 text-sm text-gray-500">
-                <Eye className="w-4 h-4" />
-                {item.views || 0}
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+              <span className="flex items-center gap-1 text-xs sm:text-sm text-gray-500">
+                <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">{item.views || 0}</span>
+                <span className="sm:hidden">{item.views || 0}</span>
               </span>
-              <span className="flex items-center gap-1 text-sm text-green-600">
-                <CheckCircle className="w-4 h-4" />
-                {item.acknowledged || 0}
+              <span className="flex items-center gap-1 text-xs sm:text-sm text-green-600">
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">{item.acknowledged || 0}</span>
+                <span className="sm:hidden">{item.acknowledged || 0}</span>
               </span>
             </div>
           </div>
           
-          <div className="mb-4">
-            <p className={`text-gray-700 leading-relaxed ${isExpanded ? '' : 'line-clamp-3'}`}>
+          <div className="mb-3 sm:mb-4">
+            <p className={`text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base ${isExpanded ? '' : 'line-clamp-3'}`}>
               {content}
             </p>
             {content.length > 200 && (
               <button
                 onClick={() => toggleExpanded(item.id)}
-                className="mt-2 text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center gap-1"
+                className="mt-2 text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium flex items-center gap-1"
               >
                 {isExpanded ? (
-                  <>Show Less <ChevronDown className="w-4 h-4" /></>
+                  <>Show Less <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" /></>
                 ) : (
-                  <>Read More <ChevronRight className="w-4 h-4" /></>
+                  <>Read More <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" /></>
                 )}
               </button>
             )}
           </div>
 
           {item.attachments && item.attachments.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
               {item.attachments.map((attachment, idx) => (
                 <a
                   key={idx}
                   href={attachment.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-700 transition-colors"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 bg-gray-50 hover:bg-gray-100 rounded-lg text-xs sm:text-sm text-gray-700 transition-colors"
                 >
-                  <FileText className="w-4 h-4" />
-                  {attachment.name}
-                  <ExternalLink className="w-3 h-3" />
+                  <FileText className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate max-w-20 sm:max-w-none">{attachment.name}</span>
+                  <ExternalLink className="w-2 h-2 sm:w-3 sm:h-3 flex-shrink-0" />
                 </a>
               ))}
             </div>
           )}
 
           {item.expires && (
-            <div className="flex items-center gap-2 text-sm text-orange-600 bg-orange-50 px-3 py-2 rounded-lg">
-              <AlertCircle className="w-4 h-4" />
-              Expires: {formatDate(item.expires)}
+            <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-orange-600 bg-orange-50 px-2 sm:px-3 py-1 sm:py-2 rounded-lg">
+              <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline">Expires: </span>
+              <span className="sm:hidden">Exp: </span>
+              {formatDate(item.expires)}
             </div>
           )}
         </div>
@@ -456,7 +461,7 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
     }
 
     return (
-      <div key={activeTab} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div key={activeTab} className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {filteredData.map(item => {
           switch (activeTab) {
             case 'announcements':
@@ -498,15 +503,16 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
                     type="button"
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all duration-200 ${
+                    className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-md font-medium transition-all duration-200 ${
                       isActive
                         ? 'bg-gray-900 text-white shadow-sm'
                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}
+                    title={tab.label}
                   >
                     <Icon className="w-4 h-4" />
-                    <span>{tab.label}</span>
-                    <span className={`text-xs px-2 py-1 rounded-full ${
+                    <span className="hidden sm:inline">{tab.label}</span>
+                    <span className={`text-xs px-1 sm:px-2 py-1 rounded-full ${
                       isActive 
                         ? 'bg-white/20 text-white' 
                         : 'bg-gray-100 text-gray-600'
@@ -523,10 +529,13 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
               <button
                 type="button"
                 onClick={() => openCreateModal(activeTab)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm"
+                className="flex items-center gap-2 px-2 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm"
+                title={`Create ${activeTab === 'announcements' ? 'Announcement' : activeTab === 'posts' ? 'Post' : activeTab === 'polls' ? 'Poll' : ''}`}
               >
                 <Plus className="w-4 h-4" />
-                {`Create ${activeTab === 'announcements' ? 'Announcement' : activeTab === 'posts' ? 'Post' : activeTab === 'polls' ? 'Poll' : ''}`}
+                <span className="hidden md:inline">
+                  {`Create ${activeTab === 'announcements' ? 'Announcement' : activeTab === 'posts' ? 'Post' : activeTab === 'polls' ? 'Poll' : ''}`}
+                </span>
               </button>
             )}
           </div>
@@ -602,7 +611,8 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
                 </span>
               </button>
 
-              {Object.entries(getDepartmentCounts()).map(([dept, count]) => (
+              {/* Show first 3 departments */}
+              {Object.entries(getDepartmentCounts()).slice(0, 3).map(([dept, count]) => (
                 <button
                   type="button"
                   key={dept}
@@ -614,7 +624,41 @@ const OfficialAnnouncements = ({ userRole = "official" }) => {
                   }`}
                   title={dept}
                 >
-                  {dept}
+                  <span className="truncate max-w-32">{dept}</span>
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${
+                    selectedDepartment === dept ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              ))}
+
+              {/* Show More Button - only if there are more than 3 departments */}
+              {Object.entries(getDepartmentCounts()).length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setShowMoreDepartments(!showMoreDepartments)}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm transition-colors bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                >
+                  {showMoreDepartments ? 'Show Less' : 'Show More'}
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showMoreDepartments ? 'rotate-180' : ''}`} />
+                </button>
+              )}
+
+              {/* Show remaining departments when expanded */}
+              {showMoreDepartments && Object.entries(getDepartmentCounts()).slice(3).map(([dept, count]) => (
+                <button
+                  type="button"
+                  key={dept}
+                  onClick={() => setSelectedDepartment(dept)}
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                    selectedDepartment === dept
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
+                  }`}
+                  title={dept}
+                >
+                  <span className="truncate max-w-32">{dept}</span>
                   <span className={`text-xs px-2 py-0.5 rounded-full ${
                     selectedDepartment === dept ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'
                   }`}>

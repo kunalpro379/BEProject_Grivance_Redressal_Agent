@@ -239,41 +239,43 @@ const Announcements = () => {
           ${priorityLevel === 'high' ? 'bg-red-500' : 
             priorityLevel === 'medium' ? 'bg-blue-500' : 'bg-green-500'}`} />
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="flex items-start justify-between mb-4">
-            <div className="flex items-start gap-4">
-              <div className={`p-3 rounded-xl ${
+            <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+              <div className={`p-2 sm:p-3 rounded-xl flex-shrink-0 ${
                 priorityLevel === 'high' ? 'bg-red-50' : 
                 priorityLevel === 'medium' ? 'bg-blue-50' : 'bg-green-50'
               }`}>
                 {getCategoryIcon(announcement.category)}
               </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
                   {announcement.title}
                 </h3>
                 
-                {/* Metadata: each on its own single line with truncation */}
-                <div className="mt-2 space-y-1 text-sm">
+                {/* Metadata: responsive layout for mobile */}
+                <div className="mt-2 space-y-1 text-xs sm:text-sm">
                   {(announcement.author) && (
-                    <div className="inline-flex items-center gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-blue-200 bg-blue-50 text-blue-700">
-                      <User className="w-4 h-4 flex-shrink-0" />
+                    <div className="inline-flex items-center gap-1 sm:gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-blue-200 bg-blue-50 text-blue-700">
+                      <User className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                       <span className="truncate">{announcement.author}</span>
                     </div>
                   )}
                   {(announcement.department) && (
-                    <div className="inline-flex items-center gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-indigo-200 bg-indigo-50 text-indigo-700">
-                      <Building className="w-4 h-4 flex-shrink-0" />
+                    <div className="inline-flex items-center gap-1 sm:gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-indigo-200 bg-indigo-50 text-indigo-700">
+                      <Building className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                       <span className="truncate">{announcement.department}</span>
                     </div>
                   )}
-                  <div className="inline-flex items-center gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-gray-200 bg-gray-50 text-gray-700">
-                    <Calendar className="w-4 h-4 flex-shrink-0" />
+                  <div className="inline-flex items-center gap-1 sm:gap-2 max-w-full whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 rounded-md border border-gray-200 bg-gray-50 text-gray-700">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span className="truncate">{formatDate(announcement.date)}</span>
                     {announcement.expires && (
-                      <span className="ml-2 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md border border-orange-200 bg-orange-50 text-orange-700 whitespace-nowrap">
-                        <Clock className="w-3 h-3" />
-                        Expires: {formatDate(announcement.expires)}
+                      <span className="ml-1 sm:ml-2 inline-flex items-center gap-1 text-xs px-1 sm:px-2 py-0.5 rounded-md border border-orange-200 bg-orange-50 text-orange-700 whitespace-nowrap">
+                        <Clock className="w-2 h-2 sm:w-3 sm:h-3" />
+                        <span className="hidden sm:inline">Expires: </span>
+                        <span className="sm:hidden">Exp: </span>
+                        {formatDate(announcement.expires)}
                       </span>
                     )}
                   </div>
@@ -283,7 +285,7 @@ const Announcements = () => {
       </div>
 
           <div className="mb-4">
-            <p className={`text-gray-700 leading-relaxed ${
+            <p className={`text-gray-700 leading-relaxed text-sm sm:text-base ${
               isExpanded ? '' : 'line-clamp-3'
             }`}>
               {announcement.description}
@@ -291,54 +293,56 @@ const Announcements = () => {
             
             <button
               onClick={(e) => { e.stopPropagation(); handleAnnouncementClick(announcement); }}
-              className="mt-2 text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center gap-1 transition-colors"
+              className="mt-2 text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium inline-flex items-center gap-1 transition-colors"
             >
-              Read More <ChevronRight className="w-4 h-4" />
+              Read More <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
       </div>
 
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
             <span className="inline-flex items-center gap-1 px-2 py-1 bg-purple-100 text-purple-800 rounded-lg text-xs font-medium">
               <Tag className="w-3 h-3" />
-              {announcement.category}
+              <span className="truncate max-w-20 sm:max-w-none">{announcement.category}</span>
             </span>
             <span className="inline-flex items-center gap-1 px-2 py-1 bg-indigo-100 text-indigo-800 rounded-lg text-xs font-medium">
               <FileText className="w-3 h-3" />
-              {announcement.type}
+              <span className="truncate max-w-20 sm:max-w-none">{announcement.type}</span>
             </span>
       </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-4 border-t border-gray-100 gap-3">
+            <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
               {/* Views and Likes */}
               {(announcement.views || announcement.likes) && (
-                <div className="flex items-center gap-3 text-sm text-gray-500">
+                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500">
                   {announcement.views && (
                     <span className="flex items-center gap-1">
-                      <Eye className="w-4 h-4" />
-                      {announcement.views}
+                      <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span className="hidden sm:inline">{announcement.views}</span>
+                      <span className="sm:hidden">{announcement.views}</span>
                     </span>
                   )}
                   {announcement.likes && (
                     <span className="flex items-center gap-1">
-                      <Heart className="w-4 h-4" />
-                      {announcement.likes}
+                      <Heart className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span className="hidden sm:inline">{announcement.likes}</span>
+                      <span className="sm:hidden">{announcement.likes}</span>
                     </span>
                   )}
                 </div>
               )}
               
-              <button className="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">
-                <Bookmark className="w-4 h-4" />
-                <span className="text-sm">Save</span>
+              <button className="flex items-center gap-1 sm:gap-2 text-gray-500 hover:text-red-500 transition-colors">
+                <Bookmark className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm hidden sm:inline">Save</span>
               </button>
-              <button className="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">
-                <Share className="w-4 h-4" />
-                <span className="text-sm">Share</span>
+              <button className="flex items-center gap-1 sm:gap-2 text-gray-500 hover:text-blue-500 transition-colors">
+                <Share className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm hidden sm:inline">Share</span>
               </button>
         </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {announcement.attachments && announcement.attachments.length > 0 && (
                 <span className="flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
                   <FileText className="w-3 h-3" />
@@ -346,9 +350,10 @@ const Announcements = () => {
                 </span>
               )}
               
-              <button className="flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
-                <ExternalLink className="w-4 h-4" />
-                View Details
+              <button className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-xs sm:text-sm">
+                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">View Details</span>
+                <span className="sm:hidden">View</span>
               </button>
             </div>
         </div>
@@ -360,7 +365,7 @@ const Announcements = () => {
   };
 
   const ListView = () => (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {filteredAnnouncements.map((announcement, index) => (
         <div
           key={announcement.id}
@@ -370,32 +375,32 @@ const Announcements = () => {
           tabIndex={0}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleAnnouncementClick(announcement); } }}
         >
-          <div className="p-4 flex items-center justify-between">
-            <div className="flex items-center gap-4 flex-1">
-              <div className={`p-2 rounded-lg ${
+          <div className="p-3 sm:p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+              <div className={`p-2 rounded-lg flex-shrink-0 ${
                 getPriorityLevel(announcement.status, announcement.type) === 'high' ? 'bg-red-50' : 
                 getPriorityLevel(announcement.status, announcement.type) === 'medium' ? 'bg-blue-50' : 'bg-green-50'
               }`}>
                 {getCategoryIcon(announcement.category)}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <button
                   type="button"
-                  className="font-semibold text-left text-gray-900 line-clamp-1 hover:text-blue-600 focus:outline-none"
+                  className="font-semibold text-left text-gray-900 line-clamp-1 hover:text-blue-600 focus:outline-none text-sm sm:text-base"
                   onClick={(e) => { e.stopPropagation(); handleAnnouncementClick(announcement); }}
                 >
                   {announcement.title}
                 </button>
-                <p className="text-sm text-gray-600 line-clamp-1 mt-1">{announcement.description}</p>
+                <p className="text-xs sm:text-sm text-gray-600 line-clamp-1 mt-1">{announcement.description}</p>
                 
                 {/* Author and Department in ListView */}
                 {(announcement.author || announcement.department) && (
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-1 truncate">
                     {announcement.author}{announcement.author && announcement.department && ' • '}{announcement.department}
                   </p>
                 )}
                 
-                <div className="flex items-center gap-3 mt-2">
+                <div className="flex items-center gap-2 sm:gap-3 mt-2 flex-wrap">
                   <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(announcement.status)}`}>
                     {announcement.status}
                   </span>
@@ -407,13 +412,15 @@ const Announcements = () => {
                       {announcement.views && (
                         <span className="flex items-center gap-1">
                           <Eye className="w-3 h-3" />
-                          {announcement.views}
+                          <span className="hidden sm:inline">{announcement.views}</span>
+                          <span className="sm:hidden">{announcement.views}</span>
                         </span>
                       )}
                       {announcement.likes > 0 && (
                         <span className="flex items-center gap-1">
                           <Heart className="w-3 h-3" />
-                          {announcement.likes}
+                          <span className="hidden sm:inline">{announcement.likes}</span>
+                          <span className="sm:hidden">{announcement.likes}</span>
                         </span>
                       )}
                     </div>
@@ -428,7 +435,7 @@ const Announcements = () => {
                 </div>
               </div>
             </div>
-            <ChevronRight className="w-5 h-5 text-gray-400" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
           </div>
         </div>
       ))}

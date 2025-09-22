@@ -66,10 +66,10 @@ const Timeline = ({ data, onShowMore }) => {
   ];
 
   return (
-    <motion.div className="p-6 rounded-xl bg-white border border-gray-200 shadow-lg">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
-          <Clock size={20} />
+    <motion.div className="p-3 sm:p-6 rounded-xl bg-white border border-gray-200 shadow-lg">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 gap-3">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 flex items-center gap-2">
+          <Clock size={18} className="sm:w-5 sm:h-5" />
           Resolution Timeline
         </h2>
         {onShowMore && (
@@ -77,42 +77,42 @@ const Timeline = ({ data, onShowMore }) => {
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
             onClick={onShowMore}
-            className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
+            className="flex items-center gap-2 text-xs sm:text-sm text-blue-600 hover:text-blue-700 self-start sm:self-auto"
           >
-            View All <ArrowRight size={16} />
+            View All <ArrowRight size={14} className="sm:w-4 sm:h-4" />
           </motion.button>
         )}
       </div>
 
       <div className="relative">
         {/* Timeline Line */}
-        <div className="absolute left-[21px] top-4 h-full w-[2px] bg-gradient-to-b from-blue-200 via-green-200 to-purple-200" />
+        <div className="absolute left-[18px] sm:left-[21px] top-4 h-full w-[2px] bg-gradient-to-b from-blue-200 via-green-200 to-purple-200" />
 
         {/* Timeline Items */}
-        <div className="space-y-8">
+        <div className="space-y-4 sm:space-y-8">
           {timelineSteps.map((step, index) => (
             <motion.div
               key={step.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="relative flex gap-4"
+              className="relative flex gap-2 sm:gap-4"
             >
               {/* Timeline Dot */}
-              <div className={`w-11 h-11 rounded-full border-4 border-white ${step.dotColor} 
+              <div className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full border-2 sm:border-4 border-white ${step.dotColor} 
                 flex items-center justify-center shrink-0 z-10 shadow-lg`}>
-                <step.icon size={20} className="text-white" />
+                <step.icon size={16} className="sm:w-5 sm:h-5 text-white" />
               </div>
 
               {/* Content */}
               <div className="flex-1">
-                <div className="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{step.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1 leading-relaxed">{step.description}</p>
+                <div className="bg-gray-50 p-3 sm:p-4 rounded-lg shadow-sm border border-gray-200">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{step.title}</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">{step.description}</p>
                     </div>
-                    <span className={`px-3 py-1 text-xs rounded-full font-medium ${
+                    <span className={`px-2 sm:px-3 py-1 text-xs rounded-full font-medium self-start ${
                       step.status === 'completed' ? 'bg-green-100 text-green-800 border border-green-200' :
                       step.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800 border border-yellow-200' :
                       'bg-gray-100 text-gray-800 border border-gray-200'
@@ -121,39 +121,41 @@ const Timeline = ({ data, onShowMore }) => {
                     </span>
                   </div>
 
-                  <div className="mt-4 flex items-center gap-6 text-sm text-gray-600">
+                  <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-gray-600">
                     <div className="flex items-center gap-2">
-                      <User size={14} className="text-blue-500" />
-                      <span className="font-medium">{step.assignedTo}</span>
+                      <User size={12} className="sm:w-3.5 sm:h-3.5 text-blue-500" />
+                      <span className="font-medium truncate">{step.assignedTo}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MessageCircle size={14} className="text-green-500" />
-                      <span className="font-medium">{step.department}</span>
+                      <MessageCircle size={12} className="sm:w-3.5 sm:h-3.5 text-green-500" />
+                      <span className="font-medium truncate">{step.department}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock size={14} className="text-purple-500" />
+                      <Clock size={12} className="sm:w-3.5 sm:h-3.5 text-purple-500" />
                       <span className="font-medium">{step.date}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="mt-3 flex gap-3">
+                <div className="mt-3 flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-xs flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors border border-blue-200"
+                    className="text-xs flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-1 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors border border-blue-200"
                   >
-                    <MessageCircle size={12} />
-                    Add Comment
+                    <MessageCircle size={10} className="sm:w-3 sm:h-3" />
+                    <span className="hidden sm:inline">Add Comment</span>
+                    <span className="sm:hidden">Comment</span>
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-xs flex items-center gap-1 px-3 py-1 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors border border-green-200"
+                    className="text-xs flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 sm:py-1 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors border border-green-200"
                   >
-                    <Send size={12} />
-                    Forward
+                    <Send size={10} className="sm:w-3 sm:h-3" />
+                    <span className="hidden sm:inline">Forward</span>
+                    <span className="sm:hidden">Forward</span>
                   </motion.button>
                 </div>
               </div>

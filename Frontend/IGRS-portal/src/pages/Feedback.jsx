@@ -3,6 +3,7 @@ import feedbackData from '../data/officials/feedbacks.json';
 
 function Feedback() {
   const [activeTab, setActiveTab] = useState('Drainage Issues');
+  const [showMoreCategories, setShowMoreCategories] = useState(false);
 
   // Get unique categories from the feedback data
   const categories = [...new Set(feedbackData.grievances.map(item => item.category))];
@@ -47,23 +48,25 @@ function Feedback() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             Citizen Feedback & AI Insights
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Comprehensive feedback analysis across all grievance categories
           </p>
         </div>
 
         {/* Category Chips (LeetCode-style) */}
         <div className="mb-6">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-3 sm:p-4">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Grievance Categories</h3>
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200">Grievance Categories</h3>
               <span className="text-xs text-gray-500 dark:text-gray-400">Click a chip to filter</span>
             </div>
-            <div className="flex flex-wrap gap-2">
+            
+            {/* Desktop: Show all categories */}
+            <div className="hidden sm:flex flex-wrap gap-2">
               {categories.map((category) => {
                 const count = getCategoryCounts()[category] || 0;
                 const active = activeTab === category;
@@ -87,6 +90,53 @@ function Feedback() {
                   </button>
                 );
               })}
+            </div>
+
+            {/* Mobile: Show only 3 categories + dropdown */}
+            <div className="sm:hidden">
+              <div className="flex flex-wrap gap-2 mb-3">
+                {categories.slice(0, 3).map((category) => {
+                  const count = getCategoryCounts()[category] || 0;
+                  const active = activeTab === category;
+                  return (
+                    <button
+                      type="button"
+                      key={category}
+                      onClick={() => setActiveTab(category)}
+                      className={`inline-flex items-center gap-2 px-2 py-1.5 rounded-full border text-xs transition-colors ${
+                        active
+                          ? 'bg-blue-600 text-white border-blue-600'
+                          : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      {category}
+                      <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+                        active ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200'
+                      }`}>
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+                
+                {/* Show More Dropdown */}
+                <select
+                  value=""
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setActiveTab(e.target.value);
+                    }
+                  }}
+                  className="px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-50 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">More Categories</option>
+                  {categories.slice(3).map((category) => (
+                    <option key={category} value={category}>
+                      {category} ({getCategoryCounts()[category] || 0})
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </div>

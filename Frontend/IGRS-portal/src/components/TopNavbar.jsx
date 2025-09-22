@@ -37,44 +37,74 @@ const TopNavbar = ({ userAuth, onSearch }) => {
   return (
     <>
       {/* Top Navbar */}
-      <div className="bg-black rounded-lg shadow-lg p-2 sm:p-3 mb-3 sm:mb-4 flex flex-col sm:flex-row justify-between items-center border border-gray-700">
-        <div className="flex-1 max-w-xl w-full mb-3 sm:mb-0">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search grievances, departments, or locations..."
-              className="w-full pl-10 pr-4 py-1.5 sm:py-2 border rounded-md bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              value={searchQuery}
-              onChange={handleSearch}
-            />
+      <div className="bg-black rounded-lg shadow-lg p-2 sm:p-3 mb-3 sm:mb-4 border border-gray-700">
+        {/* Mobile Layout - Only Search Bar and Bell Icon */}
+        <div className="flex md:hidden items-center gap-3">
+          <div className="flex-1">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="w-full pl-9 pr-3 py-2 text-sm border rounded-md bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
+            </div>
           </div>
-        </div>
-        
-        {/* Desktop-only icons - hidden on mobile */}
-        <div className="hidden sm:flex items-center gap-4">
+          
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="relative"
+            className="relative p-2"
             onClick={() => setShowNotifications(!showNotifications)}
           >
-            <Bell className="h-6 w-6 text-white" />
+            <Bell className="h-5 w-5 text-white" />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
               2
             </span>
           </motion.button>
+        </div>
+
+        {/* Desktop Layout - Full navbar */}
+        <div className="hidden md:flex flex-row justify-between items-center">
+          <div className="flex-1 max-w-xl w-full">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search grievances, departments, or locations..."
+                className="w-full pl-10 pr-4 py-1.5 sm:py-2 border rounded-md bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
+            </div>
+          </div>
           
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={() => setShowProfile(!showProfile)}
-          >
-            <UserCircle className="h-6 w-6 text-white" />
-            <span className="text-white text-sm font-medium">
-              {userAuth?.username || 'Admin'}
-            </span>
-          </motion.div>
+          <div className="flex items-center gap-4">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative"
+              onClick={() => setShowNotifications(!showNotifications)}
+            >
+              <Bell className="h-6 w-6 text-white" />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                2
+              </span>
+            </motion.button>
+            
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => setShowProfile(!showProfile)}
+            >
+              <UserCircle className="h-6 w-6 text-white" />
+              <span className="text-white text-sm font-medium">
+                {userAuth?.username || 'Admin'}
+              </span>
+            </motion.div>
+          </div>
         </div>
       </div>
 
