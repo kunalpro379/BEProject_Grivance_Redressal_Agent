@@ -1,3 +1,12 @@
+# 🤖 BEProjectAgent - Intelligent Grievance Redressal System
+
+
+### Agent Workflow Diagram
+![Agentic Workflow](BEProject_Grivance_Redressal_Agent/Diagram.jpg)
+
+
+![Agent Workflow](BEProject_Grivance_Redressal_Agent/Agent.jpeg)
+
 Project Workflow
 
 Data Collection
@@ -14,3 +23,7 @@ Create Validation Agent and Grievance Proof Analysis Agent to analyze grievances
 
 Government Policies Research agent
 Develop Policy Research Agent to provide relevant policy suggestions for each grievance.
+
+
+Notebook 1 : https://colab.research.google.com/drive/1TeYo3iw81YopeKblkVJ2WKxL1dADc8EZ#scrollTo=l5Gx9j-aP4f5
+Notebook 2 : https://colab.research.google.com/drive/1DpOr0KJh8OFZXW3Tft3H7EgdRw4buAB5?usp=sharing
