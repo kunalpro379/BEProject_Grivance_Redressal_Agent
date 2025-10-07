@@ -2,10 +2,10 @@
 
 
 ### Agent Workflow Diagram
-![Agentic Workflow](BEProject_Grivance_Redressal_Agent/Diagram.jpg)
+![Agentic Workflow](Diagram.jpg)
 
 
-![Agent Workflow](BEProject_Grivance_Redressal_Agent/Agent.jpeg)
+![Agent Workflow](Agent.jpeg)
 
 Project Workflow
 
