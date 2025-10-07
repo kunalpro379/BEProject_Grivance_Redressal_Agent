@@ -1,4 +1,4 @@
-# 🤖 BEProjectAgent - Intelligent Grievance Redressal System
+# BEProjectAgent - Intelligent Grievance Redressal System
 
 
 ### Agent Workflow Diagram
