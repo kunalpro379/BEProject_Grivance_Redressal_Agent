@@ -2,11 +2,13 @@
 
 
 ### Agent Workflow Diagram
+
+![Agent Workflow](websearchagent.png)
+![Agentic Workflow](DecisionMakingAgent.png)
+![Agent Workflow](ProgressTrackingAgent.png)
+![Agentic Workflow](QueryAnalystAgent.png)
 ![Agentic Workflow](Diagram.jpg)
-
-
 ![Agent Workflow](Agent.jpeg)
-
 Project Workflow
 
 Data Collection
