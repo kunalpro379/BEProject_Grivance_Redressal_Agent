@@ -29,3 +29,4 @@ Develop Policy Research Agent to provide relevant policy suggestions for each gr
 
 Notebook 1 : https://colab.research.google.com/drive/1TeYo3iw81YopeKblkVJ2WKxL1dADc8EZ#scrollTo=l5Gx9j-aP4f5
 Notebook 2 : https://colab.research.google.com/drive/1DpOr0KJh8OFZXW3Tft3H7EgdRw4buAB5?usp=sharing
+Notebook 3 : https://colab.research.google.com/drive/1uQiFb4hDxY_xWZ5b2ZQs4OMieZpvQvBr?usp=sharing
