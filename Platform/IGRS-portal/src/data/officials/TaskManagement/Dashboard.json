@@ -1,0 +1,135 @@
+{
+    "taskManagement": {
+      "overview": {
+        "totalGrievances": 156,
+        "pendingTasks": 45,
+        "inProgressTasks": 68,
+        "resolvedTasks": 43
+      },
+      "urgencyBasedTasks": [
+        {
+          "urgency": "high",
+          "count": 12,
+          "tasks": [
+            {
+              "id": 101,
+              "title": "Water Supply Disruption",
+              "description": "Water supply cut in Andheri West due to pipeline leakage",
+              "region": "Andheri West",
+              "assignedTo": "Rohit Deshmukh",
+              "deadline": "2025-09-23T14:00:00Z"
+            },
+            {
+              "id": 102,
+              "title": "Power Outage",
+              "description": "Power failure affecting Bandra East sectors 3 and 4",
+              "region": "Bandra East",
+              "assignedTo": "Sneha Kulkarni",
+              "deadline": "2025-09-23T16:00:00Z"
+            }
+          ]
+        },
+        {
+          "urgency": "medium",
+          "count": 34,
+          "tasks": [
+            {
+              "id": 201,
+              "title": "Road Maintenance",
+              "description": "Pothole repairs in Western Express Highway, Borivali",
+              "region": "Borivali",
+              "assignedTo": "Manish Sharma",
+              "deadline": "2025-09-25T18:00:00Z"
+            },
+            {
+              "id": 202,
+              "title": "Street Light Repair",
+              "description": "Repair street lights in Kurla",
+              "region": "Kurla",
+              "assignedTo": "Vikram Patil",
+              "deadline": "2025-09-26T11:00:00Z"
+            }
+          ]
+        },
+        {
+          "urgency": "low",
+          "count": 22,
+          "tasks": [
+            {
+              "id": 301,
+              "title": "Sanitation Check",
+              "description": "Inspect cleanliness of public parks in Dadar West",
+              "region": "Dadar West",
+              "assignedTo": "Anjali Mehta",
+              "deadline": "2025-09-28T12:00:00Z"
+            },
+            {
+              "id": 302,
+              "title": "Tree Plantation",
+              "description": "Plant trees along the Bandra Creek",
+              "region": "Bandra West",
+              "assignedTo": "Rina Joshi",
+              "deadline": "2025-09-30T10:00:00Z"
+            }
+          ]
+        }
+      ],
+      "resourceAllocation": {
+        "staffAllocation": "85/100",
+        "budgetUtilized": "₹32L/₹45L"
+      },
+      "aiSuggestedActions": [
+        {
+          "task": "Water supply disruption in Sector 15",
+          "urgency": "high",
+          "recommendation": "Based on historical data, similar issues were resolved by deploying emergency repair team within 4 hours",
+          "estimatedResolutionTime": "4-6 hours"
+        },
+        {
+          "task": "Road maintenance in Industrial Area",
+          "urgency": "medium",
+          "recommendation": "Previous successful resolutions involved coordinating with traffic department for alternative routes",
+          "estimatedResolutionTime": "2-3 days"
+        },
+        {
+          "task": "Street light malfunction in Kurla",
+          "urgency": "medium",
+          "recommendation": "Assign electricians and monitor completion via mobile app updates",
+          "estimatedResolutionTime": "1-2 days"
+        }
+      ],
+      "departmentWiseBreakdown": [
+        {
+          "department": "Water",
+          "tasksCompleted": 38,
+          "totalTasks": 45,
+          "efficiency": "84%"
+        },
+        {
+          "department": "Roads",
+          "tasksCompleted": 28,
+          "totalTasks": 32,
+          "efficiency": "78%"
+        },
+        {
+          "department": "Electricity",
+          "tasksCompleted": 25,
+          "totalTasks": 28,
+          "efficiency": "89%"
+        },
+        {
+          "department": "Sanitation",
+          "tasksCompleted": 20,
+          "totalTasks": 24,
+          "efficiency": "83%"
+        },
+        {
+          "department": "Transport",
+          "tasksCompleted": 15,
+          "totalTasks": 18,
+          "efficiency": "83%"
+        }
+      ]
+    }
+  }
+  

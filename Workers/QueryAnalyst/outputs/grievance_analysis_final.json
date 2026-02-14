@@ -1,0 +1,200 @@
+{
+  "grievance": {
+    "text": "Sewage Drainage Problems in Mumbai",
+    "enhanced_query": "Sewage Drainage Problems in Mumbai\n\nImage description: The image depicts a highly polluted urban environment, likely an informal settlement or slum area, under a clear blue sky. On the left, a narrow dirt path runs alongside makeshift homes constructed from corrugated metal sheets and tarps. Clothes are seen hanging to dry outside these dwellings. A young girl is visible sitting inside a blue mosquito net or similar enclosure, while a young boy in a yellow shirt walks along the path away from the camera. To the right of the path, separated by a concrete embankment, is a severely choked water channel or canal. This waterway is stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse, indicating a significant lack of proper waste disposal and drainage infrastructure. The sheer volume of trash suggests severe blockage and pollution.\nVisible text in image:",
+    "image": {
+      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp6jvhof2f.jpg",
+      "description": "The image depicts a highly polluted urban environment, likely an informal settlement or slum area, under a clear blue sky. On the left, a narrow dirt path runs alongside makeshift homes constructed from corrugated metal sheets and tarps. Clothes are seen hanging to dry outside these dwellings. A young girl is visible sitting inside a blue mosquito net or similar enclosure, while a young boy in a yellow shirt walks along the path away from the camera. To the right of the path, separated by a concrete embankment, is a severely choked water channel or canal. This waterway is stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse, indicating a significant lack of proper waste disposal and drainage infrastructure. The sheer volume of trash suggests severe blockage and pollution.",
+      "key_objects": [
+        "Polluted water channel",
+        "Accumulated garbage and debris",
+        "Makeshift dwellings/shacks",
+        "Children (boy and girl)",
+        "Dirt path",
+        "Concrete embankment"
+      ],
+      "scene_type": "Urban informal settlement with polluted waterway",
+      "extracted_text": ""
+    }
+  },
+  "location": {
+    "pincode": "",
+    "district": "Mumbai",
+    "state": "Maharashtra",
+    "location_confidence": "High",
+    "raw_location_mentions": [
+      "Mumbai"
+    ]
+  },
+  "analysis": {
+    "query_type": {
+      "query_type": "Complaint",
+      "confidence": "High",
+      "reasoning": "The query is classified as a complaint due to the description of a specific problem (sewage drainage issues in Mumbai) and the accompanying image, which depicts a highly polluted environment. The tone of the query is critical and highlights the need for improvement in waste disposal and drainage infrastructure, indicating a complaint rather than a suggestion, query, feedback, follow-up, or appeal."
+    },
+    "emotion": {
+      "primary_emotion": "Frustrated",
+      "secondary_emotions": [
+        "Angry",
+        "Sad"
+      ],
+      "emotion_intensity": 8,
+      "emotional_indicators": [
+        "severely choked water channel or canal",
+        "stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse",
+        "significant lack of proper waste disposal and drainage infrastructure",
+        "sheer volume of trash suggests severe blockage and pollution",
+        "polluted urban environment",
+        "informal settlement or slum area"
+      ]
+    },
+    "severity": {
+      "severity_level": "Critical",
+      "criticality_score": 9,
+      "impact_scope": "Community",
+      "potential_consequences": [
+        "Waterborne diseases and health risks due to contaminated water",
+        "Environmental pollution and harm to local wildlife",
+        "Economic losses due to damage to infrastructure and property",
+        "Social unrest and community displacement due to unsanitary living conditions",
+        "Long-term health effects on residents, particularly children and vulnerable populations"
+      ]
+    },
+    "priority": {
+      "sentiment_score": 8,
+      "urgency_level": "High",
+      "emotional_tone": "Outrage and Concern",
+      "key_emotional_indicators": [
+        "polluted urban environment",
+        "severely choked water channel",
+        "significant lack of proper waste disposal and drainage infrastructure",
+        "sheer volume of trash suggests severe blockage and pollution",
+        "informal settlement or slum area",
+        "makeshift homes constructed from corrugated metal sheets and tarps",
+        "stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse"
+      ],
+      "priority_level": "High",
+      "justification": "The sewage drainage problem in Mumbai has a significant impact on the health and well-being of the residents, particularly in informal settlements or slum areas. The presence of stagnant water and dense plastic waste poses a high risk of waterborne diseases, and the lack of proper waste disposal infrastructure exacerbates the issue. The severity of the problem, as depicted in the image, indicates a critical need for immediate attention and resolution.",
+      "expected_resolution_time": "Within 72 hours",
+      "risk_assessment": "High risk of waterborne diseases, environmental pollution, and potential health crises if not addressed promptly. The situation requires urgent attention from local authorities, waste management services, and public health officials to prevent further deterioration and ensure a safe living environment for the affected residents.",
+      "_raw_sentiment": {
+        "sentiment_score": 8,
+        "urgency_level": "High",
+        "emotional_tone": "Outrage and Concern",
+        "key_emotional_indicators": [
+          "polluted urban environment",
+          "severely choked water channel",
+          "significant lack of proper waste disposal and drainage infrastructure",
+          "sheer volume of trash suggests severe blockage and pollution",
+          "informal settlement or slum area",
+          "makeshift homes constructed from corrugated metal sheets and tarps",
+          "stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse"
+        ]
+      },
+      "_raw_priority": {
+        "priority_level": "High",
+        "justification": "The sewage drainage problem in Mumbai has a significant impact on the health and well-being of the residents, particularly in informal settlements or slum areas. The presence of stagnant water and dense plastic waste poses a high risk of waterborne diseases, and the lack of proper waste disposal infrastructure exacerbates the issue. The severity of the problem, as depicted in the image, indicates a critical need for immediate attention and resolution.",
+        "expected_resolution_time": "Within 72 hours",
+        "risk_assessment": "High risk of waterborne diseases, environmental pollution, and potential health crises if not addressed promptly. The situation requires urgent attention from local authorities, waste management services, and public health officials to prevent further deterioration and ensure a safe living environment for the affected residents."
+      }
+    },
+    "patterns": {
+      "is_recurring_issue": true,
+      "similar_patterns_found": [
+        "Polluted waterways in informal settlements",
+        "Lack of proper waste disposal infrastructure",
+        "Choked sewage drainage systems",
+        "Environmental degradation in urban areas"
+      ],
+      "spam_likelihood": "Medium",
+      "pattern_notes": "This image depicts a common issue in urban areas, particularly in informal settlements. The presence of a severely choked water channel or canal, along with a dense layer of plastic waste and debris, suggests a lack of proper waste disposal and drainage infrastructure. This pattern is similar to other reports of environmental degradation in urban areas, including polluted waterways and choked sewage drainage systems. The likelihood of spam is medium, as the image appears to be a genuine concern about environmental issues, but the language used is not overly sensational or attention-seeking."
+    },
+    "historical_trends": {
+      "top_3_similar_cases": [
+        {
+          "id": "13862",
+          "summary": "Blockage of Sewage Drain and Overflow of Sewage Water in Muneshwara Layout, Virgonagar, Aavalahalli, Bengaluru, Karnataka 560049, India"
+        },
+        {
+          "id": "1006",
+          "summary": "Sewage and drainage water over flowing from neighboring house in 9th Cross Bhel Layout, Adityanagar, Vidyaranyapura, Bengaluru, Karnataka 560097, India"
+        },
+        {
+          "id": "2469",
+          "summary": "Sewage blockage on a residential road opposite my plot (A-katha) in Nataraja Layout, Jp Nagar 7Th Phase, Bengaluru, Karnataka, India"
+        }
+      ],
+      "common_resolutions": [
+        {
+          "resolution": "Immediate action was taken to resolve the issue, including cleaning or repairing the sewage drain or pipe.",
+          "frequency": 3
+        },
+        {
+          "resolution": "The affected residents were provided with temporary solutions, such as portable toilets or alternative water sources.",
+          "frequency": 2
+        },
+        {
+          "resolution": "The local authorities or civic agencies were instructed to take necessary measures to prevent similar incidents in the future.",
+          "frequency": 2
+        }
+      ],
+      "patterns_identified": [
+        {
+          "pattern": "Sewage drain blockage or overflow is a common issue in urban areas, particularly in areas with poor infrastructure or inadequate maintenance.",
+          "frequency": 5
+        },
+        {
+          "pattern": "Residents often report health concerns and discomfort due to the presence of sewage water or odors.",
+          "frequency": 4
+        },
+        {
+          "pattern": "Local authorities or civic agencies are often responsible for resolving the issue, but may require prompting or follow-up from residents.",
+          "frequency": 3
+        }
+      ]
+    },
+    "fraud_risk": {
+      "fraud_risk": "Low",
+      "spam_indicators": [
+        "The image description does not contain any suspicious keywords or phrases that are commonly associated with spam or phishing activities.",
+        "The visible text in the image does not contain any URLs, phone numbers, or other contact information that could be used for malicious purposes.",
+        "The image appears to be a genuine public grievance related to sewage drainage problems in Mumbai, which is a legitimate concern."
+      ],
+      "authenticity_confidence": "High",
+      "verification_recommendations": [
+        "Verify the authenticity of the image by checking the metadata and EXIF data for any signs of manipulation or tampering.",
+        "Contact the person who submitted the grievance to confirm the details and gather more information about the issue.",
+        "Check with local authorities or government agencies to confirm the existence of the sewage drainage problem in the area depicted in the image."
+      ]
+    }
+  },
+  "classification": {
+    "category": {
+      "main_category": "Sanitation",
+      "sub_category": "Sewage Drainage Problems",
+      "confidence": "High",
+      "reasoning": "The grievance content describes a highly polluted urban environment with a severely choked water channel or canal, indicating a significant lack of proper waste disposal and drainage infrastructure. The description of stagnant, dark, and completely covered waterway with a dense layer of plastic waste, debris, and refuse further supports this categorization."
+    },
+    "department": {
+      "recommended_department": "Public Works Department (PWD) or Municipal Corporation of Mumbai",
+      "contact_information": "Contact the Public Works Department (PWD) or Municipal Corporation of Mumbai through their official website, phone number, or email. You can also visit their office in person to file a complaint.",
+      "jurisdiction": "Mumbai, Maharashtra, India",
+      "escalation_path": "If the issue is not resolved, you can escalate it to the Municipal Commissioner of Mumbai or the Chief Minister of Maharashtra. You can also contact the National Human Rights Commission (NHRC) or the State Human Rights Commission (SHRC) if the issue is related to human rights."
+    }
+  },
+  "policy_search_queries": {
+    "queries": [
+      "Mumbai sewage drainage problems government schemes",
+      "Mumbai urban sanitation policy for informal settlements",
+      "Government initiatives for sewage management in Mumbai",
+      "Mumbai municipal corporation initiatives for drainage infrastructure",
+      "Sewage drainage problems in Mumbai slums solutions",
+      "Government policies for waste disposal in Mumbai"
+    ],
+    "reasoning": "These search queries are designed to find relevant information on government schemes, policies, and initiatives related to sewage drainage problems in Mumbai. They cover various aspects such as government schemes, urban sanitation policy, municipal corporation initiatives, and solutions for sewage drainage problems in informal settlements and slums."
+  },
+  "outputs": {
+    "markdown_report_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\Workers\\QueryAnalyst\\outputs\\grievance_report.md",
+    "pdf_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\Workers\\QueryAnalyst\\outputs\\grievance_report.pdf"
+  }
+}

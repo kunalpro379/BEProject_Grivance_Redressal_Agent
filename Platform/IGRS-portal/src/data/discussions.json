@@ -1,0 +1,376 @@
+{
+    "discussions": [
+      
+      {
+        "id": 6,
+        "title": "Local Train Frequency Issue - Western Line",
+        "content": "During peak hours, trains are too crowded. Need more frequency between Churchgate and Virar.",
+        "author": {"username": "Daily_Commuter", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-25T08:15:00Z",
+        "upvotes": 189,
+        "replies": 23,
+        "priority": "high",
+        "tags": ["Transport", "LocalTrain", "Crowding"],
+        "category": "Transport",
+        "location": "Western Railway, Mumbai",
+        "repliesData": [
+          {
+            "author": "WR_Official",
+            "content": "We are adding 12 new services from next month. हम पिछले महीने से नई सेवाएँ जोड़ रहे हैं।",
+            "timestamp": "2025-09-26T10:30:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Garbage Dumping at Powai Lake",
+        "content": "People are dumping waste near Powai Lake. This is affecting water quality and environment.",
+        "author": {"username": "Eco_Warrior", "verified": true, "role": "Environmentalist"},
+        "timestamp": "2025-09-24T14:20:00Z",
+        "upvotes": 156,
+        "replies": 15,
+        "priority": "high",
+        "tags": ["Sanitation", "Pollution", "Environment"],
+        "category": "Sanitation",
+        "location": "Powai Lake, Mumbai",
+        "repliesData": [
+          {
+            "author": "BMC_LakeDept",
+            "content": "We have installed CCTV cameras and increased patrols. जल्द ही कार्रवाई की जाएगी।",
+            "timestamp": "2025-09-25T09:45:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Street Lights Not Working in Chembur",
+        "content": "Many street lights are not working in Chembur Camp area. Safety concern for women and senior citizens.",
+        "author": {"username": "Chembur_Resident", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-23T19:30:00Z",
+        "upvotes": 98,
+        "replies": 8,
+        "priority": "medium",
+        "tags": ["Infrastructure", "Safety", "Lighting"],
+        "category": "Infrastructure",
+        "location": "Chembur, Mumbai",
+        "repliesData": [
+          {
+            "author": "MSEDCL_Engineer",
+            "content": "Repair work will start from tomorrow. कल से मरम्मत का काम शुरू होगा।",
+            "timestamp": "2025-09-24T11:20:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Mobile Network Issue in Malad West",
+        "content": "Very poor mobile network in Orlem area. Affecting work from home and online classes.",
+        "author": {"username": "Tech_Professional", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-22T16:45:00Z",
+        "upvotes": 134,
+        "replies": 12,
+        "priority": "medium",
+        "tags": ["Infrastructure", "Internet", "Connectivity"],
+        "category": "Infrastructure",
+        "location": "Malad West, Mumbai",
+        "repliesData": []
+      },
+      {
+        "id": 10,
+        "title": "Public Toilet Maintenance in Dadar",
+        "content": "Public toilets near Dadar station are very dirty and poorly maintained. Need immediate attention.",
+        "author": {"username": "Dadar_Shopkeeper", "verified": false, "role": "Business Owner"},
+        "timestamp": "2025-09-21T12:30:00Z",
+        "upvotes": 167,
+        "replies": 18,
+        "priority": "high",
+        "tags": ["Sanitation", "PublicToilet", "Hygiene"],
+        "category": "Sanitation",
+        "location": "Dadar Station, Mumbai",
+        "repliesData": [
+          {
+            "author": "BMC_Sanitation",
+            "content": "Cleaning contract has been renewed. Regular maintenance will be ensured.",
+            "timestamp": "2025-09-22T10:15:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "School Bus Safety Measures",
+        "content": "Need GPS tracking and female attendants in all school buses for children safety.",
+        "author": {"username": "Parent_Association", "verified": true, "role": "Parent Group"},
+        "timestamp": "2025-09-20T15:20:00Z",
+        "upvotes": 245,
+        "replies": 34,
+        "priority": "high",
+        "tags": ["Education", "Safety", "Transport"],
+        "category": "Education",
+        "location": "Mumbai Schools",
+        "repliesData": [
+          {
+            "author": "RTO_Official",
+            "content": "New guidelines being issued for all school buses. स्कूल बसों के लिए नए दिशा-निर्देश जारी किए जा रहे हैं।",
+            "timestamp": "2025-09-21T14:30:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Water Supply Problem in Virar",
+        "content": "Irregular water supply in Virar East area. Many days only 1 hour water available.",
+        "author": {"username": "Virar_Resident", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-19T11:45:00Z",
+        "upvotes": 278,
+        "replies": 27,
+        "priority": "high",
+        "tags": ["WaterIssue", "Infrastructure", "BasicNeeds"],
+        "category": "Infrastructure",
+        "location": "Virar East, Mumbai",
+        "repliesData": [
+          {
+            "author": "WaterDept_Official",
+            "content": "Pipeline repair work ongoing. Supply will normalize in 3 days.",
+            "timestamp": "2025-09-20T09:30:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Park Maintenance in Kharghar",
+        "content": "Children's play equipment in sector 12 park is broken. Need repair and maintenance.",
+        "author": {"username": "Kharghar_Mom", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-18T17:20:00Z",
+        "upvotes": 89,
+        "replies": 6,
+        "priority": "medium",
+        "tags": ["Infrastructure", "Parks", "Children"],
+        "category": "Infrastructure",
+        "location": "Kharghar, Navi Mumbai",
+        "repliesData": []
+      },
+      {
+        "id": 14,
+        "title": "Digital Classroom Implementation",
+        "content": "Request for smart boards and digital learning tools in municipal schools.",
+        "author": {"username": "Teacher_Group", "verified": true, "role": "Educator"},
+        "timestamp": "2025-09-17T13:15:00Z",
+        "upvotes": 156,
+        "replies": 14,
+        "priority": "medium",
+        "tags": ["Education", "DigitalLearning", "Technology"],
+        "category": "Education",
+        "location": "Mumbai Municipal Schools",
+        "repliesData": [
+          {
+            "author": "Education_Dept",
+            "content": "Budget approved for 100 smart classrooms. Installation starts next month.",
+            "timestamp": "2025-09-18T11:00:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Ambulance Service Response Time",
+        "content": "108 ambulance service taking too long to reach in suburban areas. Need improvement.",
+        "author": {"username": "Social_Worker", "verified": true, "role": "NGO Worker"},
+        "timestamp": "2025-09-16T10:30:00Z",
+        "upvotes": 198,
+        "replies": 22,
+        "priority": "high",
+        "tags": ["Healthcare", "Emergency", "Ambulance"],
+        "category": "Healthcare",
+        "location": "Mumbai Suburbs",
+        "repliesData": [
+          {
+            "author": "Health_Director",
+            "content": "Adding 20 new ambulances to fleet. Response time will improve.",
+            "timestamp": "2025-09-17T15:45:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "title": "Hawker Zone Allocation in Borivali",
+        "content": "Proper hawker zones needed near station to reduce traffic congestion.",
+        "author": {"username": "Borivali_Resident", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-15T14:25:00Z",
+        "upvotes": 112,
+        "replies": 16,
+        "priority": "medium",
+        "tags": ["Infrastructure", "Hawkers", "Traffic"],
+        "category": "Infrastructure",
+        "location": "Borivali Station, Mumbai",
+        "repliesData": []
+      },
+      {
+        "id": 17,
+        "title": "Library Timings Extension",
+        "content": "Request to extend library timings for students during exam season.",
+        "author": {"username": "Student_Union", "verified": true, "role": "Student Group"},
+        "timestamp": "2025-09-14T12:30:00Z",
+        "upvotes": 134,
+        "replies": 9,
+        "priority": "low",
+        "tags": ["Education", "Library", "Students"],
+        "category": "Education",
+        "location": "Mumbai Public Libraries",
+        "repliesData": [
+          {
+            "author": "Library_Dept",
+            "content": "Timings extended till 9 PM during exam months. परीक्षा के महीनों में समय बढ़ाया गया।",
+            "timestamp": "2025-09-15T10:15:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "title": "Dengue Prevention Measures",
+        "content": "Need fogging and cleanliness drive to control mosquito breeding in monsoon.",
+        "author": {"username": "Health_Activist", "verified": true, "role": "Health Worker"},
+        "timestamp": "2025-09-13T11:20:00Z",
+        "upvotes": 287,
+        "replies": 31,
+        "priority": "high",
+        "tags": ["Healthcare", "Dengue", "Prevention"],
+        "category": "Healthcare",
+        "location": "Mumbai Entire City",
+        "repliesData": [
+          {
+            "author": "BMC_Health",
+            "content": "Fogging schedule intensified. 500 teams deployed across city.",
+            "timestamp": "2025-09-14T08:45:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "title": "Footpath Repair in South Mumbai",
+        "content": "Broken footpaths causing accidents, especially for senior citizens.",
+        "author": {"username": "Senior_Citizen", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-12T16:40:00Z",
+        "upvotes": 145,
+        "replies": 11,
+        "priority": "medium",
+        "tags": ["Infrastructure", "Footpath", "Safety"],
+        "category": "Infrastructure",
+        "location": "Colaba, Mumbai",
+        "repliesData": []
+      },
+      {
+        "id": 20,
+        "title": "Online Education Portal Issues",
+        "content": "State education portal frequently down during admission season.",
+        "author": {"username": "Admission_Help", "verified": true, "role": "Volunteer"},
+        "timestamp": "2025-09-11T13:25:00Z",
+        "upvotes": 167,
+        "replies": 19,
+        "priority": "high",
+        "tags": ["Education", "Technology", "Admission"],
+        "category": "Education",
+        "location": "Maharashtra Education Portal",
+        "repliesData": [
+          {
+            "author": "IT_Education",
+            "content": "Server capacity increased. Issues should be resolved now.",
+            "timestamp": "2025-09-12T10:30:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "title": "Bus Stop Shelter Repair",
+        "content": "Bus stop shelters damaged in last storm. Need repair before monsoon.",
+        "author": {"username": "Bus_Commuter", "verified": false, "role": "Citizen"},
+        "timestamp": "2025-09-10T15:35:00Z",
+        "upvotes": 98,
+        "replies": 7,
+        "priority": "medium",
+        "tags": ["Transport", "BusStop", "Infrastructure"],
+        "category": "Transport",
+        "location": "Eastern Express Highway",
+        "repliesData": []
+      },
+      {
+        "id": 22,
+        "title": "Medical Camp Organization",
+        "content": "Request for regular free medical camps in slum areas.",
+        "author": {"username": "NGO_Health", "verified": true, "role": "NGO Representative"},
+        "timestamp": "2025-09-09T12:20:00Z",
+        "upvotes": 213,
+        "replies": 25,
+        "priority": "medium",
+        "tags": ["Healthcare", "MedicalCamp", "SlumAreas"],
+        "category": "Healthcare",
+        "location": "Mumbai Slum Areas",
+        "repliesData": [
+          {
+            "author": "Health_Director",
+            "content": "Monthly medical camps scheduled in all zones. सभी क्षेत्रों में मासिक मेडिकल कैंप शेड्यूल किए गए।",
+            "timestamp": "2025-09-10T11:15:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "title": "Cycling Track Proposal",
+        "content": "Need dedicated cycling tracks on coastal roads for fitness and environment.",
+        "author": {"username": "Cycling_Group", "verified": true, "role": "Cycling Community"},
+        "timestamp": "2025-09-08T14:45:00Z",
+        "upvotes": 178,
+        "replies": 28,
+        "priority": "low",
+        "tags": ["Transport", "Cycling", "Environment"],
+        "category": "Transport",
+        "location": "Marine Drive, Mumbai",
+        "repliesData": []
+      },
+      {
+        "id": 24,
+        "title": "Waste Segregation Awareness",
+        "content": "Need more awareness programs about waste segregation at source.",
+        "author": {"username": "Eco_Club", "verified": true, "role": "Environmental Group"},
+        "timestamp": "2025-09-07T10:30:00Z",
+        "upvotes": 134,
+        "replies": 13,
+        "priority": "medium",
+        "tags": ["Sanitation", "WasteManagement", "Awareness"],
+        "category": "Sanitation",
+        "location": "Mumbai Residential Areas",
+        "repliesData": [
+          {
+            "author": "BMC_Awareness",
+            "content": "Door-to-door campaign starting next week. अगले सप्ताह से दरवाजे-दरवाजे अभियान शुरू हो रहा है।",
+            "timestamp": "2025-09-08T09:20:00Z",
+            "official": true
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "title": "Street Food Hygiene Standards",
+        "content": "Need better hygiene monitoring for street food vendors.",
+        "author": {"username": "Food_Safety", "verified": true, "role": "Food Inspector"},
+        "timestamp": "2025-09-06T16:15:00Z",
+        "upvotes": 156,
+        "replies": 17,
+        "priority": "medium",
+        "tags": ["Healthcare", "FoodSafety", "Hygiene"],
+        "category": "Healthcare",
+        "location": "Mumbai Street Food Areas",
+        "repliesData": []
+      }
+    ]
+  }

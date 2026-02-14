@@ -1,0 +1,11 @@
+python-dotenv
+psycopg2-binary
+sentence-transformers
+Pillow
+requests
+google-generativeai
+groq
+langgraph
+reportlab
+azure-storage-queue
+azure-storage-blob

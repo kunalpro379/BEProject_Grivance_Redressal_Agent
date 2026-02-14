@@ -1,0 +1,44 @@
+{
+    "stats": {
+      "activeDiscussions": 24,
+      "totalContributors": 156,
+      "issuesResolved": 89,
+      "activeOfficials": 15,
+      "responseRate": "78%",
+      "avgResolutionTime": "14 days"
+    },
+    "officials": [
+      {
+        "username": "PWD_Officer",
+        "name": "Rajesh Kumar",
+        "designation": "Chief Engineer",
+        "department": "Public Works Department",
+        "verified": true,
+        "responseRate": "85%"
+      },
+      {
+        "username": "Health_Director",
+        "name": "Dr. Priya Sharma",
+        "designation": "Director",
+        "department": "Public Health Department",
+        "verified": true,
+        "responseRate": "92%"
+      },
+      {
+        "username": "Education_Dept",
+        "name": "Anil Deshpande",
+        "designation": "Secretary",
+        "department": "Education Department",
+        "verified": true,
+        "responseRate": "76%"
+      },
+      {
+        "username": "BMC_Commissioner",
+        "name": "I.S. Chahal",
+        "designation": "Municipal Commissioner",
+        "department": "Brihanmumbai Municipal Corporation",
+        "verified": true,
+        "responseRate": "68%"
+      }
+    ]
+  }
