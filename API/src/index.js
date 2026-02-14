@@ -1,3 +1,8 @@
+// Fix for Azure SDK crypto requirement in Docker
+const { webcrypto } = require('crypto');
+if (!globalThis.crypto) {
+    globalThis.crypto = webcrypto;
+}
 
 const express = require('express');
 const cors = require('cors');
@@ -18,6 +23,16 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
 
 // Routes
 app.use('/api', grievanceRoutes);
