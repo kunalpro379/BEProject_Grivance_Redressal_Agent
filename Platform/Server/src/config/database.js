@@ -13,24 +13,56 @@ const pool = new Pool(
     ? {
         connectionString,
         ssl: {
-          rejectUnauthorized: false, // Required for Neon DB
+          rejectUnauthorized: false, // Required for cloud databases
         },
       }
     : {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        database: process.env.DB_NAME,
-        user: process.env.DB_USER,
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
+        database: process.env.DB_NAME || 'igrs_db',
+        user: process.env.DB_USER || 'postgres',
         password: process.env.DB_PASSWORD,
         max: 20,
         idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 2000,
+        connectionTimeoutMillis: 5000,
       }
 );
 
-pool.on('error', (err) => {
-  console.error('Unexpected error on idle client', err);
-  process.exit(-1);
+// Connection event handlers
+pool.on('connect', () => {
+  console.log('Connected to PostgreSQL database');
 });
+
+pool.on('error', (err) => {
+  console.error('Unexpected database error:', err.message);
+});
+
+// Helper function to execute queries
+export const query = async (text, params) => {
+  const client = await pool.connect();
+  try {
+    const start = Date.now();
+    const res = await client.query(text, params);
+    const duration = Date.now() - start;
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Query executed', { 
+        text: text.substring(0, 50) + '...', 
+        duration: `${duration}ms`, 
+        rows: res.rowCount 
+      });
+    }
+    return res;
+  } catch (error) {
+    console.error('Database query error:', error.message);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+// Helper function to get a client from pool
+export const getClient = async () => {
+  return await pool.connect();
+};
 
 export default pool;

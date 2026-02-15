@@ -1,0 +1,169 @@
+{
+  "resource_allocation": {
+    "departments": [
+      {
+        "department": "roads",
+        "fiscal_year": "2025-26",
+        
+        "staff": {
+          "sanctioned": 45000,
+          "working": 38500,
+          "vacant": 6500,
+          "vacancy_percentage": 14.4,
+          "on_leave": 2200,
+          "available": 36300
+        },
+        
+        "budget": {
+          "total_allocation_crores": 28500,
+          "released_crores": 23450,
+          "utilized_crores": 19250,
+          "available_crores": 4200,
+          "utilization_percentage": 82.1,
+          "emergency_reserve_crores": 2850
+        },
+        
+        "equipment": {
+          "total_machinery": 5225,
+          "functional": 4076,
+          "under_repair": 685,
+          "condemned": 464,
+          "functional_percentage": 78,
+          "critical_shortage": ["pavers", "milling_machines"]
+        },
+        
+        "materials": {
+          "bitumen_tons": 12500,
+          "aggregate_tons": 185000,
+          "cement_tons": 8500,
+          "cold_mix_tons": 4200,
+          "stock_status": "adequate",
+          "reorder_needed": ["cold_mix", "bitumen"]
+        }
+      },
+      {
+        "department": "garbage",
+        "fiscal_year": "2025-26",
+        
+        "staff": {
+          "sanctioned": 28000,
+          "working": 24500,
+          "vacant": 3500,
+          "vacancy_percentage": 12.5,
+          "on_leave": 1850,
+          "available": 22650
+        },
+        
+        "budget": {
+          "total_allocation_crores": 4850,
+          "released_crores": 4120,
+          "utilized_crores": 3285,
+          "available_crores": 835,
+          "utilization_percentage": 79.7,
+          "emergency_reserve_crores": 485
+        },
+        
+        "equipment": {
+          "collection_vehicles": 2850,
+          "functional": 2280,
+          "under_repair": 420,
+          "condemned": 150,
+          "functional_percentage": 80,
+          "critical_shortage": ["compactors", "tipper_trucks"]
+        },
+        
+        "materials": {
+          "bins_units": 185000,
+          "bags_units": 2500000,
+          "ppe_sets": 28000,
+          "stock_status": "critical",
+          "reorder_needed": ["bins", "bags", "ppe"]
+        }
+      },
+      {
+        "department": "water",
+        "fiscal_year": "2025-26",
+        
+        "staff": {
+          "sanctioned": 18500,
+          "working": 16200,
+          "vacant": 2300,
+          "vacancy_percentage": 12.4,
+          "on_leave": 980,
+          "available": 15220
+        },
+        
+        "budget": {
+          "total_allocation_crores": 8500,
+          "released_crores": 7225,
+          "utilized_crores": 6140,
+          "available_crores": 1085,
+          "utilization_percentage": 85.0,
+          "emergency_reserve_crores": 850
+        },
+        
+        "equipment": {
+          "pumps": 4850,
+          "functional": 3880,
+          "under_repair": 680,
+          "condemned": 290,
+          "functional_percentage": 80,
+          "critical_shortage": ["submersible_pumps", "motors"]
+        },
+        
+        "materials": {
+          "pipes_km": 2850,
+          "valves_units": 12500,
+          "chemicals_tons": 850,
+          "stock_status": "adequate",
+          "reorder_needed": ["chlorine", "alum"]
+        }
+      }
+    ],
+    
+    "reallocation_requests": [
+      {
+        "request_id": "REQ-2026-028",
+        "date": "2026-02-13",
+        "from_department": "water",
+        "to_department": "roads",
+        "resource_type": "budget",
+        "amount_crores": 50,
+        "reason": "Emergency monsoon damage repair",
+        "justification": "Water dept has 85% utilization, Roads critical at 68%",
+        "status": "pending",
+        "requested_by": "DEPT-PWD-001",
+        "approval_required_from": "ADMIN-001"
+      },
+      {
+        "request_id": "REQ-2026-029",
+        "date": "2026-02-12",
+        "from_department": "roads",
+        "to_department": "garbage",
+        "resource_type": "vehicles",
+        "quantity": 5,
+        "vehicle_type": "tipper_trucks",
+        "reason": "Garbage collection crisis in Thane",
+        "justification": "Garbage dept has 20% vehicles under repair",
+        "status": "approved",
+        "requested_by": "DEPT-GRB-001",
+        "approved_by": "ADMIN-002",
+        "approval_date": "2026-02-12"
+      }
+    ],
+    
+    "inter_department_sharing": {
+      "active_sharing": [
+        {
+          "resource": "excavators",
+          "from": "roads",
+          "to": "water",
+          "quantity": 3,
+          "duration_days": 15,
+          "start_date": "2026-02-10",
+          "end_date": "2026-02-25"
+        }
+      ]
+    }
+  }
+}

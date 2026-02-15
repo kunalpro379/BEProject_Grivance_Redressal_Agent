@@ -1,0 +1,153 @@
+{
+  "early_warning_system": {
+    "active_alerts": [
+      {
+        "alert_id": "EWS-2026-045",
+        "timestamp": "2026-02-14 08:00:00",
+        "severity": "high",
+        "department": "water",
+        "district": "Nashik",
+        
+        "prediction": {
+          "issue": "Water supply complaints surge predicted",
+          "probability": 0.87,
+          "predicted_date": "2026-02-20",
+          "days_ahead": 6,
+          "potential_impact": "Protest risk in 14 days if unresolved"
+        },
+        
+        "indicators": {
+          "complaint_velocity": "+185% in last 7 days",
+          "emotion_trend": "Anger sentiment increased from 35% to 68%",
+          "historical_pattern": "Similar pattern in Feb 2024 led to protest",
+          "social_media_mentions": 2850,
+          "media_coverage": "3 local news articles"
+        },
+        
+        "recommended_action": {
+          "immediate": "Inspect water supply infrastructure in affected areas",
+          "short_term": "Deploy tankers, Increase supply hours",
+          "communication": "Issue public statement explaining situation",
+          "escalation": "Alert District Collector"
+        },
+        
+        "status": "active",
+        "assigned_to": "DEPT-WTR-002"
+      },
+      {
+        "alert_id": "EWS-2026-046",
+        "timestamp": "2026-02-13 15:30:00",
+        "severity": "critical",
+        "department": "roads",
+        "district": "Mumbai Suburban",
+        
+        "prediction": {
+          "issue": "Major accident risk - Bridge safety concern",
+          "probability": 0.92,
+          "predicted_date": "2026-02-18",
+          "days_ahead": 5,
+          "potential_impact": "Structural failure risk, Traffic chaos"
+        },
+        
+        "indicators": {
+          "complaint_velocity": "15 bridge safety complaints in 3 days",
+          "emotion_trend": "Fear sentiment 78%",
+          "historical_pattern": "Bridge age 35 years, Last inspection 18 months ago",
+          "social_media_mentions": 4200,
+          "media_coverage": "2 TV news segments"
+        },
+        
+        "recommended_action": {
+          "immediate": "Emergency structural inspection within 24 hours",
+          "short_term": "Load restriction, Speed limit, Warning signage",
+          "communication": "Public advisory on alternate routes",
+          "escalation": "Alert Chief Engineer immediately"
+        },
+        
+        "status": "active",
+        "assigned_to": "DEPT-PWD-003",
+        "escalated_to": "DEPT-PWD-001"
+      },
+      {
+        "alert_id": "EWS-2026-047",
+        "timestamp": "2026-02-12 10:15:00",
+        "severity": "medium",
+        "department": "garbage",
+        "district": "Pune",
+        
+        "prediction": {
+          "issue": "Garbage accumulation leading to health hazard",
+          "probability": 0.73,
+          "predicted_date": "2026-02-25",
+          "days_ahead": 13,
+          "potential_impact": "Public health risk, Media attention"
+        },
+        
+        "indicators": {
+          "complaint_velocity": "+95% in last 10 days",
+          "emotion_trend": "Disgust sentiment 62%",
+          "historical_pattern": "Similar in summer 2025",
+          "social_media_mentions": 1250,
+          "media_coverage": "1 newspaper article"
+        },
+        
+        "recommended_action": {
+          "immediate": "Increase collection frequency in hotspot areas",
+          "short_term": "Deploy extra vehicles, Clean accumulated garbage",
+          "communication": "SMS campaign on segregation",
+          "escalation": "Monitor for 7 days"
+        },
+        
+        "status": "monitoring",
+        "assigned_to": "DEPT-GRB-002"
+      }
+    ],
+    
+    "resolved_alerts": [
+      {
+        "alert_id": "EWS-2026-042",
+        "issue": "Pothole complaint surge - Western Express Highway",
+        "predicted_date": "2026-02-08",
+        "actual_outcome": "Prevented - Emergency repairs completed",
+        "action_taken": "5 emergency teams deployed, 285 potholes filled in 48 hours",
+        "resolution_date": "2026-02-07",
+        "effectiveness": "Successful - Complaints dropped 78%"
+      }
+    ],
+    
+    "prediction_accuracy": {
+      "total_predictions": 156,
+      "accurate_predictions": 128,
+      "false_positives": 18,
+      "missed_events": 10,
+      "accuracy_percentage": 82.1
+    },
+    
+    "hotspot_areas": [
+      {
+        "location": "Western Express Highway, Mumbai",
+        "department": "roads",
+        "risk_score": 8.5,
+        "recurring_issues": ["potholes", "waterlogging"],
+        "last_incident": "2026-02-10",
+        "monitoring_status": "active"
+      },
+      {
+        "location": "Khadakwasla Area, Pune",
+        "department": "water",
+        "risk_score": 7.8,
+        "recurring_issues": ["water shortage", "supply disruption"],
+        "last_incident": "2026-02-05",
+        "monitoring_status": "active"
+      },
+      {
+        "location": "Thane West Zone",
+        "department": "garbage",
+        "risk_score": 7.2,
+        "recurring_issues": ["collection delays", "vehicle breakdown"],
+        "last_incident": "2026-02-12",
+        "monitoring_status": "active"
+      }
+    ]
+  }
+}

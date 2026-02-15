@@ -1,0 +1,228 @@
+{
+  "department": {
+    "dept_id": "MH-PWD-012",
+    "name": "Public Works Department (Roads Division)",
+    "headquarters": "Mantralaya, Mumbai",
+    "website": "https://pwd.maharashtra.gov.in",
+    
+    "minister": {
+      "name": "Hon. Minister for Public Works",
+      "designation": "Cabinet Minister",
+      "office": "Mantralaya, Mumbai"
+    },
+    
+    "chief_engineer_roads": {
+      "name": "Shri Rajendra Pawar (Engineering Services)",
+      "designation": "Chief Engineer (Roads) & Additional Secretary",
+      "email": "ce.roads@maharashtra.gov.in",
+      "phone": "022-22027920"
+    },
+    
+    "key_officers": {
+      "chief_engineer_nh": {
+        "name": "Shri Deepak Patil",
+        "designation": "Chief Engineer (National Highways)",
+        "email": "ce.nh@maharashtra.gov.in",
+        "phone": "022-22027921"
+      },
+      "chief_engineer_sh": {
+        "name": "Smt. Madhuri Deshmukh",
+        "designation": "Chief Engineer (State Highways)",
+        "email": "ce.sh@maharashtra.gov.in",
+        "phone": "022-22027922"
+      },
+      "chief_engineer_mddr": {
+        "name": "Shri Vikram Bhosale",
+        "designation": "Chief Engineer (Major District & Other Roads)",
+        "email": "ce.mddr@maharashtra.gov.in",
+        "phone": "022-22027923"
+      },
+      "director_quality": {
+        "name": "Dr. Suresh Kulkarni",
+        "designation": "Director (Quality Control & Testing)",
+        "email": "director.quality@maharashtra.gov.in",
+        "phone": "022-22027924"
+      }
+    },
+    
+    "organizational_structure": {
+      "state_level": [
+        {"designation": "Chief Engineer", "count": 5},
+        {"designation": "Superintending Engineer", "count": 18},
+        {"designation": "Executive Engineer", "count": 85},
+        {"designation": "Deputy Engineer", "count": 420},
+        {"designation": "Assistant Engineer", "count": 1250}
+      ],
+      
+      "regional_offices": {
+        "mumbai_region": {
+          "superintending_engineer": "Shri A.B. Jadhav",
+          "email": "se.mumbai@maharashtra.gov.in",
+          "phone": "022-24567812",
+          "divisions": 12,
+          "staff_strength": 2850
+        },
+        "pune_region": {
+          "superintending_engineer": "Smt. P.R. Kale",
+          "email": "se.pune@maharashtra.gov.in",
+          "phone": "020-26541237",
+          "divisions": 14,
+          "staff_strength": 3200
+        },
+        "nagpur_region": {
+          "superintending_engineer": "Shri M.V. Thakare",
+          "email": "se.nagpur@maharashtra.gov.in",
+          "phone": "0712-2548963",
+          "divisions": 10,
+          "staff_strength": 2400
+        },
+        "aurangabad_region": {
+          "superintending_engineer": "Shri R.K. Shelke",
+          "email": "se.aurangabad@maharashtra.gov.in",
+          "phone": "0240-2548621",
+          "divisions": 8,
+          "staff_strength": 1950
+        }
+      },
+      
+      "field_staff": {
+        "junior_engineers": 3500,
+        "work_inspectors": 5200,
+        "surveyors": 1850,
+        "quality_inspectors": 620,
+        "machine_operators": 2400,
+        "road_workers": 28000
+      }
+    },
+    
+    "road_network_statistics": {
+      "total_road_network_km": 248500,
+      
+      "by_category": {
+        "national_highways_km": 17550,
+        "state_highways_km": 33850,
+        "major_district_roads_km": 34200,
+        "other_district_roads_km": 52900,
+        "village_roads_km": 110000
+      },
+      
+      "by_surface_type": {
+        "concrete_roads_km": 48500,
+        "bituminous_roads_km": 165000,
+        "gravel_roads_km": 25000,
+        "earthen_roads_km": 10000
+      },
+      
+      "by_condition": {
+        "good_km": 152000,
+        "fair_km": 68500,
+        "poor_km": 22000,
+        "very_poor_km": 6000
+      }
+    }
+  },
+
+  "district_road_officers": [
+    {
+      "district": "Mumbai City",
+      "executive_engineer": {
+        "name": "Shri S.D.More",
+        "phone": "022-22658741",
+        "email": "ee.roads.mumbai@maharashtra.gov.in"
+      },
+      "road_network_km": 2450,
+      "bridges": 285,
+      "flyovers": 48,
+      "staff_strength": 850,
+      "maintenance_budget_crores": 450,
+      "annual_traffic_crore_vehicles": 185
+    },
+    {
+      "district": "Pune",
+      "executive_engineer": {
+        "name": "Smt. N.P. Kulkarni",
+        "phone": "020-26547821",
+        "email": "ee.roads.pune@maharashtra.gov.in"
+      },
+      "road_network_km": 8500,
+      "bridges": 520,
+      "flyovers": 28,
+      "staff_strength": 1250,
+      "maintenance_budget_crores": 580,
+      "annual_traffic_crore_vehicles": 125
+    },
+    {
+      "district": "Nagpur",
+      "executive_engineer": {
+        "name": "Shri V.K. Deshmukh",
+        "phone": "0712-2584762",
+        "email": "ee.roads.nagpur@maharashtra.gov.in"
+      },
+      "road_network_km": 6800,
+      "bridges": 385,
+      "flyovers": 18,
+      "staff_strength": 920,
+      "maintenance_budget_crores": 420,
+      "annual_traffic_crore_vehicles": 68
+    },
+    {
+      "district": "Thane",
+      "executive_engineer": {
+        "name": "Shri A.R. Patil",
+        "phone": "022-25847963",
+        "email": "ee.roads.thane@maharashtra.gov.in"
+      },
+      "road_network_km": 5200,
+      "bridges": 420,
+      "flyovers": 32,
+      "staff_strength": 1150,
+      "maintenance_budget_crores": 520,
+      "annual_traffic_crore_vehicles": 145
+    },
+    {
+      "district": "Beed",
+      "executive_engineer": {
+        "name": "Shri K.B. Gaikwad",
+        "phone": "02442-258741",
+        "email": "ee.roads.beed@maharashtra.gov.in"
+      },
+      "road_network_km": 4850,
+      "bridges": 185,
+      "flyovers": 2,
+      "staff_strength": 420,
+      "maintenance_budget_crores": 180,
+      "annual_traffic_crore_vehicles": 22
+    }
+  ],
+
+  "resources_and_infrastructure": {
+    "machinery": {
+      "excavators": 850,
+      "bulldozers": 620,
+      "motor_graders": 420,
+      "compactors_rollers": 1250,
+      "hot_mix_plants": 85,
+      "concrete_batching_plants": 125,
+      "pavers": 920,
+      "milling_machines": 185,
+      "crack_sealing_machines": 320,
+      "pothole_repair_machines": 450,
+      "total_machinery": 5225,
+      "functional_percentage": 78
+    },
+    
+    "quality_testing_labs": {
+      "state_labs": 8,
+      "regional_labs": 24,
+      "mobile_labs": 45,
+      "total_tests_per_year": 185000
+    },
+    
+    "control_rooms": {
+      "state_control_room_247": true,
+      "regional_control_rooms": 6,
+      "complaint_monitoring": "Real-time",
+      "cctv_coverage_km": 12500
+    }
+  }
+}

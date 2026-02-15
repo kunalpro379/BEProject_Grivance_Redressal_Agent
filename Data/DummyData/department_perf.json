@@ -1,0 +1,79 @@
+{
+  "performance_metrics": {
+    "fiscal_year": "2025-26",
+    "reporting_period": "April 2025 - January 2026",
+    
+    "budget_performance": {
+      "total_allocation_crores": 12500,
+      "jal_jeevan_mission_crores": 8500,
+      "rural_water_supply_crores": 2800,
+      "released_crores": 9850,
+      "utilized_crores": 7920,
+      "utilization_percentage": 80.4,
+      "state_share_released_percentage": 92,
+      "central_share_released_percentage": 78
+    },
+    
+    "jal_jeevan_mission_progress": {
+      "baseline_households": 14500000,
+      "target_fhtc_march_2026": 14500000,
+      "fhtc_achieved": 11200000,
+      "achievement_percentage": 77.24,
+      "households_remaining": 3300000,
+      "monthly_connection_rate": 185000,
+      "projected_completion": "December 2026",
+      "villages_with_100pct_coverage": 32500,
+      "villages_partial_coverage": 8200,
+      "villages_work_in_progress": 3011
+    },
+    
+    "physical_targets": {
+      "piped_water_schemes": {
+        "target": 4850,
+        "completed": 3420,
+        "in_progress": 1180,
+        "achievement_percentage": 70.5
+      },
+      "borewells": {
+        "target": 12000,
+        "drilled": 9850,
+        "successful": 8520,
+        "success_rate_percentage": 86.5
+      },
+      "handpump_repairs": {
+        "target": 45000,
+        "completed": 38500,
+        "achievement_percentage": 85.6
+      },
+      "water_quality_testing": {
+        "target_samples": 500000,
+        "tested": 425000,
+        "contaminated_found": 18500,
+        "contaminated_percentage": 4.35,
+        "action_taken_on_contaminated": 17200
+      }
+    },
+    
+    "tanker_supply_status": {
+      "current_tanker_villages": 2850,
+      "tankers_operational": 4500,
+      "daily_trips": 18500,
+      "population_served_lakhs": 28.5,
+      "cost_per_month_crores": 45,
+      "target_reduction": "50% by March 2026"
+    },
+    
+    "delayed_schemes": {
+      "total_delayed": 485,
+      "delay_categories": {
+        "contractor_issues": 145,
+        "land_problems": 98,
+        "technical_issues": 85,
+        "fund_delays": 72,
+        "other": 85
+      },
+      "oldest_pending_scheme_years": 4.5,
+      "action_taken": "Review meeting every month"
+    }
+  }
+}

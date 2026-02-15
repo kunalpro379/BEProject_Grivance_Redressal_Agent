@@ -1,0 +1,500 @@
+{
+  "department_info": {
+    "district": "Ambernath",
+    "region": "Thane Division",
+    "executive_engineer": {
+      "name": "Shri Prakash R. Shinde",
+      "designation": "Executive Engineer (Roads)",
+      "phone": "0251-2623456",
+      "email": "ee.roads.ambernath@maharashtra.gov.in",
+      "joining_date": "2023-07-15",
+      "experience_years": 18
+    },
+    
+    "assistant_engineers": [
+      {
+        "name": "Smt. Anjali Patil",
+        "zone": "Ambernath East",
+        "phone": "0251-2623457",
+        "email": "ae.east.ambernath@maharashtra.gov.in",
+        "team_size": 45
+      },
+      {
+        "name": "Shri Rahul Deshmukh",
+        "zone": "Ambernath West",
+        "phone": "0251-2623458",
+        "email": "ae.west.ambernath@maharashtra.gov.in",
+        "team_size": 38
+      },
+      {
+        "name": "Shri Sunil Kamble",
+        "zone": "Rural Ambernath",
+        "phone": "0251-2623459",
+        "email": "ae.rural.ambernath@maharashtra.gov.in",
+        "team_size": 32
+      }
+    ],
+    
+    "office_address": "PWD Office, Station Road, Ambernath (East), Thane - 421501",
+    "jurisdiction_area_sq_km": 185,
+    "population_covered_lakhs": 3.8,
+    
+    "road_network": {
+      "total_road_length_km": 425,
+      "state_highways_km": 28,
+      "major_district_roads_km": 85,
+      "other_district_roads_km": 142,
+      "village_roads_km": 170,
+      
+      "by_surface_type": {
+        "concrete_roads_km": 145,
+        "bituminous_roads_km": 215,
+        "gravel_roads_km": 48,
+        "earthen_roads_km": 17
+      },
+      
+      "by_condition": {
+        "good_km": 245,
+        "fair_km": 125,
+        "poor_km": 42,
+        "very_poor_km": 13
+      }
+    },
+    
+    "infrastructure": {
+      "bridges": 42,
+      "culverts": 185,
+      "flyovers": 2,
+      "underpasses": 3,
+      "railway_crossings": 8
+    },
+    
+    "staff_strength": {
+      "engineers": 3,
+      "junior_engineers": 12,
+      "work_inspectors": 18,
+      "surveyors": 8,
+      "machine_operators": 15,
+      "road_workers": 85,
+      "office_staff": 12,
+      "total": 153
+    },
+    
+    "equipment": {
+      "excavators": 4,
+      "bulldozers": 2,
+      "motor_graders": 2,
+      "compactors_rollers": 6,
+      "hot_mix_plant": 1,
+      "pavers": 3,
+      "pothole_repair_machines": 5,
+      "water_tankers": 8,
+      "trucks": 12,
+      "jcb_machines": 6,
+      "total_machinery": 49,
+      "functional_percentage": 82
+    },
+    
+    "budget_fy_2025_26": {
+      "total_allocation_crores": 45,
+      "maintenance_crores": 12,
+      "new_construction_crores": 18,
+      "repairs_crores": 8,
+      "emergency_reserve_crores": 4,
+      "equipment_crores": 3,
+      "released_till_date_crores": 38,
+      "utilized_till_date_crores": 31.5,
+      "utilization_percentage": 82.9
+    }
+  },
+  
+  "historical_performance": {
+    "fy_2024_25": {
+      "new_construction_km": 18,
+      "resurfacing_km": 45,
+      "potholes_repaired": 12500,
+      "bridges_repaired": 8,
+      "budget_crores": 42,
+      "utilization_percentage": 85.2,
+      "complaints_received": 18500,
+      "complaints_resolved": 15800,
+      "resolution_rate_percentage": 85.4,
+      "avg_resolution_time_days": 6.5,
+      "citizen_satisfaction_score": 3.8
+    },
+    
+    "fy_2023_24": {
+      "new_construction_km": 15,
+      "resurfacing_km": 38,
+      "potholes_repaired": 10200,
+      "bridges_repaired": 5,
+      "budget_crores": 38,
+      "utilization_percentage": 81.5,
+      "complaints_received": 16200,
+      "complaints_resolved": 13500,
+      "resolution_rate_percentage": 83.3
+    },
+    
+    "fy_2022_23": {
+      "new_construction_km": 12,
+      "resurfacing_km": 32,
+      "potholes_repaired": 8900,
+      "budget_crores": 35,
+      "utilization_percentage": 78.5,
+      "complaints_received": 14800,
+      "complaints_resolved": 11800,
+      "resolution_rate_percentage": 79.7
+    }
+  },
+  
+  "past_grievances_database": [
+    {
+      "grievance_id": "AMB-2025-1245",
+      "date_submitted": "2025-11-15 09:30:00",
+      "citizen_name": "Ramesh Kumar Sharma",
+      "citizen_phone": "9876543210",
+      "location": "Station Road, near Railway Station, Ambernath East",
+      "gps_coordinates": "19.2183, 73.1964",
+      "category": "Pothole",
+      "description": "Large pothole near railway station causing accidents. Water logging during rain.",
+      "photos": ["AMB-2025-1245-photo1.jpg", "AMB-2025-1245-photo2.jpg"],
+      "priority": "High",
+      
+      "agent_analysis": {
+        "analyzed_at": "2025-11-15 09:32:15",
+        "category": "Roads",
+        "sub_category": "Pothole + Waterlogging",
+        "severity": "Critical",
+        "estimated_depth_mm": 95,
+        "estimated_area_sq_m": 3.5,
+        "priority_score": 8.5,
+        "confidence": 0.91,
+        
+        "estimated_resources": {
+          "cost_rupees": 52000,
+          "time_days": 2,
+          "workers": 4,
+          "equipment": ["Road roller", "Asphalt mixer", "Compactor"],
+          "materials": {
+            "bitumen_tons": 0.8,
+            "gravel_tons": 2.5,
+            "cold_mix_kg": 150
+          }
+        },
+        
+        "sla_target_hours": 12,
+        "assigned_to": "Smt. Anjali Patil - Ambernath East",
+        "recommended_team": "Team-3"
+      },
+      
+      "department_action": {
+        "received_at": "2025-11-15 09:33:00",
+        "acknowledged_at": "2025-11-15 09:45:00",
+        "approved_by": "Smt. Anjali Patil",
+        "assigned_to_team": "Team-3",
+        "team_leader": "Suresh Jadhav",
+        "work_order_number": "WO-AMB-2025-1245",
+        "approved_budget": 52000
+      },
+      
+      "work_progress": [
+        {
+          "timestamp": "2025-11-15 11:30:00",
+          "status": "Site Inspection",
+          "progress_percentage": 10,
+          "notes": "Site inspected. Pothole depth 92mm, area 3.2 sq.m. Drainage issue confirmed.",
+          "photos": ["AMB-2025-1245-inspection.jpg"],
+          "updated_by": "Suresh Jadhav"
+        },
+        {
+          "timestamp": "2025-11-15 14:00:00",
+          "status": "Work Started",
+          "progress_percentage": 20,
+          "notes": "Area barricaded. Traffic diverted. Excavation started.",
+          "photos": ["AMB-2025-1245-work-start.jpg"],
+          "updated_by": "Suresh Jadhav"
+        },
+        {
+          "timestamp": "2025-11-15 18:30:00",
+          "status": "In Progress",
+          "progress_percentage": 60,
+          "notes": "Drainage pipe laid. Base preparation done. Bitumen laying tomorrow.",
+          "resources_used": {
+            "workers": 4,
+            "hours": 6,
+            "bitumen_tons": 0,
+            "gravel_tons": 2.5,
+            "drainage_pipe_meters": 8
+          },
+          "updated_by": "Suresh Jadhav"
+        },
+        {
+          "timestamp": "2025-11-16 16:00:00",
+          "status": "Completed",
+          "progress_percentage": 100,
+          "notes": "Bitumen laid and compacted. Road marking done. Quality checked.",
+          "photos": ["AMB-2025-1245-completed.jpg"],
+          "resources_used": {
+            "workers": 4,
+            "hours": 5,
+            "bitumen_tons": 0.8,
+            "cold_mix_kg": 150
+          },
+          "updated_by": "Suresh Jadhav"
+        }
+      ],
+      
+      "completion_details": {
+        "completed_at": "2025-11-16 16:00:00",
+        "actual_cost": 49500,
+        "actual_time_days": 1.3,
+        "actual_workers": 4,
+        "quality_inspection": {
+          "inspected_by": "Smt. Anjali Patil",
+          "inspection_date": "2025-11-16 17:00:00",
+          "quality_rating": "Good",
+          "remarks": "Work completed as per standards. Drainage issue resolved."
+        }
+      },
+      
+      "citizen_feedback": {
+        "feedback_date": "2025-11-18 10:00:00",
+        "rating": 5,
+        "satisfaction": "Very Satisfied",
+        "comments": "Excellent work! Problem solved quickly. Thank you PWD team.",
+        "would_recommend": true
+      },
+      
+      "status": "Closed",
+      "sla_met": true,
+      "resolution_time_hours": 30.5
+    },
+    {
+      "grievance_id": "AMB-2025-1189",
+      "date_submitted": "2025-10-28 14:20:00",
+      "citizen_name": "Priya Mehta",
+      "citizen_phone": "9823456789",
+      "location": "Shivaji Chowk, Ambernath West",
+      "gps_coordinates": "19.2095, 73.1875",
+      "category": "Road Damage",
+      "description": "Road completely damaged after heavy rain. Multiple potholes and cracks.",
+      "photos": ["AMB-2025-1189-photo1.jpg"],
+      "priority": "Critical",
+      
+      "agent_analysis": {
+        "analyzed_at": "2025-10-28 14:22:30",
+        "category": "Roads",
+        "sub_category": "Road Resurfacing Required",
+        "severity": "Critical",
+        "estimated_area_sq_m": 250,
+        "priority_score": 9.2,
+        "confidence": 0.88,
+        
+        "estimated_resources": {
+          "cost_rupees": 850000,
+          "time_days": 12,
+          "workers": 12,
+          "equipment": ["Milling machine", "Paver", "Road roller", "Compactor"],
+          "materials": {
+            "bitumen_tons": 18,
+            "aggregate_tons": 45,
+            "emulsion_liters": 500
+          }
+        },
+        
+        "sla_target_hours": 24,
+        "assigned_to": "Shri Rahul Deshmukh - Ambernath West",
+        "recommended_team": "Team-5 + Team-6"
+      },
+      
+      "department_action": {
+        "received_at": "2025-10-28 14:23:00",
+        "acknowledged_at": "2025-10-28 15:00:00",
+        "approved_by": "Shri Prakash R. Shinde (EE)",
+        "assigned_to_team": "Team-5 + Team-6",
+        "team_leader": "Vijay Pawar",
+        "work_order_number": "WO-AMB-2025-1189",
+        "approved_budget": 850000,
+        "remarks": "Major work. Requires EE approval. Monsoon damage."
+      },
+      
+      "work_progress": [
+        {
+          "timestamp": "2025-10-29 10:00:00",
+          "status": "Site Survey",
+          "progress_percentage": 5,
+          "notes": "Detailed survey done. 250 sq.m area needs complete resurfacing. Traffic management plan prepared.",
+          "updated_by": "Vijay Pawar"
+        },
+        {
+          "timestamp": "2025-10-30 09:00:00",
+          "status": "Work Started",
+          "progress_percentage": 15,
+          "notes": "Milling of old surface started. Traffic diverted to alternate route.",
+          "updated_by": "Vijay Pawar"
+        },
+        {
+          "timestamp": "2025-11-02 17:00:00",
+          "status": "In Progress",
+          "progress_percentage": 40,
+          "notes": "Milling complete. Base preparation ongoing. Weather good.",
+          "resources_used": {
+            "workers": 12,
+            "days": 3,
+            "milling_depth_mm": 75
+          },
+          "updated_by": "Vijay Pawar"
+        },
+        {
+          "timestamp": "2025-11-06 16:00:00",
+          "status": "In Progress",
+          "progress_percentage": 70,
+          "notes": "Base course laid. Binder course 50% complete.",
+          "resources_used": {
+            "bitumen_tons": 12,
+            "aggregate_tons": 30
+          },
+          "updated_by": "Vijay Pawar"
+        },
+        {
+          "timestamp": "2025-11-09 18:00:00",
+          "status": "Completed",
+          "progress_percentage": 100,
+          "notes": "Wearing course laid. Road marking done. Traffic opened.",
+          "photos": ["AMB-2025-1189-completed.jpg"],
+          "resources_used": {
+            "bitumen_tons": 6,
+            "aggregate_tons": 15,
+            "emulsion_liters": 500
+          },
+          "updated_by": "Vijay Pawar"
+        }
+      ],
+      
+      "completion_details": {
+        "completed_at": "2025-11-09 18:00:00",
+        "actual_cost": 825000,
+        "actual_time_days": 12,
+        "actual_workers": 12,
+        "quality_inspection": {
+          "inspected_by": "Shri Prakash R. Shinde",
+          "inspection_date": "2025-11-10 11:00:00",
+          "quality_rating": "Excellent",
+          "core_test_results": "Passed",
+          "compaction_percentage": 98.5,
+          "remarks": "High quality work. Meets all IRC standards."
+        }
+      },
+      
+      "citizen_feedback": {
+        "feedback_date": "2025-11-12 09:00:00",
+        "rating": 5,
+        "satisfaction": "Very Satisfied",
+        "comments": "Road is like new! Great job by PWD. Worth the wait.",
+        "would_recommend": true
+      },
+      
+      "status": "Closed",
+      "sla_met": true,
+      "resolution_time_days": 12
+    },
+    {
+      "grievance_id": "AMB-2025-0987",
+      "date_submitted": "2025-09-18 07:45:00",
+      "citizen_name": "Anil Patil",
+      "citizen_phone": "9765432108",
+      "location": "Nehru Road, near Municipal Office, Ambernath East",
+      "gps_coordinates": "19.2156, 73.1928",
+      "category": "Pothole",
+      "description": "Small pothole but in front of school. Children safety risk.",
+      "photos": ["AMB-2025-0987-photo1.jpg"],
+      "priority": "Medium",
+      
+      "agent_analysis": {
+        "analyzed_at": "2025-09-18 07:47:20",
+        "category": "Roads",
+        "sub_category": "Pothole",
+        "severity": "Medium",
+        "estimated_depth_mm": 45,
+        "estimated_area_sq_m": 1.2,
+        "priority_score": 7.0,
+        "confidence": 0.85,
+        "priority_boost_reason": "Near school - safety concern",
+        
+        "estimated_resources": {
+          "cost_rupees": 15000,
+          "time_hours": 4,
+          "workers": 2,
+          "equipment": ["Compactor"],
+          "materials": {
+            "cold_mix_kg": 80,
+            "emulsion_liters": 20
+          }
+        },
+        
+        "sla_target_hours": 24,
+        "assigned_to": "Smt. Anjali Patil - Ambernath East",
+        "recommended_team": "Team-1"
+      },
+      
+      "department_action": {
+        "received_at": "2025-09-18 07:48:00",
+        "acknowledged_at": "2025-09-18 08:15:00",
+        "approved_by": "Smt. Anjali Patil",
+        "assigned_to_team": "Team-1",
+        "team_leader": "Ganesh Bhoir",
+        "work_order_number": "WO-AMB-2025-0987",
+        "approved_budget": 15000
+      },
+      
+      "work_progress": [
+        {
+          "timestamp": "2025-09-18 10:30:00",
+          "status": "Work Started",
+          "progress_percentage": 30,
+          "notes": "Team reached site. Pothole cleaned and prepared.",
+          "updated_by": "Ganesh Bhoir"
+        },
+        {
+          "timestamp": "2025-09-18 13:00:00",
+          "status": "Completed",
+          "progress_percentage": 100,
+          "notes": "Cold mix applied and compacted. Work completed.",
+          "photos": ["AMB-2025-0987-completed.jpg"],
+          "resources_used": {
+            "workers": 2,
+            "hours": 2.5,
+            "cold_mix_kg": 75,
+            "emulsion_liters": 18
+          },
+          "updated_by": "Ganesh Bhoir"
+        }
+      ],
+      
+      "completion_details": {
+        "completed_at": "2025-09-18 13:00:00",
+        "actual_cost": 12500,
+        "actual_time_hours": 5.25,
+        "actual_workers": 2,
+        "quality_inspection": {
+          "inspected_by": "Junior Engineer - Ramesh Kale",
+          "inspection_date": "2025-09-18 15:00:00",
+          "quality_rating": "Good",
+          "remarks": "Quick response. Good quality work."
+        }
+      },
+      
+      "citizen_feedback": {
+        "feedback_date": "2025-09-19 08:00:00",
+        "rating": 4,
+        "satisfaction": "Satisfied",
+        "comments": "Fixed quickly. Good work.",
+        "would_recommend": true
+      },
+      
+      "status": "Closed",
+      "sla_met": true,
+      "resolution_time_hours": 5.25
+    }
+  ]
+}

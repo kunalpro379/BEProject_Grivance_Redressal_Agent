@@ -23,7 +23,17 @@ export const schemas = {
     password: Joi.string().min(8).required(),
     full_name: Joi.string().min(2).required(),
     phone: Joi.string().pattern(/^[0-9]{10}$/).optional(),
-    address: Joi.string().optional()
+    address: Joi.string().optional(),
+    role: Joi.string().valid('citizen', 'department_officer', 'department_head', 'admin').optional(),
+    department_id: Joi.number().integer().optional(),
+    department_name: Joi.string().optional(),
+    designation: Joi.string().optional(),
+    city: Joi.string().optional(),
+    official_type: Joi.string().optional(),
+    ward: Joi.string().optional(),
+    district: Joi.string().optional(),
+    admin_id: Joi.string().optional(),
+    admin_passkey: Joi.string().optional()
   }),
 
   login: Joi.object({

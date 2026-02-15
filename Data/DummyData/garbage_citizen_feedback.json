@@ -1,0 +1,392 @@
+{
+  "citizen_feedback_system": {
+    "feedback_channels": {
+      "online_portal": {
+        "name": "Swachh Maharashtra Portal",
+        "url": "swachhmaharashtra.gov.in",
+        "features": ["Complaint registration", "Real-time tracking", "Photo upload", "Waste collection schedule"]
+      },
+      "mobile_app": {
+        "name": "MySwachh Maharashtra",
+        "platforms": ["Android", "iOS"],
+        "downloads": 4500000,
+        "active_users": 1850000,
+        "features": ["GPS-based complaint", "Photo/video upload", "Collection schedule", "Complaint tracking", "SWM charges payment"]
+      },
+      "toll_free": {
+        "number": "1800-120-7777",
+        "working_hours": "24x7",
+        "languages": ["Marathi", "Hindi", "English"],
+        "avg_calls_per_day": 8500
+      },
+      "whatsapp": {
+        "number": "+91-9222100XXX",
+        "bot_enabled": true,
+        "features": ["Complaint with photo", "Schedule inquiry", "Track complaint"],
+        "messages_per_day": 12500
+      },
+      "sms": {
+        "number": "56677",
+        "format": "SWM<space>COMPLAINT<space>AREA",
+        "avg_sms_per_day": 5200
+      },
+      "email": {
+        "primary": "complaints.swm@maharashtra.gov.in",
+        "grievance": "grievance.swm@maharashtra.gov.in",
+        "emails_per_day": 2800
+      },
+      "twitter": {
+        "handle": "@SwachhMaha",
+        "followers": 285000,
+        "complaints_via_twitter_monthly": 4500
+      }
+    },
+    
+    "complaint_statistics": {
+      "total_complaints_received": 485250,
+      "reporting_period": "April 2025 - January 2026",
+      
+      "by_category": {
+        "garbage_not_collected": {
+          "count": 125000,
+          "percentage": 25.8,
+          "avg_resolution_hours": 12
+        },
+        "irregular_collection": {
+          "count": 98500,
+          "percentage": 20.3,
+          "avg_resolution_hours": 24
+        },
+        "overflowing_bins": {
+          "count": 82000,
+          "percentage": 16.9,
+          "avg_resolution_hours": 6
+        },
+        "street_sweeping_missed": {
+          "count": 56000,
+          "percentage": 11.5,
+          "avg_resolution_hours": 8
+        },
+        "littering_complaint": {
+          "count": 42500,
+          "percentage": 8.8,
+          "avg_resolution_hours": 48
+        },
+        "illegal_dumping": {
+          "count": 35000,
+          "percentage": 7.2,
+          "avg_resolution_hours": 72
+        },
+        "biomedical_waste": {
+          "count": 18500,
+          "percentage": 3.8,
+          "avg_resolution_hours": 4
+        },
+        "vehicle_breakdown": {
+          "count": 15250,
+          "percentage": 3.1,
+          "avg_resolution_hours": 18
+        },
+        "worker_misconduct": {
+          "count": 8500,
+          "percentage": 1.8,
+          "avg_resolution_hours": 96
+        },
+        "other": {
+          "count": 4000,
+          "percentage": 0.8,
+          "avg_resolution_hours": 48
+        }
+      },
+      
+      "resolution_status": {
+        "resolved": 402500,
+        "resolution_rate_percentage": 82.9,
+        "pending": 58250,
+        "in_progress": 24500,
+        "escalated": 12500,
+        "closed_unsolved": 4200
+      },
+      
+      "channel_wise_complaints": {
+        "mobile_app": {"count": 195000, "percentage": 40.2},
+        "toll_free": {"count": 142500, "percentage": 29.4},
+        "whatsapp": {"count": 82000, "percentage": 16.9},
+        "portal": {"count": 38500, "percentage": 7.9},
+        "sms": {"count": 18250, "percentage": 3.8},
+        "email": {"count": 6500, "percentage": 1.3},
+        "twitter": {"count": 2500, "percentage": 0.5}
+      },
+      
+      "area_wise_complaints": {
+        "mumbai": {
+          "total": 125000,
+          "per_lakh_population": 1000,
+          "top_issue": "irregular_collection",
+          "resolution_rate_percentage": 88
+        },
+        "pune": {
+          "total": 95000,
+          "per_lakh_population": 1000,
+          "top_issue": "overflowing_bins",
+          "resolution_rate_percentage": 85
+        },
+        "nagpur": {
+          "total": 48000,
+          "per_lakh_population": 1000,
+          "top_issue": "garbage_not_collected",
+          "resolution_rate_percentage": 80
+        },
+        "thane": {
+          "total": 88000,
+          "per_lakh_population": 800,
+          "top_issue": "irregular_collection",
+          "resolution_rate_percentage": 82
+        },
+        "aurangabad": {
+          "total": 28500,
+          "per_lakh_population": 750,
+          "top_issue": "street_sweeping_missed",
+          "resolution_rate_percentage": 78
+        },
+        "nashik": {
+          "total": 32000,
+          "per_lakh_population": 650,
+          "top_issue": "overflowing_bins",
+          "resolution_rate_percentage": 81
+        },
+        "solapur": {
+          "total": 18250,
+          "per_lakh_population": 410,
+          "top_issue": "illegal_dumping",
+          "resolution_rate_percentage": 72
+        },
+        "rural_areas": {
+          "total": 50500,
+          "per_lakh_population": 85,
+          "top_issue": "illegal_dumping",
+          "resolution_rate_percentage": 68
+        }
+      },
+      
+      "time_based_analysis": {
+        "peak_complaint_hours": ["7-9 AM", "6-8 PM"],
+        "peak_complaint_days": ["Monday", "Tuesday"],
+        "seasonal_spike": {
+          "monsoon_june_aug": "+35%",
+          "festivals_sept_nov": "+42%",
+          "summer_march_may": "+15%"
+        }
+      },
+      
+      "sentiment_analysis": {
+        "highly_dissatisfied": {"count": 125000, "percentage": 25.8},
+        "dissatisfied": {"count": 195000, "percentage": 40.2},
+        "neutral": {"count": 98000, "percentage": 20.2},
+        "satisfied": {"count": 58000, "percentage": 12.0},
+        "highly_satisfied": {"count": 9250, "percentage": 1.9}
+      },
+      
+      "repeat_complainants": {
+        "total_unique_complainants": 325000,
+        "repeat_complainants": 95000,
+        "repeat_percentage": 29.2,
+        "avg_complaints_per_repeat": 3.2,
+        "hotspot_areas": ["Malad West", "Hadapsar", "Dhantoli", "Kalwa"]
+      }
+    },
+    
+    "detailed_complaint_samples": [
+      {
+        "complaint_id": "SWM/MUM/2026/012458",
+        "date": "2026-02-10 08:15",
+        "category": "garbage_not_collected",
+        "area": "Andheri West, Mumbai",
+        "ward": "K-West",
+        "pincode": "400053",
+        "channel": "mobile_app",
+        "complainant_id": "USER-458962",
+        "description": "Garbage not collected for 3 days. Stinking badly. Dogs spreading waste.",
+        "photo_attached": true,
+        "gps_location": "19.1334° N, 72.8266° E",
+        "assigned_to": "Supervisor-KW-24",
+        "assigned_date": "2026-02-10 08:45",
+        "resolution_date": "2026-02-10 14:30",
+        "resolution_time_hours": 6.25,
+        "status": "resolved",
+        "action_taken": "Vehicle breakdown was the issue. Alternate vehicle sent. Area cleaned. 3 dogs relocated.",
+        "proof_of_work": "After-photo uploaded. GPS timestamp verified.",
+        "complainant_rating": 4,
+        "remarks": "Supervisor counseled for delayed morning round. Vehicle sent to workshop."
+      },
+      {
+        "complaint_id": "SWM/PUN/2026/008745",
+        "date": "2026-02-08 18:30",
+        "category": "overflowing_bins",
+        "area": "Kothrud, Pune",
+        "ward": "Ward-34",
+        "pincode": "411038",
+        "channel": "whatsapp",
+        "complainant_id": "USER-782456",
+        "description": "Community bin overflowing since morning. Waste on road. Traffic affected.",
+        "photo_attached": true,
+        "gps_location": "18.5074° N, 73.8077° E",
+        "assigned_to": "Driver-P-185",
+        "assigned_date": "2026-02-08 18:45",
+        "resolution_date": "2026-02-08 21:15",
+        "resolution_time_hours": 2.75,
+        "status": "resolved",
+        "action_taken": "Emergency vehicle dispatched. 1.5 ton waste cleared. Bin cleaned and sanitized.",
+        "proof_of_work": "Video of clearing uploaded. Supervisor inspection done.",
+        "complainant_rating": 5,
+        "remarks": "Extra bin requested for this high-generation point. Approved on 2026-02-09."
+      },
+      {
+        "complaint_id": "SWM/NAG/2026/005621",
+        "date": "2026-02-05 10:15",
+        "category": "illegal_dumping",
+        "area": "Hingna, Nagpur",
+        "ward": "Ward-12",
+        "pincode": "440016",
+        "channel": "toll_free",
+        "complainant_id": "ANON",
+        "description": "Construction debris dumped on roadside. Blocking footpath.",
+        "photo_attached": false,
+        "gps_location": "21.0862° N, 79.0548° E",
+        "assigned_to": "Inspector-N-42",
+        "assigned_date": "2026-02-05 11:00",
+        "resolution_date": "2026-02-07 16:00",
+        "resolution_time_hours": 53,
+        "status": "resolved",
+        "action_taken": "Builder identified via CCTV. Notice issued. Rs 50,000 fine imposed. Debris cleared by builder.",
+        "proof_of_work": "Payment receipt attached. Site photos before-after.",
+        "complainant_rating": null,
+        "remarks": "Police involved. Builder warned of license suspension on repeat."
+      },
+      {
+        "complaint_id": "SWM/THA/2026/010985",
+        "date": "2026-02-12 07:20",
+        "category": "irregular_collection",
+        "area": "Kalwa, Thane",
+        "ward": "Ward-7",
+        "pincode": "400605",
+        "channel": "portal",
+        "complainant_id": "USER-965478",
+        "description": "Collection timing keeps changing. Sometimes 7 AM, sometimes 11 AM. Residents missing it.",
+        "photo_attached": false,
+        "gps_location": "19.1989° N, 73.0007° E",
+        "assigned_to": "Supervisor-T-18",
+        "assigned_date": "2026-02-12 09:00",
+        "resolution_date": "2026-02-13 18:00",
+        "resolution_time_hours": 34.67,
+        "status": "resolved",
+        "action_taken": "Route optimized. Fixed timing 8:00-8:30 AM set. SMS alerts enabled for 450 households.",
+        "proof_of_work": "Route schedule published on app. 7-day verification period active.",
+        "complainant_rating": 4,
+        "remarks": "Driver training on punctuality conducted. GPS tracking enforced."
+      },
+      {
+        "complaint_id": "SWM/AUR/2026/003256",
+        "date": "2026-02-11 16:45",
+        "category": "biomedical_waste",
+        "area": "Cidco, Aurangabad",
+        "ward": "Ward-N5",
+        "pincode": "431003",
+        "channel": "email",
+        "complainant_id": "USER-123698",
+        "description": "Biomedical waste seen in regular waste bin. Syringes visible. Safety hazard.",
+        "photo_attached": true,
+        "gps_location": "19.8762° N, 75.3433° E",
+        "assigned_to": "Emergency-Team-AU",
+        "assigned_date": "2026-02-11 17:00",
+        "resolution_date": "2026-02-11 19:30",
+        "resolution_time_hours": 2.75,
+        "status": "resolved",
+        "action_taken": "Yellow bag team dispatched. Waste collected using PPE. Hospital traced. Rs 1 Lakh fine.",
+        "proof_of_work": "Disposal certificate. Fine receipt. Hospital notice.",
+        "complainant_rating": 5,
+        "remarks": "Small clinic was source. License suspended 30 days. Awareness drive planned."
+      },
+      {
+        "complaint_id": "SWM/SOL/2026/002847",
+        "date": "2026-02-09 12:30",
+        "category": "worker_misconduct",
+        "area": "Jule Solapur, Solapur",
+        "ward": "Ward-A",
+        "pincode": "413004",
+        "channel": "sms",
+        "complainant_id": "USER-741852",
+        "description": "Worker demanding money for garbage collection. Rude behavior.",
+        "photo_attached": false,
+        "gps_location": "17.6599° N, 75.9064° E",
+        "assigned_to": "HR-Disciplinary-Committee",
+        "assigned_date": "2026-02-09 15:00",
+        "resolution_date": "2026-02-13 17:00",
+        "resolution_time_hours": 100.5,
+        "status": "resolved",
+        "action_taken": "Investigation conducted. Worker suspended. Alternative route assigned. Complainant met.",
+        "proof_of_work": "Investigation report. Suspension order dated 2026-02-10.",
+        "complainant_rating": 3,
+        "remarks": "Worker had 2 prior warnings. Terminated on 2026-02-12. Service restored on 2026-02-10."
+      }
+    ],
+    
+    "escalation_tracker": {
+      "total_escalations": 12500,
+      "escalation_rate_percentage": 2.6,
+      
+      "escalation_levels": {
+        "level_1_supervisor": {"count": 8500, "resolved": 7200},
+        "level_2_ee": {"count": 2850, "resolved": 2100},
+        "level_3_ce": {"count": 950, "resolved": 680},
+        "level_4_director": {"count": 200, "resolved": 142}
+      },
+      
+      "complaints_to_cm_office": 45,
+      "complaints_to_ministers": 28,
+      "rti_applications": 850,
+      "court_cases_filed": 12,
+      
+      "high_priority_escalations": [
+        {
+          "complaint_id": "SWM/MUM/2025/098562",
+          "escalation_date": "2025-12-20",
+          "current_level": "Chief Engineer",
+          "issue": "Repeated non-collection for 2 weeks",
+          "area": "Versova, Mumbai",
+          "status": "Resolved on 2026-01-05",
+          "action": "Contractor blacklisted. Direct MJP control. 15 vehicles deployed."
+        },
+        {
+          "complaint_id": "SWM/PUN/2025/075412",
+          "escalation_date": "2026-01-10",
+          "current_level": "Director",
+          "issue": "Landfill fire affecting 5000 residents",
+          "area": "Uruli Devachi, Pune",
+          "status": "In Progress",
+          "action": "Fire brigade on site. Soil covering done. Air quality monitoring. Medical camps."
+        }
+      ]
+    },
+    
+    "citizen_satisfaction": {
+      "overall_satisfaction_percentage": 68.5,
+      "by_service": {
+        "waste_collection": 72.0,
+        "collection_frequency": 68.0,
+        "bin_maintenance": 65.0,
+        "street_sweeping": 70.0,
+        "complaint_resolution": 71.0,
+        "staff_behavior": 75.0
+      },
+      
+      "nps_score": 28,
+      "improvement_areas": [
+        "Punctuality of collection",
+        "More bins needed",
+        "Faster complaint resolution",
+        "Better segregation at source"
+      ]
+    }
+  }
+}

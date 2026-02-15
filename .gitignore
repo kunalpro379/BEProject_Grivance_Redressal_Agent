@@ -1,6 +1,5 @@
 AgenticWorkflow/
 .env
-
 Workers/QueryAnalyst/.env
 Workers/WebCrawl/.enving
 Server/.env
@@ -9,3 +8,4 @@ Platform/IGRS-portal/.env
 Platform/Server/node_modules/
 Platform/IGRS-portal/node_modules/
 API/node_modules/
+

@@ -1,0 +1,569 @@
+{
+  "new_grievances_queue": {
+    "department": "PWD Ambernath",
+    "date": "2026-02-14",
+    "total_pending": 28,
+    "critical": 5,
+    "high": 12,
+    "medium": 8,
+    "low": 3,
+    
+    "grievances": [
+      {
+        "grievance_id": "AMB-2026-0145",
+        "submission_time": "2026-02-14 08:15:00",
+        "citizen_name": "Suresh Kamble",
+        "citizen_phone": "9876501234",
+        "citizen_email": "suresh.kamble@gmail.com",
+        "location": "Kalyan-Badlapur Road, near Dmart, Ambernath West",
+        "landmark": "Opposite Dmart Supermarket",
+        "gps_coordinates": "19.2089, 73.1856",
+        "category": "Pothole",
+        "description": "Very deep pothole causing bike accidents. 2 accidents happened yesterday. Urgent repair needed.",
+        "photos": [
+          "AMB-2026-0145-photo1.jpg",
+          "AMB-2026-0145-photo2.jpg",
+          "AMB-2026-0145-photo3.jpg"
+        ],
+        "video": "AMB-2026-0145-video.mp4",
+        
+        "agent_analysis": {
+          "analyzed_at": "2026-02-14 08:17:25",
+          "processing_time_seconds": 145,
+          
+          "classification": {
+            "category": "Roads",
+            "sub_category": "Pothole - Critical",
+            "issue_type": "Infrastructure Damage",
+            "severity": "Critical",
+            "confidence_score": 0.93
+          },
+          
+          "image_analysis": {
+            "pothole_detected": true,
+            "estimated_depth_mm": 110,
+            "estimated_width_mm": 850,
+            "estimated_length_mm": 1200,
+            "estimated_area_sq_m": 1.02,
+            "lane_blocked": "Partial (40%)",
+            "water_accumulation": true,
+            "edge_deterioration": true,
+            "confidence": 0.91
+          },
+          
+          "location_analysis": {
+            "road_type": "Major District Road",
+            "traffic_volume": "High (15000 vehicles/day)",
+            "nearby_facilities": ["Shopping Mall", "Residential Area", "Bus Stop"],
+            "accident_history": "2 accidents in last 24 hours",
+            "past_complaints_same_location": 3,
+            "last_repair_date": "2024-08-15"
+          },
+          
+          "priority_calculation": {
+            "base_priority": 7.0,
+            "depth_factor": 2.5,
+            "traffic_factor": 1.5,
+            "accident_factor": 2.0,
+            "location_factor": 1.0,
+            "final_priority_score": 9.5,
+            "priority_level": "Critical",
+            "reasoning": [
+              "Depth >100mm = Critical",
+              "High traffic area",
+              "Recent accidents reported",
+              "Partial lane blockage",
+              "Water accumulation risk"
+            ]
+          },
+          
+          "estimated_resources": {
+            "cost_rupees": 65000,
+            "cost_breakdown": {
+              "materials": 35000,
+              "labor": 18000,
+              "equipment": 8000,
+              "overhead": 4000
+            },
+            "time_hours": 6,
+            "workers_required": 5,
+            "equipment_needed": [
+              "Road roller",
+              "Asphalt mixer",
+              "Compactor",
+              "Water tanker"
+            ],
+            "materials_needed": {
+              "bitumen_tons": 1.2,
+              "aggregate_tons": 3.5,
+              "cold_mix_kg": 200,
+              "emulsion_liters": 50
+            }
+          },
+          
+          "sla_compliance": {
+            "policy_sla_hours": 4,
+            "response_required_by": "2026-02-14 12:15:00",
+            "resolution_required_by": "2026-02-14 14:15:00",
+            "escalation_time": "2026-02-14 16:15:00",
+            "penalty_per_hour_delay": 5000
+          },
+          
+          "routing_decision": {
+            "assigned_department": "PWD Ambernath",
+            "assigned_zone": "Ambernath West",
+            "assigned_officer": "Shri Rahul Deshmukh",
+            "recommended_team": "Team-5",
+            "team_current_location": "2.8 km away",
+            "team_availability": "Available in 30 minutes",
+            "reasoning": [
+              "Location falls in Ambernath West zone",
+              "Team-5 nearest and available",
+              "Team-5 has required equipment",
+              "Team-5 performance rating: 4.5/5"
+            ]
+          },
+          
+          "risk_assessment": {
+            "sla_breach_risk": "Low",
+            "public_safety_risk": "High",
+            "traffic_disruption_risk": "High",
+            "weather_impact": "Low (clear weather)",
+            "complexity": "Medium",
+            "estimated_success_probability": 0.92
+          },
+          
+          "recommendations": {
+            "immediate_action": "Deploy Team-5 immediately. Barricade area for safety.",
+            "traffic_management": "Deploy traffic police. Use alternate route signage.",
+            "quality_measures": "Use hot mix for permanent fix. Avoid cold mix.",
+            "monitoring": "Inspect after 2 hours. Photo documentation mandatory.",
+            "long_term": "Schedule 500m road resurfacing in next quarter."
+          },
+          
+          "similar_cases_analysis": {
+            "similar_cases_found": 8,
+            "avg_actual_cost": 58500,
+            "avg_actual_time_hours": 5.5,
+            "success_rate": 0.95,
+            "common_issues": ["Water accumulation", "Base failure"],
+            "best_practices": "Proper drainage + quality bitumen"
+          },
+          
+          "data_sources_used": [
+            "ambernath_department_data.json - Historical performance",
+            "roads_policy_rules.json - SLA norms",
+            "heatmap_data.json - Location traffic data",
+            "past_events.json - Similar cases",
+            "weather_api - Current weather"
+          ]
+        },
+        
+        "status": "Pending Assignment",
+        "priority": "Critical",
+        "sla_status": "Within SLA",
+        "time_elapsed_minutes": 0,
+        "auto_escalation_enabled": true
+      },
+      
+      {
+        "grievance_id": "AMB-2026-0146",
+        "submission_time": "2026-02-14 09:30:00",
+        "citizen_name": "Meena Desai",
+        "citizen_phone": "9823456701",
+        "location": "Shivaji Marg, Sector 12, Ambernath East",
+        "gps_coordinates": "19.2145, 73.1945",
+        "category": "Road Damage",
+        "description": "Road surface cracked and uneven. Difficult for two-wheelers.",
+        "photos": ["AMB-2026-0146-photo1.jpg"],
+        
+        "agent_analysis": {
+          "analyzed_at": "2026-02-14 09:32:10",
+          "processing_time_seconds": 130,
+          
+          "classification": {
+            "category": "Roads",
+            "sub_category": "Surface Cracking",
+            "severity": "High",
+            "confidence_score": 0.87
+          },
+          
+          "image_analysis": {
+            "crack_type": "Alligator cracking",
+            "affected_area_sq_m": 45,
+            "crack_severity": "Moderate to Severe",
+            "surface_unevenness_mm": 35,
+            "confidence": 0.85
+          },
+          
+          "priority_calculation": {
+            "final_priority_score": 7.8,
+            "priority_level": "High",
+            "reasoning": [
+              "Large affected area (45 sq.m)",
+              "Alligator cracking indicates base failure",
+              "Two-wheeler safety concern",
+              "Residential area - moderate traffic"
+            ]
+          },
+          
+          "estimated_resources": {
+            "cost_rupees": 285000,
+            "time_days": 5,
+            "workers_required": 8,
+            "equipment_needed": ["Milling machine", "Paver", "Road roller"],
+            "materials_needed": {
+              "bitumen_tons": 4.5,
+              "aggregate_tons": 12,
+              "emulsion_liters": 150
+            }
+          },
+          
+          "sla_compliance": {
+            "policy_sla_hours": 24,
+            "response_required_by": "2026-02-14 13:30:00",
+            "resolution_required_by": "2026-02-19 09:30:00"
+          },
+          
+          "routing_decision": {
+            "assigned_zone": "Ambernath East",
+            "assigned_officer": "Smt. Anjali Patil",
+            "recommended_team": "Team-3 + Team-4",
+            "reasoning": "Requires major repair work - multiple teams needed"
+          },
+          
+          "recommendations": {
+            "immediate_action": "Site inspection by AE. Prepare detailed estimate.",
+            "repair_method": "Mill and overlay. Base repair if needed.",
+            "quality_measures": "Core testing mandatory. 3-year warranty.",
+            "long_term": "Monitor adjacent areas for similar deterioration."
+          }
+        },
+        
+        "status": "Pending Assignment",
+        "priority": "High",
+        "sla_status": "Within SLA"
+      },
+      
+      {
+        "grievance_id": "AMB-2026-0147",
+        "submission_time": "2026-02-14 10:45:00",
+        "citizen_name": "Rajesh Pawar",
+        "citizen_phone": "9765432109",
+        "location": "MG Road, near Bus Depot, Ambernath West",
+        "gps_coordinates": "19.2078, 73.1889",
+        "category": "Waterlogging",
+        "description": "Water accumulates on road after rain. Drainage blocked.",
+        "photos": ["AMB-2026-0147-photo1.jpg", "AMB-2026-0147-photo2.jpg"],
+        
+        "agent_analysis": {
+          "analyzed_at": "2026-02-14 10:47:35",
+          "processing_time_seconds": 155,
+          
+          "classification": {
+            "category": "Roads",
+            "sub_category": "Drainage Issue + Waterlogging",
+            "severity": "High",
+            "confidence_score": 0.89
+          },
+          
+          "image_analysis": {
+            "water_depth_estimated_mm": 180,
+            "affected_length_m": 25,
+            "drainage_blockage": "Confirmed",
+            "debris_accumulation": true,
+            "confidence": 0.88
+          },
+          
+          "priority_calculation": {
+            "final_priority_score": 8.2,
+            "priority_level": "High",
+            "reasoning": [
+              "Near bus depot - high pedestrian traffic",
+              "Monsoon season approaching",
+              "Drainage completely blocked",
+              "Public transport disruption"
+            ]
+          },
+          
+          "estimated_resources": {
+            "cost_rupees": 125000,
+            "time_days": 3,
+            "workers_required": 6,
+            "equipment_needed": ["JCB", "Drainage cleaning machine", "Suction pump"],
+            "materials_needed": {
+              "drainage_pipes_meters": 25,
+              "manhole_covers": 2,
+              "gravel_tons": 5
+            }
+          },
+          
+          "sla_compliance": {
+            "policy_sla_hours": 12,
+            "response_required_by": "2026-02-14 14:45:00",
+            "resolution_required_by": "2026-02-14 22:45:00"
+          },
+          
+          "routing_decision": {
+            "assigned_zone": "Ambernath West",
+            "assigned_officer": "Shri Rahul Deshmukh",
+            "recommended_team": "Team-6 (Drainage Specialist)",
+            "reasoning": "Requires drainage expertise"
+          },
+          
+          "recommendations": {
+            "immediate_action": "Clear drainage immediately. Remove debris.",
+            "repair_method": "Clean existing drains + repair damaged sections.",
+            "preventive_measures": "Install grill covers to prevent debris entry.",
+            "long_term": "Upgrade drainage capacity for monsoon preparedness."
+          }
+        },
+        
+        "status": "Pending Assignment",
+        "priority": "High",
+        "sla_status": "Within SLA"
+      },
+      
+      {
+        "grievance_id": "AMB-2026-0148",
+        "submission_time": "2026-02-14 11:20:00",
+        "citizen_name": "Kavita Joshi",
+        "citizen_phone": "9834567890",
+        "location": "Gandhi Nagar, Lane 5, Ambernath East",
+        "gps_coordinates": "19.2167, 73.1912",
+        "category": "Pothole",
+        "description": "Small pothole but growing. Need repair before it becomes big.",
+        "photos": ["AMB-2026-0148-photo1.jpg"],
+        
+        "agent_analysis": {
+          "analyzed_at": "2026-02-14 11:22:15",
+          "processing_time_seconds": 135,
+          
+          "classification": {
+            "category": "Roads",
+            "sub_category": "Pothole - Medium",
+            "severity": "Medium",
+            "confidence_score": 0.84
+          },
+          
+          "image_analysis": {
+            "estimated_depth_mm": 38,
+            "estimated_area_sq_m": 0.6,
+            "edge_deterioration": true,
+            "growth_potential": "High",
+            "confidence": 0.82
+          },
+          
+          "priority_calculation": {
+            "final_priority_score": 6.5,
+            "priority_level": "Medium",
+            "reasoning": [
+              "Small size but growing",
+              "Residential area - moderate traffic",
+              "Proactive repair prevents bigger issue",
+              "Cost-effective to fix now"
+            ]
+          },
+          
+          "estimated_resources": {
+            "cost_rupees": 18000,
+            "time_hours": 3,
+            "workers_required": 2,
+            "equipment_needed": ["Compactor"],
+            "materials_needed": {
+              "cold_mix_kg": 50,
+              "emulsion_liters": 15
+            }
+          },
+          
+          "sla_compliance": {
+            "policy_sla_hours": 24,
+            "response_required_by": "2026-02-14 15:20:00",
+            "resolution_required_by": "2026-02-15 11:20:00"
+          },
+          
+          "routing_decision": {
+            "assigned_zone": "Ambernath East",
+            "assigned_officer": "Smt. Anjali Patil",
+            "recommended_team": "Team-1",
+            "reasoning": "Quick fix - small team sufficient"
+          },
+          
+          "recommendations": {
+            "immediate_action": "Schedule repair within 24 hours.",
+            "repair_method": "Cold mix patching. Quick and effective.",
+            "quality_measures": "Proper compaction to prevent recurrence.",
+            "cost_benefit": "₹18k now vs ₹60k+ if left to grow"
+          }
+        },
+        
+        "status": "Pending Assignment",
+        "priority": "Medium",
+        "sla_status": "Within SLA"
+      },
+      
+      {
+        "grievance_id": "AMB-2026-0149",
+        "submission_time": "2026-02-14 12:00:00",
+        "citizen_name": "Amit Kulkarni",
+        "citizen_phone": "9876543298",
+        "location": "Ulhasnagar-Ambernath Link Road, near Toll Plaza",
+        "gps_coordinates": "19.2201, 73.1798",
+        "category": "Road Marking",
+        "description": "Road markings faded. Difficult to see lanes at night. Safety issue.",
+        "photos": ["AMB-2026-0149-photo1.jpg"],
+        
+        "agent_analysis": {
+          "analyzed_at": "2026-02-14 12:02:40",
+          "processing_time_seconds": 160,
+          
+          "classification": {
+            "category": "Roads",
+            "sub_category": "Road Marking - Safety",
+            "severity": "High",
+            "confidence_score": 0.86
+          },
+          
+          "image_analysis": {
+            "marking_visibility": "Poor (20%)",
+            "affected_length_km": 2.5,
+            "marking_type": "Lane markings + center line",
+            "night_visibility": "Critical",
+            "confidence": 0.84
+          },
+          
+          "priority_calculation": {
+            "final_priority_score": 7.5,
+            "priority_level": "High",
+            "reasoning": [
+              "Highway section - high speed traffic",
+              "Night visibility critical for safety",
+              "Near toll plaza - accident prone",
+              "2.5 km stretch affected"
+            ]
+          },
+          
+          "estimated_resources": {
+            "cost_rupees": 185000,
+            "time_days": 2,
+            "workers_required": 6,
+            "equipment_needed": ["Road marking machine", "Thermoplastic applicator"],
+            "materials_needed": {
+              "thermoplastic_paint_kg": 450,
+              "glass_beads_kg": 90,
+              "primer_liters": 50
+            }
+          },
+          
+          "sla_compliance": {
+            "policy_sla_hours": 48,
+            "response_required_by": "2026-02-14 16:00:00",
+            "resolution_required_by": "2026-02-16 12:00:00"
+          },
+          
+          "routing_decision": {
+            "assigned_zone": "State Highway Division",
+            "assigned_officer": "Shri Prakash R. Shinde (EE)",
+            "recommended_team": "Specialized Road Marking Team",
+            "reasoning": "Highway work requires specialized team"
+          },
+          
+          "recommendations": {
+            "immediate_action": "Night work preferred (less traffic).",
+            "repair_method": "Thermoplastic marking for durability.",
+            "quality_measures": "Reflectivity test mandatory. 2-year warranty.",
+            "traffic_management": "Lane closure with proper signage.",
+            "long_term": "Annual marking renewal schedule."
+          }
+        },
+        
+        "status": "Pending Assignment",
+        "priority": "High",
+        "sla_status": "Within SLA"
+      },
+      
+      {
+        "grievance_id": "AMB-2026-0150",
+        "submission_time": "2026-02-14 13:15:00",
+        "citizen_name": "Santosh Bhosale",
+        "citizen_phone": "9765401234",
+        "location": "Village Road, Vadavali, Ambernath Rural",
+        "gps_coordinates": "19.2289, 73.2045",
+        "category": "Road Damage",
+        "description": "Entire road damaged. Villagers facing difficulty. Ambulance cannot reach.",
+        "photos": ["AMB-2026-0150-photo1.jpg", "AMB-2026-0150-photo2.jpg"],
+        
+        "agent_analysis": {
+          "analyzed_at": "2026-02-14 13:17:50",
+          "processing_time_seconds": 170,
+          
+          "classification": {
+            "category": "Roads",
+            "sub_category": "Village Road - Complete Damage",
+            "severity": "Critical",
+            "confidence_score": 0.90
+          },
+          
+          "image_analysis": {
+            "road_condition": "Very Poor",
+            "affected_length_km": 1.2,
+            "surface_type": "Gravel (damaged)",
+            "accessibility": "Emergency vehicles cannot pass",
+            "confidence": 0.88
+          },
+          
+          "priority_calculation": {
+            "final_priority_score": 9.0,
+            "priority_level": "Critical",
+            "reasoning": [
+              "Emergency vehicle access blocked",
+              "Entire village connectivity affected",
+              "Medical emergency risk",
+              "Monsoon approaching - will worsen"
+            ]
+          },
+          
+          "estimated_resources": {
+            "cost_rupees": 950000,
+            "time_days": 15,
+            "workers_required": 15,
+            "equipment_needed": ["Grader", "Roller", "Water tanker", "Tipper trucks"],
+            "materials_needed": {
+              "wbm_grade2_tons": 450,
+              "wbm_grade3_tons": 600,
+              "bitumen_for_surface_tons": 8
+            }
+          },
+          
+          "sla_compliance": {
+            "policy_sla_hours": 24,
+            "response_required_by": "2026-02-14 17:15:00",
+            "resolution_required_by": "2026-03-01 13:15:00",
+            "emergency_access_required_by": "2026-02-15 13:15:00"
+          },
+          
+          "routing_decision": {
+            "assigned_zone": "Ambernath Rural",
+            "assigned_officer": "Shri Sunil Kamble",
+            "recommended_team": "Multiple teams + contractor support",
+            "reasoning": "Major work - requires contractor mobilization"
+          },
+          
+          "recommendations": {
+            "immediate_action": "Create temporary access for emergency vehicles within 24 hours.",
+            "repair_method": "Complete reconstruction. WBM base + bituminous surface.",
+            "phasing": "Phase 1: Emergency access (1 day), Phase 2: Full reconstruction (15 days)",
+            "quality_measures": "Proper drainage. Monsoon-ready construction.",
+            "funding": "Requires EE approval + possible additional budget allocation.",
+            "social_impact": "High priority - affects 2500 villagers."
+          }
+        },
+        
+        "status": "Pending Assignment",
+        "priority": "Critical",
+        "sla_status": "Within SLA",
+        "special_flag": "Emergency - Village Connectivity"
+      }
+    ]
+  }
+}

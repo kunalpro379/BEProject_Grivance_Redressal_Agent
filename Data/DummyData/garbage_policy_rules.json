@@ -1,0 +1,310 @@
+{
+  "policy_and_rules": {
+    "governing_acts": [
+      {
+        "name": "Solid Waste Management Rules",
+        "year": 2016,
+        "updated": 2019,
+        "authority": "Ministry of Environment, Forest and Climate Change",
+        "relevance": "Framework for municipal solid waste management"
+      },
+      {
+        "name": "Maharashtra Non-Biodegradable Garbage (Control) Act",
+        "year": 2006,
+        "updated": 2018,
+        "relevance": "Plastic ban and regulation"
+      },
+      {
+        "name": "Biomedical Waste Management Rules",
+        "year": 2016,
+        "updated": 2018,
+        "relevance": "Hospital and medical waste handling"
+      },
+      {
+        "name": "E-Waste Management Rules",
+        "year": 2016,
+        "updated": 2022,
+        "relevance": "Electronic waste collection and recycling"
+      }
+    ],
+    
+    "key_government_resolutions": [
+      {
+        "gr_number": "SWM/2024/CR-285/Swachh-Bharat",
+        "date": "2024-04-12",
+        "subject": "Swachh Bharat Mission Urban 2.0 Implementation",
+        "summary": "Guidelines for ODF Plus, segregation at source, 100% waste processing"
+      },
+      {
+        "gr_number": "SWM/2024/CR-312/Plastic-Ban",
+        "date": "2024-06-01",
+        "subject": "Strengthening plastic ban enforcement",
+        "summary": "Enhanced penalties. Rs 5000 to Rs 25000 fine. Repeat offense: license cancellation"
+      },
+      {
+        "gr_number": "SWM/2025/CR-089/Processing",
+        "date": "2025-03-20",
+        "subject": "Waste processing target revision",
+        "summary": "Mandatory 100% processing by March 2027. No landfill dumping after Dec 2026."
+      },
+      {
+        "gr_number": "SWM/2025/CR-156/User-Fees",
+        "date": "2025-08-15",
+        "subject": "User fee collection guidelines",
+        "summary": "Minimum Rs 50/month per household. Commercial: Rs 500-5000 based on generation."
+      },
+      {
+        "gr_number": "SWM/2025/CR-198/Complaint-SLA",
+        "date": "2025-11-10",
+        "subject": "Complaint resolution SLA norms",
+        "summary": "Timelines for different complaint types. Auto-escalation mechanism."
+      }
+    ],
+    
+    "waste_management_standards": {
+      "segregation_categories": {
+        "wet_waste": "Biodegradable, kitchen waste, garden waste",
+        "dry_waste": "Plastic, paper, metal, glass - recyclable",
+        "hazardous_waste": "Batteries, chemicals, e-waste, biomedical",
+        "sanitary_waste": "Diapers, sanitary napkins - separate collection"
+      },
+      
+      "processing_requirements": {
+        "wet_waste": "Composting or bio-methanation within 24 hours",
+        "dry_waste": "Sorting at MRF. 80% recovery target.",
+        "hazardous_waste": "Authorized facility only. Track via manifest.",
+        "construction_debris": "Designated sites. Recycling mandatory."
+      },
+      
+      "collection_frequency": {
+        "residential_daily": true,
+        "commercial_twice_daily": true,
+        "bulk_generators_self_management": ">100 kg/day",
+        "street_sweeping_daily": true
+      },
+      
+      "vehicle_specifications": {
+        "compactor_minimum_capacity_tons": 5,
+        "gps_tracking_mandatory": true,
+        "emission_standard": "BS-VI",
+        "rfid_tagging": "All vehicles and bins"
+      }
+    },
+    
+    "sla_timelines": {
+      "garbage_not_collected": {
+        "response_hours": 2,
+        "resolution_hours": 6,
+        "escalation_if_not_resolved_hours": 8
+      },
+      "overflowing_bin": {
+        "response_hours": 1,
+        "resolution_hours": 4,
+        "escalation_if_not_resolved_hours": 6
+      },
+      "irregular_collection": {
+        "response_hours": 4,
+        "resolution_hours": 24,
+        "escalation_if_not_resolved_hours": 48
+      },
+      "biomedical_waste": {
+        "response_hours": 0.5,
+        "resolution_hours": 2,
+        "escalation_if_not_resolved_hours": 3
+      },
+      "illegal_dumping": {
+        "response_hours": 6,
+        "resolution_hours": 48,
+        "escalation_if_not_resolved_hours": 72
+      },
+      "worker_misconduct": {
+        "response_hours": 12,
+        "resolution_hours": 72,
+        "escalation_if_not_resolved_hours": 96
+      },
+      "street_sweeping": {
+        "response_hours": 4,
+        "resolution_hours": 12,
+        "escalation_if_not_resolved_hours": 24
+      }
+    },
+    
+    "budget_allocation_rules": {
+      "swachh_bharat_mission": {
+        "central_share_percentage": 60,
+        "state_share_percentage": 40,
+        "fund_release_tranches": "Quarterly based on utilization",
+        "minimum_utilization_for_next_release_percentage": 75,
+        "allowable_activities": [
+          "IEC campaigns",
+          "Collection vehicles",
+          "Processing infrastructure",
+          "Capacity building",
+          "Technology adoption"
+        ]
+      },
+      
+      "state_scheme": {
+        "allocation_basis": "Population + waste generation",
+        "allocation_per_capita_rupees": 125,
+        "flexible_spending": true,
+        "approval_requirement": "Detailed Project Report for >5 Cr projects"
+      },
+      
+      "fund_utilization_certificate": {
+        "submission_deadline": "Within 30 days of quarter end",
+        "mandatory_uploads": ["Expenditure statement", "Physical progress", "Photos", "Bills"],
+        "audit_requirement": "Annual audit by CAG"
+      },
+      
+      "penalty_for_non_utilization": {
+        "below_60_percent": "10% reduction in next allocation",
+        "below_50_percent": "20% reduction + show cause notice",
+        "below_40_percent": "Fund transfer to better performing district"
+      }
+    },
+    
+    "penalty_framework": {
+      "citizen_penalties": {
+        "littering_public_place": "Rs 200 to Rs 500",
+        "spitting_gutka": "Rs 500",
+        "not_segregating_waste": "Rs 200 first offense, Rs 500 repeat",
+        "illegal_dumping_individual": "Rs 1000 to Rs 5000",
+        "burning_waste": "Rs 5000 + legal action"
+      },
+      
+      "business_penalties": {
+        "using_banned_plastic": "Rs 5000 to Rs 25000",
+        "not_managing_waste_bulk_generator": "Rs 10000 + daily penalty Rs 1000",
+        "illegal_dumping_commercial": "Rs 25000 to Rs 1 Lakh",
+        "biomedical_waste_violation": "Rs 1 Lakh + license suspension"
+      },
+      
+      "contractor_penalties": {
+        "missed_collection": "Rs 5000 per incident",
+        "vehicle_breakdown_not_replaced": "Rs 10000 per vehicle per day",
+        "worker_shortage": "Rs 2000 per worker per day",
+        "not_meeting_processing_target": "Rs 50000 per week + contract review"
+      },
+      
+      "official_penalties": {
+        "not_meeting_SLA": "Adverse annual report",
+        "repeated_complaint_hotspot": "Transfer + inquiry",
+        "fund_misutilization": "Suspension + FIR",
+        "not_submitting_reports": "Show cause notice"
+      }
+    },
+    
+    "escalation_matrix": {
+      "level_0": {
+        "designation": "Sanitation Supervisor",
+        "resolution_time_hours": 6,
+        "authority": "Routine complaints, worker deployment"
+      },
+      "level_1": {
+        "designation": "Ward Officer / Junior Engineer",
+        "resolution_time_hours": 24,
+        "authority": "Vehicle allocation, bin placement, minor procurement"
+      },
+      "level_2": {
+        "designation": "Executive Engineer / Zonal Officer",
+        "resolution_time_hours": 72,
+        "authority": "Contractor action, route changes, fund allocation up to 10 Lakhs"
+      },
+      "level_3": {
+        "designation": "Chief Engineer / Municipal Commissioner",
+        "resolution_time_hours": 168,
+        "authority": "Major policy decisions, contractor termination, budget reallocation"
+      },
+      "level_4": {
+        "designation": "Director SWM / Principal Secretary",
+        "resolution_time_hours": 336,
+        "authority": "Statewide policy, fund release, inter-department coordination"
+      }
+    },
+    
+    "mandatory_reporting": {
+      "daily_reports": [
+        "Waste collected (tons)",
+        "Waste processed (tons)",
+        "Vehicles operational",
+        "Complaints received & resolved",
+        "GPS tracking verification"
+      ],
+      
+      "weekly_reports": [
+        "Ward-wise collection efficiency",
+        "Processing plant status",
+        "Bin maintenance status",
+        "Complaint hotspots",
+        "Staff attendance"
+      ],
+      
+      "monthly_reports": [
+        "Budget utilization",
+        "Physical and financial progress",
+        "KPI achievement",
+        "Citizen satisfaction survey",
+        "Penalty collected"
+      ],
+      
+      "annual_reports": [
+        "Comprehensive performance review",
+        "Audit report",
+        "Awards and recognitions",
+        "Lessons learned",
+        "Next year plan"
+      ]
+    },
+    
+    "recent_circulars": [
+      {
+        "circular_no": "SWM/CIRC/2026/012",
+        "date": "2026-01-15",
+        "subject": "Monsoon 2026 Preparation",
+        "summary": "Start preparation by February. Drain cleaning, extra vehicles, emergency stocks.",
+        "compliance_deadline": "2026-03-31",
+        "responsible": "All Zonal Officers"
+      },
+      {
+        "circular_no": "SWM/CIRC/2026/008",
+        "date": "2026-01-05",
+        "subject": "Q4 Target Achievement Push",
+        "summary": "85% of annual target must be achieved by Feb. Weekly reviews mandatory.",
+        "compliance_deadline": "2026-02-28",
+        "responsible": "All Executive Engineers"
+      },
+      {
+        "circular_no": "SWM/CIRC/2025/095",
+        "date": "2025-12-10",
+        "subject": "Year-end fund utilization",
+        "summary": "Utilize remaining funds by March. Submit proposals by Dec 20.",
+        "compliance_deadline": "2025-12-20",
+        "responsible": "All District Officers"
+      }
+    ],
+    
+    "compliance_requirements": {
+      "mpcb_clearance": {
+        "required_for": "All processing plants, landfills",
+        "renewal_years": 5,
+        "inspection_frequency": "Annual",
+        "non_compliance_penalty": "Plant closure + Rs 10 Lakh fine"
+      },
+      
+      "safety_standards": {
+        "worker_ppe": "Mandatory gloves, boots, masks, uniform",
+        "vehicle_insurance": "Comprehensive",
+        "accident_reporting": "Within 24 hours",
+        "safety_training": "Quarterly for all field staff"
+      },
+      
+      "data_submission": {
+        "waste_generation_data": "Daily to state server by 2 PM",
+        "gps_tracking_data": "Real-time upload",
+        "complaint_data": "Daily by 6 PM",
+        "financial_data": "Monthly by 5th of next month"
+      }
+    }
+  }
+}

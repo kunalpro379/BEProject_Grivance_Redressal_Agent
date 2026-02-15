@@ -1,0 +1,260 @@
+{
+  "kpi_tracking": {
+    "departments": [
+      {
+        "department": "roads",
+        "fiscal_year": "2025-26",
+        "period": "April 2025 - January 2026",
+        
+        "kpis": [
+          {
+            "kpi_name": "Budget Utilization",
+            "target": 90,
+            "achieved": 82.1,
+            "unit": "percentage",
+            "score": 91.2,
+            "status": "on_track",
+            "trend": "improving"
+          },
+          {
+            "kpi_name": "Road Construction",
+            "target": 2850,
+            "achieved": 1950,
+            "unit": "km",
+            "score": 68.4,
+            "status": "below_target",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Pothole Repair Rate",
+            "target": 95,
+            "achieved": 87.6,
+            "unit": "percentage",
+            "score": 92.2,
+            "status": "on_track",
+            "trend": "improving"
+          },
+          {
+            "kpi_name": "Complaint Resolution",
+            "target": 90,
+            "achieved": 85.0,
+            "unit": "percentage",
+            "score": 94.4,
+            "status": "on_track",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Average Resolution Time",
+            "target": 12,
+            "achieved": 18,
+            "unit": "hours",
+            "score": 66.7,
+            "status": "below_target",
+            "trend": "declining"
+          },
+          {
+            "kpi_name": "Citizen Satisfaction",
+            "target": 75,
+            "achieved": 62.5,
+            "unit": "percentage",
+            "score": 83.3,
+            "status": "needs_improvement",
+            "trend": "stable"
+          }
+        ],
+        
+        "overall_performance_score": 82.7,
+        "performance_grade": "B+",
+        
+        "monthly_kpi_trend": [
+          {"month": "Apr 2025", "score": 78.5},
+          {"month": "May 2025", "score": 82.0},
+          {"month": "Jun 2025", "score": 75.2},
+          {"month": "Jul 2025", "score": 62.8},
+          {"month": "Aug 2025", "score": 58.5},
+          {"month": "Sep 2025", "score": 72.5},
+          {"month": "Oct 2025", "score": 88.2},
+          {"month": "Nov 2025", "score": 91.5},
+          {"month": "Dec 2025", "score": 93.8},
+          {"month": "Jan 2026", "score": 95.2}
+        ]
+      },
+      {
+        "department": "garbage",
+        "fiscal_year": "2025-26",
+        "period": "April 2025 - January 2026",
+        
+        "kpis": [
+          {
+            "kpi_name": "Budget Utilization",
+            "target": 90,
+            "achieved": 79.7,
+            "unit": "percentage",
+            "score": 88.6,
+            "status": "on_track",
+            "trend": "improving"
+          },
+          {
+            "kpi_name": "Daily Collection Coverage",
+            "target": 100,
+            "achieved": 92.5,
+            "unit": "percentage",
+            "score": 92.5,
+            "status": "on_track",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Waste Segregation Rate",
+            "target": 80,
+            "achieved": 58.5,
+            "unit": "percentage",
+            "score": 73.1,
+            "status": "below_target",
+            "trend": "improving"
+          },
+          {
+            "kpi_name": "Complaint Resolution",
+            "target": 90,
+            "achieved": 78.2,
+            "unit": "percentage",
+            "score": 86.9,
+            "status": "needs_improvement",
+            "trend": "declining"
+          },
+          {
+            "kpi_name": "Vehicle Uptime",
+            "target": 90,
+            "achieved": 80.0,
+            "unit": "percentage",
+            "score": 88.9,
+            "status": "on_track",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Citizen Satisfaction",
+            "target": 75,
+            "achieved": 68.5,
+            "unit": "percentage",
+            "score": 91.3,
+            "status": "on_track",
+            "trend": "improving"
+          }
+        ],
+        
+        "overall_performance_score": 86.9,
+        "performance_grade": "B+",
+        
+        "monthly_kpi_trend": [
+          {"month": "Apr 2025", "score": 85.2},
+          {"month": "May 2025", "score": 87.5},
+          {"month": "Jun 2025", "score": 88.8},
+          {"month": "Jul 2025", "score": 82.5},
+          {"month": "Aug 2025", "score": 79.2},
+          {"month": "Sep 2025", "score": 84.5},
+          {"month": "Oct 2025", "score": 89.2},
+          {"month": "Nov 2025", "score": 91.5},
+          {"month": "Dec 2025", "score": 90.8},
+          {"month": "Jan 2026", "score": 88.5}
+        ]
+      },
+      {
+        "department": "water",
+        "fiscal_year": "2025-26",
+        "period": "April 2025 - January 2026",
+        
+        "kpis": [
+          {
+            "kpi_name": "Budget Utilization",
+            "target": 90,
+            "achieved": 85.0,
+            "unit": "percentage",
+            "score": 94.4,
+            "status": "on_track",
+            "trend": "improving"
+          },
+          {
+            "kpi_name": "Water Supply Coverage",
+            "target": 100,
+            "achieved": 96.5,
+            "unit": "percentage",
+            "score": 96.5,
+            "status": "excellent",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Water Quality Compliance",
+            "target": 100,
+            "achieved": 98.2,
+            "unit": "percentage",
+            "score": 98.2,
+            "status": "excellent",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Complaint Resolution",
+            "target": 90,
+            "achieved": 88.5,
+            "unit": "percentage",
+            "score": 98.3,
+            "status": "on_track",
+            "trend": "improving"
+          },
+          {
+            "kpi_name": "Leakage Reduction",
+            "target": 15,
+            "achieved": 18.5,
+            "unit": "percentage",
+            "score": 81.1,
+            "status": "needs_improvement",
+            "trend": "stable"
+          },
+          {
+            "kpi_name": "Citizen Satisfaction",
+            "target": 75,
+            "achieved": 72.5,
+            "unit": "percentage",
+            "score": 96.7,
+            "status": "on_track",
+            "trend": "stable"
+          }
+        ],
+        
+        "overall_performance_score": 94.2,
+        "performance_grade": "A",
+        
+        "monthly_kpi_trend": [
+          {"month": "Apr 2025", "score": 92.5},
+          {"month": "May 2025", "score": 93.8},
+          {"month": "Jun 2025", "score": 91.2},
+          {"month": "Jul 2025", "score": 88.5},
+          {"month": "Aug 2025", "score": 90.2},
+          {"month": "Sep 2025", "score": 94.5},
+          {"month": "Oct 2025", "score": 96.2},
+          {"month": "Nov 2025", "score": 97.5},
+          {"month": "Dec 2025", "score": 98.2},
+          {"month": "Jan 2026", "score": 95.8}
+        ]
+      }
+    ],
+    
+    "cross_department_comparison": {
+      "overall_ranking": [
+        {"rank": 1, "department": "water", "score": 94.2},
+        {"rank": 2, "department": "garbage", "score": 86.9},
+        {"rank": 3, "department": "roads", "score": 82.7}
+      ],
+      
+      "best_performers": {
+        "budget_utilization": "water",
+        "complaint_resolution": "water",
+        "citizen_satisfaction": "water"
+      },
+      
+      "needs_improvement": {
+        "resolution_time": "roads",
+        "waste_segregation": "garbage",
+        "leakage_control": "water"
+      }
+    }
+  }
+}

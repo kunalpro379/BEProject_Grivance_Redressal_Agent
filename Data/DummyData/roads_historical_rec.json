@@ -1,0 +1,415 @@
+{
+  "historical_records": {
+    "past_performance": {
+      "FY_2024_25": {
+        "new_construction_km": 2450,
+        "resurfacing_km": 7850,
+        "potholes_repaired": 425000,
+        "bridges_built": 95,
+        "budget_crores": 25500,
+        "utilization_percentage": 84.2,
+        "complaints_received": 585000,
+        "resolution_rate_percentage": 82.5
+      },
+      
+      "FY_2023_24": {
+        "new_construction_km": 2150,
+        "resurfacing_km": 6950,
+        "potholes_repaired": 385000,
+        "bridges_built": 78,
+        "budget_crores": 22500,
+        "utilization_percentage": 81.5
+      },
+      
+      "FY_2022_23": {
+        "new_construction_km": 1850,
+        "resurfacing_km": 6200,
+        "potholes_repaired": 345000,
+        "budget_crores": 19800,
+        "utilization_percentage": 78.5
+      }
+    },
+    
+    "major_projects_completed": [
+      {
+        "name": "Mumbai-Goa Highway (NH-66) - 4 to 6 Lane",
+        "completion_year": 2024,
+        "length_km": 358,
+        "start_date": "2020-04-15",
+        "completion_date": "2024-08-30",
+        "duration_months": 52,
+        "original_timeline_months": 48,
+        "delay_months": 4,
+        "cost_crores": 12500,
+        "cost_escalation_crores": 1800,
+        "beneficiary_population_lakhs": 425,
+        "outcome": "Travel time reduced from 10 hrs to 6 hrs. Accident rate down 35%.",
+        "responsible_officer": "Shri Deepak Patil",
+        "awards": ["Best Highway Project Award 2024 - Ministry of Road Transport"],
+        "current_status": "Operational. Toll collection: Rs 450 Cr/year."
+      },
+      {
+        "name": "Samruddhi Mahamarg (Maharashtra Expressway) Phase-1",
+        "completion_year": 2023,
+        "length_km": 520,
+        "start_date": "2019-08-01",
+        "completion_date": "2023-12-15",
+        "duration_months": 52,
+        "original_timeline_months": 48,
+        "delay_months": 4,
+        "cost_crores": 45000,
+        "cost_escalation_crores": 5200,
+        "beneficiary_population_lakhs": 850,
+        "outcome": "Mumbai-Nagpur travel time reduced from 16 hrs to 8 hrs.",
+        "responsible_officer": "Smt. Madhuri Deshmukh",
+        "awards": ["Infrastructure Excellence Award 2023"],
+        "current_status": "Operational. Daily traffic: 25000 vehicles. Toll revenue meeting projections."
+      },
+      {
+        "name": "Pune Ring Road Enhancement",
+        "completion_year": 2024,
+        "length_km": 128,
+        "start_date": "2021-02-10",
+        "completion_date": "2024-11-20",
+        "duration_months": 45,
+        "original_timeline_months": 36,
+        "delay_months": 9,
+        "cost_crores": 8500,
+        "cost_escalation_crores": 1250,
+        "beneficiary_population_lakhs": 950,
+        "outcome": "City traffic congestion reduced 28%. Travel time savings 35 mins avg.",
+        "responsible_officer": "Smt. N.P. Kulkarni",
+        "current_status": "Operational. Phase-2 in progress."
+      }
+    ],
+    
+    "crisis_management_records": {
+      "monsoon_2025_damage": {
+        "period": "2025-06-15 to 2025-09-30",
+        "rainfall_percentage_above_normal": 35,
+        "roads_damaged_km": 3850,
+        "bridges_damaged_full": 18,
+        "bridges_damaged_partial": 107,
+        "landslides": 85,
+        "villages_cut_off": 485,
+        "estimated_damage_crores": 1450,
+        
+        "emergency_response": {
+          "response_time_hours": 2,
+          "emergency_funds_released_crores": 850,
+          "emergency_repairs_km": 2850,
+          "bailey_bridges_deployed": 12,
+          "temporary_roads_km": 125
+        },
+        
+        "recovery_timeline": {
+          "critical_roads_restored_days": 15,
+          "all_roads_restored_days": 95,
+          "bridges_restored_days": 180
+        },
+        
+        "lessons_learned": [
+          "Need better drainage systems on all highways",
+          "Slope stabilization must for hilly areas",
+          "Quick deployment bridges in stock",
+          "Real-time monitoring systems"
+        ],
+        
+        "responsible_officer": "Shri Rajendra Pawar",
+        "remarks": "Fastest recovery compared to 2019 floods. Central govt praised response."
+      },
+      
+      "bridge_collapse_raigad_2024": {
+        "date": "2024-07-22",
+        "location": "Mahad-Poladpur Road, Raigad",
+        "bridge_name": "Savitri River Bridge",
+        "bridge_age_years": 68,
+        "cause": "Structural failure due to heavy monsoon flow + age",
+        "casualties": 2,
+        "vehicles_lost": 1,
+        "villages_affected": 45,
+        
+        "immediate_response": {
+          "rescue_ops_hours": 18,
+          "alternate_route_distance_km": 38,
+          "bailey_bridge_installed_days": 12,
+          "emergency_funds_released_crores": 15
+        },
+        
+        "investigation": {
+          "inquiry_committee": "IIT Bombay + PWD",
+          "report_date": "2024-09-15",
+          "findings": "Inadequate maintenance. Structural weakness undetected. Poor inspection regime.",
+          "action_taken": "EE suspended. Comprehensive bridge audit of all 450+ old bridges ordered."
+        },
+        
+        "new_bridge": {
+          "sanction_date": "2024-08-05",
+          "cost_crores": 125,
+          "design": "Modern cable-stayed. 100 year design life.",
+          "completion_target": "2026-06-30",
+          "current_status": "Foundation complete. Superstructure in progress."
+        },
+        
+        "compensation": {
+          "families_of_deceased_lakhs": 20,
+          "vehicle_owner_lakhs": 8,
+          "total_paid_lakhs": 48
+        },
+        
+        "policy_changes": [
+          "Mandatory annual bridge health audit for 30+ year bridges",
+          "Load testing every 5 years",
+          "Real-time structural health monitoring for critical bridges",
+          "Increased maintenance budget allocation"
+        ],
+        
+        "responsible_officer": "Shri Rajendra Pawar",
+        "remarks": "Tragic incident. Led to systemic improvements in bridge safety protocols."
+      }
+    },
+    
+    "past_events_with_detailed_tracking": [
+      {
+        "event_id": "RD-2025-1245",
+        "date": "2025-11-30",
+        "type": "infrastructure_development",
+        "title": "Mumbai Coastal Road Phase-2 Construction",
+        "department_zone": "Mumbai Region",
+        "sanctioned_amount_crores": 12500,
+        "sanctioned_date": "2023-05-20",
+        "length_km": 23.8,
+        "target_completion": "2026-12-31",
+        
+        "progress": [
+          {
+            "date": "2023-08-31",
+            "milestone": "Land acquisition & environmental clearances",
+            "progress_percentage": 8,
+            "amount_released_crores": 850,
+            "proof": "CRZ clearance dated 2023-08-15. Land transfer documents.",
+            "officer_remarks": "All clearances in place. Work can commence.",
+            "challenges": "Fishermen rehabilitation ongoing."
+          },
+          {
+            "date": "2024-02-28",
+            "milestone": "Reclamation work 40% complete",
+            "progress_percentage": 22,
+            "amount_released_crores": 2850,
+            "proof": "Survey reports. Reclamation volume certificates.",
+            "officer_remarks": "Monsoon preparation. Work to pause June-Sept.",
+            "challenges": "Rough sea slowing work. Weather dependency high."
+          },
+          {
+            "date": "2024-11-30",
+            "milestone": "Reclamation complete. Pile foundation started.",
+            "progress_percentage": 45,
+            "amount_released_crores": 3200,
+            "proof": "Reclamation completion certificate. Pile driving records.",
+            "officer_remarks": "Post-monsoon acceleration. 850 piles completed.",
+            "challenges": "Rock strata encountered. Drilling slower than expected."
+          },
+          {
+            "date": "2025-06-30",
+            "milestone": "Foundation 85% complete. Deck work started.",
+            "progress_percentage": 62,
+            "amount_released_crores": 2800,
+            "proof": "Foundation inspection reports. First deck segment photos.",
+            "officer_remarks": "Good progress. On schedule for Dec 2026 completion.",
+            "challenges": "Monsoon imminent. Waterproofing critical."
+          },
+          {
+            "date": "2025-11-30",
+            "milestone": "Deck 50% complete. Tunnel work in progress.",
+            "progress_percentage": 78,
+            "amount_released_crores": 2450,
+            "proof": "Deck completion certificates. TBM progress logs.",
+            "officer_remarks": "Ahead of schedule! Quality excellent. CM inspected site.",
+            "photo_evidence": "RD-2025-1245-Nov.jpg",
+            "challenges": "None. Ideal weather. Full resource deployment."
+          }
+        ],
+        
+        "current_status": "In Progress - 78% complete",
+        "responsible_officer": "Shri A.B. Jadhav",
+        "next_milestone": "Deck completion by March 2026",
+        "remarks": "Prestigious project. Will reduce South Mumbai travel time 60%. PM to inaugurate."
+      },
+      {
+        "event_id": "RD-2024-0895",
+        "date": "2024-12-20",
+        "type": "emergency_repair",
+        "title": "Western Ghats Road Restoration Post-Landslides",
+        "department_zone": "Konkan Region",
+        "sanctioned_amount_crores": 285,
+        "sanctioned_date": "2024-08-05",
+        "length_affected_km": 145,
+        "target_completion": "2025-04-30",
+        
+        "progress": [
+          {
+            "date": "2024-08-15",
+            "milestone": "Damage assessment complete",
+            "landslides_cleared": 28,
+            "amount_released_crores": 85,
+            "proof": "Geological survey reports. Photos of each site.",
+            "officer_remarks": "85 landslide sites identified. Slope stabilization priority.",
+            "challenges": "Continuous rainfall. Work windows limited."
+          },
+          {
+            "date": "2024-09-30",
+            "milestone": "Emergency restoration of critical sections",
+            "landslides_cleared": 58,
+            "roads_restored_km": 95,
+            "amount_released_crores": 125,
+            "proof": "Work completion certificates. Traffic restoration reports.",
+            "officer_remarks": "Main routes cleared. Slope work ongoing.",
+            "challenges": "Found 15 more unstable slopes. Budget inadequate."
+          },
+          {
+            "date": "2024-12-20",
+            "milestone": "Project complete. All roads operational.",
+            "landslides_cleared": 85,
+            "roads_restored_km": 145,
+            "slope_stabilization_sites": 42,
+            "amount_released_crores": 75,
+            "proof": "Final completion reports. Geological clearances.",
+            "officer_remarks": "Successful completion. Monsoon 2025 ready.",
+            "photo_evidence": "RD-2024-0895-Complete.jpg"
+          }
+        ],
+        
+        "current_status": "Completed",
+        "responsible_officer": "Shri P.M. Sawant",
+        "outcome": "All roads operational. Zero casualties in monsoon 2025.",
+        "remarks": "Additional Rs 150 Cr approved for long-term slope stabilization."
+      },
+      {
+        "event_id": "RD-2025-0458",
+        "date": "2026-02-14",
+        "type": "technology_implementation",
+        "title": "AI-based Pothole Detection System Rollout",
+        "department_zone": "Statewide",
+        "sanctioned_amount_crores": 125,
+        "sanctioned_date": "2025-04-10",
+        "target_completion": "2026-03-31",
+        
+        "progress": [
+          {
+            "date": "2025-06-30",
+            "milestone": "Pilot in Mumbai & Pune",
+            "vehicles_equipped": 85,
+            "roads_covered_km": 2500,
+            "potholes_detected": 18500,
+            "accuracy_percentage": 92,
+            "amount_released_crores": 25,
+            "proof": "Pilot project report. AI model validation.",
+            "officer_remarks": "Excellent results. 92% accuracy. Scale up approved."
+          },
+          {
+            "date": "2025-10-31",
+            "milestone": "Expansion to 10 cities",
+            "vehicles_equipped": 285,
+            "roads_covered_km": 8500,
+            "potholes_detected": 58000,
+            "accuracy_percentage": 94,
+            "amount_released_crores": 50,
+            "proof": "Deployment certificates. Detection reports.",
+            "officer_remarks": "Proactive detection working. Repair TAT reduced 40%."
+          },
+          {
+            "date": "2026-02-14",
+            "milestone": "Statewide rollout 80% complete",
+            "vehicles_equipped": 850,
+            "roads_covered_km": 28500,
+            "potholes_detected": 185000,
+            "accuracy_percentage": 95,
+            "amount_released_crores": 40,
+            "proof": "System dashboards. Real-time detection logs.",
+            "officer_remarks": "Revolutionary improvement. Citizens reporting reduced 35%.",
+            "awards": "Digital India Award 2026 nominated"
+          }
+        ],
+        
+        "current_status": "In Progress - 80% rollout",
+        "responsible_officer": "Dr. Suresh Kulkarni",
+        "next_milestone": "Complete statewide coverage by March 2026",
+        "remarks": "Model for other states. NHAI interested in replication."
+      }
+    ],
+    
+    "lessons_learned_database": [
+      {
+        "incident": "Savitri Bridge Collapse 2024",
+        "lesson": "Old bridge inspection protocols inadequate",
+        "action_taken": "Comprehensive bridge health program. 450 bridges audited.",
+        "policy_change": "Mandatory annual audit for 30+ year bridges. Load testing every 5 years."
+      },
+      {
+        "incident": "Monsoon 2025 extensive damage",
+        "lesson": "Need better drainage and slope stabilization",
+        "action_taken": "Rs 2500 Cr approved for drainage upgrade statewide.",
+        "policy_change": "Geological survey mandatory for all hill roads."
+      },
+      {
+        "incident": "Recurring potholes at same locations",
+        "lesson": "Quality issues + inadequate base preparation",
+        "action_taken": "Strengthened quality testing. Material standards revised.",
+        "policy_change": "Third-party quality audit mandatory. Contractor warranty period increased to 3 years."
+      },
+      {
+        "incident": "Project delays due to land acquisition",
+        "lesson": "Land acquisition should precede sanction",
+        "action_taken": "New process: 80% land acquired before fund release.",
+        "policy_change": "GR amended. Land acquisition timeline reduced via fast-track courts."
+      }
+    ],
+    
+    "improvement_trends": {
+      "road_construction_km_per_year": {
+        "2022": 1850,
+        "2023": 2150,
+        "2024": 2450,
+        "2025": 2650,
+        "2026_target": 2850,
+        "trend": "Consistent growth. Capacity building working."
+      },
+      
+      "pothole_repair_avg_time_hours": {
+        "2022": 48,
+        "2023": 36,
+        "2024": 24,
+        "2025": 20,
+        "2026_ytd": 18,
+        "trend": "Major improvement. AI detection + quick response teams."
+      },
+      
+      "complaint_resolution_rate": {
+        "2022": 76.0,
+        "2023": 79.5,
+        "2024": 82.5,
+        "2025": 84.0,
+        "2026_ytd": 85.0,
+        "trend": "Steady improvement. Target 90% by 2027."
+      },
+      
+      "budget_utilization": {
+        "2022": 78.5,
+        "2023": 81.5,
+        "2024": 84.2,
+        "2025": 85.8,
+        "2026_ytd": 82.1,
+        "trend": "Good. Better than national average."
+      },
+      
+      "citizen_satisfaction": {
+        "2022": 52.0,
+        "2023": 56.5,
+        "2024": 59.0,
+        "2025": 61.5,
+        "2026_ytd": 62.5,
+        "trend": "Gradual improvement. Need acceleration."
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { authService } from '../services/auth.service';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import authService from '../services/authService';
 
 const AuthContext = createContext(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };
@@ -14,67 +14,95 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Initialize auth state from localStorage
   useEffect(() => {
-    const initAuth = async () => {
-      try {
-        if (authService.isAuthenticated()) {
-          const storedUser = authService.getStoredUser();
-          if (storedUser) {
-            setUser(storedUser);
-          } else {
-            const profile = await authService.getProfile();
-            setUser(profile);
-            localStorage.setItem('user', JSON.stringify(profile));
-          }
-        }
-      } catch (error) {
-        console.error('Auth initialization error:', error);
-        authService.clearTokens();
-      } finally {
-        setLoading(false);
+    const initAuth = () => {
+      const storedUser = authService.getCurrentUser();
+      const token = authService.getAccessToken();
+
+      if (storedUser && token) {
+        setUser(storedUser);
+        setIsAuthenticated(true);
       }
+
+      setLoading(false);
     };
 
     initAuth();
   }, []);
 
   const login = async (email, password) => {
-    const response = await authService.login(email, password);
-    setUser(response.user);
-    return response;
+    try {
+      const data = await authService.login(email, password);
+      setUser(data.user);
+      setIsAuthenticated(true);
+      return { success: true, user: data.user };
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || 'Login failed';
+      const errorData = error.response?.data || {};
+      return { 
+        success: false, 
+        error: errorMessage,
+        ...errorData
+      };
+    }
   };
 
-  const register = async (data) => {
-    const response = await authService.register(data);
-    setUser(response.user);
-    return response;
+  const register = async (userData) => {
+    try {
+      const data = await authService.register(userData);
+      
+      // If auto-approved (citizen), set user
+      if (data.accessToken) {
+        setUser(data.user);
+        setIsAuthenticated(true);
+      }
+      
+      return { 
+        success: true, 
+        user: data.user,
+        requiresApproval: data.requiresApproval || false
+      };
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || 'Registration failed';
+      return { success: false, error: errorMessage };
+    }
   };
 
   const logout = async () => {
-    await authService.logout();
-    setUser(null);
+    try {
+      await authService.logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setUser(null);
+      setIsAuthenticated(false);
+    }
   };
 
-  const updateUser = (userData) => {
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
-  };
-
-  const hasRole = (...roles) => {
-    return user && roles.includes(user.role);
+  const refreshProfile = async () => {
+    try {
+      const profile = await authService.getProfile();
+      setUser(profile);
+      localStorage.setItem('user', JSON.stringify(profile));
+    } catch (error) {
+      console.error('Refresh profile error:', error);
+    }
   };
 
   const value = {
     user,
     loading,
+    isAuthenticated,
     login,
     register,
     logout,
-    updateUser,
-    hasRole,
-    isAuthenticated: !!user,
+    refreshProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+export default AuthContext;

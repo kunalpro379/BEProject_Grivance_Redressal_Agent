@@ -1,0 +1,379 @@
+{
+  "historical_records": {
+    "past_performance": {
+      "FY_2024_25": {
+        "waste_collection_target_percentage": 95,
+        "waste_collection_achieved_percentage": 88.5,
+        "processing_target_tpd": 22000,
+        "processing_achieved_tpd": 18200,
+        "budget_crores": 7800,
+        "utilization_percentage": 82.5,
+        "complaints_received": 425000,
+        "resolution_rate_percentage": 80.5,
+        "new_facilities_commissioned": 18,
+        "odf_plus_achieved": 8500
+      },
+      
+      "FY_2023_24": {
+        "waste_collection_achieved_percentage": 85.2,
+        "processing_achieved_tpd": 16500,
+        "budget_crores": 6800,
+        "utilization_percentage": 78.2,
+        "complaints_received": 385000,
+        "resolution_rate_percentage": 78.0
+      },
+      
+      "FY_2022_23": {
+        "waste_collection_achieved_percentage": 81.5,
+        "processing_achieved_tpd": 14800,
+        "budget_crores": 5500,
+        "utilization_percentage": 75.5
+      }
+    },
+    
+    "major_initiatives_completed": [
+      {
+        "name": "Mumbai Legacy Waste Clearance",
+        "year": 2024,
+        "duration_months": 18,
+        "start_date": "2023-01-15",
+        "completion_date": "2024-06-30",
+        "beneficiary_population_lakhs": 125,
+        "cost_crores": 850,
+        "waste_cleared_lakh_tons": 12.5,
+        "outcome": "All 3 major dumpsites in Mumbai remediated. 450 acres land reclaimed.",
+        "responsible_officer": "Smt. R.K. Mehta",
+        "current_status": "Completed. Land transfer to MMRDA done.",
+        "awards": ["Swachh Survekshan Excellence Award 2024"]
+      },
+      {
+        "name": "Pune Waste-to-Compost Program",
+        "year": 2024,
+        "duration_months": 12,
+        "start_date": "2023-08-01",
+        "completion_date": "2024-07-31",
+        "beneficiary_population_lakhs": 95,
+        "cost_crores": 280,
+        "compost_produced_tons": 85000,
+        "outcome": "32 decentralized composting units. 2500 TPD processing capacity.",
+        "responsible_officer": "Shri P.S. Deshpande",
+        "current_status": "Operational. 15000 farmers using compost.",
+        "remarks": "Revenue of Rs 12 Cr generated from compost sales."
+      },
+      {
+        "name": "Nagpur Plastic-Free Drive",
+        "year": 2025,
+        "duration_months": 6,
+        "start_date": "2024-10-02",
+        "completion_date": "2025-03-31",
+        "beneficiary_population_lakhs": 48,
+        "cost_crores": 45,
+        "plastic_collected_tons": 4500,
+        "outcome": "85% reduction in single-use plastic. 1200 shops penalized.",
+        "responsible_officer": "Shri V.M. Meshram",
+        "current_status": "Ongoing. Enforcement continues.",
+        "remarks": "Rs 85 Lakh collected in fines. Recycling unit handles all collected plastic."
+      }
+    ],
+    
+    "crisis_management_records": {
+      "ganesh_festival_2025": {
+        "date": "2025-09-07 to 2025-09-17",
+        "challenge": "Record 5500 TPD extra waste during immersion",
+        "preparation_start": "2025-07-01",
+        "resources_deployed": {
+          "extra_vehicles": 850,
+          "temporary_workers": 8500,
+          "supervisors": 420,
+          "emergency_funds_crores": 125
+        },
+        "waste_handled": {
+          "total_extra_tons": 58000,
+          "floral_waste_tons": 28000,
+          "decoration_material_tons": 18500,
+          "general_waste_tons": 11500
+        },
+        "outcome": "All beaches and immersion points cleared within 18 hours of immersion.",
+        "lessons_learned": "Need more mechanized beach cleaning equipment. 200 additional vehicles approved.",
+        "citizen_satisfaction_percentage": 88,
+        "responsible_officer": "Shri Vikram Desai",
+        "cost_total_crores": 142,
+        "remarks": "Best performance in 5 years. Zero health incidents. PM praised the effort."
+      },
+      
+      "monsoon_flooding_2025": {
+        "date": "2025-07-15 to 2025-07-25",
+        "challenge": "Waterlogging prevented waste collection in 850 areas",
+        "affected_population_lakhs": 185,
+        "vehicles_damaged": 45,
+        "workers_affected": 2500,
+        "waste_backlog_tons": 42000,
+        "response_time_hours": 4,
+        "resources_deployed": {
+          "extra_vehicles_from_other_zones": 250,
+          "emergency_workers": 5000,
+          "emergency_funds_crores": 85
+        },
+        "clearance_time_days": 12,
+        "outcome": "All backlogs cleared by 2025-08-06. No disease outbreak.",
+        "health_measures": "Sanitization of 12500 garbage points. Mosquito fogging.",
+        "lessons_learned": "Need amphibious vehicles for flooded areas. 50 boats procured.",
+        "responsible_officer": "Smt. Priya Sharma",
+        "cost_total_crores": 96,
+        "remarks": "WHO appreciated quick response. Better than 2019 floods."
+      },
+      
+      "landfill_fire_uruli_2024": {
+        "date": "2024-06-18",
+        "location": "Uruli Devachi Landfill, Pune",
+        "duration_days": 8,
+        "affected_population": 25000,
+        "cause": "Methane ignition due to heat",
+        "response_measures": {
+          "fire_brigades_deployed": 12,
+          "soil_coverage_tons": 5000,
+          "water_spraying_days": 8,
+          "air_quality_monitoring_points": 15,
+          "medical_camps": 8
+        },
+        "evacuation": "500 families within 1 km radius",
+        "health_impact": "485 respiratory complaints. 42 hospitalized.",
+        "environmental_impact": "AQI reached 420. Trees damaged: 158",
+        "resolution_date": "2024-06-26",
+        "preventive_measures": "Methane extraction system installed. 24x7 monitoring.",
+        "compensation_paid_crores": 2.5,
+        "responsible_officer": "Shri P.S. Deshpande",
+        "inquiry_report": "Submitted 2024-08-15. No negligence found. Natural event.",
+        "remarks": "New protocol for landfill fire prevention approved statewide."
+      }
+    },
+    
+    "past_events_with_detailed_tracking": [
+      {
+        "event_id": "GRB-2025-0842",
+        "date": "2025-11-15",
+        "type": "equipment_procurement",
+        "title": "Purchase of 150 New Compactor Trucks",
+        "department_zone": "Mumbai Zone",
+        "sanctioned_amount_crores": 180,
+        "sanctioned_date": "2025-06-10",
+        "tender_date": "2025-06-25",
+        "contract_awarded": "2025-08-20",
+        "vendor": "Tata Motors Ltd",
+        "delivery_schedule": "50 vehicles per month for 3 months",
+        "progress": [
+          {
+            "date": "2025-09-30",
+            "milestone": "First 50 vehicles delivered",
+            "proof": "Delivery challan nos. TM-2025-001 to 050",
+            "officer_remarks": "Quality inspection passed. Deployed in K-East ward.",
+            "photo_evidence": "GRB-2025-0842-P1.jpg"
+          },
+          {
+            "date": "2025-10-31",
+            "milestone": "Second batch 50 vehicles delivered",
+            "proof": "Delivery challan nos. TM-2025-051 to 100",
+            "officer_remarks": "All vehicles GPS-enabled. Driver training completed.",
+            "photo_evidence": "GRB-2025-0842-P2.jpg"
+          },
+          {
+            "date": "2025-11-15",
+            "milestone": "Final 50 vehicles delivered. Project complete.",
+            "proof": "Delivery challan nos. TM-2025-101 to 150. Final invoice.",
+            "officer_remarks": "All 150 vehicles operational. 15% improvement in collection efficiency.",
+            "photo_evidence": "GRB-2025-0842-P3.jpg",
+            "final_payment": "Released on 2025-11-20. Rs 180 Cr fully utilized."
+          }
+        ],
+        "current_status": "Completed",
+        "responsible_officer": "Smt. R.K. Mehta",
+        "outcome": "Collection coverage increased from 92% to 95% in Mumbai zone."
+      },
+      {
+        "event_id": "GRB-2025-1256",
+        "date": "2026-02-14",
+        "type": "infrastructure_development",
+        "title": "Thane Material Recovery Facility Construction",
+        "department_zone": "Thane District",
+        "sanctioned_amount_crores": 95,
+        "sanctioned_date": "2023-09-10",
+        "tender_date": "2023-11-15",
+        "contract_awarded": "2024-01-20",
+        "vendor": "L&T Construction",
+        "target_completion": "2025-10-31",
+        "progress": [
+          {
+            "date": "2024-03-31",
+            "milestone": "Foundation work completed",
+            "progress_percentage": 12,
+            "amount_released_crores": 15,
+            "proof": "Site photos, Engineer certification",
+            "officer_remarks": "Work delayed by 1 month due to worker shortage. Extra labor deployed."
+          },
+          {
+            "date": "2024-06-30",
+            "milestone": "Structural work 50% complete",
+            "progress_percentage": 28,
+            "amount_released_crores": 25,
+            "proof": "Structural audit report dated 2024-06-25",
+            "officer_remarks": "Quality satisfactory. Monsoon break from July."
+          },
+          {
+            "date": "2024-10-31",
+            "milestone": "Building structure complete",
+            "progress_percentage": 45,
+            "amount_released_crores": 18,
+            "proof": "Completion certificate for civil work",
+            "officer_remarks": "Machinery order placed. Delivery expected Jan 2025."
+          },
+          {
+            "date": "2025-01-15",
+            "milestone": "Contractor financial issues. Work stopped.",
+            "progress_percentage": 45,
+            "amount_released_crores": 0,
+            "proof": "Bank notice, Contractor letter",
+            "officer_remarks": "Emergency meeting held. Bank guarantee to be encashed. New tender planned."
+          },
+          {
+            "date": "2025-03-30",
+            "milestone": "New contractor appointed. Work resumed.",
+            "progress_percentage": 48,
+            "amount_released_crores": 12,
+            "proof": "New work order dated 2025-03-15",
+            "officer_remarks": "Lost 75 days. New completion date: August 2026."
+          },
+          {
+            "date": "2025-08-31",
+            "milestone": "Machinery installation 60% complete",
+            "progress_percentage": 68,
+            "amount_released_crores": 15,
+            "proof": "Installation report, Vendor invoices",
+            "officer_remarks": "Electrical work in progress. Trial run expected Oct 2025."
+          },
+          {
+            "date": "2026-02-14",
+            "milestone": "90% work complete. Testing phase.",
+            "progress_percentage": 90,
+            "amount_released_crores": 10,
+            "proof": "Test run reports, MPCB pre-inspection",
+            "officer_remarks": "Commissioning by March 2026. Capacity: 500 TPD. 85 staff recruited and trained.",
+            "photo_evidence": "GRB-2025-1256-Current.jpg"
+          }
+        ],
+        "current_status": "In Progress - 90% complete",
+        "responsible_officer": "Shri S.B. Patil",
+        "revised_completion": "2026-03-31",
+        "delays": "10 months due to contractor change",
+        "remarks": "Despite delays, quality maintained. Will serve 2.5 lakh population."
+      },
+      {
+        "event_id": "GRB-2024-0589",
+        "date": "2024-12-20",
+        "type": "policy_implementation",
+        "title": "Statewide Plastic Ban Enforcement Drive",
+        "sanctioned_amount_crores": 25,
+        "implementation_date": "2024-06-05",
+        "duration_months": 6,
+        "progress": [
+          {
+            "date": "2024-06-05",
+            "milestone": "Drive launched. 5000 inspectors deployed.",
+            "inspections": 85000,
+            "violations": 12500,
+            "fines_collected_lakhs": 155,
+            "officer_remarks": "Good response in urban areas. Rural areas need more awareness."
+          },
+          {
+            "date": "2024-08-31",
+            "milestone": "Mid-term review",
+            "inspections": 185000,
+            "violations": 22000,
+            "fines_collected_lakhs": 420,
+            "shops_closed": 145,
+            "officer_remarks": "45% reduction in plastic usage. Extended to rural areas."
+          },
+          {
+            "date": "2024-12-20",
+            "milestone": "Drive completed",
+            "inspections": 425000,
+            "violations": 38500,
+            "fines_collected_lakhs": 865,
+            "shops_closed": 285,
+            "licenses_suspended": 42,
+            "officer_remarks": "68% reduction in single-use plastic. Now regular monitoring."
+          }
+        ],
+        "current_status": "Completed. Converted to regular enforcement.",
+        "responsible_officer": "Smt. Anjali Patil",
+        "outcome": "Collected Rs 8.65 Cr in fines. 68% plastic usage reduction.",
+        "awards": "National Swachh Survekshan Award for Plastic Management",
+        "remarks": "Model adopted by 5 other states."
+      }
+    ],
+    
+    "lessons_learned_database": [
+      {
+        "incident": "Ganesh Festival Waste Management 2025",
+        "lesson": "Advance preparation crucial. 6-week lead time optimal.",
+        "action_taken": "2026 preparation started in January itself.",
+        "policy_change": "GR issued for advance planning mandatory for all festivals."
+      },
+      {
+        "incident": "Monsoon flooding waste backlog 2025",
+        "lesson": "Need specialized equipment for flooded areas.",
+        "action_taken": "50 amphibious boats procured. 200 waterproof vehicles.",
+        "policy_change": "Monsoon contingency fund of Rs 150 Cr created."
+      },
+      {
+        "incident": "Landfill fire incidents",
+        "lesson": "Methane management critical in summer.",
+        "action_taken": "Methane extraction systems installed at all 45 scientific landfills.",
+        "policy_change": "Mandatory methane monitoring. Real-time alerts."
+      },
+      {
+        "incident": "Contractor financial failures",
+        "lesson": "Better financial due diligence needed.",
+        "action_taken": "Bank guarantee increased to 15%. Quarterly financial audits mandatory.",
+        "policy_change": "Performance bank guarantee encashment clause strengthened."
+      }
+    ],
+    
+    "improvement_trends": {
+      "waste_collection_coverage": {
+        "2022": 78.5,
+        "2023": 81.5,
+        "2024": 85.2,
+        "2025": 88.5,
+        "2026_ytd": 91.5,
+        "trend": "Improving. Target 100% by 2027."
+      },
+      
+      "processing_capacity_tpd": {
+        "2022": 12500,
+        "2023": 14800,
+        "2024": 16500,
+        "2025": 18200,
+        "2026_ytd": 19200,
+        "trend": "Steady growth. 22 new plants in pipeline."
+      },
+      
+      "complaint_resolution_rate": {
+        "2022": 75.0,
+        "2023": 78.0,
+        "2024": 80.5,
+        "2025": 82.0,
+        "2026_ytd": 82.9,
+        "trend": "Gradual improvement. target 90% by 2027."
+      },
+      
+      "citizen_satisfaction": {
+        "2022": 58.0,
+        "2023": 62.0,
+        "2024": 65.5,
+        "2025": 68.0,
+        "2026_ytd": 68.5,
+        "trend": "Positive. Need faster improvement."
+      }
+    }
+  }
+}

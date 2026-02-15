@@ -1,0 +1,47 @@
+{
+  "policy_and_rules": {
+    "governing_acts": [
+      {
+        "name": "Maharashtra Groundwater (Development and Management) Act",
+        "year": 2009,
+        "relevance": "Groundwater regulation"
+      },
+      {
+        "name": "Jal Jeevan Mission Guidelines",
+        "year": 2019,
+        "updated": 2024,
+        "relevance": "Central scheme implementation"
+      }
+    ],
+    
+    "key_government_resolutions": [
+      {
+        "gr_number": "WSSD/2024/CR-178/JJM",
+        "date": "2024-05-15",
+        "subject": "JJM implementation guidelines",
+        "summary": "Revised guidelines for household tap connections"
+      },
+      {
+        "gr_number": "WSSD/2025/CR-045/Tanker",
+        "date": "2025-02-01",
+        "subject": "Tanker water supply norms",
+        "summary": "Minimum 40 LPCD through tankers in scarcity areas"
+      }
+    ],
+    
+    "water_quality_standards": {
+      "standard": "IS 10500:2012",
+      "testing_frequency": "Monthly for piped supply",
+      "parameters_tested": 62,
+      "critical_parameters": ["Fluoride", "Nitrate", "Arsenic", "Bacteria"]
+    },
+    
+    "sla_timelines": {
+      "pipeline_burst": "6 hours",
+      "handpump_repair": "5 days",
+      "tanker_request": "12 hours",
+      "water_quality_complaint": "48 hours",
+      "new_connection": "21 days"
+    }
+  }
+}

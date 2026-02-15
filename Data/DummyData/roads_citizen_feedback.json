@@ -1,0 +1,437 @@
+{
+  "citizen_feedback_system": {
+    "feedback_channels": {
+      "online_portal": {
+        "name": "Maharashtra PWD Complaint Portal",
+        "url": "complaints.pwd.maharashtra.gov.in",
+        "features": ["Pothole complaint with GPS", "Road damage report", "Bridge safety concerns", "Photo/video upload", "Track status"]
+      },
+      "mobile_app": {
+        "name": "Road Care Maharashtra",
+        "platforms": ["Android", "iOS"],
+        "downloads": 3850000,
+        "active_users": 1450000,
+        "features": ["GPS-based pothole reporting", "AI damage assessment", "Real-time tracking", "Before-after photos"]
+      },
+      "toll_free": {
+        "number": "1800-233-4444",
+        "working_hours": "24x7",
+        "languages": ["Marathi", "Hindi", "English"],
+        "avg_calls_per_day": 12500
+      },
+      "whatsapp": {
+        "number": "+91-9225200XXX",
+        "bot_enabled": true,
+        "features": ["Photo complaint", "GPS location auto-detect", "Status updates"],
+        "messages_per_day": 18500
+      },
+      "sms": {
+        "number": "56688",
+        "format": "ROAD<space>LOCATION<space>ISSUE",
+        "avg_sms_per_day": 3800
+      },
+      "email": {
+        "primary": "complaints.pwd@maharashtra.gov.in",
+        "emergency": "emergency.roads@maharashtra.gov.in",
+        "emails_per_day": 2200
+      },
+      "twitter": {
+        "handle": "@MahaRoadsPWD",
+        "followers": 385000,
+        "complaints_via_twitter_monthly": 8500
+      }
+    },
+    
+    "complaint_statistics": {
+      "total_complaints_received": 685420,
+      "reporting_period": "April 2025 - January 2026",
+      
+      "by_category": {
+        "potholes": {
+          "count": 285000,
+          "percentage": 41.6,
+          "avg_resolution_hours": 18
+        },
+        "road_surface_damage": {
+          "count": 125000,
+          "percentage": 18.2,
+          "avg_resolution_hours": 48
+        },
+        "waterlogging_drainage": {
+          "count": 98500,
+          "percentage": 14.4,
+          "avg_resolution_hours": 24
+        },
+        "road_cave_in": {
+          "count": 42500,
+          "percentage": 6.2,
+          "avg_resolution_hours": 4
+        },
+        "traffic_signal_malfunction": {
+          "count": 35000,
+          "percentage": 5.1,
+          "avg_resolution_hours": 6
+        },
+        "bridge_safety_concerns": {
+          "count": 28500,
+          "percentage": 4.2,
+          "avg_resolution_hours": 72
+        },
+        "road_encroachment": {
+          "count": 25000,
+          "percentage": 3.6,
+          "avg_resolution_hours": 168
+        },
+        "street_light_issues": {
+          "count": 22000,
+          "percentage": 3.2,
+          "avg_resolution_hours": 12
+        },
+        "divider_damage": {
+          "count": 15420,
+          "percentage": 2.2,
+          "avg_resolution_hours": 48
+        },
+        "other": {
+          "count": 8500,
+          "percentage": 1.2,
+          "avg_resolution_hours": 72
+        }
+      },
+      
+      "resolution_status": {
+        "resolved": 582500,
+        "resolution_rate_percentage": 85.0,
+        "pending": 68420,
+        "in_progress": 28500,
+        "escalated": 18000,
+        "closed_duplicate": 12500
+      },
+      
+      "channel_wise_complaints": {
+        "mobile_app": {"count": 295000, "percentage": 43.0},
+        "toll_free": {"count": 185000, "percentage": 27.0},
+        "whatsapp": {"count": 125000, "percentage": 18.2},
+        "portal": {"count": 52000, "percentage": 7.6},
+        "twitter": {"count": 18420, "percentage": 2.7},
+        "sms": {"count": 8000, "percentage": 1.2},
+        "email": {"count": 2000, "percentage": 0.3}
+      },
+      
+      "area_wise_complaints": {
+        "mumbai": {
+          "total": 185000,
+          "per_lakh_population": 1480,
+          "top_issue": "potholes",
+          "resolution_rate_percentage": 88,
+          "avg_resolution_hours": 14
+        },
+        "pune": {
+          "total": 125000,
+          "per_lakh_population": 1316,
+          "top_issue": "potholes",
+          "resolution_rate_percentage": 86,
+          "avg_resolution_hours": 16
+        },
+        "nagpur": {
+          "total": 68000,
+          "per_lakh_population": 1417,
+          "top_issue": "road_surface_damage",
+          "resolution_rate_percentage": 82,
+          "avg_resolution_hours": 20
+        },
+        "thane": {
+          "total": 142000,
+          "per_lakh_population": 1291,
+          "top_issue": "potholes",
+          "resolution_rate_percentage": 84,
+          "avg_resolution_hours": 18
+        },
+        "nashik": {
+          "total": 48000,
+          "per_lakh_population": 980,
+          "top_issue": "waterlogging",
+          "resolution_rate_percentage": 80,
+          "avg_resolution_hours": 22
+        },
+        "aurangabad": {
+          "total": 38500,
+          "per_lakh_population": 1014,
+          "top_issue": "potholes",
+          "resolution_rate_percentage": 78,
+          "avg_resolution_hours": 24
+        },
+        "rural_highways": {
+          "total": 78920,
+          "per_100_km_roads": 358,
+          "top_issue": "road_surface_damage",
+          "resolution_rate_percentage": 75,
+          "avg_resolution_hours": 36
+        }
+      },
+      
+      "time_based_analysis": {
+        "peak_complaint_hours": ["8-10 AM", "5-7 PM"],
+        "peak_complaint_days": ["Monday", "Friday"],
+        "seasonal_spike": {
+          "monsoon_june_aug": "+385%",
+          "post_monsoon_sept_oct": "+120%",
+          "winter_nov_jan": "-15%",
+          "summer_feb_may": "+25%"
+        }
+      },
+      
+      "sentiment_analysis": {
+        "highly_dissatisfied_angry": {"count": 285000, "percentage": 41.6},
+        "dissatisfied": {"count": 225000, "percentage": 32.8},
+        "neutral": {"count": 102920, "percentage": 15.0},
+        "satisfied": {"count": 58500, "percentage": 8.5},
+        "highly_satisfied": {"count": 14000, "percentage": 2.0}
+      },
+      
+      "repeat_complainants": {
+        "total_unique_complainants": 485000,
+        "repeat_complainants": 145000,
+        "repeat_percentage": 29.9,
+        "avg_complaints_per_repeat": 2.8,
+        "hotspot_locations": [
+          "Western Express Highway, Mumbai",
+          "Katraj-Dehu Road Bypass, Pune",
+          "Kamptee Road, Nagpur",
+          "Ghodbunder Road, Thane"
+        ]
+      }
+    },
+    
+    "detailed_complaint_samples": [
+      {
+        "complaint_id": "PWD/MUM/2026/085621",
+        "date": "2026-02-13 07:45",
+        "category": "potholes",
+        "location": "Western Express Highway, Andheri, Mumbai",
+        "coordinates": "19.1197° N, 72.8464° E",
+        "ward_section": "K-East Ward, Chainage 22.5 km",
+        "channel": "mobile_app",
+        "complainant_id": "USER-7854621",
+        "description": "Large pothole 1.5 ft deep, 3 ft wide. Multiple accidents. Lane blocked. Urgent.",
+        "photo_attached": true,
+        "severity": "Critical",
+        "traffic_impact": "High - causing 2 km jam",
+        "assigned_to": "Emergency-Team-WEH-02",
+        "assigned_date": "2026-02-13 08:00",
+        "team_reached": "2026-02-13 08:35",
+        "resolution_date": "2026-02-13 11:20",
+        "resolution_time_hours": 3.58,
+        "status": "resolved",
+        "action_taken": "Emergency cold mix used. 750 kg material. Traffic diverted. Permanent repair scheduled for Feb 20.",
+        "proof_of_work": "Before-after photos. GPS timestamp. Video of repair. Supervisor sign-off.",
+        "material_used": "Cold mix: 750 kg, Cost: Rs 12,500",
+        "complainant_rating": 5,
+        "remarks": "Area identified for complete resurfacing. Added to FY 2026-27 plan."
+      },
+      {
+        "complaint_id": "PWD/PUN/2026/062458",
+        "date": "2026-02-10 18:20",
+        "category": "road_cave_in",
+        "location": "Sinhagad Road, Pune",
+        "coordinates": "18.4737° N, 73.8085° E",
+        "channel": "whatsapp",
+        "complainant_id": "USER-4569821",
+        "description": "Road cave-in 8 ft x 6 ft. Underground water pipe burst. Road blocked.",
+        "photo_attached": true,
+        "severity": "Critical",
+        "traffic_impact": "Complete blockage. 5 km diversion",
+        "assigned_to": "Emergency-Team-Pune-05",
+        "assigned_date": "2026-02-10 18:30",
+        "team_reached": "2026-02-10 19:05",
+        "resolution_date": "2026-02-11 14:30",
+        "resolution_time_hours": 20.17,
+        "status": "resolved",
+        "action_taken": "Water supply dept coordinated. Pipe repaired. Cave-in filled. Road reopened. Barricades for 7 days.",
+        "proof_of_work": "Photo sequence. Water dept certificate. Material receipt. Traffic police NOC.",
+        "material_used": "Stone aggregate: 12 tons, Concrete: 8 cu.m., Cost: Rs 1.85 Lakhs",
+        "complainant_rating": 4,
+        "remarks": "Old water line. Complete replacement scheduled. Coordination with water dept."
+      },
+      {
+        "complaint_id": "PWD/NAG/2026/045782",
+        "date": "2026-02-08 12:15",
+        "category": "bridge_safety_concerns",
+        "location": "Kanhan River Bridge, Nagpur-Chhindwara Road",
+        "coordinates": "21.0780° N, 79.3012° E",
+        "channel": "toll_free",
+        "complainant_id": "USER-9632147",
+        "description": "Bridge railing damaged. 15 ft section missing. Safety risk.",
+        "photo_attached": false,
+        "severity": "High",
+        "traffic_impact": "Medium - speed restricted to 20 kmph",
+        "assigned_to": "Bridge-Inspector-NAG-08",
+        "assigned_date": "2026-02-08 13:00",
+        "inspection_completed": "2026-02-08 16:30",
+        "resolution_date": "2026-02-11 18:00",
+        "resolution_time_hours": 77.75,
+        "status": "resolved",
+        "action_taken": "Inspection confirmed. Temporary barricade on Feb 8. New railing fabricated and installed. Load test done.",
+        "proof_of_work": "Inspection report. Before-after photos. Load test certificate. Safety audit clearance.",
+        "material_used": "Steel railing: 18 meters, Fabrication + installation, Cost: Rs 2.45 Lakhs",
+        "complainant_rating": 4,
+        "remarks": "Full bridge safety audit scheduled for March 2026. Age: 32 years."
+      },
+      {
+        "complaint_id": "PWD/THA/2026/078541",
+        "date": "2026-02-11 21:30",
+        "category": "waterlogging",
+        "location": "Ghodbunder Road, Thane",
+        "coordinates": "19.2183° N, 72.9781° E",
+        "channel": "twitter",
+        "complainant_id": "@citizen_thane",
+        "description": "Severe waterlogging. 2 ft water even without rain. Drain choked. Daily issue.",
+        "photo_attached": true,
+        "video_attached": true,
+        "severity": "High",
+        "traffic_impact": "Medium - slow moving",
+        "assigned_to": "Drainage-Team-THA-12",
+        "assigned_date": "2026-02-12 08:00",
+        "team_reached": "2026-02-12 09:30",
+        "resolution_date": "2026-02-12 17:45",
+        "resolution_time_hours": 20.25,
+        "status": "resolved",
+        "action_taken": "Drain inspection. 4 manholes desilted. 85 kg plastic waste removed. Drain flow restored.",
+        "proof_of_work": "Before-after videos. CCTV drain survey. Waste disposal receipt.",
+        "material_used": "Desilting: 12 tons muck, Jetting: 150 meters, Cost: Rs 45,000",
+        "complainant_rating": 4,
+        "remarks": "Recurring issue. Permanent solution: New drain line. DPR under preparation."
+      },
+      {
+        "complaint_id": "PWD/AUR/2026/032156",
+        "date": "2026-02-09 15:40",
+        "category": "road_encroachment",
+        "location": "Station Road, Aurangabad",
+        "coordinates": "19.8762° N, 75.3433° E",
+        "channel": "email",
+        "complainant_id": "USER-1478523",
+        "description": "Roadside vendors encroaching 10 ft of road. Causing traffic chaos. Safety hazard.",
+        "photo_attached": true,
+        "severity": "Medium",
+        "traffic_impact": "High - 1 lane blocked",
+        "assigned_to": "Encroachment-Officer-AUR",
+        "assigned_date": "2026-02-10 10:00",
+        "resolution_date": "2026-02-14 12:00",
+        "resolution_time_hours": 116.33,
+        "status": "resolved",
+        "action_taken": "Joint action with traffic police & municipal corp. 28 vendors relocated to designated market. Bollards installed.",
+        "proof_of_work": "Removal photos. Police panchnama. Vendor list. Market allotment receipts.",
+        "material_used": "Bollards: 45 nos, Cost: Rs 1.25 Lakhs",
+        "complainant_rating": 5,
+        "remarks": "Alternative market space provided. Vendors cooperative. Win-win solution."
+      },
+      {
+        "complaint_id": "PWD/SOL/2026/025698",
+        "date": "2026-02-07 09:20",
+        "category": "road_surface_damage",
+        "location": "Solapur-Tuljapur Highway, SH-211",
+        "coordinates": "17.7695° N, 75.9180° E",
+        "channel": "portal",
+        "complainant_id": "USER-8529641",
+        "description": "10 km stretch badly damaged. Multiple crater-like potholes. Bus accident yesterday.",
+        "photo_attached": true,
+        "severity": "High",
+        "traffic_impact": "Very High - accidents reported",
+        "assigned_to": "Division-SOL-01",
+        "assigned_date": "2026-02-07 11:00",
+        "inspection_date": "2026-02-07 16:00",
+        "resolution_date": "2026-02-14",
+        "resolution_time_hours": 166.67,
+        "status": "in_progress",
+        "action_taken": "Emergency repairs: 185 potholes filled. Warning signage. Speed restriction to 40 kmph. Complete resurfacing awarded. Work starts Feb 20.",
+        "proof_of_work": "Inspection report. Emergency repair photos. Tender award letter dated Feb 13.",
+        "material_used": "Emergency repairs: 28 tons mix, Cost: Rs 4.8 Lakhs",
+        "progress_percentage": 15,
+        "resurfacing_contract": "10 km, Rs 2.8 Cr, 60 days",
+        "remarks": "Heavy truck traffic. Last resurfaced in 2019. Due for major overhaul."
+      }
+    ],
+    
+    "escalation_tracker": {
+      "total_escalations": 18000,
+      "escalation_rate_percentage": 2.6,
+      
+      "escalation_levels": {
+        "level_1_junior_engineer": {"count": 12500, "resolved": 10200},
+        "level_2_executive_engineer": {"count": 4200, "resolved": 3480},
+        "level_3_se": {"count": 1150, "resolved": 850},
+        "level_4_ce": {"count": 150, "resolved": 98}
+      },
+      
+      "complaints_to_cm_office": 68,
+      "complaints_to_ministers": 42,
+      "rti_applications": 1250,
+      "court_cases_filed": 28,
+      
+      "high_priority_escalations": [
+        {
+          "complaint_id": "PWD/MUM/2025/125698",
+          "escalation_date": "2026-01-05",
+          "current_level": "Chief Engineer",
+          "issue": "Chronic pothole problem - 2 km Western Express Highway",
+          "location": "Santacruz-Vile Parle, Mumbai",
+          "status": "Tender approved. Work starts March 2026",
+          "action": "Rs 8.5 Cr allocated. Complete reconstruction. 90 days timeline."
+        },
+        {
+          "complaint_id": "PWD/PUN/2026/015478",
+          "escalation_date": "2026-01-28",
+          "current_level": "Minister Office",
+          "issue": "Bridge safety - cracks observed",
+          "location": "Khadakwasla Dam Bridge, Pune",
+          "status": "In Progress",
+          "action": "IIT Bombay structural audit ordered. Partial closure. Load restriction 10 tons."
+        }
+      ]
+    },
+    
+    "citizen_satisfaction": {
+      "overall_satisfaction_percentage": 62.5,
+      
+      "by_service": {
+        "pothole_repair_speed": 68.0,
+        "pothole_repair_quality": 55.0,
+        "new_road_quality": 78.0,
+        "complaint_resolution": 65.0,
+        "communication_updates": 58.0,
+        "staff_responsiveness": 72.0
+      },
+      
+      "nps_score": 12,
+      
+      "improvement_areas": [
+        "Faster pothole repairs",
+        "Better repair quality - recurring potholes",
+        "Proactive maintenance",
+        "Better communication",
+        "Monsoon preparedness"
+      ],
+      
+      "positive_feedback": [
+        "Good emergency response",
+        "Mobile app very useful",
+        "GPS tracking helpful",
+        "Staff courteous"
+      ]
+    },
+    
+    "accident_related_complaints": {
+      "total": 8500,
+      "due_to_potholes": 4200,
+      "due_to_waterlogging": 1850,
+      "due_to_poor_lighting": 1250,
+      "due_to_damaged_dividers": 850,
+      "other": 350,
+      
+      "compensation_claims_filed": 485,
+      "claims_settled": 185,
+      "claims_pending": 300,
+      "total_compensation_paid_lakhs": 125
+    }
+  }
+}

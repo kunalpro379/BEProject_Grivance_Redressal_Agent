@@ -1,0 +1,362 @@
+{
+  "performance_metrics": {
+    "fiscal_year": "2025-26",
+    "reporting_period": "April 2025 - January 2026",
+    
+    "budget_performance": {
+      "total_allocation_crores": 8500,
+      "swachh_bharat_mission_crores": 5200,
+      "state_scheme_crores": 2100,
+      "infrastructure_development_crores": 1200,
+      "released_crores": 6950,
+      "utilized_crores": 5580,
+      "utilization_percentage": 80.3,
+      "state_share_released_percentage": 88,
+      "central_share_released_percentage": 76
+    },
+    
+    "swachh_bharat_mission_progress": {
+      "target_odf_plus": 15000,
+      "achieved_odf_plus": 10850,
+      "achievement_percentage": 72.3,
+      "pending_wards": 4150,
+      "star_rating_5_star": 285,
+      "star_rating_3_star": 1850,
+      "star_rating_1_star": 3200
+    },
+    
+    "physical_targets": {
+      "waste_collection_coverage": {
+        "target_percentage": 100,
+        "achieved_percentage": 91.5,
+        "gap_percentage": 8.5,
+        "uncovered_population_lakhs": 42.5
+      },
+      
+      "door_to_door_collection": {
+        "target_households": 25000000,
+        "covered_households": 21500000,
+        "achievement_percentage": 86.0,
+        "pending_households": 3500000
+      },
+      
+      "waste_processing": {
+        "daily_generation_tpd": 28500,
+        "target_processing_tpd": 24000,
+        "actual_processing_tpd": 19200,
+        "achievement_percentage": 80.0,
+        "unprocessed_tpd": 9300,
+        "landfill_disposed_tpd": 9300
+      },
+      
+      "segregation_at_source": {
+        "target_percentage": 85,
+        "achieved_percentage": 68.5,
+        "gap_percentage": 16.5,
+        "compliant_households_percentage": 68.5
+      },
+      
+      "compost_production": {
+        "target_tpd": 4500,
+        "achieved_tpd": 3250,
+        "achievement_percentage": 72.2
+      },
+      
+      "plastic_waste_recycling": {
+        "target_tpd": 850,
+        "achieved_tpd": 620,
+        "achievement_percentage": 72.9
+      }
+    },
+    
+    "infrastructure_development": {
+      "waste_processing_plants": {
+        "target_new_plants": 25,
+        "completed": 14,
+        "in_progress": 8,
+        "not_started": 3,
+        "achievement_percentage": 56.0
+      },
+      
+      "material_recovery_facilities": {
+        "target": 85,
+        "completed": 62,
+        "in_progress": 18,
+        "achievement_percentage": 72.9
+      },
+      
+      "bio_methanation_plants": {
+        "target": 20,
+        "completed": 12,
+        "in_progress": 5,
+        "achievement_percentage": 60.0
+      },
+      
+      "sanitary_landfills": {
+        "target": 15,
+        "completed": 8,
+        "in_progress": 5,
+        "delayed": 2,
+        "achievement_percentage": 53.3
+      }
+    },
+    
+    "operational_performance": {
+      "vehicle_uptime_percentage": 82,
+      "collection_frequency": {
+        "daily_areas_percentage": 78,
+        "alternate_day_percentage": 18,
+        "irregular_percentage": 4
+      },
+      
+      "street_sweeping": {
+        "target_km_daily": 125000,
+        "achieved_km_daily": 102000,
+        "achievement_percentage": 81.6
+      },
+      
+      "garbage_bins_maintained": {
+        "total_bins": 485000,
+        "functional": 412000,
+        "functional_percentage": 84.9,
+        "needing_repair": 58000,
+        "missing": 15000
+      }
+    },
+    
+    "delayed_projects": {
+      "total_delayed": 145,
+      "delay_categories": {
+        "land_acquisition": 42,
+        "contractor_issues": 38,
+        "environmental_clearance": 25,
+        "fund_delays": 20,
+        "local_opposition": 12,
+        "technical_issues": 8
+      },
+      
+      "major_delayed_projects": [
+        {
+          "project_name": "Pune Waste-to-Energy Plant",
+          "sanctioned_date": "2022-03-15",
+          "target_completion": "2024-12-31",
+          "current_status": "45% complete",
+          "delay_months": 14,
+          "reason": "Local opposition and technical modifications",
+          "cost_crores": 450,
+          "current_officer": "Shri P.S. Deshpande",
+          "last_review_date": "2026-01-20",
+          "next_deadline": "2026-09-30",
+          "remarks": "NOC from locals obtained on 2026-01-10. Work resumed. 6 month extension approved.",
+          "action_taken": "Additional consultation meetings held. Rs 25 Cr released on 2026-01-25."
+        },
+        {
+          "project_name": "Nagpur Compost Plant - Phase 2",
+          "sanctioned_date": "2023-06-20",
+          "target_completion": "2025-08-31",
+          "current_status": "65% complete",
+          "delay_months": 6,
+          "reason": "Machinery supply delays",
+          "cost_crores": 180,
+          "current_officer": "Shri V.M. Meshram",
+          "last_review_date": "2026-02-05",
+          "next_deadline": "2026-05-31",
+          "remarks": "Machinery arrived on 2026-01-28. Installation in progress.",
+          "action_taken": "Liquidated damages of Rs 5 Lakhs imposed on supplier. Installation team deployed."
+        },
+        {
+          "project_name": "Thane Material Recovery Facility",
+          "sanctioned_date": "2023-09-10",
+          "target_completion": "2025-10-31",
+          "current_status": "38% complete",
+          "delay_months": 4,
+          "reason": "Contractor financial issues",
+          "cost_crores": 95,
+          "current_officer": "Shri S.B. Patil",
+          "last_review_date": "2026-02-08",
+          "next_deadline": "2026-08-31",
+          "remarks": "Contractor changed on 2026-01-15. New contractor mobilized on 2026-01-30.",
+          "action_taken": "Bank guarantee encashed. New tender awarded. Additional monitoring appointed."
+        }
+      ],
+      
+      "oldest_pending_project_years": 3.9,
+      "action_taken": "Weekly review meetings by CE. Monthly by Principal Secretary."
+    },
+    
+    "area_wise_performance": {
+      "mumbai_zone": {
+        "waste_collection_percentage": 95,
+        "processing_percentage": 86,
+        "segregation_compliance_percentage": 72,
+        "complaint_resolution_percentage": 88,
+        "budget_utilization_percentage": 92,
+        "kpi_score": 86.6,
+        "grade": "A"
+      },
+      
+      "pune_zone": {
+        "waste_collection_percentage": 92,
+        "processing_percentage": 80,
+        "segregation_compliance_percentage": 68,
+        "complaint_resolution_percentage": 82,
+        "budget_utilization_percentage": 85,
+        "kpi_score": 81.4,
+        "grade": "B+"
+      },
+      
+      "nagpur_zone": {
+        "waste_collection_percentage": 88,
+        "processing_percentage": 82,
+        "segregation_compliance_percentage": 64,
+        "complaint_resolution_percentage": 78,
+        "budget_utilization_percentage": 81,
+        "kpi_score": 78.6,
+        "grade": "B"
+      },
+      
+      "marathwada_zone": {
+        "waste_collection_percentage": 82,
+        "processing_percentage": 68,
+        "segregation_compliance_percentage": 52,
+        "complaint_resolution_percentage": 72,
+        "budget_utilization_percentage": 74,
+        "kpi_score": 69.6,
+        "grade": "C+"
+      },
+      
+      "vidarbha_zone": {
+        "waste_collection_percentage": 85,
+        "processing_percentage": 72,
+        "segregation_compliance_percentage": 58,
+        "complaint_resolution_percentage": 75,
+        "budget_utilization_percentage": 78,
+        "kpi_score": 73.6,
+        "grade": "B-"
+      }
+    },
+    
+    "monthly_progress_tracking": [
+      {
+        "month": "April 2025",
+        "waste_processed_tpd": 17200,
+        "collection_coverage_percentage": 88.5,
+        "complaints_received": 18500,
+        "complaints_resolved": 15200,
+        "budget_released_crores": 650,
+        "budget_spent_crores": 520,
+        "new_vehicles_deployed": 85,
+        "staff_deployed": 8500,
+        "remarks": "Summer month. Increased collection frequency in tourist areas."
+      },
+      {
+        "month": "May 2025",
+        "waste_processed_tpd": 17800,
+        "collection_coverage_percentage": 89.2,
+        "complaints_received": 19200,
+        "complaints_resolved": 15800,
+        "budget_released_crores": 680,
+        "budget_spent_crores": 545,
+        "new_vehicles_deployed": 42,
+        "staff_deployed": 8650,
+        "remarks": "Heat wave. Special attention to biomedical waste. 125 workers hospitalized due to heat."
+      },
+      {
+        "month": "June 2025",
+        "waste_processed_tpd": 18200,
+        "collection_coverage_percentage": 89.8,
+        "complaints_received": 22000,
+        "complaints_resolved": 18500,
+        "budget_released_crores": 620,
+        "budget_spent_crores": 502,
+        "new_vehicles_deployed": 58,
+        "staff_deployed": 8720,
+        "remarks": "Monsoon preparation. Drain cleaning drive. Plastic collection drive successful."
+      },
+      {
+        "month": "July 2025",
+        "waste_processed_tpd": 18500,
+        "collection_coverage_percentage": 90.1,
+        "complaints_received": 28500,
+        "complaints_resolved": 22000,
+        "budget_released_crores": 710,
+        "budget_spent_crores": 568,
+        "new_vehicles_deployed": 95,
+        "staff_deployed": 9200,
+        "remarks": "Heavy rains. Waterlogging. Extra staff deployed. 18 vehicles damaged in floods."
+      },
+      {
+        "month": "August 2025",
+        "waste_processed_tpd": 18200,
+        "collection_coverage_percentage": 89.5,
+        "complaints_received": 25200,
+        "complaints_resolved": 20500,
+        "budget_released_crores": 690,
+        "budget_spent_crores": 555,
+        "new_vehicles_deployed": 62,
+        "staff_deployed": 9100,
+        "remarks": "Ganesh festival preparation. Extra bins deployed. 2500 temporary workers hired."
+      },
+      {
+        "month": "September 2025",
+        "waste_processed_tpd": 22500,
+        "collection_coverage_percentage": 92.0,
+        "complaints_received": 32000,
+        "complaints_resolved": 28500,
+        "budget_released_crores": 850,
+        "budget_spent_crores": 725,
+        "new_vehicles_deployed": 185,
+        "staff_deployed": 12500,
+        "remarks": "Ganesh Visarjan. Record 5500 TPD extra waste. Special teams deployed. All hands on deck."
+      },
+      {
+        "month": "October 2025",
+        "waste_processed_tpd": 19500,
+        "collection_coverage_percentage": 91.2,
+        "complaints_received": 21500,
+        "complaints_resolved": 18200,
+        "budget_released_crores": 720,
+        "budget_spent_crores": 590,
+        "new_vehicles_deployed": 48,
+        "staff_deployed": 9000,
+        "remarks": "Diwali preparation. Fire safety checks. Cracker waste management planning."
+      },
+      {
+        "month": "November 2025",
+        "waste_processed_tpd": 20500,
+        "collection_coverage_percentage": 91.5,
+        "complaints_received": 23500,
+        "complaints_resolved": 19800,
+        "budget_released_crores": 740,
+        "budget_spent_crores": 608,
+        "new_vehicles_deployed": 72,
+        "staff_deployed": 9200,
+        "remarks": "Post-Diwali. 2800 TPD cracker waste. Air quality concerns. Extra sweeping."
+      },
+      {
+        "month": "December 2025",
+        "waste_processed_tpd": 19200,
+        "collection_coverage_percentage": 91.1,
+        "complaints_received": 19800,
+        "complaints_resolved": 17200,
+        "budget_released_crores": 650,
+        "budget_spent_crores": 528,
+        "new_vehicles_deployed": 38,
+        "staff_deployed": 8900,
+        "remarks": "Winter season. Lower generation. Focus on processing backlog. Plant maintenance."
+      },
+      {
+        "month": "January 2026",
+        "waste_processed_tpd": 19200,
+        "collection_coverage_percentage": 91.5,
+        "complaints_received": 18200,
+        "complaints_resolved": 15800,
+        "budget_released_crores": 640,
+        "budget_spent_crores": 540,
+        "new_vehicles_deployed": 45,
+        "staff_deployed": 8850,
+        "remarks": "Q4 target push. 3 new MRFs inaugurated. Training program for 2500 workers completed."
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "department": {
+    "dept_id": "MH-SWM-018",
+    "name": "Solid Waste Management Department",
+    "headquarters": "Mantralaya, Mumbai",
+    "website": "https://swm.maharashtra.gov.in",
+    
+    "minister": {
+      "name": "Hon. Minister for Urban Development & Solid Waste Management",
+      "designation": "Cabinet Minister",
+      "office": "Mantralaya, Mumbai"
+    },
+    
+    "principal_secretary": {
+      "name": "Shri Vikram Desai (IAS)",
+      "designation": "Principal Secretary (SWM)",
+      "email": "ps.swm@maharashtra.gov.in",
+      "phone": "022-22027845"
+    },
+    
+    "key_officers": {
+      "secretary_urban_swm": {
+        "name": "Smt. Priya Sharma (IAS)",
+        "designation": "Secretary (Urban Solid Waste Management)",
+        "email": "secy.uswm@maharashtra.gov.in",
+        "phone": "022-22027846"
+      },
+      "director_swm": {
+        "name": "Shri Anil Jadhav",
+        "designation": "Director, Solid Waste Management",
+        "email": "director.swm@maharashtra.gov.in",
+        "phone": "022-22027847"
+      },
+      "chief_engineer_swm": {
+        "name": "Shri Ramesh Kulkarni",
+        "designation": "Chief Engineer (SWM Infrastructure)",
+        "email": "ce.swm@maharashtra.gov.in",
+        "phone": "022-22027848"
+      },
+      "commissioner_cleanliness": {
+        "name": "Smt. Anjali Patil",
+        "designation": "State Cleanliness Commissioner",
+        "email": "commissioner.swachh@maharashtra.gov.in",
+        "phone": "022-22027849"
+      }
+    },
+    
+    "implementing_agencies": [
+      {
+        "name": "Maharashtra Pollution Control Board (MPCB)",
+        "role": "Waste processing compliance and monitoring",
+        "headquarters": "Kalwa, Thane",
+        "regional_offices": 9,
+        "staff_strength": 1850
+      },
+      {
+        "name": "Municipal Corporations",
+        "role": "Urban waste collection and disposal",
+        "count": 27,
+        "staff_strength": 125000
+      },
+      {
+        "name": "Zilla Parishads",
+        "role": "Rural waste management",
+        "count": 36,
+        "staff_strength": 45000
+      }
+    ],
+    
+    "organizational_structure": {
+      "state_level": [
+        {"designation": "Principal Secretary", "count": 1},
+        {"designation": "Secretary", "count": 1},
+        {"designation": "Director", "count": 2},
+        {"designation": "Joint Director", "count": 5},
+        {"designation": "Deputy Director", "count": 12}
+      ],
+      "field_structure": [
+        {"designation": "Chief Engineer", "count": 3},
+        {"designation": "Superintending Engineer", "count": 15},
+        {"designation": "Executive Engineer", "count": 48},
+        {"designation": "Deputy Engineer", "count": 185},
+        {"designation": "Junior Engineer", "count": 850}
+      ],
+      "operational_staff": {
+        "sanitation_supervisors": 4500,
+        "sanitation_workers": 95000,
+        "vehicle_drivers": 12500,
+        "machinery_operators": 3500,
+        "cleanliness_inspectors": 1200
+      }
+    }
+  },
+
+  "district_waste_officers": [
+    {
+      "district": "Pune",
+      "executive_engineer": {
+        "name": "Shri P.S. Deshpande",
+        "phone": "020-26123489",
+        "email": "ee.swm.pune@maharashtra.gov.in"
+      },
+      "population_covered": 9500000,
+      "waste_generated_tpd": 3500,
+      "waste_processed_tpd": 2800,
+      "landfill_sites": 8,
+      "collection_efficiency_percentage": 92,
+      "segregation_compliance_percentage": 68
+    },
+    {
+      "district": "Mumbai",
+      "executive_engineer": {
+        "name": "Smt. R.K. Mehta",
+        "phone": "022-24567890",
+        "email": "ee.swm.mumbai@maharashtra.gov.in"
+      },
+      "population_covered": 12500000,
+      "waste_generated_tpd": 9500,
+      "waste_processed_tpd": 8200,
+      "landfill_sites": 12,
+      "collection_efficiency_percentage": 95,
+      "segregation_compliance_percentage": 72
+    },
+    {
+      "district": "Nagpur",
+      "executive_engineer": {
+        "name": "Shri V.M. Meshram",
+        "phone": "0712-2567823",
+        "email": "ee.swm.nagpur@maharashtra.gov.in"
+      },
+      "population_covered": 4800000,
+      "waste_generated_tpd": 1850,
+      "waste_processed_tpd": 1520,
+      "landfill_sites": 5,
+      "collection_efficiency_percentage": 88,
+      "segregation_compliance_percentage": 64
+    },
+    {
+      "district": "Thane",
+      "executive_engineer": {
+        "name": "Shri S.B. Patil",
+        "phone": "022-25678901",
+        "email": "ee.swm.thane@maharashtra.gov.in"
+      },
+      "population_covered": 11000000,
+      "waste_generated_tpd": 4200,
+      "waste_processed_tpd": 3400,
+      "landfill_sites": 9,
+      "collection_efficiency_percentage": 90,
+      "segregation_compliance_percentage": 70
+    }
+  ],
+
+  "resources_and_infrastructure": {
+    "vehicles": {
+      "compactor_trucks": 2850,
+      "tipper_lorries": 4200,
+      "dumper_placer": 1850,
+      "mini_trucks": 3500,
+      "auto_tippers": 5200,
+      "e_vehicles": 850,
+      "total_vehicles": 18450,
+      "functional_percentage": 82
+    },
+    
+    "waste_processing_facilities": {
+      "compost_plants": 85,
+      "waste_to_energy_plants": 12,
+      "material_recovery_facilities": 145,
+      "bio_methanation_plants": 35,
+      "plastic_recycling_units": 68,
+      "e_waste_centers": 42
+    },
+    
+    "landfill_sites": {
+      "operational": 185,
+      "scientific_landfills": 45,
+      "legacy_dumpsites": 320,
+      "closure_pending": 140
+    }
+  }
+}

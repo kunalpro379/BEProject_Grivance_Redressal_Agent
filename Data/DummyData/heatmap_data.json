@@ -1,0 +1,235 @@
+{
+  "heatmap_data": {
+    "complaint_heatmap": {
+      "department": "roads",
+      "period": "January 2026",
+      
+      "area_wise": [
+        {
+          "area": "Mumbai City",
+          "coordinates": {"lat": 19.0760, "lng": 72.8777},
+          "total_complaints": 18500,
+          "complaints_per_100k": 1480,
+          "severity_score": 8.5,
+          "color_code": "red",
+          "top_issues": ["potholes", "waterlogging", "traffic_signals"]
+        },
+        {
+          "area": "Thane",
+          "coordinates": {"lat": 19.2183, "lng": 72.9781},
+          "total_complaints": 14200,
+          "complaints_per_100k": 1291,
+          "severity_score": 7.8,
+          "color_code": "orange",
+          "top_issues": ["potholes", "drainage", "road_damage"]
+        },
+        {
+          "area": "Pune",
+          "coordinates": {"lat": 18.5204, "lng": 73.8567},
+          "total_complaints": 12500,
+          "complaints_per_100k": 1316,
+          "severity_score": 7.2,
+          "color_code": "orange",
+          "top_issues": ["potholes", "bridge_safety", "waterlogging"]
+        },
+        {
+          "area": "Nagpur",
+          "coordinates": {"lat": 21.1458, "lng": 79.0882},
+          "total_complaints": 6800,
+          "complaints_per_100k": 1417,
+          "severity_score": 6.5,
+          "color_code": "yellow",
+          "top_issues": ["road_surface", "potholes", "encroachment"]
+        },
+        {
+          "area": "Nashik",
+          "coordinates": {"lat": 19.9975, "lng": 73.7898},
+          "total_complaints": 4800,
+          "complaints_per_100k": 980,
+          "severity_score": 5.2,
+          "color_code": "yellow",
+          "top_issues": ["waterlogging", "potholes", "drainage"]
+        },
+        {
+          "area": "Aurangabad",
+          "coordinates": {"lat": 19.8762, "lng": 75.3433},
+          "total_complaints": 3850,
+          "complaints_per_100k": 1014,
+          "severity_score": 4.8,
+          "color_code": "green",
+          "top_issues": ["potholes", "encroachment", "road_damage"]
+        }
+      ],
+      
+      "hotspot_locations": [
+        {
+          "location": "Western Express Highway, Andheri-Santacruz",
+          "coordinates": {"lat": 19.1197, "lng": 72.8464},
+          "complaints": 2850,
+          "severity": "critical",
+          "radius_km": 5,
+          "color_code": "dark_red"
+        },
+        {
+          "location": "Ghodbunder Road, Thane",
+          "coordinates": {"lat": 19.2183, "lng": 72.9781},
+          "complaints": 1850,
+          "severity": "high",
+          "radius_km": 3,
+          "color_code": "red"
+        },
+        {
+          "location": "Katraj-Dehu Road Bypass, Pune",
+          "coordinates": {"lat": 18.4737, "lng": 73.8085},
+          "complaints": 1420,
+          "severity": "high",
+          "radius_km": 4,
+          "color_code": "red"
+        },
+        {
+          "location": "Kamptee Road, Nagpur",
+          "coordinates": {"lat": 21.0780, "lng": 79.3012},
+          "complaints": 980,
+          "severity": "medium",
+          "radius_km": 2,
+          "color_code": "orange"
+        }
+      ]
+    },
+    
+    "department_performance_heatmap": {
+      "period": "January 2026",
+      
+      "district_wise_performance": [
+        {
+          "district": "Mumbai City",
+          "departments": {
+            "roads": {"score": 88, "color": "green"},
+            "garbage": {"score": 72, "color": "yellow"},
+            "water": {"score": 95, "color": "dark_green"}
+          },
+          "overall_score": 85
+        },
+        {
+          "district": "Thane",
+          "departments": {
+            "roads": {"score": 84, "color": "green"},
+            "garbage": {"score": 65, "color": "orange"},
+            "water": {"score": 92, "color": "green"}
+          },
+          "overall_score": 80.3
+        },
+        {
+          "district": "Pune",
+          "departments": {
+            "roads": {"score": 86, "color": "green"},
+            "garbage": {"score": 88, "color": "green"},
+            "water": {"score": 90, "color": "green"}
+          },
+          "overall_score": 88
+        },
+        {
+          "district": "Nagpur",
+          "departments": {
+            "roads": {"score": 82, "color": "green"},
+            "garbage": {"score": 85, "color": "green"},
+            "water": {"score": 88, "color": "green"}
+          },
+          "overall_score": 85
+        },
+        {
+          "district": "Nashik",
+          "departments": {
+            "roads": {"score": 80, "color": "yellow"},
+            "garbage": {"score": 82, "color": "green"},
+            "water": {"score": 78, "color": "yellow"}
+          },
+          "overall_score": 80
+        },
+        {
+          "district": "Aurangabad",
+          "departments": {
+            "roads": {"score": 78, "color": "yellow"},
+            "garbage": {"score": 80, "color": "yellow"},
+            "water": {"score": 85, "color": "green"}
+          },
+          "overall_score": 81
+        }
+      ]
+    },
+    
+    "sentiment_heatmap": {
+      "period": "January 2026",
+      "department": "roads",
+      
+      "area_wise_sentiment": [
+        {
+          "area": "Mumbai City",
+          "sentiment_score": 4.2,
+          "sentiment": "dissatisfied",
+          "angry_percentage": 45,
+          "neutral_percentage": 35,
+          "satisfied_percentage": 20,
+          "color_code": "orange"
+        },
+        {
+          "area": "Pune",
+          "sentiment_score": 5.8,
+          "sentiment": "neutral",
+          "angry_percentage": 28,
+          "neutral_percentage": 42,
+          "satisfied_percentage": 30,
+          "color_code": "yellow"
+        },
+        {
+          "area": "Nagpur",
+          "sentiment_score": 6.5,
+          "sentiment": "satisfied",
+          "angry_percentage": 18,
+          "neutral_percentage": 45,
+          "satisfied_percentage": 37,
+          "color_code": "light_green"
+        },
+        {
+          "area": "Thane",
+          "sentiment_score": 3.8,
+          "sentiment": "highly_dissatisfied",
+          "angry_percentage": 58,
+          "neutral_percentage": 28,
+          "satisfied_percentage": 14,
+          "color_code": "red"
+        }
+      ]
+    },
+    
+    "time_based_heatmap": {
+      "department": "roads",
+      "period": "Last 30 days",
+      
+      "hourly_complaint_pattern": [
+        {"hour": "00-02", "complaints": 120, "intensity": "low"},
+        {"hour": "02-04", "complaints": 85, "intensity": "low"},
+        {"hour": "04-06", "complaints": 180, "intensity": "low"},
+        {"hour": "06-08", "complaints": 1850, "intensity": "high"},
+        {"hour": "08-10", "complaints": 3200, "intensity": "very_high"},
+        {"hour": "10-12", "complaints": 2100, "intensity": "high"},
+        {"hour": "12-14", "complaints": 1650, "intensity": "medium"},
+        {"hour": "14-16", "complaints": 1420, "intensity": "medium"},
+        {"hour": "16-18", "complaints": 2850, "intensity": "very_high"},
+        {"hour": "18-20", "complaints": 3500, "intensity": "very_high"},
+        {"hour": "20-22", "complaints": 1200, "intensity": "medium"},
+        {"hour": "22-24", "complaints": 450, "intensity": "low"}
+      ],
+      
+      "day_of_week_pattern": [
+        {"day": "Monday", "complaints": 4850, "intensity": "very_high"},
+        {"day": "Tuesday", "complaints": 3200, "intensity": "high"},
+        {"day": "Wednesday", "complaints": 3100, "intensity": "high"},
+        {"day": "Thursday", "complaints": 3400, "intensity": "high"},
+        {"day": "Friday", "complaints": 4200, "intensity": "very_high"},
+        {"day": "Saturday", "complaints": 2100, "intensity": "medium"},
+        {"day": "Sunday", "complaints": 1650, "intensity": "medium"}
+      ]
+    }
+  }
+}

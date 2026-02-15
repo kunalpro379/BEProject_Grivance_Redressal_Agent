@@ -1,0 +1,97 @@
+{
+  "admin_users": [
+    {
+      "user_id": "ADMIN-001",
+      "name": "Rajesh Kumar",
+      "designation": "Chief Secretary",
+      "email": "rajesh.kumar@gov.in",
+      "phone": "+91-9876543210",
+      "access_level": "super_admin",
+      "departments_access": ["all"],
+      "permissions": ["view_all", "approve_budget", "reallocate_resources", "escalate", "policy_override"],
+      "login_enabled": true
+    },
+    {
+      "user_id": "ADMIN-002",
+      "name": "Priya Sharma",
+      "designation": "Additional Chief Secretary",
+      "email": "priya.sharma@gov.in",
+      "phone": "+91-9876543211",
+      "access_level": "admin",
+      "departments_access": ["all"],
+      "permissions": ["view_all", "approve_budget", "reallocate_resources", "escalate"],
+      "login_enabled": true
+    },
+    {
+      "user_id": "ADMIN-003",
+      "name": "Amit Deshmukh",
+      "designation": "Secretary (Urban Development)",
+      "email": "amit.deshmukh@gov.in",
+      "phone": "+91-9876543212",
+      "access_level": "admin",
+      "departments_access": ["roads", "water", "garbage"],
+      "permissions": ["view_departments", "approve_budget", "escalate"],
+      "login_enabled": true
+    }
+  ],
+  
+  "department_officers": [
+    {
+      "user_id": "DEPT-PWD-001",
+      "name": "Shri Rajendra Pawar",
+      "designation": "Chief Engineer (Roads)",
+      "department": "roads",
+      "email": "ce.roads@maharashtra.gov.in",
+      "phone": "022-22027920",
+      "access_level": "department_head",
+      "permissions": ["view_department", "submit_reports", "request_resources", "assign_tasks"],
+      "login_enabled": true
+    },
+    {
+      "user_id": "DEPT-PWD-002",
+      "name": "Shri Deepak Patil",
+      "designation": "Chief Engineer (National Highways)",
+      "department": "roads",
+      "sub_department": "national_highways",
+      "email": "ce.nh@maharashtra.gov.in",
+      "phone": "022-22027921",
+      "access_level": "sub_department_head",
+      "permissions": ["view_sub_department", "submit_reports", "request_resources"],
+      "login_enabled": true
+    },
+    {
+      "user_id": "DEPT-PWD-003",
+      "name": "Shri S.D. More",
+      "designation": "Executive Engineer (Mumbai)",
+      "department": "roads",
+      "district": "Mumbai City",
+      "email": "ee.roads.mumbai@maharashtra.gov.in",
+      "phone": "022-22658741",
+      "access_level": "district_officer",
+      "permissions": ["view_district", "submit_reports", "handle_complaints"],
+      "login_enabled": true
+    },
+    {
+      "user_id": "DEPT-GRB-001",
+      "name": "Dr. Sunil Patil",
+      "designation": "Commissioner (Solid Waste Management)",
+      "department": "garbage",
+      "email": "commissioner.swm@gov.in",
+      "phone": "022-22027930",
+      "access_level": "department_head",
+      "permissions": ["view_department", "submit_reports", "request_resources", "assign_tasks"],
+      "login_enabled": true
+    },
+    {
+      "user_id": "DEPT-WTR-001",
+      "name": "Smt. Anjali Kulkarni",
+      "designation": "Chief Engineer (Water Supply)",
+      "department": "water",
+      "email": "ce.water@maharashtra.gov.in",
+      "phone": "022-22027940",
+      "access_level": "department_head",
+      "permissions": ["view_department", "submit_reports", "request_resources", "assign_tasks"],
+      "login_enabled": true
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "department": {
+    "dept_id": "MH-WSS-024",
+    "name": "Water Supply and Sanitation Department",
+    "headquarters": "Mantralaya, Mumbai",
+    "website": "https://wssd.maharashtra.gov.in",
+    
+    "minister": {
+      "name": "Hon. Minister for Water Supply & Sanitation",
+      "designation": "Cabinet Minister",
+      "office": "Mantralaya, Mumbai"
+    },
+    
+    "principal_secretary": {
+      "name": "Smt. Manisha Verma (IAS)",
+      "designation": "Principal Secretary (WSSD)",
+      "email": "ps.wssd@maharashtra.gov.in",
+      "phone": "022-22027890"
+    },
+    
+    "key_officers": {
+      "secretary_rural_water": {
+        "name": "Shri Sunil Pawar (IAS)",
+        "designation": "Secretary (Rural Water Supply)",
+        "email": "secy.rws@maharashtra.gov.in"
+      },
+      "member_secretary_swsm": {
+        "name": "Shri Rajesh Deshmukh",
+        "designation": "Member Secretary, State Water & Sanitation Mission",
+        "email": "ms.swsm@maharashtra.gov.in"
+      },
+      "md_mjp": {
+        "name": "Shri Dinesh Patil (IAS)",
+        "designation": "Managing Director, Maharashtra Jeevan Pradhikaran",
+        "email": "md.mjp@maharashtra.gov.in",
+        "phone": "022-22025678"
+      },
+      "director_gsda": {
+        "name": "Shri Arun Shinde",
+        "designation": "Director, Groundwater Surveys & Development Agency",
+        "email": "director.gsda@maharashtra.gov.in"
+      }
+    },
+    
+    "implementing_agencies": [
+      {
+        "name": "Maharashtra Jeevan Pradhikaran (MJP)",
+        "role": "Rural and semi-urban water supply schemes",
+        "headquarters": "Belapur, Navi Mumbai",
+        "regional_offices": 8,
+        "divisions": 42,
+        "staff_strength": 8500
+      },
+      {
+        "name": "Groundwater Surveys & Development Agency (GSDA)",
+        "role": "Groundwater exploration and borewell construction",
+        "headquarters": "Pune",
+        "regional_offices": 6,
+        "staff_strength": 2200
+      },
+      {
+        "name": "Maharashtra Water Resources Regulatory Authority (MWRRA)",
+        "role": "Water allocation and regulation",
+        "staff_strength": 85
+      }
+    ],
+    
+    "organizational_structure": {
+      "state_level": [
+        {"designation": "Principal Secretary", "count": 1},
+        {"designation": "Secretary", "count": 2},
+        {"designation": "Director", "count": 3},
+        {"designation": "Joint Director", "count": 8}
+      ],
+      "mjp_structure": [
+        {"designation": "Managing Director", "count": 1},
+        {"designation": "Chief Engineer", "count": 6},
+        {"designation": "Superintending Engineer", "count": 24},
+        {"designation": "Executive Engineer", "count": 85},
+        {"designation": "Deputy Engineer", "count": 340},
+        {"designation": "Junior Engineer", "count": 1450},
+        {"designation": "Technical Staff", "count": 3500},
+        {"designation": "Pump Operators", "count": 2500}
+      ],
+      "district_level": {
+        "executive_engineers_zp_water": 36,
+        "deputy_engineers": 144,
+        "junior_engineers": 720,
+        "pump_operators": 3500,
+        "water_quality_inspectors": 180
+      }
+    }
+  },
+
+  "district_water_officers": [
+    {
+      "district": "Pune",
+      "executive_engineer": {
+        "name": "Shri M.K. Kulkarni",
+        "phone": "020-26123456",
+        "email": "ee.water.pune@maharashtra.gov.in"
+      },
+      "water_sources": 485,
+      "villages_covered": 1450,
+      "daily_supply_mld": 850
+    },
+    {
+      "district": "Beed",
+      "executive_engineer": {
+        "name": "Shri S.R. Gaikwad",
+        "phone": "02442-222345",
+        "email": "ee.water.beed@maharashtra.gov.in"
+      },
+      "water_sources": 380,
+      "villages_covered": 1120,
+      "tanker_dependent_villages": 420,
+      "scarcity_prone": true
+    },
+    {
+      "district": "Nagpur",
+      "executive_engineer": {
+        "name": "Shri R.P. Thakare",
+        "phone": "0712-2567890",
+        "email": "ee.water.nagpur@maharashtra.gov.in"
+      },
+      "water_sources": 520,
+      "villages_covered": 1380,
+      "daily_supply_mld": 720
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "citizen_feedback_system": {
+    "feedback_channels": {
+      "online_portal": {
+        "name": "Jal Jeevan Mission Portal",
+        "url": "ejalshakti.gov.in/JJM",
+        "state_dashboard": "jjm.maharashtra.gov.in",
+        "features": ["FHTC tracking", "Quality complaints", "Scheme status"]
+      },
+      "mobile_app": {
+        "name": "JalJeevan Mission App",
+        "platforms": ["Android", "iOS"],
+        "features": ["Water quality reporting", "Complaint registration", "Scheme tracking"]
+      },
+      "toll_free": {
+        "number": "1800-180-5544",
+        "working_hours": "8 AM to 8 PM",
+        "languages": ["Marathi", "Hindi", "English"]
+      },
+      "whatsapp": {
+        "number": "+91-9223100XXX",
+        "bot_enabled": true
+      },
+      "email": {
+        "primary": "grievance.wssd@maharashtra.gov.in",
+        "jjm": "jjm.maharashtra@gov.in"
+      }
+    },
+    
+    "complaint_statistics": {
+      "total_complaints_received": 185420,
+      "by_category": {
+        "no_water_supply": {"count": 52000, "percentage": 28.0},
+        "irregular_supply": {"count": 38500, "percentage": 20.8},
+        "water_quality": {"count": 32500, "percentage": 17.5},
+        "pipeline_damage": {"count": 28000, "percentage": 15.1},
+        "tanker_issues": {"count": 18500, "percentage": 10.0},
+        "handpump_repair": {"count": 12500, "percentage": 6.7},
+        "other": {"count": 3420, "percentage": 1.9}
+      },
+      
+      "resolution_status": {
+        "resolved": 152000,
+        "resolution_rate": 82.0,
+        "pending": 25420,
+        "in_progress": 8000
+      },
+      
+      "average_resolution_time": {
+        "pipeline_burst_hours": 8,
+        "tanker_request_hours": 24,
+        "handpump_repair_days": 5,
+        "new_connection_days": 21,
+        "water_quality_days": 7
+      }
+    }
+  }
+}

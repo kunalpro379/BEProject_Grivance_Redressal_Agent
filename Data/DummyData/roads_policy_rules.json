@@ -1,0 +1,402 @@
+{
+  "policy_and_rules": {
+    "governing_acts": [
+      
+    ],
+    
+    "key_government_resolutions": [
+      {
+        "gr_number": "PWD/2024/CR-445/Roads",
+        "date": "2024-06-15",
+        "subject": "Road Quality Standards & Warranty Period",
+        "summary": "Mandatory 3-year warranty. Contractor penalized for defects. Third-party quality audit."
+      },
+      {
+        "gr_number": "PWD/2024/CR-512/Pothole",
+        "date": "2024-08-10",
+        "subject": "Pothole Repair SLA Norms",
+        "summary": "Critical: 4 hrs, High: 12 hrs, Medium: 24 hrs, Low: 48 hrs. Auto-escalation mechanism."
+      },
+      {
+        "gr_number": "PWD/2025/CR-089/Bridge",
+        "date": "2025-03-25",
+        "subject": "Bridge Safety & Inspection Protocol",
+        "summary": "Mandatory annual audit for 30+ year bridges. Structural health monitoring for critical bridges."
+      },
+      {
+        "gr_number": "PWD/2025/CR-156/Monsoon",
+        "date": "2025-04-30",
+        "subject": "Monsoon Preparedness Guidelines",
+        "summary": "Pre-monsoon inspection by April 30. Drainage clearing. Emergency teams on standby."
+      },
+      {
+        "gr_number": "PWD/2025/CR-198/Tech",
+        "date": "2025-09-15",
+        "subject": "Technology Adoption in Highway Management",
+        "summary": "AI pothole detection mandatory. GPS tracking for all vehicles. Real-time complaint monitoring."
+      }
+    ],
+    
+    "road_construction_standards": {
+      "irc_codes_applicable": [
+        "IRC:37-2018 - Geometric Design",
+        "IRC:SP:84-2019 - Pavement Design",
+        "IRC:78-2014 - Flexible Pavement",
+        "IRC:58-2015 - Flexible Pavement Maintenance",
+        "IRC:5-2015 - Road Drainage"
+      ],
+      
+      "pavement_specifications": {
+        "national_highways": {
+          "min_thickness_mm": 350,
+          "layers": "Sub-base, base, binder, wearing course",
+          "design_life_years": 20,
+          "quality_testing_frequency": "Every 500 meters"
+        },
+        "state_highways": {
+          "min_thickness_mm": 300,
+          "design_life_years": 15,
+          "quality_testing_frequency": "Every 750 meters"
+        },
+        "district_roads": {
+          "min_thickness_mm": 250,
+          "design_life_years": 10,
+          "quality_testing_frequency": "Every 1000 meters"
+        }
+      },
+      
+      "quality_parameters": {
+        "bitumen_grade": "VG-30 or better",
+        "aggregate_crushing_value_max": 30,
+        "compaction_percentage_min": 98,
+        "surface_roughness_iri_max": 2.5,
+        "skid_resistance_bpn_min": 55
+      }
+    },
+    
+    "sla_timelines": {
+      "pothole_critical": {
+        "definition": "Depth >75mm OR Width >300mm OR Lane blocked",
+        "response_hours": 1,
+        "resolution_hours": 4,
+        "escalation_if_not_resolved_hours": 6,
+        "penalty_per_hour_delay": 5000
+      },
+      "pothole_high": {
+        "definition": "Depth 50-75mm, Width >200mm",
+        "response_hours": 2,
+        "resolution_hours": 12,
+        "escalation_if_not_resolved_hours": 18,
+        "penalty_per_hour_delay": 3000
+      },
+      "pothole_medium": {
+        "definition": "Depth 25-50mm",
+        "response_hours": 4,
+        "resolution_hours": 24,
+        "escalation_if_not_resolved_hours": 36,
+        "penalty_per_hour_delay": 1000
+      },
+      "pothole_low": {
+        "definition": "Depth <25mm",
+        "response_hours": 12,
+        "resolution_hours": 48,
+        "escalation_if_not_resolved_hours": 72,
+        "penalty_per_hour_delay": 500
+      },
+      "road_cave_in": {
+        "response_hours": 0.5,
+        "resolution_hours": 6,
+        "escalation_if_not_resolved_hours": 8,
+        "immediate_action": "Road closure, traffic diversion, warning signage"
+      },
+      "bridge_safety_issue": {
+        "response_hours": 2,
+        "inspection_hours": 4,
+        "interim_measures_hours": 6,
+        "report_to_higher_authority_hours": 12
+      },
+      "waterlogging": {
+        "response_hours": 2,
+        "resolution_hours": 12,
+        "escalation_if_not_resolved_hours": 24
+      },
+      "traffic_signal_malfunction": {
+        "response_hours": 1,
+        "resolution_hours": 4,
+        "escalation_if_not_resolved_hours": 6
+      }
+    },
+    
+    "budget_allocation_rules": {
+      "maintenance_budget": {
+        "allocation_per_km_lakhs": {
+          "national_highways": 12,
+          "state_highways": 8,
+          "district_roads": 5
+        },
+        "allocation_basis": "Road length + condition + traffic volume",
+        "minimum_maintenance_percentage": 15,
+        "emergency_reserve_percentage": 10
+      },
+      
+      "new_construction": {
+        "dpr_mandatory_for_projects_above_crores": 50,
+        "technical_sanction_requirement": "Chief Engineer for <100 Cr, HPC for >100 Cr",
+        "land_acquisition_completion_before_release": 80,
+        "environmental_clearance_mandatory_for": "All projects >25 Cr or forest areas"
+      },
+      
+      "fund_release_mechanism": {
+        "first_installment": "30% on work order",
+        "subsequent_installments": "Based on work progress, max 90%",
+        "final_10_percent": "After completion & quality audit",
+        "retention_money_percentage": 5,
+        "retention_period_months": 24
+      },
+      
+      "utilization_monitoring": {
+        "monthly_uc_submission": "Mandatory by 5th of next month",
+        "quarterly_physical_inspection": "By Superintending Engineer",
+        "annual_audit": "By CAG",
+        "penalty_for_non_utilization": "Below 70%: Show cause, Below 60%: Fund reallocation"
+      }
+    },
+    
+    "contractor_management": {
+      "qualification_criteria": {
+        "class_a_contractors": ">500 Cr projects, 20 year experience",
+        "class_b_contractors": "100-500 Cr projects, 10 year experience",
+        "class_c_contractors": "<100 Cr projects, 5 year experience"
+      },
+      
+      "performance_evaluation": {
+        "quality_rating": "Based on third-party audit. Min 75% required.",
+        "time_rating": "Based on adherence to timeline. Min 80% required.",
+        "safety_rating": "Zero accidents target. Max 2 minor incidents acceptable.",
+        "blacklisting_criteria": "Quality <60% OR Time <60% OR Major safety violation"
+      },
+      
+      "penalties": {
+        "delay_percentage_per_day": 0.05,
+        "max_delay_penalty_percentage": 10,
+        "quality_defect_penalty": "2x repair cost",
+        "safety_violation_penalty_lakhs": "1-10 based on severity",
+        "non_responsive_contractor": "Bank guarantee forfeiture + blacklisting"
+      },
+      
+      "warranty_requirements": {
+        "new_construction_years": 3,
+        "major_repair_years": 2,
+        "minor_repair_months": 6,
+        "bridge_construction_years": 5
+      }
+    },
+    
+    "quality_control": {
+      "mandatory_tests": [
+        "Soil CBR - Every 250m",
+        "Aggregate quality - Every batch",
+        "Bitumen grade - Every tanker",
+        "Marshall stability - Every 1000 sq.m",
+        "Core density - Every 500m",
+        "Surface roughness - Every 2km"
+      ],
+      
+      "third_party_quality_audit": {
+        "mandatory_for_projects_above_crores": 25,
+        "audit_frequency": "Monthly for duration of project",
+        "audit_agency": "NABL accredited labs only",
+        "cost_percentage": 0.5
+      },
+      
+      "rejection_criteria": {
+        "compaction_below_percentage": 95,
+        "thickness_deficiency_more_than_mm": 15,
+        "surface_roughness_iri_above": 4.0,
+        "any_test_failure": "Rejection + relay"
+      }
+    },
+    
+    "monsoon_preparedness_protocol": {
+      "timeline": {
+        "pre_monsoon_inspection_by": "April 30",
+        "drainage_cleaning_by": "May 15",
+        "waterlogging_prone_points_identified_by": "May 20",
+        "emergency_material_stocks_by": "May 31",
+        "emergency_teams_activation": "June 1"
+      },
+      
+      "mandatory_actions": {
+        "drain_desilting": "100% of highway drains",
+        "slope_stabilization": "All unstable slopes protected",
+        "bridge_protection": "Boulders removed from river beds",
+        "cold_mix_stock_tons": "500 tons per district",
+        "bailey_bridge_availability": "Minimum 2 per region"
+      },
+      
+      "emergency_response": {
+        "control_room_operational": "24x7 June to September",
+        "emergency_teams": "One per 100 km",
+        "response_time_hours": 2,
+        "fund_availability": "10% budget as emergency reserve"
+      }
+    },
+    
+    "technology_mandates": {
+      "gps_tracking": {
+        "mandatory_for": "All PWD vehicles, contractor vehicles on NH/SH",
+        "data_upload_frequency": "Real-time",
+        "monitoring": "State control room 24x7"
+      },
+      
+      "ai_pothole_detection": {
+        "coverage_target": "100% NH and SH by 2027",
+        "detection_frequency": "Weekly",
+        "auto_work_order": "For critical potholes within 2 hours"
+      },
+      
+      "structural_health_monitoring": {
+        "mandatory_for": "Bridges >50m span OR 30+ years old",
+        "sensors": "Strain, vibration, tilt, corrosion",
+        "monitoring": "Real-time with alerts",
+        "cost_per_bridge_lakhs": "15-50"
+      },
+      
+      "complaint_management_system": {
+        "integration": "Mobile app + portal + call center + social media",
+        "auto_assignment": "Based on location within 15 minutes",
+        "citizen_sms_updates": "Auto at each stage",
+        "escalation": "Auto if SLA missed"
+      }
+    },
+    
+    "safety_standards": {
+      "worker_safety": {
+        "ppe_mandatory": "Helmets, boots, reflective jackets, gloves",
+        "traffic_management": "Barricades, signage, traffic police coordination",
+        "night_work_lighting": "Minimum 200 lux",
+        "first_aid_facility": "Mandatory at each site",
+        "safety_officer": "Mandatory for projects >10 Cr"
+      },
+      
+      "road_safety_features": {
+        "crash_barriers": "Mandatory on all NH/SH curves + bridges",
+        "cat_eyes": "Every 10 meters on all highways",
+        "road_markings": "Thermoplastic, renew annually",
+        "speed_limit_signage": "Every 2 km",
+        "accident_data_collection": "GPS coordinates of all accidents"
+      }
+    },
+    
+    "escalation_matrix": {
+      "level_0": {
+        "designation": "Junior Engineer / Work Inspector",
+        "resolution_time_hours": 12,
+        "authority": "Routine repairs up to Rs 50,000"
+      },
+      "level_1": {
+        "designation": "Assistant Engineer",
+        "resolution_time_hours": 24,
+        "authority": "Repairs up to Rs 5 Lakhs, work order modifications"
+      },
+      "level_2": {
+        "designation": "Executive Engineer",
+        "resolution_time_hours": 72,
+        "authority": "Project up to Rs 50 Lakhs, contractor penalties"
+      },
+      "level_3": {
+        "designation": "Superintending Engineer",
+        "resolution_time_hours": 168,
+        "authority": "Projects up to Rs 10 Cr, blacklisting recommendations"
+      },
+      "level_4": {
+        "designation": "Chief Engineer",
+        "resolution_time_hours": 336,
+        "authority": "Major policy decisions, fund reallocation, statewide directives"
+      }
+    },
+    
+    "mandatory_reporting": {
+      "daily_reports": [
+        "Complaints received & resolved",
+        "Emergency incidents",
+        "Traffic disruptions",
+        "Work progress on active projects",
+        "Material consumption"
+      ],
+      
+      "weekly_reports": [
+        "Pothole repair summary",
+        "Quality test results",
+        "Budget utilization",
+        "Contractor performance",
+        "Road condition survey"
+      ],
+      
+      "monthly_reports": [
+        "Physical & financial progress",
+        "Citizen satisfaction survey",
+        "Accident analysis",
+        "Equipment status",
+        "Staff deployment"
+      ],
+      
+      "annual_reports": [
+        "Comprehensive performance review",
+        "Road network condition assessment",
+        "Budget utilization & audit",
+        "Technology adoption status",
+        "Future year planning"
+      ]
+    },
+    
+    "recent_circulars": [
+      {
+        "circular_no": "PWD/CIRC/2026/018",
+        "date": "2026-02-01",
+        "subject": "Q4 Target Achievement Drive",
+        "summary": "Achieve 90% of annual targets by March 15. Weekly reviews by CE. Fast-track approvals.",
+        "compliance_deadline": "2026-03-15",
+        "responsible": "All Executive Engineers"
+      },
+      {
+        "circular_no": "PWD/CIRC/2026/012",
+        "date": "2026-01-10",
+        "subject": "Pre-Monsoon 2026 Planning",
+        "summary": "Start preparation immediately. Identify weak points. Material procurement by April.",
+        "compliance_deadline": "2026-04-30",
+        "responsible": "All Superintending Engineers"
+      },
+      {
+        "circular_no": "PWD/CIRC/2025/098",
+        "date": "2025-12-15",
+        "subject": "Year-end fund utilization",
+        "summary": "Target 85% utilization by Feb. Submit proposals by Dec 31. No fund lapse acceptable.",
+        "compliance_deadline": "2025-12-31",
+        "responsible": "All District Officers"
+      }
+    ],
+    
+    "environmental_compliance": {
+      "environmental_clearance": {
+        "required_for": "All projects >25 Cr OR forest/ecologically sensitive areas",
+        "authority": "MoEFCC for NH, State SEIAA for SH",
+        "timeline_months": 6,
+        "non_compliance_penalty": "Project cancellation + fine"
+      },
+      
+      "pollution_control": {
+        "hot_mix_plant_clearance": "MPCB mandatory",
+        "water_sprinkling": "3 times daily on work sites",
+        "noise_levels_db_max": 75,
+        "dust_suppression": "Green nets on excavation sites"
+      },
+      
+      "tree_compensation": {
+        "trees_cut_compensation_ratio": "1:10",
+        "compensatory_afforestation_mandatory": true,
+        "penalty_per_tree_cut_illegally_rupees": 50000
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "historical_records": {
+    "past_performance": {
+      "FY_2024_25": {
+        "fhtc_target": 3500000,
+        "fhtc_achieved": 2850000,
+        "achievement_percentage": 81.4,
+        "budget_crores": 11200,
+        "utilization_percentage": 78.5,
+        "tanker_villages_start": 4500,
+        "tanker_villages_end": 3200
+      },
+      "FY_2023_24": {
+        "fhtc_achieved": 2450000,
+        "budget_crores": 9800,
+        "utilization_percentage": 82.3
+      }
+    },
+    
+    "drought_years_data": {
+      "2024_drought": {
+        "affected_districts": 18,
+        "villages_on_tanker": 8500,
+        "expenditure_crores": 850,
+        "relief_provided_population_lakhs": 125
+      },
+      "2019_drought": {
+        "affected_districts": 26,
+        "villages_on_tanker": 12500,
+        "expenditure_crores": 1250
+      }
+    },
+    
+    "major_schemes_completed": [
+      {
+        "name": "Krishna-Bhima Stabilization",
+        "year": 2023,
+        "beneficiary_villages": 850,
+        "cost_crores": 2500
+      },
+      {
+        "name": "Marathwada Grid",
+        "year": 2024,
+        "beneficiary_villages": 1250,
+        "cost_crores": 4500
+      }
+    ]
+  }
+}

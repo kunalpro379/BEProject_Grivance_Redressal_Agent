@@ -1,33 +1,60 @@
 import pool from '../config/database.js';
+import grievanceDBService from '../services/grievance.db.service.js';
+import azureQueueService from '../services/azure.queue.service.js';
 
 export const createGrievance = async (req, res) => {
-  const client = await pool.connect();
-  
   try {
-    const { grievance_text, image_path, category } = req.body;
+    const { grievance_text, image_path, image_description, enhanced_query } = req.body;
     const userId = req.user.id;
 
-    await client.query('BEGIN');
-
-    const result = await client.query(
-      `INSERT INTO "UserGrievance" (user_id, grievance_text, image_path, category, status, priority)
-       VALUES ($1, $2, $3, $4, 'pending', 'medium')
-       RETURNING *`,
-      [userId, grievance_text, image_path, category ? JSON.stringify(category) : null]
+    // Get citizen_id from user_id (for web-registered citizens)
+    const citizenResult = await pool.query(
+      'SELECT id FROM "Citizens" WHERE user_id = $1',
+      [userId]
     );
 
-    await client.query('COMMIT');
+    if (citizenResult.rows.length === 0) {
+      return res.status(400).json({ error: 'User is not registered as a citizen' });
+    }
+
+    const citizenId = citizenResult.rows[0].id;
+
+    // Use the common grievance service (same as Telegram bot)
+    const grievanceResult = await grievanceDBService.submitGrievance({
+      citizen_id: citizenId,
+      grievance_text,
+      image_path: image_path || null,
+      image_description: image_description || null,
+      enhanced_query: enhanced_query || null,
+      embedding: null // Can be added later with vector search
+    });
+
+    // Push to AI analysis queue (same as Telegram bot)
+    const queueMessage = {
+      grievance_id: grievanceResult.grievance_id,
+      citizen_id: citizenId,
+      user_id: userId,
+      grievance_text,
+      image_path: image_path || null,
+      timestamp: new Date().toISOString(),
+      source: 'web'
+    };
+
+    await azureQueueService.sendMessage(queueMessage);
 
     res.status(201).json({
+      success: true,
       message: 'Grievance submitted successfully',
-      grievance: result.rows[0]
+      grievance_id: grievanceResult.grievance_id,
+      status: 'pending_analysis'
     });
   } catch (error) {
-    await client.query('ROLLBACK');
     console.error('Create grievance error:', error);
-    res.status(500).json({ error: 'Failed to create grievance' });
-  } finally {
-    client.release();
+    res.status(500).json({ 
+      success: false,
+      error: 'Failed to create grievance',
+      message: error.message 
+    });
   }
 };
 

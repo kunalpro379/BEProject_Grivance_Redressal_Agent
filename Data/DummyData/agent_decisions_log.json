@@ -1,0 +1,213 @@
+{
+  "agent_decisions": [
+    {
+      "decision_id": "DEC-2026-001",
+      "timestamp": "2026-02-13 09:30:00",
+      "department": "roads",
+      "district": "Mumbai City",
+      "situation_type": "critical",
+      
+      "trigger": {
+        "complaint_growth_percentage": 285,
+        "kpi_drop_percentage": 15,
+        "delay_days": 12,
+        "budget_utilization_percentage": 68
+      },
+      
+      "progress_tracking_output": {
+        "deviation_score": 87.5,
+        "complaint_trend": "Exponential growth in pothole complaints",
+        "performance_drop": "Resolution time increased from 14h to 28h",
+        "policy_threshold_breach": "SLA violation: 45% complaints beyond deadline"
+      },
+      
+      "analysis_output": {
+        "root_cause": "Monsoon damage + insufficient repair teams + material shortage",
+        "policy_violations": ["SLA breach on critical potholes", "Budget utilization below 70% threshold"],
+        "recommended_actions": [
+          "Allocate extra resources (5 emergency teams)",
+          "Release additional funds (Rs 50 Lakhs emergency)",
+          "Escalate to Superintending Engineer"
+        ]
+      },
+      
+      "decision_logic": {
+        "situation_classification": "Critical",
+        "allowed_actions": ["Send warning", "Allocate extra resources", "Escalate to higher authority", "Release extra funds"],
+        "rule_applied": "IF Critical AND Budget < 70% → Escalate + Resource Reallocation",
+        "confidence_score": 0.89
+      },
+      
+      "final_decision": {
+        "action_taken": "Escalate + Resource Reallocation + Fund Release",
+        "resources_allocated": {
+          "emergency_teams": 5,
+          "equipment": ["2 pavers", "3 compactors"],
+          "material": "500 tons cold mix"
+        },
+        "funds_released": 5000000,
+        "escalated_to": "Superintending Engineer Mumbai",
+        "deadline": "2026-02-20",
+        "human_approval": "Required",
+        "approved_by": null,
+        "approval_status": "pending"
+      },
+      
+      "expected_outcome": {
+        "complaint_reduction_target_percentage": 60,
+        "resolution_time_target_hours": 16,
+        "budget_utilization_target_percentage": 85
+      }
+    },
+    {
+      "decision_id": "DEC-2026-002",
+      "timestamp": "2026-02-12 14:15:00",
+      "department": "roads",
+      "district": "Pune",
+      
+      "trigger": {
+        "complaint_growth_percentage": 45,
+        "kpi_drop_percentage": 8,
+        "delay_days": 3,
+        "budget_utilization_percentage": 82
+      },
+      
+      "progress_tracking_output": {
+        "deviation_score": 42.3,
+        "complaint_trend": "Moderate increase in waterlogging complaints",
+        "performance_drop": "Minor delay in drainage clearing",
+        "policy_threshold_breach": "None"
+      },
+      
+      "analysis_output": {
+        "root_cause": "Pre-monsoon drain cleaning incomplete",
+        "policy_violations": [],
+        "recommended_actions": [
+          "Send warning to drainage team",
+          "Accelerate drain cleaning schedule"
+        ]
+      },
+      
+      "decision_logic": {
+        "situation_classification": "Medium",
+        "allowed_actions": ["Send warning", "Monitor closely"],
+        "rule_applied": "IF Medium AND No Policy Violation → Warning + Monitoring",
+        "confidence_score": 0.92
+      },
+      
+      "final_decision": {
+        "action_taken": "Warning Issued + Monitoring",
+        "warning_sent_to": "Executive Engineer Pune",
+        "monitoring_frequency": "Daily",
+        "deadline": "2026-02-25",
+        "human_approval": "Not Required",
+        "approved_by": "AUTO-APPROVED",
+        "approval_status": "approved"
+      },
+      
+      "expected_outcome": {
+        "complaint_reduction_target_percentage": 30,
+        "resolution_time_target_hours": 20,
+        "budget_utilization_target_percentage": 85
+      }
+    },
+    {
+      "decision_id": "DEC-2026-003",
+      "timestamp": "2026-02-10 11:00:00",
+      "department": "garbage",
+      "district": "Thane",
+      "situation_type": "critical",
+      
+      "trigger": {
+        "complaint_growth_percentage": 320,
+        "kpi_drop_percentage": 22,
+        "delay_days": 18,
+        "budget_utilization_percentage": 55
+      },
+      
+      "progress_tracking_output": {
+        "deviation_score": 92.8,
+        "complaint_trend": "Garbage collection complaints tripled",
+        "performance_drop": "Collection efficiency dropped from 95% to 73%",
+        "policy_threshold_breach": "Multiple SLA violations, Budget utilization critically low"
+      },
+      
+      "analysis_output": {
+        "root_cause": "Vehicle breakdown (8 out of 15 trucks), Staff shortage (15% absent), Contractor payment delay",
+        "policy_violations": ["SLA breach on daily collection", "Budget utilization below 60% - Fund reallocation risk"],
+        "recommended_actions": [
+          "Emergency vehicle hire",
+          "Release contractor payment immediately",
+          "Escalate to Commissioner",
+          "Reallocate funds from other zones"
+        ]
+      },
+      
+      "decision_logic": {
+        "situation_classification": "Critical",
+        "allowed_actions": ["Allocate extra resources", "Escalate to higher authority", "Release extra funds", "Emergency procurement"],
+        "rule_applied": "IF Critical AND Budget < 60% → Immediate Escalation + Emergency Measures",
+        "confidence_score": 0.78
+      },
+      
+      "final_decision": {
+        "action_taken": "Emergency Response + Escalation",
+        "resources_allocated": {
+          "hired_vehicles": 10,
+          "temporary_staff": 25,
+          "equipment": ["2 compactors"]
+        },
+        "funds_released": 8500000,
+        "contractor_payment_released": 12000000,
+        "escalated_to": "Commissioner Solid Waste Management",
+        "deadline": "2026-02-15",
+        "human_approval": "Required - Low Confidence",
+        "approved_by": "ADMIN-002",
+        "approval_status": "approved",
+        "approval_timestamp": "2026-02-10 15:30:00"
+      },
+      
+      "expected_outcome": {
+        "complaint_reduction_target_percentage": 70,
+        "collection_efficiency_target_percentage": 92,
+        "budget_utilization_target_percentage": 75
+      },
+      
+      "actual_outcome": {
+        "measured_on": "2026-02-14",
+        "complaint_reduction_actual_percentage": 65,
+        "collection_efficiency_actual_percentage": 88,
+        "budget_utilization_actual_percentage": 72,
+        "outcome_status": "Partially Successful - Monitoring continues"
+      }
+    }
+  ],
+  
+  "decision_statistics": {
+    "total_decisions": 156,
+    "auto_approved": 98,
+    "human_approval_required": 58,
+    "pending_approval": 12,
+    "approved": 144,
+    
+    "by_confidence": {
+      "high_confidence_gt_85": 98,
+      "medium_confidence_70_85": 42,
+      "low_confidence_lt_70": 16
+    },
+    
+    "by_situation": {
+      "critical": 28,
+      "high": 52,
+      "medium": 68,
+      "low": 8
+    },
+    
+    "success_rate": {
+      "fully_successful": 112,
+      "partially_successful": 28,
+      "failed": 4,
+      "too_early_to_measure": 12
+    }
+  }
+}

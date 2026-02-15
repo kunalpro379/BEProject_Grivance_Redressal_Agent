@@ -1,0 +1,414 @@
+{
+  "performance_metrics": {
+    "fiscal_year": "2025-26",
+    "reporting_period": "April 2025 - January 2026",
+    
+    "budget_performance": {
+      "total_allocation_crores": 28500,
+      "national_highways_crores": 8500,
+      "state_highways_crores": 12000,
+      "district_roads_crores": 5200,
+      "maintenance_crores": 2800,
+      "released_crores": 23450,
+      "utilized_crores": 19250,
+      "utilization_percentage": 82.1,
+      "central_share_released_percentage": 78,
+      "state_share_released_percentage": 92
+    },
+    
+    "physical_targets": {
+      "new_road_construction": {
+        "target_km": 2850,
+        "completed_km": 1950,
+        "in_progress_km": 720,
+        "not_started_km": 180,
+        "achievement_percentage": 68.4
+      },
+      
+      "road_widening": {
+        "target_km": 1250,
+        "completed_km": 820,
+        "in_progress_km": 320,
+        "achievement_percentage": 65.6
+      },
+      
+      "bridge_construction": {
+        "target": 125,
+        "completed": 78,
+        "in_progress": 38,
+        "delayed": 9,
+        "achievement_percentage": 62.4
+      },
+      
+      "flyover_construction": {
+        "target": 18,
+        "completed": 8,
+        "in_progress": 7,
+        "delayed": 3,
+        "achievement_percentage": 44.4
+      },
+      
+      "road_resurfacing": {
+        "target_km": 8500,
+        "completed_km": 6850,
+        "in_progress_km": 1250,
+        "achievement_percentage": 80.6
+      },
+      
+      "pothole_repairs": {
+        "target": 485000,
+        "completed": 425000,
+        "pending": 60000,
+        "achievement_percentage": 87.6,
+        "average_repair_time_hours": 18
+      }
+    },
+    
+    "road_condition_assessment": {
+      "total_inspections_km": 185000,
+      "roads_in_good_condition_km": 152000,
+      "roads_needing_minor_repair_km": 68500,
+      "roads_needing_major_repair_km": 22000,
+      "roads_requiring_reconstruction_km": 6000,
+      
+      "pothole_inventory": {
+        "total_potholes_detected": 485000,
+        "repaired": 425000,
+        "pending_repair": 60000,
+        "critical_1_lane_blocked": 2500,
+        "high_priority_traffic_affected": 12500,
+        "medium_priority": 28000,
+        "low_priority": 17000
+      },
+      
+      "monsoon_damage_2025": {
+        "road_damaged_km": 3850,
+        "bridges_damaged": 125,
+        "landslides": 85,
+        "estimated_repair_cost_crores": 1450,
+        "emergency_repairs_completed_km": 2850
+      }
+    },
+    
+    "major_ongoing_projects": [
+      {
+        "project_name": "Mumbai-Pune Expressway Expansion (6 to 8 lanes)",
+        "project_code": "NH-48-EXP-2024",
+        "sanctioned_date": "2024-03-15",
+        "length_km": 94,
+        "sanctioned_cost_crores": 8500,
+        "target_completion": "2027-03-31",
+        "current_progress_percentage": 35,
+        "amount_released_crores": 3400,
+        "amount_spent_crores": 2975,
+        "current_status": "On Schedule",
+        "responsible_officer": "Shri Deepak Patil",
+        "last_review_date": "2026-02-01",
+        "remarks": "Land acquisition 98% complete. Major structures in progress. No delays expected."
+      },
+      {
+        "project_name": "Nagpur-Hyderabad Highway (4-lane)",
+        "project_code": "NH-44-NAG-2023",
+        "sanctioned_date": "2023-08-20",
+        "length_km": 185,
+        "sanctioned_cost_crores": 4200,
+        "target_completion": "2026-08-31",
+        "current_progress_percentage": 72,
+        "amount_released_crores": 3360,
+        "amount_spent_crores": 3024,
+        "current_status": "Delayed by 4 months",
+        "delay_reason": "Forest clearance delays, contractor cash flow issues",
+        "responsible_officer": "Shri V.K. Deshmukh",
+        "last_review_date": "2026-02-08",
+        "revised_target": "2026-12-31",
+        "action_taken": "Forest clearance obtained on 2026-01-10. Rs 200 Cr advance to contractor released on 2026-01-25.",
+        "remarks": "Work pace increased. 8 km completed in January 2026."
+      },
+      {
+        "project_name": "Pune Ring Road Phase-2",
+        "project_code": "SH-RR-PUN-2023",
+        "sanctioned_date": "2023-06-10",
+        "length_km": 68,
+        "sanctioned_cost_crores": 3800,
+        "target_completion": "2026-06-30",
+        "current_progress_percentage": 58,
+        "amount_released_crores": 2660,
+        "amount_spent_crores": 2204,
+        "current_status": "Delayed by 6 months",
+        "delay_reason": "Land acquisition issues, local opposition, utility shifting",
+        "responsible_officer": "Smt. N.P. Kulkarni",
+        "last_review_date": "2026-02-10",
+        "revised_target": "2026-12-31",
+        "action_taken": "23 out of 28 land parcels acquired. Utility shifting 85% done. Extra resources deployed.",
+        "remarks": "5 land cases in court. Parallel work on acquired sections ongoing."
+      }
+    ],
+    
+    "delayed_projects": {
+      "total_delayed": 125,
+      
+      "delay_categories": {
+        "land_acquisition": 38,
+        "environmental_forest_clearance": 28,
+        "contractor_issues": 22,
+        "fund_shortage": 18,
+        "utility_shifting": 12,
+        "local_opposition": 7
+      },
+      
+      "critical_delayed_projects": [
+        {
+          "project_name": "Thane-Bhiwandi Bypass",
+          "sanctioned_date": "2022-04-20",
+          "target_completion": "2025-04-30",
+          "current_status": "42% complete",
+          "delay_months": 10,
+          "reason": "Land acquisition & illegal encroachments",
+          "cost_crores": 1850,
+          "cost_escalation_crores": 285,
+          "current_officer": "Shri A.R. Patil",
+          "last_review_date": "2026-02-05",
+          "next_deadline": "2026-10-31",
+          "action_taken": "Collector mobilized. 850 encroachments removed. Police protection provided. Work resumed.",
+          "remarks": "Lost 9 months. Fast-track mode. Daily monitoring by SE."
+        },
+        {
+          "project_name": "Ratnagiri Coastal Road",
+          "sanctioned_date": "2022-09-15",
+          "target_completion": "2025-09-30",
+          "current_status": "38% complete",
+          "delay_months": 12,
+          "reason": "Landslides, monsoon damage, forest clearance",
+          "cost_crores": 2400,
+          "cost_escalation_crores": 450,
+          "current_officer": "Shri P.M. Sawant",
+          "last_review_date": "2026-01-28",
+          "next_deadline": "2027-03-31",
+          "action_taken": "Geological survey done. Slope stabilization priority. Extra Rs 450 Cr approved.",
+          "remarks": "Challenging terrain. 18 landslides in 2025 monsoon. CEC clearance obtained Jan 2026."
+        },
+        {
+          "project_name": "Beed-Osmanabad Road",
+          "sanctioned_date": "2023-02-10",
+          "target_completion": "2025-12-31",
+          "current_status": "15% complete",
+          "delay_months": 6,
+          "reason": "Contractor bankruptcy, equipment shortage",
+          "cost_crores": 480,
+          "cost_escalation_crores": 0,
+          "current_officer": "Shri K.B. Gaikwad",
+          "last_review_date": "2026-02-12",
+          "next_deadline": "2026-09-30",
+          "action_taken": "Contractor terminated. New tender in January. Work order issued on 2026-02-03.",
+          "remarks": "6 months wasted. Bank guarantee of Rs 25 Cr encashed. New contractor mobilized."
+        }
+      ]
+    },
+    
+    "pothole_management_detailed": {
+      "detection_methods": {
+        "citizen_complaints": 285000,
+        "pwd_inspections": 125000,
+        "cctv_ai_detection": 58000,
+        "patrol_vehicle_reports": 17000
+      },
+      
+      "severity_classification": {
+        "critical_depth_gt_75mm_width_gt_300mm": {
+          "count": 28500,
+          "avg_repair_time_hours": 4,
+          "repaired": 26500,
+          "pending": 2000
+        },
+        "high_depth_50_75mm": {
+          "count": 95000,
+          "avg_repair_time_hours": 12,
+          "repaired": 88000,
+          "pending": 7000
+        },
+        "medium_depth_25_50mm": {
+          "count": 185000,
+          "avg_repair_time_hours": 24,
+          "repaired": 168000,
+          "pending": 17000
+        },
+        "low_depth_lt_25mm": {
+          "count": 176500,
+          "avg_repair_time_hours": 48,
+          "repaired": 142500,
+          "pending": 34000
+        }
+      },
+      
+      "area_wise_potholes": {
+        "mumbai": {
+          "detected": 85000,
+          "repaired": 78500,
+          "pending": 6500,
+          "repair_rate_percentage": 92.4
+        },
+        "pune": {
+          "detected": 62000,
+          "repaired": 55800,
+          "pending": 6200,
+          "repair_rate_percentage": 90.0
+        },
+        "nagpur": {
+          "detected": 38500,
+          "repaired": 33300,
+          "pending": 5200,
+          "repair_rate_percentage": 86.5
+        },
+        "thane": {
+          "detected": 58000,
+          "repaired": 51000,
+          "pending": 7000,
+          "repair_rate_percentage": 87.9
+        },
+        "rural_districts": {
+          "detected": 241500,
+          "repaired": 206400,
+          "pending": 35100,
+          "repair_rate_percentage": 85.5
+        }
+      },
+      
+      "repair_quality_audit": {
+        "repairs_audited": 85000,
+        "passed_quality": 68000,
+        "pass_percentage": 80.0,
+        "failed_redone": 12500,
+        "failed_pending": 4500
+      }
+    },
+    
+    "monthly_progress_tracking": [
+      {
+        "month": "April 2025",
+        "new_construction_km": 145,
+        "resurfacing_km": 520,
+        "potholes_repaired": 28500,
+        "budget_released_crores": 1850,
+        "budget_spent_crores": 1520,
+        "complaints_received": 18500,
+        "complaints_resolved": 15200,
+        "remarks": "Pre-monsoon preparation. Focus on pothole filling. Quality audit of 2500 km roads."
+      },
+      {
+        "month": "May 2025",
+        "new_construction_km": 185,
+        "resurfacing_km": 680,
+        "potholes_repaired": 42500,
+        "budget_released_crores": 2100,
+        "budget_spent_crores": 1785,
+        "complaints_received": 22000,
+        "complaints_resolved": 18500,
+        "remarks": "Rush to complete pre-monsoon repairs. Heat affected workers. 125 heat strokes reported."
+      },
+      {
+        "month": "June 2025",
+        "new_construction_km": 165,
+        "resurfacing_km": 420,
+        "potholes_repaired": 38000,
+        "budget_released_crores": 1950,
+        "budget_spent_crores": 1580,
+        "complaints_received": 32500,
+        "complaints_resolved": 26000,
+        "remarks": "Early monsoon arrival. Stopped resurfacing on June 15. Emergency repair teams on standby."
+      },
+      {
+        "month": "July 2025",
+        "new_construction_km": 85,
+        "resurfacing_km": 120,
+        "potholes_repaired": 18500,
+        "budget_released_crores": 2400,
+        "budget_spent_crores": 1920,
+        "complaints_received": 85000,
+        "complaints_resolved": 42000,
+        "remarks": "Heavy monsoon. 1850 km roads damaged. 125 bridges affected. Emergency mode."
+      },
+      {
+        "month": "August 2025",
+        "new_construction_km": 42,
+        "resurfacing_km": 85,
+        "potholes_repaired": 12500,
+        "budget_released_crores": 2850,
+        "budget_spent_crores": 2280,
+        "complaints_received": 125000,
+        "complaints_resolved": 68000,
+        "remarks": "Worst month. Continuous rains. 45 road blockages. 18 bridges washed away. Rs 850 Cr damage."
+      },
+      {
+        "month": "September 2025",
+        "new_construction_km": 120,
+        "resurfacing_km": 285,
+        "potholes_repaired": 58000,
+        "budget_released_crores": 3200,
+        "budget_spent_crores": 2720,
+        "complaints_received": 95000,
+        "complaints_resolved": 78000,
+        "remarks": "Post-monsoon recovery. War footing repairs. 24x7 operations. Extra mobilization."
+      },
+      {
+        "month": "October 2025",
+        "new_construction_km": 225,
+        "resurfacing_km": 950,
+        "potholes_repaired": 85000,
+        "budget_released_crores": 2950,
+        "budget_spent_crores": 2480,
+        "complaints_received": 62000,
+        "complaints_resolved": 58000,
+        "remarks": "Best month. Ideal weather. All resources deployed. Target: clear monsoon damage by Nov."
+      },
+      {
+        "month": "November 2025",
+        "new_construction_km": 285,
+        "resurfacing_km": 1150,
+        "potholes_repaired": 68000,
+        "budget_released_crores": 2750,
+        "budget_spent_crores": 2340,
+        "complaints_received": 42000,
+        "complaints_resolved": 38500,
+        "remarks": "Excellent progress. 95% monsoon damage cleared. Quality better than previous year."
+      },
+      {
+        "month": "December 2025",
+        "new_construction_km": 320,
+        "resurfacing_km": 1250,
+        "potholes_repaired": 48500,
+        "budget_released_crores": 2200,
+        "budget_spent_crores": 1870,
+        "complaints_received": 28500,
+        "complaints_resolved": 26000,
+        "remarks": "Winter peak season. All machinery operational. Focus on Quality."
+      },
+      {
+        "month": "January 2026",
+        "new_construction_km": 378,
+        "resurfacing_km": 1390,
+        "potholes_repaired": 25500,
+        "budget_released_crores": 1200,
+        "budget_spent_crores": 755,
+        "complaints_received": 18500,
+        "complaints_resolved": 17200,
+        "remarks": "Q4 push. 5 new bridges inaugurated. CM praised monsoon recovery. Best January in 5 years."
+      }
+    ],
+    
+    "quality_metrics": {
+      "road_surface_quality_index": 72.5,
+      "riding_quality_index": 68.0,
+      "pavement_condition_index": 70.5,
+      "bridge_health_index": 75.0
+    },
+    
+    "safety_performance": {
+      "accident_prone_locations": 485,
+      "black_spots_identified": 125,
+      "black_spots_rectified": 82,
+      "safety_audits_conducted": 850,
+      "road_fatalities_ytd": 4850,
+      "fatalities_vs_last_year": "-8.5%"
+    }
+  }
+}
