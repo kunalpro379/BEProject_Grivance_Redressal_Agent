@@ -12,8 +12,9 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install production dependencies only
-RUN npm ci --only=production --ignore-scripts && \
+# Install production dependencies and rebuild native modules
+RUN npm ci --only=production && \
+    npm rebuild bcrypt --build-from-source && \
     npm cache clean --force
 
 # Stage 2: Production
