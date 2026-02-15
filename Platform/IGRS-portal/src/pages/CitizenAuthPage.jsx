@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Phone, Building, Home, MapPin, ArrowRight, ArrowLeft, CheckCircle } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import authService from '../services/authService';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 const CitizenAuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -75,57 +78,116 @@ const CitizenAuthPage = () => {
     
     setLoading(true);
     
-    // Test credentials for citizens
-    const testCredentials = {
-      'citize@gmail.com': { password: 'citizen123', name: 'Test Citizen', phone: '+91-9876543210', address: 'Mumbai, Maharashtra' },
-      'citizen@test.com': { password: 'citizen123', name: 'Test Citizen', phone: '+91-9876543210', address: 'Mumbai, Maharashtra' },
-      'user@test.com': { password: 'user123', name: 'Test User', phone: '+91-9876543211', address: 'Delhi, India' }
-    };
+    try {
+      if (isLogin) {
+        // Login API call
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password
+          })
+        });
 
-    const testUser = testCredentials[formData.email];
-    
-    if (testUser && testUser.password === formData.password) {
-      // Use test credentials
-      const userData = {
-        id: Date.now(),
-        name: testUser.name,
-        email: formData.email,
-        phone: testUser.phone,
-        address: testUser.address,
-        role: "citizen"
-      };
-      
-      // Store in localStorage for session management
-      localStorage.setItem('userData', JSON.stringify(userData));
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userRole', 'citizen');
-      
+        const data = await response.json();
+
+        if (!response.ok) {
+          toast({
+            title: 'Login Failed',
+            description: data.error || 'Invalid credentials',
+            variant: 'destructive'
+          });
+          setLoading(false);
+          return;
+        }
+
+        // Store tokens and user data
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('userRole', data.user.role);
+        }
+
+        toast({
+          title: 'Login Successful',
+          description: 'Welcome back!',
+        });
+
+        // Redirect based on role
+        if (data.user.role === 'citizen') {
+          window.location.href = '/citizen/dashboard';
+        } else {
+          window.location.href = '/';
+        }
+
+      } else {
+        // Register API call
+        const registrationData = {
+          email: formData.email,
+          password: formData.password,
+          full_name: formData.name,
+          phone: formData.phone,
+          role: 'citizen',
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.pincode
+        };
+
+        const response = await fetch(`${API_URL}/api/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(registrationData)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          toast({
+            title: 'Registration Failed',
+            description: data.error || 'Could not create account',
+            variant: 'destructive'
+          });
+          setLoading(false);
+          return;
+        }
+
+        // Citizens are auto-approved, so store tokens
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('userRole', 'citizen');
+
+          toast({
+            title: 'Registration Successful',
+            description: 'Welcome to Citizen Portal!',
+          });
+
+          window.location.href = '/citizen/dashboard';
+        } else {
+          toast({
+            title: 'Registration Submitted',
+            description: 'Your account has been created successfully!',
+          });
+          setIsLogin(true);
+          setCurrentStep(1);
+        }
+      }
+    } catch (error) {
+      console.error('Auth error:', error);
       toast({
-        title: 'Login Successful',
-        description: 'Welcome to Citizen Portal!',
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
+        variant: 'destructive'
       });
-      
-      // Force page reload to ensure authentication state is properly set
-      window.location.href = '/citizen-portal/dashboard';
-      return;
+    } finally {
+      setLoading(false);
     }
-    
-    // Simulate API call for other credentials
-    setTimeout(() => {
-      const userData = {
-        id: Date.now(),
-        name: formData.name || "Citizen User",
-        email: formData.email,
-        phone: formData.phone,
-        role: "citizen"
-      };
-      
-      localStorage.setItem('userData', JSON.stringify(userData));
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userRole', 'citizen');
-      
-      window.location.href = '/citizen-portal/dashboard';
-    }, 1500);
   };
 
   return (

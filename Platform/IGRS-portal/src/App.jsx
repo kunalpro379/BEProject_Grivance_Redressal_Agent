@@ -27,6 +27,65 @@ import CitizenDashboard from "./pages/CitizenDashboard";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
+// Temporarily disabled - import UserManagement from "./pages/admin/UserManagement";
+
+// Inline Users Page Component
+function UsersPage() {
+  const [users, setUsers] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch('http://localhost:4000/api/admin/users', {
+      headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+    })
+    .then(res => res.json())
+    .then(data => {
+      // Filter out citizens - only show Users table entries
+      const filteredUsers = (data.users || []).filter(u => u.role !== 'citizen');
+      setUsers(filteredUsers);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div className="p-6">Loading...</div>;
+
+  return (
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">User Management</h1>
+      <div className="bg-white rounded-lg border overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">User</th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Role</th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {users.map((user) => (
+              <tr key={user.id} className="hover:bg-gray-50">
+                <td className="px-6 py-4">
+                  <div className="font-medium">{user.full_name}</div>
+                  <div className="text-sm text-gray-500">{user.email}</div>
+                </td>
+                <td className="px-6 py-4">
+                  <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">{user.role}</span>
+                </td>
+                <td className="px-6 py-4">
+                  <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">{user.approval_status}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   const { user, loading, logout } = useAuth();
@@ -130,6 +189,9 @@ function App() {
             }
           >
             <Route path="dashboard" element={<AdminDashboard userAuth={user} />} />
+            <Route path="users" element={
+              <UsersPage />
+            } />
             <Route path="knowledge-base" element={<div className="p-6 bg-white rounded-xl shadow-sm"><h2 className="text-2xl font-bold text-gray-900">Knowledge Base</h2><p className="text-gray-600 mt-2">Coming soon...</p></div>} />
             <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
           </Route>

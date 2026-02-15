@@ -2,6 +2,9 @@
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Phone, Building, Home, MapPin, ArrowRight, ArrowLeft, CheckCircle, Shield, Key, Briefcase } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import authService from '../services/authService';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 const OfficialAuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -131,7 +134,7 @@ const OfficialAuthPage = () => {
     try {
       if (isLogin) {
         // Login
-        const response = await fetch('http://localhost:5000/api/auth/login', {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -243,7 +246,7 @@ const OfficialAuthPage = () => {
           })
         };
 
-        const response = await fetch('http://localhost:5000/api/auth/register', {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(registrationData)

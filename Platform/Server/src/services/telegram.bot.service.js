@@ -501,20 +501,20 @@ class TelegramBotService {
         }
     }
 
-    init() {
+    async init() {
         if (!process.env.TELEGRAM_BOT_TOKEN) {
-            console.warn('Telegram bot token not provided. Bot will not start.');
+            console.warn('⚠️  Telegram bot token not provided. Bot will not start.');
             this.initialized = false;
-            return;
+            return Promise.resolve();
         }
 
         try {
             // Launch with dropPendingUpdates to avoid conflicts
-            this.bot.launch({
+            await this.bot.launch({
                 dropPendingUpdates: true
             });
             this.initialized = true;
-            console.log('Telegram bot started successfully');
+            console.log('✅ Telegram bot started successfully');
             
             // Graceful shutdown
             const stopBot = () => {
@@ -526,8 +526,12 @@ class TelegramBotService {
             process.once('SIGTERM', stopBot);
             
         } catch (error) {
-            console.error('Failed to start Telegram bot:', error);
+            console.warn('⚠️  Failed to start Telegram bot:', error.message);
+            console.warn('⚠️  This is usually because another bot instance is running');
+            console.warn('⚠️  Server will continue without Telegram bot functionality');
             this.initialized = false;
+            // Don't throw error, just log warning
+            return Promise.resolve();
         }
     }
 

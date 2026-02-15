@@ -55,7 +55,11 @@ function Layout({ userRole, onLogout, userAuth }) {
 
   // Update navigation handler
   const handleNavigation = (path) => {
-    navigate(`/officials-portal/${path}`);
+    // Determine base path based on user role
+    const basePath = userRole === 'admin' ? '/admin' : 
+                     userRole === 'department_head' ? '/department' : 
+                     userRole === 'citizen' ? '/citizen' : '/officer';
+    navigate(`${basePath}/${path}`);
   };
 
   return (

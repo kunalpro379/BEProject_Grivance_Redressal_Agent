@@ -2,6 +2,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom"
 import { 
   LayoutDashboard, 
   BookOpen,
+  Users,
   LogOut,
   Bell,
   UserCircle,
@@ -17,9 +18,10 @@ function AdminLayout({ userAuth, onLogout }) {
   const { logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Admin-specific navigation items - Only Dashboard and Knowledge Base
+  // Admin-specific navigation items
   const navItems = [
     { path: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { path: "users", label: "Users", icon: Users },
     { path: "knowledge-base", label: "Knowledge Base", icon: BookOpen }
   ];
 
@@ -67,9 +69,7 @@ function AdminLayout({ userAuth, onLogout }) {
         {/* Logo section */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">A</span>
-            </div>
+            <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
             <div>
               <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
               <p className="text-xs text-gray-500">System Management</p>
@@ -78,9 +78,9 @@ function AdminLayout({ userAuth, onLogout }) {
         </div>
 
         {/* User Info */}
-        <div className="p-6 border-b border-gray-200 bg-gradient-to-br from-blue-50 to-white">
+        <div className="p-6 border-b border-gray-200 bg-gray-50">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
               <UserCircle className="w-7 h-7 text-white" />
             </div>
             <div className="flex-1 min-w-0">
@@ -102,7 +102,7 @@ function AdminLayout({ userAuth, onLogout }) {
                 w-full flex items-center gap-3 px-4 py-3 rounded-xl
                 transition-all duration-200 font-medium
                 ${isActive(item.path)
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+                  ? "bg-black text-white shadow-lg"
                   : "text-gray-700 hover:bg-gray-100"
                 }
               `}

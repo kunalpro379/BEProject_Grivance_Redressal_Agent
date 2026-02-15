@@ -1,7 +1,7 @@
 AgenticWorkflow/
 .env
-Workers/QueryAnalyst/.env
-Workers/WebCrawl/.enving
+AgenticWorkers/QueryAnalyst/.env
+AgenticWorkers/WebCrawl/.enving
 Server/.env
 Platform/Server/.env
 Platform/IGRS-portal/.env

@@ -8,6 +8,8 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "migrate": "node migrate.js",
+    "migrate:006": "node run-migration.js",
+    "migrate:cleanup": "node cleanup-functions.js",
     "migrate:old": "node scripts/migrate.js",
     "migrate:status": "node scripts/migration-status.js",
     "migrate:rollback": "node scripts/rollback.js",

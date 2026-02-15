@@ -82,6 +82,15 @@ app.get('/health', async (req, res) => {
   }
 });
 
+// Test endpoint for frontend connectivity
+app.get('/api/test', (req, res) => {
+  res.json({ 
+    message: 'API is working!',
+    timestamp: new Date().toISOString(),
+    port: PORT
+  });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
@@ -113,13 +122,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Initialize Telegram Bot
-try {
-  telegramBot.init();
-  console.log('Telegram Bot initialized');
-} catch (error) {
-  console.error('Telegram Bot initialization failed:', error.message);
-}
+// Initialize Telegram Bot (non-blocking)
+(async () => {
+  try {
+    await telegramBot.init();
+    console.log('Telegram Bot initialized');
+  } catch (error) {
+    console.warn('⚠️  Telegram Bot initialization failed:', error.message);
+    console.warn('⚠️  Server will continue without Telegram bot');
+  }
+})();
 
 // Start server
 app.listen(PORT, () => {
