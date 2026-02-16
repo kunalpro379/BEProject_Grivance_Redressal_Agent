@@ -83,39 +83,7 @@ CREATE TABLE public.GrievanceComments (
   is_internal boolean DEFAULT false,
   CONSTRAINT GrievanceComments_pkey PRIMARY KEY (id),
   CONSTRAINT GrievanceComments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.Users(id),
-  CONSTRAINT grievancecomments_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.Grievances(id)
-);
-CREATE TABLE public.Grievances (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  created_at timestamp with time zone DEFAULT now(),
-  updated_at timestamp with time zone DEFAULT now(),
-  assigned_officer_id uuid,
-  department_id uuid,
-  status USER-DEFINED DEFAULT 'pending'::grievance_status,
-  priority character varying DEFAULT 'medium'::character varying,
-  query_type jsonb,
-  category jsonb,
-  similar_cases_summary text,
-  sentiment_priority jsonb,
-  emotion jsonb,
-  severity jsonb,
-  patterns jsonb,
-  fraud jsonb,
-  department jsonb,
-  policy_search jsonb,
-  past_queries_summary text,
-  full_result jsonb,
-  resolution_text text,
-  resolved_at timestamp with time zone,
-  resolved_by uuid,
-  citizen_id uuid,
-  grievance_id uuid,
-  CONSTRAINT Grievances_pkey PRIMARY KEY (id),
-  CONSTRAINT UserGrievance_assigned_officer_id_fkey FOREIGN KEY (assigned_officer_id) REFERENCES public.Users(id),
-  CONSTRAINT UserGrievance_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.Departments(id),
-  CONSTRAINT UserGrievance_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.Users(id),
-  CONSTRAINT UserGrievance_citizen_id_fkey FOREIGN KEY (citizen_id) REFERENCES public.Citizens(id),
-  CONSTRAINT UserGrievance_grivience_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.UserGrievance(id)
+  CONSTRAINT grievancecomments_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.UserGrievance(id)
 );
 CREATE TABLE public.KnowledgeBase (
   id integer NOT NULL DEFAULT nextval('"KnowledgeBase_id_seq"'::regclass),

@@ -1,37 +1,39 @@
 {
   "grievance": {
     "text": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell",
-    "enhanced_query": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell\n\nImage description: The image captures a severely polluted nala (stream) overflowing with various types of garbage, predominantly plastic bags, wrappers, and other discarded items. The water itself appears dark, murky, and stagnant in some areas, with visible foam and debris floating on its surface, indicative of heavy pollution. The photograph is taken from an elevated perspective, likely a bridge, looking down through a metal grate or fence. Beyond the polluted water and accumulated trash, green vegetation is visible on the far bank, providing a stark contrast to the unhealthy state of the water body. A GPS camera overlay confirms the location as Ambernath, Maharashtra, India, and provides coordinates and a timestamp.\nVisible text in image: GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle\nLocation: 655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nNearby landmarks: Polluted nala (stream/drain), Metal fence/railing over the nala, Residential buildings visible in the embedded map thumbnail\nArea type: residential",
+    "enhanced_query": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell\n\nImage description: The image captures a severely polluted nala (stream/drain) from a slightly elevated perspective, likely from a bridge or overpass, with a metal gridded fence or railing in the foreground. The water in the nala appears dark and murky, indicating significant contamination. It is extensively covered and choked with a vast amount of diverse garbage, including numerous plastic bags, bottles, wrappers, and other discarded refuse, forming a thick layer on the water's surface and along its banks. The immediate surroundings show some sparse vegetation, but the primary focus is on the dense accumulation of waste within the water channel. A digital overlay from a 'GPS Map Camera' is visible at the bottom, displaying location details, coordinates, and timestamp.\nVisible text in image: GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath,\nMaharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle\nLocation: 655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nNearby landmarks: Polluted Nala (stream/drain) with extensive garbage, Metal railing/fence (suggesting a bridge or elevated view)\nArea type: residential",
     "image": {
-      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp6u7yx1ka.jpg",
-      "description": "The image captures a severely polluted nala (stream) overflowing with various types of garbage, predominantly plastic bags, wrappers, and other discarded items. The water itself appears dark, murky, and stagnant in some areas, with visible foam and debris floating on its surface, indicative of heavy pollution. The photograph is taken from an elevated perspective, likely a bridge, looking down through a metal grate or fence. Beyond the polluted water and accumulated trash, green vegetation is visible on the far bank, providing a stark contrast to the unhealthy state of the water body. A GPS camera overlay confirms the location as Ambernath, Maharashtra, India, and provides coordinates and a timestamp.",
+      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp7p5bkxdl.jpg",
+      "description": "The image captures a severely polluted nala (stream/drain) from a slightly elevated perspective, likely from a bridge or overpass, with a metal gridded fence or railing in the foreground. The water in the nala appears dark and murky, indicating significant contamination. It is extensively covered and choked with a vast amount of diverse garbage, including numerous plastic bags, bottles, wrappers, and other discarded refuse, forming a thick layer on the water's surface and along its banks. The immediate surroundings show some sparse vegetation, but the primary focus is on the dense accumulation of waste within the water channel. A digital overlay from a 'GPS Map Camera' is visible at the bottom, displaying location details, coordinates, and timestamp.",
       "key_objects": [
-        "nala (stream)",
-        "garbage (plastic bags, refuse)",
-        "polluted water",
-        "metal fence/grate",
-        "green vegetation"
+        "nala (stream/drain)",
+        "garbage (plastic bags, bottles, general refuse)",
+        "murky water",
+        "metal fence/railing",
+        "vegetation",
+        "GPS overlay"
       ],
-      "scene_type": "Urban waterway pollution",
-      "extracted_text": "GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle"
+      "scene_type": "Urban water pollution / Nala pollution",
+      "extracted_text": "GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath,\nMaharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle"
     }
   },
   "location": {
     "pincode": "421501",
-    "district": "Kalyan",
+    "district": "Raigad",
     "state": "Maharashtra",
     "location_confidence": "High",
     "raw_location_mentions": [
       "Ambernath, Maharashtra",
       "655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India",
-      "Ambernath, Maharashtra, India"
+      "Ambernath, Maharashtra, India",
+      "Maharashtra 421501, India"
     ]
   },
   "analysis": {
     "query_type": {
       "query_type": "Complaint",
       "confidence": "High",
-      "reasoning": "The query is a complaint due to the presence of garbage dumped in a nala near the area, causing water pollution and a bad smell. The image provided is a visual representation of the issue, and the GPS coordinates and timestamp confirm the location. The tone of the query is one of concern and frustration, indicating that the individual is seeking a resolution to the problem."
+      "reasoning": "The query is classified as a complaint due to the explicit mention of a problem (water pollution and bad smell) caused by a specific issue (garbage dumped in nala near the area). The image provided further supports this classification by visually depicting the severity of the issue. The tone of the query is also critical and concerned, which is typical of a complaint."
     },
     "emotion": {
       "primary_emotion": "Angry",
@@ -43,13 +45,12 @@
       "emotional_indicators": [
         "Garbage dumped in nala near my area",
         "Water pollution and bad smell",
-        "polluted nala (stream/drain)",
-        "overflowing with various types of garbage",
-        "dark, murky, and stagnant in some areas",
-        "visible foam and debris floating on its surface",
-        "heavy pollution",
-        "unhealthy state of the water body",
-        "stark contrast to the green vegetation"
+        "polluted nala (stream/drain) with extensive garbage",
+        "extensive garbage",
+        "significant contamination",
+        "dense accumulation of waste",
+        "bad smell",
+        "pollution"
       ]
     },
     "severity": {
@@ -57,104 +58,100 @@
       "criticality_score": 9,
       "impact_scope": "Community",
       "potential_consequences": [
-        "Waterborne diseases due to pollution",
-        "Negative impact on local ecosystem and wildlife",
-        "Health risks for residents due to bad smell and pollution",
-        "Potential for water contamination affecting nearby residential areas",
-        "Long-term damage to the environment and water quality"
+        "Water pollution can lead to the spread of waterborne diseases among the community.",
+        "The bad smell from the garbage can cause respiratory issues and discomfort to the residents.",
+        "The presence of garbage in the nala can attract pests and rodents, leading to the spread of diseases.",
+        "The pollution can also affect the local wildlife and ecosystem.",
+        "The situation can lead to a decline in the quality of life for the residents and can have long-term effects on their health."
       ]
     },
     "priority": {
       "sentiment_score": 8,
       "urgency_level": "High",
-      "emotional_tone": "Outrage and Concern",
+      "emotional_tone": "Anger and Disgust",
       "key_emotional_indicators": [
-        "severely polluted nala",
-        "various types of garbage",
-        "water pollution and bad smell",
-        "stagnant in some areas",
-        "visible foam and debris",
-        "heavy pollution",
-        "unhealthy state of the water body",
-        "contrast to the green vegetation"
+        "Garbage dumped in nala near my area",
+        "Water pollution and bad smell",
+        "Severely polluted nala",
+        "Extensive garbage",
+        "Dark and murky water",
+        "Bad smell"
       ],
       "priority_level": "High",
-      "justification": "The grievance involves severe water pollution and a bad smell, which poses a significant risk to the health and well-being of the residents in the area. The presence of plastic bags, wrappers, and other discarded items in the nala indicates a lack of proper waste management, and the potential consequences of water pollution can be severe, including the spread of waterborne diseases and harm to aquatic life. The fact that the issue is located in a residential area with nearby buildings and a metal fence/railing over the nala suggests that the impact of the grievance is localized but still significant.",
-      "expected_resolution_time": "Within 3-5 working days",
-      "risk_assessment": "High risk of waterborne diseases, harm to aquatic life, and negative impact on the environment. Medium risk of property damage and economic losses due to the presence of garbage and pollution. Low risk of physical harm to individuals, but high risk of long-term health consequences.",
+      "justification": "The grievance involves water pollution and a bad smell, which poses a significant threat to public health and the environment. The large amount of garbage dumped in the nala indicates a severe impact on the ecosystem and nearby residents. The issue requires immediate attention to prevent further contamination and potential health risks.",
+      "expected_resolution_time": "Within 24-48 hours",
+      "risk_assessment": "High risk of waterborne diseases, environmental pollution, and negative impact on local wildlife. The situation may escalate if not addressed promptly, leading to more severe consequences.",
       "_raw_sentiment": {
         "sentiment_score": 8,
         "urgency_level": "High",
-        "emotional_tone": "Outrage and Concern",
+        "emotional_tone": "Anger and Disgust",
         "key_emotional_indicators": [
-          "severely polluted nala",
-          "various types of garbage",
-          "water pollution and bad smell",
-          "stagnant in some areas",
-          "visible foam and debris",
-          "heavy pollution",
-          "unhealthy state of the water body",
-          "contrast to the green vegetation"
+          "Garbage dumped in nala near my area",
+          "Water pollution and bad smell",
+          "Severely polluted nala",
+          "Extensive garbage",
+          "Dark and murky water",
+          "Bad smell"
         ]
       },
       "_raw_priority": {
         "priority_level": "High",
-        "justification": "The grievance involves severe water pollution and a bad smell, which poses a significant risk to the health and well-being of the residents in the area. The presence of plastic bags, wrappers, and other discarded items in the nala indicates a lack of proper waste management, and the potential consequences of water pollution can be severe, including the spread of waterborne diseases and harm to aquatic life. The fact that the issue is located in a residential area with nearby buildings and a metal fence/railing over the nala suggests that the impact of the grievance is localized but still significant.",
-        "expected_resolution_time": "Within 3-5 working days",
-        "risk_assessment": "High risk of waterborne diseases, harm to aquatic life, and negative impact on the environment. Medium risk of property damage and economic losses due to the presence of garbage and pollution. Low risk of physical harm to individuals, but high risk of long-term health consequences."
+        "justification": "The grievance involves water pollution and a bad smell, which poses a significant threat to public health and the environment. The large amount of garbage dumped in the nala indicates a severe impact on the ecosystem and nearby residents. The issue requires immediate attention to prevent further contamination and potential health risks.",
+        "expected_resolution_time": "Within 24-48 hours",
+        "risk_assessment": "High risk of waterborne diseases, environmental pollution, and negative impact on local wildlife. The situation may escalate if not addressed promptly, leading to more severe consequences."
       }
     },
     "patterns": {
       "is_recurring_issue": true,
       "similar_patterns_found": [
-        "Garbage dumped in nala near residential areas in Maharashtra",
-        "Polluted water bodies in urban areas of India",
-        "Lack of waste management infrastructure in Indian cities"
+        "Garbage dumping in water bodies in urban areas",
+        "Pollution in residential areas due to lack of waste management",
+        "Similar cases of water pollution in Maharashtra, India"
       ],
       "spam_likelihood": "Medium",
-      "pattern_notes": "The image appears to be a genuine report of a polluted nala in Ambernath, Maharashtra. The presence of a GPS camera overlay and a timestamp suggests that the image is not staged. However, the similarity in the issue to other reports in the region and the lack of specific details about the incident (e.g., date, time, and exact location) may indicate a potential spam campaign. Further investigation is required to determine the authenticity of the report."
+      "pattern_notes": "The image captures a severe case of water pollution in Ambernath, Maharashtra, with a large amount of garbage dumped in a nala. This is a recurring issue in urban areas, particularly in India, where lack of proper waste management leads to pollution in water bodies. The image is likely to be genuine, but the similarity in patterns suggests that it may be part of a larger campaign to raise awareness about environmental issues. The use of a GPS Map Camera and the presence of a digital overlay suggest that the image is authentic, but the similarity in patterns and the lack of specific details about the incident make it difficult to determine the likelihood of spam."
     },
     "historical_trends": {
       "top_3_similar_cases": [
         {
-          "id": "13847",
-          "summary": "Garbage is repeatedly thrown in front of Gate. Garbage is thrown by near by eatery shops. Kindly stop them from doing this. Take action against the eatery shops."
+          "id": "9357",
+          "summary": "People throwing Garbage in the NALA"
         },
         {
-          "id": "264",
-          "summary": "Garbage collecting in front of rajarajeshwari lake is so annoying... Garbage collecting in front of rajarajeshwari lake is so annoying."
+          "id": "10068",
+          "summary": "Garbage pile up in plot next to my house"
         },
         {
-          "id": "2453",
-          "summary": "Garbage in an empty plot next to the lake Garbage is being burnt every night opposite to Allalasandra lake swimming pool."
+          "id": "12954",
+          "summary": "Day 2 !\r\nThis garbage menace continues ..\r\nYet to see the action fr..."
         }
       ],
       "common_resolutions": [
         {
-          "resolution": "Immediate action was taken to stop the garbage dumping and burning.",
-          "description": "In all three cases, the authorities took immediate action to stop the garbage dumping and burning, and ensured that the areas were cleaned up."
+          "resolution": "Installation of dustbins and proper waste management systems",
+          "count": 3
         },
         {
-          "resolution": "Public awareness campaigns were conducted to educate people about the importance of proper waste management.",
-          "description": "In two of the cases, public awareness campaigns were conducted to educate people about the importance of proper waste management and the consequences of littering and burning garbage."
+          "resolution": "Issuance of notices to landowners to fence vacant lands",
+          "count": 2
         },
         {
-          "resolution": "Collaboration between local authorities and community members was key to resolving the issue.",
-          "description": "In all three cases, collaboration between local authorities and community members was key to resolving the issue, with community members playing an active role in reporting the incidents and working with authorities to find a solution."
+          "resolution": "Collaboration between local authorities and residents to maintain cleanliness",
+          "count": 2
         }
       ],
       "patterns_identified": [
         {
-          "pattern": "Garbage dumping and burning is a recurring issue in residential areas.",
-          "description": "All three cases involved garbage dumping and burning in residential areas, highlighting the need for effective waste management systems and public awareness campaigns to prevent such incidents."
+          "pattern": "Garbage dumping in public areas",
+          "count": 5
         },
         {
-          "pattern": "Community involvement is crucial in resolving waste management issues.",
-          "description": "In all three cases, community members played an active role in reporting the incidents and working with authorities to find a solution, highlighting the importance of community involvement in resolving waste management issues."
+          "pattern": "Lack of proper waste management infrastructure",
+          "count": 4
         },
         {
-          "pattern": "Effective communication between authorities and community members is essential for resolving waste management issues.",
-          "description": "In all three cases, effective communication between authorities and community members was key to resolving the issue, with community members needing to be informed about the actions being taken and the reasons behind them."
+          "pattern": "Community involvement in maintaining cleanliness",
+          "count": 3
         }
       ]
     },
@@ -162,19 +159,19 @@
       "fraud_risk": "Low",
       "spam_indicators": [
         {
-          "pattern": "Generic complaint about pollution",
-          "description": "The complaint does not provide specific details about the issue, only mentioning 'bad smell' and 'water pollution'."
+          "pattern": "Generic complaint",
+          "description": "The complaint describes a common issue (garbage dumped in nala) without providing specific details or context."
         },
         {
-          "pattern": "Lack of specific evidence",
-          "description": "The image provided is strong visual evidence, but the complaint does not mention any specific actions taken by the citizen to document the issue or provide additional context."
+          "pattern": "Lack of personal experience",
+          "description": "The complaint does not mention the complainant's personal experience or connection to the issue, making it seem more like a general report."
         }
       ],
       "authenticity_confidence": "High",
       "verification_recommendations": [
-        "Verify the GPS data and location to ensure accuracy",
-        "Request additional information from the citizen to provide more context about the issue",
-        "Consider contacting the local authorities to confirm the complaint and gather more information"
+        "Verify the location using GPS coordinates and nearby landmarks",
+        "Check for any previous complaints or reports from the same location",
+        "Review the image for any signs of manipulation or tampering"
       ]
     }
   },
@@ -183,25 +180,25 @@
       "main_category": "Environmental Issues",
       "sub_category": "Water Pollution",
       "confidence": "High",
-      "reasoning": "The grievance content mentions 'Water pollution and bad smell' due to garbage dumped in a nala near the area. The image description also highlights the severely polluted nala with dark, murky, and stagnant water, indicating a high level of water pollution."
+      "reasoning": "The grievance content mentions 'Water pollution and bad smell' due to garbage dumped in a nala near the area, which indicates a clear connection to water pollution. The image description also supports this, showing a severely polluted nala with dark and murky water, extensive garbage, and a bad smell."
     },
     "department": {
       "recommended_department": "Public Works Department (PWD) or Municipal Corporation of Ambernath",
-      "contact_information": "Contact the local authorities or municipal corporation office in Ambernath, Maharashtra, to report the issue and request action.",
+      "contact_information": "Contact the local authorities or municipal corporation of Ambernath for reporting and addressing the issue of garbage dumped in the nala. You can also contact the Public Works Department (PWD) for assistance.",
       "jurisdiction": "Ambernath, Maharashtra, India",
-      "escalation_path": "If the issue is not resolved, escalate to the District Collector or the State Pollution Control Board (SPCB) for further action."
+      "escalation_path": "If the issue is not resolved by the local authorities, you can escalate the matter to the Maharashtra Pollution Control Board (MPCB) or the Ministry of Environment, Forest and Climate Change (MoEFCC) for further action."
     }
   },
   "policy_search_queries": {
     "queries": [
-      "Ambernath Maharashtra nala pollution control measures",
-      "Government schemes for water pollution prevention in India",
-      "Waste management policies in Maharashtra state India",
-      "Environmental protection laws in India related to water pollution",
-      "Ambernath Municipal Corporation waste disposal initiatives",
-      "India government initiatives for reducing plastic waste in water bodies"
+      "Maharashtra government initiatives for water pollution control near Ambernath",
+      "Ambernath nala pollution complaint procedure Maharashtra government",
+      "Water pollution control policies in Maharashtra India",
+      "Garbage dumping in nala near Ambernath Maharashtra government response",
+      "Environmental protection laws in Maharashtra India related to water pollution",
+      "Ambernath water pollution grievance redressal mechanism Maharashtra government"
     ],
-    "reasoning": "These search queries are designed to find relevant information on policies and schemes related to water pollution, waste management, and environmental protection in the context of Ambernath, Maharashtra. They cover government initiatives, laws, and measures to prevent water pollution and promote sustainable waste management practices."
+    "reasoning": "These search queries are designed to find relevant information on government policies, schemes, and initiatives related to water pollution control in Maharashtra, specifically in the Ambernath area. They cover various aspects such as complaint procedures, government responses, environmental protection laws, and grievance redressal mechanisms."
   },
   "outputs": {
     "markdown_report_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\AgenticWorkers\\QueryAnalyst\\outputs\\grievance_report.md",
