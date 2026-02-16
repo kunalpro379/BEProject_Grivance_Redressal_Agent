@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Phone, Building, Home, MapPin, ArrowRight, ArrowLeft, CheckCircle, Shield, Key, Briefcase } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import authService from '../services/authService';
+import { getDepartmentId } from '../utils/departmentMapping';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
@@ -203,16 +204,25 @@ const OfficialAuthPage = () => {
           },
         });
 
-        // Redirect based on role
-        const roleRoutes = {
-          'admin': '/admin/dashboard',
-          'department_officer': '/officer/dashboard',
-          'department_head': '/department/dashboard',
-          'citizen': '/citizen/dashboard'
-        };
+        // Redirect based on role and department
+        let redirectUrl = '/';
+        
+        if (data.user.role === 'admin') {
+          redirectUrl = '/admin/dashboard';
+        } else if (data.user.role === 'department_officer' || data.user.role === 'department_head') {
+          // Get department ID from department name
+          const deptId = data.user.department_name ? getDepartmentId(data.user.department_name) : null;
+          if (deptId) {
+            redirectUrl = `/department/${deptId}`;
+          } else {
+            redirectUrl = data.user.role === 'department_officer' ? '/officer/dashboard' : '/department/dashboard';
+          }
+        } else if (data.user.role === 'citizen') {
+          redirectUrl = '/citizen/dashboard';
+        }
         
         setTimeout(() => {
-          window.location.href = roleRoutes[data.user.role] || '/';
+          window.location.href = redirectUrl;
         }, 1000);
         
       } else {

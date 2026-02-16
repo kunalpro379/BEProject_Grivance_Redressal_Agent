@@ -21,6 +21,7 @@ import vectorRoutes from './src/routes/vector.routes.js';
 import citizenRoutes from './src/routes/citizen.routes.js';
 import workerRoutes from './src/routes/worker.routes.js';
 import telegramRoutes from './src/routes/telegram.routes.js';
+import knowledgeBaseRoutes from './src/routes/knowledgebase.routes.js';
 
 // Import services
 import pool from './src/config/database.js';
@@ -99,6 +100,7 @@ app.use('/api/vector', vectorRoutes);
 app.use('/api/citizens', citizenRoutes);
 app.use('/api/worker', workerRoutes);
 app.use('/api/telegram', telegramRoutes);
+app.use('/api/knowledgebase', knowledgeBaseRoutes);
 
 // 404 handler
 app.use((req, res) => {

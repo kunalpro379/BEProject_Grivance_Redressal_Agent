@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import citizenService from './citizen.service.js';
 import grievanceDBService from './grievance.db.service.js';
 import azureStorageService from './azure.storage.services.js';
-import azureQueueService from './azure.queue.service.js';
+import azureQueryAnalystQueueService from './azure.queue.queryanalyst.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -462,7 +462,7 @@ class TelegramBotService {
                 timestamp: new Date().toISOString()
             };
 
-            await azureQueueService.sendMessage(queueMessage);
+            await azureQueryAnalystQueueService.sendMessage(queueMessage);
 
             if (fs.existsSync(tempFilePath)) {
                 fs.unlinkSync(tempFilePath);

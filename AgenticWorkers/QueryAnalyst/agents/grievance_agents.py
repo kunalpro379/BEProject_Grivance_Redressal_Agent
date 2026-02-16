@@ -86,8 +86,8 @@ def analyze_patterns(enhanced_query: str, retrieved_data: Dict[str, Any]) -> Dic
     return _parse_json(raw)
 
 
-def analyze_fraud(enhanced_query: str, retrieved_data: Dict[str, Any]) -> Dict[str, Any]:
-    task = _task_creator.create_fraud_task(enhanced_query)
+def analyze_fraud(enhanced_query: str, validation_result: Dict[str, Any] = None) -> Dict[str, Any]:
+    task = _task_creator.create_fraud_task(enhanced_query, validation_result)
     raw = _run_task(task, "fraud")
     return _parse_json(raw)
 

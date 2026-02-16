@@ -116,19 +116,19 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
   useEffect(() => {
     const path = location.pathname;
     switch (path) {
-      case '/citizen-portal/grievances':
+      case '/citizen/grievances':
         setActiveTab("Grievances");
         break;
-      case '/citizen-portal/statistics':
+      case '/citizen/statistics':
         setActiveTab("Statistics");
         break;
-      case '/citizen-portal/announcements':
+      case '/citizen/announcements':
         setActiveTab("Announcements");
         break;
-      case '/citizen-portal/community':
+      case '/citizen/community':
         setActiveTab("Community");
         break;
-      case '/citizen-portal/settings':
+      case '/citizen/settings':
         setActiveTab("Settings");
         break;
       default:
@@ -235,23 +235,23 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
   const renderMainContent = () => {
     const path = location.pathname;
     
-    if (path === '/citizen-portal/grievances') {
+    if (path === '/citizen/grievances') {
       return <Grievances />;
     }
     
-    if (path === '/citizen-portal/statistics') {
+    if (path === '/citizen/statistics') {
       return <Statistics />;
     }
     
-    if (path === '/citizen-portal/announcements') {
+    if (path === '/citizen/announcements') {
       return <Announcements />;
     }
     
-    if (path === '/citizen-portal/community') {
+    if (path === '/citizen/community') {
       return <Community />;
     }
     
-    if (path === '/citizen-portal/settings') {
+    if (path === '/citizen/settings') {
       return (
         <main className="flex-1 p-2 sm:p-4 md:p-6 relative z-10 overflow-y-auto">
           <div className="bg-white rounded-xl p-12 shadow-lg border-2 border-gray-300 text-center">
@@ -574,12 +574,12 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
         <nav className="flex-1 p-2 sm:p-3 md:p-4">
           <div className="space-y-1 sm:space-y-2">
             {[
-              { label: "Dashboard", icon: Home, path: "/citizen-portal/dashboard" },
-              { label: "Grievances", icon: FileText, path: "/citizen-portal/grievances" },
-              { label: "Statistics", icon: BarChart3, path: "/citizen-portal/statistics" },
-              { label: "Announcements", icon: Bell, path: "/citizen-portal/announcements" },
-              { label: "Community", icon: Users, path: "/citizen-portal/community" },
-              { label: "Settings", icon: Settings, path: "/citizen-portal/settings" }
+              { label: "Dashboard", icon: Home, path: "/citizen/dashboard" },
+              { label: "Grievances", icon: FileText, path: "/citizen/grievances" },
+              { label: "Statistics", icon: BarChart3, path: "/citizen/statistics" },
+              { label: "Announcements", icon: Bell, path: "/citizen/announcements" },
+              { label: "Community", icon: Users, path: "/citizen/community" },
+              { label: "Settings", icon: Settings, path: "/citizen/settings" }
             ].map((item, index) => (
               <button
                 key={index}

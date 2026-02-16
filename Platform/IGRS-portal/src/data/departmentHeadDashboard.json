@@ -1,0 +1,462 @@
+{
+  "grievanceOverview": {
+    "totalGrievances": 156,
+    "pendingGrievances": 45,
+    "resolvedGrievances": 98,
+    "overdueGrievances": 13,
+    "emergencyGrievances": 8,
+    "monthlyTrend": "+12%"
+  },
+  "performanceMetrics": {
+    "kpiScore": 87.5,
+    "kpiTarget": 90,
+    "slaCompliance": 94.3,
+    "avgResolutionTime": "4.2 days",
+    "citizenSatisfaction": 4.2,
+    "performanceTrend": "+5.2%"
+  },
+  "resourceHealth": {
+    "staff": {
+      "available": 45,
+      "required": 60,
+      "utilizationRate": 85,
+      "status": "Shortage"
+    },
+    "equipment": {
+      "available": 12,
+      "total": 18,
+      "availabilityPercent": 67,
+      "status": "Adequate"
+    },
+    "budget": {
+      "allocated": 50000000,
+      "used": 32500000,
+      "remaining": 17500000,
+      "utilizationPercent": 65,
+      "status": "On Track"
+    },
+    "materials": {
+      "adequate": 12,
+      "lowStock": 5,
+      "critical": 2,
+      "status": "Low Stock Alert"
+    }
+  },
+  "tenderProjectStatus": {
+    "activeTenders": 8,
+    "activeProjects": 15,
+    "projectsAtRisk": 3,
+    "projectsDelayed": 2,
+    "tenderClosingSoon": 3
+  },
+  "grievanceTrends": {
+    "daily": [
+      { "date": "2024-02-08", "count": 12 },
+      { "date": "2024-02-09", "count": 15 },
+      { "date": "2024-02-10", "count": 18 },
+      { "date": "2024-02-11", "count": 14 },
+      { "date": "2024-02-12", "count": 16 },
+      { "date": "2024-02-13", "count": 19 },
+      { "date": "2024-02-14", "count": 22 }
+    ],
+    "byCategory": [
+      { "category": "Water Supply Disruption", "count": 58, "percentage": 37.2 },
+      { "category": "Pipeline Leakage", "count": 42, "percentage": 26.9 },
+      { "category": "Water Quality Issue", "count": 28, "percentage": 17.9 },
+      { "category": "Low Water Pressure", "count": 18, "percentage": 11.5 },
+      { "category": "Meter Issues", "count": 10, "percentage": 6.4 }
+    ],
+    "byZone": [
+      { "zone": "Zone 4", "count": 52, "percentage": 33.3 },
+      { "zone": "Zone 2", "count": 38, "percentage": 24.4 },
+      { "zone": "Zone 3", "count": 35, "percentage": 22.4 },
+      { "zone": "Zone 1", "count": 31, "percentage": 19.9 }
+    ],
+    "emergencyVsNormal": {
+      "emergency": 8,
+      "urgent": 45,
+      "normal": 103
+    },
+    "growthPercentage": 12.5
+  },
+  "zonePerformance": [
+    {
+      "zone": "Zone 1",
+      "activeGrievances": 12,
+      "resolutionRate": 89,
+      "avgResolutionTime": "3.8 days",
+      "staffAssigned": 15,
+      "resourceUtilization": 72,
+      "riskLevel": "Low"
+    },
+    {
+      "zone": "Zone 2",
+      "activeGrievances": 18,
+      "resolutionRate": 82,
+      "avgResolutionTime": "4.5 days",
+      "staffAssigned": 12,
+      "resourceUtilization": 88,
+      "riskLevel": "Medium"
+    },
+    {
+      "zone": "Zone 3",
+      "activeGrievances": 15,
+      "resolutionRate": 85,
+      "avgResolutionTime": "4.1 days",
+      "staffAssigned": 14,
+      "resourceUtilization": 78,
+      "riskLevel": "Low"
+    },
+    {
+      "zone": "Zone 4",
+      "activeGrievances": 28,
+      "resolutionRate": 68,
+      "avgResolutionTime": "5.8 days",
+      "staffAssigned": 10,
+      "resourceUtilization": 95,
+      "riskLevel": "High"
+    }
+  ],
+  "resourceOverview": {
+    "staff": {
+      "total": 60,
+      "available": 18,
+      "busy": 42,
+      "utilizationPercent": 70
+    },
+    "equipment": {
+      "total": 18,
+      "available": 6,
+      "inUse": 10,
+      "underMaintenance": 2
+    },
+    "materials": {
+      "inStock": 15,
+      "lowStock": 5,
+      "criticalStock": 2
+    },
+    "budget": {
+      "totalAllocated": 50000000,
+      "used": 32500000,
+      "remaining": 17500000,
+      "utilizationPercent": 65
+    }
+  },
+  "tenderContractorOverview": {
+    "activeTenders": [
+      {
+        "tenderId": "TND_2024_001",
+        "title": "Pipeline Replacement Zone 4",
+        "closingDate": "2024-02-20",
+        "daysRemaining": 6,
+        "estimatedValue": "₹25 Lakhs",
+        "status": "Open"
+      },
+      {
+        "tenderId": "TND_2024_002",
+        "title": "Water Quality Testing Equipment",
+        "closingDate": "2024-02-18",
+        "daysRemaining": 4,
+        "estimatedValue": "₹8 Lakhs",
+        "status": "Closing Soon"
+      }
+    ],
+    "contractorPerformance": [
+      {
+        "contractorId": "CNT_001",
+        "name": "ABC Infrastructure",
+        "performanceScore": 92,
+        "activeProjects": 3,
+        "completionRate": 95,
+        "delayRisk": "Low",
+        "rating": 4.6
+      },
+      {
+        "contractorId": "CNT_002",
+        "name": "XYZ Constructions",
+        "performanceScore": 78,
+        "activeProjects": 2,
+        "completionRate": 82,
+        "delayRisk": "Medium",
+        "rating": 3.8
+      },
+      {
+        "contractorId": "CNT_003",
+        "name": "PQR Enterprises",
+        "performanceScore": 65,
+        "activeProjects": 1,
+        "completionRate": 70,
+        "delayRisk": "High",
+        "rating": 3.2
+      }
+    ],
+    "contractorAlerts": [
+      "PQR Enterprises showing delay risk on Project PRJ_015",
+      "XYZ Constructions - 2 projects behind schedule"
+    ]
+  },
+  "projectProgress": [
+    {
+      "projectId": "PRJ_001",
+      "projectName": "Zone 4 Pipeline Upgrade",
+      "contractor": "ABC Infrastructure",
+      "completionPercent": 75,
+      "budgetUtilization": 68,
+      "timeRemaining": "15 days",
+      "delayRisk": "Low",
+      "status": "On Track"
+    },
+    {
+      "projectId": "PRJ_002",
+      "projectName": "Water Treatment Plant Maintenance",
+      "contractor": "XYZ Constructions",
+      "completionPercent": 45,
+      "budgetUtilization": 52,
+      "timeRemaining": "30 days",
+      "delayRisk": "Medium",
+      "status": "At Risk"
+    },
+    {
+      "projectId": "PRJ_003",
+      "projectName": "Zone 2 Drainage System",
+      "contractor": "PQR Enterprises",
+      "completionPercent": 30,
+      "budgetUtilization": 45,
+      "timeRemaining": "10 days",
+      "delayRisk": "High",
+      "status": "Delayed"
+    }
+  ],
+  "aiInsights": [
+    {
+      "id": "AI_001",
+      "type": "Alert",
+      "priority": "High",
+      "message": "Zone 4 complaint growth increased by 32%",
+      "recommendation": "Allocate 3 additional workers to Zone 4",
+      "confidence": 0.92,
+      "impact": "High"
+    },
+    {
+      "id": "AI_002",
+      "type": "Warning",
+      "priority": "Medium",
+      "message": "Ward 12 likely to miss SLA deadline",
+      "recommendation": "Escalate to supervisor and assign emergency team",
+      "confidence": 0.85,
+      "impact": "Medium"
+    },
+    {
+      "id": "AI_003",
+      "type": "Alert",
+      "priority": "High",
+      "message": "Staff shortage detected in Ward 15",
+      "recommendation": "Reassign 2 workers from Zone 1 (lower workload)",
+      "confidence": 0.88,
+      "impact": "High"
+    },
+    {
+      "id": "AI_004",
+      "type": "Risk",
+      "priority": "Medium",
+      "message": "Contractor ABC Infra showing delay risk",
+      "recommendation": "Review project timeline and apply penalties if needed",
+      "confidence": 0.78,
+      "impact": "Medium"
+    },
+    {
+      "id": "AI_005",
+      "type": "Warning",
+      "priority": "Low",
+      "message": "Equipment shortage affecting pipeline repairs",
+      "recommendation": "Rent additional excavator for 2 weeks",
+      "confidence": 0.82,
+      "impact": "Low"
+    }
+  ],
+  "citizenFeedbackOverview": {
+    "averageRating": 4.2,
+    "positiveFeedbackPercent": 78,
+    "negativeFeedbackPercent": 12,
+    "neutralFeedbackPercent": 10,
+    "mostComplainedZones": ["Zone 4", "Zone 2"],
+    "mostComplainedCategories": ["Water Supply Disruption", "Pipeline Leakage"],
+    "feedbackTrend": [
+      { "month": "Oct 2023", "rating": 3.8 },
+      { "month": "Nov 2023", "rating": 4.0 },
+      { "month": "Dec 2023", "rating": 4.1 },
+      { "month": "Jan 2024", "rating": 4.2 },
+      { "month": "Feb 2024", "rating": 4.2 }
+    ]
+  },
+  "slaEscalationMonitoring": {
+    "nearSLADeadline": 18,
+    "overdueGrievances": 13,
+    "escalatedGrievances": 5,
+    "slaCompliancePercent": 94.3,
+    "criticalGrievances": [
+      {
+        "grievanceId": "GRV_WAT_2024_002",
+        "priority": "Emergency",
+        "overdueBy": "48 hours",
+        "escalationLevel": 2,
+        "status": "Critical"
+      },
+      {
+        "grievanceId": "GRV_WAT_2024_005",
+        "priority": "Emergency",
+        "overdueBy": "24 hours",
+        "escalationLevel": 1,
+        "status": "Critical"
+      }
+    ]
+  },
+  "kpiTracking": {
+    "targetGrievances": 180,
+    "actualResolved": 158,
+    "kpiScore": 87.8,
+    "monthlyTrend": [
+      { "month": "Oct", "score": 82 },
+      { "month": "Nov", "score": 84 },
+      { "month": "Dec", "score": 85 },
+      { "month": "Jan", "score": 86 },
+      { "month": "Feb", "score": 87.8 }
+    ],
+    "improvementPercent": 5.2
+  },
+  "resourceAllocationRecommendations": [
+    {
+      "zone": "Zone 4",
+      "recommendation": "Needs 3 additional workers",
+      "reason": "High complaint density and staff utilization at 95%",
+      "priority": "High",
+      "estimatedImpact": "Reduce resolution time by 30%"
+    },
+    {
+      "zone": "Ward 12",
+      "recommendation": "Needs additional excavator",
+      "reason": "Multiple pipeline repair projects pending",
+      "priority": "Medium",
+      "estimatedImpact": "Complete 5 pending projects"
+    },
+    {
+      "zone": "Zone 2",
+      "recommendation": "Material shortage detected",
+      "reason": "PVC pipes and fittings critically low",
+      "priority": "High",
+      "estimatedImpact": "Prevent project delays"
+    }
+  ],
+  "alertsRiskMonitoring": [
+    {
+      "id": "ALERT_001",
+      "type": "Budget",
+      "severity": "Medium",
+      "message": "Budget nearing limit - 65% utilized",
+      "action": "Review upcoming expenses and optimize spending",
+      "timestamp": "2024-02-14T10:00:00Z"
+    },
+    {
+      "id": "ALERT_002",
+      "type": "Equipment",
+      "severity": "High",
+      "message": "Equipment failure risk - Excavator EXC-001",
+      "action": "Schedule immediate maintenance",
+      "timestamp": "2024-02-14T11:30:00Z"
+    },
+    {
+      "id": "ALERT_003",
+      "type": "Contractor",
+      "severity": "High",
+      "message": "Contractor delay risk - PQR Enterprises",
+      "action": "Review contract and apply penalties",
+      "timestamp": "2024-02-14T09:15:00Z"
+    },
+    {
+      "id": "ALERT_004",
+      "type": "SLA",
+      "severity": "Critical",
+      "message": "SLA violation risk - 18 grievances near deadline",
+      "action": "Prioritize and allocate emergency resources",
+      "timestamp": "2024-02-14T08:00:00Z"
+    },
+    {
+      "id": "ALERT_005",
+      "type": "Complaint",
+      "severity": "Medium",
+      "message": "High complaint growth alert - Zone 4 (+32%)",
+      "action": "Investigate root cause and deploy additional resources",
+      "timestamp": "2024-02-13T16:00:00Z"
+    }
+  ],
+  "recentActivityFeed": [
+    {
+      "id": "ACT_001",
+      "type": "Grievance",
+      "message": "New emergency grievance received - GRV_WAT_2024_020",
+      "timestamp": "2024-02-14T14:30:00Z",
+      "priority": "Emergency"
+    },
+    {
+      "id": "ACT_002",
+      "type": "Tender",
+      "message": "Tender created - Pipeline Replacement Zone 4",
+      "timestamp": "2024-02-14T12:00:00Z",
+      "priority": "Normal"
+    },
+    {
+      "id": "ACT_003",
+      "type": "Contractor",
+      "message": "Contractor assigned - ABC Infra to Project PRJ_018",
+      "timestamp": "2024-02-14T10:45:00Z",
+      "priority": "Normal"
+    },
+    {
+      "id": "ACT_004",
+      "type": "Resource",
+      "message": "Resource request submitted - 2 additional excavators",
+      "timestamp": "2024-02-14T09:30:00Z",
+      "priority": "Medium"
+    },
+    {
+      "id": "ACT_005",
+      "type": "AI",
+      "message": "AI recommendation generated - Allocate workers to Zone 4",
+      "timestamp": "2024-02-14T08:00:00Z",
+      "priority": "High"
+    },
+    {
+      "id": "ACT_006",
+      "type": "Work Order",
+      "message": "Work order issued - WO_2024_045",
+      "timestamp": "2024-02-13T16:00:00Z",
+      "priority": "Normal"
+    }
+  ],
+  "decisionSupportSummary": {
+    "highRiskZones": ["Zone 4", "Zone 2"],
+    "underperformingContractors": ["PQR Enterprises", "XYZ Constructions"],
+    "resourceShortages": ["Staff in Zone 4", "Excavators", "PVC Pipes"],
+    "budgetRiskAreas": ["Zone 4 Projects", "Emergency Repairs"],
+    "recommendedActions": [
+      "Allocate 3 workers to Zone 4 immediately",
+      "Review PQR Enterprises contract performance",
+      "Procure additional excavator equipment",
+      "Increase material stock for Zone 2",
+      "Escalate critical SLA violations"
+    ]
+  },
+  "departmentHealthScore": {
+    "overallScore": 82,
+    "maxScore": 100,
+    "components": {
+      "kpiPerformance": { "score": 87.5, "weight": 25 },
+      "slaCompliance": { "score": 94.3, "weight": 25 },
+      "citizenSatisfaction": { "score": 84, "weight": 20 },
+      "resourceAvailability": { "score": 72, "weight": 15 },
+      "complaintGrowth": { "score": 68, "weight": 15 }
+    },
+    "status": "Good",
+    "trend": "Improving"
+  }
+}

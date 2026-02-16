@@ -3,6 +3,17 @@ class GrievanceState(TypedDict, total=False):
     query: str
     image_path: Optional[str]
     IMAGE_URL: Optional[str]
+    citizen_id: Optional[str]  # ID of the citizen who submitted the grievance
+    grievance_id: Optional[str]  # ID of the grievance to update
+    
+    # Validation fields
+    validation_result: Dict[str, Any]
+    is_validated: bool
+    
+    # Location extraction fields
+    location_data: Dict[str, Any]
+    
+    # Image analysis
     image_analysis: Dict[str, Any]
     enhanced_query: str
 

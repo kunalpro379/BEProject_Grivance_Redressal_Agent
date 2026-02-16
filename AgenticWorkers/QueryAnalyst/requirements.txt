@@ -9,3 +9,4 @@ langgraph
 reportlab
 azure-storage-queue
 azure-storage-blob
+crewai

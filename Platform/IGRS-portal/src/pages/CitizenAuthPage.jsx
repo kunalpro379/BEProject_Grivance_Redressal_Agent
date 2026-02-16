@@ -130,11 +130,7 @@ const CitizenAuthPage = () => {
           password: formData.password,
           full_name: formData.name,
           phone: formData.phone,
-          role: 'citizen',
-          address: formData.address,
-          city: formData.city,
-          state: formData.state,
-          pincode: formData.pincode
+          address: `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`
         };
 
         const response = await fetch(`${API_URL}/api/auth/register`, {

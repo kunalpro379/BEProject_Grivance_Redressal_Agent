@@ -1,5 +1,7 @@
 from typing import Dict, Any, Tuple
 from tools.image_analysis import ImageAnalysisEngine
+from tools.image_validator import ImageQueryValidator
+from tools.location_extractor import LocationExtractor
 from tools.embeddings import EmbeddingEngine
 from tools.db_query import DatabaseQueryEngine
 from tools.pdf_report import generate_pdf_from_markdown
@@ -8,8 +10,59 @@ from agents import grievance_agents as GA
 from configs.config import Config
 
 image_engine=ImageAnalysisEngine()
+validator_engine=ImageQueryValidator()
+location_engine=LocationExtractor()
 embedding_engine=EmbeddingEngine()
 db_engine=DatabaseQueryEngine()
+
+def NODE_validate_image(state: Dict[str, Any]) -> Dict[str, Any]:
+    """Validate if image matches the query before processing."""
+    query = state["query"]
+    IMAGE_URL = state.get("IMAGE_URL")
+    
+    validation_result = {
+        "is_valid": True,
+        "validation_score": 1.0,
+        "reasoning": "No image provided",
+        "mismatches": [],
+        "confidence": "none",
+        "image_shows": "No image"
+    }
+    
+    if IMAGE_URL:
+        print("   🔍 Validating image-query match...")
+        validation_result = validator_engine.validate_image_query_match(IMAGE_URL, query)
+        print(f"   ✓ Validation: {validation_result['is_valid']} (score: {validation_result['validation_score']:.2f})")
+    
+    state["validation_result"] = validation_result
+    state["is_validated"] = validation_result["is_valid"]
+    return state
+
+
+def NODE_extract_location(state: Dict[str, Any]) -> Dict[str, Any]:
+    """Extract location details from image."""
+    IMAGE_URL = state.get("IMAGE_URL")
+    query = state["query"]
+    
+    location_data = {
+        "address": "Not available",
+        "latitude": None,
+        "longitude": None,
+        "landmarks": [],
+        "area_type": "unknown",
+        "location_details": {},
+        "confidence": "none",
+        "extraction_method": "none"
+    }
+    
+    if IMAGE_URL:
+        print("   📍 Extracting location from image...")
+        location_data = location_engine.extract_location_from_image(IMAGE_URL, query)
+        print(f"   ✓ Location: {location_data['address']} (confidence: {location_data['confidence']})")
+    
+    state["location_data"] = location_data
+    return state
+
 
 def NODE_describe_image(state:Dict[str,Any])-> Dict[str, Any]:
     query=state["query"]
@@ -45,14 +98,28 @@ def _sanitize_image_summary(desc: str, extracted_text: str) -> Tuple[str, str]:
 def NODE_enhance_query(state: Dict[str, Any]) -> Dict[str, Any]:
     query = state["query"]
     img = state.get("image_analysis", {})
+    location = state.get("location_data", {})
+    
     desc = img.get("description", "")
     extracted_text = img.get("extracted_text") or ""
     desc, extracted_text = _sanitize_image_summary(desc, extracted_text)
+    
+    # Include location data in enhanced query
+    location_info = ""
+    if location.get("confidence") not in ["none", None]:
+        location_info = f"\nLocation: {location.get('address', 'Not specified')}"
+        if location.get("landmarks"):
+            location_info += f"\nNearby landmarks: {', '.join(location['landmarks'][:3])}"
+        if location.get("area_type"):
+            location_info += f"\nArea type: {location['area_type']}"
+    
     enhanced_query = (
         f"{query.strip()}\n\n"
         f"Image description: {desc}\n"
         f"Visible text in image: {extracted_text}"
+        f"{location_info}"
     ).strip()
+    
     state["enhanced_query"] = enhanced_query
     return state
 def NODE_embed_query(state:Dict[str, Any])->Dict[str, Any]:
@@ -65,13 +132,16 @@ def NODE_embed_query(state:Dict[str, Any])->Dict[str, Any]:
 def NODE_run_agents(state: Dict[str, Any]) -> Dict[str, Any]:
     enhanced_query = state["enhanced_query"]
     retrieved=state.get("retrieved_data", {})
+    validation_result = state.get("validation_result", {})
+    
     agents_outputs:Dict[str, Any]={}
     agents_outputs["query_type"] = GA.analyze_query_type(enhanced_query)
     agents_outputs["location"] = GA.analyze_location(enhanced_query)
     agents_outputs["emotion"] = GA.analyze_emotion(enhanced_query)
     agents_outputs["severity"] = GA.analyze_severity(enhanced_query)
     agents_outputs["patterns"] = GA.analyze_patterns(enhanced_query, retrieved)
-    agents_outputs["fraud"] = GA.analyze_fraud(enhanced_query, retrieved)
+    # Pass validation_result instead of retrieved_data to fraud analysis
+    agents_outputs["fraud"] = GA.analyze_fraud(enhanced_query, validation_result)
     agents_outputs["category"] = GA.analyze_category(enhanced_query, retrieved)
     agents_outputs["similar_cases"] = GA.analyze_similar_cases(enhanced_query, retrieved)
     agents_outputs["department"] = GA.suggest_department(enhanced_query, retrieved)
@@ -213,10 +283,14 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     with open(_Cfg.json_agents_path(), "w", encoding="utf-8") as f:
         _json.dump(process_trace, f, indent=2, ensure_ascii=False)
 
-    # 5) Insert into Supabase UserGrivience
+    # 5) Update Supabase UserGrievance with processed data
     embedding = state.get("embedding", [])
     image_path = state.get("image_path")
     image_description = image_analysis.get("description", "")
+    validation_result = state.get("validation_result")
+    location_data = state.get("location_data")
+    citizen_id = state.get("citizen_id")  # Get citizen_id from state
+    grievance_id = state.get("grievance_id")  # Get grievance_id from state
 
     insert_user_grievience(
         grievance_text=grievance_text,
@@ -226,6 +300,10 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
         embedding=embedding,
         agent_outputs=agents_outputs,
         full_result=case_study,
+        validation_result=validation_result,
+        location_data=location_data,
+        citizen_id=citizen_id,
+        grievance_id=grievance_id,
     )
 
     return state

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { getDepartmentId } from '../utils/departmentMapping';
 
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
   const { user, loading, isAuthenticated } = useAuth();
@@ -27,7 +28,7 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
   // Check if user has required role
   if (allowedRoles.length > 0 && !allowedRoles.includes(user?.role)) {
     // Redirect to appropriate dashboard based on role
-    const redirectPath = getRoleBasedPath(user?.role);
+    const redirectPath = getRoleBasedPath(user?.role, user?.department_name);
     return <Navigate to={redirectPath} replace />;
   }
 
@@ -35,14 +36,18 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
 };
 
 // Helper function to get default path for each role
-const getRoleBasedPath = (role) => {
+const getRoleBasedPath = (role, departmentName) => {
   switch (role) {
     case 'admin':
       return '/admin/dashboard';
     case 'department_officer':
-      return '/officer/dashboard';
     case 'department_head':
-      return '/department/dashboard';
+      // Redirect to department-specific dashboard if department exists
+      const deptId = departmentName ? getDepartmentId(departmentName) : null;
+      if (deptId) {
+        return `/department/${deptId}`;
+      }
+      return role === 'department_officer' ? '/officer/dashboard' : '/department/dashboard';
     case 'citizen':
       return '/citizen/portal';
     default:

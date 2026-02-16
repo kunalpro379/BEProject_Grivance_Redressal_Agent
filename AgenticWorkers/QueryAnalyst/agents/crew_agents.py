@@ -94,10 +94,13 @@ class AgentsManager:
         # Fraud Detection
         self.agents["fraud"] = Agent(
             role="Fraud Detection Specialist",
-            goal="Identify potential fraud, spam patterns, and malicious content",
+            goal="Identify potential spam, fake complaints, and suspicious behavioral patterns",
             backstory=(
-                "You are an expert in detecting fraudulent patterns, spam, "
-                "and malicious content in public grievances."
+                "You are an expert in detecting fraudulent patterns through behavioral analysis. "
+                "You analyze image-query consistency, complaint authenticity, and spam patterns. "
+                "You DO NOT flag complaints based on keywords like 'fraud' or 'scam' in the text. "
+                "Instead, you look for: mismatched images, vague details, generic complaints, "
+                "promotional content, duplicate submissions, and suspicious patterns."
             ),
             llm=self.llm,
             verbose=True,
@@ -285,20 +288,41 @@ Provide JSON response with:
             expected_output="JSON with pattern detection",
         )
 
-    def create_fraud_task(self, enhanced_query: str) -> Task:
+    def create_fraud_task(self, enhanced_query: str, validation_result: Dict[str, Any] = None) -> Task:
+        validation_info = ""
+        if validation_result:
+            validation_info = f"""
+IMAGE VALIDATION RESULT:
+- Is Valid: {validation_result.get('is_valid', True)}
+- Validation Score: {validation_result.get('validation_score', 'N/A')}
+- Reasoning: {validation_result.get('reasoning', 'N/A')}
+"""
+        
         return Task(
-            description=f"""Detect fraud/spam risk.
+            description=f"""Detect fraud/spam risk by analyzing BEHAVIORAL PATTERNS, not keywords.
 
 QUERY:
 {enhanced_query}
+{validation_info}
+
+FOCUS ON:
+1. Image-query mismatch (if validation failed)
+2. Suspicious patterns (generic complaints, no specific details)
+3. Spam indicators (repeated phrases, promotional content)
+4. Authenticity issues (vague location, no concrete evidence)
+
+DO NOT:
+- Search for "fraud" keywords in the text
+- Flag legitimate complaints about fraud/scams as fraudulent
+- Use retrieved data about fraud cases
 
 Provide JSON response with:
 - fraud_risk: Low | Medium | High
-- spam_indicators: array of strings
+- spam_indicators: array of behavioral patterns found (not keywords)
 - authenticity_confidence: High | Medium | Low
 - verification_recommendations: array of strings""",
             agent=self.agents_manager.get_agent("fraud"),
-            expected_output="JSON with fraud detection",
+            expected_output="JSON with fraud detection based on behavioral analysis",
         )
 
     def create_category_task(self, grievance_text: str, retrieved_data: Dict[str, Any]) -> Task:

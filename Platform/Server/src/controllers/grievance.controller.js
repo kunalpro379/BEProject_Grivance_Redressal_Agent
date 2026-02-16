@@ -1,6 +1,6 @@
 import pool from '../config/database.js';
 import grievanceDBService from '../services/grievance.db.service.js';
-import azureQueueService from '../services/azure.queue.service.js';
+import azureQueryAnalystQueueService from '../services/azure.queue.queryanalyst.service.js';
 
 export const createGrievance = async (req, res) => {
   try {
@@ -40,7 +40,7 @@ export const createGrievance = async (req, res) => {
       source: 'web'
     };
 
-    await azureQueueService.sendMessage(queueMessage);
+    await azureQueryAnalystQueueService.sendMessage(queueMessage);
 
     res.status(201).json({
       success: true,

@@ -1,6 +1,5 @@
 import os
 import re
-import requests
 import json
 import time
 import base64
@@ -38,7 +37,6 @@ class QueryAnalystWorker:
         self.webcrawler_queue_client: QueueClient = self.queue_service_client.get_queue_client(webcrawler_queue_name)
         self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
         self.container_name = os.getenv("AZURE_STORAGE_CONTAINER_NAME", "test")
-        self.api_callback_url = os.getenv("API_CALLBACK_URL", "http://localhost:3000")
         
         # Ensure queues exist
         for qc in [self.queue_client, self.webcrawler_queue_client]:
@@ -47,7 +45,10 @@ class QueryAnalystWorker:
             except Exception:
                 pass
         
-        print(f"✅ QueryAnalyst Worker initialized. Polling: {queue_name} → pushes to: {webcrawler_queue_name}")
+        print(f"✅ QueryAnalyst Worker initialized")
+        print(f"   Polling queue: {queue_name}")
+        print(f"   Pushing to: {webcrawler_queue_name}")
+        print(f"   Server handles Telegram notifications")
     
     def decode_message(self, message_text: str) -> Dict[str, Any]:
         """Decode base64-encoded queue message."""
@@ -126,31 +127,75 @@ class QueryAnalystWorker:
 
     def process_message(self, message_data: Dict[str, Any]) -> Dict[str, Any]:
         """Process a single grievance message."""
-        grievance_id = message_data.get("grievanceId") or message_data.get("submissionId")
-        query = message_data.get("query", "")
-        image_url = message_data.get("proofFileUrl") or message_data.get("imageUrl")
+        # Handle different field names from Telegram vs API
+        grievance_id = (
+            message_data.get("grievance_id") or 
+            message_data.get("grievanceId") or 
+            message_data.get("submissionId")
+        )
+        citizen_id = message_data.get("citizen_id")  # Extract citizen_id from message
+        
+        query = (
+            message_data.get("grievance_text") or 
+            message_data.get("query") or 
+            ""
+        )
+        image_url = (
+            message_data.get("image_path") or 
+            message_data.get("proofFileUrl") or 
+            message_data.get("imageUrl")
+        )
         
         print(f"\n📋 Processing grievance: {grievance_id}")
+        print(f"   Citizen ID: {citizen_id}")
         print(f"   Query: {(query or '')[:100]}...")
         print(f"   Image URL: {image_url}")
 
         # For Azure blob URLs (private), download via SDK so image analysis can access it
-        image_path = image_url
+        # Keep original URL for database storage
+        original_image_url = image_url
+        image_path_for_analysis = image_url
         temp_image_path = None
+        
         if image_url and "blob.core.windows.net" in (image_url or ""):
             temp_image_path = self._download_blob_to_temp(image_url)
             if temp_image_path:
-                image_path = temp_image_path
+                image_path_for_analysis = temp_image_path
                 print(f"   📥 Downloaded image from blob to temp file for analysis")
 
         # Run analysis using existing workflow
         try:
-            print("   🔍 Running analysis...")
-            state = analysis(query=query, image_path=image_path)
+            print("   🔍 Running analysis with validation and location extraction...")
+            state = analysis(query=query, image_path=image_path_for_analysis, citizen_id=citizen_id, grievance_id=grievance_id)
             
-            # Extract only policy_search_queries (search queries)
+            # IMPORTANT: Restore original blob URL in state (don't use temp path)
+            if original_image_url:
+                state["image_path"] = original_image_url
+                if "image_analysis" in state:
+                    state["image_analysis"]["path"] = original_image_url
+            
+            # Check if validation failed
+            validation_result = state.get("validation_result", {})
+            is_validated = state.get("is_validated", True)
+            
+            if not is_validated:
+                print(f"   ❌ Validation failed: {validation_result.get('reasoning', 'Unknown reason')}")
+                return {
+                    **message_data,
+                    "current_status": "ValidationFailed",
+                    "validation_result": validation_result,
+                    "error": "Image does not match the complaint description",
+                    "error_at": datetime.utcnow().isoformat() + "Z",
+                }
+            
+            # Extract search queries and location data
             search_queries = self.extract_search_queries(state)
-            print(f"   ✅ Analysis complete! Search queries: {len(search_queries)} found")
+            location_data = state.get("location_data", {})
+            
+            print(f"   ✅ Analysis complete!")
+            print(f"      - Validation score: {validation_result.get('validation_score', 'N/A')}")
+            print(f"      - Location: {location_data.get('address', 'Not extracted')}")
+            print(f"      - Search queries: {len(search_queries)} found")
             
             # Upload analysis files to blob at griviences/<grievanceId>/
             from configs.config import Config
@@ -161,11 +206,20 @@ class QueryAnalystWorker:
             file_urls = self.upload_files_to_blob(grievance_id, pdf_path, md_path, json_path, agents_json_path)
             print(f"   📁 Files uploaded to blob: {list(file_urls.keys())}")
             
-            # Push only search_queries + file URLs to queue (no full analysis)
+            # Push search_queries + validation + location + file URLs to queue
             updated_message = {
                 **message_data,
                 "current_status": "WebCrawling",
                 "policy_search_queries": search_queries,
+                "validation_result": validation_result,
+                "location_data": {
+                    "address": location_data.get("address"),
+                    "latitude": location_data.get("latitude"),
+                    "longitude": location_data.get("longitude"),
+                    "landmarks": location_data.get("landmarks", []),
+                    "area_type": location_data.get("area_type"),
+                    "confidence": location_data.get("confidence"),
+                },
                 "file_urls": file_urls,
                 "analysis_completed_at": datetime.utcnow().isoformat() + "Z",
             }
@@ -174,6 +228,8 @@ class QueryAnalystWorker:
 
         except Exception as e:
             print(f"   ❌ Error processing grievance: {e}")
+            import traceback
+            traceback.print_exc()
             return {
                 **message_data,
                 "current_status": "Error",
@@ -207,10 +263,23 @@ class QueryAnalystWorker:
                             # Decode message
                             message_data = self.decode_message(message.content)
                             
-                            # Only process messages with current_status: "QueryAnalyst"
-                            if message_data.get("current_status") != "QueryAnalyst":
-                                # Don't delete - leave for WebCrawling/other workers; message becomes visible again after visibility_timeout
+                            print(f"\n📨 Received message:")
+                            print(f"   Fields: {list(message_data.keys())}")
+                            
+                            # Check current_status - if not present or is "QueryAnalyst", process it
+                            current_status = message_data.get("current_status")
+                            
+                            # Skip if status is explicitly set to something else (like "WebCrawling", "Error", etc.)
+                            if current_status and current_status not in ["QueryAnalyst", "pending", None]:
+                                print(f"   ⏭️  Skipping message with status: {current_status}")
+                                # Delete the message so it doesn't keep getting picked up
+                                self.queue_client.delete_message(message.id, message.pop_receipt)
                                 continue
+                            
+                            # If no status or status is QueryAnalyst/pending, process it
+                            if not current_status:
+                                print(f"   📝 Message has no status field - processing as new grievance")
+                                message_data["current_status"] = "QueryAnalyst"
                             
                             message_processed = True
                             
@@ -220,22 +289,13 @@ class QueryAnalystWorker:
                             # Delete original message from queryanalyst
                             self.queue_client.delete_message(message.id, message.pop_receipt)
                             
-                            # Call API callback so API can notify Telegram
-                            try:
-                                callback_url = f"{self.api_callback_url.rstrip('/')}/api/worker/queryanalyst-callback"
-                                resp = requests.post(callback_url, json=updated_message, timeout=10)
-                                if resp.ok:
-                                    print(f"   📤 API callback OK – Telegram notified")
-                                else:
-                                    print(f"   ⚠️ API callback returned {resp.status_code}")
-                            except Exception as e:
-                                print(f"   ⚠️ API callback failed: {e}")
-                            
                             # Push to webcrawler queue for WebCrawler worker
+                            # Server will handle Telegram notifications directly
                             encoded_message = self.encode_message(updated_message)
                             self.webcrawler_queue_client.send_message(encoded_message)
                             
-                            print(f"   ✅ Pushed to webcrawler queue with status: {updated_message['current_status']}\n")
+                            print(f"   ✅ Pushed to webcrawler queue with status: {updated_message['current_status']}")
+                            print(f"   📱 Server will notify Telegram directly\n")
                             
                         except Exception as e:
                             print(f"   ❌ Error processing message: {e}")

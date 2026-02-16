@@ -1,51 +1,55 @@
 {
   "grievance": {
-    "text": "Sewage Drainage Problems in Mumbai",
-    "enhanced_query": "Sewage Drainage Problems in Mumbai\n\nImage description: The image depicts a highly polluted urban environment, likely an informal settlement or slum area, under a clear blue sky. On the left, a narrow dirt path runs alongside makeshift homes constructed from corrugated metal sheets and tarps. Clothes are seen hanging to dry outside these dwellings. A young girl is visible sitting inside a blue mosquito net or similar enclosure, while a young boy in a yellow shirt walks along the path away from the camera. To the right of the path, separated by a concrete embankment, is a severely choked water channel or canal. This waterway is stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse, indicating a significant lack of proper waste disposal and drainage infrastructure. The sheer volume of trash suggests severe blockage and pollution.\nVisible text in image:",
+    "text": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell",
+    "enhanced_query": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell\n\nImage description: The image captures a severely polluted nala (stream) overflowing with various types of garbage, predominantly plastic bags, wrappers, and other discarded items. The water itself appears dark, murky, and stagnant in some areas, with visible foam and debris floating on its surface, indicative of heavy pollution. The photograph is taken from an elevated perspective, likely a bridge, looking down through a metal grate or fence. Beyond the polluted water and accumulated trash, green vegetation is visible on the far bank, providing a stark contrast to the unhealthy state of the water body. A GPS camera overlay confirms the location as Ambernath, Maharashtra, India, and provides coordinates and a timestamp.\nVisible text in image: GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle\nLocation: 655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nNearby landmarks: Polluted nala (stream/drain), Metal fence/railing over the nala, Residential buildings visible in the embedded map thumbnail\nArea type: residential",
     "image": {
-      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp6jvhof2f.jpg",
-      "description": "The image depicts a highly polluted urban environment, likely an informal settlement or slum area, under a clear blue sky. On the left, a narrow dirt path runs alongside makeshift homes constructed from corrugated metal sheets and tarps. Clothes are seen hanging to dry outside these dwellings. A young girl is visible sitting inside a blue mosquito net or similar enclosure, while a young boy in a yellow shirt walks along the path away from the camera. To the right of the path, separated by a concrete embankment, is a severely choked water channel or canal. This waterway is stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse, indicating a significant lack of proper waste disposal and drainage infrastructure. The sheer volume of trash suggests severe blockage and pollution.",
+      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp6u7yx1ka.jpg",
+      "description": "The image captures a severely polluted nala (stream) overflowing with various types of garbage, predominantly plastic bags, wrappers, and other discarded items. The water itself appears dark, murky, and stagnant in some areas, with visible foam and debris floating on its surface, indicative of heavy pollution. The photograph is taken from an elevated perspective, likely a bridge, looking down through a metal grate or fence. Beyond the polluted water and accumulated trash, green vegetation is visible on the far bank, providing a stark contrast to the unhealthy state of the water body. A GPS camera overlay confirms the location as Ambernath, Maharashtra, India, and provides coordinates and a timestamp.",
       "key_objects": [
-        "Polluted water channel",
-        "Accumulated garbage and debris",
-        "Makeshift dwellings/shacks",
-        "Children (boy and girl)",
-        "Dirt path",
-        "Concrete embankment"
+        "nala (stream)",
+        "garbage (plastic bags, refuse)",
+        "polluted water",
+        "metal fence/grate",
+        "green vegetation"
       ],
-      "scene_type": "Urban informal settlement with polluted waterway",
-      "extracted_text": ""
+      "scene_type": "Urban waterway pollution",
+      "extracted_text": "GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle"
     }
   },
   "location": {
-    "pincode": "",
-    "district": "Mumbai",
+    "pincode": "421501",
+    "district": "Kalyan",
     "state": "Maharashtra",
     "location_confidence": "High",
     "raw_location_mentions": [
-      "Mumbai"
+      "Ambernath, Maharashtra",
+      "655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India",
+      "Ambernath, Maharashtra, India"
     ]
   },
   "analysis": {
     "query_type": {
       "query_type": "Complaint",
       "confidence": "High",
-      "reasoning": "The query is classified as a complaint due to the description of a specific problem (sewage drainage issues in Mumbai) and the accompanying image, which depicts a highly polluted environment. The tone of the query is critical and highlights the need for improvement in waste disposal and drainage infrastructure, indicating a complaint rather than a suggestion, query, feedback, follow-up, or appeal."
+      "reasoning": "The query is a complaint due to the presence of garbage dumped in a nala near the area, causing water pollution and a bad smell. The image provided is a visual representation of the issue, and the GPS coordinates and timestamp confirm the location. The tone of the query is one of concern and frustration, indicating that the individual is seeking a resolution to the problem."
     },
     "emotion": {
-      "primary_emotion": "Frustrated",
+      "primary_emotion": "Angry",
       "secondary_emotions": [
-        "Angry",
+        "Frustrated",
         "Sad"
       ],
       "emotion_intensity": 8,
       "emotional_indicators": [
-        "severely choked water channel or canal",
-        "stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse",
-        "significant lack of proper waste disposal and drainage infrastructure",
-        "sheer volume of trash suggests severe blockage and pollution",
-        "polluted urban environment",
-        "informal settlement or slum area"
+        "Garbage dumped in nala near my area",
+        "Water pollution and bad smell",
+        "polluted nala (stream/drain)",
+        "overflowing with various types of garbage",
+        "dark, murky, and stagnant in some areas",
+        "visible foam and debris floating on its surface",
+        "heavy pollution",
+        "unhealthy state of the water body",
+        "stark contrast to the green vegetation"
       ]
     },
     "severity": {
@@ -53,11 +57,11 @@
       "criticality_score": 9,
       "impact_scope": "Community",
       "potential_consequences": [
-        "Waterborne diseases and health risks due to contaminated water",
-        "Environmental pollution and harm to local wildlife",
-        "Economic losses due to damage to infrastructure and property",
-        "Social unrest and community displacement due to unsanitary living conditions",
-        "Long-term health effects on residents, particularly children and vulnerable populations"
+        "Waterborne diseases due to pollution",
+        "Negative impact on local ecosystem and wildlife",
+        "Health risks for residents due to bad smell and pollution",
+        "Potential for water contamination affecting nearby residential areas",
+        "Long-term damage to the environment and water quality"
       ]
     },
     "priority": {
@@ -65,136 +69,142 @@
       "urgency_level": "High",
       "emotional_tone": "Outrage and Concern",
       "key_emotional_indicators": [
-        "polluted urban environment",
-        "severely choked water channel",
-        "significant lack of proper waste disposal and drainage infrastructure",
-        "sheer volume of trash suggests severe blockage and pollution",
-        "informal settlement or slum area",
-        "makeshift homes constructed from corrugated metal sheets and tarps",
-        "stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse"
+        "severely polluted nala",
+        "various types of garbage",
+        "water pollution and bad smell",
+        "stagnant in some areas",
+        "visible foam and debris",
+        "heavy pollution",
+        "unhealthy state of the water body",
+        "contrast to the green vegetation"
       ],
       "priority_level": "High",
-      "justification": "The sewage drainage problem in Mumbai has a significant impact on the health and well-being of the residents, particularly in informal settlements or slum areas. The presence of stagnant water and dense plastic waste poses a high risk of waterborne diseases, and the lack of proper waste disposal infrastructure exacerbates the issue. The severity of the problem, as depicted in the image, indicates a critical need for immediate attention and resolution.",
-      "expected_resolution_time": "Within 72 hours",
-      "risk_assessment": "High risk of waterborne diseases, environmental pollution, and potential health crises if not addressed promptly. The situation requires urgent attention from local authorities, waste management services, and public health officials to prevent further deterioration and ensure a safe living environment for the affected residents.",
+      "justification": "The grievance involves severe water pollution and a bad smell, which poses a significant risk to the health and well-being of the residents in the area. The presence of plastic bags, wrappers, and other discarded items in the nala indicates a lack of proper waste management, and the potential consequences of water pollution can be severe, including the spread of waterborne diseases and harm to aquatic life. The fact that the issue is located in a residential area with nearby buildings and a metal fence/railing over the nala suggests that the impact of the grievance is localized but still significant.",
+      "expected_resolution_time": "Within 3-5 working days",
+      "risk_assessment": "High risk of waterborne diseases, harm to aquatic life, and negative impact on the environment. Medium risk of property damage and economic losses due to the presence of garbage and pollution. Low risk of physical harm to individuals, but high risk of long-term health consequences.",
       "_raw_sentiment": {
         "sentiment_score": 8,
         "urgency_level": "High",
         "emotional_tone": "Outrage and Concern",
         "key_emotional_indicators": [
-          "polluted urban environment",
-          "severely choked water channel",
-          "significant lack of proper waste disposal and drainage infrastructure",
-          "sheer volume of trash suggests severe blockage and pollution",
-          "informal settlement or slum area",
-          "makeshift homes constructed from corrugated metal sheets and tarps",
-          "stagnant, dark, and completely covered with a dense layer of plastic waste, debris, and refuse"
+          "severely polluted nala",
+          "various types of garbage",
+          "water pollution and bad smell",
+          "stagnant in some areas",
+          "visible foam and debris",
+          "heavy pollution",
+          "unhealthy state of the water body",
+          "contrast to the green vegetation"
         ]
       },
       "_raw_priority": {
         "priority_level": "High",
-        "justification": "The sewage drainage problem in Mumbai has a significant impact on the health and well-being of the residents, particularly in informal settlements or slum areas. The presence of stagnant water and dense plastic waste poses a high risk of waterborne diseases, and the lack of proper waste disposal infrastructure exacerbates the issue. The severity of the problem, as depicted in the image, indicates a critical need for immediate attention and resolution.",
-        "expected_resolution_time": "Within 72 hours",
-        "risk_assessment": "High risk of waterborne diseases, environmental pollution, and potential health crises if not addressed promptly. The situation requires urgent attention from local authorities, waste management services, and public health officials to prevent further deterioration and ensure a safe living environment for the affected residents."
+        "justification": "The grievance involves severe water pollution and a bad smell, which poses a significant risk to the health and well-being of the residents in the area. The presence of plastic bags, wrappers, and other discarded items in the nala indicates a lack of proper waste management, and the potential consequences of water pollution can be severe, including the spread of waterborne diseases and harm to aquatic life. The fact that the issue is located in a residential area with nearby buildings and a metal fence/railing over the nala suggests that the impact of the grievance is localized but still significant.",
+        "expected_resolution_time": "Within 3-5 working days",
+        "risk_assessment": "High risk of waterborne diseases, harm to aquatic life, and negative impact on the environment. Medium risk of property damage and economic losses due to the presence of garbage and pollution. Low risk of physical harm to individuals, but high risk of long-term health consequences."
       }
     },
     "patterns": {
       "is_recurring_issue": true,
       "similar_patterns_found": [
-        "Polluted waterways in informal settlements",
-        "Lack of proper waste disposal infrastructure",
-        "Choked sewage drainage systems",
-        "Environmental degradation in urban areas"
+        "Garbage dumped in nala near residential areas in Maharashtra",
+        "Polluted water bodies in urban areas of India",
+        "Lack of waste management infrastructure in Indian cities"
       ],
       "spam_likelihood": "Medium",
-      "pattern_notes": "This image depicts a common issue in urban areas, particularly in informal settlements. The presence of a severely choked water channel or canal, along with a dense layer of plastic waste and debris, suggests a lack of proper waste disposal and drainage infrastructure. This pattern is similar to other reports of environmental degradation in urban areas, including polluted waterways and choked sewage drainage systems. The likelihood of spam is medium, as the image appears to be a genuine concern about environmental issues, but the language used is not overly sensational or attention-seeking."
+      "pattern_notes": "The image appears to be a genuine report of a polluted nala in Ambernath, Maharashtra. The presence of a GPS camera overlay and a timestamp suggests that the image is not staged. However, the similarity in the issue to other reports in the region and the lack of specific details about the incident (e.g., date, time, and exact location) may indicate a potential spam campaign. Further investigation is required to determine the authenticity of the report."
     },
     "historical_trends": {
       "top_3_similar_cases": [
         {
-          "id": "13862",
-          "summary": "Blockage of Sewage Drain and Overflow of Sewage Water in Muneshwara Layout, Virgonagar, Aavalahalli, Bengaluru, Karnataka 560049, India"
+          "id": "13847",
+          "summary": "Garbage is repeatedly thrown in front of Gate. Garbage is thrown by near by eatery shops. Kindly stop them from doing this. Take action against the eatery shops."
         },
         {
-          "id": "1006",
-          "summary": "Sewage and drainage water over flowing from neighboring house in 9th Cross Bhel Layout, Adityanagar, Vidyaranyapura, Bengaluru, Karnataka 560097, India"
+          "id": "264",
+          "summary": "Garbage collecting in front of rajarajeshwari lake is so annoying... Garbage collecting in front of rajarajeshwari lake is so annoying."
         },
         {
-          "id": "2469",
-          "summary": "Sewage blockage on a residential road opposite my plot (A-katha) in Nataraja Layout, Jp Nagar 7Th Phase, Bengaluru, Karnataka, India"
+          "id": "2453",
+          "summary": "Garbage in an empty plot next to the lake Garbage is being burnt every night opposite to Allalasandra lake swimming pool."
         }
       ],
       "common_resolutions": [
         {
-          "resolution": "Immediate action was taken to resolve the issue, including cleaning or repairing the sewage drain or pipe.",
-          "frequency": 3
+          "resolution": "Immediate action was taken to stop the garbage dumping and burning.",
+          "description": "In all three cases, the authorities took immediate action to stop the garbage dumping and burning, and ensured that the areas were cleaned up."
         },
         {
-          "resolution": "The affected residents were provided with temporary solutions, such as portable toilets or alternative water sources.",
-          "frequency": 2
+          "resolution": "Public awareness campaigns were conducted to educate people about the importance of proper waste management.",
+          "description": "In two of the cases, public awareness campaigns were conducted to educate people about the importance of proper waste management and the consequences of littering and burning garbage."
         },
         {
-          "resolution": "The local authorities or civic agencies were instructed to take necessary measures to prevent similar incidents in the future.",
-          "frequency": 2
+          "resolution": "Collaboration between local authorities and community members was key to resolving the issue.",
+          "description": "In all three cases, collaboration between local authorities and community members was key to resolving the issue, with community members playing an active role in reporting the incidents and working with authorities to find a solution."
         }
       ],
       "patterns_identified": [
         {
-          "pattern": "Sewage drain blockage or overflow is a common issue in urban areas, particularly in areas with poor infrastructure or inadequate maintenance.",
-          "frequency": 5
+          "pattern": "Garbage dumping and burning is a recurring issue in residential areas.",
+          "description": "All three cases involved garbage dumping and burning in residential areas, highlighting the need for effective waste management systems and public awareness campaigns to prevent such incidents."
         },
         {
-          "pattern": "Residents often report health concerns and discomfort due to the presence of sewage water or odors.",
-          "frequency": 4
+          "pattern": "Community involvement is crucial in resolving waste management issues.",
+          "description": "In all three cases, community members played an active role in reporting the incidents and working with authorities to find a solution, highlighting the importance of community involvement in resolving waste management issues."
         },
         {
-          "pattern": "Local authorities or civic agencies are often responsible for resolving the issue, but may require prompting or follow-up from residents.",
-          "frequency": 3
+          "pattern": "Effective communication between authorities and community members is essential for resolving waste management issues.",
+          "description": "In all three cases, effective communication between authorities and community members was key to resolving the issue, with community members needing to be informed about the actions being taken and the reasons behind them."
         }
       ]
     },
     "fraud_risk": {
       "fraud_risk": "Low",
       "spam_indicators": [
-        "The image description does not contain any suspicious keywords or phrases that are commonly associated with spam or phishing activities.",
-        "The visible text in the image does not contain any URLs, phone numbers, or other contact information that could be used for malicious purposes.",
-        "The image appears to be a genuine public grievance related to sewage drainage problems in Mumbai, which is a legitimate concern."
+        {
+          "pattern": "Generic complaint about pollution",
+          "description": "The complaint does not provide specific details about the issue, only mentioning 'bad smell' and 'water pollution'."
+        },
+        {
+          "pattern": "Lack of specific evidence",
+          "description": "The image provided is strong visual evidence, but the complaint does not mention any specific actions taken by the citizen to document the issue or provide additional context."
+        }
       ],
       "authenticity_confidence": "High",
       "verification_recommendations": [
-        "Verify the authenticity of the image by checking the metadata and EXIF data for any signs of manipulation or tampering.",
-        "Contact the person who submitted the grievance to confirm the details and gather more information about the issue.",
-        "Check with local authorities or government agencies to confirm the existence of the sewage drainage problem in the area depicted in the image."
+        "Verify the GPS data and location to ensure accuracy",
+        "Request additional information from the citizen to provide more context about the issue",
+        "Consider contacting the local authorities to confirm the complaint and gather more information"
       ]
     }
   },
   "classification": {
     "category": {
-      "main_category": "Sanitation",
-      "sub_category": "Sewage Drainage Problems",
+      "main_category": "Environmental Issues",
+      "sub_category": "Water Pollution",
       "confidence": "High",
-      "reasoning": "The grievance content describes a highly polluted urban environment with a severely choked water channel or canal, indicating a significant lack of proper waste disposal and drainage infrastructure. The description of stagnant, dark, and completely covered waterway with a dense layer of plastic waste, debris, and refuse further supports this categorization."
+      "reasoning": "The grievance content mentions 'Water pollution and bad smell' due to garbage dumped in a nala near the area. The image description also highlights the severely polluted nala with dark, murky, and stagnant water, indicating a high level of water pollution."
     },
     "department": {
-      "recommended_department": "Public Works Department (PWD) or Municipal Corporation of Mumbai",
-      "contact_information": "Contact the Public Works Department (PWD) or Municipal Corporation of Mumbai through their official website, phone number, or email. You can also visit their office in person to file a complaint.",
-      "jurisdiction": "Mumbai, Maharashtra, India",
-      "escalation_path": "If the issue is not resolved, you can escalate it to the Municipal Commissioner of Mumbai or the Chief Minister of Maharashtra. You can also contact the National Human Rights Commission (NHRC) or the State Human Rights Commission (SHRC) if the issue is related to human rights."
+      "recommended_department": "Public Works Department (PWD) or Municipal Corporation of Ambernath",
+      "contact_information": "Contact the local authorities or municipal corporation office in Ambernath, Maharashtra, to report the issue and request action.",
+      "jurisdiction": "Ambernath, Maharashtra, India",
+      "escalation_path": "If the issue is not resolved, escalate to the District Collector or the State Pollution Control Board (SPCB) for further action."
     }
   },
   "policy_search_queries": {
     "queries": [
-      "Mumbai sewage drainage problems government schemes",
-      "Mumbai urban sanitation policy for informal settlements",
-      "Government initiatives for sewage management in Mumbai",
-      "Mumbai municipal corporation initiatives for drainage infrastructure",
-      "Sewage drainage problems in Mumbai slums solutions",
-      "Government policies for waste disposal in Mumbai"
+      "Ambernath Maharashtra nala pollution control measures",
+      "Government schemes for water pollution prevention in India",
+      "Waste management policies in Maharashtra state India",
+      "Environmental protection laws in India related to water pollution",
+      "Ambernath Municipal Corporation waste disposal initiatives",
+      "India government initiatives for reducing plastic waste in water bodies"
     ],
-    "reasoning": "These search queries are designed to find relevant information on government schemes, policies, and initiatives related to sewage drainage problems in Mumbai. They cover various aspects such as government schemes, urban sanitation policy, municipal corporation initiatives, and solutions for sewage drainage problems in informal settlements and slums."
+    "reasoning": "These search queries are designed to find relevant information on policies and schemes related to water pollution, waste management, and environmental protection in the context of Ambernath, Maharashtra. They cover government initiatives, laws, and measures to prevent water pollution and promote sustainable waste management practices."
   },
   "outputs": {
-    "markdown_report_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\Workers\\QueryAnalyst\\outputs\\grievance_report.md",
-    "pdf_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\Workers\\QueryAnalyst\\outputs\\grievance_report.pdf"
+    "markdown_report_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\AgenticWorkers\\QueryAnalyst\\outputs\\grievance_report.md",
+    "pdf_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\AgenticWorkers\\QueryAnalyst\\outputs\\grievance_report.pdf"
   }
 }

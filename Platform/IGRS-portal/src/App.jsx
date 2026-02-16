@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
+import { getDepartmentId } from "./utils/departmentMapping";
 
 // Public pages
 import Landing from "./pages/Landing";
@@ -25,8 +26,12 @@ import Feedback from "./pages/Feedback";
 // Citizen pages
 import CitizenDashboard from "./pages/CitizenDashboard";
 
+// Department pages
+import DepartmentDashboard from "./pages/DepartmentDashboard";
+
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import KnowledgeBaseManagement from "./pages/admin/KnowledgeBaseManagement";
 // Temporarily disabled - import UserManagement from "./pages/admin/UserManagement";
 
 // Inline Users Page Component
@@ -116,11 +121,11 @@ function App() {
           {/* Portal-specific Authentication Routes */}
           <Route 
             path="/citizen-portal/authentication" 
-            element={user ? <Navigate to={getRoleBasedPath(user.role)} replace /> : <CitizenAuthPage />} 
+            element={user ? <Navigate to={getRoleBasedPath(user.role, user.department_name)} replace /> : <CitizenAuthPage />} 
           />
           <Route 
             path="/officials-portal/authentication" 
-            element={user ? <Navigate to={getRoleBasedPath(user.role)} replace /> : <OfficialAuthPage />} 
+            element={user ? <Navigate to={getRoleBasedPath(user.role, user.department_name)} replace /> : <OfficialAuthPage />} 
           />
 
           {/* Citizen Portal - Protected Routes */}
@@ -137,6 +142,16 @@ function App() {
                   <Route path="settings" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="*" element={<Navigate to="/citizen/dashboard" replace />} />
                 </Routes>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Department Specific Dashboard - Protected Routes */}
+          <Route
+            path="/department/:departmentId"
+            element={
+              <ProtectedRoute allowedRoles={['department_officer', 'department_head']}>
+                <DepartmentDashboard />
               </ProtectedRoute>
             }
           />
@@ -192,7 +207,7 @@ function App() {
             <Route path="users" element={
               <UsersPage />
             } />
-            <Route path="knowledge-base" element={<div className="p-6 bg-white rounded-xl shadow-sm"><h2 className="text-2xl font-bold text-gray-900">Knowledge Base</h2><p className="text-gray-600 mt-2">Coming soon...</p></div>} />
+            <Route path="knowledge-base" element={<KnowledgeBaseManagement />} />
             <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
           </Route>
 
@@ -214,14 +229,18 @@ function App() {
 }
 
 // Helper function to get default path for each role
-const getRoleBasedPath = (role) => {
+const getRoleBasedPath = (role, departmentName) => {
   switch (role) {
     case 'admin':
       return '/admin/dashboard';
     case 'department_officer':
-      return '/officer/dashboard';
     case 'department_head':
-      return '/department/dashboard';
+      // Redirect to department-specific dashboard if department exists
+      const deptId = departmentName ? getDepartmentId(departmentName) : null;
+      if (deptId) {
+        return `/department/${deptId}`;
+      }
+      return role === 'department_officer' ? '/officer/dashboard' : '/department/dashboard';
     case 'citizen':
       return '/citizen/dashboard';
     default:
