@@ -99,7 +99,8 @@ class TelegramBotService {
             Markup.keyboard([
                 ['Submit New Grievance'],
                 ['My Grievances', 'Notifications'],
-                ['My Profile', 'Help']
+                ['My Profile', 'Help'],
+                ['Logout']
             ]).resize()
         );
     }
@@ -228,6 +229,17 @@ class TelegramBotService {
         
         if (text === 'Help') {
             return await this.showHelp(ctx);
+        }
+
+        if (text === 'Logout') {
+            return await this.handleLogout(ctx);
+        }
+
+        if (text === 'Confirm Logout') {
+            const session = this.userSessions.get(userId);
+            if (session && session.step === 'confirming_logout') {
+                return await this.confirmLogout(ctx);
+            }
         }
 
         if (userSession.step === 'awaiting_grievance_text') {
@@ -374,6 +386,8 @@ class TelegramBotService {
             '   View your registration details\n\n' +
             'Notifications\n' +
             '   You will receive updates automatically\n\n' +
+            'Logout\n' +
+            '   Unregister from the bot\n\n' +
             'Status Meanings:\n' +
             'PENDING - Awaiting AI analysis\n' +
             'IN_PROGRESS - Assigned to department\n' +
@@ -384,6 +398,71 @@ class TelegramBotService {
             'Contact support or use /start to restart.';
 
         ctx.reply(message);
+    }
+
+    async handleLogout(ctx) {
+        const telegramId = ctx.from.id;
+        
+        await ctx.reply(
+            'Logout Confirmation\n\n' +
+            'Are you sure you want to logout?\n\n' +
+            'This will:\n' +
+            '- Remove your registration\n' +
+            '- Clear your session\n' +
+            '- Stop notifications\n\n' +
+            'Your grievances will remain in the system.',
+            Markup.keyboard([
+                ['Confirm Logout'],
+                ['Cancel']
+            ]).resize()
+        );
+
+        this.userSessions.set(telegramId.toString(), {
+            step: 'confirming_logout'
+        });
+    }
+
+    async confirmLogout(ctx) {
+        const telegramId = ctx.from.id;
+        
+        try {
+            await citizenService.deactivateCitizen(telegramId);
+            this.userSessions.delete(telegramId.toString());
+            
+            await ctx.reply(
+                'Logged Out Successfully\n\n' +
+                'Your account has been deactivated.\n\n' +
+                'To use the service again, use /start to register.',
+                Markup.removeKeyboard()
+            );
+        } catch (error) {
+            console.error('Logout error:', error);
+            ctx.reply('Logout failed. Please try again.');
+        }
+    }
+
+    async notifyQueryAnalyzed(telegramId, grievanceId, analysisResult) {
+        try {
+            const message = 
+                '🔍 Query Analysis Complete!\n\n' +
+                `Grievance ID: ${grievanceId}\n\n` +
+                `Status: ${analysisResult.validation_status || 'Analyzed'}\n` +
+                `Department: ${analysisResult.department?.name || 'Being assigned'}\n` +
+                `Priority: ${analysisResult.severity?.level || 'Medium'}\n\n` +
+                `${analysisResult.validation_status === 'validated' 
+                    ? '✅ Your grievance has been validated and is being processed.' 
+                    : '⚠️ Your grievance needs review.'}\n\n` +
+                'Next Steps:\n' +
+                '- Department assignment in progress\n' +
+                '- Officer will be assigned soon\n' +
+                '- You will receive updates here\n\n' +
+                'Use "My Grievances" to check detailed status.';
+
+            await this.bot.telegram.sendMessage(telegramId, message);
+            console.log(`Query analysis notification sent to user ${telegramId}`);
+        } catch (error) {
+            console.error(`Failed to send query analysis notification to user ${telegramId}:`, error);
+        }
     }
 
     async handleFileUpload(ctx) {

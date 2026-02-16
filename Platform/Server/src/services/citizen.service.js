@@ -105,6 +105,30 @@ class CitizenService {
             throw error;
         }
     }
+
+    /**
+     * Deactivate citizen account (logout)
+     */
+    async deactivateCitizen(telegram_id) {
+        try {
+            const result = await query(
+                `UPDATE "Citizens" 
+                 SET is_active = false, is_registered = false, updated_at = now()
+                 WHERE telegram_id = $1
+                 RETURNING *`,
+                [telegram_id]
+            );
+
+            return {
+                success: true,
+                data: result.rows[0],
+                message: 'Citizen deactivated successfully'
+            };
+        } catch (error) {
+            console.error('Error deactivating citizen:', error);
+            throw error;
+        }
+    }
 }
 
 // Export singleton instance

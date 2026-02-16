@@ -3,17 +3,40 @@ import telegramBot from '../services/telegram.bot.service.js';
 class WorkerController {
     async queryanalystCallback(req, res) {
         try {
-            const { grievanceId, userId, userName, query, policy_search_queries, file_urls, current_status } = req.body;
+            const { 
+                grievance_id, 
+                grievanceId,
+                citizen_id,
+                telegram_id,
+                userId, 
+                userName, 
+                query, 
+                policy_search_queries, 
+                file_urls, 
+                current_status,
+                validation_result,
+                location_data,
+                analysis_completed_at
+            } = req.body;
 
-            if (!grievanceId || !userId) {
-                return res.status(400).json({ success: false, message: 'grievanceId and userId are required' });
+            const gId = grievance_id || grievanceId;
+            const tId = telegram_id || userId;
+
+            if (!gId || !tId) {
+                return res.status(400).json({ success: false, message: 'grievance_id and telegram_id are required' });
             }
 
-            // Notify user via Telegram
-            const message = `✅ Grievance analyzed!\n\nSubmission ID: ${grievanceId}\n\nPlease wait for results. We are now searching for relevant policies and information.`;
-            await telegramBot.notifyUser(userId, message);
+            // Prepare analysis result for notification
+            const analysisResult = {
+                validation_status: validation_result?.is_valid ? 'validated' : 'needs_review',
+                department: { name: 'Being assigned' },
+                severity: { level: 'Medium' }
+            };
 
-            console.log(`QueryAnalyst callback: notified user ${userId} for grievance ${grievanceId}`);
+            // Notify user via Telegram with detailed analysis
+            await telegramBot.notifyQueryAnalyzed(tId, gId, analysisResult);
+
+            console.log(`QueryAnalyst callback: notified user ${tId} for grievance ${gId}`);
 
             res.json({
                 success: true,
