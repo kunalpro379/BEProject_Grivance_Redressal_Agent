@@ -29,9 +29,15 @@ const adminService = {
     return response.data;
   },
 
-  // Approve a user
-  approveUser: async (userId) => {
-    const response = await api.post(`/approve-user/${userId}`);
+  // Get all departments (for allocating officers on approve)
+  getDepartments: async () => {
+    const response = await api.get('/departments');
+    return response.data;
+  },
+
+  // Approve a user. For department_officer/department_head pass { department_id } to allocate department.
+  approveUser: async (userId, body = {}) => {
+    const response = await api.post(`/approve-user/${userId}`, body);
     return response.data;
   },
 

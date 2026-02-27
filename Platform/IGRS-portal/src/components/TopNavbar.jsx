@@ -37,9 +37,9 @@ const TopNavbar = ({ userAuth, onSearch }) => {
   return (
     <>
       {/* Top Navbar */}
-      <div className="bg-black rounded-lg shadow-lg p-2 sm:p-3 mb-3 sm:mb-4 border border-gray-700">
+      <div className="bg-black rounded-lg shadow-lg px-3 py-2 mb-3 sm:mb-4 border border-gray-700">
         {/* Mobile Layout - Only Search Bar and Bell Icon */}
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex md:hidden items-center gap-2">
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -81,7 +81,7 @@ const TopNavbar = ({ userAuth, onSearch }) => {
             </div>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

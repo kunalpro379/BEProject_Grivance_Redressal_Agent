@@ -1,18 +1,22 @@
 import express from 'express';
 import * as citizenController from '../controllers/citizen.controller.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Register citizen
+// Register citizen (public route)
 router.post('/register', citizenController.register);
 
-// Get citizen by telegram_id
-router.get('/:telegram_id', citizenController.getCitizen);
+// Protected routes - require authentication
+router.use(authenticate);
 
-// Update citizen location
-router.put('/:telegram_id/location', citizenController.updateLocation);
+// Get citizen by telegram_id (citizens can only access their own data, admins can access all)
+router.get('/:telegram_id', authorize('citizen', 'admin'), citizenController.getCitizen);
 
-// Get citizen grievances
-router.get('/:telegram_id/grievances', citizenController.getGrievances);
+// Update citizen location (citizens only)
+router.put('/:telegram_id/location', authorize('citizen', 'admin'), citizenController.updateLocation);
+
+// Get citizen grievances (citizens can only see their own, admins can see all)
+router.get('/:telegram_id/grievances', authorize('citizen', 'admin'), citizenController.getGrievances);
 
 export default router;

@@ -91,7 +91,7 @@ export const vectorService = {
 
       // Update grievance with embedding
       await client.query(
-        `UPDATE "UserGrievance" 
+        `UPDATE usergrievance 
          SET embedding = $1::vector, updated_at = NOW()
          WHERE id = $2`,
         [JSON.stringify(embedding), grievanceId]
@@ -125,7 +125,7 @@ export const vectorService = {
       const { title, content, department_id, document_url, embedding, metadata } = policyData;
 
       const result = await pool.query(
-        `INSERT INTO "PolicyDocuments" 
+        `INSERT INTO policydocuments 
          (title, content, department_id, document_url, embedding, metadata)
          VALUES ($1, $2, $3, $4, $5::vector, $6)
          RETURNING *`,
@@ -147,7 +147,7 @@ export const vectorService = {
       const { question, answer, category, department_id, embedding } = faqData;
 
       const result = await pool.query(
-        `INSERT INTO "FAQs" 
+        `INSERT INTO faqs 
          (question, answer, category, department_id, embedding)
          VALUES ($1, $2, $3, $4, $5::vector)
          RETURNING *`,
@@ -171,7 +171,7 @@ export const vectorService = {
 
       for (const { id, embedding } of grievanceEmbeddings) {
         await client.query(
-          `UPDATE "UserGrievance" 
+          `UPDATE usergrievance 
            SET embedding = $1::vector, updated_at = NOW()
            WHERE id = $2`,
           [JSON.stringify(embedding), id]
@@ -196,7 +196,7 @@ export const vectorService = {
     try {
       const result = await pool.query(
         `SELECT id, grievance_text, category, enhanced_query
-         FROM "UserGrievance"
+         FROM usergrievance
          WHERE embedding IS NULL
          LIMIT $1`,
         [limit]
@@ -219,9 +219,9 @@ export const vectorService = {
           u.full_name as citizen_name,
           d.name as department_name,
           1 - (g.embedding <=> $1::vector) as similarity
-        FROM "UserGrievance" g
-        LEFT JOIN "Users" u ON g.user_id = u.id
-        LEFT JOIN "Departments" d ON g.department_id = d.id
+        FROM usergrievance g
+        LEFT JOIN users u ON g.user_id = u.id
+        LEFT JOIN departments d ON g.department_id = d.id
         WHERE g.embedding IS NOT NULL
       `;
 

@@ -76,7 +76,7 @@ class LocationExtractor:
             return None
             
         except Exception as e:
-            print(f"   ⚠️ GPS extraction error: {e}")
+            print(f"    GPS extraction error: {e}")
             return None
 
     def extract_location_from_image(

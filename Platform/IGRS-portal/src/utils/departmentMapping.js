@@ -12,7 +12,7 @@ export const departmentMapping = {
 
 // Get department ID from name
 export const getDepartmentId = (departmentName) => {
-  return departmentMapping[departmentName] || 'DEPT_WATER_001'; // Default to Water Department
+  return departmentMapping[departmentName] || null; // Return null instead of hardcoded default
 };
 
 // Get department name from ID

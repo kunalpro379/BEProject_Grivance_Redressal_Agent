@@ -81,10 +81,15 @@ const authService = {
   login: async (email, password) => {
     const response = await api.post('/auth/login', { email, password });
     
+    console.log('🔐 Backend login response:', response.data);
+    console.log('👤 User from backend:', response.data.user);
+    console.log('🆔 dep_id from backend:', response.data.user?.dep_id);
+    
     if (response.data.accessToken) {
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
+      console.log('💾 Stored in localStorage:', JSON.parse(localStorage.getItem('user')));
     }
     
     return response.data;
@@ -136,6 +141,29 @@ const authService = {
   // Get access token
   getAccessToken: () => {
     return localStorage.getItem('accessToken');
+  },
+
+  // Forgot password - request reset link (for users table: officials/admins)
+  forgotPassword: async (email) => {
+    const response = await api.post('/auth/forgot-password', { email });
+    return response.data;
+  },
+
+  // Reset password with token from email link
+  resetPassword: async (token, newPassword) => {
+    const response = await api.post('/auth/reset-password', { token, newPassword });
+    return response.data;
+  },
+
+  // Verify email OTP (officials)
+  verifyEmailOtp: async (email, otp) => {
+    const response = await api.post('/auth/verify-email-otp', { email, otp });
+    return response.data;
+  },
+
+  resendOtp: async (email) => {
+    const response = await api.post('/auth/resend-otp', { email });
+    return response.data;
   },
 };
 

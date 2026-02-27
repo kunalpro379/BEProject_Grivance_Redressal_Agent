@@ -51,7 +51,7 @@ class WebCrawler:
                         'images': [img.get('src', '') for img in (result.media.get('images', []) if hasattr(result.media, 'get') else [])],
                     }
                     
-                    print(f"   ✅ Successfully crawled: {data['title']}")
+                    print(f"   Successfully crawled: {data['title']}")
                     return data
                 else:
                     print(f"   ❌ Crawl failed: {result.error_message}")

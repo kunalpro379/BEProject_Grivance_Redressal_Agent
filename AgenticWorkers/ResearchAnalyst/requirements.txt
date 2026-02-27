@@ -1,0 +1,23 @@
+# Core Dependencies
+psycopg2-binary==2.9.9
+python-dotenv==1.0.0
+
+# LangChain & LLMs
+langchain==0.1.0
+langchain-groq==0.0.1
+groq==0.4.2
+
+# Search & Web
+tavily-python==0.3.0
+requests==2.31.0
+
+# Vector & Embeddings
+numpy==1.26.3
+pgvector==0.2.4
+
+# Azure Queue (for WebCrawler integration)
+azure-storage-queue==12.9.0
+
+# Utilities
+pydantic==2.5.3
+pydantic-settings==2.1.0

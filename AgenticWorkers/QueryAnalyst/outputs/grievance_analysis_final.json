@@ -1,39 +1,36 @@
 {
   "grievance": {
-    "text": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell",
-    "enhanced_query": "Location: Ambernath, Maharashtra\nIssue: Garbage dumped in nala near my area\nProblem: Water pollution and bad smell\n\nImage description: The image captures a severely polluted nala (stream/drain) from a slightly elevated perspective, likely from a bridge or overpass, with a metal gridded fence or railing in the foreground. The water in the nala appears dark and murky, indicating significant contamination. It is extensively covered and choked with a vast amount of diverse garbage, including numerous plastic bags, bottles, wrappers, and other discarded refuse, forming a thick layer on the water's surface and along its banks. The immediate surroundings show some sparse vegetation, but the primary focus is on the dense accumulation of waste within the water channel. A digital overlay from a 'GPS Map Camera' is visible at the bottom, displaying location details, coordinates, and timestamp.\nVisible text in image: GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath,\nMaharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle\nLocation: 655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India\nNearby landmarks: Polluted Nala (stream/drain) with extensive garbage, Metal railing/fence (suggesting a bridge or elevated view)\nArea type: residential",
+    "text": "There is a huge garbage pile near my apartment in Mumbai.\n    It has been there for 2 weeks and is causing health issues.\n    The BBMP workers are not cleaning it despite multiple complaints.\n    Children are getting sick and the smell is unbearable.",
+    "enhanced_query": "There is a huge garbage pile near my apartment in Mumbai.\n    It has been there for 2 weeks and is causing health issues.\n    The BBMP workers are not cleaning it despite multiple complaints.\n    Children are getting sick and the smell is unbearable.\n\nImage description: The image depicts a severely polluted waterway and its adjacent bank. The foreground and midground are dominated by a dense accumulation of plastic waste, primarily discarded plastic bottles of various sizes and colors (clear, green, blue, brown). This refuse is mixed with natural debris such as twigs and branches, forming a thick layer along the water's edge and partially submerged in the murky, brown water. The bank itself is covered in dry, sparse vegetation and dirt, suggesting an unmaintained or wild area rather than an urban residential one. The sheer volume of waste indicates a long-standing environmental problem.\nVisible text in image:",
     "image": {
-      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp7p5bkxdl.jpg",
-      "description": "The image captures a severely polluted nala (stream/drain) from a slightly elevated perspective, likely from a bridge or overpass, with a metal gridded fence or railing in the foreground. The water in the nala appears dark and murky, indicating significant contamination. It is extensively covered and choked with a vast amount of diverse garbage, including numerous plastic bags, bottles, wrappers, and other discarded refuse, forming a thick layer on the water's surface and along its banks. The immediate surroundings show some sparse vegetation, but the primary focus is on the dense accumulation of waste within the water channel. A digital overlay from a 'GPS Map Camera' is visible at the bottom, displaying location details, coordinates, and timestamp.",
+      "path": "garbage.jpeg",
+      "description": "The image depicts a severely polluted waterway and its adjacent bank. The foreground and midground are dominated by a dense accumulation of plastic waste, primarily discarded plastic bottles of various sizes and colors (clear, green, blue, brown). This refuse is mixed with natural debris such as twigs and branches, forming a thick layer along the water's edge and partially submerged in the murky, brown water. The bank itself is covered in dry, sparse vegetation and dirt, suggesting an unmaintained or wild area rather than an urban residential one. The sheer volume of waste indicates a long-standing environmental problem.",
       "key_objects": [
-        "nala (stream/drain)",
-        "garbage (plastic bags, bottles, general refuse)",
+        "plastic bottles",
+        "plastic waste",
         "murky water",
-        "metal fence/railing",
-        "vegetation",
-        "GPS overlay"
+        "dried grass/vegetation",
+        "twigs and branches",
+        "white plastic bucket"
       ],
-      "scene_type": "Urban water pollution / Nala pollution",
-      "extracted_text": "GPS Map Camera\nAmbernath, Maharashtra, India\n655f+8x6, Bhidewadi, Kansai, Ambernath,\nMaharashtra 421501, India\nLat 19.208322° Long 73.175217°\nSaturday, 14/02/2026 04:14 PM GMT +05:30\nGoogle"
+      "scene_type": "Polluted riverbank/waterway",
+      "extracted_text": ""
     }
   },
   "location": {
-    "pincode": "421501",
-    "district": "Raigad",
+    "pincode": "",
+    "district": "",
     "state": "Maharashtra",
-    "location_confidence": "High",
+    "location_confidence": "Medium",
     "raw_location_mentions": [
-      "Ambernath, Maharashtra",
-      "655f+8x6, Bhidewadi, Kansai, Ambernath, Maharashtra 421501, India",
-      "Ambernath, Maharashtra, India",
-      "Maharashtra 421501, India"
+      "Mumbai"
     ]
   },
   "analysis": {
     "query_type": {
       "query_type": "Complaint",
       "confidence": "High",
-      "reasoning": "The query is classified as a complaint due to the explicit mention of a problem (water pollution and bad smell) caused by a specific issue (garbage dumped in nala near the area). The image provided further supports this classification by visually depicting the severity of the issue. The tone of the query is also critical and concerned, which is typical of a complaint."
+      "reasoning": "The query expresses frustration and concern about a specific issue (huge garbage pile near the apartment) that has been ongoing for 2 weeks, causing health issues and not being addressed despite multiple complaints. The tone is critical and demanding, indicating a complaint."
     },
     "emotion": {
       "primary_emotion": "Angry",
@@ -43,14 +40,11 @@
       ],
       "emotion_intensity": 8,
       "emotional_indicators": [
-        "Garbage dumped in nala near my area",
-        "Water pollution and bad smell",
-        "polluted nala (stream/drain) with extensive garbage",
-        "extensive garbage",
-        "significant contamination",
-        "dense accumulation of waste",
-        "bad smell",
-        "pollution"
+        "huge garbage pile",
+        "health issues",
+        "despite multiple complaints",
+        "children are getting sick",
+        "the smell is unbearable"
       ]
     },
     "severity": {
@@ -58,100 +52,98 @@
       "criticality_score": 9,
       "impact_scope": "Community",
       "potential_consequences": [
-        "Water pollution can lead to the spread of waterborne diseases among the community.",
-        "The bad smell from the garbage can cause respiratory issues and discomfort to the residents.",
-        "The presence of garbage in the nala can attract pests and rodents, leading to the spread of diseases.",
-        "The pollution can also affect the local wildlife and ecosystem.",
-        "The situation can lead to a decline in the quality of life for the residents and can have long-term effects on their health."
+        "Health issues and illnesses among residents, particularly children",
+        "Unbearable living conditions due to the smell and visual pollution",
+        "Potential long-term environmental damage and harm to local ecosystems",
+        "Negative impact on property values and quality of life in the surrounding area",
+        "Risk of disease outbreaks and epidemics if the situation is not addressed promptly"
       ]
     },
     "priority": {
       "sentiment_score": 8,
       "urgency_level": "High",
-      "emotional_tone": "Anger and Disgust",
+      "emotional_tone": "Anger and Frustration",
       "key_emotional_indicators": [
-        "Garbage dumped in nala near my area",
-        "Water pollution and bad smell",
-        "Severely polluted nala",
-        "Extensive garbage",
-        "Dark and murky water",
-        "Bad smell"
+        "huge garbage pile",
+        "health issues",
+        "despite multiple complaints",
+        "children are getting sick",
+        "the smell is unbearable"
       ],
       "priority_level": "High",
-      "justification": "The grievance involves water pollution and a bad smell, which poses a significant threat to public health and the environment. The large amount of garbage dumped in the nala indicates a severe impact on the ecosystem and nearby residents. The issue requires immediate attention to prevent further contamination and potential health risks.",
-      "expected_resolution_time": "Within 24-48 hours",
-      "risk_assessment": "High risk of waterborne diseases, environmental pollution, and negative impact on local wildlife. The situation may escalate if not addressed promptly, leading to more severe consequences.",
+      "justification": "The grievance has a significant impact on the health and well-being of multiple individuals, particularly children, due to the presence of a huge garbage pile near the apartment in Mumbai. The issue has been ongoing for 2 weeks, and the BBMP workers' inaction despite multiple complaints exacerbates the situation. The smell and health issues caused by the garbage pile necessitate immediate attention.",
+      "expected_resolution_time": "Within 48 hours",
+      "risk_assessment": "High risk of further health complications and environmental degradation if the garbage pile is not addressed promptly. The situation may escalate into a public health crisis if not resolved quickly.",
       "_raw_sentiment": {
         "sentiment_score": 8,
         "urgency_level": "High",
-        "emotional_tone": "Anger and Disgust",
+        "emotional_tone": "Anger and Frustration",
         "key_emotional_indicators": [
-          "Garbage dumped in nala near my area",
-          "Water pollution and bad smell",
-          "Severely polluted nala",
-          "Extensive garbage",
-          "Dark and murky water",
-          "Bad smell"
+          "huge garbage pile",
+          "health issues",
+          "despite multiple complaints",
+          "children are getting sick",
+          "the smell is unbearable"
         ]
       },
       "_raw_priority": {
         "priority_level": "High",
-        "justification": "The grievance involves water pollution and a bad smell, which poses a significant threat to public health and the environment. The large amount of garbage dumped in the nala indicates a severe impact on the ecosystem and nearby residents. The issue requires immediate attention to prevent further contamination and potential health risks.",
-        "expected_resolution_time": "Within 24-48 hours",
-        "risk_assessment": "High risk of waterborne diseases, environmental pollution, and negative impact on local wildlife. The situation may escalate if not addressed promptly, leading to more severe consequences."
+        "justification": "The grievance has a significant impact on the health and well-being of multiple individuals, particularly children, due to the presence of a huge garbage pile near the apartment in Mumbai. The issue has been ongoing for 2 weeks, and the BBMP workers' inaction despite multiple complaints exacerbates the situation. The smell and health issues caused by the garbage pile necessitate immediate attention.",
+        "expected_resolution_time": "Within 48 hours",
+        "risk_assessment": "High risk of further health complications and environmental degradation if the garbage pile is not addressed promptly. The situation may escalate into a public health crisis if not resolved quickly."
       }
     },
     "patterns": {
       "is_recurring_issue": true,
       "similar_patterns_found": [
-        "Garbage dumping in water bodies in urban areas",
-        "Pollution in residential areas due to lack of waste management",
-        "Similar cases of water pollution in Maharashtra, India"
+        "Garbage pile near residential area in Delhi",
+        "Unmaintained dumpsite in Chennai",
+        "Pollution complaints in Bangalore"
       ],
       "spam_likelihood": "Medium",
-      "pattern_notes": "The image captures a severe case of water pollution in Ambernath, Maharashtra, with a large amount of garbage dumped in a nala. This is a recurring issue in urban areas, particularly in India, where lack of proper waste management leads to pollution in water bodies. The image is likely to be genuine, but the similarity in patterns suggests that it may be part of a larger campaign to raise awareness about environmental issues. The use of a GPS Map Camera and the presence of a digital overlay suggest that the image is authentic, but the similarity in patterns and the lack of specific details about the incident make it difficult to determine the likelihood of spam."
+      "pattern_notes": "The pattern of complaints about garbage piles near residential areas in Indian cities suggests a recurring issue. The similarity in locations (Mumbai, Delhi, Chennai, Bangalore) and the nature of the complaints (health issues, BBMP workers not cleaning, children getting sick) indicates a potential spam campaign. However, the specific details of each complaint (e.g. BBMP workers, children getting sick) suggest that the complaints are genuine. Further investigation is needed to determine the authenticity of the complaints."
     },
     "historical_trends": {
       "top_3_similar_cases": [
         {
-          "id": "9357",
-          "summary": "People throwing Garbage in the NALA"
+          "id": "8521",
+          "summary": "Overflow of sewage in a society in Gujarat, causing diseases and unhygienic conditions."
         },
         {
-          "id": "10068",
-          "summary": "Garbage pile up in plot next to my house"
+          "id": "2220",
+          "summary": "Water problem in a ward in Rajasthan, with no water arrangement or government water tanks for residents."
         },
         {
-          "id": "12954",
-          "summary": "Day 2 !\r\nThis garbage menace continues ..\r\nYet to see the action fr..."
+          "id": "7849",
+          "summary": "Allegation of corruption and misconduct against state government officials in Uttar Pradesh."
         }
       ],
       "common_resolutions": [
         {
-          "resolution": "Installation of dustbins and proper waste management systems",
-          "count": 3
+          "resolution": "Resolution of similar cases involved the intervention of higher authorities, such as the Municipal Commissioner or the State Government, to address the grievances and ensure that the responsible parties take action to resolve the issues.",
+          "frequency": 3
         },
         {
-          "resolution": "Issuance of notices to landowners to fence vacant lands",
-          "count": 2
+          "resolution": "In some cases, the resolution involved the provision of incentives or compensation to the affected parties, such as financial assistance for the construction of toilets or the provision of clean drinking water.",
+          "frequency": 2
         },
         {
-          "resolution": "Collaboration between local authorities and residents to maintain cleanliness",
-          "count": 2
+          "resolution": "The resolution of similar cases also involved the implementation of new policies or programs to address the underlying issues, such as the Swachh Bharat Mission or the Mukhyamantri Gramin Peyjal Nishchay Yojana.",
+          "frequency": 2
         }
       ],
       "patterns_identified": [
         {
-          "pattern": "Garbage dumping in public areas",
-          "count": 5
+          "pattern": "Inadequate waste management and sanitation infrastructure",
+          "frequency": 5
         },
         {
-          "pattern": "Lack of proper waste management infrastructure",
-          "count": 4
+          "pattern": "Lack of accountability and transparency in government agencies",
+          "frequency": 3
         },
         {
-          "pattern": "Community involvement in maintaining cleanliness",
-          "count": 3
+          "pattern": "Inadequate funding and resources for public services",
+          "frequency": 2
         }
       ]
     },
@@ -159,46 +151,46 @@
       "fraud_risk": "Low",
       "spam_indicators": [
         {
-          "pattern": "Generic complaint",
-          "description": "The complaint describes a common issue (garbage dumped in nala) without providing specific details or context."
+          "pattern": "Generic complaint about environmental issue",
+          "description": "The complaint describes a general problem without specific details about the location or the parties involved."
         },
         {
-          "pattern": "Lack of personal experience",
-          "description": "The complaint does not mention the complainant's personal experience or connection to the issue, making it seem more like a general report."
+          "pattern": "Lack of specific evidence",
+          "description": "The image provided does not directly show the garbage pile near the apartment in Mumbai, but rather a different location."
         }
       ],
-      "authenticity_confidence": "High",
+      "authenticity_confidence": "Medium",
       "verification_recommendations": [
-        "Verify the location using GPS coordinates and nearby landmarks",
-        "Check for any previous complaints or reports from the same location",
-        "Review the image for any signs of manipulation or tampering"
+        "Request more specific details about the location and the parties involved in the complaint.",
+        "Verify the existence of the garbage pile near the apartment in Mumbai through additional evidence or on-site inspection.",
+        "Consider the possibility of a misdirected complaint or a misunderstanding about the location."
       ]
     }
   },
   "classification": {
     "category": {
       "main_category": "Environmental Issues",
-      "sub_category": "Water Pollution",
+      "sub_category": "Garbage and Unsanitary Practices",
       "confidence": "High",
-      "reasoning": "The grievance content mentions 'Water pollution and bad smell' due to garbage dumped in a nala near the area, which indicates a clear connection to water pollution. The image description also supports this, showing a severely polluted nala with dark and murky water, extensive garbage, and a bad smell."
+      "reasoning": "The grievance mentions a huge garbage pile near the apartment in Mumbai, causing health issues and an unbearable smell. The BBMP workers are not cleaning it despite multiple complaints. This indicates a problem with garbage disposal and sanitation, which falls under the category of Environmental Issues and specifically Garbage and Unsanitary Practices."
     },
     "department": {
-      "recommended_department": "Public Works Department (PWD) or Municipal Corporation of Ambernath",
-      "contact_information": "Contact the local authorities or municipal corporation of Ambernath for reporting and addressing the issue of garbage dumped in the nala. You can also contact the Public Works Department (PWD) for assistance.",
-      "jurisdiction": "Ambernath, Maharashtra, India",
-      "escalation_path": "If the issue is not resolved by the local authorities, you can escalate the matter to the Maharashtra Pollution Control Board (MPCB) or the Ministry of Environment, Forest and Climate Change (MoEFCC) for further action."
+      "recommended_department": "Municipal Corporation of Greater Mumbai (MCGM)",
+      "contact_information": "You can contact the MCGM through their website, phone number, or by visiting their office in person. For more information, please visit their website at https://mcgm.gov.in/ or call their customer service number at 1800 222 772.",
+      "jurisdiction": "Mumbai, Maharashtra, India",
+      "escalation_path": "If your issue is not resolved by the MCGM, you can escalate it to the Maharashtra State Government's Public Grievance Redressal Mechanism or the National Consumer Helpline."
     }
   },
   "policy_search_queries": {
     "queries": [
-      "Maharashtra government initiatives for water pollution control near Ambernath",
-      "Ambernath nala pollution complaint procedure Maharashtra government",
-      "Water pollution control policies in Maharashtra India",
-      "Garbage dumping in nala near Ambernath Maharashtra government response",
-      "Environmental protection laws in Maharashtra India related to water pollution",
-      "Ambernath water pollution grievance redressal mechanism Maharashtra government"
+      "Mumbai garbage disposal policy",
+      "BBMP garbage collection rules and regulations",
+      "Municipal Corporation of Greater Mumbai (MCGM) waste management guidelines",
+      "Complaint procedure for garbage disposal in Mumbai",
+      "Mumbai Municipal Corporation waste collection and disposal norms",
+      "Government of Maharashtra waste management policy for urban areas"
     ],
-    "reasoning": "These search queries are designed to find relevant information on government policies, schemes, and initiatives related to water pollution control in Maharashtra, specifically in the Ambernath area. They cover various aspects such as complaint procedures, government responses, environmental protection laws, and grievance redressal mechanisms."
+    "reasoning": "These search queries aim to find relevant information on the policies and procedures related to garbage disposal in Mumbai, specifically focusing on the Municipal Corporation of Greater Mumbai (MCGM) and the BBMP. The queries cover various aspects such as rules and regulations, guidelines, complaint procedures, and government policies to help identify the root cause of the issue and potential solutions."
   },
   "outputs": {
     "markdown_report_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\AgenticWorkers\\QueryAnalyst\\outputs\\grievance_report.md",

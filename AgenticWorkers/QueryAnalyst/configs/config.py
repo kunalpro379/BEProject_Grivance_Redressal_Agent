@@ -9,10 +9,12 @@ class Config:
     GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
     SUPABASE_DB_PASSWORD = os.environ.get("SUPABASE_DB_PASSWORD", "")
 
-    SUPABASE_DB_HOST = "aws-1-ap-southeast-1.pooler.supabase.com"
-    SUPABASE_DB_PORT = 6543
-    SUPABASE_DB_USER = "postgres.hjpgyfowhrbciemdzqgn"
-    SUPABASE_DB_NAME = "postgres"
+    SUPABASE_DB_HOST = os.environ.get("SUPABASE_DB_HOST", "aws-1-ap-southeast-1.pooler.supabase.com")
+    SUPABASE_DB_PORT = int(os.environ.get("SUPABASE_DB_PORT", "6543"))
+    SUPABASE_DB_USER = os.environ.get("SUPABASE_DB_USER", "postgres.hjpgyfowhrbciemdzqgn")
+    SUPABASE_DB_NAME = os.environ.get("SUPABASE_DB_NAME", "postgres")
+    # Table name: use usergrievance (lowercase) to match Platform DB
+    GRIEVANCE_TABLE = os.environ.get("GRIEVANCE_TABLE", "usergrievance")
 
     @classmethod
     def supabase_dsn(cls) -> str:
@@ -20,6 +22,10 @@ class Config:
             f"postgresql://{cls.SUPABASE_DB_USER}:{cls.SUPABASE_DB_PASSWORD}@"
             f"{cls.SUPABASE_DB_HOST}:{cls.SUPABASE_DB_PORT}/{cls.SUPABASE_DB_NAME}"
         )
+
+    @classmethod
+    def grievance_table(cls) -> str:
+        return cls.GRIEVANCE_TABLE
 
     EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # 384-dim
 

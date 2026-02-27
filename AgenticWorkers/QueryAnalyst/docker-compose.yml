@@ -15,7 +15,6 @@ services:
       - LANGSMITH_TRACING=false
       - LANGCHAIN_TRACING_V2=false
     volumes:
-      # Mount outputs directory to persist generated reports
       - ./outputs:/app/outputs
     networks:
       - grievance-network

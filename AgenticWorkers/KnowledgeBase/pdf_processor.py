@@ -27,7 +27,7 @@ class PDFProcessor:
             with open(temp_path, 'wb') as f:
                 f.write(response.content)
             
-            print(f"   📥 Downloaded PDF to: {temp_path}")
+            print(f"    Downloaded PDF to: {temp_path}")
             return temp_path
             
         except Exception as e:
@@ -54,7 +54,7 @@ class PDFProcessor:
                 
                 # Extract text from each page
                 num_pages = len(pdf_reader.pages)
-                print(f"   📄 Processing {num_pages} pages...")
+                print(f"    Processing {num_pages} pages...")
                 
                 for page_num, page in enumerate(pdf_reader.pages, 1):
                     try:
@@ -65,7 +65,7 @@ class PDFProcessor:
                                 'text': text.strip()
                             })
                     except Exception as e:
-                        print(f"   ⚠️ Error extracting page {page_num}: {e}")
+                        print(f"    Error extracting page {page_num}: {e}")
                         continue
             
             # Combine all text
@@ -105,7 +105,7 @@ class PDFProcessor:
                 if pdf_path and os.path.exists(pdf_path):
                     os.unlink(pdf_path)
             except Exception as e:
-                print(f"   ⚠️ Failed to cleanup temp file: {e}")
+                print(f"    Failed to cleanup temp file: {e}")
     
     def cleanup(self):
         """Cleanup temp directory"""
@@ -114,4 +114,4 @@ class PDFProcessor:
             if self.temp_dir.exists():
                 shutil.rmtree(self.temp_dir)
         except Exception as e:
-            print(f"   ⚠️ Failed to cleanup temp directory: {e}")
+            print(f"    Failed to cleanup temp directory: {e}")

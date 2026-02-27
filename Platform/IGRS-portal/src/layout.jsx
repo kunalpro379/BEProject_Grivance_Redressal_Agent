@@ -22,7 +22,7 @@ import TopNavbar from './components/TopNavbar';
 import { useAuth } from './hooks/useAuth';
 import BackgroundGrid from './components/BackgroundGrid';
 
-function Layout({ userRole, onLogout, userAuth }) {
+function Layout({ userRole, onLogout, userAuth, basePath }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { signOut } = useAuth();
@@ -55,11 +55,11 @@ function Layout({ userRole, onLogout, userAuth }) {
 
   // Update navigation handler
   const handleNavigation = (path) => {
-    // Determine base path based on user role
-    const basePath = userRole === 'admin' ? '/admin' : 
-                     userRole === 'department_head' ? '/department' : 
-                     userRole === 'citizen' ? '/citizen' : '/officer';
-    navigate(`${basePath}/${path}`);
+    // Use explicit basePath (e.g. /government/:id) or determine from user role
+    const pathBase = basePath ?? (userRole === 'admin' ? '/admin' :
+                     userRole === 'department_head' ? '/department' :
+                     userRole === 'citizen' ? '/citizen' : '/officer');
+    navigate(`${pathBase}/${path}`);
   };
 
   return (

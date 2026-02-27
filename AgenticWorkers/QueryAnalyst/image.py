@@ -1,7 +1,7 @@
 import google.generativeai as genai
 from PIL import Image
 
-# ⚠️ PUT YOUR NEW API KEY HERE (DO NOT SHARE IT)
+#  PUT YOUR NEW API KEY HERE (DO NOT SHARE IT)
 genai.configure(api_key="AIzaSyBKdYslBh7PCyZXuRWKstuuhdUFoDH_5SE")
 
 # Load Gemini Vision model

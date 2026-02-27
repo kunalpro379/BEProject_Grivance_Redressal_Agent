@@ -9,12 +9,16 @@ const api = axios.create({
   },
 });
 
-// Request interceptor to add auth token
+// Request interceptor to add auth token and fix FormData (file upload) requests
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+    // Let browser/axios set multipart/form-data with boundary when sending FormData (e.g. grievance proof file)
+    if (typeof FormData !== 'undefined' && config.data instanceof FormData) {
+      delete config.headers['Content-Type'];
     }
     return config;
   },

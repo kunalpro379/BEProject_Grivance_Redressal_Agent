@@ -1,7 +1,7 @@
 import FloatingNavbar from "../components/FloatingNavbar";
 import HeroSection from "../components/HeroSection";
 import FeaturesSection from "../components/FeaturesSection";
-import StatisticsSection from "../components/StatisticsSection";
+import StatisticsSection from "./citizen/components/StatisticsSection";
 import Footer from "../components/Footer";
 
 const Landing = () => {

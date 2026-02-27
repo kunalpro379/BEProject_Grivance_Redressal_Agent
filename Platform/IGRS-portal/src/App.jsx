@@ -1,38 +1,41 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
-import { getDepartmentId } from "./utils/departmentMapping";
 
 // Public pages
 import Landing from "./pages/Landing";
-import OfficialAuthPage from "./pages/OfficialAuthPage";
-import CitizenAuthPage from "./pages/CitizenAuthPage";
+import OfficialAuthPage from "./pages/government-officials/AuthPage";
+import CitizenAuthPage from "./pages/citizen/AuthPage";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
-// Layout
-import Layout from "./layout";
-import AdminLayout from "./components/AdminLayout";
+// Layouts
+import AdminLayout from "./pages/admin/Layout";
+import OfficerLayout from "./pages/government-officials/Layout";
 
 // Dashboard pages
-import Dashboard from "./pages/Dashboard";
-import GrievanceList from "./components/GrievanceList";
-import AreaHeatmap from "./pages/AreaHeatmap";
-import Chat from "./pages/Chat";
-import OfficialAnnouncements from "./pages/OfficialAnnouncements";
-import TaskManagement from './pages/TaskManagement';
-import Feedback from "./pages/Feedback";
-
-// Citizen pages
-import CitizenDashboard from "./pages/CitizenDashboard";
-
-// Department pages
-import DepartmentDashboard from "./pages/DepartmentDashboard";
-
-// Admin pages
+import DepartmentDashboardNew from "./pages/department/Dashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import CitizenDashboard from "./pages/citizen/Dashboard";
+import OfficerDashboard from "./pages/government-officials/DashboardPremium";
+
+// Government Officials Portal Pages
+import GrievanceList from "./pages/government-officials/components/GrievanceList";
+import AreaHeatmap from "./pages/government-officials/AreaHeatmap";
+import Chat from "./pages/government-officials/Chat";
+import OfficialAnnouncements from "./pages/government-officials/Announcements";
+import TaskManagement from './pages/government-officials/TaskManagement';
+import Feedback from "./pages/government-officials/Feedback";
+import WardOfficerDashboard from "./pages/government-officials/WardOfficerDashboard";
+import MunicipalCommissionerDashboard from "./pages/government-officials/MunicipalCommissionerDashboard";
+import DistrictCollectorDashboard from "./pages/government-officials/DistrictCollectorDashboard";
+import RoleBasedDashboard from "./pages/government-officials/RoleBasedDashboard";
+
+// Admin Portal Pages
 import KnowledgeBaseManagement from "./pages/admin/KnowledgeBaseManagement";
-// Temporarily disabled - import UserManagement from "./pages/admin/UserManagement";
+import Settings from "./pages/admin/Settings";
 
 // Inline Users Page Component
 function UsersPage() {
@@ -121,78 +124,83 @@ function App() {
           {/* Portal-specific Authentication Routes */}
           <Route 
             path="/citizen-portal/authentication" 
-            element={user ? <Navigate to={getRoleBasedPath(user.role, user.department_name)} replace /> : <CitizenAuthPage />} 
+            element={user ? <Navigate to={getRoleBasedPath(user)} replace /> : <CitizenAuthPage />} 
           />
           <Route 
             path="/officials-portal/authentication" 
-            element={user ? <Navigate to={getRoleBasedPath(user.role, user.department_name)} replace /> : <OfficialAuthPage />} 
+            element={user ? <Navigate to={getRoleBasedPath(user)} replace /> : <OfficialAuthPage />} 
+          />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+
+          {/* Government Officers Portal - For officers WITHOUT dep_id */}
+          <Route
+            path="/government/:officialId/*"
+            element={
+              <ProtectedRoute allowedRoles={['department_officer', 'department_head', 'ward_officer', 'city_commissioner', 'district_collector']}>
+                <OfficerLayout userRole="government_officer" onLogout={logout} userAuth={user} />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<OfficerDashboard userAuth={user} />} />
+            <Route path="role-dashboard" element={<RoleBasedDashboard />} />
+            <Route path="grievances" element={<GrievanceList />} />
+            <Route path="heatmap" element={<AreaHeatmap />} />
+            <Route path="chat" element={<Chat />} />
+            <Route path="announcements" element={<OfficialAnnouncements userRole="government_officer" />} />
+            <Route path="tasks" element={<TaskManagement />} />
+            <Route path="feedback" element={<Feedback />} />
+            <Route path="*" element={<Navigate to="dashboard" replace />} />
+          </Route>
+
+          {/* Department Officers Portal - For officers WITH dep_id */}
+          <Route
+            path="/department/:departmentId"
+            element={
+              <ProtectedRoute allowedRoles={['department_officer', 'department_head', 'ward_officer', 'city_commissioner', 'district_collector']} requireDepartmentMatch={true}>
+                <DepartmentDashboardNew userAuth={user} />
+              </ProtectedRoute>
+            }
           />
 
-          {/* Citizen Portal - Protected Routes */}
+          {/* Citizen Portal - Base URL: /citizen/:citizenId, tabs: /dashboard, /grievances, /profile, etc. */}
           <Route
-            path="/citizen/*"
+            path="/citizen"
+            element={
+              <ProtectedRoute allowedRoles={['citizen']}>
+                {user?.id ? <Navigate to={`/citizen/${user.id}`} replace /> : <Navigate to="/citizen-portal/authentication" replace />}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/citizen/:citizenId/*"
             element={
               <ProtectedRoute allowedRoles={['citizen']}>
                 <Routes>
+                  <Route index element={<Navigate to="dashboard" replace />} />
                   <Route path="dashboard" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
+                  <Route path="profile" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="grievances" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="statistics" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="announcements" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="community" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="settings" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
-                  <Route path="*" element={<Navigate to="/citizen/dashboard" replace />} />
+                  <Route path="*" element={<Navigate to="dashboard" replace />} />
                 </Routes>
               </ProtectedRoute>
             }
           />
 
-          {/* Department Specific Dashboard - Protected Routes */}
+          {/* Department Specific Dashboard - Protected Routes (real dep_id in URL) */}
           <Route
             path="/department/:departmentId"
             element={
-              <ProtectedRoute allowedRoles={['department_officer', 'department_head']}>
-                <DepartmentDashboard />
+              <ProtectedRoute allowedRoles={['department_officer', 'department_head']} requireDepartmentMatch={true}>
+                <DepartmentDashboardNew userAuth={user} />
               </ProtectedRoute>
             }
           />
-
-          {/* Department Officer Portal - Protected Routes */}
-          <Route
-            path="/officer/*"
-            element={
-              <ProtectedRoute allowedRoles={['department_officer']}>
-                <Layout userRole="department_officer" onLogout={logout} userAuth={user} />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<Dashboard userAuth={user} />} />
-            <Route path="grievances" element={<GrievanceList />} />
-            <Route path="heatmap" element={<AreaHeatmap />} />
-            <Route path="chat" element={<Chat />} />
-            <Route path="announcements" element={<OfficialAnnouncements userRole="department_officer" />} />
-            <Route path="tasks" element={<TaskManagement />} />
-            <Route path="feedback" element={<Feedback />} />
-            <Route path="*" element={<Navigate to="/officer/dashboard" replace />} />
-          </Route>
-
-          {/* Department Head Portal - Protected Routes */}
-          <Route
-            path="/department/*"
-            element={
-              <ProtectedRoute allowedRoles={['department_head']}>
-                <Layout userRole="department_head" onLogout={logout} userAuth={user} />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<Dashboard userAuth={user} />} />
-            <Route path="grievances" element={<GrievanceList />} />
-            <Route path="heatmap" element={<AreaHeatmap />} />
-            <Route path="chat" element={<Chat />} />
-            <Route path="announcements" element={<OfficialAnnouncements userRole="department_head" />} />
-            <Route path="tasks" element={<TaskManagement />} />
-            <Route path="feedback" element={<Feedback />} />
-            <Route path="*" element={<Navigate to="/department/dashboard" replace />} />
-          </Route>
 
           {/* Admin Portal - Protected Routes with AdminLayout */}
           <Route
@@ -208,18 +216,20 @@ function App() {
               <UsersPage />
             } />
             <Route path="knowledge-base" element={<KnowledgeBaseManagement />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
           </Route>
 
           {/* Legacy redirects */}
-          <Route path="/citizen-portal/*" element={<Navigate to="/citizen/dashboard" replace />} />
-          <Route path="/officials-portal/*" element={<Navigate to="/officer/dashboard" replace />} />
+          <Route path="/citizen-portal/*" element={<Navigate to="/citizen" replace />} />
+          <Route path="/government-officials/*" element={<Navigate to="/officials-portal/authentication" replace />} />
+          <Route path="/officer/*" element={<Navigate to="/officials-portal/authentication" replace />} />
 
           {/* 404 - Redirect to appropriate page */}
           <Route 
             path="*" 
             element={
-              user ? <Navigate to={getRoleBasedPath(user.role)} replace /> : <Navigate to="/" replace />
+              user ? <Navigate to={getRoleBasedPath(user)} replace /> : <Navigate to="/" replace />
             } 
           />
         </Routes>
@@ -228,21 +238,30 @@ function App() {
   );
 }
 
-// Helper function to get default path for each role
-const getRoleBasedPath = (role, departmentName) => {
+// Helper function to get default path for each role (pass full user for department officials)
+const getRoleBasedPath = (userOrRole, departmentName, depId) => {
+  const user = userOrRole && typeof userOrRole === 'object' ? userOrRole : null;
+  const role = user ? user.role : userOrRole;
+  
   switch (role) {
     case 'admin':
       return '/admin/dashboard';
+    
     case 'department_officer':
     case 'department_head':
-      // Redirect to department-specific dashboard if department exists
-      const deptId = departmentName ? getDepartmentId(departmentName) : null;
-      if (deptId) {
-        return `/department/${deptId}`;
-      }
-      return role === 'department_officer' ? '/officer/dashboard' : '/department/dashboard';
+    case 'ward_officer':
+    case 'city_commissioner':
+    case 'district_collector':
+      // Department officers WITH dep_id → department portal
+      if (user?.dep_id) return `/department/${user.dep_id}`;
+      if (depId) return `/department/${depId}`;
+      // Department officers WITHOUT dep_id → government portal
+      if (user?.id) return `/government/${user.id}/dashboard`;
+      return '/officials-portal/authentication';
+    
     case 'citizen':
-      return '/citizen/dashboard';
+      return user?.id ? `/citizen/${user.id}` : '/citizen';
+    
     default:
       return '/login';
   }

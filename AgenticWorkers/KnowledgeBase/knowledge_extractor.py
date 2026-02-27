@@ -16,7 +16,7 @@ class KnowledgeExtractor:
     def extract_knowledge(self, text: str, source_type: str, source_url: str) -> Dict[str, any]:
         """Extract structured knowledge from text content"""
         try:
-            print(f"   🧠 Extracting knowledge using Groq (Llama 3.1)...")
+            print(f"   Extracting knowledge using Groq (Llama 3.1)...")
             
             system_prompt = """You are a knowledge extraction expert for a government grievance redressal system.
 Extract structured information from the provided content and return ONLY valid JSON with these fields:
@@ -58,7 +58,7 @@ Extract the information as specified and return valid JSON only."""
             knowledge['source_url'] = source_url
             knowledge['extracted_at'] = None  # Will be set by worker
             
-            print(f"   ✅ Knowledge extracted: {knowledge.get('department', 'Unknown')} department")
+            print(f"   Knowledge extracted: {knowledge.get('department', 'Unknown')} department")
             
             return {
                 'success': True,
@@ -103,5 +103,5 @@ Extract the information as specified and return valid JSON only."""
             return chunks
             
         except Exception as e:
-            print(f"   ⚠️ Error creating embeddings data: {e}")
+            print(f"    Error creating embeddings data: {e}")
             return []

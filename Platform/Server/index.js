@@ -22,10 +22,19 @@ import citizenRoutes from './src/routes/citizen.routes.js';
 import workerRoutes from './src/routes/worker.routes.js';
 import telegramRoutes from './src/routes/telegram.routes.js';
 import knowledgeBaseRoutes from './src/routes/knowledgebase.routes.js';
+import departmentRoutes from './src/routes/department.routes.js';
+import departmentDashboardRoutes from './src/routes/department-dashboard.routes.js';
+import otpRoutes from './src/routes/otp.routes.js';
+import settingsRoutes from './src/routes/settings.routes.js';
+import budgetRoutes from './src/routes/budget.routes.js';
+import dashboardRoutes from './src/routes/dashboard.routes.js';
+import chatRoutes from './src/routes/chat.routes.js';
+import rolesRoutes from './src/routes/roles.routes.js';
 
 // Import services
 import pool from './src/config/database.js';
 import telegramBot from './src/services/telegram.bot.service.js';
+import runMigration from './src/migrations/fix_citizens_table.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,14 +47,14 @@ const PORT = process.env.PORT || 5000;
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: ['http://localhost:5010', 'http://localhost:5011', 'http://localhost:5173'],
   credentials: true
 }));
 
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: process.env.NODE_ENV === 'production' ? 100 : 500, // Higher limit for development
   message: 'Too many requests from this IP'
 });
 app.use('/api/', limiter);
@@ -94,6 +103,7 @@ app.get('/api/test', (req, res) => {
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/otp', otpRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/grievances', grievanceRoutes);
 app.use('/api/vector', vectorRoutes);
@@ -101,6 +111,13 @@ app.use('/api/citizens', citizenRoutes);
 app.use('/api/worker', workerRoutes);
 app.use('/api/telegram', telegramRoutes);
 app.use('/api/knowledgebase', knowledgeBaseRoutes);
+app.use('/api/departments', departmentRoutes);
+app.use('/api/department-dashboard', departmentDashboardRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/budget', budgetRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/roles', rolesRoutes);
 
 // 404 handler
 app.use((req, res) => {
@@ -124,14 +141,24 @@ app.use((err, req, res, next) => {
   });
 });
 
+// MIGRATION
+(async () => {
+  try {
+    console.log('\nRunning database migration...');
+    // await runMigration();
+  } catch (error) {
+    console.warn('  Database migration failed:', error.message);
+  }
+})();
+
 // Initialize Telegram Bot (non-blocking)
 (async () => {
   try {
     await telegramBot.init();
     console.log('Telegram Bot initialized');
   } catch (error) {
-    console.warn('⚠️  Telegram Bot initialization failed:', error.message);
-    console.warn('⚠️  Server will continue without Telegram bot');
+    console.warn('  Telegram Bot initialization failed:', error.message);
+    console.warn('  Server will continue without Telegram bot');
   }
 })();
 

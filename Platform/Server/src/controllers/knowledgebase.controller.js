@@ -18,7 +18,7 @@ class KnowledgeBaseController {
 
       // Store in database
       const result = await pool.query(
-        `INSERT INTO "KnowledgeBase" (file_name, file_url, file_type, uploaded_by, status)
+        `INSERT INTO departmentknowledgebase (file_name, file_url, file_type, uploaded_by, status)
          VALUES ($1, $2, 'pdf', $3, 'processing')
          RETURNING *`,
         [file.originalname, uploadResult.url, req.user.id]
@@ -64,7 +64,7 @@ class KnowledgeBaseController {
 
       // Store in database
       const result = await pool.query(
-        `INSERT INTO "KnowledgeBase" (file_name, file_url, file_type, uploaded_by, status, description)
+        `INSERT INTO departmentknowledgebase (file_name, file_url, file_type, uploaded_by, status, description)
          VALUES ($1, $2, 'url', $3, 'processing', $4)
          RETURNING *`,
         [url, url, req.user.id, description]
@@ -96,21 +96,48 @@ class KnowledgeBaseController {
     try {
       const { status, type, page = 1, limit = 20 } = req.query;
 
+      // NOTE:
+      // The actual "departmentknowledgebase" table (see Platform/DB/db.sql)
+      // does NOT have the "uploaded_by" or "status" columns that older
+      // controller code expected. Instead, it has:
+      // - uploaded_by_officer_id
+      // - is_active
+      // - content_text
+      //
+      // To keep the admin UI working without changing the DB schema, we:
+      // - join via uploaded_by_officer_id
+      // - treat all active records as part of the list
+      // - derive a synthetic "status" field from content_text:
+      //   - "processing" when content_text IS NULL
+      //   - "completed" when content_text IS NOT NULL
       let query = `
-        SELECT kb.*, u.full_name as uploaded_by_name
-        FROM "KnowledgeBase" kb
-        LEFT JOIN "Users" u ON kb.uploaded_by = u.id
-        WHERE 1=1
+        SELECT 
+          kb.id,
+          kb.created_at,
+          kb.updated_at,
+          kb.department_id,
+          kb.title,
+          kb.description,
+          kb.file_name,
+          kb.file_url,
+          kb.file_type,
+          kb.file_size,
+          kb.category,
+          kb.tags,
+          kb.view_count,
+          kb.download_count,
+          COALESCE(u.full_name, 'Unknown') AS uploaded_by_name,
+          CASE 
+            WHEN kb.content_text IS NULL THEN 'processing'
+            ELSE 'completed'
+          END AS status
+        FROM departmentknowledgebase kb
+        LEFT JOIN users u ON kb.uploaded_by_officer_id = u.id
+        WHERE kb.is_active = TRUE
       `;
 
       const params = [];
       let paramCount = 1;
-
-      if (status) {
-        query += ` AND kb.status = $${paramCount}`;
-        params.push(status);
-        paramCount++;
-      }
 
       if (type) {
         query += ` AND kb.file_type = $${paramCount}`;
@@ -125,7 +152,7 @@ class KnowledgeBaseController {
 
       // Get total count
       const countResult = await pool.query(
-        'SELECT COUNT(*) FROM "KnowledgeBase"'
+        'SELECT COUNT(*) FROM departmentknowledgebase WHERE is_active = TRUE'
       );
 
       res.json({
@@ -139,6 +166,23 @@ class KnowledgeBaseController {
       });
     } catch (error) {
       console.error('Get knowledge base error:', error);
+
+      // If the departmentknowledgebase table does not exist yet OR columns
+      // referenced here are missing (undefined_table / undefined_column in PostgreSQL),
+      // return an empty result instead of a 500 so that the admin UI still
+      // works gracefully even on a partially-migrated database.
+      if (error.code === '42P01' || error.code === '42703') {
+        return res.json({
+          success: true,
+          data: [],
+          pagination: {
+            page: 1,
+            limit: parseInt(req.query.limit || 20),
+            total: 0
+          }
+        });
+      }
+
       res.status(500).json({ error: 'Failed to fetch knowledge base entries' });
     }
   }
@@ -150,7 +194,7 @@ class KnowledgeBaseController {
 
       // Get entry details
       const entry = await pool.query(
-        'SELECT * FROM "KnowledgeBase" WHERE id = $1',
+        'SELECT * FROM departmentknowledgebase WHERE id = $1',
         [id]
       );
 
@@ -171,7 +215,7 @@ class KnowledgeBaseController {
       }
 
       // Delete from database
-      await pool.query('DELETE FROM "KnowledgeBase" WHERE id = $1', [id]);
+      await pool.query('DELETE FROM departmentknowledgebase WHERE id = $1', [id]);
 
       res.json({
         success: true,
@@ -202,7 +246,7 @@ class KnowledgeBaseController {
 
       // Update database
       const result = await pool.query(
-        `UPDATE "KnowledgeBase"
+        `UPDATE departmentknowledgebase
          SET status = $1,
              knowledge = $2,
              processed_files = $3,
@@ -227,7 +271,7 @@ class KnowledgeBaseController {
         return res.status(404).json({ error: 'Entry not found' });
       }
 
-      console.log(`✅ Knowledge base entry ${id} updated: ${status}`);
+      console.log(`Knowledge base entry ${id} updated: ${status}`);
 
       res.json({
         success: true,

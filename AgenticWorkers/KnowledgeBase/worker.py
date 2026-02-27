@@ -52,7 +52,7 @@ class KnowledgeBaseWorker:
             except Exception:
                 pass
         
-        print(f"✅ KnowledgeBase Worker initialized")
+        print(f"KnowledgeBase Worker initialized")
         print(f"   Input Queue: {Config.AZURE_QUEUE_NAME}")
         print(f"   Output Queue: {Config.AZURE_PROCESSED_QUEUE_NAME}")
     
@@ -98,7 +98,7 @@ class KnowledgeBaseWorker:
         # Check size (Azure Queue limit is 64KB)
         size_kb = len(encoded) / 1024
         if size_kb > 60:  # Leave some buffer
-            print(f"   ⚠️ Warning: Message size is {size_kb:.1f}KB (close to 64KB limit)")
+            print(f"    Warning: Message size is {size_kb:.1f}KB (close to 64KB limit)")
         
         return encoded
     
@@ -143,7 +143,7 @@ class KnowledgeBaseWorker:
             file_name = message_data.get('fileName', 'unknown.pdf')
             kb_id = message_data.get('id')
             
-            print(f"\n📄 Processing PDF: {file_name}")
+            print(f"\n Processing PDF: {file_name}")
             print(f"   URL: {pdf_url}")
             
             # Extract text from PDF
@@ -160,7 +160,7 @@ class KnowledgeBaseWorker:
             text_content = pdf_result.get('text', '')
             num_pages = pdf_result.get('num_pages', 0)
             
-            print(f"   ✅ Extracted text from {num_pages} pages")
+            print(f"   Extracted text from {num_pages} pages")
             
             # Extract knowledge using LLM
             knowledge_result = self.knowledge_extractor.extract_knowledge(
@@ -187,7 +187,7 @@ class KnowledgeBaseWorker:
                 knowledge, text_content
             )
             
-            print(f"   📊 Created {len(embeddings_chunks)} embedding chunks")
+            print(f"    Created {len(embeddings_chunks)} embedding chunks")
             
             # Upload processed data to blob
             blob_prefix = f"knowledgebase/processed/{kb_id or int(time.time())}"
@@ -239,7 +239,7 @@ class KnowledgeBaseWorker:
             )
             result_data['processed_files']['result_url'] = result_url
             
-            print(f"   ✅ Uploaded processed files to blob")
+            print(f"   Uploaded processed files to blob")
             
             return result_data
             
@@ -275,7 +275,7 @@ class KnowledgeBaseWorker:
             markdown_content = crawl_result.get('markdown', '')
             markdown_clean = self.web_crawler.remove_image_links(markdown_content)
             
-            print(f"   ✅ Crawled: {crawl_result.get('title', 'Untitled')}")
+            print(f"   Crawled: {crawl_result.get('title', 'Untitled')}")
             
             # Extract knowledge using LLM
             knowledge_result = self.knowledge_extractor.extract_knowledge(
@@ -303,7 +303,7 @@ class KnowledgeBaseWorker:
                 knowledge, markdown_clean
             )
             
-            print(f"   📊 Created {len(embeddings_chunks)} embedding chunks")
+            print(f"    Created {len(embeddings_chunks)} embedding chunks")
             
             # Upload processed data to blob
             blob_prefix = f"knowledgebase/processed/{kb_id or int(time.time())}"
@@ -355,7 +355,7 @@ class KnowledgeBaseWorker:
             )
             result_data['processed_files']['result_url'] = result_url
             
-            print(f"   ✅ Uploaded processed files to blob")
+            print(f"   Uploaded processed files to blob")
             
             return result_data
             
@@ -377,7 +377,7 @@ class KnowledgeBaseWorker:
         elif msg_type == 'url_crawl':
             return self.process_url(message_data)
         else:
-            print(f"   ⚠️ Unknown message type: {msg_type}")
+            print(f"    Unknown message type: {msg_type}")
             return {
                 **message_data,
                 'status': 'failed',
@@ -402,7 +402,7 @@ class KnowledgeBaseWorker:
             print(f"   💾 Saved result locally: {filepath}")
             
         except Exception as e:
-            print(f"   ⚠️ Failed to save result locally: {e}")
+            print(f"    Failed to save result locally: {e}")
     
     def update_database(self, result: Dict[str, Any]):
         """Call API to update database"""
@@ -422,21 +422,21 @@ class KnowledgeBaseWorker:
             response = requests.post(callback_url, json=payload, timeout=10)
             
             if response.ok:
-                print(f"   ✅ Database updated successfully")
+                print(f"   Database updated successfully")
                 return True
             else:
-                print(f"   ⚠️ Database update failed: {response.status_code}")
+                print(f"    Database update failed: {response.status_code}")
                 print(f"   Response: {response.text[:200]}")
                 return False
                 
         except requests.exceptions.ConnectionError as e:
-            print(f"   ⚠️ Server not running on {Config.API_CALLBACK_URL}")
+            print(f"    Server not running on {Config.API_CALLBACK_URL}")
             print(f"   💡 Start the server: cd Platform/Server && npm start")
             # Save locally if server is not running
             self.save_result_locally(result)
             return False
         except Exception as e:
-            print(f"   ⚠️ Failed to update database: {e}")
+            print(f"    Failed to update database: {e}")
             return False
     
     def run(self):
@@ -462,30 +462,30 @@ class KnowledgeBaseWorker:
                             message_processed = True
                             
                             # Decode message
-                            print("   📥 Decoding message...")
+                            print("    Decoding message...")
                             message_data = self.decode_message(message.content)
                             
                             # Process the message
                             print("   ⚙️  Processing message...")
                             result = self.process_message(message_data)
-                            print(f"   ✅ Processing complete. Status: {result.get('status')}")
+                            print(f"   Processing complete. Status: {result.get('status')}")
                             
                             # Update database via API
                             print("   💾 Updating database...")
                             self.update_database(result)
-                            print("   ✅ Database updated")
+                            print("   Database updated")
                             
                             # Push to processed queue
                             print(f"   📤 Pushing to '{Config.AZURE_PROCESSED_QUEUE_NAME}' queue...")
                             encoded_result = self.encode_message(result)
                             self.processed_queue_client.send_message(encoded_result)
-                            print(f"   ✅ Pushed to '{Config.AZURE_PROCESSED_QUEUE_NAME}' queue")
+                            print(f"   Pushed to '{Config.AZURE_PROCESSED_QUEUE_NAME}' queue")
                             
                             # Delete from input queue
                             print("   🗑️  Deleting from input queue...")
                             self.queue_client.delete_message(message.id, message.pop_receipt)
                             
-                            print(f"   ✅ Message processed and pushed to '{Config.AZURE_PROCESSED_QUEUE_NAME}' queue\n")
+                            print(f"   Message processed and pushed to '{Config.AZURE_PROCESSED_QUEUE_NAME}' queue\n")
                             
                         except Exception as e:
                             import traceback
@@ -501,14 +501,14 @@ class KnowledgeBaseWorker:
                         time.sleep(poll_interval)
                         
                 except KeyboardInterrupt:
-                    print("\n\n⚠️  Worker stopped by user")
+                    print("\n\n  Worker stopped by user")
                     break
                 except Exception as e:
                     print(f"\n❌ Error in worker loop: {e}")
                     time.sleep(poll_interval)
                     
         except KeyboardInterrupt:
-            print("\n\n⚠️  Worker stopped by user")
+            print("\n\n  Worker stopped by user")
         finally:
             # Cleanup
             self.pdf_processor.cleanup()

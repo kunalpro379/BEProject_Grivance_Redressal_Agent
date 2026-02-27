@@ -14,12 +14,19 @@ os.environ.setdefault("LANGCHAIN_TRACING_V2", "false")
 from typing import Optional, Dict, Any
 from workflow.graph import build_graph
 
-def analysis(query: str, image_path: Optional[str] = None, citizen_id: Optional[str] = None, grievance_id: Optional[str] = None) -> Dict[str, Any]:
+def analysis(
+    query: str,
+    image_path: Optional[str] = None,
+    original_image_url: Optional[str] = None,
+    citizen_id: Optional[str] = None,
+    grievance_id: Optional[str] = None,
+) -> Dict[str, Any]:
     app = build_graph()
     initial_state = {
         "query": query,
         "image_path": image_path,
         "IMAGE_URL": image_path,
+        "original_image_url": original_image_url or image_path,
         "citizen_id": citizen_id,
         "grievance_id": grievance_id,
     }

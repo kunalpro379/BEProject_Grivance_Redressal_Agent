@@ -9,11 +9,19 @@ from persistent.supabase import insert_user_grievience
 from agents import grievance_agents as GA
 from configs.config import Config
 
-image_engine=ImageAnalysisEngine()
-validator_engine=ImageQueryValidator()
-location_engine=LocationExtractor()
-embedding_engine=EmbeddingEngine()
-db_engine=DatabaseQueryEngine()
+image_engine = ImageAnalysisEngine()
+validator_engine = ImageQueryValidator()
+location_engine = LocationExtractor()
+_embedding_engine = None
+
+def _get_embedding_engine():
+    """Lazy singleton so SentenceTransformer is only loaded when embedding node runs."""
+    global _embedding_engine
+    if _embedding_engine is None:
+        _embedding_engine = EmbeddingEngine()
+    return _embedding_engine
+
+db_engine = DatabaseQueryEngine()
 
 def NODE_validate_image(state: Dict[str, Any]) -> Dict[str, Any]:
     """Validate if image matches the query before processing."""
@@ -30,7 +38,7 @@ def NODE_validate_image(state: Dict[str, Any]) -> Dict[str, Any]:
     }
     
     if IMAGE_URL:
-        print("   🔍 Validating image-query match...")
+        print("    Validating image-query match...")
         validation_result = validator_engine.validate_image_query_match(IMAGE_URL, query)
         print(f"   ✓ Validation: {validation_result['is_valid']} (score: {validation_result['validation_score']:.2f})")
     
@@ -124,7 +132,7 @@ def NODE_enhance_query(state: Dict[str, Any]) -> Dict[str, Any]:
     return state
 def NODE_embed_query(state:Dict[str, Any])->Dict[str, Any]:
     enhanced_query=state["enhanced_query"]
-    emb=embedding_engine.embed_query(enhanced_query)
+    emb = _get_embedding_engine().embed_query(enhanced_query)
     state["embedding"]=emb
     retrieved=db_engine.retrive_releveant_data(emb)
     state["retrieved_data"]=retrieved
@@ -283,20 +291,52 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     with open(_Cfg.json_agents_path(), "w", encoding="utf-8") as f:
         _json.dump(process_trace, f, indent=2, ensure_ascii=False)
 
-    # 5) Update Supabase UserGrievance with processed data
+    # 5) Update Supabase UserGrievance with processed data (persist blob URL, not local/temp path)
+    # grievance_text = original user query; enhanced_query = complete summarized version (user query + AI image description + analysis + location)
     embedding = state.get("embedding", [])
-    image_path = state.get("image_path")
+    image_path = state.get("original_image_url") or state.get("image_path")
     image_description = image_analysis.get("description", "")
     validation_result = state.get("validation_result")
-    location_data = state.get("location_data")
-    citizen_id = state.get("citizen_id")  # Get citizen_id from state
-    grievance_id = state.get("grievance_id")  # Get grievance_id from state
+    location_data = state.get("location_data") or {}
+    citizen_id = state.get("citizen_id")
+    grievance_id = state.get("grievance_id")
+    text_for_db = (grievance_text or "").strip() or (state.get("query") or "")
+
+    # Build enhanced_query for DB: complete AI summary = user query + full image description + image analysis + location (never the Platform stub like {"category":"Transport",...})
+    query_part = text_for_db
+    img = state.get("image_analysis") or {}
+    desc = (img.get("description") or "").strip()
+    extracted_text = (img.get("extracted_text") or "").strip()
+    key_objects = img.get("key_objects") or []
+    scene_type = (img.get("scene_type") or "").strip()
+    location_parts = []
+    if location_data.get("confidence") not in ("none", None):
+        if location_data.get("address"):
+            location_parts.append(str(location_data["address"]))
+        if location_data.get("landmarks"):
+            location_parts.append("Landmarks: " + ", ".join(location_data["landmarks"][:5]))
+        if location_data.get("area_type"):
+            location_parts.append("Area: " + str(location_data["area_type"]))
+    location_str = ". ".join(location_parts) if location_parts else ""
+
+    parts = [query_part]
+    if desc:
+        parts.append("Image description: " + desc)
+    if extracted_text:
+        parts.append("Visible text in image: " + extracted_text)
+    if key_objects:
+        parts.append("Key objects in image: " + ", ".join(str(x) for x in key_objects[:15]))
+    if scene_type:
+        parts.append("Scene type: " + scene_type)
+    if location_str:
+        parts.append("Location: " + location_str)
+    enhanced_for_db = "\n\n".join(p for p in parts if p).strip() or (state.get("enhanced_query") or text_for_db)
 
     insert_user_grievience(
-        grievance_text=grievance_text,
+        grievance_text=text_for_db,
         image_path=image_path,
         image_description=image_description,
-        enhanced_query=state.get("enhanced_query", grievance_text),
+        enhanced_query=enhanced_for_db,
         embedding=embedding,
         agent_outputs=agents_outputs,
         full_result=case_study,
@@ -304,6 +344,7 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
         location_data=location_data,
         citizen_id=citizen_id,
         grievance_id=grievance_id,
+        image_analysis=state.get("image_analysis"),
     )
 
     return state

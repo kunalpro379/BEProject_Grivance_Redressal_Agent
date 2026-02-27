@@ -1,23 +1,134 @@
+import fs from 'fs';
 import pool from '../config/database.js';
 import grievanceDBService from '../services/grievance.db.service.js';
 import azureQueryAnalystQueueService from '../services/azure.queue.queryanalyst.service.js';
+import azureStorageService from '../services/azure.storage.services.js';
+
+/**
+ * Submit grievance from platform form (same flow as Telegram: DB + AI queue).
+ * Accepts multipart: category, age, city, title, description, proof (optional file).
+ */
+export const submitGrievanceFromForm = async (req, res) => {
+  try {
+    const { category, age, city, title, description } = req.body;
+    const userId = req.user.id;
+
+    if (!title || !description || !category || !age || !city) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        message: 'Category, age, city, title, and description are required.'
+      });
+    }
+
+    // Platform citizens: req.user.id is already citizen id (from citizens table).
+    let citizenId;
+    if (req.user.role === 'citizen') {
+      citizenId = userId;
+    } else {
+      const citizenResult = await pool.query(
+        'SELECT id FROM citizens WHERE user_id = $1',
+        [userId]
+      );
+      if (citizenResult.rows.length === 0) {
+        return res.status(400).json({ error: 'User is not registered as a citizen' });
+      }
+      citizenId = citizenResult.rows[0].id;
+    }
+
+    // Build grievance_text for AI (same idea as Telegram: one text block)
+    const grievance_text = [
+      `Title: ${title}`,
+      `Category: ${category}`,
+      `City: ${city}`,
+      `Age: ${age}`,
+      '',
+      'Description:',
+      description
+    ].join('\n');
+
+    let image_path = null;
+    let image_description = null;
+
+    if (req.file && req.file.path) {
+      try {
+        const fileName = `grievances/${Date.now()}_${req.file.originalname}`;
+        const azureResult = await azureStorageService.uploadFile(req.file.path, fileName);
+        image_path = azureResult.url;
+        image_description = req.file.originalname;
+        console.log(`[Grievance] Proof uploaded to blob: ${image_path}`);
+      } catch (uploadErr) {
+        console.error('Proof upload error:', uploadErr);
+        if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
+        return res.status(500).json({
+          success: false,
+          error: 'Failed to upload proof/evidence',
+          message: uploadErr.message
+        });
+      }
+      if (fs.existsSync(req.file.path)) {
+        try { fs.unlinkSync(req.file.path); } catch (_) {}
+      }
+    }
+
+    const grievanceResult = await grievanceDBService.submitGrievance({
+      citizen_id: citizenId,
+      grievance_text,
+      image_path,
+      image_description,
+      enhanced_query: JSON.stringify({ category, age, city }),
+      embedding: null
+    });
+
+    const queueMessage = {
+      grievance_id: grievanceResult.grievance_id,
+      citizen_id: citizenId,
+      user_id: userId,
+      grievance_text,
+      image_path: image_path || null,
+      timestamp: new Date().toISOString(),
+      source: 'web'
+    };
+
+    await azureQueryAnalystQueueService.sendMessage(queueMessage);
+
+    res.status(201).json({
+      success: true,
+      message: 'Grievance submitted successfully',
+      grievance_id: grievanceResult.grievance_id,
+      status: 'pending_analysis'
+    });
+  } catch (error) {
+    console.error('Submit grievance from form error:', error);
+    if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+      try { fs.unlinkSync(req.file.path); } catch (_) {}
+    }
+    res.status(500).json({
+      success: false,
+      error: 'Failed to submit grievance',
+      message: error.message
+    });
+  }
+};
 
 export const createGrievance = async (req, res) => {
   try {
     const { grievance_text, image_path, image_description, enhanced_query } = req.body;
     const userId = req.user.id;
 
-    // Get citizen_id from user_id (for web-registered citizens)
-    const citizenResult = await pool.query(
-      'SELECT id FROM "Citizens" WHERE user_id = $1',
-      [userId]
-    );
-
-    if (citizenResult.rows.length === 0) {
-      return res.status(400).json({ error: 'User is not registered as a citizen' });
+    // Platform citizens: req.user.id is already citizen id. Else resolve from users -> citizens.
+    let citizenId;
+    if (req.user.role === 'citizen') {
+      citizenId = userId;
+    } else {
+      const citizenResult = await pool.query(
+        'SELECT id FROM citizens WHERE user_id = $1',
+        [userId]
+      );
+      if (citizenResult.rows.length === 0) {
+        return res.status(400).json({ error: 'User is not registered as a citizen' });
+      }
+      citizenId = citizenResult.rows[0].id;
     }
-
-    const citizenId = citizenResult.rows[0].id;
 
     // Use the common grievance service (same as Telegram bot)
     const grievanceResult = await grievanceDBService.submitGrievance({
@@ -60,25 +171,31 @@ export const createGrievance = async (req, res) => {
 
 export const getGrievances = async (req, res) => {
   try {
-    const { status, department_id, page = 1, limit = 20 } = req.query;
+    const { status, department_id, page = 1, limit = 20, all: allParam } = req.query;
     const userId = req.user.id;
     const userRole = req.user.role;
+    const citizenLoadAll = userRole === 'citizen' && (allParam === 'true' || allParam === true);
 
+    // Citizens: optionally load all grievances (all=true); include full_result so frontend can show "Analyzed" and analysis.
     let query = `
-      SELECT g.*, u.full_name as user_name, u.email as user_email,
+      SELECT g.id, g.grievance_id, g.citizen_id, g.grievance_text, g.status, g.priority, g.created_at, g.updated_at,
+             g.department_id, g.assigned_officer_id, g.image_path, g.image_description,
+             g.sla_deadline, g.resolution_time, g.enhanced_query,
+             g.full_result, g.validation_status,
+             c.full_name as citizen_name, c.email as citizen_email,
              o.full_name as officer_name, d.name as department_name
-      FROM "UserGrievance" g
-      LEFT JOIN "Users" u ON g.user_id = u.id
-      LEFT JOIN "Users" o ON g.assigned_officer_id = o.id
-      LEFT JOIN "Departments" d ON g.department_id = d.id
+      FROM usergrievance g
+      LEFT JOIN citizens c ON g.citizen_id = c.id
+      LEFT JOIN users o ON g.assigned_officer_id = o.id
+      LEFT JOIN departments d ON g.department_id = d.id
       WHERE 1=1
     `;
 
     const params = [];
     let paramCount = 1;
 
-    if (userRole === 'citizen') {
-      query += ` AND g.user_id = $${paramCount}`;
+    if (userRole === 'citizen' && !citizenLoadAll) {
+      query += ` AND g.citizen_id = $${paramCount}`;
       params.push(userId);
       paramCount++;
     } else if (userRole === 'department_officer') {
@@ -92,7 +209,7 @@ export const getGrievances = async (req, res) => {
     }
 
     if (status) {
-      query += ` AND g.status = $${paramCount}`;
+      query += ` AND g.status::text = $${paramCount}`;
       params.push(status);
       paramCount++;
     }
@@ -103,20 +220,22 @@ export const getGrievances = async (req, res) => {
       paramCount++;
     }
 
+    const limitVal = citizenLoadAll ? Math.min(parseInt(limit, 10) || 200, 500) : (parseInt(limit, 10) || 20);
+    const offsetVal = (Math.max(1, parseInt(page, 10)) - 1) * limitVal;
     query += ` ORDER BY g.created_at DESC LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
-    params.push(limit, (page - 1) * limit);
+    params.push(limitVal, offsetVal);
 
     const result = await pool.query(query, params);
 
     res.json({
       grievances: result.rows,
       pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit)
+        page: Math.max(1, parseInt(page, 10)),
+        limit: limitVal
       }
     });
   } catch (error) {
-    console.error('Get grievances error:', error);
+    console.error('Get grievances error:', error?.message || error);
     res.status(500).json({ error: 'Failed to fetch grievances' });
   }
 };
@@ -128,21 +247,19 @@ export const getGrievanceById = async (req, res) => {
     const userRole = req.user.role;
 
     let query = `
-      SELECT g.*, u.full_name as user_name, u.email as user_email, u.phone as user_phone,
-             o.full_name as officer_name, d.name as department_name,
-             r.full_name as resolver_name
-      FROM "UserGrievance" g
-      LEFT JOIN "Users" u ON g.user_id = u.id
-      LEFT JOIN "Users" o ON g.assigned_officer_id = o.id
-      LEFT JOIN "Users" r ON g.resolved_by = r.id
-      LEFT JOIN "Departments" d ON g.department_id = d.id
+      SELECT g.*, c.full_name as citizen_name, c.email as citizen_email, c.phone as citizen_phone,
+             o.full_name as officer_name, d.name as department_name
+      FROM usergrievance g
+      LEFT JOIN citizens c ON g.citizen_id = c.id
+      LEFT JOIN users o ON g.assigned_officer_id = o.id
+      LEFT JOIN departments d ON g.department_id = d.id
       WHERE g.id = $1
     `;
 
     const params = [grievanceId];
 
     if (userRole === 'citizen') {
-      query += ' AND g.user_id = $2';
+      query += ' AND g.citizen_id = $2';
       params.push(userId);
     } else if (userRole === 'department_officer') {
       query += ' AND (g.assigned_officer_id = $2 OR g.department_id = $3)';
@@ -159,17 +276,49 @@ export const getGrievanceById = async (req, res) => {
     }
 
     const commentsResult = await pool.query(
-      `SELECT c.*, u.full_name as user_name, u.role
-       FROM "GrievanceComments" c
-       LEFT JOIN "Users" u ON c.user_id = u.id
+      `SELECT c.id, c.comment, c.is_internal, c.created_at, u.full_name as user_name, u.role
+       FROM grievancecomments c
+       LEFT JOIN users u ON c.user_id = u.id
        WHERE c.grievance_id = $1
        ORDER BY c.created_at ASC`,
       [grievanceId]
     );
 
+    // Timeline: workflow steps from grievanceworkflow (if any) + workflow jsonb
+    let timelineResult = { rows: [] };
+    try {
+      timelineResult = await pool.query(
+        `SELECT id, step_number, status::text, officer_name, action_taken, notes, progress_percentage, is_completed, completed_at, created_at
+         FROM grievanceworkflow
+         WHERE grievance_id = $1
+         ORDER BY step_number ASC, created_at ASC`,
+        [grievanceId]
+      );
+    } catch (_) {}
+
+    const grievance = result.rows[0];
+    const workflow = (grievance.workflow && typeof grievance.workflow === 'object') ? grievance.workflow : {};
+    const timeline = (workflow.history && Array.isArray(workflow.history)) ? workflow.history : [];
+    // Prepend submission and add workflow steps
+    const fullTimeline = [
+      { stage: 'submitted', at: grievance.created_at, label: 'Submitted', description: 'Grievance submitted' },
+      ...(workflow.assigned_at ? [{ stage: 'assigned', at: workflow.assigned_at, label: 'Assigned', description: 'Assigned to department/officer' }] : []),
+      ...timeline,
+      ...(timelineResult.rows.map(r => ({
+        stage: r.status,
+        at: r.completed_at || r.created_at,
+        label: r.action_taken || r.status,
+        description: r.notes || null,
+        officer_name: r.officer_name,
+        progress: r.progress_percentage
+      }))),
+      ...(workflow.resolved_at ? [{ stage: 'resolved', at: workflow.resolved_at, label: 'Resolved', description: 'Grievance resolved' }] : [])
+    ].filter(Boolean);
+
     res.json({
       grievance: result.rows[0],
-      comments: commentsResult.rows
+      comments: commentsResult.rows,
+      timeline: fullTimeline.sort((a, b) => new Date(a.at || 0) - new Date(b.at || 0))
     });
   } catch (error) {
     console.error('Get grievance error:', error);
@@ -229,7 +378,7 @@ export const updateGrievance = async (req, res) => {
     params.push(grievanceId);
 
     const query = `
-      UPDATE "UserGrievance"
+      UPDATE usergrievance
       SET ${updates.join(', ')}
       WHERE id = $${paramCount}
       RETURNING *
@@ -264,7 +413,7 @@ export const addComment = async (req, res) => {
     const userId = req.user.id;
 
     const result = await pool.query(
-      `INSERT INTO "GrievanceComments" (grievance_id, user_id, comment, is_internal)
+      `INSERT INTO grievancecomments (grievance_id, user_id, comment, is_internal)
        VALUES ($1, $2, $3, $4)
        RETURNING *`,
       [grievanceId, userId, comment, is_internal]
@@ -289,7 +438,7 @@ export const getStats = async (req, res) => {
     const params = [];
 
     if (userRole === 'citizen') {
-      whereClause = 'WHERE user_id = $1';
+      whereClause = 'WHERE citizen_id = $1';
       params.push(userId);
     } else if (userRole === 'department_officer') {
       whereClause = 'WHERE (assigned_officer_id = $1 OR department_id = $2)';
@@ -302,11 +451,11 @@ export const getStats = async (req, res) => {
     const statsQuery = `
       SELECT 
         COUNT(*) as total,
-        COUNT(*) FILTER (WHERE status = 'pending') as pending,
-        COUNT(*) FILTER (WHERE status = 'in_progress') as in_progress,
-        COUNT(*) FILTER (WHERE status = 'resolved') as resolved,
-        COUNT(*) FILTER (WHERE status = 'rejected') as rejected
-      FROM "UserGrievance"
+        COUNT(*) FILTER (WHERE status::text IN ('submitted', 'pending')) as pending,
+        COUNT(*) FILTER (WHERE status::text = 'in_progress') as in_progress,
+        COUNT(*) FILTER (WHERE status::text = 'resolved') as resolved,
+        COUNT(*) FILTER (WHERE status::text = 'rejected') as rejected
+      FROM usergrievance
       ${whereClause}
     `;
 

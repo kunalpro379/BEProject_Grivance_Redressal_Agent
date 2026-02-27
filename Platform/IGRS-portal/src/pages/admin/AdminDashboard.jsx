@@ -1,17 +1,40 @@
 import { useState, useEffect } from 'react';
-import { Users, UserCheck, UserX, Clock, ArrowRight } from 'lucide-react';
+import { Users, UserCheck, UserX, Clock, ArrowRight, Building } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import adminService from '../../services/adminService';
+
+const isOfficerOrHead = (role) => role === 'department_officer' || role === 'department_head';
+const isDepartmentOfficer = (user) => isOfficerOrHead(user.role) && !user.is_government_official;
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [pendingUsers, setPendingUsers] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [approveTarget, setApproveTarget] = useState(null);
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState('');
+  const [approving, setApproving] = useState(false);
 
   useEffect(() => {
     loadDashboardData();
   }, []);
+
+  useEffect(() => {
+    if (pendingUsers.some((u) => isDepartmentOfficer(u))) {
+      adminService.getDepartments().then((data) => setDepartments(data.departments || [])).catch(() => {});
+    }
+  }, [pendingUsers.length]);
+
+  useEffect(() => {
+    if (approveTarget && isDepartmentOfficer(approveTarget) && departments.length === 0) {
+      adminService.getDepartments().then((data) => {
+        const list = data.departments || [];
+        setDepartments(list);
+        if (list.length && !selectedDepartmentId) setSelectedDepartmentId(list[0].id);
+      }).catch(() => {});
+    }
+  }, [approveTarget?.id]);
 
   const loadDashboardData = async () => {
     try {
@@ -30,13 +53,38 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleApprove = async (userId) => {
+  const handleApproveClick = (user) => {
+    if (isDepartmentOfficer(user)) {
+      setApproveTarget(user);
+      setSelectedDepartmentId(departments[0]?.id || '');
+    } else {
+      handleApprove(user.id);
+    }
+  };
+
+  const handleApprove = async (userId, body = {}) => {
     try {
-      await adminService.approveUser(userId);
+      setApproving(true);
+      await adminService.approveUser(userId, body);
+      setApproveTarget(null);
+      setSelectedDepartmentId('');
       await loadDashboardData();
     } catch (err) {
       console.error('Failed to approve user:', err);
+      if (err.response?.data?.error) alert(err.response.data.error);
+    } finally {
+      setApproving(false);
     }
+  };
+
+  const handleApproveConfirm = () => {
+    if (!approveTarget) return;
+    if (isDepartmentOfficer(approveTarget) && !selectedDepartmentId) {
+      alert('Please select a department to allocate.');
+      return;
+    }
+    const body = isDepartmentOfficer(approveTarget) ? { department_id: selectedDepartmentId } : {};
+    handleApprove(approveTarget.id, body);
   };
 
   const handleReject = async (userId) => {
@@ -155,7 +203,8 @@ const AdminDashboard = () => {
               <tr>
                 <th className="px-4 py-2 text-left text-xs font-black text-gray-900 uppercase tracking-wide">User</th>
                 <th className="px-4 py-2 text-left text-xs font-black text-gray-900 uppercase tracking-wide">Role</th>
-                <th className="px-4 py-2 text-left text-xs font-black text-gray-900 uppercase tracking-wide">Department</th>
+                <th className="px-4 py-2 text-left text-xs font-black text-gray-900 uppercase tracking-wide">Details</th>
+                <th className="px-4 py-2 text-left text-xs font-black text-gray-900 uppercase tracking-wide">Allocate dept</th>
                 <th className="px-4 py-2 text-left text-xs font-black text-gray-900 uppercase tracking-wide">Registered</th>
                 <th className="px-4 py-2 text-right text-xs font-black text-gray-900 uppercase tracking-wide">Actions</th>
               </tr>
@@ -169,11 +218,35 @@ const AdminDashboard = () => {
                   </td>
                   <td className="px-4 py-3">
                     <span className="px-2 py-1 bg-black text-white rounded text-xs font-bold uppercase">
-                      {formatRole(user.role)}
+                      {formatRole(user.role, user.is_government_official)}
                     </span>
                   </td>
+                  <td className="px-4 py-3">
+                    {user.is_government_official && user.hierarchy_info ? (
+                      <div className="text-xs">
+                        <div className="font-bold text-green-700 mb-1">Government Official</div>
+                        <div className="text-gray-600">{formatHierarchyInfo(user)}</div>
+                        {user.hierarchy_info.designation && (
+                          <div className="text-gray-500 mt-0.5">{user.hierarchy_info.designation}</div>
+                        )}
+                      </div>
+                    ) : user.department_name ? (
+                      <div className="text-xs">
+                        <div className="font-semibold text-gray-700">Department Officer</div>
+                        <div className="text-gray-600">{user.department_name}</div>
+                      </div>
+                    ) : (
+                      <span className="text-xs text-gray-400">-</span>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-sm text-gray-600 font-medium">
-                    {user.department_name || '-'}
+                    {user.is_government_official ? (
+                      <span className="text-xs text-green-600 font-bold">Gov. Official (No Dept)</span>
+                    ) : isDepartmentOfficer(user) ? (
+                      <span className="text-xs text-gray-500">Select on Approve</span>
+                    ) : (
+                      <span className="text-xs text-gray-400">-</span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-600 font-medium">
                     {new Date(user.created_at).toLocaleDateString()}
@@ -181,7 +254,7 @@ const AdminDashboard = () => {
                   <td className="px-4 py-3 text-right">
                     <div className="flex gap-2 justify-end">
                       <button
-                        onClick={() => handleApprove(user.id)}
+                        onClick={() => handleApproveClick(user)}
                         className="px-3 py-1.5 bg-black text-white text-xs rounded hover:bg-gray-800 font-bold uppercase"
                       >
                         Approve
@@ -206,11 +279,61 @@ const AdminDashboard = () => {
           <p className="text-gray-500 mt-1 text-sm font-medium">All user registrations have been processed</p>
         </div>
       )}
+
+      {/* Modal: Select department to allocate (officer/head) */}
+      {approveTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white border-2 border-black rounded-lg shadow-xl max-w-md w-full p-6">
+            <h3 className="text-lg font-black text-gray-900 mb-1">Allocate Department</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Approve <strong>{approveTarget.full_name}</strong> ({formatRole(approveTarget.role, approveTarget.is_government_official)}) and assign to a department.
+            </p>
+            <div className="mb-4">
+              <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Department</label>
+              <div className="relative">
+                <Building className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <select
+                  value={selectedDepartmentId}
+                  onChange={(e) => setSelectedDepartmentId(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 border-2 border-gray-200 rounded-md focus:ring-2 focus:ring-black focus:border-black text-sm"
+                >
+                  <option value="">Select department</option>
+                  {departments.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name} {d.dep_id ? `(${d.dep_id})` : ''}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="flex gap-2 justify-end">
+              <button
+                type="button"
+                onClick={() => { setApproveTarget(null); setSelectedDepartmentId(''); }}
+                className="px-4 py-2 border-2 border-black rounded-md font-bold text-sm uppercase hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleApproveConfirm}
+                disabled={approving || (isDepartmentOfficer(approveTarget) && !selectedDepartmentId)}
+                className="px-4 py-2 bg-black text-white rounded-md font-bold text-sm uppercase hover:bg-gray-800 disabled:opacity-50"
+              >
+                {approving ? 'Approving…' : 'Approve & Allocate'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-const formatRole = (role) => {
+const formatRole = (role, isGovOfficial) => {
+  if (isGovOfficial) {
+    return 'Gov. Official';
+  }
   const roleMap = {
     'citizen': 'Citizen',
     'department_officer': 'Officer',
@@ -218,6 +341,26 @@ const formatRole = (role) => {
     'admin': 'Admin'
   };
   return roleMap[role] || role;
+};
+
+const formatHierarchyInfo = (user) => {
+  if (!user.hierarchy_info) return null;
+  const info = user.hierarchy_info;
+  
+  switch (info.hierarchy_level) {
+    case 'state_central':
+      return `${info.level_type || 'State/Central'} - ${info.ministry_name || 'N/A'}`;
+    case 'district':
+      return `District: ${info.district || 'N/A'}`;
+    case 'taluka':
+      return `Taluka: ${info.taluka || 'N/A'}, District: ${info.district || 'N/A'}`;
+    case 'city':
+      return `City: ${info.city || 'N/A'}, District: ${info.district || 'N/A'}`;
+    case 'ward':
+      return `Ward: ${info.ward_number || 'N/A'}, City: ${info.city || 'N/A'}`;
+    default:
+      return null;
+  }
 };
 
 export default AdminDashboard;

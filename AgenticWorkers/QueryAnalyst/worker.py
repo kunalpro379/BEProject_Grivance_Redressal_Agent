@@ -4,10 +4,14 @@ import json
 import time
 import base64
 import tempfile
+import warnings
 from pathlib import Path
 from dotenv import load_dotenv
 from typing import Dict, Any, Optional
 from datetime import datetime
+
+# Suppress Pydantic "model_name/model_id vs model_" namespace warnings from deps (CrewAI, etc.)
+warnings.filterwarnings("ignore", category=UserWarning, module="pydantic._internal._fields")
 
 # Load local .env for API keys and DB URLs
 load_dotenv(Path(__file__).resolve().parent / ".env", override=True)
@@ -45,7 +49,7 @@ class QueryAnalystWorker:
             except Exception:
                 pass
         
-        print(f"✅ QueryAnalyst Worker initialized")
+        print(f"QueryAnalyst Worker initialized")
         print(f"   Polling queue: {queue_name}")
         print(f"   Pushing to: {webcrawler_queue_name}")
         print(f"   Server handles Telegram notifications")
@@ -122,7 +126,7 @@ class QueryAnalystWorker:
                 f.write(blob_client.download_blob().readall())
             return local_path
         except Exception as e:
-            print(f"   ⚠️ Could not download blob via SDK: {e}")
+            print(f"    Could not download blob via SDK: {e}")
             return None
 
     def process_message(self, message_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -161,17 +165,23 @@ class QueryAnalystWorker:
             temp_image_path = self._download_blob_to_temp(image_url)
             if temp_image_path:
                 image_path_for_analysis = temp_image_path
-                print(f"   📥 Downloaded image from blob to temp file for analysis")
+                print(f"    Downloaded image from blob to temp file for analysis")
 
         # Run analysis using existing workflow
         try:
-            print("   🔍 Running analysis with validation and location extraction...")
-            state = analysis(query=query, image_path=image_path_for_analysis, citizen_id=citizen_id, grievance_id=grievance_id)
-            
-            # IMPORTANT: Restore original blob URL in state (don't use temp path)
+            if not image_path_for_analysis:
+                print("   📷 No image provided - skipping image validation and location extraction.")
+            print("    Running analysis with validation and location extraction...")
+            state = analysis(
+                query=query,
+                image_path=image_path_for_analysis,
+                original_image_url=original_image_url,
+                citizen_id=citizen_id,
+                grievance_id=grievance_id,
+            )
             if original_image_url:
                 state["image_path"] = original_image_url
-                if "image_analysis" in state:
+                if state.get("image_analysis"):
                     state["image_analysis"]["path"] = original_image_url
             
             # Check if validation failed
@@ -192,7 +202,7 @@ class QueryAnalystWorker:
             search_queries = self.extract_search_queries(state)
             location_data = state.get("location_data", {})
             
-            print(f"   ✅ Analysis complete!")
+            print(f"   Analysis complete!")
             print(f"      - Validation score: {validation_result.get('validation_score', 'N/A')}")
             print(f"      - Location: {location_data.get('address', 'Not extracted')}")
             print(f"      - Search queries: {len(search_queries)} found")
@@ -283,18 +293,23 @@ class QueryAnalystWorker:
                             
                             message_processed = True
                             
-                            # Process the message
+                            # Process the message (AI analysis + Supabase update)
                             updated_message = self.process_message(message_data)
+                            
+                            # Only push to webcrawler when AI data was successfully saved to Supabase
+                            if updated_message.get("current_status") == "Error":
+                                print(f"     Not pushing to webcrawler: Supabase update failed. Message will retry after visibility timeout.\n")
+                                # Do not delete message - it will reappear for retry
+                                continue
                             
                             # Delete original message from queryanalyst
                             self.queue_client.delete_message(message.id, message.pop_receipt)
                             
-                            # Push to webcrawler queue for WebCrawler worker
-                            # Server will handle Telegram notifications directly
+                            # Push to webcrawler queue only after successful analysis + DB update
                             encoded_message = self.encode_message(updated_message)
                             self.webcrawler_queue_client.send_message(encoded_message)
                             
-                            print(f"   ✅ Pushed to webcrawler queue with status: {updated_message['current_status']}")
+                            print(f"   AI data saved to Supabase. Pushed to webcrawler queue with status: {updated_message['current_status']}")
                             print(f"   📱 Server will notify Telegram directly\n")
                             
                         except Exception as e:
@@ -310,14 +325,14 @@ class QueryAnalystWorker:
                         time.sleep(poll_interval)
                     
                 except KeyboardInterrupt:
-                    print("\n\n⚠️  Worker stopped by user")
+                    print("\n\n  Worker stopped by user")
                     break
                 except Exception as e:
                     print(f"\n❌ Error in worker loop: {e}")
                     time.sleep(poll_interval)
                     
         except KeyboardInterrupt:
-            print("\n\n⚠️  Worker stopped by user")
+            print("\n\n  Worker stopped by user")
         except Exception as e:
             print(f"\n❌ Fatal error: {e}")
             raise

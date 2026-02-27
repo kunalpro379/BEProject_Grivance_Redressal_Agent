@@ -61,7 +61,7 @@ class WorkerController {
 
             const linksPreview = (links || []).slice(0, 5).join('\n');
             const more = (links || []).length > 5 ? `\n... and ${(links || []).length - 5} more` : '';
-            const message = `✅ Web crawling complete!\n\nSubmission ID: ${grievanceId}\n\nFound ${urls_count || 0} links. Data saved to cloud.\n\nTop links:\n${linksPreview || 'No links'}${more}`;
+            const message = `Web crawling complete!\n\nSubmission ID: ${grievanceId}\n\nFound ${urls_count || 0} links. Data saved to cloud.\n\nTop links:\n${linksPreview || 'No links'}${more}`;
             await telegramBot.notifyUser(userId, message);
 
             console.log(`WebCrawler callback: notified user ${userId} for grievance ${grievanceId}`);

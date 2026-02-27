@@ -68,7 +68,15 @@ class TelegramBotService {
         });
 
         this.bot.on('location', async (ctx) => {
-            await this.handleLocation(ctx);
+            const userId = ctx.from.id.toString();
+            const userSession = this.userSessions.get(userId) || {};
+            
+            // Check if this is for registration or grievance
+            if (userSession.step === 'awaiting_location') {
+                await this.handleLocation(ctx);
+            } else if (userSession.step === 'awaiting_grievance_location') {
+                await this.handleGrievanceLocation(ctx);
+            }
         });
 
         this.bot.on('callback_query', async (ctx) => {
@@ -273,6 +281,39 @@ class TelegramBotService {
         }
     }
 
+    async handleGrievanceLocation(ctx) {
+        const userId = ctx.from.id.toString();
+        const userSession = this.userSessions.get(userId);
+
+        if (!userSession || userSession.step !== 'awaiting_grievance_location') {
+            return;
+        }
+
+        const latitude = ctx.message.location.latitude;
+        const longitude = ctx.message.location.longitude;
+
+        // Store location in session
+        userSession.grievance_latitude = latitude;
+        userSession.grievance_longitude = longitude;
+        userSession.grievance_location = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+        userSession.step = 'awaiting_grievance_text';
+        this.userSessions.set(userId, userSession);
+
+        await ctx.reply(
+            'Location Received!\n\n' +
+            `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}\n\n` +
+            'Step 2: Describe Your Issue\n\n' +
+            'Please type your complaint in detail:\n\n' +
+            '- What is the problem?\n' +
+            '- When did it start?\n' +
+            '- Any other relevant details\n\n' +
+            'Be specific for faster resolution.',
+            Markup.keyboard([
+                ['Cancel']
+            ]).resize()
+        );
+    }
+
     async startGrievanceSubmission(ctx) {
         const telegramId = ctx.from.id;
         
@@ -287,20 +328,21 @@ class TelegramBotService {
             }
 
             this.userSessions.set(telegramId.toString(), {
-                step: 'awaiting_grievance_text',
+                step: 'awaiting_grievance_location',
                 citizen_id: citizen.id
             });
 
             await ctx.reply(
                 'Submit New Grievance\n\n' +
-                'Step 1: Describe Your Issue\n\n' +
-                'Please type your complaint in detail:\n\n' +
-                '- What is the problem?\n' +
-                '- Where is it located?\n' +
-                '- When did it start?\n' +
-                '- Any other relevant details\n\n' +
-                'Be specific for faster resolution.',
+                'Step 1: Share Grievance Location\n\n' +
+                'Please share the LIVE LOCATION where the issue is occurring.\n\n' +
+                'This helps us:\n' +
+                '- Route to correct department\n' +
+                '- Assign local officers\n' +
+                '- Track issue location accurately\n\n' +
+                'Note: This is the location of the problem, not your home address.',
                 Markup.keyboard([
+                    [Markup.button.locationRequest('Share Grievance Location')],
                     ['Cancel']
                 ]).resize()
             );
@@ -444,14 +486,14 @@ class TelegramBotService {
     async notifyQueryAnalyzed(telegramId, grievanceId, analysisResult) {
         try {
             const message = 
-                '🔍 Query Analysis Complete!\n\n' +
+                ' Query Analysis Complete!\n\n' +
                 `Grievance ID: ${grievanceId}\n\n` +
                 `Status: ${analysisResult.validation_status || 'Analyzed'}\n` +
                 `Department: ${analysisResult.department?.name || 'Being assigned'}\n` +
                 `Priority: ${analysisResult.severity?.level || 'Medium'}\n\n` +
                 `${analysisResult.validation_status === 'validated' 
-                    ? '✅ Your grievance has been validated and is being processed.' 
-                    : '⚠️ Your grievance needs review.'}\n\n` +
+                    ? 'Your grievance has been validated and is being processed.' 
+                    : ' Your grievance needs review.'}\n\n` +
                 'Next Steps:\n' +
                 '- Department assignment in progress\n' +
                 '- Officer will be assigned soon\n' +
@@ -527,7 +569,10 @@ class TelegramBotService {
                 citizen_id: userSession.citizen_id,
                 grievance_text: userSession.grievance_text,
                 image_path: azureResult.url,
-                image_description: fileName
+                image_description: fileName,
+                latitude: userSession.grievance_latitude || null,
+                longitude: userSession.grievance_longitude || null,
+                location_address: userSession.grievance_location || null
             });
 
             await ctx.reply('Pushing to AI analysis queue...');
@@ -582,7 +627,7 @@ class TelegramBotService {
 
     async init() {
         if (!process.env.TELEGRAM_BOT_TOKEN) {
-            console.warn('⚠️  Telegram bot token not provided. Bot will not start.');
+            console.warn('  Telegram bot token not provided. Bot will not start.');
             this.initialized = false;
             return Promise.resolve();
         }
@@ -593,7 +638,7 @@ class TelegramBotService {
                 dropPendingUpdates: true
             });
             this.initialized = true;
-            console.log('✅ Telegram bot started successfully');
+            console.log('Telegram bot started successfully');
             
             // Graceful shutdown
             const stopBot = () => {
@@ -605,9 +650,9 @@ class TelegramBotService {
             process.once('SIGTERM', stopBot);
             
         } catch (error) {
-            console.warn('⚠️  Failed to start Telegram bot:', error.message);
-            console.warn('⚠️  This is usually because another bot instance is running');
-            console.warn('⚠️  Server will continue without Telegram bot functionality');
+            console.warn('  Failed to start Telegram bot:', error.message);
+            console.warn('  This is usually because another bot instance is running');
+            console.warn('  Server will continue without Telegram bot functionality');
             this.initialized = false;
             // Don't throw error, just log warning
             return Promise.resolve();
