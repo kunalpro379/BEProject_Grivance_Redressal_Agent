@@ -83,7 +83,7 @@ const authService = {
     
     console.log('🔐 Backend login response:', response.data);
     console.log('👤 User from backend:', response.data.user);
-    console.log('🆔 dep_id from backend:', response.data.user?.dep_id);
+    console.log('🆔 department_id from backend:', response.data.user?.department_id);
     
     if (response.data.accessToken) {
       localStorage.setItem('accessToken', response.data.accessToken);

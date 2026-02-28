@@ -459,7 +459,26 @@ export const register = async (req, res) => {
 
       // Send OTP email only if verification_token column exists (i.e., migration was run)
       if (columnsExist) {
-        await sendOtpEmail(user.email, otp);
+        try {
+          await sendOtpEmail(user.email, otp);
+          console.log('OTP email process completed');
+        } catch (emailError) {
+          // Log but don't fail registration if email sending fails
+          console.error('Failed to send OTP email (non-critical):', emailError.message);
+        }
+      }
+
+      console.log('About to create department officer record for user:', user.id);
+      
+      // Check if transaction is still valid before proceeding
+      try {
+        await client.query('SELECT 1');
+      } catch (txCheckError) {
+        console.error('Transaction check failed - transaction may be aborted:', txCheckError.message);
+        await client.query('ROLLBACK');
+        return res.status(500).json({ 
+          error: 'Registration failed due to database transaction error. Please try again.' 
+        });
       }
 
       // Create departmentofficers record for officers/heads
@@ -473,74 +492,36 @@ export const register = async (req, res) => {
         } else {
           try {
             const staffId = `STAFF-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-            const generatedDepId = generateDepId();
             
-            try {
-              await client.query(
-                `INSERT INTO departmentofficers (
-                  user_id,
-                  department_id,
-                  staff_id,
-                  role,
-                  zone,
-                  ward,
-                  specialization,
-                  dep_id
-                )
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-                 ON CONFLICT (user_id) DO UPDATE
-                   SET staff_id = EXCLUDED.staff_id,
-                       role = EXCLUDED.role,
-                       zone = EXCLUDED.zone,
-                       ward = EXCLUDED.ward,
-                       specialization = EXCLUDED.specialization,
-                       dep_id = EXCLUDED.dep_id`,
-                [
-                  user.id,
-                  resolvedDepartmentId,
-                  staffId,
-                  user.designation || user.role,
-                  zone || null,
-                  ward || null,
-                  user.designation || null,
-                  generatedDepId
-                ]
-              );
-              console.log('Department officer record created with department_id:', resolvedDepartmentId, 'and dep_id:', generatedDepId);
-            } catch (depIdColError) {
-              if (depIdColError.code === '42703') {
-                await client.query(
-                  `INSERT INTO departmentofficers (
-                    user_id,
-                    department_id,
-                    staff_id,
-                    role,
-                    zone,
-                    ward,
-                    specialization
-                  )
-                   VALUES ($1, $2, $3, $4, $5, $6, $7)
-                   ON CONFLICT (user_id) DO UPDATE
-                     SET staff_id = EXCLUDED.staff_id,
-                         role = EXCLUDED.role,
-                         zone = EXCLUDED.zone,
-                         ward = EXCLUDED.ward,
-                         specialization = EXCLUDED.specialization`,
-                  [
-                    user.id,
-                    resolvedDepartmentId,
-                    staffId,
-                    user.designation || user.role,
-                    zone || null,
-                    ward || null,
-                    user.designation || null
-                  ]
-                );
-                console.warn('dep_id column missing in departmentofficers - run migration');
-              } else {
-                throw depIdColError;
-              }
-            }
+            // Insert department officer record (use department_id, not dep_id)
+            await client.query(
+              `INSERT INTO departmentofficers (
+                user_id,
+                department_id,
+                staff_id,
+                role,
+                zone,
+                ward,
+                specialization
+              )
+               VALUES ($1, $2, $3, $4, $5, $6, $7)
+               ON CONFLICT (user_id) DO UPDATE
+                 SET staff_id = EXCLUDED.staff_id,
+                     role = EXCLUDED.role,
+                     zone = EXCLUDED.zone,
+                     ward = EXCLUDED.ward,
+                     specialization = EXCLUDED.specialization`,
+              [
+                user.id,
+                resolvedDepartmentId,
+                staffId,
+                user.designation || user.role,
+                zone || null,
+                ward || null,
+                user.designation || null
+              ]
+            );
+            console.log('Department officer record created with department_id:', resolvedDepartmentId);
           } catch (deptOfficerError) {
             await client.query('ROLLBACK');
             console.error('Failed to create department officer record:', deptOfficerError);
@@ -649,21 +630,8 @@ export const register = async (req, res) => {
 
       await client.query('COMMIT');
 
-      // dep_id is null until admin approves and allocates department
-      let finalDepId = null;
-      if (isOfficerRole) {
-        try {
-          const depOfficerResult = await pool.query(
-            `SELECT dep_id FROM departmentofficers WHERE user_id = $1`,
-            [user.id]
-          );
-          if (depOfficerResult.rows.length > 0) {
-            finalDepId = depOfficerResult.rows[0].dep_id || null;
-          }
-        } catch (err) {
-          console.warn('Could not fetch dep_id from departmentofficers:', err.message);
-        }
-      }
+      // Use department_id instead of dep_id
+      let finalDepartmentId = resolvedDepartmentId;
 
       // Officers need approval - don't generate tokens yet
       return res.status(201).json({
@@ -674,7 +642,7 @@ export const register = async (req, res) => {
           full_name: user.full_name,
           role: user.role,
           approval_status: user.approval_status,
-          dep_id: finalDepId,
+          department_id: finalDepartmentId,
           email_verified: user.email_verified
         },
         requiresOtpVerification: true,
@@ -892,7 +860,7 @@ export const login = async (req, res) => {
         department_id: isCitizen ? null : user.department_id,
         department_name: isCitizen ? null : user.department_name,
         approval_status: isCitizen ? 'approved' : user.approval_status,
-        dep_id: isCitizen ? null : user.department_id // Use department_id as dep_id for backward compatibility
+        department_id: isCitizen ? null : user.department_id
       },
       accessToken,
       refreshToken

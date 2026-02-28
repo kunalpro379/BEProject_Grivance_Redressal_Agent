@@ -300,7 +300,7 @@ const AdminDashboard = () => {
                   <option value="">Select department</option>
                   {departments.map((d) => (
                     <option key={d.id} value={d.id}>
-                      {d.name} {d.dep_id ? `(${d.dep_id})` : ''}
+                      {d.name}
                     </option>
                   ))}
                 </select>

@@ -23,6 +23,14 @@ export const AuthProvider = ({ children }) => {
       const token = authService.getAccessToken();
 
       if (storedUser && token) {
+        // Migrate old dep_id to department_id
+        if (storedUser.dep_id && !storedUser.department_id) {
+          console.log('🔄 Migrating dep_id to department_id:', storedUser.dep_id);
+          storedUser.department_id = storedUser.dep_id;
+          delete storedUser.dep_id;
+          localStorage.setItem('user', JSON.stringify(storedUser));
+        }
+        
         setUser(storedUser);
         setIsAuthenticated(true);
       }

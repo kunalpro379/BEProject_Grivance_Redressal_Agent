@@ -48,15 +48,15 @@ const DashboardPremium = ({ userAuth }) => {
 
     fetchProfile();
 
-    const depId = userAuth?.dep_id;
+    const departmentId = userAuth?.department_id;
     const token = localStorage.getItem('accessToken');
-    if (!depId || !token) {
+    if (!departmentId || !token) {
       setLoading(false);
       return;
     }
     
     setLoading(true);
-    departmentDashboardService.getStats(depId, token)
+    departmentDashboardService.getStats(departmentId, token)
       .then((stats) => {
         setLiveStats(stats);
         setLoading(false);
@@ -65,7 +65,7 @@ const DashboardPremium = ({ userAuth }) => {
         setLiveStats(null);
         setLoading(false);
       });
-  }, [userAuth?.dep_id, userAuth?.id]);
+  }, [userAuth?.department_id, userAuth?.id]);
 
   const features = [
     {

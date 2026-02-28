@@ -20,129 +20,63 @@ const generateDepId = () => {
 };
 
 class AdminController {
-  // Get all pending users awaiting approval (department_name from user; dep_id from departmentofficers when allocated)
+  // Get all pending users awaiting approval
   async getPendingUsers(req, res) {
     try {
-      // Try with dep_id, fallback if column doesn't exist
-      let result;
-      try {
-        result = await pool.query(
-          `SELECT u.id, u.email, u.full_name, u.phone, u.role, u.created_at,
-                  u.approval_status, u.department_name,
-                  doff.dep_id,
-                  EXISTS (
-                    SELECT 1 FROM state_central_officials WHERE user_id = u.id
-                    UNION ALL
-                    SELECT 1 FROM district_officials WHERE user_id = u.id
-                    UNION ALL
-                    SELECT 1 FROM taluka_officials WHERE user_id = u.id
-                    UNION ALL
-                    SELECT 1 FROM city_officials WHERE user_id = u.id
-                    UNION ALL
-                    SELECT 1 FROM ward_officers WHERE user_id = u.id
-                  ) as is_government_official,
-                  -- Get government official hierarchy details
-                  COALESCE(
-                    (SELECT json_build_object(
-                      'hierarchy_level', 'state_central',
-                      'level_type', level_type,
-                      'ministry_name', ministry_name,
-                      'jurisdiction', jurisdiction
-                    ) FROM state_central_officials WHERE user_id = u.id),
-                    (SELECT json_build_object(
-                      'hierarchy_level', 'district',
-                      'district', district,
-                      'designation', designation
-                    ) FROM district_officials WHERE user_id = u.id),
-                    (SELECT json_build_object(
-                      'hierarchy_level', 'taluka',
-                      'district', district,
-                      'taluka', taluka,
-                      'designation', designation,
-                      'block_name', block_name
-                    ) FROM taluka_officials WHERE user_id = u.id),
-                    (SELECT json_build_object(
-                      'hierarchy_level', 'city',
-                      'city', city,
-                      'district', district,
-                      'designation', designation,
-                      'corporation_name', corporation_name
-                    ) FROM city_officials WHERE user_id = u.id),
-                    (SELECT json_build_object(
-                      'hierarchy_level', 'ward',
-                      'ward_number', ward_number,
-                      'city', city,
-                      'district', district,
-                      'zone', zone
-                    ) FROM ward_officers WHERE user_id = u.id)
-                  ) as hierarchy_info
-           FROM users u
-           LEFT JOIN departmentofficers doff ON doff.user_id = u.id
-           WHERE u.approval_status = 'pending'
-           ORDER BY u.created_at ASC`,
-          []
-        );
-      } catch (depIdError) {
-        if (depIdError.code === '42703') {
-          // dep_id column doesn't exist, query without it
-          result = await pool.query(
-            `SELECT u.id, u.email, u.full_name, u.phone, u.role, u.created_at,
-                    u.approval_status, u.department_name,
-                    EXISTS (
-                      SELECT 1 FROM state_central_officials WHERE user_id = u.id
-                      UNION ALL
-                      SELECT 1 FROM district_officials WHERE user_id = u.id
-                      UNION ALL
-                      SELECT 1 FROM taluka_officials WHERE user_id = u.id
-                      UNION ALL
-                      SELECT 1 FROM city_officials WHERE user_id = u.id
-                      UNION ALL
-                      SELECT 1 FROM ward_officers WHERE user_id = u.id
-                    ) as is_government_official,
-                    -- Get government official hierarchy details
-                    COALESCE(
-                      (SELECT json_build_object(
-                        'hierarchy_level', 'state_central',
-                        'level_type', level_type,
-                        'ministry_name', ministry_name,
-                        'jurisdiction', jurisdiction
-                      ) FROM state_central_officials WHERE user_id = u.id),
-                      (SELECT json_build_object(
-                        'hierarchy_level', 'district',
-                        'district', district,
-                        'designation', designation
-                      ) FROM district_officials WHERE user_id = u.id),
-                      (SELECT json_build_object(
-                        'hierarchy_level', 'taluka',
-                        'district', district,
-                        'taluka', taluka,
-                        'designation', designation,
-                        'block_name', block_name
-                      ) FROM taluka_officials WHERE user_id = u.id),
-                      (SELECT json_build_object(
-                        'hierarchy_level', 'city',
-                        'city', city,
-                        'district', district,
-                        'designation', designation,
-                        'corporation_name', corporation_name
-                      ) FROM city_officials WHERE user_id = u.id),
-                      (SELECT json_build_object(
-                        'hierarchy_level', 'ward',
-                        'ward_number', ward_number,
-                        'city', city,
-                        'district', district,
-                        'zone', zone
-                      ) FROM ward_officers WHERE user_id = u.id)
-                    ) as hierarchy_info
-             FROM users u
-             WHERE u.approval_status = 'pending'
-             ORDER BY u.created_at ASC`,
-            []
-          );
-        } else {
-          throw depIdError;
-        }
-      }
+      const result = await pool.query(
+        `SELECT u.id, u.email, u.full_name, u.phone, u.role, u.created_at,
+                u.approval_status, u.department_name, u.department_id,
+                EXISTS (
+                  SELECT 1 FROM state_central_officials WHERE user_id = u.id
+                  UNION ALL
+                  SELECT 1 FROM district_officials WHERE user_id = u.id
+                  UNION ALL
+                  SELECT 1 FROM taluka_officials WHERE user_id = u.id
+                  UNION ALL
+                  SELECT 1 FROM city_officials WHERE user_id = u.id
+                  UNION ALL
+                  SELECT 1 FROM ward_officers WHERE user_id = u.id
+                ) as is_government_official,
+                -- Get government official hierarchy details
+                COALESCE(
+                  (SELECT json_build_object(
+                    'hierarchy_level', 'state_central',
+                    'level_type', level_type,
+                    'ministry_name', ministry_name,
+                    'jurisdiction', jurisdiction
+                  ) FROM state_central_officials WHERE user_id = u.id),
+                  (SELECT json_build_object(
+                    'hierarchy_level', 'district',
+                    'district', district,
+                    'designation', designation
+                  ) FROM district_officials WHERE user_id = u.id),
+                  (SELECT json_build_object(
+                    'hierarchy_level', 'taluka',
+                    'district', district,
+                    'taluka', taluka,
+                    'designation', designation,
+                    'block_name', block_name
+                  ) FROM taluka_officials WHERE user_id = u.id),
+                  (SELECT json_build_object(
+                    'hierarchy_level', 'city',
+                    'city', city,
+                    'district', district,
+                    'designation', designation,
+                    'corporation_name', corporation_name
+                  ) FROM city_officials WHERE user_id = u.id),
+                  (SELECT json_build_object(
+                    'hierarchy_level', 'ward',
+                    'ward_number', ward_number,
+                    'city', city,
+                    'district', district,
+                    'zone', zone
+                  ) FROM ward_officers WHERE user_id = u.id)
+                ) as hierarchy_info
+         FROM users u
+         WHERE u.approval_status = 'pending'
+         ORDER BY u.created_at ASC`,
+        []
+      );
 
       res.json({
         success: true,
@@ -270,57 +204,19 @@ class AdminController {
         // Insert or update departmentofficers record (UPSERT)
         const staffId = `STAFF-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
         
-        // Generate dep_id if not exists
-        const generateDepId = () => {
-          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-          let part1 = '';
-          for (let i = 0; i < 4; i++) {
-            part1 += chars.charAt(Math.floor(Math.random() * chars.length));
-          }
-          let part2 = '';
-          for (let i = 0; i < 4; i++) {
-            part2 += chars.charAt(Math.floor(Math.random() * chars.length));
-          }
-          return `DEP-${part1}-${part2}`;
-        };
-        
-        const depId = generateDepId();
-        
-        try {
-          await client.query(
-            `INSERT INTO departmentofficers (
-              user_id, department_id, staff_id, role, dep_id
-            )
-            VALUES ($1, $2, $3, $4, $5)
-            ON CONFLICT (user_id) DO UPDATE
-            SET department_id = EXCLUDED.department_id,
-                staff_id = EXCLUDED.staff_id,
-                role = EXCLUDED.role,
-                dep_id = COALESCE(departmentofficers.dep_id, EXCLUDED.dep_id),
-                updated_at = NOW()`,
-            [userId, dept.id, staffId, user.role, depId]
-          );
-          console.log('Created/Updated departmentofficers for user:', userId, 'with dep_id:', depId);
-        } catch (depIdError) {
-          // Fallback if dep_id column doesn't exist
-          if (depIdError.code === '42703') {
-            await client.query(
-              `INSERT INTO departmentofficers (
-                user_id, department_id, staff_id, role
-              )
-              VALUES ($1, $2, $3, $4)
-              ON CONFLICT (user_id) DO UPDATE
-              SET department_id = EXCLUDED.department_id,
-                  staff_id = EXCLUDED.staff_id,
-                  role = EXCLUDED.role,
-                  updated_at = NOW()`,
-              [userId, dept.id, staffId, user.role]
-            );
-            console.warn('dep_id column missing - run migration 20260219_add_users_dep_id.sql');
-          } else {
-            throw depIdError;
-          }
-        }
+        await client.query(
+          `INSERT INTO departmentofficers (
+            user_id, department_id, staff_id, role
+          )
+          VALUES ($1, $2, $3, $4)
+          ON CONFLICT (user_id) DO UPDATE
+          SET department_id = EXCLUDED.department_id,
+              staff_id = EXCLUDED.staff_id,
+              role = EXCLUDED.role,
+              updated_at = NOW()`,
+          [userId, dept.id, staffId, user.role]
+        );
+        console.log('Created/Updated departmentofficers for user:', userId);
       } else {
         // Government officials or citizens - just approve without department
         result = await client.query(

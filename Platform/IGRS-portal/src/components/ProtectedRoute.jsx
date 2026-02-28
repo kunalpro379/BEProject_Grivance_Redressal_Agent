@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children, allowedRoles = [], requireDepartmentMatch = 
         path: location.pathname,
         userRole: user.role,
         userId: user.id,
-        depId: user.dep_id,
+        departmentId: user.department_id,
         allowedRoles,
         requireNoDepId,
         timestamp: new Date().toISOString()
@@ -37,14 +37,14 @@ const ProtectedRoute = ({ children, allowedRoles = [], requireDepartmentMatch = 
     return <Navigate to={to} state={{ from: location }} replace />;
   }
 
-  // Check if government route is being accessed by officer WITH dep_id (should use department portal instead)
-  if (requireNoDepId && user?.dep_id) {
-    console.warn('[Security] Government portal access denied - user has dep_id:', {
+  // Check if government route is being accessed by officer WITH department_id (should use department portal instead)
+  if (requireNoDepId && user?.department_id) {
+    console.warn('[Security] Government portal access denied - user has department_id:', {
       userId: user.id,
-      depId: user.dep_id,
+      departmentId: user.department_id,
       path: location.pathname
     });
-    return <Navigate to={`/department/${user.dep_id}`} replace />;
+    return <Navigate to={`/department/${user.department_id}`} replace />;
   }
 
   // Only check role when we have allowedRoles and user has a role (avoid redirecting while user is still empty)
@@ -70,16 +70,16 @@ const ProtectedRoute = ({ children, allowedRoles = [], requireDepartmentMatch = 
     const routeDepartmentId = departmentId || depId;
     
     // Check if user is trying to access another department's data
-    if (routeDepartmentId && user.dep_id && routeDepartmentId !== user.dep_id) {
+    if (routeDepartmentId && user.department_id && routeDepartmentId !== user.department_id) {
       console.warn('[Security] Department access denied:', {
-        userDepId: user.dep_id,
+        userDepartmentId: user.department_id,
         requestedDepId: routeDepartmentId,
         userId: user.id,
         path: location.pathname
       });
       
       // Redirect to user's own department
-      return <Navigate to={`/department/${user.dep_id}`} replace />;
+      return <Navigate to={`/department/${user.department_id}`} replace />;
     }
 
     // Check if user is trying to access another official's dashboard
@@ -90,9 +90,9 @@ const ProtectedRoute = ({ children, allowedRoles = [], requireDepartmentMatch = 
         path: location.pathname
       });
       
-      // Redirect based on whether user has dep_id or not
-      if (user.dep_id) {
-        return <Navigate to={`/department/${user.dep_id}`} replace />;
+      // Redirect based on whether user has department_id or not
+      if (user.department_id) {
+        return <Navigate to={`/department/${user.department_id}`} replace />;
       } else {
         return <Navigate to={`/government/${user.id}`} replace />;
       }
@@ -113,9 +113,9 @@ const getRoleBasedPath = (user) => {
     case 'ward_officer':
     case 'city_commissioner':
     case 'district_collector':
-      // Officers WITH dep_id → department portal
-      if (user?.dep_id) return `/department/${user.dep_id}`;
-      // Officers WITHOUT dep_id → government portal
+      // Officers WITH department_id → department portal
+      if (user?.department_id) return `/department/${user.department_id}`;
+      // Officers WITHOUT department_id → government portal
       if (user?.id) return `/government/${user.id}/dashboard`;
       return '/officials-portal/authentication';
     case 'citizen':

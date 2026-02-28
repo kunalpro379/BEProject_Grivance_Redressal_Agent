@@ -133,11 +133,14 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
-          {/* Government Officers Portal - For officers WITHOUT dep_id */}
+          {/* Government Officers Portal - For officers WITHOUT department_id */}
           <Route
             path="/government/:officialId/*"
             element={
-              <ProtectedRoute allowedRoles={['department_officer', 'department_head', 'ward_officer', 'city_commissioner', 'district_collector']}>
+              <ProtectedRoute 
+                allowedRoles={['department_officer', 'department_head', 'ward_officer', 'city_commissioner', 'district_collector']} 
+                requireNoDepId={true}
+              >
                 <OfficerLayout userRole="government_officer" onLogout={logout} userAuth={user} />
               </ProtectedRoute>
             }
@@ -154,7 +157,7 @@ function App() {
             <Route path="*" element={<Navigate to="dashboard" replace />} />
           </Route>
 
-          {/* Department Officers Portal - For officers WITH dep_id */}
+          {/* Department Officers Portal - For officers WITH department_id */}
           <Route
             path="/department/:departmentId"
             element={
@@ -192,7 +195,7 @@ function App() {
             }
           />
 
-          {/* Department Specific Dashboard - Protected Routes (real dep_id in URL) */}
+          {/* Department Specific Dashboard - Protected Routes (real department_id in URL) */}
           <Route
             path="/department/:departmentId"
             element={
@@ -252,10 +255,10 @@ const getRoleBasedPath = (userOrRole, departmentName, depId) => {
     case 'ward_officer':
     case 'city_commissioner':
     case 'district_collector':
-      // Department officers WITH dep_id → department portal
-      if (user?.dep_id) return `/department/${user.dep_id}`;
+      // Department officers WITH department_id → department portal
+      if (user?.department_id) return `/department/${user.department_id}`;
       if (depId) return `/department/${depId}`;
-      // Department officers WITHOUT dep_id → government portal
+      // Department officers WITHOUT department_id → government portal
       if (user?.id) return `/government/${user.id}/dashboard`;
       return '/officials-portal/authentication';
     

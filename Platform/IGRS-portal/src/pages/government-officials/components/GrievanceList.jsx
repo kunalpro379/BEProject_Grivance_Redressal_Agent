@@ -37,7 +37,7 @@ const mapApiGrievanceToUi = (g) => {
 
 const GrievanceList = () => {
   const { user } = useAuth();
-  const depId = user?.dep_id;
+  const departmentId = user?.department_id;
   const [grievancesFromApi, setGrievancesFromApi] = useState([]);
   const [apiLoading, setApiLoading] = useState(true);
   const [selectedGrievance, setSelectedGrievance] = useState(null);
@@ -80,7 +80,7 @@ const GrievanceList = () => {
         if (!cancelled) setApiLoading(false);
       });
     return () => { cancelled = true; };
-  }, [depId]);
+  }, [departmentId]);
 
   const grievances = grievancesFromApi;
 
@@ -109,7 +109,7 @@ const GrievanceList = () => {
     return { total, pending, inProgress, resolved };
   }, [filteredGrievances]);
 
-  if (!depId && !apiLoading) {
+  if (!departmentId && !apiLoading) {
     return (
       <div className="space-y-6">
         <div className="bg-amber-50 border border-amber-200 rounded-2xl p-8 text-center">

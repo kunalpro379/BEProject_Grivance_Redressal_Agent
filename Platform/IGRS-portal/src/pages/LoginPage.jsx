@@ -26,11 +26,11 @@ export default function LoginPage() {
       
       console.log(' Login response:', response);
       console.log('👤 User data:', response.user);
-      console.log('🆔 dep_id:', response.user.dep_id);
+      console.log('🆔 department_id:', response.user.department_id);
       console.log('🆔 user.id:', response.user.id);
       console.log('📋 role:', response.user.role);
       
-      // Redirect based on role and dep_id
+      // Redirect based on role and department_id
       if (response.user.role === 'admin') {
         console.log('➡️ Redirecting to admin dashboard');
         navigate('/admin/dashboard');
@@ -38,12 +38,12 @@ export default function LoginPage() {
         console.log('➡️ Redirecting to citizen dashboard');
         navigate(`/citizen/${response.user.id}/dashboard`);
       } else if (response.user.role === 'department_officer' || response.user.role === 'department_head') {
-        // Department officers MUST have dep_id
-        if (response.user.dep_id) {
-          console.log(`➡️ Redirecting to department portal: /department/${response.user.dep_id}`);
-          navigate(`/department/${response.user.dep_id}`);
+        // Department officers MUST have department_id
+        if (response.user.department_id) {
+          console.log(`➡️ Redirecting to department portal: /department/${response.user.department_id}`);
+          navigate(`/department/${response.user.department_id}`);
         } else {
-          console.log('❌ ERROR: Department officer has no dep_id!');
+          console.log('❌ ERROR: Department officer has no department_id!');
           setError('Your account is not properly configured. Please contact admin.');
           return;
         }
