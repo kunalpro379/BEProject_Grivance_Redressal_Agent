@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import {
   LayoutDashboard, FileText, TrendingUp, Users, AlertTriangle, Activity,
   Clock, CheckCircle, Briefcase, MapPin, ChevronRight, Loader, DollarSign, BarChart3,
-  Eye, Pencil, Search, X, MessageSquare, Wrench, BookOpen, ScrollText, UserPlus, AlertCircle as AlertCircleIcon
+  Eye, Pencil, Search, X, MessageSquare, Wrench, BookOpen, ScrollText, UserPlus, AlertCircle as AlertCircleIcon, Link as LinkIcon
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -52,17 +52,11 @@ const DepartmentDashboardNew = () => {
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [staff, setStaff] = useState([]);
   const [staffLoading, setStaffLoading] = useState(false);
-  const [equipment, setEquipment] = useState([]);
-  const [equipmentLoading, setEquipmentLoading] = useState(false);
-  const [materials, setMaterials] = useState([]);
-  const [materialsLoading, setMaterialsLoading] = useState(false);
   const [contractors, setContractors] = useState([]);
   const [contractorsLoading, setContractorsLoading] = useState(false);
   const [zoneAllocation, setZoneAllocation] = useState([]);
   const [zoneAllocationLoading, setZoneAllocationLoading] = useState(false);
-  const [resourceRequests, setResourceRequests] = useState([]);
-  const [resourceRequestsLoading, setResourceRequestsLoading] = useState(false);
-  const [activeResourceTab, setActiveResourceTab] = useState('staff');
+  const [activeResourceTab, setActiveResourceTab] = useState('internal-team');
   const [escalationsData, setEscalationsData] = useState({ escalations: [], repeatPatterns: [] });
   const [escalationsLoading, setEscalationsLoading] = useState(false);
   const [aiInsightsList, setAiInsightsList] = useState([]);
@@ -73,6 +67,13 @@ const DepartmentDashboardNew = () => {
   const [predictiveMaintenanceLoading, setPredictiveMaintenanceLoading] = useState(false);
   const [knowledgeBaseList, setKnowledgeBaseList] = useState([]);
   const [knowledgeBaseLoading, setKnowledgeBaseLoading] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [uploadFile, setUploadFile] = useState(null);
+  const [uploadTitle, setUploadTitle] = useState('');
+  const [uploadDescription, setUploadDescription] = useState('');
+  const [uploadCategory, setUploadCategory] = useState('General');
+  const [uploading, setUploading] = useState(false);
+  const [copyingLink, setCopyingLink] = useState(null);
   const [officersList, setOfficersList] = useState([]);
   const [officersLoading, setOfficersLoading] = useState(false);
   const [auditLogsList, setAuditLogsList] = useState([]);
@@ -196,18 +197,10 @@ const DepartmentDashboardNew = () => {
       return;
     }
     try {
-      if (activeResourceTab === 'staff') {
+      if (activeResourceTab === 'internal-team') {
         setStaffLoading(true);
         const res = await departmentDashboardService.getStaff(depId, token);
         if (res.success) setStaff(res.data || []);
-      } else if (activeResourceTab === 'equipment') {
-        setEquipmentLoading(true);
-        const res = await departmentDashboardService.getEquipment(depId, token);
-        if (res.success) setEquipment(res.data || []);
-      } else if (activeResourceTab === 'materials') {
-        setMaterialsLoading(true);
-        const res = await departmentDashboardService.getMaterials(depId, token);
-        if (res.success) setMaterials(res.data || []);
       } else if (activeResourceTab === 'contractors') {
         setContractorsLoading(true);
         const res = await departmentDashboardService.getContractors(depId, token);
@@ -216,14 +209,6 @@ const DepartmentDashboardNew = () => {
         setZoneAllocationLoading(true);
         const res = await departmentDashboardService.getZoneAllocation(depId, token);
         if (res.success) setZoneAllocation(res.data || []);
-      } else if (activeResourceTab === 'requests') {
-        setResourceRequestsLoading(true);
-        const res = await departmentDashboardService.getResourceRequests(depId, token);
-        if (res.success) setBudgetProjects(res.data || []);
-      } else if (activeResourceTab === 'requests') {
-        setResourceRequestsLoading(true);
-        const res = await departmentDashboardService.getResourceRequests(depId, token);
-        if (res.success) setResourceRequests(res.data || []);
       }
     } catch (e) {
       const handled = await handleAuthError(e);
@@ -232,11 +217,8 @@ const DepartmentDashboardNew = () => {
       }
     } finally {
       setStaffLoading(false);
-      setEquipmentLoading(false);
-      setMaterialsLoading(false);
       setContractorsLoading(false);
       setZoneAllocationLoading(false);
-      setResourceRequestsLoading(false);
     }
   };
   const loadEscalations = async () => {
@@ -329,6 +311,54 @@ const DepartmentDashboardNew = () => {
       }
     } finally { setKnowledgeBaseLoading(false); }
   };
+
+  const handleUploadDocument = async () => {
+    if (!uploadFile) {
+      alert('Please select a file');
+      return;
+    }
+
+    try {
+      setUploading(true);
+      const formData = new FormData();
+      formData.append('document', uploadFile);
+      formData.append('title', uploadTitle || uploadFile.name);
+      formData.append('description', uploadDescription);
+      formData.append('category', uploadCategory);
+
+      const token = localStorage.getItem('accessToken');
+      await departmentDashboardService.uploadKnowledgeBaseDocument(depId, formData, token);
+
+      setShowUploadModal(false);
+      setUploadFile(null);
+      setUploadTitle('');
+      setUploadDescription('');
+      setUploadCategory('General');
+      loadKnowledgeBase();
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Failed to upload document');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleCopyLink = async (docId) => {
+    try {
+      setCopyingLink(docId);
+      const token = localStorage.getItem('accessToken');
+      const response = await departmentDashboardService.generateShareableLink(depId, docId, token, 1440); // 24 hours
+      
+      await navigator.clipboard.writeText(response.data.shareableLink);
+      alert('Link copied to clipboard! Valid for 24 hours.');
+    } catch (error) {
+      console.error('Copy link error:', error);
+      alert('Failed to copy link');
+    } finally {
+      setCopyingLink(null);
+    }
+  };
+
   const loadOfficers = async () => {
     try {
       setOfficersLoading(true);
@@ -467,12 +497,9 @@ const DepartmentDashboardNew = () => {
     { id: 'audit-logs', label: 'Audit Logs', icon: ScrollText },
   ];
   const resourceSubTabs = [
-    { id: 'staff', label: 'Staff Management' },
-    { id: 'equipment', label: 'Equipment' },
-    { id: 'materials', label: 'Materials' },
+    { id: 'internal-team', label: 'Internal Team' },
     { id: 'contractors', label: 'Contractors' },
     { id: 'zone', label: 'Zone Allocation' },
-    { id: 'requests', label: 'Resource Requests' },
   ];
 
   // Hooks must run unconditionally (before any early return)
@@ -1492,9 +1519,12 @@ const DepartmentDashboardNew = () => {
           <button key={t.id} onClick={() => setActiveResourceTab(t.id)} className={`px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap ${activeResourceTab === t.id ? 'bg-stone-800 text-white' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'}`}>{t.label}</button>
         ))}
       </div>
-      {activeResourceTab === 'staff' && (staffLoading ? <div className="flex items-center justify-center py-12"><Loader className="w-8 h-8 animate-spin text-stone-500" /></div> : (
+      {activeResourceTab === 'internal-team' && (staffLoading ? <div className="flex items-center justify-center py-12"><Loader className="w-8 h-8 animate-spin text-stone-500" /></div> : (
         <div className="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-md">
-          <h3 className="text-xl font-bold p-6 border-b border-stone-200 text-stone-900 uppercase tracking-wide">Staff Management</h3>
+          <h3 className="text-xl font-bold p-6 border-b border-stone-200 text-stone-900 uppercase tracking-wide">Internal Team - Small Work Specialists</h3>
+          <p className="px-6 py-3 text-sm text-stone-600 bg-stone-50 border-b border-stone-200">
+            Internal team members handle small-scale grievances and maintenance work that doesn't require contractor involvement.
+          </p>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-stone-50">
@@ -1666,53 +1696,195 @@ const DepartmentDashboardNew = () => {
       ))}
       {activeResourceTab === 'zone' && (zoneAllocationLoading ? <div className="flex items-center justify-center py-12"><Loader className="w-8 h-8 animate-spin text-stone-500" /></div> : (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-stone-900 uppercase tracking-wide">Zone Resource Allocation</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {zoneAllocation.map((z, i) => {
-              const utilization = z.utilization ?? 0;
-              const statusColor = utilization >= 90 ? 'bg-red-100 text-red-800' : utilization >= 70 ? 'bg-green-100 text-green-800' : utilization >= 50 ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800';
-              const statusLabel = utilization >= 90 ? 'Overloaded' : utilization >= 70 ? 'Optimal' : utilization >= 50 ? 'Optimal' : 'Underutilized';
-              const zoneNum = z.zone_name.match(/\d+/)?.[0] || '';
-              const location = z.zone_name.includes('Zone 1') ? 'Ambernath East' : z.zone_name.includes('Zone 2') ? 'Ambernath West' : z.zone_name.includes('Zone 3') ? 'Ambernath East' : z.zone_name.includes('Zone 4') ? 'Ambernath West' : '';
-              const displayName = z.zone_name.includes('Zone') ? `Ward ${12 + parseInt(zoneNum || '1')}` : z.zone_name;
-              return (
-                <div key={i} className="bg-white rounded-xl border border-stone-200 p-6 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-stone-900 uppercase tracking-wide">Ward Grievance Tracking</h2>
+          <p className="text-sm text-stone-600">Department-specific grievances with real-time progress updates</p>
+          
+          {/* Show grievances grouped by ward */}
+          {zoneAllocation.map((z, zoneIdx) => {
+            const zoneNum = z.zone_name.match(/\d+/)?.[0] || '';
+            const location = z.zone_name.includes('Zone 1') ? 'Ambernath East' : z.zone_name.includes('Zone 2') ? 'Ambernath West' : z.zone_name.includes('Zone 3') ? 'Ambernath East' : z.zone_name.includes('Zone 4') ? 'Ambernath West' : '';
+            const displayName = z.zone_name.includes('Zone') ? `Ward ${12 + parseInt(zoneNum || '1')}` : z.zone_name;
+            const grievances = z.current_grievances || [];
+            
+            return (
+              <div key={zoneIdx} className="space-y-4">
+                {/* Ward Header */}
+                <div className="bg-gradient-to-r from-stone-800 to-stone-900 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex justify-between items-center">
                     <div>
-                      <h4 className="font-bold text-stone-900 text-lg">{displayName}</h4>
-                      {location && <p className="text-xs text-stone-500 mt-1">{location}</p>}
+                      <h3 className="text-2xl font-bold">{displayName}</h3>
+                      {location && <p className="text-sm opacity-90 mt-1">{location}</p>}
                     </div>
-                    <span className={`px-3 py-1 rounded-lg text-xs font-semibold ${statusColor}`}>
-                      {statusLabel}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-4 gap-3 mb-4">
-                    <div className="bg-stone-50 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-stone-900">{z.workers}</div>
-                      <div className="text-xs text-stone-600 mt-1">Workers</div>
-                    </div>
-                    <div className="bg-stone-50 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-stone-900">{z.equipment}</div>
-                      <div className="text-xs text-stone-600 mt-1">Equipment</div>
-                    </div>
-                    <div className="bg-stone-50 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-stone-900">{z.active}</div>
-                      <div className="text-xs text-stone-600 mt-1">Active</div>
-                    </div>
-                    <div className="bg-stone-50 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-stone-900">{z.resolved}</div>
-                      <div className="text-xs text-stone-600 mt-1">Resolved</div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold">{grievances.length}</div>
+                      <div className="text-sm opacity-90">Active Grievances</div>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center pt-3 border-t border-stone-200">
-                    <p className="text-sm text-stone-700"><span className="font-semibold">Avg Resolution:</span> <span className="font-bold">{z.avg_resolution_days != null ? z.avg_resolution_days + ' days' : '-'}</span></p>
-                    <p className="text-sm text-stone-700"><span className="font-semibold">Utilization:</span> <span className="font-bold">{utilization}%</span></p>
+                  
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-4 gap-3 mt-4 pt-4 border-t border-white/20">
+                    <div className="text-center">
+                      <div className="text-xl font-bold">{z.workers || 0}</div>
+                      <div className="text-xs opacity-75">Workers</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-bold">{z.equipment || 0}</div>
+                      <div className="text-xs opacity-75">Equipment</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-bold">{z.resolved || 0}</div>
+                      <div className="text-xs opacity-75">Resolved</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-bold">{z.avg_resolution_days || '-'}</div>
+                      <div className="text-xs opacity-75">Avg Days</div>
+                    </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-          {zoneAllocation.length === 0 && !zoneAllocationLoading && <p className="text-center text-stone-500 py-8">No zone allocation data</p>}
+
+                {/* Individual Grievance Cards */}
+                {grievances.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {grievances.map((g, gIdx) => {
+                      // Extract grievance data
+                      const workCompleted = g.work_completed || g.progress || 0;
+                      const daysLeft = g.days_left || g.estimated_days_remaining || 0;
+                      const stage = (g.stage || g.workflow_stage || g.status || 'pending').toLowerCase();
+                      
+                      // Stage configuration
+                      const stageConfig = {
+                        'ongoing': { color: 'bg-blue-100 text-blue-800 border-blue-300', label: 'ONGOING', icon: '🔵' },
+                        'in_progress': { color: 'bg-blue-100 text-blue-800 border-blue-300', label: 'IN PROGRESS', icon: '🔵' },
+                        'pending': { color: 'bg-amber-100 text-amber-800 border-amber-300', label: 'PENDING', icon: '🟡' },
+                        'assigned': { color: 'bg-purple-100 text-purple-800 border-purple-300', label: 'ASSIGNED', icon: '🟣' },
+                        'finished': { color: 'bg-green-100 text-green-800 border-green-300', label: 'FINISHED', icon: '🟢' },
+                        'completed': { color: 'bg-green-100 text-green-800 border-green-300', label: 'COMPLETED', icon: '🟢' },
+                        'resolved': { color: 'bg-green-100 text-green-800 border-green-300', label: 'RESOLVED', icon: '🟢' }
+                      };
+                      
+                      const currentStage = stageConfig[stage] || stageConfig.pending;
+                      const isUrgent = daysLeft > 0 && daysLeft <= 2;
+                      
+                      return (
+                        <div key={gIdx} className={`bg-white rounded-xl border-2 ${isUrgent ? 'border-red-400' : 'border-stone-200'} shadow-md hover:shadow-xl transition-all overflow-hidden`}>
+                          {/* Grievance Header */}
+                          <div className="bg-gradient-to-r from-stone-50 to-white p-4 border-b-2 border-stone-200">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex-1">
+                                <p className="text-sm font-bold text-stone-900 mb-1">{g.grievance_id || `GRV-${gIdx + 1}`}</p>
+                                <p className="text-xs text-stone-600 line-clamp-2">{g.description || g.grievance_text || 'No description'}</p>
+                              </div>
+                              <span className={`ml-2 px-2 py-1 rounded text-xs font-bold whitespace-nowrap ${
+                                (g.priority || '').toLowerCase() === 'high' || (g.priority || '').toLowerCase() === 'urgent' ? 'bg-red-100 text-red-800' :
+                                (g.priority || '').toLowerCase() === 'medium' ? 'bg-amber-100 text-amber-800' :
+                                'bg-green-100 text-green-800'
+                              }`}>
+                                {(g.priority || 'NORMAL').toUpperCase()}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Current Stage */}
+                          <div className="p-4 bg-stone-50 border-b border-stone-200">
+                            <p className="text-xs font-semibold text-stone-600 mb-2">CURRENT STAGE</p>
+                            <div className={`px-4 py-2 rounded-lg border-2 ${currentStage.color} text-center font-bold text-sm`}>
+                              {currentStage.icon} {currentStage.label}
+                            </div>
+                          </div>
+
+                          {/* Work Progress */}
+                          <div className="p-4 border-b border-stone-200">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-xs font-semibold text-stone-600">WORK COMPLETED</span>
+                              <span className="text-lg font-bold text-[#D4AF37]">{workCompleted}%</span>
+                            </div>
+                            <div className="w-full bg-stone-200 rounded-full h-4 overflow-hidden">
+                              <div 
+                                className={`h-4 rounded-full transition-all duration-500 flex items-center justify-end pr-2 ${
+                                  workCompleted >= 75 ? 'bg-green-500' :
+                                  workCompleted >= 50 ? 'bg-blue-500' :
+                                  workCompleted >= 25 ? 'bg-amber-500' :
+                                  'bg-red-500'
+                                }`}
+                                style={{ width: `${Math.max(10, Math.min(100, workCompleted))}%` }}
+                              >
+                                {workCompleted > 15 && <span className="text-xs font-bold text-white">{workCompleted}%</span>}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Timeline */}
+                          <div className="p-4 border-b border-stone-200">
+                            <p className="text-xs font-semibold text-stone-600 mb-3">TIMELINE</p>
+                            <div className="grid grid-cols-3 gap-2">
+                              <div className="bg-stone-50 rounded-lg p-3 text-center border border-stone-200">
+                                <div className="text-xs text-stone-500 mb-1">Days Open</div>
+                                <div className="text-xl font-bold text-stone-900">{g.days_open || 0}</div>
+                              </div>
+                              <div className={`rounded-lg p-3 text-center border-2 ${
+                                daysLeft <= 2 && daysLeft > 0 ? 'bg-red-50 border-red-300' :
+                                daysLeft <= 5 && daysLeft > 0 ? 'bg-amber-50 border-amber-300' :
+                                'bg-green-50 border-green-300'
+                              }`}>
+                                <div className="text-xs text-stone-500 mb-1">Days Left</div>
+                                <div className={`text-xl font-bold ${
+                                  daysLeft <= 2 && daysLeft > 0 ? 'text-red-600' :
+                                  daysLeft <= 5 && daysLeft > 0 ? 'text-amber-600' :
+                                  'text-green-600'
+                                }`}>
+                                  {daysLeft > 0 ? daysLeft : '-'}
+                                </div>
+                              </div>
+                              <div className="bg-stone-50 rounded-lg p-3 text-center border border-stone-200">
+                                <div className="text-xs text-stone-500 mb-1">Target</div>
+                                <div className="text-xl font-bold text-stone-900">{g.target_days || g.estimated_days || '-'}</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Assignment Info */}
+                          <div className="p-4 bg-stone-50">
+                            <div className="flex items-center justify-between text-xs">
+                              <div className="flex items-center gap-1 text-stone-600">
+                                <Users className="w-3 h-3" />
+                                <span className="font-semibold">{g.assigned_to || 'Unassigned'}</span>
+                              </div>
+                              <div className="flex items-center gap-1 text-stone-500">
+                                <Clock className="w-3 h-3" />
+                                <span>{g.last_updated ? new Date(g.last_updated).toLocaleDateString() : 'Recent'}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Urgency Alert */}
+                          {isUrgent && (
+                            <div className="bg-red-500 text-white p-3 flex items-center gap-2">
+                              <AlertTriangle className="w-5 h-5" />
+                              <span className="text-sm font-bold">URGENT: Deadline in {daysLeft} day{daysLeft !== 1 ? 's' : ''}!</span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-xl border-2 border-dashed border-stone-300 p-12 text-center">
+                    <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-3" />
+                    <p className="text-lg font-bold text-stone-900 mb-1">All Clear!</p>
+                    <p className="text-sm text-stone-600">No active grievances in {displayName}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          
+          {zoneAllocation.length === 0 && !zoneAllocationLoading && (
+            <div className="bg-white rounded-xl border-2 border-stone-200 p-12 text-center">
+              <MapPin className="w-16 h-16 text-stone-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-stone-900 mb-2">No Zone Data</h3>
+              <p className="text-stone-600">No zone allocation data available for this department</p>
+            </div>
+          )}
         </div>
       ))}
       {activeResourceTab === 'requests' && (resourceRequestsLoading ? <div className="flex items-center justify-center py-12"><Loader className="w-8 h-8 animate-spin text-stone-500" /></div> : (
@@ -2520,11 +2692,96 @@ const DepartmentDashboardNew = () => {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-stone-900 uppercase tracking-wide">Knowledge Base</h2>
-          <button className="px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold hover:bg-stone-800 transition-colors flex items-center gap-2">
+          <button 
+            onClick={() => setShowUploadModal(true)}
+            className="px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold hover:bg-stone-800 transition-colors flex items-center gap-2"
+          >
             <UserPlus className="w-4 h-4" />
             ↑ UPLOAD DOCUMENT
           </button>
         </div>
+
+        {/* Upload Modal */}
+        {showUploadModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+              <h3 className="text-xl font-bold text-stone-900 mb-4">Upload Document</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-stone-700 mb-2">File</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    onChange={(e) => setUploadFile(e.target.files[0])}
+                    className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-500"
+                  />
+                  <p className="text-xs text-stone-500 mt-1">Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB)</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-stone-700 mb-2">Title (Optional)</label>
+                  <input
+                    type="text"
+                    value={uploadTitle}
+                    onChange={(e) => setUploadTitle(e.target.value)}
+                    placeholder="Document title"
+                    className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-stone-700 mb-2">Description (Optional)</label>
+                  <textarea
+                    value={uploadDescription}
+                    onChange={(e) => setUploadDescription(e.target.value)}
+                    placeholder="Document description"
+                    rows={3}
+                    className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-stone-700 mb-2">Category</label>
+                  <select
+                    value={uploadCategory}
+                    onChange={(e) => setUploadCategory(e.target.value)}
+                    className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-500"
+                  >
+                    <option value="General">General</option>
+                    <option value="Policy">Policy</option>
+                    <option value="Procedure">Procedure</option>
+                    <option value="Guidelines">Guidelines</option>
+                    <option value="Reports">Reports</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={handleUploadDocument}
+                  disabled={uploading || !uploadFile}
+                  className="flex-1 px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold hover:bg-stone-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {uploading ? 'Uploading...' : 'Upload'}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowUploadModal(false);
+                    setUploadFile(null);
+                    setUploadTitle('');
+                    setUploadDescription('');
+                  }}
+                  disabled={uploading}
+                  className="flex-1 px-4 py-2 bg-white border-2 border-stone-300 text-stone-800 rounded-lg font-semibold hover:bg-stone-50 transition-colors disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {knowledgeBaseList.map((doc) => (
             <div key={doc.id} className="bg-white rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow p-6">
@@ -2542,11 +2799,22 @@ const DepartmentDashboardNew = () => {
                 <span>{doc.file_type || 'PDF'} • {doc.file_size ? `${(doc.file_size / 1024 / 1024).toFixed(1)} MB` : 'N/A'}</span>
               </div>
               <div className="flex gap-2">
-                <button className="flex-1 px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold hover:bg-stone-800 transition-colors text-sm">
-                  VIEW
-                </button>
-                <button className="flex-1 px-4 py-2 bg-white border-2 border-stone-300 text-stone-800 rounded-lg font-semibold hover:bg-stone-50 transition-colors text-sm">
-                  DOWNLOAD
+                <button 
+                  onClick={() => handleCopyLink(doc.id)}
+                  disabled={copyingLink === doc.id}
+                  className="flex-1 px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold hover:bg-stone-800 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {copyingLink === doc.id ? (
+                    <>
+                      <Loader className="w-4 h-4 animate-spin" />
+                      Copying...
+                    </>
+                  ) : (
+                    <>
+                      <LinkIcon className="w-4 h-4" />
+                      COPY LINK
+                    </>
+                  )}
                 </button>
               </div>
             </div>

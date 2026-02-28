@@ -276,6 +276,29 @@ class DepartmentDashboardService {
     return await response.json();
   }
 
+  async uploadKnowledgeBaseDocument(depId, formData, token) {
+    const response = await fetch(`${API_URL}/api/department-dashboard/${depId}/knowledge-base/upload`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` },
+      body: formData
+    });
+    if (!response.ok) throw new Error('Failed to upload document');
+    return await response.json();
+  }
+
+  async generateShareableLink(depId, docId, token, expiryMinutes = 60) {
+    const response = await fetch(`${API_URL}/api/department-dashboard/${depId}/knowledge-base/${docId}/generate-link`, {
+      method: 'POST',
+      headers: { 
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ expiryMinutes })
+    });
+    if (!response.ok) throw new Error('Failed to generate shareable link');
+    return await response.json();
+  }
+
   async getOfficers(depId, token) {
     const response = await fetch(`${API_URL}/api/department-dashboard/${depId}/officers`, {
       headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }

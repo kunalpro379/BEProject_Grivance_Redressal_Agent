@@ -46,6 +46,45 @@ class AzureStorageService {
         }
     }
 
+    async generateSasUrl(fileName, expiryMinutes = 60) {
+        try {
+            const { BlobSASPermissions, generateBlobSASQueryParameters, StorageSharedKeyCredential } = await import('@azure/storage-blob');
+            
+            const containerClient = this.blobServiceClient.getContainerClient(this.containerName);
+            const blockBlobClient = containerClient.getBlockBlobClient(fileName);
+            
+            // Extract account name and key from connection string
+            const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
+            const accountNameMatch = connectionString.match(/AccountName=([^;]+)/);
+            const accountKeyMatch = connectionString.match(/AccountKey=([^;]+)/);
+            
+            if (!accountNameMatch || !accountKeyMatch) {
+                throw new Error('Could not extract account credentials from connection string');
+            }
+            
+            const accountName = accountNameMatch[1];
+            const accountKey = accountKeyMatch[1];
+            
+            const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+            
+            const sasOptions = {
+                containerName: this.containerName,
+                blobName: fileName,
+                permissions: BlobSASPermissions.parse('r'), // read only
+                startsOn: new Date(),
+                expiresOn: new Date(new Date().valueOf() + expiryMinutes * 60 * 1000)
+            };
+            
+            const sasToken = generateBlobSASQueryParameters(sasOptions, sharedKeyCredential).toString();
+            const sasUrl = `${blockBlobClient.url}?${sasToken}`;
+            
+            return sasUrl;
+        } catch (error) {
+            console.error('Azure SAS URL generation error:', error.message);
+            throw new Error(`Failed to generate SAS URL: ${error.message}`);
+        }
+    }
+
     async deleteFile(fileName) {
         try {
             const containerClient = this.blobServiceClient.getContainerClient(this.containerName);
