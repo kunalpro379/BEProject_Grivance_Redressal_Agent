@@ -1,31 +1,36 @@
 {
   "grievance": {
     "text": "Title: Garbage\nCategory: Water Supply\nCity: Ambernath\nAge: 22\n\nDescription:\ngarbage issue",
-    "enhanced_query_described": "**Comprehensive Grievance Description**\n\n**Original Complaint/Query:** The citizen has submitted a complaint regarding a garbage issue in Ambernath.\n\n**Visual Evidence and Location Details:** A visual inspection of the provided image reveals a highly unsanitary outdoor scene characterized by a large accumulation of garbage. The image captures a mixture of plastic bags, wrappers, discarded packaging, and general debris scattered across the ground. A rusted, metal grid fence, partially collapsed and overgrown with dried vegetation, runs through the center of the frame. Behind this fence, a murky water body (likely a canal or ditch) is visible, appearing dark and potentially stagnant, with more garbage visible floating on or near its surface. The location appears to be an urban slum area in Ambernath, with green foliage visible on the banks beyond the water.\n\n**Key Observations and Concerns:** The observed garbage accumulation and pollution of the nearby water body pose significant environmental and health concerns. The presence of plastic waste, snack packaging, and other non-biodegradable materials in the garbage pile suggests a lack of proper waste management practices in the area. The partially collapsed metal grid fence and dried vegetation indicate neglect and disrepair, further exacerbating the environmental degradation. The murky water body, likely a canal or ditch, appears to be a potential breeding ground for disease-carrying insects and other pollutants.\n\n**Initial Category Assessment:** Based on the visual evidence and location details, the grievance can be initially categorized as a **Waste Management** issue, with potential subcategories of **Environmental Pollution** and **Public Health Concerns**. Further investigation and verification of the location and circumstances surrounding the complaint are necessary to determine the root cause and scope of the issue.",
+    "enhanced_query_described": "**Comprehensive Grievance Description**\n\n**Title:** Garbage Issue in Ambernath\n\n**Category Assessment:** Initially categorized under \"Water Supply\" due to the presence of a water body in the vicinity, however, upon closer inspection, it appears that the primary issue is related to environmental degradation and open dumping of garbage. Therefore, the category has been reassessed to \"Environmental Degradation\" with a subcategory of \"Open Dumping Ground.\"\n\n**Detailed Description:** A grievance has been reported regarding a severely neglected outdoor area in Ambernath, characterized by a large accumulation of garbage. The image analysis reveals a scene depicting an open dumping ground with clear signs of environmental degradation. The area is heavily littered with various types of garbage, including plastic bags, food wrappers, cardboard, and general refuse mixed with dry leaves and soil. A rusted, wire mesh fence or barrier stands upright, behind which even more trash is visible. The presence of a dark, narrow body of water, possibly a stream, canal, or drainage ditch, in the background raises concerns about water pollution. The water appears murky and possibly polluted, with additional debris floating or submerged near its edge. The scene also depicts dense vegetation along the water body, which may be affected by the pollution.\n\n**Location and Observations:** The grievance is reported from Ambernath, with the exact address not specified. The location is described as an urban slum area, with nearby landmarks including a large pile of garbage, a metal mesh fence, and a water body (likely a stream or nullah). The presence of a large garbage pile and a metal mesh fence suggests that the area may be used for open dumping, which is a significant environmental concern. The grievance highlights the need for immediate attention to prevent further environmental degradation and potential health risks associated with water pollution.",
     "image": {
-      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp1cm9eeo3.jpeg",
-      "description": "The image captures a highly unsanitary outdoor scene dominated by a large accumulation of garbage. In the foreground and midground, various types of refuse, including plastic bags, wrappers, discarded packaging, and general debris, are strewn across the ground. A rusted, metal grid fence, partially collapsed and covered in dried vegetation, runs through the center of the frame. Behind this fence, and at a lower elevation, a murky water body (likely a canal or ditch) is visible, appearing dark and potentially stagnant, with more garbage visible floating on or near its surface. Green foliage is present on the banks beyond the water. The overall impression is one of severe environmental neglect and pollution affecting both land and a water source.",
+      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmpjte6rhi8.jpeg",
+      "description": "The image captures a severely neglected outdoor area, heavily littered with various types of garbage. In the foreground and midground, there is a large accumulation of waste, including numerous plastic bags, food wrappers (like snack packets), cardboard, and general refuse mixed with dry leaves and soil. A rusted, wire mesh fence or barrier stands upright, behind which even more trash is visible. Beyond the fence and further in the background, a dark, narrow body of water, possibly a stream, canal, or drainage ditch, can be seen, with green vegetation on its banks. The water appears murky and possibly polluted, with additional debris floating or submerged near its edge. The scene depicts an open dumping ground with clear signs of environmental degradation.",
       "key_objects": [
         "garbage pile",
-        "plastic waste",
-        "metal grid fence",
-        "dried vegetation",
-        "murky water body",
-        "green foliage",
-        "snack packaging"
+        "plastic bags",
+        "food wrappers",
+        "metal mesh fence",
+        "dry vegetation",
+        "water body",
+        "rubble"
       ],
-      "scene_type": "Outdoor garbage accumulation near a polluted water body",
-      "extracted_text": "BALAR"
+      "scene_type": "Polluted outdoor area near water body / Open dumping ground",
+      "extracted_text": "BALAR, ID, BE"
     },
     "location": {
-      "address": "Not visible",
+      "address": "Ambernath",
       "latitude": null,
       "longitude": null,
-      "landmarks": [],
+      "landmarks": [
+        "Large pile of garbage",
+        "Metal mesh fence",
+        "Water body (likely a stream or nullah)",
+        "Dense vegetation along the water body"
+      ],
       "area_type": "urban_slum"
     },
-    "category": "Environmental Issues",
-    "sub_category": "Garbage and Unsanitary Practices"
+    "category": "Sanitation",
+    "sub_category": "Garbage Dumping In Vacant Lot/Land"
   },
   "analysis": {
     "query_type": {
@@ -41,27 +46,28 @@
       "emotion_intensity": 8,
       "emotional_indicators": [
         "garbage issue",
-        "unsanitary outdoor scene",
-        "large accumulation of garbage",
-        "rusted, metal grid fence",
-        "partially collapsed and covered in dried vegetation",
-        "murky water body",
-        "dark and potentially stagnant",
-        "garbage visible floating on or near its surface",
-        "severe environmental neglect and pollution",
-        "BALAR"
+        "severely neglected outdoor area",
+        "heavily littered with various types of garbage",
+        "rusted, wire mesh fence or barrier",
+        "murky and possibly polluted water",
+        "clear signs of environmental degradation",
+        "Large pile of garbage",
+        "Metal mesh fence",
+        "Water body (likely a stream or nullah)",
+        "urban_slum"
       ]
     },
     "severity": {
       "severity_level": "Critical",
-      "criticality_score": 8,
+      "criticality_score": 9,
       "impact_scope": "Community",
       "potential_consequences": [
         "Environmental pollution and degradation",
-        "Health risks due to unsanitary conditions and potential water contamination",
+        "Health risks due to exposure to toxic waste and water pollution",
+        "Spread of diseases and epidemics",
         "Negative impact on local ecosystem and wildlife",
-        "Potential for disease outbreaks and waterborne illnesses",
-        "Long-term damage to the water supply and surrounding environment"
+        "Damage to nearby properties and infrastructure",
+        "Loss of public trust in local authorities and water supply system"
       ]
     },
     "priority": {
@@ -69,69 +75,70 @@
       "urgency_level": "High",
       "emotional_tone": "Anger and Disgust",
       "key_emotional_indicators": [
-        "unsanitary outdoor scene",
-        "large accumulation of garbage",
-        "rusted, metal grid fence",
-        "murky water body",
-        "severe environmental neglect and pollution",
-        "urban_slum"
+        "severely neglected outdoor area",
+        "heavily littered with various types of garbage",
+        "large accumulation of waste",
+        "rusted, wire mesh fence or barrier",
+        "murky and possibly polluted water",
+        "clear signs of environmental degradation",
+        "open dumping ground"
       ],
       "priority_level": "High",
-      "justification": "The grievance has a significant impact on the environment, affecting both land and a water source. The presence of garbage in the water body poses a risk to public health and the ecosystem. The severity of the issue and its potential consequences warrant a high priority level for resolution.",
+      "justification": "The grievance has a significant impact on the environment and public health due to the presence of a large accumulation of waste, including plastic bags, food wrappers, and other non-biodegradable materials. The image also shows a nearby water body that appears to be polluted, which could lead to waterborne diseases and other health issues. Additionally, the grievance affects a large number of people living in the urban slum area, making it a high-priority issue for resolution.",
       "expected_resolution_time": "Within 3-5 working days",
-      "risk_assessment": "High risk of waterborne diseases, environmental pollution, and potential harm to local wildlife. Immediate action is required to mitigate these risks and restore the affected area to a safe and healthy state."
+      "risk_assessment": "High risk of environmental degradation, water pollution, and public health issues if the grievance is not addressed promptly. There is also a risk of fire outbreaks and other accidents due to the presence of flammable materials in the garbage pile."
     },
     "patterns": {
       "is_recurring_issue": true,
       "similar_patterns_found": [
-        "Environmental pollution in urban slums",
-        "Garbage accumulation in public spaces",
-        "Water pollution in canals and ditches"
+        "Environmental degradation due to open dumping",
+        "Pollution of water bodies due to litter and waste",
+        "Urban slum conditions and lack of waste management"
       ],
       "spam_likelihood": "Medium",
-      "pattern_notes": "The image description and visible text in the image ('BALAR') suggest a potential spam campaign related to environmental issues in Ambernath. The recurring issue of garbage accumulation and water pollution in urban slums is a common problem in many cities. However, the presence of a specific location ('Ambernath') and a unique image description suggests that this might be a genuine issue rather than a spam campaign. Further investigation is required to determine the authenticity of the report."
+      "pattern_notes": "The image depicts a severe case of environmental degradation, with a large accumulation of garbage and a polluted water body. The presence of a metal mesh fence and a large pile of garbage nearby suggests a recurring issue in the area. The visible text 'BALAR, ID, BE' may be a reference to a nearby landmark or a code, but its relevance to the issue is unclear. The area type 'urban_slum' indicates that the issue may be related to the lack of waste management and infrastructure in the area. The spam likelihood is Medium due to the presence of a clear issue, but the lack of a clear call to action or a specific request for help."
     },
     "historical_trends": {
       "top_3_similar_cases": [
+        {
+          "id": "5905",
+          "summary": "No Foggings no sprinkling of powerful bleaching powders no manoeuvre of garbage collection vehicles regularly from these following areas, near Gramin Bank D B Road Naya Bazar, Gwala Para, Chowk Bazar Jugsalai Nagar parishad, Jugsalai Jamshedpur East Singhbhum Jharkhand to avoid epidemic of dengue, malarial parasites"
+        },
         {
           "id": "13522",
           "summary": "Housing and Urban Affairs  DDA (Delhi Development Authority)  OthersMiscSuggestions ----------------------- Sub-Regarding request to DDA to remove stagnant water and garbage dump from vacant landsplot in Kirari Suleman Nagar, Delhi -110086."
         },
         {
-          "id": "6048",
-          "summary": "Nearby People throwing this garbage everyday here. and due to rains it has become worse and flys are here in a large number and also is stinking."
-        },
-        {
-          "id": "14557",
-          "summary": "There is always garbage pile up in this vacant land due to people dumping garbage due to ignorance and lack of discipline, in spite of garbage collection vehicle coming everyday."
+          "id": "12464",
+          "summary": "Water Resources, River Development  Ganga Rejuvenuation,  Water Resources Development and Management  Policy and Planning ----------------------- Save the Pond and Unite a Community! Hamsawaram in Kakinada District of A.P., is a very kind , silent and serene Village with very highly Intelligent Farming Community and Population."
         }
       ],
       "common_resolutions": [
         {
-          "resolution": "Clearing the garbage and taking strict measures to prevent future dumping",
-          "count": 3
+          "resolution": "Resolved",
+          "description": "The issue was resolved by the concerned authorities, and the problem was addressed."
         },
         {
-          "resolution": "Providing education and awareness about the importance of proper waste management",
-          "count": 2
+          "resolution": "Resolved",
+          "description": "The issue was resolved by the concerned authorities, and the problem was addressed."
         },
         {
-          "resolution": "Implementing regular garbage collection and disposal services",
-          "count": 2
+          "resolution": "Resolved",
+          "description": "The issue was resolved by the concerned authorities, and the problem was addressed."
         }
       ],
       "patterns_identified": [
         {
-          "pattern": "Garbage dumping in vacant lands or public spaces",
-          "count": 5
+          "pattern": "Garbage and Unsanitary Practices",
+          "description": "The pattern of garbage and unsanitary practices was identified in multiple cases, indicating a need for improved waste management and sanitation infrastructure."
         },
         {
-          "pattern": "Stagnant water and garbage accumulation in residential areas",
-          "count": 2
+          "pattern": "Water Supply",
+          "description": "The pattern of water supply issues was identified in multiple cases, indicating a need for improved water management and infrastructure."
         },
         {
-          "pattern": "Lack of proper waste management infrastructure and services",
-          "count": 4
+          "pattern": "Environmental Degradation",
+          "description": "The pattern of environmental degradation was identified in multiple cases, indicating a need for improved waste management and conservation practices."
         }
       ]
     },
@@ -140,55 +147,55 @@
       "spam_indicators": [
         {
           "pattern": "Generic complaint",
-          "description": "The complaint description 'garbage issue' is too vague and does not provide specific details about the issue."
+          "description": "The complaint description is very brief and does not provide any specific details about the issue."
         },
         {
-          "pattern": "Image-query mismatch",
-          "description": "The complaint category is 'Water Supply' but the image clearly shows a garbage issue affecting a water body, which is a valid concern but not directly related to the complaint category."
+          "pattern": "Lack of concrete evidence",
+          "description": "The image validation result is positive, but there is no concrete evidence provided in the description to support the complaint."
         }
       ],
       "authenticity_confidence": "Medium",
       "verification_recommendations": [
-        "Request more specific details about the garbage issue and its impact on the water supply.",
-        "Verify the location of the issue to ensure it is within the Ambernath city limits.",
-        "Request images or videos of the issue from multiple angles to confirm the severity of the problem."
+        "Request additional information about the specific issue with the water supply.",
+        "Verify the location and nearby landmarks to ensure they match the provided description.",
+        "Check for any previous complaints from the same user or IP address."
       ]
     }
   },
   "department": {
-    "recommended_department": "Public Works Department (PWD) or Municipal Corporation",
-    "contact_information": "Contact the local Public Works Department (PWD) or Municipal Corporation office in Ambernath for reporting garbage issues. You can also reach out to the local authorities through their official website or mobile app.",
-    "jurisdiction": "Urban",
+    "recommended_department": "Public Works Department (PWD) or Municipal Corporation of Ambernath",
+    "contact_information": "Contact the Public Works Department (PWD) or Municipal Corporation of Ambernath through their official website, phone number, or in-person at their office. You can also file a complaint through the CPGRAMS portal or mobile app.",
+    "jurisdiction": "Ambernath, Maharashtra, India",
     "allocated_department": null
   },
   "real_time_data": {
     "search_results": {
-      "Ambernath garbage disposal policy": {
+      "Ambernath garbage dumping issues": {
         "results": [
           {
-            "title": "No rubbish: Sop story in Ambernath's trash plan - Mumbai Mirror",
-            "url": "https://mumbaimirror.indiatimes.com/mumbai/other/no-rubbish-sop-story-in-ambernaths-trash-plan/articleshow/48795805.html",
-            "content": "DIY to reduce garbage generation and get rebate in property tax, AMC tells its residents.  \n   \n In a bid to end the blame game over garbage disposal, the Ambernath Municipal Council’s (AMC) is aiming to be the first civic body in the state to introduce a waste management plan run by citizens, which will be rewarded with property tax concessions. [...] This, corporator Patil says, will increase the civic body’s struggle to dispose of garbage in a timely manner. Patil has proposed that solid waste management be handed over to citizens who will collect, segregate and then dispose of it in the dumping ground, or use it for compost.   \n  \n “The proposal was approved by a majority of corporators. We don’t have a CEO at the moment. We are waiting for one to take charge, after which orders would be issued to implement it,” said AMC president Pradnya Bansode.   \n  \n The civic body’s CEO, Bhalchandra Gosavi, is behind bars for alleged graft in a Transfer of Development Rights case. Thane district collector Ashwini Joshi has assumed additional charge till a new appointment is made. [...] Bansode added that tenders will also be floated for compost collection. “The societies can also prepare compost from the waste, which will be bought by the civic body. This should further motivate housing societies. The compost will be used in AMC gardens, greenery at traffic islands and roadside plantations,” Bansode said.   \n  \n She said the new garbage collection and disposal project will be proposed only for new housing societies, and older ones can join in as well. “Peoples’ involvement in this activity will go a long way in making the city a cleaner and beautiful place,” Bansode added.",
-            "score": 0.7373288,
+            "title": "Ambernath citizens complain to MPCB over garbage burning",
+            "url": "https://www.hindustantimes.com/cities/mumbai-news/ambernath-citizens-complain-to-mpcb-over-garbage-burning-101698770113953.html",
+            "content": "Ambernath citizens complain to MPCB over garbage burning\n\nThe Ambernath Citizens Forum has complained to Maharashtra Pollution Control Board (MPCB) alleging that Ambernath Municipal Council is illegally dumping garbage on a private road and burning it near the railway track, reducing visibility for Express and local trains and causing pollution.\n\nResidents of Ambernath East area of B-cabin have been facing a lot of health issues after inhaling heavy smoke. After COVID pandemic, the masks were removed by other citizens of the city but in Ambernath, the residents of B-cabin area continue to sport the masks due to the smoke emanating from the garbage. Residents have been complaining of burning sesation in the eyes, cough, and other skin allergies. [...] Sunil Sonawane, resident of the B-cabin area, said, “ The Ambernath Municipal Council (AMC) is illegally dumping city garbage on private land adjacent to the railway track, and they have been setting these heaps on fire every day. From past 10 days, the air quality deteriorated so much that we couldn’t see any vehicle ahead due to smoke. The smell of the smoke was also really weird and not breathable for children and senior citizens. Most of the society residents have been coughing badly.” [...] Burman said the local shopkeepers and the residents do not have any option but to shut their windows. “The illegal dumping and subsequent fires not only harm the environment but also endanger the health of citizens. We have phoned fire brigade, disaster management and Ambernath Municipal corporation officers to resolve the issue, but no one has helped us or suggested any permanent solution to the problem,” he added.\n\nWhen contacted, Prashant Rasal, Chief officer of AMC, said, “ We are addressing the issue. Soon we will find the culprits who are doing this and a solution for the problem.”",
+            "score": 0.90692574,
             "published_date": ""
           },
           {
-            "title": "Solid Waste Management Cell | Mumbai Metropolitan Region ...",
-            "url": "https://mmrda.maharashtra.gov.in/en/divisions/town-country-planning/solid-waste-management-cell/overview",
-            "content": "Ambernath Municipal Council (AMC) and Kulgaon-Badlapur Municipal Council (KBMC) have proposed an Integrated Solid Waste Management (ISWM) Project for the Disposal of Municipal Solid Waste in a scientific manner. The proposed integrated process comprises of several collection methods, varied transportation equipment, storage, recovery mechanisms for recyclable material, reduction of waste volume and quantity by methods such as composting, Refuse-Derived Fuel (RDF) processing and disposal in a designated engineered sanitary landfill. MMRDA has made budget provision of in the FY 2022-23 for ISWM project of AMC & KBMC. Further, MMRDA has requested Ulhasnagar Municipal Corporation (UMC) to inform MMRDA about their willingness to join and share the proportionate expenses in Regional Integrated",
-            "score": 0.6133529,
+            "title": "Shriraj Madhusoodanan Pillai And Others Vs. The Chief Officer And ...",
+            "url": "https://www.legitquest.com/case/shriraj-madhusoodanan-pillai-and-others-v-the-chief-officer-and-others/76B1E4",
+            "content": "2. The brief facts of the case are that in the vicinity of the applicants in Survey No. 132, which is situated in residential area, garbage dumping is done by Respondent No. 1- Ambernath Municipal Corporation (AMC) since December 2021. Initially in the month of September 2021, Respondent No. 1 used to dump one/two trucks on daily basis which was gradually increased by considerable quantity without following any norms. Various representations were made by the residents of the area to the authority but to no avail. The guidelines laid down under the various laws providing for \"Buffer Zone\" have not been followed. Even Central Pollution Control Board (CPCB) has issued \"Buffer Zone guidelines\" which have been ignored. There are about 35,000-40,000 houses in the vicinity which are vulnerable [...] > The Respondent No. 1 is carrying out illegal dumping activities without obtaining requisite authorization from the Respondent No. 3 in complete violation of the compliance criteria and the procedure laid down in Schedule I and II of the Solid Waste Management Rules, 2016 and in Office Memorandum dated 15.04.2019 issued by the Central Pollution Control Board, wherein \"Clarification on Buffer Zone Guidelines\" have been contained in respect of Management and Handling of the Municipal Solid Waste for effectively curbing the practice of illegal garbage dumping within the residential area without maintaining the buffer zone within the boundary area of the MSW site at Survey No. 132, Village Chikhloli, Tal, Ambernath, Dist. Thane. In this rejoinder affidavit the same violations have been [...] > 03.6 Thereafter, as a temporary arrangement AMC once again started dumping of Solid Waste at Survey No. 132, Village Chikhloli, Tal. Ambernath, Dist. Thane from 11/08/2021 i.e. almost a year back. Though, AMC had obtained Authorisation dated 28.12.2017 (Annexure-V) to set up and operate waste processing/recycling/treatment/disposal facility at this Survey No. 132, village Chikhaloli and the same was valid up to 31.12.2021, Solid waste processing/recycling/treatment/disposal facility are not developed at this site and solid waste dumping started on open ground at one corner near the residential buildings. The distance from nearest building is about 20 meters whereas MIDC road is about 100 meters. During the visit, it was observed that the dumping of SW is very adjacent to residential",
+            "score": 0.81770587,
             "published_date": ""
           },
           {
-            "title": "Appraisal on suitable landfill site selection for municipal ...",
-            "url": "https://www.sciencedirect.com/science/article/abs/pii/S1474706524000494",
-            "content": "The result shows that south western part and eastern part of the Ambernath are the suitable sites for landfilling of municipal waste (Fig. 5). Landfill suitability mapping has been categorised into five classes (Very low, low, moderate, high, and very high). Central part of the Ambernath is much more urbanized, and surrounding part is covered by the vacant open space. Ushanagar, Kalyan, Samrat Ashok Nagar, Swami Nagar, Babasai Nagar, Matoshree Nagar, and Kamlakar Nagar are the most unsuitable\n\n## Policy making approach",
-            "score": 0.60861784,
+            "title": "Ulhasnagar, Ambernath citizens demand immediate action on ...",
+            "url": "https://www.newsband.in/article_detail/ulhasnagar-ambernath-citizens-demand-immediate-action-on-dumping-ground-issues",
+            "content": "The Ambernath assembly constituency is home to two separate dumping grounds serving both Ambernath and Ulhasnagar. These grounds have been causing immense hardship for years, with residents enduring poor living conditions due to the continuous dumping of waste. Despite several announcements by the Ulhasnagar Municipal Corporation, Ambernath Municipal Council, and the state government, the issue remains unresolved, leading to growing discontent among the population. [...] 02/28/2026 : 02/28/2026\n\nlogo\n\nlogo logo\n\n ### Sign In\n\n###### Latest News\n\nTwo Bodies, One Consciousness\n\nChain-snatching spree sparks fear in Panvel and Kamothe\n\nWoman robbed in Ambernath, accused held within 24 hours\n\nVashi police seize Hydro Cannabis worth Rs12.91 crore\n\n## Ulhasnagar, Ambernath citizens demand immediate action on dumping ground issues\n\ntop-news\n\n Newsband\n 18 Nov, 2024\n\nThe persistent problem of the dumping grounds in Ulhasnagar and Ambernath has emerged as a major concern for local residents as the assembly elections approach. Citizens have voiced their frustrations over the issue, urging candidates to prioritize the resolution of the dumping ground problems in their manifestos. [...] Rohit Salve, a Congress leader and Maha Vikas Aghadi coordinator, pointed out that both Ulhasnagar and Ambernath face similar challenges with their dumping grounds. He added that the municipal corporations and state government have failed to resolve the issue. Salve assured that if the grand alliance forms the government, solving the dumping ground problem will be a top priority.\n\nIn response, Dr. Kinikar stated that a solid waste management project will soon be implemented by the state government, covering Ambernath, Ulhasnagar, and Badlapur, and he assured the public that the issue would be resolved in the near future.\n\n###### Share Now\n\nimage\n\n## Follow Us\n\nFollowers\n\n5.7K+\n\nFollowers\n\n3,450+\n\nFollowers\n\n610+\n\nSubscribers\n\n300+\n\n#### Go Premium",
+            "score": 0.81524754,
             "published_date": ""
           }
         ],
         "answer": null,
-        "query": "Ambernath garbage disposal policy"
+        "query": "Ambernath garbage dumping issues"
       },
       "government schemes for garbage management in urban slums": {
         "results": [
@@ -217,95 +224,95 @@
         "answer": null,
         "query": "government schemes for garbage management in urban slums"
       },
-      "water supply and sanitation issues in Ambernath": {
+      "complaints about garbage in Ambernath": {
         "results": [
           {
-            "title": "Ambernath's main water source contaminated - Mumbai Mirror",
-            "url": "https://mumbaimirror.indiatimes.com/mumbai/ambernaths-main-water-source-contaminated/articleshow/125546526.html",
-            "content": "A series of internal communications between the Thane Irrigation Department, the Maharashtra Pollution Control Board (MPCB), and Ambernath MIDC have confirmed what residents have been alleging for weeks – contaminated water is entering the Chikhloli (Jambivli) dam, the primary drinking water source for lakhs of people in Ambernath city. [...] In a strongly worded letter dated September 30, 2025, the Executive Engineer of the Thane Irrigation Department informed the company that “polluted and semi-treated water” from its premises appeared to be entering the dam’s catchment and demanded immediate corrective action. The letter cites an earlier MPCB report dated September 12, which flagged contamination indicators in the dam water, and follow-up inspections on September 28 and 29, confirming the presence of pollutants. The engineer stressed that because the reservoir exclusively supplies potable water to Ambernath, any industrial discharge poses “serious risks”. [...] Officials have now acknowledged that an industrial unit near the Dam’s catchment was ordered to shut down after inspections and test reports repeatedly revealed untreated and semi-treated effluents reaching the reservoir, confirming contamination of the principal drinking water source for Ambernath. This decision was made following weeks of resident allegations, substantiated by internal communications among the Thane Irrigation Department, Maharashtra Pollution Control Board (MPCB), and Ambernath MIDC.  \n  \nWritten warnings ignore",
-            "score": 0.9999502,
+            "title": "Ambernath citizens complain to MPCB over garbage burning",
+            "url": "https://www.hindustantimes.com/cities/mumbai-news/ambernath-citizens-complain-to-mpcb-over-garbage-burning-101698770113953.html",
+            "content": "The members of Ambernath citizens forum have recorded videos and have sent complaint letters to several government authorities to stop the situation and take action against unknown people who set the garbage on fire. ACF MEMBER Satyajit Burman said, “The fire at the illegal dumping causes severe air pollution and puts citizens lives to risk. We have seen garbage vehicles of Ambernath Municipal corporations emptying it in this open empty area from past few months and now some unknown persons also setting this garbage at fire. We have recorded videos of local trains slowing down due to zero visibility due to the dense smoke.” [...] Sunil Sonawane, resident of the B-cabin area, said, “ The Ambernath Municipal Council (AMC) is illegally dumping city garbage on private land adjacent to the railway track, and they have been setting these heaps on fire every day. From past 10 days, the air quality deteriorated so much that we couldn’t see any vehicle ahead due to smoke. The smell of the smoke was also really weird and not breathable for children and senior citizens. Most of the society residents have been coughing badly.” [...] Ambernath citizens complain to MPCB over garbage burning\n\nThe Ambernath Citizens Forum has complained to Maharashtra Pollution Control Board (MPCB) alleging that Ambernath Municipal Council is illegally dumping garbage on a private road and burning it near the railway track, reducing visibility for Express and local trains and causing pollution.\n\nResidents of Ambernath East area of B-cabin have been facing a lot of health issues after inhaling heavy smoke. After COVID pandemic, the masks were removed by other citizens of the city but in Ambernath, the residents of B-cabin area continue to sport the masks due to the smoke emanating from the garbage. Residents have been complaining of burning sesation in the eyes, cough, and other skin allergies.",
+            "score": 0.9999577,
             "published_date": ""
           },
           {
-            "title": "Four out of 11 samples of treated water in Ambernath, Ulhasnagar ...",
-            "url": "https://indianexpress.com/article/cities/mumbai/four-out-of-11-samples-of-treated-water-in-ambernath-ulhasnagar-found-unfit-for-drinking-say-ngos-5263950/",
-            "content": "“It is MPCB’s job to check industrial pollution in water. I can assure you that there are no industries discharging waste into water bodies in my region,” said Patil.\n\nResidents of Ambernath and Ulhasnagar had complained earlier about contaminated water in their areas.\n\n“The problem generally escalates during the monsoon. Once, the tap-water was mud-coloured and had a terrible smell,” said Reena Kalra, a resident of Ulhasnagar, who says she uses UV-filtered and boiled water. Manas Patil, a resident of Ambernath, said there’s a metallic after-taste to the water even after boiling. [...] Of eleven samples of treated water that were tested by non-governmental organisations in Ambernath earlier this month, four were found to be non-potable. All 14 samples of untreated water taken directly from dams or other sources were also found to be non-potable, according to reports released by two NGOs.\n\nActivists said water supply in Ambernath and Ulhasnagar has been polluted by industrial effluents dumped directly into the Ulhas river and its tributaries. [...] The tests were conducted on July 6 by the Ambernath Citizens’ Forum and Nagrik Seva Mandal. “The results painted a grim picture. Four out of the 11 water samples from households were deemed to be non-potable, including water supplied to the Ulhasnagar Municipal Corporation,” said Satyajit Burman, an activist working towards access to potable water.\n\nThe report showed presence of coliforms and thermotolerant coliform bacteria in water being supplied to the offices of the municipality and senior police officers in Ulhasnagar and Ambernath, along with some other private establishments. “According to the report, the water can’t be made potable just by boiling it. The water is severely contaminated,” said Burman.",
-            "score": 0.99988043,
+            "title": "Rid Ambernath dump of fires, or face action: NGT panel chief",
+            "url": "https://mumbaimirror.indiatimes.com/mumbai/civic/rid-ambernath-dump-of-fires-or-face-action-ngt-panel-chief/articleshow/66836710.html",
+            "content": "Toxins from the garbage dumped there have polluted the Waldhuni river that runs through Ambernath, said Stalin Dayanand. His environmental NGO Vanashakti has filed a complaint in the NGT against the dumping ground. [...] Enthused by the surprise visit, the Ambernath Citizens’ Forum—which has filed several complaints with the Maharashtra Pollution Control Board—has decided to send regular reports to the NGT on actions, if any, taken by the AMC. They also plan to send a report signed by those who live near the dumping ground, describing its effect on their health. “We are thankful to the NGT for its interest in the matter,” said Satyajit Burman, forum convener. “We hope it takes strict action against the officers concerned, to whom we have been complaining for long with no effect.” [...] Mumbai Mirror had on November 21 reported that the 24-acre dumping ground, where both dry and wet waste is dumped, is one of the two leading causes of air pollution in the township. The other is smoke from factories all over this industrial zone. Small fires dot the 40-ft-high mounds of garbage at the dumpyard day and night, reducing visibility and forcing residents to keep their windows closed.  \n  \nThe Kalyan unit of the Maharashtra Pollution Control Board had recently issued a notice to the Ambernath Municipal Corporation (AMC) after finding very high amounts of particulate matter around residential complexes, caused by smoke emanating from the dumping ground.",
+            "score": 0.99982184,
             "published_date": ""
           },
           {
-            "title": "[PDF] FIELD ASSESSMENT FOR PERFORMANCE IMPROVEMENT PLAN",
-            "url": "https://cwas.org.in/resources/file_manager/ambarnath_pip_revised.pdf",
-            "content": "Electronic Recorded Data Water Supply Diagnostics AMBARNATH MUNICIPAL COUNCIL: PIP STRATEGIES Water Tariff Structure: AMC Water tariff structure revised in 2010-11, consumption slab based tariffs: •Domestic Tariffs 50% lesser than GR norms. •Non- Domestic Tariffs are comparable. Institutional tariffs are 25% lesser Water Supply AMC Total Number Of AMC Connections 7149 Number Of Connections Buildings 860 (HH Served:7310) Number Of Individual Connections 6289 City Engineer Deputy Engineer Water Supply And Sanitation Asst Engineer Laboratory Assistant/ Valve Man Labour From Health Department And PWD Taken For Valve Man Supervisor Clerk Pump Operator / Electrical/ Fitter PWD Clerk Sanctioned : 1 Filled: 1 Sanctioned : 2 Filled :2 Sanctioned :4 Filled :2 Sanctioned : 4 Filled : 1 Sanctioned : [...] AMBARNATH MUNICIPAL COUNCIL: PIP STRATEGIES Ordinance Wards Water Supply Zones S.No WATER SUPPLY INDICATOR VALUES Unit 2008-09 2009-10 2010-11 1 Coverage of water supply connections # % 37 38 92 2 Per capita available of water at consumer end Lpcd 153 123 128 3 Extent of metering of water connections % 73.7 76.7 98.6 4 Extent of Non Revenue Water % 28.4 28.4 29.61 5 Continuity of water supply Hours/Day 4.00 4.00 3.5 6 Efficiency in redressal of customer complaints % 100 99 99 7 Quality of water supplied % 96 97 96 8 Cost recovery in water supply services  % 88.8 92.9 94.4 9 Efficiency in collection of water supply related charges % 90 90 90 # Coverage was showing low in 2008-09 & 2009-10 due to method of data recording. Water Supply Indicators 92 92 92 Water Supply Diagnostics AMBARNATH [...] Concentration Of Class III and IV Staff(MJP) Present NRW 30% Complicated Institutional Structure. MJP Is Supplying 75% Water To Ambarnath City. Water Supply Should Be Handed Over To A Single Institution As Per 74th CAA, Water Supply Can Be Handed Over To ULB In A Phased Manner Increase Sanctioned Quota To 10 MLD Implementation Of Water Audit Recommendations Additional Staff On Deputation Capacity Building Stream Lining Of Institution Wastewater Diagnostics AMBARNATH MUNICIPAL COUNCIL: PIP STRATEGIES • Coverage Of Toilets 43% Population In Non Slum Areas , 100% Coverage Of Individual Toilets. ~2000 Individual Toilets In Slum (Ongoing Survey) And 2308 Community Toilet Seats (1438 MMR + 870 AMC). Average Number Of Users Per Seat 63. MoUD WSP Norm 50 users. • Coverage Of Waste Water Network",
-            "score": 0.9997347,
+            "title": "Waste management project in Ambernath may get scrapped as BMC ...",
+            "url": "https://www.mid-day.com/mumbai/mumbai-news/article/waste-management-project-in-ambernath-may-get-scrapped-as-bmc-finds-transporting-garbage-is-too-expensive-23448915",
+            "content": "A senior BMC official said that decades ago, it was decided that the civic body would set up a solid waste treatment plant at Ambernath’s Karvale village. Of the 52.10 hectares required, only 1.5 hectares was yet to be acquired. But villagers started opposing the project. So, the BMC is planning to scrap the project. “Currently, the city produces around 6,500 metric tonnes of waste daily. The figure used to be 9,500 metric tonnes before 2017. The quantity of waste has reduced owing to segregation at the source,” an official added. [...] Representation pic\n\nThe BMC is thinking of scrapping its solid waste management project in Ambernath. As locals have strongly opposed the project and it is also working out to be too expensive to transport waste from Mumbai, the BMC will now focus on treating waste in the city itself. [...] Latest Updates\nWebstories\nShot Video\n\nToday's E-Paper\n\nMid-Day\nWebstories\n\nWeb Stories\n\nE-Papaer\n\nE-Paper\n\nMid-day Gujarati\n\nInquilab\n\nMid-day Hindi\n\nMid-Day\nWeb Story\nE-Paper\nLatest Updates\nLatest News\nshots\nshot-button\nT20 World Cup 2026 Article Details\nT20 World Cup 2026 Article Details\n\n# Waste management project in Ambernath may get scrapped as BMC finds transporting garbage is too expensive\n\nUpdated on: 18 December,2024 07:37 AM IST  |  Mumbai   \n A Correspondent\n\n|\n\nSays while citizens are opposed to its decision, transporting waste outside city is too expensive\n\nWaste management project in Ambernath may get scrapped as BMC finds transporting garbage is too expensive\n\nWaste management project in Ambernath may get scrapped as BMC finds transporting garbage is too expensive",
+            "score": 0.9997918,
             "published_date": ""
           }
         ],
         "answer": null,
-        "query": "water supply and sanitation issues in Ambernath"
+        "query": "complaints about garbage in Ambernath"
       },
-      "Environmental Issues latest news ": {
+      "Sanitation latest news ": {
         "results": [
           {
-            "title": "5 Things to Watch in Climate and Environment in 2026",
-            "url": "https://unu.edu/ehs/article/5-things-watch-climate-and-environment-2026",
-            "content": "issues and impacts they address, such as land degradation and carbon emissions. Efforts to bridge the Rio Conventions are being made under the Rio Trio initiative started in 2024 in Baku. [...] where the focus will be on the global housing crisis and sustainable urban development. [...] ### Changing realities: More heat and escalating risk\n\nAs Earth’s temperatures rise from human-induced greenhouse gas emissions, the 1.5°C  overshoot is likely. The latest WMO Global Annual to Decadal Climate Update warns that global temperatures are likely to stay at or near record levels from 2025 to 2029, sharply escalating risks for societies and economies. It projects that each year in this period will be about 1.2°C to 1.9°C warmer than the 1850–1900 average, with a 70 per cent chance that the five-year average for 2025–2029 will be above this threshold. Every fraction of a degree of additional warming intensifies heatwaves, extreme rainfall, droughts, ice loss, ocean heating and sea level rise, compounding harm for people and ecosystems worldwide.",
-            "score": 0.96458924,
+            "title": "Our work in Water, Sanitation & Hygiene across the globe",
+            "url": "https://www.gatesfoundation.org/our-work/programs/global-growth-and-opportunity/water-sanitation-and-hygiene",
+            "content": "### Unsupported browser detected\n\nYour browser appears to be unsupported. Because of this, portions of the site may not function as intended.\n\nPlease install a current version of Chrome, Firefox, Edge, or Safari for a better experience.\n\n# Water, Sanitation & Hygiene\n\nA view of a public toilet at Gugulethu Primary School in KwaMashu outside of Durban in KwaZulu-Natal, South Africa on September 19, 2018.\n\n## At a glance\n\n## The latest updates on water, sanitation & hygiene\n\nThe “A Better Way to Go: Toilets and the Future of Sanitation” exhibition at the Bill and Melinda Gates Foundation Discovery Center in Seattle, Washington, on April 28, 2024.\n\n## The next sanitation breakthrough: Making reinvented toilets more affordable [...] Together with our partners, we have made great strides in this area since we launched the Reinvent the Toilet Challenge in 2011—an initiative to spur the creation of innovative toilet technologies that safely and effectively manage human waste. Our investments have resulted in more than 25 innovations that are available for licensing, production, and commercialization.\n\n## Toilets and the future of sanitation\n\nIf half of the world still needs a toilet and the other half needs a better one, what if new innovations could solve our sanitation challenges? [...] An exhibition called A Better Way to Go: Toilets and the Future of Sanitation at the Gates Foundation Discovery Center in Seattle, Washington, features technologies, interactive displays, and artworks that explore sanitation solutions that can help protect the health and dignity of everyone. If you’re ever in Seattle, you can see the exhibition for free on Wednesday through Saturday, 10am to 5pm.\n\nFind a better a way to go",
+            "score": 0.9965166,
             "published_date": ""
           },
           {
-            "title": "15 Biggest Environmental Problems of 2025",
-            "url": "https://earth.org/the-biggest-environmental-problems-of-our-lifetime/",
-            "content": "According to a 2023 study, air pollution in South Asia – one of the most polluted areas in the world – cuts life expectancy by about five years. The study blames a series of factors, including a lack of adequate infrastructure and funding for the high levels of pollution in some countries. Most countries in Asia and Africa, which together contribute about 92.7% of life years lost globally due to air pollution, lack key air quality standards needed to develop adequate policies. Moreover, just 6.8% and 3.7% of governments in the two continents, respectively, provide their citizens with fully open-air quality data. [...] Sign up to our weekly and monthly, easy-to-digest recap of climate news from around the world.\n\n# 16 Biggest Environmental Problems of 2026\n\n16 Biggest Environmental Problems of 2026\n\nThe world is grappling with a host of pressing environmental challenges that demand immediate attention and action. From climate change-induced disasters, biodiversity loss and plastic pollution to the rise of artificial intelligence, the 16 biggest environmental problems of 2026 paint a stark picture of the urgent need for climate change mitigation and adaptation.\n\n—\n\n## 1. Global Warming From Fossil Fuels [...] Undoubtedly among the biggest environmental problems of our lifetime is the rise in greenhouse gas emissions, which trap heat the sun's heat in the atmosphere, raising Earth’s surface temperature and leading to longer and hotter heatwaves. Atmospheric concentrations of all three major planet-warming gases – carbon dioxide (CO2), methane, and nitrous oxide – have never been so high. Because of these gases’ extremely long durability in the atmosphere, the world is now committed to \"more long-term temperature increase,\" Ko Barret, Deputy Secretary-General of the World Meteorological Organization, said last month.",
-            "score": 0.936285,
+            "title": "department of sanitation | Latest News | New York Post",
+            "url": "https://nypost.com/tag/department-of-sanitation/",
+            "content": "The order, which came shortly after the democratic socialist took office, left responsibility with the camps for the ill-equipped Department of Homeless Services who were caught flatfooted for the task...\n\nAn image collage containing 3 images, Image 1 shows The New York City Department of Sanitation logo on a yellow snow removal vehicle, with another orange snow removal vehicle in the background, Image 2 shows A large orange front-end loader filling a \"WIDE LOAD\" truck with snow in a snowy city street, with skyscrapers in the background, Image 3 shows A worker watches as a snow melter and a front-end loader move snow\n\n### NYC rolls out huge ‘hot tubs’ to melt snow after whiteout winter storm [...] It's a real garbage fire.\n\n### Mamdani enjoys a trash-free Gracie Mansion as neighbors drown in 8-foot piles of garbage\n\n“Clean as a whistle for the mayor,” one local griped to The Post. “Look at this side.”\n\nFrustrated Big Apple residents are raising a stink over mountains of trash piling up on city streets as \"limited collection\" drags on a week after a massive winter storm dumped more than a foot of snow.\n\n### NYers raise a stink over trash buildup as ‘limited collection’ continues 7 days after winter storm\n\n\"It's very dirty, it's higher than a car.\"\n\n### Laughing worker ‘intentionally’ plows snow onto parked cars after storm in viral video\n\nNot so Brotherly Love.\n\n### NYC cops, sanitation workers ordered to stop taking down homeless encampments weeks before 10 found dead [...] Massive hot tubs have been deployed across the Big Apple for the first time in nearly five years to melt snow from Sunday’s deadly winter storm.\n\nThe homeless have a new perk thanks to Mayor Zohran Mamdani: turndown service.\n\n### NYC homeless living high life under Mayor Mamdani's new policies\n\nThe homeless have a new perk thanks to NYC Mayor Zohran Mamdani: turndown service.\n\n### Maker of NYC's hard-to-find trash bins leaves town as locals scramble under new law\n\nCity Hall’s plan to clean up New York’s trash is turning into a hot mess -- and a former insider says the official bin maker has already walked off the...",
+            "score": 0.9938548,
             "published_date": ""
           },
           {
-            "title": "Environment News: Climate Change, Energy & Conservation",
-            "url": "https://www.nbcnews.com/science/environment",
-            "content": "## Data Graphics\n\n## Quiz: Which objects actually get recycled?\n\nU.N Climate Change Conference COP 30\n\n## Environment\n\n## With the world at a climate summit, White House pushes major environmental rollbacks\n\nA person fishes with offshore oil and gas platform in California. \n\n## Environment\n\n## Trump administration announces plan to drill oil off California and Florida\n\nButterflies of Music Garden in Toronto\n\n## U.S. news\n\n## Trump administration moves to roll back some Endangered Species Act protections\n\nBenicia Fire Department firefighter Kyle Williams keep flames at bay.\n\n## U.S. news\n\n## Senators propose bill to require PPE for wildland firefighters, but some have reservations [...] ## Environment\n\n## Looming water supply 'bankruptcy' puts billions at risk, U.N. report warns\n\n## Climate change\n\n## 2025 was the third-hottest year ever recorded on Earth, data shows\n\nEmissions rise from the smokestacks at the Jeffrey Energy Center coal power plant \n\n## Environment\n\n## EPA to stop calculating deaths avoided and health care savings from air pollution rules\n\nSilhouettes of large billowing smoke coming out of smoke stacks as the sun sets\n\n## Climate change\n\n## Carbon pollution rose last year. Experts blame a cold winter, natural gas prices and data centers.\n\nA family walks in the rain at Elysian Park on Dec. 24, 2025 in Los Angeles, California\n\n## Science News\n\n### California is completely free of drought for the first time in 25 years [...] Biodegradable Mardi Gras Beads.\n\n## U.S. news\n\n## Biodegradable Mardi Gras beads help make Carnival season more sustainable\n\nTraffic moves along a stretch of roads near the Royal Dutch Shell and Valero Energy's Norco refineries during a power outage caused by Hurricane Ida in LaPlace, La., on Aug. 30, 2021.\n\n## Climate change\n\n## EPA reverses climate change finding, stripping its own ability to regulate emissions\n\nCoal fired power station.\n\n## Climate change\n\n## EPA to repeal its own conclusion that greenhouse gases harm the environment\n\nMount Saint Helens on Jan. 17. 2026.\n\n## Environment\n\n## Western states face 'snow drought' as snowpack hits record lows\n\nWater crisis forces families into long queues and threatens children's education in Kabul\n\n## Environment",
-            "score": 0.87234735,
+            "title": "The Global Sanitation Crisis in a Changing World",
+            "url": "http://www.iwa-network.org/post/the-global-sanitation-crisis-in-a-changing-world",
+            "content": "Access to safe water and adequate sanitation is central to the mission of IWA. As highlighted by the 2025 World Toilet Day theme, \"Sanitation in a changing world\", there is a need for urgent action to address the global sanitation crisis. With the added pressures of climate change and economic challenges, the sanitation sector is working overtime to develop resilient, inclusive, and environmentally sound solutions.\n\nHere were share the key takeaways from the dialogue, reflecting the important messages from the World Bank report.\n\n#### Message 1: The Climate Crisis is a Sanitation Crisis—Ignoring It Affects Billions [...] The global sanitation crisis is alarmingly off-track for meeting Sustainable Development Goal 6 (SDG 6) to achieve universal, safely managed urban sanitation by 2030, requiring a fivefold acceleration in progress. Climate change is critically exacerbating this crisis.\n\n#### Message 2: Resilience is the New Standard: Safely Managed Sanitation in a Hostile Climate\n\nTo protect public health and maintain stability, the world needs a fundamental shift from a vicious cycle (inadequate, vulnerable sanitation) to a virtuous cycle of climate-resilient, mitigation-positive sanitation services for all.\n\n#### Message 3: Toilets as Resource Hubs: Embracing the Circular Economy [...] Logo\n\nBack to explore\n\n# The Global Sanitation Crisis in a Changing World\n\nPost Image\n\nPublished on Nov 18, 2025\n\nby the IWA Inclusive Urban Sanitation Team\n\nOn November 13, representatives of the IWA Inclusive Urban Sanitation Initiative, the IWA Specialist Group on Sanitation and Water Management in Low- and Middle Income Countries and the World Bank took part in the online Sanitation Dialogue on the Global Sanitation Crisis. Based on the recently released World Bank report, \"The Global Sanitation Crisis: Pathways to Urgent Action\", this dialogue facilitated enriching discussions on the current challenges on sanitation and potential pathways to Climate-Resilient Sanitation (CRS).",
+            "score": 0.99174845,
             "published_date": ""
           }
         ],
         "answer": null,
-        "query": "Environmental Issues latest news "
+        "query": "Sanitation latest news "
       },
-      "Environmental Issues government policy  2024 2025": {
+      "Sanitation government policy  2024 2025": {
         "results": [
           {
-            "title": "Project 2025 Report: Environmental Guide",
-            "url": "https://www.law.berkeley.edu/research/clee/research/other-research-initiatives/environmental-guide-to-project-2025-report/",
-            "content": "Project 2025 was created by over 100 conservative organizations, reflecting an increasingly organized and emergent assault on principles of representative democracy. It calls for a significant and often radical overhaul of the federal government, with a particular focus on agencies and actions connected to climate change and environmental and energy law and policy. Amidst a new presidential administration, we anticipate that many of these proposals will continue to be put forward and underlying legal theories will be pursued. [...] The document below provides excerpts from Project 2025 addressing government responses to climate change and environmental impacts. These excerpts span 41 pages and include comments for those interested in a deeper understanding. For a quick overview, we have also outlined major themes and the corresponding page numbers in both the report and this document. \n\nRead the complete annotations: A Guide to Major Climate and Environmental Excerpts in the Project 2025 Report\n\nRead CLEE’s Monograph Series on the Project 2025 Report: [...] Skip to content Skip to main menu\n\n# A Guide to the Major Climate and Environmental Excerpts in the Project 2025 Report\n\nProject 2025, titled “Mandate for Leadership: The Conservative Promise,” presents a comprehensive collection of conservative proposals on critical topics related to U.S. energy and environmental policy. Despite receiving significant media attention, few have read the entire 900+ page document or mapped its potential implications for climate change and environmental impacts if major portions are enacted.",
-            "score": 0.9997198,
+            "title": "[PDF] State of systems for drinking-water, sanitation and hygiene",
+            "url": "https://cdn.who.int/media/docs/default-source/wash-documents/glaas/glaas-2024-2025/en_who-unicef-state-of-systems-for-drinking-water--sanitation-and-hygiene---un-water-glaas-global-update-2025_final.pdf?sfvrsn=d2bcb47e_3&download=true",
+            "content": "While comprehensive, the analysis in this report provides a global snapshot of the valuable information available from the GLAAS 2024/2025 data set covering 105 countries and 21 development partners. WASH practitioners, researchers, policy-makers, civil society organizations, investors and citizens are invited to explore the data set, conduct further analysis and examine specific details, to build greater understanding and contribute towards more effective action to deliver on the collective promise of available and sustainably managed water and sanitation for all. The complete GLAAS 2024/2025 data set is available on the GLAAS data portal (4). Overview of the GLAAS 2024/2025 cycle Methodology Each GLAAS cycle is open to governments and development partners around the world, who provide [...] country surveys; Organisation for Economic Co-operation and Development Creditor Reporting System, 2025. 1 1. Introduction The UN-Water Global Analysis and Assessment of Sanitation and Drinking-Water (GLAAS) 2025 report, jointly developed by the World Health Organization (WHO) and the United Nations Children’s Fund (UNICEF), provides a comprehensive, in-depth look at the status of national drinking-water , sanitation and hygiene (WASH) systems. It presents the findings from the GLAAS 2024/2025 country survey completed by 105 countries and territories, comprising 62% of the global population from all Sustainable Development Goal (SDG) regions, as well as from the GLAAS 2024/2025 development partner survey completed by 21 development partners (Fig. 1.1). The report examines the status of [...] 2016/2017 2018/2019 2021/2022 2024/2025 Percentage of countriesa providing cost estimates for WASH plans (%) – 66 74 66 Average annual increase in government WASH budgets (%) 4.9 11.1 5.0 2.6 Government WASH budget per capita (US$, current), average of all respondents excluding China 8.98 9.14 12.45 9.61 Total WASH expenditure per capita (US$, current), average 32 33 38 34 Total WASH expenditure as a percentage of gross domestic product, average (%) 0.84 0.72 1.02 0.83 Percentage of WASH funding derived from users, average (%) 64 66 60 50 Development partner support for WASH 2020 2021 2022 2023 Official development assistance (ODA) disbursements for water supply and sanitation (constant 2024 US$) 6.8 billion 6.7 billion 7.3 billion 6.9 billion Percentage of total ODA commitments for water",
+            "score": 0.7876867,
             "published_date": ""
           },
           {
-            "title": "Project 2025's Environmental and Climate Policy Proposals",
-            "url": "https://doctorsoftheworld.org/blog/project-2025s-environmental-and-climate-policy-proposals/",
-            "content": "Project 2025’s proposed policies towards the environment and climate change are widespread including removal of environmental protections, ramping up the production of fossil fuels, undermining chemical regulation, repealing climate legislation, and rolling back climate action.\n\nThe consequences of Project 2025 could be catastrophic, both domestically and abroad. Just this past year, the U.S. experienced some of its most severe storms along its coasts. While low-income countries will bear the greatest burden of climate change, the U.S. will not be spared from the serious repercussions of inaction.\n\n## Gutting Environmental Protections: [...] The agenda aims to remove climate action from policy entirely, repealing crucial legislation that has been pushing the U.S. toward a more sustainable future. It calls for the rollback of climate investments in the Inflation Reduction Act (IRA), the largest clean energy bill in U.S. history, along with eliminating incentives for renewable energy, electric vehicles, and other climate solutions. This would not only mean missing critical climate targets but also wiping out clean energy investments and more than a million jobs created in the sector. [...] Project 2025 goes beyond ignoring climate change—it seeks to deny its very existence. Each year, new climate records are shattered, from more intense hurricanes to increasingly dangerous heat waves. Denying climate change not only ignores reality but puts communities at tremendous risk, forcing them to face escalating disasters without adequate support as conditions worsen.",
-            "score": 0.9992446,
+            "title": "Sanitation in a changing world: a turning point | SEI",
+            "url": "https://www.sei.org/perspectives/sanitation-changing-world-turning-point/",
+            "content": "This is a shift SEI has long argued for: a move from infrastructure-centric planning to systems thinking that considers governance, behaviour, risk, equity and long-term climate pressures.\n\n## Global commitments from Madrid\n\nThe 2025 Sector Ministers’ Meeting﻿ organized by the SWA global partnership reinforced the urgency of redesigning WASH services for a rapidly changing world – one that in which most sanitation services are still built for a climate and a society that no longer exist. [...] - Climate\n    - Water\n    - Air\n    - Land\n    - Energy\n    - Governance\n    - Economy\n    - Gender\n    - Health\n  + Regions\n\n    - Africa\n    - Americas\n    - Antarctica\n    - Arctic\n    - Asia\n    - Australia and Oceania\n    - Europe\n\nPerspective\n\n# Sanitation in a changing world: a turning point\n\npart of World Toilet Day 2025\n\n Start reading\n\nPerspective\n\n# Sanitation in a changing world: a turning point\n\nWe are only five years away from the 2030 deadline to deliver on the promise of “clean water and sanitation for all”. Yet climate change, limited financing, political uncertainty and widening inequalities continue to undermine progress. For the 3.4 billion people still without safely managed sanitation, that promise feels increasingly distant. [...] If countries implement these commitments, sanitation could shift from being a downstream vulnerability to a central pillar of national climate resilience.\n\n## Circularity: the missing piece in the global conversation\n\nOne dimension that deserves far more attention, especially under the 2025 World Toilet Day theme, is circularity. Most sanitation services follow a linear model: extract water, use it once, mix it with waste and flush it away. This is increasingly unsustainable in a century marked by water scarcity, climate uncertainty and resource depletion.",
+            "score": 0.58408195,
             "published_date": ""
           },
           {
-            "title": "2025 Guide for Climate and Environmental Policy Action",
-            "url": "https://www.nature.org/en-us/about-us/who-we-are/how-we-work/policy/environmental-issues-guide/",
-            "content": "Proposed federal legislation, called the U.S. Foundation for International Conservation Act (USFICA), would establish a fund that would leverage U.S. government, private sector and philanthropic funding to support local communities and Indigenous Peoples around the world who manage protected and conserved areas. [...] ## Stories about people who benefit from climate policies\n\nWe can't address climate change without taking action on government policies that reduce planet-warming pollution, increase clean energy and boost natural climate solutions.\n\n### IRA helps former coal miner install solar power\n\nAfter flooding devastated Kentucky in 2022, Bobby Stallard, a former coal miner, is embracing a different form of energy: solar power. See how federal policies like the IRA are shaping a more sustainable future and empowering people in the region.\n\n### Federal funding saves native birds in Hawai'i [...] The Farm Bill is the single largest federal investment in the conservation, restoration and management of America's private lands including farms, ranches and forests. Authorized every five years, it funds conservation to the tune of $6 billion each year, supporting efforts including bolstering regenerative agricultural practices and permanently protecting farms and ranches from future development.\n\nWe're also going global. The proposed U.S. Foundation for International Conservation Act would provide $100 million each year for Indigenous and local communities around the world to boost conservation and restoration on millions of acres of protected and conserved lands and waters worldwide.",
-            "score": 0.9991959,
+            "title": "Draft Guidance for Industry: Establishing Sanitation Programs ... - FDA",
+            "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/draft-guidance-industry-establishing-sanitation-programs-low-moisture-ready-eat-human-foods-and",
+            "content": "1. Search for FDA Guidance Documents\n\nGUIDANCE DOCUMENT\n\n# Draft Guidance for Industry: Establishing Sanitation Programs for Low-Moisture Ready-to-Eat Human Foods and Taking Corrective Actions Following a Pathogen Contamination Event January 2025\n\nDownload the Draft Guidance Document Read the Federal Register Notice\n\nDraft\n\nNot for implementation. Contains non-binding recommendations.\n\nDocket Number:\n:   FDA-2024-D-2604\n\nIssued by:\n:   Guidance Issuing Office\n\n    Human Foods Program [...] Human Foods Program\n\nOn May 29, 2025, FDA reopened the comment period for draft guidance for industry, Establishing Sanitation Programs for Low-Moisture Ready-to-Eat Human Foods and Taking Corrective Actions Following a Pathogen Contamination Event. The earlier comment period ended May 7, and now is being reopened and will be open through FDA-2024-D-2604.",
+            "score": 0.53895956,
             "published_date": ""
           }
         ],
         "answer": null,
-        "query": "Environmental Issues government policy  2024 2025"
+        "query": "Sanitation government policy  2024 2025"
       }
     },
     "policy_queries": [
-      "Ambernath garbage disposal policy",
+      "Ambernath garbage dumping issues",
       "government schemes for garbage management in urban slums",
-      "water supply and sanitation issues in Ambernath",
-      "garbage collection and disposal services in Ambernath",
-      "environmental pollution control measures in Ambernath",
-      "urban slum development and garbage management policies"
+      "complaints about garbage in Ambernath",
+      "Ambernath municipal corporation garbage collection services",
+      "garbage disposal policies in Maharashtra",
+      "Ambernath garbage dumping near water bodies"
     ]
   }
 }

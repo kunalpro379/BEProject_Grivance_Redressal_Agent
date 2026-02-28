@@ -172,8 +172,9 @@ const Grievances = () => {
     let cancelled = false;
     setLoading(true);
     setError(null);
+    // Load first batch of 50 grievances instead of 200
     grievanceService
-      .getGrievances({ all: "true", limit: 200 })
+      .getGrievances({ all: "true", limit: 50, page: 1 })
       .then((res) => {
         if (!cancelled) {
           setGrievances(res.grievances || []);
