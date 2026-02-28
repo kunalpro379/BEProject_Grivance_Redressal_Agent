@@ -1113,26 +1113,76 @@ function mapResourceRequestToFrontend(r) {
 // Contractors (all; map to camelCase and ensure numbers for frontend)
 router.get('/:depId/contractors', authenticate, verifyDepartmentAccess, async (req, res) => {
   try {
-    const result = await pool.query(
-      `SELECT contractor_id, company_name, contact_person, phone, email, specialization,
-        performance_score, active_projects, completed_projects, avg_completion_time, contract_value
-      FROM contractors
-      WHERE is_active = true
-      ORDER BY company_name`
-    );
+    const { depId } = req.params;
+    
+    // Check if department_id column exists
+    const columnCheck = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name = 'contractors' AND column_name = 'department_id'
+    `);
+    
+    const hasDepartmentId = columnCheck.rows.length > 0;
+    
+    let result;
+    if (hasDepartmentId) {
+      // Filter by department if column exists
+      result = await pool.query(
+        `SELECT 
+          contractor_id, 
+          company_name, 
+          contact_person, 
+          phone, 
+          email, 
+          specialization,
+          performance_score, 
+          active_projects, 
+          completed_projects, 
+          avg_completion_time, 
+          contract_value,
+          ai_analysis
+        FROM contractors
+        WHERE is_active = true AND (department_id = $1 OR department_id IS NULL)
+        ORDER BY performance_score DESC NULLS LAST, company_name`,
+        [depId]
+      );
+    } else {
+      // Show all contractors if column doesn't exist yet
+      result = await pool.query(
+        `SELECT 
+          contractor_id, 
+          company_name, 
+          contact_person, 
+          phone, 
+          email, 
+          specialization,
+          performance_score, 
+          active_projects, 
+          completed_projects, 
+          avg_completion_time, 
+          contract_value,
+          ai_analysis
+        FROM contractors
+        WHERE is_active = true
+        ORDER BY performance_score DESC NULLS LAST, company_name`
+      );
+    }
+    
     const data = (result.rows || []).map(r => ({
-      contractorId: r.contractor_id,
-      name: r.company_name || '',
-      performanceScore: r.performance_score != null ? Number(r.performance_score) : 0,
-      contactPerson: r.contact_person || '',
+      contractor_id: r.contractor_id,
+      company_name: r.company_name || '',
+      contact_person: r.contact_person || '',
       phone: r.phone || '',
       email: r.email || '',
-      assignedProjects: r.active_projects != null ? Number(r.active_projects) : 0,
-      completedProjects: r.completed_projects != null ? Number(r.completed_projects) : 0,
-      avgCompletionTime: r.avg_completion_time != null ? Number(r.avg_completion_time) : 0,
-      contractValue: r.contract_value != null ? Number(r.contract_value) : 0,
-      specialization: r.specialization || ''
+      specialization: r.specialization || '',
+      performance_score: r.performance_score != null ? Number(r.performance_score) : 0,
+      active_projects: r.active_projects != null ? Number(r.active_projects) : 0,
+      completed_projects: r.completed_projects != null ? Number(r.completed_projects) : 0,
+      avg_completion_time: r.avg_completion_time != null ? Number(r.avg_completion_time) : 0,
+      contract_value: r.contract_value != null ? Number(r.contract_value) : 0,
+      ai_analysis: r.ai_analysis || {}
     }));
+    
     res.json({ success: true, data });
   } catch (error) {
     console.error('Error fetching contractors:', error);

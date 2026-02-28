@@ -15,11 +15,13 @@ const pool = new Pool(
         ssl: {
           rejectUnauthorized: false,
         },
-        max: 10, // Reduced for Supabase pooler - it handles pooling for us
-        min: 1,  // Reduced minimum
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 10000,
+        max: 3, // Very low for Supabase pooler to prevent connection exhaustion
+        min: 0,  // No minimum connections
+        idleTimeoutMillis: 20000, // Close idle connections faster
+        connectionTimeoutMillis: 5000, // Faster timeout
         allowExitOnIdle: false,
+        keepAlive: true,
+        keepAliveInitialDelayMillis: 10000,
       }
     : {
         host: process.env.DB_HOST || 'localhost',
@@ -27,11 +29,13 @@ const pool = new Pool(
         database: process.env.DB_NAME || 'igrs_db',
         user: process.env.DB_USER || 'postgres',
         password: process.env.DB_PASSWORD,
-        max: 10,
-        min: 1,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 10000,
+        max: 3,
+        min: 0,
+        idleTimeoutMillis: 20000,
+        connectionTimeoutMillis: 5000,
         allowExitOnIdle: false,
+        keepAlive: true,
+        keepAliveInitialDelayMillis: 10000,
       }
 );
 
@@ -47,6 +51,14 @@ pool.on('connect', (client) => {
 pool.on('error', (err, client) => {
   console.error('[Pool] Unexpected database error:', err.message);
   // Don't exit the process, just log the error
+  // The pool will automatically try to reconnect
+});
+
+// Handle process-level unhandled rejections from database
+process.on('unhandledRejection', (reason, promise) => {
+  if (reason && reason.message && reason.message.includes('Connection terminated')) {
+    console.error('[Database] Connection terminated, pool will reconnect automatically');
+  }
 });
 
 // Helper function to execute queries

@@ -1,0 +1,13 @@
+{
+  "name": "igrs-db-migrations",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Database migrations for IGRS",
+  "scripts": {
+    "migrate:contractors": "node run_contractors_migration.js"
+  },
+  "dependencies": {
+    "pg": "^8.19.0",
+    "dotenv": "^16.6.1"
+  }
+}
