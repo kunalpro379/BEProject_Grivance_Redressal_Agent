@@ -5,13 +5,19 @@ from tools.location_extractor import LocationExtractor
 from tools.embeddings import EmbeddingEngine
 from tools.db_query import DatabaseQueryEngine
 from tools.pdf_report import generate_pdf_from_markdown
+from tools.tavily_search import TavilySearchEngine
+from tools.department_allocator import DepartmentAllocator
 from persistent.supabase import insert_user_grievience
 from agents import grievance_agents as GA
 from configs.config import Config
+from LLMs.groq_llm import GroqLLM
 
 image_engine = ImageAnalysisEngine()
 validator_engine = ImageQueryValidator()
 location_engine = LocationExtractor()
+tavily_engine = TavilySearchEngine()
+department_allocator = DepartmentAllocator()
+groq_llm = GroqLLM()
 _embedding_engine = None
 
 def _get_embedding_engine():
@@ -130,6 +136,49 @@ def NODE_enhance_query(state: Dict[str, Any]) -> Dict[str, Any]:
     
     state["enhanced_query"] = enhanced_query
     return state
+
+
+def NODE_create_described_query(state: Dict[str, Any]) -> Dict[str, Any]:
+    """Create LLM-described version of query with image, location, and category."""
+    query = state["query"]
+    img = state.get("image_analysis", {})
+    location = state.get("location_data", {})
+    
+    # Build a comprehensive prompt for LLM to describe the query
+    prompt = f"""You are analyzing a citizen grievance. Create a comprehensive, well-structured description that includes:
+
+1. The original complaint/query
+2. Visual evidence from the image (if available)
+3. Location details (if available)
+4. Initial category assessment
+
+Original Query:
+{query}
+
+Image Analysis:
+- Description: {img.get('description', 'No image provided')}
+- Key Objects: {', '.join(img.get('key_objects', [])) or 'None'}
+- Scene Type: {img.get('scene_type', 'Unknown')}
+- Extracted Text: {img.get('extracted_text', 'None')}
+
+Location Information:
+- Address: {location.get('address', 'Not specified')}
+- Landmarks: {', '.join(location.get('landmarks', [])) or 'None'}
+- Area Type: {location.get('area_type', 'Unknown')}
+
+Create a detailed, professional description (2-3 paragraphs) that synthesizes all this information into a coherent grievance description. Focus on facts and observable details."""
+
+    try:
+        print("   📝 Creating LLM-described query...")
+        described_query = groq_llm.generate(prompt)
+        state["enhanced_query_described"] = described_query
+        print(f"      ✓ Created described query ({len(described_query)} chars)")
+    except Exception as e:
+        print(f"      ⚠️ Error creating described query: {e}")
+        # Fallback to enhanced_query
+        state["enhanced_query_described"] = state["enhanced_query"]
+    
+    return state
 def NODE_embed_query(state:Dict[str, Any])->Dict[str, Any]:
     enhanced_query=state["enhanced_query"]
     emb = _get_embedding_engine().embed_query(enhanced_query)
@@ -163,6 +212,92 @@ def NODE_Policy_Queries(state: Dict[str, Any]) -> Dict[str, Any]:
     policy_search = GA.policy_search_queries(enhanced_query, category_info)
     state["policy_search"] = policy_search
     state["agents_outputs"]["policy_search"] = policy_search
+    return state
+
+
+def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
+    """Search for real-time data using Tavily (news, policies, government decisions, etc.)."""
+    print("   🌐 Searching real-time data with Tavily...")
+    
+    # Get search queries from policy_search
+    policy_search = state.get("policy_search", {})
+    queries = policy_search.get("queries", [])
+    
+    # Also add category-specific searches
+    category_info = state["agents_outputs"].get("category", {})
+    location_info = state["agents_outputs"].get("location", {})
+    
+    main_category = category_info.get("main_category", "")
+    state_name = location_info.get("state", "India")
+    
+    # Add additional real-time search queries
+    additional_queries = []
+    if main_category:
+        additional_queries.append(f"{main_category} latest news {state_name}")
+        additional_queries.append(f"{main_category} government policy {state_name} 2024 2025")
+        additional_queries.append(f"{main_category} budget allocation {state_name}")
+    
+    all_queries = queries[:3] + additional_queries[:2]  # Limit to 5 total queries
+    
+    if not all_queries:
+        print("      ⚠️ No search queries available, skipping Tavily search")
+        state["tavily_search_results"] = {}
+        return state
+    
+    try:
+        search_results = tavily_engine.search_realtime_data(all_queries, max_results_per_query=3)
+        state["tavily_search_results"] = search_results
+        
+        total_results = sum(len(r.get("results", [])) for r in search_results.values())
+        print(f"      ✓ Found {total_results} real-time results across {len(search_results)} queries")
+    except Exception as e:
+        print(f"      ❌ Error in Tavily search: {e}")
+        state["tavily_search_results"] = {}
+    
+    return state
+
+
+def NODE_allocate_department(state: Dict[str, Any]) -> Dict[str, Any]:
+    """Allocate department using Supabase embedding search."""
+    print("   🏢 Allocating department from Supabase...")
+    
+    # Get required information
+    location_info = state["agents_outputs"].get("location", {})
+    department_info = state["agents_outputs"].get("department", {})
+    location_data = state.get("location_data", {})
+    category_info = state["agents_outputs"].get("category", {})
+    
+    location = location_info.get("district", "") or location_info.get("state", "")
+    recommended_dept = department_info.get("recommended_department", "")
+    address = location_data.get("address", "")
+    category = category_info.get("main_category", "")
+    embedding = state.get("embedding", [])
+    
+    if not embedding:
+        print("      ⚠️ No embedding available, skipping department allocation")
+        state["allocated_department"] = None
+        return state
+    
+    try:
+        allocated_dept = department_allocator.allocate_department(
+            location=location,
+            recommended_department=recommended_dept,
+            address=address,
+            query_embedding=embedding,
+            category=category
+        )
+        
+        state["allocated_department"] = allocated_dept
+        
+        if allocated_dept:
+            print(f"      ✓ Allocated to: {allocated_dept['name']}")
+        else:
+            print(f"      ⚠️ No department allocated")
+            
+    except Exception as e:
+        print(f"      ❌ Error allocating department: {e}")
+        state["allocated_department"] = None
+    
     return state   
 def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     grievance_text=state["query"]
@@ -171,6 +306,9 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     policy_search=state.get("policy_search", {})
     retrieved=state.get("retrieved_data", {})
     enhanced_query = state.get("enhanced_query")
+    enhanced_query_described = state.get("enhanced_query_described", enhanced_query)
+    tavily_results = state.get("tavily_search_results", {})
+    allocated_dept = state.get("allocated_department")
 
     # MD FILE (textual professional report)
     report_md = GA.final_report(
@@ -202,12 +340,25 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     process_trace = {
         "grievance_text": grievance_text,
         "enhanced_query": enhanced_query,
+        "enhanced_query_described": enhanced_query_described,
         "image_analysis": image_analysis,
         "agents_outputs": agents_outputs,
         "policy_search_queries": policy_search,
+        "tavily_search_results": tavily_results,
+        "allocated_department": allocated_dept,
         "db_search_summary": db_summary,
         "raw_conversations": GA.get_reasoning_log(),
         "pipeline_steps": [
+            {
+                "step": "validate_image",
+                "description": "Validated image-query match to detect fraud/spam.",
+                "output_key": "validation_result",
+            },
+            {
+                "step": "extract_location",
+                "description": "Extracted location details from image metadata and visual analysis.",
+                "output_key": "location_data",
+            },
             {
                 "step": "describe_image",
                 "description": "Analyzed any provided image to extract description, key objects, and visible text.",
@@ -217,6 +368,11 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
                 "step": "enhance_query",
                 "description": "Combined user text with image description/OCR to create an enhanced query.",
                 "output_key": "enhanced_query",
+            },
+            {
+                "step": "create_described_query",
+                "description": "Created LLM-described version with image, location, and category details.",
+                "output_key": "enhanced_query_described",
             },
             {
                 "step": "embed_query_and_retrieve",
@@ -234,6 +390,16 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
                 "output_key": "policy_search_queries",
             },
             {
+                "step": "tavily_search",
+                "description": "Searched real-time data using Tavily (news, government policies, budget allocations, etc.).",
+                "output_key": "tavily_search_results",
+            },
+            {
+                "step": "allocate_department",
+                "description": "Allocated department using Supabase embedding search based on location, category, and description.",
+                "output_key": "allocated_department",
+            },
+            {
                 "step": "final_report_generation",
                 "description": "Composed a formal government-style Markdown report and exported it as a PDF document.",
                 "output_key": "markdown_report_path",
@@ -244,10 +410,43 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     }
 
     # 2) Case-study JSON (final structured view of the grievance)
+    # Remove 'reasoning' fields from all agent outputs
+    cleaned_agents_outputs = {}
+    for key, value in agents_outputs.items():
+        if isinstance(value, dict):
+            cleaned_value = {k: v for k, v in value.items() if k not in ['reasoning', '_raw', '_error', '_raw_sentiment', '_raw_priority']}
+            cleaned_agents_outputs[key] = cleaned_value
+        else:
+            cleaned_agents_outputs[key] = value
+    
+    # Build department field with allocated_department
+    department_field = {
+        "recommended_department": agents_outputs.get("department", {}).get("recommended_department", ""),
+        "contact_information": None,
+        "jurisdiction": None,
+        "allocated_department": None
+    }
+    
+    if allocated_dept:
+        department_field["allocated_department"] = {
+            "id": allocated_dept.get("id"),
+            "name": allocated_dept.get("name"),
+            "description": allocated_dept.get("description"),
+            "address": allocated_dept.get("address"),
+            "match_score": allocated_dept.get("match_score")
+        }
+        department_field["contact_information"] = allocated_dept.get("contact_information")
+        department_field["jurisdiction"] = allocated_dept.get("jurisdiction")
+    else:
+        # Fallback to AI-recommended department info
+        dept_info = agents_outputs.get("department", {})
+        department_field["contact_information"] = dept_info.get("contact_information")
+        department_field["jurisdiction"] = dept_info.get("jurisdiction")
+    
     case_study = {
         "grievance": {
             "text": grievance_text,
-            "enhanced_query": enhanced_query,
+            "enhanced_query_described": enhanced_query_described,
             "image": {
                 "path": state.get("image_path"),
                 "description": image_analysis.get("description", ""),
@@ -255,25 +454,29 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
                 "scene_type": image_analysis.get("scene_type", ""),
                 "extracted_text": image_analysis.get("extracted_text", ""),
             },
+            "location": {
+                "address": state.get("location_data", {}).get("address"),
+                "latitude": state.get("location_data", {}).get("latitude"),
+                "longitude": state.get("location_data", {}).get("longitude"),
+                "landmarks": state.get("location_data", {}).get("landmarks", []),
+                "area_type": state.get("location_data", {}).get("area_type"),
+            },
+            "category": cleaned_agents_outputs.get("category", {}).get("main_category"),
+            "sub_category": cleaned_agents_outputs.get("category", {}).get("sub_category"),
         },
-        "location": agents_outputs.get("location"),
         "analysis": {
-            "query_type": agents_outputs.get("query_type"),
-            "emotion": agents_outputs.get("emotion"),
-            "severity": agents_outputs.get("severity"),
-            "priority": agents_outputs.get("sentiment_priority"),
-            "patterns": agents_outputs.get("patterns"),
-            "historical_trends": agents_outputs.get("similar_cases"),
-            "fraud_risk": agents_outputs.get("fraud"),
+            "query_type": cleaned_agents_outputs.get("query_type"),
+            "emotion": cleaned_agents_outputs.get("emotion"),
+            "severity": cleaned_agents_outputs.get("severity"),
+            "priority": cleaned_agents_outputs.get("sentiment_priority"),
+            "patterns": cleaned_agents_outputs.get("patterns"),
+            "historical_trends": cleaned_agents_outputs.get("similar_cases"),
+            "fraud_risk": cleaned_agents_outputs.get("fraud"),
         },
-        "classification": {
-            "category": agents_outputs.get("category"),
-            "department": agents_outputs.get("department"),
-        },
-        "policy_search_queries": policy_search,
-        "outputs": {
-            "markdown_report_path": md_path,
-            "pdf_path": pdf_path,
+        "department": department_field,
+        "real_time_data": {
+            "search_results": tavily_results,
+            "policy_queries": policy_search.get("queries", []),
         },
     }
 
@@ -283,16 +486,16 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     import json as _json
     from configs.config import Config as _Cfg
 
-    # Case-study JSON
+    # Case-study JSON (final output - no reasoning/output fields)
     with open(_Cfg.json_analysis_path(), "w", encoding="utf-8") as f:
         _json.dump(case_study, f, indent=2, ensure_ascii=False)
 
-    # Process / reasoning JSON
+    # Process / reasoning JSON (internal use only)
     with open(_Cfg.json_agents_path(), "w", encoding="utf-8") as f:
         _json.dump(process_trace, f, indent=2, ensure_ascii=False)
 
     # 5) Update Supabase UserGrievance with processed data (persist blob URL, not local/temp path)
-    # grievance_text = original user query; enhanced_query = complete summarized version (user query + AI image description + analysis + location)
+    # grievance_text = original user query; enhanced_query_described = complete LLM-described version
     embedding = state.get("embedding", [])
     image_path = state.get("original_image_url") or state.get("image_path")
     image_description = image_analysis.get("description", "")
@@ -302,35 +505,8 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     grievance_id = state.get("grievance_id")
     text_for_db = (grievance_text or "").strip() or (state.get("query") or "")
 
-    # Build enhanced_query for DB: complete AI summary = user query + full image description + image analysis + location (never the Platform stub like {"category":"Transport",...})
-    query_part = text_for_db
-    img = state.get("image_analysis") or {}
-    desc = (img.get("description") or "").strip()
-    extracted_text = (img.get("extracted_text") or "").strip()
-    key_objects = img.get("key_objects") or []
-    scene_type = (img.get("scene_type") or "").strip()
-    location_parts = []
-    if location_data.get("confidence") not in ("none", None):
-        if location_data.get("address"):
-            location_parts.append(str(location_data["address"]))
-        if location_data.get("landmarks"):
-            location_parts.append("Landmarks: " + ", ".join(location_data["landmarks"][:5]))
-        if location_data.get("area_type"):
-            location_parts.append("Area: " + str(location_data["area_type"]))
-    location_str = ". ".join(location_parts) if location_parts else ""
-
-    parts = [query_part]
-    if desc:
-        parts.append("Image description: " + desc)
-    if extracted_text:
-        parts.append("Visible text in image: " + extracted_text)
-    if key_objects:
-        parts.append("Key objects in image: " + ", ".join(str(x) for x in key_objects[:15]))
-    if scene_type:
-        parts.append("Scene type: " + scene_type)
-    if location_str:
-        parts.append("Location: " + location_str)
-    enhanced_for_db = "\n\n".join(p for p in parts if p).strip() or (state.get("enhanced_query") or text_for_db)
+    # Use enhanced_query_described for DB storage
+    enhanced_for_db = enhanced_query_described or enhanced_query or text_for_db
 
     insert_user_grievience(
         grievance_text=text_for_db,
@@ -338,7 +514,7 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
         image_description=image_description,
         enhanced_query=enhanced_for_db,
         embedding=embedding,
-        agent_outputs=agents_outputs,
+        agent_outputs=cleaned_agents_outputs,
         full_result=case_study,
         validation_result=validation_result,
         location_data=location_data,

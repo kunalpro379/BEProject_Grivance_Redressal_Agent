@@ -379,8 +379,7 @@ RETRIEVED DATA (summary JSON, may be truncated):
 Provide JSON response with:
 - recommended_department: string
 - contact_information: string (generic, non-personal)
-- jurisdiction: string
-- escalation_path: string""",
+- jurisdiction: string""",
             agent=self.agents_manager.get_agent("department"),
             expected_output="JSON with department routing",
         )

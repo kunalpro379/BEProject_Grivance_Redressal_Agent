@@ -142,8 +142,10 @@ class KnowledgeBaseWorker:
             pdf_url = message_data.get('url')
             file_name = message_data.get('fileName', 'unknown.pdf')
             kb_id = message_data.get('id')
+            department_id = message_data.get('departmentId')
+            uploaded_by = message_data.get('uploadedBy')
             
-            print(f"\n Processing PDF: {file_name}")
+            print(f"\n📄 Processing PDF: {file_name}")
             print(f"   URL: {pdf_url}")
             
             # Extract text from PDF
@@ -160,7 +162,11 @@ class KnowledgeBaseWorker:
             text_content = pdf_result.get('text', '')
             num_pages = pdf_result.get('num_pages', 0)
             
-            print(f"   Extracted text from {num_pages} pages")
+            print(f"   ✓ Extracted text from {num_pages} pages")
+            
+            # Extract URLs from PDF text
+            extracted_urls = self.extract_urls_from_text(text_content)
+            print(f"   🔗 Found {len(extracted_urls)} URLs in PDF")
             
             # Extract knowledge using LLM
             knowledge_result = self.knowledge_extractor.extract_knowledge(
@@ -181,13 +187,14 @@ class KnowledgeBaseWorker:
             
             knowledge = knowledge_result.get('knowledge', {})
             knowledge['extracted_at'] = datetime.utcnow().isoformat() + 'Z'
+            knowledge['extracted_urls'] = extracted_urls[:20]  # Store first 20 URLs
             
             # Create embeddings data
             embeddings_chunks = self.knowledge_extractor.create_embeddings_data(
                 knowledge, text_content
             )
             
-            print(f"    Created {len(embeddings_chunks)} embedding chunks")
+            print(f"   ✓ Created {len(embeddings_chunks)} embedding chunks")
             
             # Upload processed data to blob
             blob_prefix = f"knowledgebase/processed/{kb_id or int(time.time())}"
@@ -226,7 +233,8 @@ class KnowledgeBaseWorker:
                 'stats': {
                     'num_pages': num_pages,
                     'text_length': len(text_content),
-                    'num_chunks': len(embeddings_chunks)
+                    'num_chunks': len(embeddings_chunks),
+                    'num_urls_found': len(extracted_urls)
                 },
                 'processed_at': datetime.utcnow().isoformat() + 'Z'
             }
@@ -239,7 +247,16 @@ class KnowledgeBaseWorker:
             )
             result_data['processed_files']['result_url'] = result_url
             
-            print(f"   Uploaded processed files to blob")
+            print(f"   ✓ Uploaded processed files to blob")
+            
+            # Queue extracted URLs for crawling
+            if extracted_urls and department_id and uploaded_by:
+                self.queue_extracted_urls(
+                    extracted_urls[:10],  # Queue first 10 URLs
+                    department_id,
+                    uploaded_by,
+                    f"Extracted from PDF: {file_name}"
+                )
             
             return result_data
             
@@ -257,6 +274,8 @@ class KnowledgeBaseWorker:
         try:
             url = message_data.get('url')
             kb_id = message_data.get('id')
+            department_id = message_data.get('departmentId')
+            uploaded_by = message_data.get('uploadedBy')
             
             print(f"\n🌐 Processing URL: {url}")
             
@@ -275,7 +294,11 @@ class KnowledgeBaseWorker:
             markdown_content = crawl_result.get('markdown', '')
             markdown_clean = self.web_crawler.remove_image_links(markdown_content)
             
-            print(f"   Crawled: {crawl_result.get('title', 'Untitled')}")
+            # Get extracted links from crawler
+            extracted_links = crawl_result.get('links', [])
+            
+            print(f"   ✓ Crawled: {crawl_result.get('title', 'Untitled')}")
+            print(f"   🔗 Found {len(extracted_links)} links on page")
             
             # Extract knowledge using LLM
             knowledge_result = self.knowledge_extractor.extract_knowledge(
@@ -297,13 +320,14 @@ class KnowledgeBaseWorker:
             knowledge = knowledge_result.get('knowledge', {})
             knowledge['extracted_at'] = datetime.utcnow().isoformat() + 'Z'
             knowledge['title'] = crawl_result.get('title', '')
+            knowledge['extracted_links'] = extracted_links[:20]  # Store first 20 links
             
             # Create embeddings data
             embeddings_chunks = self.knowledge_extractor.create_embeddings_data(
                 knowledge, markdown_clean
             )
             
-            print(f"    Created {len(embeddings_chunks)} embedding chunks")
+            print(f"   ✓ Created {len(embeddings_chunks)} embedding chunks")
             
             # Upload processed data to blob
             blob_prefix = f"knowledgebase/processed/{kb_id or int(time.time())}"
@@ -342,7 +366,7 @@ class KnowledgeBaseWorker:
                 'stats': {
                     'text_length': len(markdown_clean),
                     'num_chunks': len(embeddings_chunks),
-                    'num_links': len(crawl_result.get('links', []))
+                    'num_links': len(extracted_links)
                 },
                 'processed_at': datetime.utcnow().isoformat() + 'Z'
             }
@@ -355,7 +379,16 @@ class KnowledgeBaseWorker:
             )
             result_data['processed_files']['result_url'] = result_url
             
-            print(f"   Uploaded processed files to blob")
+            print(f"   ✓ Uploaded processed files to blob")
+            
+            # Queue extracted links for crawling
+            if extracted_links and department_id and uploaded_by:
+                self.queue_extracted_urls(
+                    extracted_links[:10],  # Queue first 10 links
+                    department_id,
+                    uploaded_by,
+                    f"Extracted from: {url}"
+                )
             
             return result_data
             
@@ -402,7 +435,64 @@ class KnowledgeBaseWorker:
             print(f"   💾 Saved result locally: {filepath}")
             
         except Exception as e:
-            print(f"    Failed to save result locally: {e}")
+            print(f"   ⚠️  Failed to save result locally: {e}")
+    
+    def extract_urls_from_text(self, text: str) -> list:
+        """Extract URLs from text content"""
+        import re
+        # Match http:// and https:// URLs
+        url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+        urls = re.findall(url_pattern, text)
+        # Remove duplicates and clean
+        unique_urls = list(set(urls))
+        # Filter out common non-content URLs
+        filtered_urls = [
+            url for url in unique_urls
+            if not any(skip in url.lower() for skip in [
+                'facebook.com', 'twitter.com', 'linkedin.com',
+                'instagram.com', 'youtube.com', 'google.com',
+                '.jpg', '.png', '.gif', '.pdf', '.zip'
+            ])
+        ]
+        return filtered_urls
+    
+    def queue_extracted_urls(self, urls: list, department_id: str, uploaded_by: str, source_description: str):
+        """Queue extracted URLs for crawling"""
+        try:
+            queued_count = 0
+            for url in urls:
+                try:
+                    # Validate URL
+                    from urllib.parse import urlparse
+                    parsed = urlparse(url)
+                    if not parsed.scheme or not parsed.netloc:
+                        continue
+                    
+                    # Send to queue
+                    message = {
+                        'type': 'url_crawl',
+                        'id': None,  # Will be assigned by server
+                        'url': url,
+                        'description': source_description,
+                        'uploadedBy': uploaded_by,
+                        'departmentId': department_id,
+                        'uploadedAt': datetime.utcnow().isoformat() + 'Z',
+                        'auto_extracted': True
+                    }
+                    
+                    encoded_message = self.encode_message(message)
+                    self.queue_client.send_message(encoded_message)
+                    queued_count += 1
+                    
+                except Exception as e:
+                    print(f"   ⚠️  Failed to queue URL {url}: {e}")
+                    continue
+            
+            if queued_count > 0:
+                print(f"   📤 Queued {queued_count} extracted URLs for crawling")
+                
+        except Exception as e:
+            print(f"   ⚠️  Error queuing URLs: {e}")
     
     def update_database(self, result: Dict[str, Any]):
         """Call API to update database"""

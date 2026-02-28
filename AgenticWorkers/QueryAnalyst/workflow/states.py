@@ -17,12 +17,15 @@ class GrievanceState(TypedDict, total=False):
     # Image analysis
     image_analysis: Dict[str, Any]
     enhanced_query: str
+    enhanced_query_described: str  # LLM-described version with image, location, category
 
     embedding: List[float]
     retrieved_data: Dict[str, Any]
 
     agents_outputs: Dict[str, Any]
     policy_search: Dict[str, Any]
+    tavily_search_results: Dict[str, Any]  # Real-time search results
+    allocated_department: Optional[Dict[str, Any]]  # Department allocation from Supabase
 
     final_report_md: str
     pdf_path: str

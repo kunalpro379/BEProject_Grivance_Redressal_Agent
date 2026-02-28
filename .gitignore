@@ -1,50 +1,11 @@
-# Environment variables
+AgenticWorkflow/
 .env
-.env.*
-!.env.example
-pages/
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+AgenticWorkers/QueryAnalyst/.env
+AgenticWorkers/WebCrawl/.enving
+Server/.env
+Platform/Server/.env
+Platform/IGRS-portal/.env
+Platform/Server/node_modules/
+Platform/IGRS-portal/node_modules/
+API/node_modules/
 
-# Virtual environments
-venv/
-ENV/
-env/
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db

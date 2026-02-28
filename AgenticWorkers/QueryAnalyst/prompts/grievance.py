@@ -151,7 +151,6 @@ Return JSON:
 - recommended_department: string
 - contact_information: string (generic, non-personal)
 - jurisdiction: string
-- escalation_path: string
 """
     return system, user
 

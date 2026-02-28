@@ -10,3 +10,4 @@ reportlab
 azure-storage-queue
 azure-storage-blob
 crewai
+tavily-python

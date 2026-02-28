@@ -3,7 +3,6 @@ import azureKnowledgeBaseQueueService from '../services/azure.queue.knowledgebas
 import pool from '../config/database.js';
 
 class KnowledgeBaseController {
-  // Upload PDF to blob storage and send URL to queue
   async uploadPDF(req, res) {
     try {
       if (!req.file) {
@@ -17,14 +16,47 @@ class KnowledgeBaseController {
       const uploadResult = await azureStorageService.uploadFile(file.path, fileName);
 
       // Store in database
+      // Note: Using uploaded_by_officer_id (not uploaded_by)
+      // Get department_id from user or fetch first available department
+      let departmentId = req.user.department_id;
+      
+      if (!departmentId) {
+        // Get first available department as fallback
+        const deptResult = await pool.query(
+          'SELECT id FROM departments LIMIT 1'
+        );
+        if (deptResult.rows.length > 0) {
+          departmentId = deptResult.rows[0].id;
+        } else {
+          return res.status(400).json({ 
+            error: 'No departments available. Please create a department first.' 
+          });
+        }
+      }
+      
       const result = await pool.query(
-        `INSERT INTO departmentknowledgebase (file_name, file_url, file_type, uploaded_by, status)
-         VALUES ($1, $2, 'pdf', $3, 'processing')
+        `INSERT INTO departmentknowledgebase (
+          title, 
+          file_name, 
+          file_url, 
+          file_type, 
+          uploaded_by_officer_id, 
+          department_id,
+          description
+        )
+         VALUES ($1, $2, $3, 'pdf', $4, $5, $6)
          RETURNING *`,
-        [file.originalname, uploadResult.url, req.user.id]
+        [
+          file.originalname, // title
+          file.originalname, // file_name
+          uploadResult.url,  // file_url
+          req.user.id,       // uploaded_by_officer_id
+          departmentId,      // department_id
+          'Processing PDF...' // description
+        ]
       );
 
-      // Send URL to Azure Queue for processing (with ID)
+      // Send URL to Azure Queue for processing (with ID and department info)
       await azureKnowledgeBaseQueueService.sendMessage({
         type: 'pdf_upload',
         id: result.rows[0].id,
@@ -32,6 +64,7 @@ class KnowledgeBaseController {
         fileName: fileName,
         originalName: file.originalname,
         uploadedBy: req.user.id,
+        departmentId: departmentId,
         uploadedAt: new Date().toISOString()
       });
 
@@ -63,20 +96,54 @@ class KnowledgeBaseController {
       }
 
       // Store in database
+      // Note: Using uploaded_by_officer_id (not uploaded_by)
+      // Get department_id from user or fetch first available department
+      let departmentId = req.user.department_id;
+      
+      if (!departmentId) {
+        // Get first available department as fallback
+        const deptResult = await pool.query(
+          'SELECT id FROM departments LIMIT 1'
+        );
+        if (deptResult.rows.length > 0) {
+          departmentId = deptResult.rows[0].id;
+        } else {
+          return res.status(400).json({ 
+            error: 'No departments available. Please create a department first.' 
+          });
+        }
+      }
+      
       const result = await pool.query(
-        `INSERT INTO departmentknowledgebase (file_name, file_url, file_type, uploaded_by, status, description)
-         VALUES ($1, $2, 'url', $3, 'processing', $4)
+        `INSERT INTO departmentknowledgebase (
+          title,
+          file_name, 
+          file_url, 
+          file_type, 
+          uploaded_by_officer_id, 
+          department_id,
+          description
+        )
+         VALUES ($1, $2, $3, 'url', $4, $5, $6)
          RETURNING *`,
-        [url, url, req.user.id, description]
+        [
+          url,              // title
+          url,              // file_name
+          url,              // file_url
+          req.user.id,      // uploaded_by_officer_id
+          departmentId,     // department_id
+          description || 'Processing URL...' // description
+        ]
       );
 
-      // Send URL to Azure Queue for processing (with ID)
+      // Send URL to Azure Queue for processing (with ID and department info)
       await azureKnowledgeBaseQueueService.sendMessage({
         type: 'url_crawl',
         id: result.rows[0].id,
         url: url,
         description: description || '',
         uploadedBy: req.user.id,
+        departmentId: departmentId,
         uploadedAt: new Date().toISOString()
       });
 
@@ -128,8 +195,10 @@ class KnowledgeBaseController {
           kb.download_count,
           COALESCE(u.full_name, 'Unknown') AS uploaded_by_name,
           CASE 
-            WHEN kb.content_text IS NULL THEN 'processing'
-            ELSE 'completed'
+            WHEN kb.content_text IS NULL AND (kb.tags->>'status' IS NULL OR kb.tags->>'status' = 'processing') THEN 'processing'
+            WHEN kb.tags->>'status' = 'failed' THEN 'failed'
+            WHEN kb.content_text IS NOT NULL THEN 'completed'
+            ELSE 'processing'
           END AS status
         FROM departmentknowledgebase kb
         LEFT JOIN users u ON kb.uploaded_by_officer_id = u.id
@@ -244,25 +313,32 @@ class KnowledgeBaseController {
         return res.status(400).json({ error: 'ID is required' });
       }
 
-      // Update database
+      // Extract content_text from knowledge if available
+      const contentText = knowledge?.summary || knowledge?.content || '';
+      
+      // Store processed_files, stats, and other metadata in tags (JSONB)
+      const metadata = {
+        status: status || 'completed',
+        knowledge: knowledge || {},
+        processed_files: processed_files || {},
+        stats: stats || {},
+        error: error || null,
+        processed_at: processed_at || new Date().toISOString()
+      };
+
+      // Update database - use actual schema columns
       const result = await pool.query(
         `UPDATE departmentknowledgebase
-         SET status = $1,
-             knowledge = $2,
-             processed_files = $3,
-             stats = $4,
-             error = $5,
-             processed_at = $6,
+         SET content_text = $1,
+             tags = $2,
+             description = $3,
              updated_at = NOW()
-         WHERE id = $7
+         WHERE id = $4
          RETURNING *`,
         [
-          status,
-          JSON.stringify(knowledge || {}),
-          JSON.stringify(processed_files || {}),
-          JSON.stringify(stats || {}),
-          error || null,
-          processed_at || new Date().toISOString(),
+          contentText,
+          JSON.stringify(metadata),
+          status === 'failed' ? `Error: ${error}` : (knowledge?.summary || 'Processed successfully'),
           id
         ]
       );

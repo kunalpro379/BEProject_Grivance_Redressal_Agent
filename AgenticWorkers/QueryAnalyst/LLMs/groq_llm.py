@@ -24,4 +24,17 @@ class GroqLLM:
         )
         content = resp.choices[0].message.content
         return json.loads(content)
+    
+    def generate(self, prompt: str, system_prompt: str = "You are a helpful assistant.") -> str:
+        """Generate text completion."""
+        resp = self.client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.3,
+            max_tokens=2000,
+        )
+        return resp.choices[0].message.content
 
