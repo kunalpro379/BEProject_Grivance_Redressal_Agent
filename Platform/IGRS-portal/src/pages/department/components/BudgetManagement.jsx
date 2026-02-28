@@ -19,8 +19,42 @@ const BudgetManagement = ({ depId }) => {
   const [alerts, setAlerts] = useState([]);
   const [efficiencyMetrics, setEfficiencyMetrics] = useState(null);
   const [documents, setDocuments] = useState([]);
+  
+  // New Allocation Modal State
+  const [showAllocationModal, setShowAllocationModal] = useState(false);
+  const [submittingAllocation, setSubmittingAllocation] = useState(false);
+  
+  // Helper function to get current financial year
+  const getInitialFinancialYear = () => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth();
+    let fyStart, fyEnd;
+    if (currentMonth >= 3) {
+      fyStart = currentYear;
+      fyEnd = currentYear + 1;
+    } else {
+      fyStart = currentYear - 1;
+      fyEnd = currentYear;
+    }
+    return `${fyStart}-${String(fyEnd).slice(-2)}`;
+  };
 
-  const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+  const [allocationForm, setAllocationForm] = useState({
+    allocation_id: '',
+    allocation_amount: '',
+    allocation_date: new Date().toISOString().split('T')[0],
+    financial_year: getInitialFinancialYear(),
+    scheme_name: '',
+    allocation_purpose: '',
+    allocated_by: '',
+    approval_authority: '',
+    budget_type: 'Operational',
+    budget_source: 'State Government',
+    remarks: ''
+  });
+
+  const API_BASE = `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}/api`;
 
   useEffect(() => {
     if (depId) {
@@ -79,6 +113,104 @@ const BudgetManagement = ({ depId }) => {
     if (num >= 100000) return `₹${(num / 100000).toFixed(2)} L`;
     if (num >= 1000) return `₹${(num / 1000).toFixed(2)} K`;
     return `₹${num.toLocaleString('en-IN')}`;
+  };
+
+  const generateAllocationId = () => {
+    // Get current date
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth(); // 0-11
+    
+    // Determine financial year (April to March)
+    let fyStart, fyEnd;
+    if (currentMonth >= 3) { // April (3) onwards
+      fyStart = currentYear;
+      fyEnd = currentYear + 1;
+    } else { // January to March
+      fyStart = currentYear - 1;
+      fyEnd = currentYear;
+    }
+    
+    // Generate 3 random alphanumeric characters
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let randomSuffix = '';
+    for (let i = 0; i < 3; i++) {
+      randomSuffix += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    
+    // Format: BUDGET-YYYY-YY-XXX
+    return `BUDGET-${fyStart}-${String(fyEnd).slice(-2)}-${randomSuffix}`;
+  };
+
+  const getCurrentFinancialYear = () => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth(); // 0-11
+    
+    // Determine financial year (April to March)
+    let fyStart, fyEnd;
+    if (currentMonth >= 3) { // April (3) onwards
+      fyStart = currentYear;
+      fyEnd = currentYear + 1;
+    } else { // January to March
+      fyStart = currentYear - 1;
+      fyEnd = currentYear;
+    }
+    
+    // Format: YYYY-YY
+    return `${fyStart}-${String(fyEnd).slice(-2)}`;
+  };
+
+  const handleAllocationFormChange = (field, value) => {
+    setAllocationForm(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmitAllocation = async () => {
+    try {
+      // Validation
+      if (!allocationForm.allocation_amount) {
+        alert('Please enter the allocation amount');
+        return;
+      }
+
+      setSubmittingAllocation(true);
+      const token = localStorage.getItem('accessToken');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      // Generate allocation ID if not already set, and ensure financial year is set
+      const allocationData = {
+        ...allocationForm,
+        allocation_id: allocationForm.allocation_id || generateAllocationId(),
+        financial_year: allocationForm.financial_year || getCurrentFinancialYear()
+      };
+
+      await axios.post(`${API_BASE}/budget/${depId}/allocations`, allocationData, config);
+
+      // Reset form and close modal
+      setAllocationForm({
+        allocation_id: '',
+        allocation_amount: '',
+        allocation_date: new Date().toISOString().split('T')[0],
+        financial_year: getCurrentFinancialYear(),
+        scheme_name: '',
+        allocation_purpose: '',
+        allocated_by: '',
+        approval_authority: '',
+        budget_type: 'Operational',
+        budget_source: 'State Government',
+        remarks: ''
+      });
+      setShowAllocationModal(false);
+      
+      // Reload allocations
+      loadBudgetData();
+      alert('Budget allocation created successfully!');
+    } catch (error) {
+      console.error('Error creating allocation:', error);
+      alert('Failed to create allocation. Please try again.');
+    } finally {
+      setSubmittingAllocation(false);
+    }
   };
 
   const sections = [
@@ -245,11 +377,212 @@ const BudgetManagement = ({ depId }) => {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-gray-900">Budget Allocations</h2>
-          <button className="px-6 py-3 bg-gradient-to-r from-[#1a1a1a] to-[#000000] text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center gap-2">
+          <button 
+            onClick={() => setShowAllocationModal(true)}
+            className="px-6 py-3 bg-gradient-to-r from-[#1a1a1a] to-[#000000] text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center gap-2"
+          >
             <Plus className="w-5 h-5" />
             New Allocation
           </button>
         </div>
+
+        {/* New Allocation Modal */}
+        {showAllocationModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">Create New Budget Allocation</h3>
+                <button 
+                  onClick={() => setShowAllocationModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <XCircle className="w-6 h-6 text-gray-500" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Allocation ID <span className="text-gray-500 text-xs">(Auto-generated)</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={allocationForm.allocation_id || generateAllocationId()}
+                        readOnly
+                        className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleAllocationFormChange('allocation_id', generateAllocationId())}
+                        className="px-4 py-2 bg-[#D4AF37] text-white rounded-lg hover:bg-[#C5A028] transition-colors flex items-center gap-2"
+                        title="Generate new ID"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Amount (₹) <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      value={allocationForm.allocation_amount}
+                      onChange={(e) => handleAllocationFormChange('allocation_amount', e.target.value)}
+                      placeholder="e.g., 5000000"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Allocation Date
+                    </label>
+                    <input
+                      type="date"
+                      value={allocationForm.allocation_date}
+                      onChange={(e) => handleAllocationFormChange('allocation_date', e.target.value)}
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Financial Year <span className="text-gray-500 text-xs">(Auto-detected)</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={allocationForm.financial_year}
+                      readOnly
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Budget Type
+                    </label>
+                    <select
+                      value={allocationForm.budget_type}
+                      onChange={(e) => handleAllocationFormChange('budget_type', e.target.value)}
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                    >
+                      <option value="Operational">Operational</option>
+                      <option value="Emergency">Emergency</option>
+                      <option value="Maintenance">Maintenance</option>
+                      <option value="Infrastructure">Infrastructure</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Budget Source
+                    </label>
+                    <select
+                      value={allocationForm.budget_source}
+                      onChange={(e) => handleAllocationFormChange('budget_source', e.target.value)}
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                    >
+                      <option value="State Government">State Government</option>
+                      <option value="Central Government">Central Government</option>
+                      <option value="Municipal Corporation">Municipal Corporation</option>
+                      <option value="Special Grant">Special Grant</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                    Scheme Name
+                  </label>
+                  <input
+                    type="text"
+                    value={allocationForm.scheme_name}
+                    onChange={(e) => handleAllocationFormChange('scheme_name', e.target.value)}
+                    placeholder="e.g., Smart City Mission"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                    Allocation Purpose
+                  </label>
+                  <textarea
+                    value={allocationForm.allocation_purpose}
+                    onChange={(e) => handleAllocationFormChange('allocation_purpose', e.target.value)}
+                    placeholder="Describe the purpose of this allocation..."
+                    rows={3}
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Allocated By
+                    </label>
+                    <input
+                      type="text"
+                      value={allocationForm.allocated_by}
+                      onChange={(e) => handleAllocationFormChange('allocated_by', e.target.value)}
+                      placeholder="e.g., Finance Department"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Approval Authority
+                    </label>
+                    <input
+                      type="text"
+                      value={allocationForm.approval_authority}
+                      onChange={(e) => handleAllocationFormChange('approval_authority', e.target.value)}
+                      placeholder="e.g., Municipal Commissioner"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                    Remarks
+                  </label>
+                  <textarea
+                    value={allocationForm.remarks}
+                    onChange={(e) => handleAllocationFormChange('remarks', e.target.value)}
+                    placeholder="Additional notes or remarks..."
+                    rows={2}
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-[#D4AF37] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={handleSubmitAllocation}
+                  disabled={submittingAllocation}
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-[#1a1a1a] to-[#000000] text-white font-bold rounded-xl hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {submittingAllocation ? 'Creating...' : 'Create Allocation'}
+                </button>
+                <button
+                  onClick={() => setShowAllocationModal(false)}
+                  disabled={submittingAllocation}
+                  className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-900 font-bold rounded-xl hover:bg-gray-50 transition-all disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="bg-white rounded-2xl shadow-lg border-2 border-[#F5E6D3] overflow-hidden">
           <div className="overflow-x-auto">

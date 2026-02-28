@@ -42,6 +42,7 @@ router.use(authorize('admin'));
 router.post('/upload-pdf', upload.single('pdf'), knowledgeBaseController.uploadPDF);
 router.post('/add-url', knowledgeBaseController.addURL);
 router.get('/', knowledgeBaseController.getAll);
+router.post('/:id/generate-link', knowledgeBaseController.generateShareableLink);
 router.delete('/:id', knowledgeBaseController.delete);
 
 export default router;

@@ -1,8 +1,38 @@
 import express from 'express';
+import multer from 'multer';
+import path from 'path';
 import pool from '../config/database.js';
 import { authenticate, verifyDepartmentAccess as authVerifyDepartmentAccess } from '../middleware/auth.js';
+import azureStorageService from '../services/azure.storage.services.js';
+import azureKnowledgeBaseQueueService from '../services/azure.queue.knowledgebase.service.js';
 
 const router = express.Router();
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only PDF, DOC, DOCX, JPG, and PNG files are allowed'));
+    }
+  }
+});
 
 // Helper: get department info from head_officer_id
 async function getDepartmentByHeadOfficerId(headOfficerId) {
@@ -1540,6 +1570,117 @@ router.get('/:depId/knowledge-base', authenticate, verifyDepartmentAccess, async
   } catch (error) {
     console.error('Error fetching knowledge base:', error);
     res.status(500).json({ error: 'Failed to fetch knowledge base' });
+  }
+});
+
+// Upload document to department knowledge base
+router.post('/:depId/knowledge-base/upload', authenticate, verifyDepartmentAccess, upload.single('document'), async (req, res) => {
+  try {
+    const { depId } = req.params;
+    const departmentId = depId;
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const file = req.file;
+    const { title, description, category } = req.body;
+
+    // Create department-specific path: knowledgebase/department/{department_id}/{timestamp}_{filename}
+    const fileName = `knowledgebase/department/${departmentId}/${Date.now()}_${file.originalname}`;
+
+    // Upload to Azure Blob Storage
+    const uploadResult = await azureStorageService.uploadFile(file.path, fileName);
+
+    // Store in database
+    const result = await pool.query(
+      `INSERT INTO departmentknowledgebase (
+        title, 
+        description,
+        file_name, 
+        file_url, 
+        file_type, 
+        file_size,
+        category,
+        uploaded_by_officer_id, 
+        department_id
+      )
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+       RETURNING *`,
+      [
+        title || file.originalname,
+        description || 'Processing document...',
+        file.originalname,
+        uploadResult.url,
+        file.mimetype,
+        file.size,
+        category || 'General',
+        req.user.id,
+        departmentId
+      ]
+    );
+
+    // Send to Azure Queue for processing if it's a PDF
+    if (file.mimetype === 'application/pdf') {
+      await azureKnowledgeBaseQueueService.sendMessage({
+        type: 'pdf_upload',
+        id: result.rows[0].id,
+        url: uploadResult.url,
+        fileName: fileName,
+        originalName: file.originalname,
+        uploadedBy: req.user.id,
+        departmentId: departmentId,
+        uploadedAt: new Date().toISOString()
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Document uploaded successfully',
+      data: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Upload document error:', error);
+    res.status(500).json({ error: 'Failed to upload document' });
+  }
+});
+
+// Generate shareable link for a document
+router.post('/:depId/knowledge-base/:docId/generate-link', authenticate, verifyDepartmentAccess, async (req, res) => {
+  try {
+    const { depId, docId } = req.params;
+    const { expiryMinutes = 60 } = req.body;
+
+    // Get document details and verify it belongs to the department
+    const result = await pool.query(
+      'SELECT * FROM departmentknowledgebase WHERE id = $1 AND department_id = $2',
+      [docId, depId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Document not found' });
+    }
+
+    const document = result.rows[0];
+
+    // Extract blob name from URL
+    const url = new URL(document.file_url);
+    const blobName = url.pathname.substring(url.pathname.indexOf('/') + 1);
+
+    // Generate SAS URL
+    const sasUrl = await azureStorageService.generateSasUrl(blobName, expiryMinutes);
+
+    res.json({
+      success: true,
+      data: {
+        shareableLink: sasUrl,
+        expiresIn: expiryMinutes,
+        expiresAt: new Date(Date.now() + expiryMinutes * 60 * 1000).toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('Generate shareable link error:', error);
+    res.status(500).json({ error: 'Failed to generate shareable link' });
   }
 });
 

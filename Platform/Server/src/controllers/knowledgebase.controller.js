@@ -10,15 +10,9 @@ class KnowledgeBaseController {
       }
 
       const file = req.file;
-      const fileName = `knowledgebase/${Date.now()}_${file.originalname}`;
-
-      // Upload to Azure Blob Storage
-      const uploadResult = await azureStorageService.uploadFile(file.path, fileName);
-
-      // Store in database
-      // Note: Using uploaded_by_officer_id (not uploaded_by)
-      // Get department_id from user or fetch first available department
-      let departmentId = req.user.department_id;
+      
+      // Get department_id from request body or user
+      let departmentId = req.body.department_id || req.user.department_id;
       
       if (!departmentId) {
         // Get first available department as fallback
@@ -33,23 +27,32 @@ class KnowledgeBaseController {
           });
         }
       }
-      
+
+      // Create department-specific path: knowledgebase/department/{department_id}/{timestamp}_{filename}
+      const fileName = `knowledgebase/department/${departmentId}/${Date.now()}_${file.originalname}`;
+
+      // Upload to Azure Blob Storage
+      const uploadResult = await azureStorageService.uploadFile(file.path, fileName);
+
+      // Store in database
       const result = await pool.query(
         `INSERT INTO departmentknowledgebase (
           title, 
           file_name, 
           file_url, 
           file_type, 
+          file_size,
           uploaded_by_officer_id, 
           department_id,
           description
         )
-         VALUES ($1, $2, $3, 'pdf', $4, $5, $6)
+         VALUES ($1, $2, $3, 'pdf', $4, $5, $6, $7)
          RETURNING *`,
         [
           file.originalname, // title
           file.originalname, // file_name
           uploadResult.url,  // file_url
+          file.size,         // file_size
           req.user.id,       // uploaded_by_officer_id
           departmentId,      // department_id
           'Processing PDF...' // description
@@ -357,6 +360,45 @@ class KnowledgeBaseController {
     } catch (error) {
       console.error('Update status error:', error);
       res.status(500).json({ error: 'Failed to update status' });
+    }
+  }
+
+  // Generate shareable link for a document
+  async generateShareableLink(req, res) {
+    try {
+      const { id } = req.params;
+      const { expiryMinutes = 60 } = req.body;
+
+      // Get document details
+      const result = await pool.query(
+        'SELECT * FROM departmentknowledgebase WHERE id = $1',
+        [id]
+      );
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Document not found' });
+      }
+
+      const document = result.rows[0];
+
+      // Extract blob name from URL
+      const url = new URL(document.file_url);
+      const blobName = url.pathname.substring(url.pathname.indexOf('/') + 1);
+
+      // Generate SAS URL
+      const sasUrl = await azureStorageService.generateSasUrl(blobName, expiryMinutes);
+
+      res.json({
+        success: true,
+        data: {
+          shareableLink: sasUrl,
+          expiresIn: expiryMinutes,
+          expiresAt: new Date(Date.now() + expiryMinutes * 60 * 1000).toISOString()
+        }
+      });
+    } catch (error) {
+      console.error('Generate shareable link error:', error);
+      res.status(500).json({ error: 'Failed to generate shareable link' });
     }
   }
 }
