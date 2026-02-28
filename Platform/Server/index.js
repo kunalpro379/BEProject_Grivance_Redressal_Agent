@@ -30,11 +30,14 @@ import budgetRoutes from './src/routes/budget.routes.js';
 import dashboardRoutes from './src/routes/dashboard.routes.js';
 import chatRoutes from './src/routes/chat.routes.js';
 import rolesRoutes from './src/routes/roles.routes.js';
+import commentsRoutes from './src/routes/comments.routes.js';
 
 // Import services
 import pool from './src/config/database.js';
 import telegramBot from './src/services/telegram.bot.service.js';
 import runMigration from './src/migrations/fix_citizens_table.js';
+import addLocationToGrievances from './src/migrations/add_location_to_grievances.js';
+import fixDepartmentTrigger from './src/migrations/fix_department_trigger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -106,6 +109,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/otp', otpRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/grievances', grievanceRoutes);
+app.use('/api', commentsRoutes); // Comments routes (includes /api/grievances/:id/comments and /api/comments/:id)
 app.use('/api/vector', vectorRoutes);
 app.use('/api/citizens', citizenRoutes);
 app.use('/api/worker', workerRoutes);
@@ -144,18 +148,23 @@ app.use((err, req, res, next) => {
 // MIGRATION
 (async () => {
   try {
-    console.log('\nRunning database migration...');
+    console.log('\nRunning database migrations...');
+    // Migrations temporarily disabled to prevent connection pool exhaustion
     // await runMigration();
+    // await fixDepartmentTrigger();
+    // await addLocationToGrievances();
+    console.log('✅ All migrations completed (skipped)');
   } catch (error) {
-    console.warn('  Database migration failed:', error.message);
+    console.warn('⚠️  Database migration failed:', error.message);
   }
 })();
 
-// Initialize Telegram Bot (non-blocking)
+// Initialize Telegram Bot (non-blocking) - TEMPORARILY DISABLED
 (async () => {
   try {
-    await telegramBot.init();
-    console.log('Telegram Bot initialized');
+    console.log('Telegram Bot initialization skipped (disabled for debugging)');
+    // await telegramBot.init();
+    // console.log('Telegram Bot initialized');
   } catch (error) {
     console.warn('  Telegram Bot initialization failed:', error.message);
     console.warn('  Server will continue without Telegram bot');

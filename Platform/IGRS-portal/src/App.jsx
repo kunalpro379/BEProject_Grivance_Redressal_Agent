@@ -32,6 +32,7 @@ import WardOfficerDashboard from "./pages/government-officials/WardOfficerDashbo
 import MunicipalCommissionerDashboard from "./pages/government-officials/MunicipalCommissionerDashboard";
 import DistrictCollectorDashboard from "./pages/government-officials/DistrictCollectorDashboard";
 import RoleBasedDashboard from "./pages/government-officials/RoleBasedDashboard";
+import GrievanceMap from "./components/GrievanceMap";
 
 // Admin Portal Pages
 import KnowledgeBaseManagement from "./pages/admin/KnowledgeBaseManagement";
@@ -149,6 +150,7 @@ function App() {
             <Route path="dashboard" element={<OfficerDashboard userAuth={user} />} />
             <Route path="role-dashboard" element={<RoleBasedDashboard />} />
             <Route path="grievances" element={<GrievanceList />} />
+            <Route path="map" element={<GrievanceMap />} />
             <Route path="heatmap" element={<AreaHeatmap />} />
             <Route path="chat" element={<Chat />} />
             <Route path="announcements" element={<OfficialAnnouncements userRole="government_officer" />} />
@@ -185,6 +187,7 @@ function App() {
                   <Route path="dashboard" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="profile" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="grievances" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
+                  <Route path="map" element={<GrievanceMap />} />
                   <Route path="statistics" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="announcements" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />
                   <Route path="community" element={<CitizenDashboard userAuth={user} onLogout={logout} />} />

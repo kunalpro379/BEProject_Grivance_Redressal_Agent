@@ -62,19 +62,25 @@ class GrievanceDBService {
             image_path,
             image_description,
             enhanced_query,
-            embedding
+            embedding,
+            latitude,
+            longitude,
+            location_address
         } = grievanceData;
 
         try {
             const result = await query(
-                `SELECT submit_grievance($1, $2, $3, $4, $5, $6) as grievance_id`,
+                `SELECT submit_grievance($1, $2, $3, $4, $5, $6, $7, $8, $9) as grievance_id`,
                 [
                     citizen_id,
                     grievance_text,
                     image_path || null,
                     image_description || null,
                     enhanced_query || null,
-                    embedding || null
+                    embedding || null,
+                    latitude || null,
+                    longitude || null,
+                    location_address || null
                 ]
             );
 

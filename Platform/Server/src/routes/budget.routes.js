@@ -1,12 +1,7 @@
 import express from 'express';
-import pkg from 'pg';
-const { Pool } = pkg;
+import pool from '../config/database.js';
 
 const router = express.Router();
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 // NOTE: depId parameter in routes is the department UUID (id), not dep_id field
 // It comes from the URL: /api/budget/:depId/...

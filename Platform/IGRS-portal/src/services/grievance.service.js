@@ -20,8 +20,8 @@ export const grievanceService = {
     return response.data;
   },
 
-  async getGrievanceById(grievanceId) {
-    const response = await api.get(`/grievances/${grievanceId}`);
+  async getGrievanceById(grievanceId, params = {}) {
+    const response = await api.get(`/grievances/${grievanceId}`, { params });
     return response.data;
   },
 

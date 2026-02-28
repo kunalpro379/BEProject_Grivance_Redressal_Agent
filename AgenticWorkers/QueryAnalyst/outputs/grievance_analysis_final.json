@@ -1,36 +1,36 @@
 {
   "grievance": {
-    "text": "There is a huge garbage pile near my apartment in Mumbai.\n    It has been there for 2 weeks and is causing health issues.\n    The BBMP workers are not cleaning it despite multiple complaints.\n    Children are getting sick and the smell is unbearable.",
-    "enhanced_query": "There is a huge garbage pile near my apartment in Mumbai.\n    It has been there for 2 weeks and is causing health issues.\n    The BBMP workers are not cleaning it despite multiple complaints.\n    Children are getting sick and the smell is unbearable.\n\nImage description: The image depicts a severely polluted waterway and its adjacent bank. The foreground and midground are dominated by a dense accumulation of plastic waste, primarily discarded plastic bottles of various sizes and colors (clear, green, blue, brown). This refuse is mixed with natural debris such as twigs and branches, forming a thick layer along the water's edge and partially submerged in the murky, brown water. The bank itself is covered in dry, sparse vegetation and dirt, suggesting an unmaintained or wild area rather than an urban residential one. The sheer volume of waste indicates a long-standing environmental problem.\nVisible text in image:",
+    "text": "Title: Garbage\nCategory: Water Supply\nCity: Ambernath\nAge: 22\n\nDescription:\ngarbage issue",
+    "enhanced_query_described": "**Comprehensive Grievance Description**\n\n**Original Complaint/Query:** The citizen has submitted a complaint regarding a garbage issue in Ambernath.\n\n**Visual Evidence and Location Details:** A visual inspection of the provided image reveals a highly unsanitary outdoor scene characterized by a large accumulation of garbage. The image captures a mixture of plastic bags, wrappers, discarded packaging, and general debris scattered across the ground. A rusted, metal grid fence, partially collapsed and overgrown with dried vegetation, runs through the center of the frame. Behind this fence, a murky water body (likely a canal or ditch) is visible, appearing dark and potentially stagnant, with more garbage visible floating on or near its surface. The location appears to be an urban slum area in Ambernath, with green foliage visible on the banks beyond the water.\n\n**Key Observations and Concerns:** The observed garbage accumulation and pollution of the nearby water body pose significant environmental and health concerns. The presence of plastic waste, snack packaging, and other non-biodegradable materials in the garbage pile suggests a lack of proper waste management practices in the area. The partially collapsed metal grid fence and dried vegetation indicate neglect and disrepair, further exacerbating the environmental degradation. The murky water body, likely a canal or ditch, appears to be a potential breeding ground for disease-carrying insects and other pollutants.\n\n**Initial Category Assessment:** Based on the visual evidence and location details, the grievance can be initially categorized as a **Waste Management** issue, with potential subcategories of **Environmental Pollution** and **Public Health Concerns**. Further investigation and verification of the location and circumstances surrounding the complaint are necessary to determine the root cause and scope of the issue.",
     "image": {
-      "path": "garbage.jpeg",
-      "description": "The image depicts a severely polluted waterway and its adjacent bank. The foreground and midground are dominated by a dense accumulation of plastic waste, primarily discarded plastic bottles of various sizes and colors (clear, green, blue, brown). This refuse is mixed with natural debris such as twigs and branches, forming a thick layer along the water's edge and partially submerged in the murky, brown water. The bank itself is covered in dry, sparse vegetation and dirt, suggesting an unmaintained or wild area rather than an urban residential one. The sheer volume of waste indicates a long-standing environmental problem.",
+      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp1cm9eeo3.jpeg",
+      "description": "The image captures a highly unsanitary outdoor scene dominated by a large accumulation of garbage. In the foreground and midground, various types of refuse, including plastic bags, wrappers, discarded packaging, and general debris, are strewn across the ground. A rusted, metal grid fence, partially collapsed and covered in dried vegetation, runs through the center of the frame. Behind this fence, and at a lower elevation, a murky water body (likely a canal or ditch) is visible, appearing dark and potentially stagnant, with more garbage visible floating on or near its surface. Green foliage is present on the banks beyond the water. The overall impression is one of severe environmental neglect and pollution affecting both land and a water source.",
       "key_objects": [
-        "plastic bottles",
+        "garbage pile",
         "plastic waste",
-        "murky water",
-        "dried grass/vegetation",
-        "twigs and branches",
-        "white plastic bucket"
+        "metal grid fence",
+        "dried vegetation",
+        "murky water body",
+        "green foliage",
+        "snack packaging"
       ],
-      "scene_type": "Polluted riverbank/waterway",
-      "extracted_text": ""
-    }
-  },
-  "location": {
-    "pincode": "",
-    "district": "",
-    "state": "Maharashtra",
-    "location_confidence": "Medium",
-    "raw_location_mentions": [
-      "Mumbai"
-    ]
+      "scene_type": "Outdoor garbage accumulation near a polluted water body",
+      "extracted_text": "BALAR"
+    },
+    "location": {
+      "address": "Not visible",
+      "latitude": null,
+      "longitude": null,
+      "landmarks": [],
+      "area_type": "urban_slum"
+    },
+    "category": "Environmental Issues",
+    "sub_category": "Garbage and Unsanitary Practices"
   },
   "analysis": {
     "query_type": {
       "query_type": "Complaint",
-      "confidence": "High",
-      "reasoning": "The query expresses frustration and concern about a specific issue (huge garbage pile near the apartment) that has been ongoing for 2 weeks, causing health issues and not being addressed despite multiple complaints. The tone is critical and demanding, indicating a complaint."
+      "confidence": "High"
     },
     "emotion": {
       "primary_emotion": "Angry",
@@ -40,110 +40,98 @@
       ],
       "emotion_intensity": 8,
       "emotional_indicators": [
-        "huge garbage pile",
-        "health issues",
-        "despite multiple complaints",
-        "children are getting sick",
-        "the smell is unbearable"
+        "garbage issue",
+        "unsanitary outdoor scene",
+        "large accumulation of garbage",
+        "rusted, metal grid fence",
+        "partially collapsed and covered in dried vegetation",
+        "murky water body",
+        "dark and potentially stagnant",
+        "garbage visible floating on or near its surface",
+        "severe environmental neglect and pollution",
+        "BALAR"
       ]
     },
     "severity": {
       "severity_level": "Critical",
-      "criticality_score": 9,
+      "criticality_score": 8,
       "impact_scope": "Community",
       "potential_consequences": [
-        "Health issues and illnesses among residents, particularly children",
-        "Unbearable living conditions due to the smell and visual pollution",
-        "Potential long-term environmental damage and harm to local ecosystems",
-        "Negative impact on property values and quality of life in the surrounding area",
-        "Risk of disease outbreaks and epidemics if the situation is not addressed promptly"
+        "Environmental pollution and degradation",
+        "Health risks due to unsanitary conditions and potential water contamination",
+        "Negative impact on local ecosystem and wildlife",
+        "Potential for disease outbreaks and waterborne illnesses",
+        "Long-term damage to the water supply and surrounding environment"
       ]
     },
     "priority": {
-      "sentiment_score": 8,
+      "sentiment_score": 2,
       "urgency_level": "High",
-      "emotional_tone": "Anger and Frustration",
+      "emotional_tone": "Anger and Disgust",
       "key_emotional_indicators": [
-        "huge garbage pile",
-        "health issues",
-        "despite multiple complaints",
-        "children are getting sick",
-        "the smell is unbearable"
+        "unsanitary outdoor scene",
+        "large accumulation of garbage",
+        "rusted, metal grid fence",
+        "murky water body",
+        "severe environmental neglect and pollution",
+        "urban_slum"
       ],
       "priority_level": "High",
-      "justification": "The grievance has a significant impact on the health and well-being of multiple individuals, particularly children, due to the presence of a huge garbage pile near the apartment in Mumbai. The issue has been ongoing for 2 weeks, and the BBMP workers' inaction despite multiple complaints exacerbates the situation. The smell and health issues caused by the garbage pile necessitate immediate attention.",
-      "expected_resolution_time": "Within 48 hours",
-      "risk_assessment": "High risk of further health complications and environmental degradation if the garbage pile is not addressed promptly. The situation may escalate into a public health crisis if not resolved quickly.",
-      "_raw_sentiment": {
-        "sentiment_score": 8,
-        "urgency_level": "High",
-        "emotional_tone": "Anger and Frustration",
-        "key_emotional_indicators": [
-          "huge garbage pile",
-          "health issues",
-          "despite multiple complaints",
-          "children are getting sick",
-          "the smell is unbearable"
-        ]
-      },
-      "_raw_priority": {
-        "priority_level": "High",
-        "justification": "The grievance has a significant impact on the health and well-being of multiple individuals, particularly children, due to the presence of a huge garbage pile near the apartment in Mumbai. The issue has been ongoing for 2 weeks, and the BBMP workers' inaction despite multiple complaints exacerbates the situation. The smell and health issues caused by the garbage pile necessitate immediate attention.",
-        "expected_resolution_time": "Within 48 hours",
-        "risk_assessment": "High risk of further health complications and environmental degradation if the garbage pile is not addressed promptly. The situation may escalate into a public health crisis if not resolved quickly."
-      }
+      "justification": "The grievance has a significant impact on the environment, affecting both land and a water source. The presence of garbage in the water body poses a risk to public health and the ecosystem. The severity of the issue and its potential consequences warrant a high priority level for resolution.",
+      "expected_resolution_time": "Within 3-5 working days",
+      "risk_assessment": "High risk of waterborne diseases, environmental pollution, and potential harm to local wildlife. Immediate action is required to mitigate these risks and restore the affected area to a safe and healthy state."
     },
     "patterns": {
       "is_recurring_issue": true,
       "similar_patterns_found": [
-        "Garbage pile near residential area in Delhi",
-        "Unmaintained dumpsite in Chennai",
-        "Pollution complaints in Bangalore"
+        "Environmental pollution in urban slums",
+        "Garbage accumulation in public spaces",
+        "Water pollution in canals and ditches"
       ],
       "spam_likelihood": "Medium",
-      "pattern_notes": "The pattern of complaints about garbage piles near residential areas in Indian cities suggests a recurring issue. The similarity in locations (Mumbai, Delhi, Chennai, Bangalore) and the nature of the complaints (health issues, BBMP workers not cleaning, children getting sick) indicates a potential spam campaign. However, the specific details of each complaint (e.g. BBMP workers, children getting sick) suggest that the complaints are genuine. Further investigation is needed to determine the authenticity of the complaints."
+      "pattern_notes": "The image description and visible text in the image ('BALAR') suggest a potential spam campaign related to environmental issues in Ambernath. The recurring issue of garbage accumulation and water pollution in urban slums is a common problem in many cities. However, the presence of a specific location ('Ambernath') and a unique image description suggests that this might be a genuine issue rather than a spam campaign. Further investigation is required to determine the authenticity of the report."
     },
     "historical_trends": {
       "top_3_similar_cases": [
         {
-          "id": "8521",
-          "summary": "Overflow of sewage in a society in Gujarat, causing diseases and unhygienic conditions."
+          "id": "13522",
+          "summary": "Housing and Urban Affairs  DDA (Delhi Development Authority)  OthersMiscSuggestions ----------------------- Sub-Regarding request to DDA to remove stagnant water and garbage dump from vacant landsplot in Kirari Suleman Nagar, Delhi -110086."
         },
         {
-          "id": "2220",
-          "summary": "Water problem in a ward in Rajasthan, with no water arrangement or government water tanks for residents."
+          "id": "6048",
+          "summary": "Nearby People throwing this garbage everyday here. and due to rains it has become worse and flys are here in a large number and also is stinking."
         },
         {
-          "id": "7849",
-          "summary": "Allegation of corruption and misconduct against state government officials in Uttar Pradesh."
+          "id": "14557",
+          "summary": "There is always garbage pile up in this vacant land due to people dumping garbage due to ignorance and lack of discipline, in spite of garbage collection vehicle coming everyday."
         }
       ],
       "common_resolutions": [
         {
-          "resolution": "Resolution of similar cases involved the intervention of higher authorities, such as the Municipal Commissioner or the State Government, to address the grievances and ensure that the responsible parties take action to resolve the issues.",
-          "frequency": 3
+          "resolution": "Clearing the garbage and taking strict measures to prevent future dumping",
+          "count": 3
         },
         {
-          "resolution": "In some cases, the resolution involved the provision of incentives or compensation to the affected parties, such as financial assistance for the construction of toilets or the provision of clean drinking water.",
-          "frequency": 2
+          "resolution": "Providing education and awareness about the importance of proper waste management",
+          "count": 2
         },
         {
-          "resolution": "The resolution of similar cases also involved the implementation of new policies or programs to address the underlying issues, such as the Swachh Bharat Mission or the Mukhyamantri Gramin Peyjal Nishchay Yojana.",
-          "frequency": 2
+          "resolution": "Implementing regular garbage collection and disposal services",
+          "count": 2
         }
       ],
       "patterns_identified": [
         {
-          "pattern": "Inadequate waste management and sanitation infrastructure",
-          "frequency": 5
+          "pattern": "Garbage dumping in vacant lands or public spaces",
+          "count": 5
         },
         {
-          "pattern": "Lack of accountability and transparency in government agencies",
-          "frequency": 3
+          "pattern": "Stagnant water and garbage accumulation in residential areas",
+          "count": 2
         },
         {
-          "pattern": "Inadequate funding and resources for public services",
-          "frequency": 2
+          "pattern": "Lack of proper waste management infrastructure and services",
+          "count": 4
         }
       ]
     },
@@ -151,49 +139,173 @@
       "fraud_risk": "Low",
       "spam_indicators": [
         {
-          "pattern": "Generic complaint about environmental issue",
-          "description": "The complaint describes a general problem without specific details about the location or the parties involved."
+          "pattern": "Generic complaint",
+          "description": "The complaint description 'garbage issue' is too vague and does not provide specific details about the issue."
         },
         {
-          "pattern": "Lack of specific evidence",
-          "description": "The image provided does not directly show the garbage pile near the apartment in Mumbai, but rather a different location."
+          "pattern": "Image-query mismatch",
+          "description": "The complaint category is 'Water Supply' but the image clearly shows a garbage issue affecting a water body, which is a valid concern but not directly related to the complaint category."
         }
       ],
       "authenticity_confidence": "Medium",
       "verification_recommendations": [
-        "Request more specific details about the location and the parties involved in the complaint.",
-        "Verify the existence of the garbage pile near the apartment in Mumbai through additional evidence or on-site inspection.",
-        "Consider the possibility of a misdirected complaint or a misunderstanding about the location."
+        "Request more specific details about the garbage issue and its impact on the water supply.",
+        "Verify the location of the issue to ensure it is within the Ambernath city limits.",
+        "Request images or videos of the issue from multiple angles to confirm the severity of the problem."
       ]
     }
   },
-  "classification": {
-    "category": {
-      "main_category": "Environmental Issues",
-      "sub_category": "Garbage and Unsanitary Practices",
-      "confidence": "High",
-      "reasoning": "The grievance mentions a huge garbage pile near the apartment in Mumbai, causing health issues and an unbearable smell. The BBMP workers are not cleaning it despite multiple complaints. This indicates a problem with garbage disposal and sanitation, which falls under the category of Environmental Issues and specifically Garbage and Unsanitary Practices."
+  "department": {
+    "recommended_department": "Public Works Department (PWD) or Municipal Corporation",
+    "contact_information": "Contact the local Public Works Department (PWD) or Municipal Corporation office in Ambernath for reporting garbage issues. You can also reach out to the local authorities through their official website or mobile app.",
+    "jurisdiction": "Urban",
+    "allocated_department": null
+  },
+  "real_time_data": {
+    "search_results": {
+      "Ambernath garbage disposal policy": {
+        "results": [
+          {
+            "title": "No rubbish: Sop story in Ambernath's trash plan - Mumbai Mirror",
+            "url": "https://mumbaimirror.indiatimes.com/mumbai/other/no-rubbish-sop-story-in-ambernaths-trash-plan/articleshow/48795805.html",
+            "content": "DIY to reduce garbage generation and get rebate in property tax, AMC tells its residents.  \n   \n In a bid to end the blame game over garbage disposal, the Ambernath Municipal Council’s (AMC) is aiming to be the first civic body in the state to introduce a waste management plan run by citizens, which will be rewarded with property tax concessions. [...] This, corporator Patil says, will increase the civic body’s struggle to dispose of garbage in a timely manner. Patil has proposed that solid waste management be handed over to citizens who will collect, segregate and then dispose of it in the dumping ground, or use it for compost.   \n  \n “The proposal was approved by a majority of corporators. We don’t have a CEO at the moment. We are waiting for one to take charge, after which orders would be issued to implement it,” said AMC president Pradnya Bansode.   \n  \n The civic body’s CEO, Bhalchandra Gosavi, is behind bars for alleged graft in a Transfer of Development Rights case. Thane district collector Ashwini Joshi has assumed additional charge till a new appointment is made. [...] Bansode added that tenders will also be floated for compost collection. “The societies can also prepare compost from the waste, which will be bought by the civic body. This should further motivate housing societies. The compost will be used in AMC gardens, greenery at traffic islands and roadside plantations,” Bansode said.   \n  \n She said the new garbage collection and disposal project will be proposed only for new housing societies, and older ones can join in as well. “Peoples’ involvement in this activity will go a long way in making the city a cleaner and beautiful place,” Bansode added.",
+            "score": 0.7373288,
+            "published_date": ""
+          },
+          {
+            "title": "Solid Waste Management Cell | Mumbai Metropolitan Region ...",
+            "url": "https://mmrda.maharashtra.gov.in/en/divisions/town-country-planning/solid-waste-management-cell/overview",
+            "content": "Ambernath Municipal Council (AMC) and Kulgaon-Badlapur Municipal Council (KBMC) have proposed an Integrated Solid Waste Management (ISWM) Project for the Disposal of Municipal Solid Waste in a scientific manner. The proposed integrated process comprises of several collection methods, varied transportation equipment, storage, recovery mechanisms for recyclable material, reduction of waste volume and quantity by methods such as composting, Refuse-Derived Fuel (RDF) processing and disposal in a designated engineered sanitary landfill. MMRDA has made budget provision of in the FY 2022-23 for ISWM project of AMC & KBMC. Further, MMRDA has requested Ulhasnagar Municipal Corporation (UMC) to inform MMRDA about their willingness to join and share the proportionate expenses in Regional Integrated",
+            "score": 0.6133529,
+            "published_date": ""
+          },
+          {
+            "title": "Appraisal on suitable landfill site selection for municipal ...",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S1474706524000494",
+            "content": "The result shows that south western part and eastern part of the Ambernath are the suitable sites for landfilling of municipal waste (Fig. 5). Landfill suitability mapping has been categorised into five classes (Very low, low, moderate, high, and very high). Central part of the Ambernath is much more urbanized, and surrounding part is covered by the vacant open space. Ushanagar, Kalyan, Samrat Ashok Nagar, Swami Nagar, Babasai Nagar, Matoshree Nagar, and Kamlakar Nagar are the most unsuitable\n\n## Policy making approach",
+            "score": 0.60861784,
+            "published_date": ""
+          }
+        ],
+        "answer": null,
+        "query": "Ambernath garbage disposal policy"
+      },
+      "government schemes for garbage management in urban slums": {
+        "results": [
+          {
+            "title": "A Scalable Waste Management Solution for Slums by Earth5R",
+            "url": "https://earth5r.org/waste-management-for-slums-earth5r/",
+            "content": "## Transforming Siddharth Nagar: A Model for Community-Led Waste Management in Urban Slums\n\nA compelling case study of Earth5R’s implementation can be found in Siddharth Nagar, a densely populated informal settlement in Mumbai. Prior to Earth5R’s intervention, the area struggled with overflowing bins, frequent garbage fires, and blocked drainage channels. In collaboration with local youth groups and women’s self-help groups, Earth5R conducted a comprehensive waste audit followed by a three-month community training program. [...] Earth5R employs a decentralized implementation model, prioritizing local leadership and community ownership. Instead of relying solely on municipal collection systems, Earth5R trains local volunteers and waste workers, creating micro-ecosystems of waste management within each slum. This not only boosts efficiency but also generates livelihood opportunities for the urban poor. [...] ## FAQs on A Scalable Waste Management Solution for Slums by Earth5R\n\nWhat is Earth5R’s waste management model?Earth5R’s model is a community-driven, decentralized system that focuses on reducing, segregating, and sustainably processing waste in urban slums using the 5R principles—Refuse, Reduce, Reuse, Repurpose, and Recycle.\n\nWhy is waste management a major issue in slums?Slums often lack formal waste collection services, infrastructure, and awareness, leading to uncollected waste, health hazards, and environmental pollution.\n\nHow is Earth5R’s approach different from conventional municipal systems?Unlike top-down models, Earth5R empowers communities, uses local resources, and creates circular waste economies through localized solutions.",
+            "score": 0.9983897,
+            "published_date": ""
+          },
+          {
+            "title": "[PDF] Solid waste collection that benefits the urban poor",
+            "url": "https://www.ccacoalition.org/sites/default/files/resources//CWG%20-%20paper%20-%20Solid%20Waste%20collection%20that%20benefits%20the%20urban%20poor.pdf",
+            "content": "Are community-based schemes the best solution? [...] Solid waste collection that benefits the urban poor This booklet is based on papers and discussions at a CWG workshop that was held in Dar es Salaam in March 2003. It provides a summary of some of the main points from the workshop and provides links to further information. The following questions are discussed: n Why is it so important to collect solid waste from poor areas? n How can we afford to collect waste from poor areas when the waste collection service is already overloaded? n How can we enhance the contribution of the poor to waste collection services? n Are community-based schemes the best solution? n Are private contractors the answer? This little publication should be of interest to managers in local government, NGOs, and others who are concerned to improve living conditions [...] Key points – the role of local government Though there are factors that make the collection of solid waste from low-income urban areas more difficult than collection from more prosperous areas, there are compelling reasons for providing a waste collection service for the urban poor. Solid waste collection and recycling provide important opportunities for job creation. Whenever possible, labour-intensive methods should be preferred and recycling should be encouraged. Community-based and private sector waste collection can provide useful alternatives to the use of municipal workforces for waste collection, but the public sector has a very important role in such partnerships.",
+            "score": 0.99836427,
+            "published_date": ""
+          },
+          {
+            "title": "Community-based waste management systems for low-income areas",
+            "url": "https://www.ccacoalition.org/projects/community-based-waste-management-systems-low-income-areas",
+            "content": "Rapid global urbanization has caused a number of densely packed informal settlements to form in many low-income countries in the world. The unsanitary conditions in such communities are a major cause of health degradation for the inhabitants of such communities. Waste infrastructure and waste treatment services are necessary facilities, which most of those communities lack. [...] In recognition of the structural challenges inherent to delivering waste services in low-income areas and informal settlements, many cities in Africa are increasingly looking toward community-based models. The \"Community-based waste management systems (CBWMS)\" project was implemented as a solution for this impending issue. This project promoted local empowerment and was designed around the needs and preferences of the local community, tailoring solutions to local contexts and working in close collaboration with local stakeholders. [...] Promote community-based waste management systems to empower the local communities and create a locally contextualized waste collection system designed around the needs and preferences of the local community.\n\nAssistance was provided to the City of Freetown, Sierra Leone, as part of the targeted technical assistance given to six cities as part of the Waste Finance Programme. After a thorough assessment, it was determined that the assistance to be provided to Freetown would be to pilot community-based waste management in two hard-to-reach areas. This assistance was provided by C40 Cities on behalf of CCAC. The project received co-funding from the Citi-Foundation.\n\nOver the three-month engagement, the following activities were carried out.",
+            "score": 0.99694854,
+            "published_date": ""
+          }
+        ],
+        "answer": null,
+        "query": "government schemes for garbage management in urban slums"
+      },
+      "water supply and sanitation issues in Ambernath": {
+        "results": [
+          {
+            "title": "Ambernath's main water source contaminated - Mumbai Mirror",
+            "url": "https://mumbaimirror.indiatimes.com/mumbai/ambernaths-main-water-source-contaminated/articleshow/125546526.html",
+            "content": "A series of internal communications between the Thane Irrigation Department, the Maharashtra Pollution Control Board (MPCB), and Ambernath MIDC have confirmed what residents have been alleging for weeks – contaminated water is entering the Chikhloli (Jambivli) dam, the primary drinking water source for lakhs of people in Ambernath city. [...] In a strongly worded letter dated September 30, 2025, the Executive Engineer of the Thane Irrigation Department informed the company that “polluted and semi-treated water” from its premises appeared to be entering the dam’s catchment and demanded immediate corrective action. The letter cites an earlier MPCB report dated September 12, which flagged contamination indicators in the dam water, and follow-up inspections on September 28 and 29, confirming the presence of pollutants. The engineer stressed that because the reservoir exclusively supplies potable water to Ambernath, any industrial discharge poses “serious risks”. [...] Officials have now acknowledged that an industrial unit near the Dam’s catchment was ordered to shut down after inspections and test reports repeatedly revealed untreated and semi-treated effluents reaching the reservoir, confirming contamination of the principal drinking water source for Ambernath. This decision was made following weeks of resident allegations, substantiated by internal communications among the Thane Irrigation Department, Maharashtra Pollution Control Board (MPCB), and Ambernath MIDC.  \n  \nWritten warnings ignore",
+            "score": 0.9999502,
+            "published_date": ""
+          },
+          {
+            "title": "Four out of 11 samples of treated water in Ambernath, Ulhasnagar ...",
+            "url": "https://indianexpress.com/article/cities/mumbai/four-out-of-11-samples-of-treated-water-in-ambernath-ulhasnagar-found-unfit-for-drinking-say-ngos-5263950/",
+            "content": "“It is MPCB’s job to check industrial pollution in water. I can assure you that there are no industries discharging waste into water bodies in my region,” said Patil.\n\nResidents of Ambernath and Ulhasnagar had complained earlier about contaminated water in their areas.\n\n“The problem generally escalates during the monsoon. Once, the tap-water was mud-coloured and had a terrible smell,” said Reena Kalra, a resident of Ulhasnagar, who says she uses UV-filtered and boiled water. Manas Patil, a resident of Ambernath, said there’s a metallic after-taste to the water even after boiling. [...] Of eleven samples of treated water that were tested by non-governmental organisations in Ambernath earlier this month, four were found to be non-potable. All 14 samples of untreated water taken directly from dams or other sources were also found to be non-potable, according to reports released by two NGOs.\n\nActivists said water supply in Ambernath and Ulhasnagar has been polluted by industrial effluents dumped directly into the Ulhas river and its tributaries. [...] The tests were conducted on July 6 by the Ambernath Citizens’ Forum and Nagrik Seva Mandal. “The results painted a grim picture. Four out of the 11 water samples from households were deemed to be non-potable, including water supplied to the Ulhasnagar Municipal Corporation,” said Satyajit Burman, an activist working towards access to potable water.\n\nThe report showed presence of coliforms and thermotolerant coliform bacteria in water being supplied to the offices of the municipality and senior police officers in Ulhasnagar and Ambernath, along with some other private establishments. “According to the report, the water can’t be made potable just by boiling it. The water is severely contaminated,” said Burman.",
+            "score": 0.99988043,
+            "published_date": ""
+          },
+          {
+            "title": "[PDF] FIELD ASSESSMENT FOR PERFORMANCE IMPROVEMENT PLAN",
+            "url": "https://cwas.org.in/resources/file_manager/ambarnath_pip_revised.pdf",
+            "content": "Electronic Recorded Data Water Supply Diagnostics AMBARNATH MUNICIPAL COUNCIL: PIP STRATEGIES Water Tariff Structure: AMC Water tariff structure revised in 2010-11, consumption slab based tariffs: •Domestic Tariffs 50% lesser than GR norms. •Non- Domestic Tariffs are comparable. Institutional tariffs are 25% lesser Water Supply AMC Total Number Of AMC Connections 7149 Number Of Connections Buildings 860 (HH Served:7310) Number Of Individual Connections 6289 City Engineer Deputy Engineer Water Supply And Sanitation Asst Engineer Laboratory Assistant/ Valve Man Labour From Health Department And PWD Taken For Valve Man Supervisor Clerk Pump Operator / Electrical/ Fitter PWD Clerk Sanctioned : 1 Filled: 1 Sanctioned : 2 Filled :2 Sanctioned :4 Filled :2 Sanctioned : 4 Filled : 1 Sanctioned : [...] AMBARNATH MUNICIPAL COUNCIL: PIP STRATEGIES Ordinance Wards Water Supply Zones S.No WATER SUPPLY INDICATOR VALUES Unit 2008-09 2009-10 2010-11 1 Coverage of water supply connections # % 37 38 92 2 Per capita available of water at consumer end Lpcd 153 123 128 3 Extent of metering of water connections % 73.7 76.7 98.6 4 Extent of Non Revenue Water % 28.4 28.4 29.61 5 Continuity of water supply Hours/Day 4.00 4.00 3.5 6 Efficiency in redressal of customer complaints % 100 99 99 7 Quality of water supplied % 96 97 96 8 Cost recovery in water supply services  % 88.8 92.9 94.4 9 Efficiency in collection of water supply related charges % 90 90 90 # Coverage was showing low in 2008-09 & 2009-10 due to method of data recording. Water Supply Indicators 92 92 92 Water Supply Diagnostics AMBARNATH [...] Concentration Of Class III and IV Staff(MJP) Present NRW 30% Complicated Institutional Structure. MJP Is Supplying 75% Water To Ambarnath City. Water Supply Should Be Handed Over To A Single Institution As Per 74th CAA, Water Supply Can Be Handed Over To ULB In A Phased Manner Increase Sanctioned Quota To 10 MLD Implementation Of Water Audit Recommendations Additional Staff On Deputation Capacity Building Stream Lining Of Institution Wastewater Diagnostics AMBARNATH MUNICIPAL COUNCIL: PIP STRATEGIES • Coverage Of Toilets 43% Population In Non Slum Areas , 100% Coverage Of Individual Toilets. ~2000 Individual Toilets In Slum (Ongoing Survey) And 2308 Community Toilet Seats (1438 MMR + 870 AMC). Average Number Of Users Per Seat 63. MoUD WSP Norm 50 users. • Coverage Of Waste Water Network",
+            "score": 0.9997347,
+            "published_date": ""
+          }
+        ],
+        "answer": null,
+        "query": "water supply and sanitation issues in Ambernath"
+      },
+      "Environmental Issues latest news ": {
+        "results": [
+          {
+            "title": "5 Things to Watch in Climate and Environment in 2026",
+            "url": "https://unu.edu/ehs/article/5-things-watch-climate-and-environment-2026",
+            "content": "issues and impacts they address, such as land degradation and carbon emissions. Efforts to bridge the Rio Conventions are being made under the Rio Trio initiative started in 2024 in Baku. [...] where the focus will be on the global housing crisis and sustainable urban development. [...] ### Changing realities: More heat and escalating risk\n\nAs Earth’s temperatures rise from human-induced greenhouse gas emissions, the 1.5°C  overshoot is likely. The latest WMO Global Annual to Decadal Climate Update warns that global temperatures are likely to stay at or near record levels from 2025 to 2029, sharply escalating risks for societies and economies. It projects that each year in this period will be about 1.2°C to 1.9°C warmer than the 1850–1900 average, with a 70 per cent chance that the five-year average for 2025–2029 will be above this threshold. Every fraction of a degree of additional warming intensifies heatwaves, extreme rainfall, droughts, ice loss, ocean heating and sea level rise, compounding harm for people and ecosystems worldwide.",
+            "score": 0.96458924,
+            "published_date": ""
+          },
+          {
+            "title": "15 Biggest Environmental Problems of 2025",
+            "url": "https://earth.org/the-biggest-environmental-problems-of-our-lifetime/",
+            "content": "According to a 2023 study, air pollution in South Asia – one of the most polluted areas in the world – cuts life expectancy by about five years. The study blames a series of factors, including a lack of adequate infrastructure and funding for the high levels of pollution in some countries. Most countries in Asia and Africa, which together contribute about 92.7% of life years lost globally due to air pollution, lack key air quality standards needed to develop adequate policies. Moreover, just 6.8% and 3.7% of governments in the two continents, respectively, provide their citizens with fully open-air quality data. [...] Sign up to our weekly and monthly, easy-to-digest recap of climate news from around the world.\n\n# 16 Biggest Environmental Problems of 2026\n\n16 Biggest Environmental Problems of 2026\n\nThe world is grappling with a host of pressing environmental challenges that demand immediate attention and action. From climate change-induced disasters, biodiversity loss and plastic pollution to the rise of artificial intelligence, the 16 biggest environmental problems of 2026 paint a stark picture of the urgent need for climate change mitigation and adaptation.\n\n—\n\n## 1. Global Warming From Fossil Fuels [...] Undoubtedly among the biggest environmental problems of our lifetime is the rise in greenhouse gas emissions, which trap heat the sun's heat in the atmosphere, raising Earth’s surface temperature and leading to longer and hotter heatwaves. Atmospheric concentrations of all three major planet-warming gases – carbon dioxide (CO2), methane, and nitrous oxide – have never been so high. Because of these gases’ extremely long durability in the atmosphere, the world is now committed to \"more long-term temperature increase,\" Ko Barret, Deputy Secretary-General of the World Meteorological Organization, said last month.",
+            "score": 0.936285,
+            "published_date": ""
+          },
+          {
+            "title": "Environment News: Climate Change, Energy & Conservation",
+            "url": "https://www.nbcnews.com/science/environment",
+            "content": "## Data Graphics\n\n## Quiz: Which objects actually get recycled?\n\nU.N Climate Change Conference COP 30\n\n## Environment\n\n## With the world at a climate summit, White House pushes major environmental rollbacks\n\nA person fishes with offshore oil and gas platform in California. \n\n## Environment\n\n## Trump administration announces plan to drill oil off California and Florida\n\nButterflies of Music Garden in Toronto\n\n## U.S. news\n\n## Trump administration moves to roll back some Endangered Species Act protections\n\nBenicia Fire Department firefighter Kyle Williams keep flames at bay.\n\n## U.S. news\n\n## Senators propose bill to require PPE for wildland firefighters, but some have reservations [...] ## Environment\n\n## Looming water supply 'bankruptcy' puts billions at risk, U.N. report warns\n\n## Climate change\n\n## 2025 was the third-hottest year ever recorded on Earth, data shows\n\nEmissions rise from the smokestacks at the Jeffrey Energy Center coal power plant \n\n## Environment\n\n## EPA to stop calculating deaths avoided and health care savings from air pollution rules\n\nSilhouettes of large billowing smoke coming out of smoke stacks as the sun sets\n\n## Climate change\n\n## Carbon pollution rose last year. Experts blame a cold winter, natural gas prices and data centers.\n\nA family walks in the rain at Elysian Park on Dec. 24, 2025 in Los Angeles, California\n\n## Science News\n\n### California is completely free of drought for the first time in 25 years [...] Biodegradable Mardi Gras Beads.\n\n## U.S. news\n\n## Biodegradable Mardi Gras beads help make Carnival season more sustainable\n\nTraffic moves along a stretch of roads near the Royal Dutch Shell and Valero Energy's Norco refineries during a power outage caused by Hurricane Ida in LaPlace, La., on Aug. 30, 2021.\n\n## Climate change\n\n## EPA reverses climate change finding, stripping its own ability to regulate emissions\n\nCoal fired power station.\n\n## Climate change\n\n## EPA to repeal its own conclusion that greenhouse gases harm the environment\n\nMount Saint Helens on Jan. 17. 2026.\n\n## Environment\n\n## Western states face 'snow drought' as snowpack hits record lows\n\nWater crisis forces families into long queues and threatens children's education in Kabul\n\n## Environment",
+            "score": 0.87234735,
+            "published_date": ""
+          }
+        ],
+        "answer": null,
+        "query": "Environmental Issues latest news "
+      },
+      "Environmental Issues government policy  2024 2025": {
+        "results": [
+          {
+            "title": "Project 2025 Report: Environmental Guide",
+            "url": "https://www.law.berkeley.edu/research/clee/research/other-research-initiatives/environmental-guide-to-project-2025-report/",
+            "content": "Project 2025 was created by over 100 conservative organizations, reflecting an increasingly organized and emergent assault on principles of representative democracy. It calls for a significant and often radical overhaul of the federal government, with a particular focus on agencies and actions connected to climate change and environmental and energy law and policy. Amidst a new presidential administration, we anticipate that many of these proposals will continue to be put forward and underlying legal theories will be pursued. [...] The document below provides excerpts from Project 2025 addressing government responses to climate change and environmental impacts. These excerpts span 41 pages and include comments for those interested in a deeper understanding. For a quick overview, we have also outlined major themes and the corresponding page numbers in both the report and this document. \n\nRead the complete annotations: A Guide to Major Climate and Environmental Excerpts in the Project 2025 Report\n\nRead CLEE’s Monograph Series on the Project 2025 Report: [...] Skip to content Skip to main menu\n\n# A Guide to the Major Climate and Environmental Excerpts in the Project 2025 Report\n\nProject 2025, titled “Mandate for Leadership: The Conservative Promise,” presents a comprehensive collection of conservative proposals on critical topics related to U.S. energy and environmental policy. Despite receiving significant media attention, few have read the entire 900+ page document or mapped its potential implications for climate change and environmental impacts if major portions are enacted.",
+            "score": 0.9997198,
+            "published_date": ""
+          },
+          {
+            "title": "Project 2025's Environmental and Climate Policy Proposals",
+            "url": "https://doctorsoftheworld.org/blog/project-2025s-environmental-and-climate-policy-proposals/",
+            "content": "Project 2025’s proposed policies towards the environment and climate change are widespread including removal of environmental protections, ramping up the production of fossil fuels, undermining chemical regulation, repealing climate legislation, and rolling back climate action.\n\nThe consequences of Project 2025 could be catastrophic, both domestically and abroad. Just this past year, the U.S. experienced some of its most severe storms along its coasts. While low-income countries will bear the greatest burden of climate change, the U.S. will not be spared from the serious repercussions of inaction.\n\n## Gutting Environmental Protections: [...] The agenda aims to remove climate action from policy entirely, repealing crucial legislation that has been pushing the U.S. toward a more sustainable future. It calls for the rollback of climate investments in the Inflation Reduction Act (IRA), the largest clean energy bill in U.S. history, along with eliminating incentives for renewable energy, electric vehicles, and other climate solutions. This would not only mean missing critical climate targets but also wiping out clean energy investments and more than a million jobs created in the sector. [...] Project 2025 goes beyond ignoring climate change—it seeks to deny its very existence. Each year, new climate records are shattered, from more intense hurricanes to increasingly dangerous heat waves. Denying climate change not only ignores reality but puts communities at tremendous risk, forcing them to face escalating disasters without adequate support as conditions worsen.",
+            "score": 0.9992446,
+            "published_date": ""
+          },
+          {
+            "title": "2025 Guide for Climate and Environmental Policy Action",
+            "url": "https://www.nature.org/en-us/about-us/who-we-are/how-we-work/policy/environmental-issues-guide/",
+            "content": "Proposed federal legislation, called the U.S. Foundation for International Conservation Act (USFICA), would establish a fund that would leverage U.S. government, private sector and philanthropic funding to support local communities and Indigenous Peoples around the world who manage protected and conserved areas. [...] ## Stories about people who benefit from climate policies\n\nWe can't address climate change without taking action on government policies that reduce planet-warming pollution, increase clean energy and boost natural climate solutions.\n\n### IRA helps former coal miner install solar power\n\nAfter flooding devastated Kentucky in 2022, Bobby Stallard, a former coal miner, is embracing a different form of energy: solar power. See how federal policies like the IRA are shaping a more sustainable future and empowering people in the region.\n\n### Federal funding saves native birds in Hawai'i [...] The Farm Bill is the single largest federal investment in the conservation, restoration and management of America's private lands including farms, ranches and forests. Authorized every five years, it funds conservation to the tune of $6 billion each year, supporting efforts including bolstering regenerative agricultural practices and permanently protecting farms and ranches from future development.\n\nWe're also going global. The proposed U.S. Foundation for International Conservation Act would provide $100 million each year for Indigenous and local communities around the world to boost conservation and restoration on millions of acres of protected and conserved lands and waters worldwide.",
+            "score": 0.9991959,
+            "published_date": ""
+          }
+        ],
+        "answer": null,
+        "query": "Environmental Issues government policy  2024 2025"
+      }
     },
-    "department": {
-      "recommended_department": "Municipal Corporation of Greater Mumbai (MCGM)",
-      "contact_information": "You can contact the MCGM through their website, phone number, or by visiting their office in person. For more information, please visit their website at https://mcgm.gov.in/ or call their customer service number at 1800 222 772.",
-      "jurisdiction": "Mumbai, Maharashtra, India",
-      "escalation_path": "If your issue is not resolved by the MCGM, you can escalate it to the Maharashtra State Government's Public Grievance Redressal Mechanism or the National Consumer Helpline."
-    }
-  },
-  "policy_search_queries": {
-    "queries": [
-      "Mumbai garbage disposal policy",
-      "BBMP garbage collection rules and regulations",
-      "Municipal Corporation of Greater Mumbai (MCGM) waste management guidelines",
-      "Complaint procedure for garbage disposal in Mumbai",
-      "Mumbai Municipal Corporation waste collection and disposal norms",
-      "Government of Maharashtra waste management policy for urban areas"
-    ],
-    "reasoning": "These search queries aim to find relevant information on the policies and procedures related to garbage disposal in Mumbai, specifically focusing on the Municipal Corporation of Greater Mumbai (MCGM) and the BBMP. The queries cover various aspects such as rules and regulations, guidelines, complaint procedures, and government policies to help identify the root cause of the issue and potential solutions."
-  },
-  "outputs": {
-    "markdown_report_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\AgenticWorkers\\QueryAnalyst\\outputs\\grievance_report.md",
-    "pdf_path": "C:\\Users\\kunal\\OneDrive\\文档\\GitHub\\BEProject_Grivance_Redressal_Agent\\AgenticWorkers\\QueryAnalyst\\outputs\\grievance_report.pdf"
+    "policy_queries": [
+      "Ambernath garbage disposal policy",
+      "government schemes for garbage management in urban slums",
+      "water supply and sanitation issues in Ambernath",
+      "garbage collection and disposal services in Ambernath",
+      "environmental pollution control measures in Ambernath",
+      "urban slum development and garbage management policies"
+    ]
   }
 }

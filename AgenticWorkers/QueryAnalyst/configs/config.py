@@ -18,7 +18,9 @@ class Config:
     GRIEVANCE_TABLE = os.environ.get("GRIEVANCE_TABLE", "usergrievance")
     
     # Direct Supabase connection for department matching
-    SUPABASE_DIRECT_URL = "postgresql://postgres:[YOUR-PASSWORD]@db.hjpgyfowhrbciemdzqgn.supabase.co:5432/postgres"
+    @classmethod
+    def supabase_direct_url(cls) -> str:
+        return f"postgresql://postgres:{cls.SUPABASE_DB_PASSWORD}@db.hjpgyfowhrbciemdzqgn.supabase.co:5432/postgres"
 
     @classmethod
     def supabase_dsn(cls) -> str:

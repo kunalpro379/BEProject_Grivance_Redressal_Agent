@@ -86,6 +86,23 @@ def insert_user_grievience(
         loc_details = location_data.get("location_details") or {}
         ward_val = loc_details.get("ward") if isinstance(loc_details, dict) else None
 
+    # Extract department_id from full_result.department.allocated_department
+    department_id_val = None
+    if full_result and isinstance(full_result, dict):
+        dept_section = full_result.get("department", {})
+        if isinstance(dept_section, dict):
+            allocated_dept = dept_section.get("allocated_department")
+            if allocated_dept and isinstance(allocated_dept, dict):
+                department_id_val = allocated_dept.get("id")
+                print(f"[Supabase] Extracted department_id: {department_id_val} from allocated_department")
+    
+    # Extract category and sub_category for separate columns
+    category_val = None
+    sub_category_val = None
+    if isinstance(category, dict):
+        category_val = category.get("main_category") or category.get("category")
+        sub_category_val = category.get("sub_category")
+
     def _json_safe(value: Any) -> Any:
         if isinstance(value, (dict, list)):
             return json.dumps(value, ensure_ascii=False)
@@ -129,8 +146,10 @@ def insert_user_grievience(
       priority = %(priority)s,
       zone = %(zone)s,
       ward = %(ward)s,
+      department_id = %(department_id)s,
+      category = %(category_val)s,
+      sub_category = %(sub_category_val)s,
       query_type = %(query_type)s,
-      category = %(category)s,
       similar_cases_summary = %(similar_cases_summary)s,
       sentiment_priority = %(sentiment_priority)s,
       emotion = %(emotion)s,
@@ -167,8 +186,10 @@ def insert_user_grievience(
       priority = %(priority)s,
       zone = %(zone)s,
       ward = %(ward)s,
+      department_id = %(department_id)s,
+      category = %(category_val)s,
+      sub_category = %(sub_category_val)s,
       query_type = %(query_type)s,
-      category = %(category)s,
       similar_cases_summary = %(similar_cases_summary)s,
       sentiment_priority = %(sentiment_priority)s,
       emotion = %(emotion)s,
@@ -203,8 +224,10 @@ def insert_user_grievience(
         "priority": priority_val,
         "zone": zone_val,
         "ward": ward_val,
+        "department_id": department_id_val,
+        "category_val": category_val,
+        "sub_category_val": sub_category_val,
         "query_type": _json_safe(query_type),
-        "category": _json_safe(category),
         "similar_cases_summary": _json_safe(similar_cases_summary),
         "sentiment_priority": _json_safe(sentiment_priority),
         "emotion": _json_safe(emotion),

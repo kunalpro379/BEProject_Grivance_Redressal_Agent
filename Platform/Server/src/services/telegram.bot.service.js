@@ -559,9 +559,30 @@ class TelegramBotService {
                 writer.on('error', reject);
             });
 
+            console.log('[Telegram] File downloaded to temp:', tempFilePath);
+
             await ctx.reply('Uploading to cloud storage...');
 
-            const azureResult = await azureStorageService.uploadFile(tempFilePath, fileName);
+            // Create a proper blob path with folder structure
+            const blobFileName = `grievances/${Date.now()}_${userId}_${fileName}`;
+            let azureResult;
+            
+            try {
+                azureResult = await azureStorageService.uploadFile(tempFilePath, blobFileName);
+                console.log('[Telegram] File uploaded to Azure:', azureResult.url);
+            } catch (uploadError) {
+                console.error('[Telegram] Azure upload failed:', uploadError);
+                // Clean up temp file
+                if (fs.existsSync(tempFilePath)) {
+                    fs.unlinkSync(tempFilePath);
+                }
+                return ctx.reply(
+                    '❌ Upload Failed\n\n' +
+                    'Failed to upload your document to cloud storage.\n\n' +
+                    'Error: ' + uploadError.message + '\n\n' +
+                    'Please try again or contact support if the issue persists.'
+                );
+            }
             
             await ctx.reply('Saving to database...');
 
@@ -575,6 +596,12 @@ class TelegramBotService {
                 location_address: userSession.grievance_location || null
             });
 
+            console.log('[Telegram] Grievance saved to DB:', {
+                grievance_id: grievanceResult.grievance_id,
+                citizen_id: userSession.citizen_id,
+                has_location: !!(userSession.grievance_latitude && userSession.grievance_longitude)
+            });
+
             await ctx.reply('Pushing to AI analysis queue...');
 
             const queueMessage = {
@@ -583,10 +610,40 @@ class TelegramBotService {
                 telegram_id: parseInt(userId),
                 grievance_text: userSession.grievance_text,
                 image_path: azureResult.url,
-                timestamp: new Date().toISOString()
+                latitude: userSession.grievance_latitude || null,
+                longitude: userSession.grievance_longitude || null,
+                location_address: userSession.grievance_location || null,
+                timestamp: new Date().toISOString(),
+                source: 'telegram'
             };
 
-            await azureQueryAnalystQueueService.sendMessage(queueMessage);
+            console.log('[Telegram] Attempting to send message to queue:', {
+                grievance_id: queueMessage.grievance_id,
+                citizen_id: queueMessage.citizen_id,
+                telegram_id: queueMessage.telegram_id
+            });
+
+            try {
+                const queueResponse = await azureQueryAnalystQueueService.sendMessage(queueMessage);
+                console.log('[Telegram] Message successfully enqueued:', {
+                    messageId: queueResponse.messageId,
+                    insertionTime: queueResponse.insertionTime
+                });
+            } catch (queueError) {
+                console.error('[Telegram] Queue submission failed:', {
+                    error: queueError.message,
+                    stack: queueError.stack,
+                    grievance_id: grievanceResult.grievance_id
+                });
+                // Don't throw - grievance is saved, just notify user
+                await ctx.reply(
+                    '⚠️ Warning: Grievance saved but AI analysis queue failed.\n\n' +
+                    `Submission ID: ${grievanceResult.grievance_id}\n\n` +
+                    'Your grievance is saved and will be processed manually.\n' +
+                    'You will receive updates soon.'
+                );
+                throw queueError; // Re-throw to trigger outer catch
+            }
 
             if (fs.existsSync(tempFilePath)) {
                 fs.unlinkSync(tempFilePath);

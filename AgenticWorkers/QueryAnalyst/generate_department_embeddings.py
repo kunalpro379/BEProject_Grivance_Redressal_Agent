@@ -31,7 +31,7 @@ def generate_embeddings():
         print("   ❌ Error: SUPABASE_DB_PASSWORD not set in environment")
         sys.exit(1)
     
-    db_url = Config.SUPABASE_DIRECT_URL.replace("[YOUR-PASSWORD]", password)
+    db_url = Config.supabase_direct_url()
     
     try:
         print("   Connecting to Supabase...")

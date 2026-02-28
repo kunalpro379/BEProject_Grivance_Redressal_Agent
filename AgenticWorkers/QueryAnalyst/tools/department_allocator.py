@@ -11,8 +11,7 @@ from configs.config import Config
 class DepartmentAllocator:
     def __init__(self):
         # Use direct Supabase URL for department matching
-        password = Config.SUPABASE_DB_PASSWORD or os.environ.get("SUPABASE_DB_PASSWORD")
-        self.db_url = Config.SUPABASE_DIRECT_URL.replace("[YOUR-PASSWORD]", password)
+        self.db_url = Config.supabase_direct_url()
     
     def _get_connection(self):
         """Get database connection."""

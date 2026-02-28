@@ -20,28 +20,58 @@ class AzureStorageService {
 
     async uploadFile(filePath, fileName) {
         try {
+            console.log('[Azure Storage] Starting upload:', {
+                filePath: typeof filePath === 'string' ? filePath : filePath?.path,
+                fileName,
+                containerName: this.containerName
+            });
+
             const containerClient = this.blobServiceClient.getContainerClient(this.containerName);
             
-            // Ensure container exists with private access (most secure)
-            await containerClient.createIfNotExists();
+            // Ensure container exists with public read access for blob URLs to work
+            const createResponse = await containerClient.createIfNotExists({
+                access: 'blob' // Allow public read access to blobs
+            });
+            
+            if (createResponse.succeeded) {
+                console.log('[Azure Storage] Container created:', this.containerName);
+            }
 
-            const blockBlobClient = containerClient.getBlockBlobClient(fileName);
+            // Sanitize fileName to ensure it's a valid blob name
+            const sanitizedFileName = fileName.replace(/\\/g, '/');
+            const blockBlobClient = containerClient.getBlockBlobClient(sanitizedFileName);
             
             // Upload file - filePath can be a string path or an object with .path property
             const pathToUpload = typeof filePath === 'string' ? filePath : filePath.path;
+            
+            if (!pathToUpload) {
+                throw new Error('Invalid file path provided');
+            }
+
+            console.log('[Azure Storage] Uploading file from:', pathToUpload);
+            
             const uploadResponse = await blockBlobClient.uploadFile(pathToUpload);
             
-            console.log(`File uploaded successfully to Azure: ${fileName}`);
+            console.log('[Azure Storage] File uploaded successfully:', {
+                fileName: sanitizedFileName,
+                url: blockBlobClient.url,
+                requestId: uploadResponse.requestId
+            });
             
             return {
                 success: true,
                 url: blockBlobClient.url,
-                fileName: fileName,
+                fileName: sanitizedFileName,
                 uploadResponse
             };
 
         } catch (error) {
-            console.error('Azure upload error:', error.message);
+            console.error('[Azure Storage] Upload error:', {
+                message: error.message,
+                code: error.code,
+                statusCode: error.statusCode,
+                stack: error.stack
+            });
             throw new Error(`Failed to upload file to Azure: ${error.message}`);
         }
     }

@@ -3,6 +3,7 @@ import fs from 'fs';
 import multer from 'multer';
 import path from 'path';
 import * as grievanceController from '../controllers/grievance.controller.js';
+import { getGrievanceDetails } from '../controllers/grievance.details.controller.js';
 import { authenticate, authorize } from '../middleware/auth.js';
 import { validate, schemas } from '../middleware/validation.js';
 
@@ -47,6 +48,7 @@ router.post('/', validate(schemas.createGrievance), grievanceController.createGr
 router.get('/', grievanceController.getGrievances);
 router.get('/stats', grievanceController.getStats);
 router.get('/:grievanceId', grievanceController.getGrievanceById);
+router.get('/:grievanceId/details', getGrievanceDetails); // Enhanced detailed view with full AI analysis
 router.put('/:grievanceId', 
   authorize('admin', 'department_officer', 'department_head'),
   validate(schemas.updateGrievance),

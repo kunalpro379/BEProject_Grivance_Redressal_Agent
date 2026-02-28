@@ -13,8 +13,13 @@ const pool = new Pool(
     ? {
         connectionString,
         ssl: {
-          rejectUnauthorized: false, // Required for cloud databases
+          rejectUnauthorized: false,
         },
+        max: 10, // Reduced for Supabase pooler - it handles pooling for us
+        min: 1,  // Reduced minimum
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 10000,
+        allowExitOnIdle: false,
       }
     : {
         host: process.env.DB_HOST || 'localhost',
@@ -22,19 +27,26 @@ const pool = new Pool(
         database: process.env.DB_NAME || 'igrs_db',
         user: process.env.DB_USER || 'postgres',
         password: process.env.DB_PASSWORD,
-        max: 20,
+        max: 10,
+        min: 1,
         idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 5000,
+        connectionTimeoutMillis: 10000,
+        allowExitOnIdle: false,
       }
 );
 
 // Connection event handlers
-pool.on('connect', () => {
-  console.log('Connected to PostgreSQL database');
+let connectionCount = 0;
+pool.on('connect', (client) => {
+  connectionCount++;
+  if (connectionCount <= 3) {
+    console.log(`[Pool] Connection #${connectionCount} established`);
+  }
 });
 
-pool.on('error', (err) => {
-  console.error('Unexpected database error:', err.message);
+pool.on('error', (err, client) => {
+  console.error('[Pool] Unexpected database error:', err.message);
+  // Don't exit the process, just log the error
 });
 
 // Helper function to execute queries
