@@ -31,7 +31,7 @@ class ResearchWorker:
         self.workflow = ResearchWorkflow(groq_api_key, self.db)
         self.embedding_gen = EmbeddingGenerator(groq_api_key)
         
-        print("✅ Research Worker initialized")
+        print(" Research Worker initialized")
     
     def listen_for_grievances(self):
         """Listen to PostgreSQL NOTIFY for new grievances"""
@@ -44,7 +44,7 @@ class ResearchWorker:
         cursor = conn.cursor()
         cursor.execute("LISTEN new_grievance_research;")
         
-        print("✅ Connected to database notification channel")
+        print(" Connected to database notification channel")
         print("   Channel: new_grievance_research")
         print("   Press Ctrl+C to stop\n")
         
@@ -100,7 +100,7 @@ class ResearchWorker:
                 print("❌ Failed to generate embedding")
                 return
             
-            print(f"   ✅ Embedding generated ({len(embedding)} dimensions)")
+            print(f"    Embedding generated ({len(embedding)} dimensions)")
             
             # Step 2: Search for similar pattern
             print("\n🔍 Step 2: Searching for similar patterns...")
@@ -111,7 +111,7 @@ class ResearchWorker:
             
             if pattern:
                 # PATTERN FOUND - REUSE RESEARCH
-                print(f"\n✅ PATTERN MATCH FOUND!")
+                print(f"\n PATTERN MATCH FOUND!")
                 print(f"   Pattern: {pattern['pattern_name']}")
                 print(f"   Similarity: {pattern['similarity']:.2%}")
                 print(f"   Reusing cached research...")
@@ -159,7 +159,7 @@ class ResearchWorker:
                     print(f"❌ Research failed: {result['error']}")
                     return
                 
-                print("   ✅ Research completed")
+                print("    Research completed")
                 
                 # Step 4: Create new pattern
                 print("\n💾 Step 4: Creating new pattern...")
@@ -184,10 +184,10 @@ class ResearchWorker:
                         1.0  # Perfect match for original grievance
                     )
                     
-                    print(f"   ✅ Pattern created: {pattern_id}")
+                    print(f"    Pattern created: {pattern_id}")
                 
                 elapsed = (datetime.now() - start_time).total_seconds()
-                print(f"\n✅ COMPLETED in {elapsed:.2f}s (full research)")
+                print(f"\n COMPLETED in {elapsed:.2f}s (full research)")
             
             print(f"\n{'='*70}\n")
             

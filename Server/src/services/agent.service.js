@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import pool from '../config/database.js';
 import { BlobServiceClient } from '@azure/storage-blob';
 import * as helpers from './agent.helpers.js';
@@ -26,15 +26,15 @@ class AgentService {
   clearFieldWorkerState = async (userId) => {
     try {
       await pool.query('DELETE FROM fieldworker_states WHERE user_id = $1', [userId]);
-      console.log(`✅ Cleared state for user: ${userId}`);
+      console.log(` Cleared state for user: ${userId}`);
     } catch (error) {
-      console.error('❌ Error clearing state:', error);
+      console.error(' Error clearing state:', error);
     }
   };
   clearUserState = async (userId) => {
     // Clear all user data
     await this.clearFieldWorkerState(userId);
-    console.log(`🔄 User ${userId} logged out - all data cleared`);
+    console.log(` User ${userId} logged out - all data cleared`);
   };
   loadContractorState = (userId) => helpers.loadContractorState(userId);
   saveContractorState = (userId, state) => helpers.saveContractorState(userId, state);
@@ -72,7 +72,7 @@ class AgentService {
         // If AI detected user is contractor but they're using field worker bot
         if (aiContext.userType === 'contractor' && channel === 'telegram_fieldworker') {
           return {
-            text: `⚠️ You mentioned being a contractor.\n\n` +
+            text: `️ You mentioned being a contractor.\n\n` +
                   `This bot is for FIELD WORKERS (individual employees).\n\n` +
                   `If you're a contractor/company, please use the Contractor Bot instead.\n\n` +
                   `Are you a field worker? Reply "yes" to continue with field worker registration.`
@@ -82,7 +82,7 @@ class AgentService {
         // If AI detected user is field worker but they're using contractor bot
         if (aiContext.userType === 'field_worker' && channel === 'telegram_contractor') {
           return {
-            text: `⚠️ You seem to be an individual worker.\n\n` +
+            text: `️ You seem to be an individual worker.\n\n` +
                   `This bot is for CONTRACTORS (companies/businesses).\n\n` +
                   `If you're a field worker, please use the Field Worker Bot instead.\n\n` +
                   `Are you a contractor/company? Reply "yes" to continue with contractor registration.`
@@ -232,34 +232,34 @@ class AgentService {
       
       // Check finish reason
       if (candidate.finishReason === 'MAX_TOKENS') {
-        console.warn('⚠️  Gemini response truncated due to max tokens');
+        console.warn('️  Gemini response truncated due to max tokens');
       }
 
       const text = candidate.content.parts[0].text;
       
-      console.log('📄 Full Gemini response length:', text.length, 'chars');
-      console.log('📄 Finish reason:', candidate.finishReason);
+      console.log(' Full Gemini response length:', text.length, 'chars');
+      console.log(' Finish reason:', candidate.finishReason);
       
       // If JSON mode, try to extract JSON from response
       if (jsonMode) {
         // Remove markdown code blocks if present
         let cleanText = text.trim();
         
-        console.log('🔍 Attempting JSON extraction from response...');
+        console.log(' Attempting JSON extraction from response...');
         
         // Try to extract JSON from markdown code blocks
         const jsonMatch = cleanText.match(/```json\s*([\s\S]*?)\s*```/);
         if (jsonMatch) {
           cleanText = jsonMatch[1].trim();
-          console.log('✅ Extracted JSON from ```json block');
+          console.log(' Extracted JSON from ```json block');
         } else {
           // Try generic code blocks
           const codeMatch = cleanText.match(/```\s*([\s\S]*?)\s*```/);
           if (codeMatch) {
             cleanText = codeMatch[1].trim();
-            console.log('✅ Extracted JSON from ``` block');
+            console.log(' Extracted JSON from ``` block');
           } else {
-            console.log('⚠️  No code blocks found, using raw text');
+            console.log('️  No code blocks found, using raw text');
           }
         }
         
@@ -268,11 +268,11 @@ class AgentService {
         
         try {
           const parsed = JSON.parse(cleanText);
-          console.log('✅ Successfully parsed JSON');
+          console.log(' Successfully parsed JSON');
           return parsed;
         } catch (parseError) {
-          console.error('❌ JSON parse error:', parseError.message);
-          console.error('📝 Raw text (first 500 chars):', text.substring(0, 500));
+          console.error(' JSON parse error:', parseError.message);
+          console.error(' Raw text (first 500 chars):', text.substring(0, 500));
           console.error('🧹 Cleaned text (first 500 chars):', cleanText.substring(0, 500));
           throw parseError;
         }
@@ -395,13 +395,13 @@ Return ONLY valid JSON:
           });
           
           return {
-            text: `✅ Registration Request Submitted!\n\n` +
-                  `📋 Your Details:\n` +
+            text: ` Registration Request Submitted!\n\n` +
+                  ` Your Details:\n` +
                   `Company: ${extracted.company_name}\n` +
                   `License: ${extracted.license_number}\n` +
                   `GST: ${extracted.gst}\n` +
                   `Category: ${extracted.category}\n\n` +
-                  `⏳ Your request has been sent to the department for approval.\n` +
+                  ` Your request has been sent to the department for approval.\n` +
                   `You'll be notified once it's reviewed (usually within 24-48 hours).`
           };
         }
@@ -437,22 +437,22 @@ Return ONLY valid JSON:
               );
               
               return {
-                text: `✅ Field Worker Registration Request Submitted!\n\n` +
-                      `📱 Phone: ${storedData.phone_number}\n` +
+                text: ` Field Worker Registration Request Submitted!\n\n` +
+                      ` Phone: ${storedData.phone_number}\n` +
                       `👤 Name: ${storedData.full_name}\n\n` +
-                      `⏳ Your request has been sent to the department officer for approval.\n` +
+                      ` Your request has been sent to the department officer for approval.\n` +
                       `You'll be notified once it's reviewed (usually within 24-48 hours).`
               };
             } else {
               return {
-                text: `📝 Field Worker Registration\n\n` +
+                text: ` Field Worker Registration\n\n` +
                       `To register, please first share your contact:\n` +
                       `Tap the 📎 button → Contact → Share My Contact\n\n` +
                       `Then I'll guide you through the registration process.`,
                 reply_markup: {
                   keyboard: [
                     [{
-                      text: '📱 Share My Contact',
+                      text: ' Share My Contact',
                       request_contact: true
                     }]
                   ],
@@ -478,10 +478,10 @@ Return ONLY valid JSON:
             );
             
             return {
-              text: `✅ Field Worker Registration Request Submitted!\n\n` +
-                    `📱 Phone: ${phoneNumber}\n` +
+              text: ` Field Worker Registration Request Submitted!\n\n` +
+                    ` Phone: ${phoneNumber}\n` +
                     `👤 Name: ${userName}\n\n` +
-                    `⏳ Your request has been sent to the department officer for approval.\n` +
+                    ` Your request has been sent to the department officer for approval.\n` +
                     `You'll be notified once it's reviewed (usually within 24-48 hours).`
             };
           }
@@ -501,43 +501,43 @@ Return ONLY valid JSON:
 
       if (lowerMessage.includes('contractor') || lowerMessage.includes('company') || lowerMessage.includes('tender')) {
         return {
-          text: `Hi ${userName}! 👋\n\nI see you're a contractor. To register, please provide:\n\n1. Company name\n2. License number\n3. GST number\n4. Category (e.g., Civil, Electrical, Plumbing)\n\nYou can send all details in one message.`
+          text: `Hi ${userName}! \n\nI see you're a contractor. To register, please provide:\n\n1. Company name\n2. License number\n3. GST number\n4. Category (e.g., Civil, Electrical, Plumbing)\n\nYou can send all details in one message.`
         };
       }
 
       if (lowerMessage.includes('field worker') || lowerMessage.includes('staff') || lowerMessage.includes('employee')) {
         return {
-          text: `Hi ${userName}! 👋\n\nFor field workers, please contact your department administrator to register your phone: ${phoneNumber}`
+          text: `Hi ${userName}! \n\nFor field workers, please contact your department administrator to register your phone: ${phoneNumber}`
         };
       }
 
       return {
-        text: `Hi ${userName}! 👋\n\nWelcome! I can help:\n\n🏗️ *Field Workers* - Daily reports\n📋 *Contractors* - Registration\n\nWhat are you?`
+        text: `Hi ${userName}! \n\nWelcome! I can help:\n\n *Field Workers* - Daily reports\n *Contractors* - Registration\n\nWhat are you?`
       };
     }
   }
 
   /**
-   * 🏗️ FIELD WORKER WORKFLOW
+   *  FIELD WORKER WORKFLOW
    * Daily reporting with structured extraction
    */
   /**
-     * 🏗️ FIELD WORKER WORKFLOW
+     *  FIELD WORKER WORKFLOW
      * Conversational daily reporting - ask questions one by one
      */
     async fieldWorkerWorkflow({ userId, userName, message, userContext, media, aiContext }) {
       try {
-        console.log(`\n🏗️ Field Worker Workflow - User: ${userId}, Message: "${message}"`);
+        console.log(`\n Field Worker Workflow - User: ${userId}, Message: "${message}"`);
         
         // Check AI context for suspicious activity
         if (aiContext) {
-          console.log(`🤖 AI Context:`, aiContext);
+          console.log(` AI Context:`, aiContext);
           
           // If AI detected user might be a contractor
           if (aiContext.userType === 'contractor' && aiContext.confidence > 0.6) {
-            console.log(`⚠️ AI detected potential contractor: ${aiContext.userType} (confidence: ${aiContext.confidence})`);
+            console.log(`️ AI detected potential contractor: ${aiContext.userType} (confidence: ${aiContext.confidence})`);
             return {
-              text: `⚠️ I noticed you mentioned being a contractor.\n\n` +
+              text: `️ I noticed you mentioned being a contractor.\n\n` +
                     `This bot is for FIELD WORKERS (individual employees who work for the department).\n\n` +
                     `Contractors should use the Contractor Bot for company registration.\n\n` +
                     `Are you a field worker employed by the department? Reply "yes" to continue.`
@@ -548,7 +548,7 @@ Return ONLY valid JSON:
         // Load or create today's report state
         const state = await this.loadFieldWorkerState(userId);
         
-        console.log(`📊 Current state:`, {
+        console.log(` Current state:`, {
           status: state.status,
           currentQuestion: state.currentQuestion,
           missingFields: state.missingFields,
@@ -558,30 +558,30 @@ Return ONLY valid JSON:
         // Check if report already submitted today
         if (state.status === 'complete') {
           return {
-            text: `You've already submitted your report today! ✅\n\nSummary:\n` +
+            text: `You've already submitted your report today! \n\nSummary:\n` +
                   `📍 Site: ${state.report.site}\n` +
-                  `⏰ Hours: ${state.report.hours}\n` +
-                  `📝 Work: ${state.report.description}\n\n` +
+                  ` Hours: ${state.report.hours}\n` +
+                  ` Work: ${state.report.description}\n\n` +
                   `See you tomorrow! 👷`
           };
         }
 
         // Handle image/proof upload
         if (media) {
-          console.log(`📸 Processing image upload...`);
+          console.log(` Processing image upload...`);
           try {
             const proofUrl = await this.uploadProofToBlob(userId, media);
-            console.log(`✅ Image uploaded to: ${proofUrl}`);
+            console.log(` Image uploaded to: ${proofUrl}`);
 
             // Use AI to analyze what's in the image
             const imageAnalysis = await this.analyzeImageContent(media, state.report);
-            console.log(`🤖 Image analysis:`, imageAnalysis);
+            console.log(` Image analysis:`, imageAnalysis);
 
             // If we don't have description yet, use image analysis
             if (!state.report.description && imageAnalysis.description) {
               state.report.description = imageAnalysis.description;
               state.missingFields = state.missingFields.filter(f => f !== 'description');
-              console.log(`✅ Extracted description from image: ${imageAnalysis.description}`);
+              console.log(` Extracted description from image: ${imageAnalysis.description}`);
             }
 
             // Store the proof
@@ -593,7 +593,7 @@ Return ONLY valid JSON:
             
             if (allFieldsFilled) {
               // All fields collected, submit report
-              console.log(`✅ All fields collected, submitting report...`);
+              console.log(` All fields collected, submitting report...`);
               const score = await this.calculateProductivityScore(state.report, { proof_valid: true, confidence: 0.9 });
               const aiAnalysis = await this.analyzeReportWithAI(state.report, { proof_valid: true });
               aiAnalysis.channel = 'telegram';
@@ -604,15 +604,15 @@ Return ONLY valid JSON:
               await this.saveFieldWorkerState(userId, state);
 
               return {
-                text: `✅ Report submitted successfully!\n\n` +
-                      `📊 Productivity Score: ${score.toFixed(1)}/10\n` +
-                      `🤖 AI Analysis: ${aiAnalysis.summary}\n\n` +
-                      `Great work today! 💪`
+                text: ` Report submitted successfully!\n\n` +
+                      ` Productivity Score: ${score.toFixed(1)}/10\n` +
+                      ` AI Analysis: ${aiAnalysis.summary}\n\n` +
+                      `Great work today! `
               };
             }
 
             // Still have missing fields, ask for them
-            let response = `📸 Got your photo! `;
+            let response = ` Got your photo! `;
             if (imageAnalysis.description) {
               response += `I can see: ${imageAnalysis.description}\n\n`;
             }
@@ -635,7 +635,7 @@ Return ONLY valid JSON:
           } catch (error) {
             console.error('Error processing image:', error);
             return {
-              text: `📸 Photo received! Please continue with your report details.`
+              text: ` Photo received! Please continue with your report details.`
             };
           }
         }
@@ -650,7 +650,7 @@ Return ONLY valid JSON:
           await this.saveFieldWorkerState(userId, state);
           
           return {
-            text: `Hi ${userName}! 👋\n\nReady to submit your daily work report?\n\nLet's start: What work did you do today?`
+            text: `Hi ${userName}! \n\nReady to submit your daily work report?\n\nLet's start: What work did you do today?`
           };
         }
 
@@ -661,10 +661,10 @@ Return ONLY valid JSON:
           state.currentQuestion = 'site';
           await this.saveFieldWorkerState(userId, state);
           
-          console.log(`✅ Saved description: "${message}", next question: site`);
+          console.log(` Saved description: "${message}", next question: site`);
 
           return {
-            text: `Got it! 📝\n\nWork: ${message}\n\nWhich site or location did you work at?`
+            text: `Got it! \n\nWork: ${message}\n\nWhich site or location did you work at?`
           };
         }
 
@@ -674,7 +674,7 @@ Return ONLY valid JSON:
           state.currentQuestion = 'hours';
           await this.saveFieldWorkerState(userId, state);
           
-          console.log(`✅ Saved site: "${message}", next question: hours`);
+          console.log(` Saved site: "${message}", next question: hours`);
 
           return {
             text: `Perfect! 📍\n\nSite: ${message}\n\nHow many hours did you work? (Just send the number)`
@@ -690,10 +690,10 @@ Return ONLY valid JSON:
             state.currentQuestion = 'proof';
             await this.saveFieldWorkerState(userId, state);
             
-            console.log(`✅ Saved hours: ${state.report.hours}, next question: proof`);
+            console.log(` Saved hours: ${state.report.hours}, next question: proof`);
 
             return {
-              text: `Excellent! ⏰\n\nHours: ${state.report.hours}\n\nNow please send a photo of your completed work as proof. 📸`
+              text: `Excellent! \n\nHours: ${state.report.hours}\n\nNow please send a photo of your completed work as proof. `
             };
           } else {
             return {
@@ -704,18 +704,18 @@ Return ONLY valid JSON:
 
         if (state.currentQuestion === 'proof') {
           return {
-            text: `Please send a photo of your completed work. 📸\n\nYou can attach an image using the 📎 button.`
+            text: `Please send a photo of your completed work. \n\nYou can attach an image using the 📎 button.`
           };
         }
 
         // Fallback - determine what's missing and ask for it
-        console.log(`⚠️ Fallback triggered - checking what's missing`);
+        console.log(`️ Fallback triggered - checking what's missing`);
         
         if (!state.report.description) {
           state.currentQuestion = 'description';
           await this.saveFieldWorkerState(userId, state);
           return {
-            text: `Hi ${userName}! 👋\n\nLet's start your daily report.\n\nWhat work did you do today?`
+            text: `Hi ${userName}! \n\nLet's start your daily report.\n\nWhat work did you do today?`
           };
         } else if (!state.report.site) {
           state.currentQuestion = 'site';
@@ -734,7 +734,7 @@ Return ONLY valid JSON:
           state.currentQuestion = 'proof';
           await this.saveFieldWorkerState(userId, state);
           return {
-            text: `Please send a photo of your completed work as proof. 📸`
+            text: `Please send a photo of your completed work as proof. `
           };
         }
 
@@ -748,7 +748,7 @@ Return ONLY valid JSON:
 
 
   /**
-   * 🏗️ CONTRACTOR WORKFLOW
+   *  CONTRACTOR WORKFLOW
    * Onboarding and verification
    */
   async contractorWorkflow({ userId, userName, message, userContext, media }) {
@@ -759,7 +759,7 @@ Return ONLY valid JSON:
       // Check verification status
       if (state.verificationStatus === 'verified') {
         return {
-          text: `✅ You're already verified!\n\n` +
+          text: ` You're already verified!\n\n` +
                 `Company: ${state.profile.companyName}\n` +
                 `License: ${state.profile.licenseNumber}\n` +
                 `Category: ${state.profile.category}\n\n` +
@@ -769,7 +769,7 @@ Return ONLY valid JSON:
 
       if (state.verificationStatus === 'pending_review') {
         return {
-          text: `⏳ Your application is under review.\n\n` +
+          text: ` Your application is under review.\n\n` +
                 `We'll notify you once verification is complete (usually 2-3 business days).`
         };
       }
@@ -797,19 +797,19 @@ Return ONLY valid JSON:
             await this.saveContractorState(userId, state);
             
             return {
-              text: `✅ Application submitted successfully!\n\n` +
+              text: ` Application submitted successfully!\n\n` +
                     `Your details:\n` +
                     `Company: ${state.profile.companyName}\n` +
                     `License: ${state.profile.licenseNumber}\n` +
                     `GST: ${state.profile.gst}\n` +
                     `Category: ${state.profile.category}\n\n` +
-                    `Our team will verify your documents within 2-3 business days. 📋`
+                    `Our team will verify your documents within 2-3 business days. `
             };
           }
           
           await this.saveContractorState(userId, state);
           return {
-            text: `✅ Document received!\n\n` +
+            text: ` Document received!\n\n` +
                   `Extracted: ${JSON.stringify(docAnalysis.extracted, null, 2)}\n\n` +
                   (state.missingFields.length > 0 
                     ? `Still need: ${state.missingFields.join(', ')}`
@@ -817,7 +817,7 @@ Return ONLY valid JSON:
           };
         } else {
           return {
-            text: `⚠️ Document validation issue:\n${docAnalysis.explanation}\n\n` +
+            text: `️ Document validation issue:\n${docAnalysis.explanation}\n\n` +
                   `Please upload a clear photo of your license or registration certificate.`
           };
         }
@@ -840,7 +840,7 @@ Return ONLY valid JSON:
                 `License: ${state.profile.licenseNumber}\n` +
                 `GST: ${state.profile.gst}\n` +
                 `Category: ${state.profile.category}\n\n` +
-                `Now please upload your license/registration document. 📄`
+                `Now please upload your license/registration document. `
         };
       }
 
@@ -1024,7 +1024,7 @@ Examples:
         ]
       );
 
-      console.log(`✅ Pending registration created: ${result.rows[0].id}`);
+      console.log(` Pending registration created: ${result.rows[0].id}`);
       return result.rows[0].id;
 
     } catch (error) {
@@ -1212,7 +1212,7 @@ Examples:
       return 'No pending grievances at the moment.';
     }
 
-    let text = `📋 Pending Grievances (${grievances.length}):\n\n`;
+    let text = ` Pending Grievances (${grievances.length}):\n\n`;
     grievances.forEach((g, idx) => {
       text += `${idx + 1}. #${g.id} - ${g.title}\n   Status: ${g.status}\n   Date: ${new Date(g.created_at).toLocaleDateString()}\n\n`;
     });
@@ -1227,7 +1227,7 @@ Examples:
       return 'Grievance not found or you do not have access to it.';
     }
 
-    return `🔍 Grievance #${grievance.id}\n\n` +
+    return ` Grievance #${grievance.id}\n\n` +
            `Title: ${grievance.title}\n` +
            `Status: ${grievance.status}\n` +
            `Submitted: ${new Date(grievance.created_at).toLocaleDateString()}\n` +
@@ -1256,7 +1256,7 @@ Examples:
    * Format analytics
    */
   formatAnalytics(analytics) {
-    return `📊 Department Analytics\n\n` +
+    return ` Department Analytics\n\n` +
            `Total Grievances: ${analytics.total}\n` +
            `Pending: ${analytics.pending}\n` +
            `In Progress: ${analytics.in_progress}\n` +

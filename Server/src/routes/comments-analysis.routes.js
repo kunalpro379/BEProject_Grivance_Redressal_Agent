@@ -144,7 +144,7 @@ router.post('/department/:departmentId/auto-analyze', authenticate, authorize(['
     const { departmentId } = req.params;
     const { limit = 20 } = req.body;
 
-    console.log(`🤖 Auto-analyzing grievances for department: ${departmentId}`);
+    console.log(` Auto-analyzing grievances for department: ${departmentId}`);
 
     // Get grievances needing analysis
     const grievances = await commentsAnalysisService.getGrievancesNeedingAnalysis(

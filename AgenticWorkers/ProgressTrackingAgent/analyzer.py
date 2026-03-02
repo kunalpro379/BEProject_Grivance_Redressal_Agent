@@ -11,7 +11,7 @@ class GrievanceAnalyzer:
     def __init__(self):
         # Initialize DeepSeek AI
         self.ai_client = DeepSeekClient()
-        print("✅ AI client initialized")
+        print(" AI client initialized")
     
     def analyze_status_progress(self, grievance: Dict[str, Any], workflow: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Analyze the progress status of a grievance"""
@@ -345,14 +345,14 @@ DATA:
 
 Write in a professional, clear, and actionable tone. Focus on insights and recommendations, not just data repetition. Be specific about numbers and percentages."""
 
-            print("   🤖 Calling DeepSeek AI (this may take 30-60 seconds)...")
+            print("    Calling DeepSeek AI (this may take 30-60 seconds)...")
             
             # Call DeepSeek API
             result = self.ai_client.generate_content(prompt, temperature=0.7, max_tokens=3000)
             
             if result:
                 ai_text = result['candidates'][0]['content']['parts'][0]['text']
-                print("   ✅ AI report generated successfully")
+                print("    AI report generated successfully")
                 return ai_text.strip()
             else:
                 print(f"   ❌ DeepSeek API error")

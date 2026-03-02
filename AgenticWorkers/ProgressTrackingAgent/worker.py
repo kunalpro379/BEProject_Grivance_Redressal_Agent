@@ -301,7 +301,7 @@ class ProgressTrackingWorker:
             print(f"   📊 Triggers: {escalation_data.get('total_triggers')}")
             print(f"   📋 Grievances to escalate: {escalation_data.get('total_grievances_to_escalate')}")
         else:
-            print("   ✅ No escalation needed")
+            print("    No escalation needed")
         
         # Add escalation data to report
         report_data["escalation_analysis"] = escalation_data

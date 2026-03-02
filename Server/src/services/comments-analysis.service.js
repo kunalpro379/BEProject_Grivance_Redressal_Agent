@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import pool from '../config/database.js';
 
 class CommentsAnalysisService {
@@ -12,7 +12,7 @@ class CommentsAnalysisService {
    */
   async analyzeGrievanceComments(grievanceId) {
     try {
-      console.log(`📊 Analyzing comments for grievance: ${grievanceId}`);
+      console.log(` Analyzing comments for grievance: ${grievanceId}`);
 
       // Fetch grievance details
       const grievanceResult = await pool.query(
@@ -147,7 +147,7 @@ class CommentsAnalysisService {
         [analysisResult.rows[0].id, grievanceId]
       );
 
-      console.log(`✅ Analysis completed for grievance: ${grievanceId}`);
+      console.log(` Analysis completed for grievance: ${grievanceId}`);
 
       return {
         success: true,
@@ -155,7 +155,7 @@ class CommentsAnalysisService {
       };
 
     } catch (error) {
-      console.error('❌ Comments analysis error:', error);
+      console.error(' Comments analysis error:', error);
       throw error;
     }
   }

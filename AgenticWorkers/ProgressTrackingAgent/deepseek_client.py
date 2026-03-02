@@ -11,7 +11,7 @@ class DeepSeekClient:
         self.api_key = config.DEEPSEEK_API_KEY
         self.base_url = config.DEEPSEEK_BASE_URL
         self.api_url = f"{self.base_url}/chat/completions"
-        print("✅ DeepSeek AI client initialized")
+        print(" DeepSeek AI client initialized")
     
     def generate_content(self, prompt: str, temperature: float = 0.3, max_tokens: int = 4000) -> Dict[str, Any]:
         """

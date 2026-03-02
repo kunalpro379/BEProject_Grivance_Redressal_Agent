@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+﻿import { GoogleGenerativeAI } from '@google/generative-ai';
 
 class BotContextAnalyzerService {
   constructor() {
@@ -11,15 +11,15 @@ class BotContextAnalyzerService {
     try {
       const apiKey = process.env.GEMINI_API_KEY;
       if (!apiKey) {
-        console.warn('⚠️  GEMINI_API_KEY not configured - context analysis disabled');
+        console.warn('️  GEMINI_API_KEY not configured - context analysis disabled');
         return;
       }
 
       this.genAI = new GoogleGenerativeAI(apiKey);
       this.model = this.genAI.getGenerativeModel({ model: 'gemini-3.1-pro-preview' });
-      console.log('✅ Bot Context Analyzer initialized');
+      console.log(' Bot Context Analyzer initialized');
     } catch (error) {
-      console.error('❌ Failed to initialize Bot Context Analyzer:', error.message);
+      console.error(' Failed to initialize Bot Context Analyzer:', error.message);
     }
   }
 
@@ -48,7 +48,7 @@ class BotContextAnalyzerService {
         ...analysis
       };
     } catch (error) {
-      console.error('❌ Context analysis error:', error.message);
+      console.error(' Context analysis error:', error.message);
       return this.fallbackAnalysis(message, botType);
     }
   }
@@ -254,10 +254,10 @@ Conversation History:
 ${conversationHistory.map(h => `${h.role}: ${h.message}`).join('\n')}
 
 Analyze if the user seems to be:
-1. A contractor (company/business) using the contractor bot ✅
-2. A field worker (individual employee) using the field worker bot ✅
-3. A contractor mistakenly using the field worker bot ❌
-4. A field worker mistakenly using the contractor bot ❌
+1. A contractor (company/business) using the contractor bot 
+2. A field worker (individual employee) using the field worker bot 
+3. A contractor mistakenly using the field worker bot 
+4. A field worker mistakenly using the contractor bot 
 
 Return JSON:
 {
@@ -276,7 +276,7 @@ Return ONLY valid JSON.`;
       
       return validation;
     } catch (error) {
-      console.error('❌ Bot validation error:', error.message);
+      console.error(' Bot validation error:', error.message);
       return { isCorrectBot: true, suggestion: null };
     }
   }
@@ -304,7 +304,7 @@ Return ONLY valid JSON.`;
       
       return JSON.parse(this.extractJSON(response));
     } catch (error) {
-      console.error('❌ Data extraction error:', error.message);
+      console.error(' Data extraction error:', error.message);
       return null;
     }
   }

@@ -200,7 +200,7 @@ class WorkflowNodes:
         self.db.save_research_result(state['grievance_id'], report)
         
         print("Report generated and saved")
-        print(f"✅ Pushed {queue_results['success']} validated URLs to WebCrawler queue")
+        print(f" Pushed {queue_results['success']} validated URLs to WebCrawler queue")
         return state
     
     def handle_error(self, state: ResearchState) -> ResearchState:

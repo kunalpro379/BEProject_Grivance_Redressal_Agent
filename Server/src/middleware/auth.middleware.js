@@ -78,7 +78,7 @@ export const authorizeRoles = (...roles) => {
       });
     }
 
-    console.log('✅ Authorization successful');
+    console.log(' Authorization successful');
     next();
   };
 };

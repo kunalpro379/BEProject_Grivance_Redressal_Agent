@@ -188,7 +188,7 @@ class KBWorker:
                 'processed_at': datetime.utcnow().isoformat() + 'Z'
             }
             
-            print(f"\n   ✅ PDF processing complete!")
+            print(f"\n    PDF processing complete!")
             return result_data
             
         except Exception as e:
@@ -258,7 +258,7 @@ class KBWorker:
                             self.queue_client.delete_message(message.id, message.pop_receipt)
                             print(f"   ✓ Deleted from input queue")
                             
-                            print(f"\n   ✅ Message processing complete!")
+                            print(f"\n    Message processing complete!")
                             print("=" * 80 + "\n")
                             
                         except Exception as e:

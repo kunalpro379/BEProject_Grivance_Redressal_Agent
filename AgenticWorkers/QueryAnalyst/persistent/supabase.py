@@ -294,9 +294,9 @@ def insert_user_grievience(
         if cur.rowcount == 0:
             print(f"[Supabase] ⚠️ WARNING: UPDATE matched 0 rows for grievance_id={grievance_id}. Check that the row exists and QueryAnalyst uses the same DB as the Platform.")
         else:
-            print(f"[Supabase] ✅ Successfully updated {cur.rowcount} row(s) for grievance_id={grievance_id}")
+            print(f"[Supabase]  Successfully updated {cur.rowcount} row(s) for grievance_id={grievance_id}")
             if department_id_val:
-                print(f"[Supabase] ✅ Department ID {department_id_val} assigned successfully")
+                print(f"[Supabase]  Department ID {department_id_val} assigned successfully")
     except psycopg2.ProgrammingError as e:
         err = str(e)
         if "metadata" in err or "column" in err.lower():

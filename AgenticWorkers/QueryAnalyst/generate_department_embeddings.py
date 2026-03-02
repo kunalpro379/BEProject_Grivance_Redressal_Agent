@@ -105,7 +105,7 @@ def generate_embeddings():
     # Commit changes
     try:
         conn.commit()
-        print(f"\n✅ Successfully updated {updated_count} departments")
+        print(f"\n Successfully updated {updated_count} departments")
         if error_count > 0:
             print(f"⚠️  {error_count} departments had errors")
     except Exception as e:
@@ -167,4 +167,4 @@ if __name__ == "__main__":
     if args.test:
         test_search()
     
-    print("\n✅ Done!")
+    print("\n Done!")

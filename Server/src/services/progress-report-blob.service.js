@@ -1,4 +1,4 @@
-import { BlobServiceClient } from '@azure/storage-blob';
+﻿import { BlobServiceClient } from '@azure/storage-blob';
 import fs from 'fs/promises';
 import path from 'path';
 import pool from '../config/database.js';
@@ -136,7 +136,7 @@ class ProgressReportBlobService {
           metadata
         });
 
-        console.log(`✅ Uploaded report: ${file} -> ${blobUrl}`);
+        console.log(` Uploaded report: ${file} -> ${blobUrl}`);
       }
 
       return uploadedReports;

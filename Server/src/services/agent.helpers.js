@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+﻿import pool from '../config/database.js';
 import axios from 'axios';
 import { BlobServiceClient } from '@azure/storage-blob';
 
@@ -12,7 +12,7 @@ import { BlobServiceClient } from '@azure/storage-blob';
 export async function loadFieldWorkerState(userId) {
   const today = new Date().toISOString().split('T')[0];
   
-  console.log(`🔍 Loading state for user: ${userId}, date: ${today}`);
+  console.log(` Loading state for user: ${userId}, date: ${today}`);
   
   const result = await pool.query(
     `SELECT * FROM field_worker_states 
@@ -21,10 +21,10 @@ export async function loadFieldWorkerState(userId) {
   );
 
   if (result.rows.length > 0) {
-    console.log(`✅ Found existing state for user ${userId}`);
+    console.log(` Found existing state for user ${userId}`);
     const stateData = result.rows[0].state_data;
-    console.log(`📦 State data type: ${typeof stateData}`);
-    console.log(`📦 State data:`, JSON.stringify(stateData, null, 2));
+    console.log(` State data type: ${typeof stateData}`);
+    console.log(` State data:`, JSON.stringify(stateData, null, 2));
     
     // Check if it's already an object or needs parsing
     if (typeof stateData === 'object' && stateData !== null) {
@@ -61,8 +61,8 @@ export async function loadFieldWorkerState(userId) {
 export async function saveFieldWorkerState(userId, state) {
   const today = new Date().toISOString().split('T')[0];
   
-  console.log(`💾 Saving state for user: ${userId}, date: ${today}`);
-  console.log(`💾 State to save:`, JSON.stringify(state, null, 2));
+  console.log(` Saving state for user: ${userId}, date: ${today}`);
+  console.log(` State to save:`, JSON.stringify(state, null, 2));
   
   await pool.query(
     `INSERT INTO field_worker_states (user_id, date, state_data, updated_at)
@@ -72,7 +72,7 @@ export async function saveFieldWorkerState(userId, state) {
     [userId, today, JSON.stringify(state)]
   );
   
-  console.log(`✅ State saved successfully for user ${userId}`);
+  console.log(` State saved successfully for user ${userId}`);
 }
 
 /**
@@ -167,20 +167,20 @@ export async function uploadProofToBlob(userId, media) {
     const response = await axios.get(media.fileUrl, { responseType: 'arraybuffer' });
     const buffer = Buffer.from(response.data);
     
-    console.log(`📤 Uploading buffer to Azure (${buffer.length} bytes)`);
+    console.log(` Uploading buffer to Azure (${buffer.length} bytes)`);
     await blockBlobClient.upload(buffer, buffer.length, {
       blobHTTPHeaders: { blobContentType: media.mimeType || 'image/jpeg' }
     });
     
-    console.log(`✅ Upload complete: ${blockBlobClient.url}`);
+    console.log(` Upload complete: ${blockBlobClient.url}`);
   } else if (media.data && Buffer.isBuffer(media.data)) {
     // Direct buffer upload
-    console.log(`📤 Uploading buffer to Azure (${media.data.length} bytes)`);
+    console.log(` Uploading buffer to Azure (${media.data.length} bytes)`);
     await blockBlobClient.upload(media.data, media.data.length, {
       blobHTTPHeaders: { blobContentType: media.mimeType || 'image/jpeg' }
     });
     
-    console.log(`✅ Upload complete: ${blockBlobClient.url}`);
+    console.log(` Upload complete: ${blockBlobClient.url}`);
   } else {
     throw new Error('Media must have either fileUrl or data property (as Buffer)');
   }

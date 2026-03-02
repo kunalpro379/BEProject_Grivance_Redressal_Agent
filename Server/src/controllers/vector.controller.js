@@ -256,7 +256,7 @@ export const getDepartmentPoliciesReact = async (req, res) => {
     const { departmentId } = req.params;
     const { max_attempts = 10, retry_delay = 2.0 } = req.query;
 
-    console.log(`🤖 Using REACT agent for department ${departmentId}`);
+    console.log(` Using REACT agent for department ${departmentId}`);
 
     // Try REACT agent first
     const agentHealthy = await reactPolicyService.checkAgentHealth();

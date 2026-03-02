@@ -56,7 +56,7 @@ def monitor_queue(interval=10, duration=300):
                     
                     # Status indicator
                     if change > 0:
-                        status = "✅ Decreasing"
+                        status = " Decreasing"
                     elif change < 0:
                         status = "⚠️  Increasing"
                     else:

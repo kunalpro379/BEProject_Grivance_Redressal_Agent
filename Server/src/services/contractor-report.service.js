@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+﻿import pool from '../config/database.js';
 import { BlobServiceClient } from '@azure/storage-blob';
 import OpenAI from 'openai';
 import { createRequire } from 'module';
@@ -23,12 +23,12 @@ class ContractorReportService {
           process.env.AZURE_STORAGE_CONTAINER_NAME || 'igrs'
         );
       } catch (error) {
-        console.warn('⚠️  Azure Blob Storage not configured, document uploads will be disabled');
+        console.warn('️  Azure Blob Storage not configured, document uploads will be disabled');
         this.blobServiceClient = null;
         this.containerClient = null;
       }
     } else {
-      console.warn('⚠️  Azure Blob Storage not configured, document uploads will be disabled');
+      console.warn('️  Azure Blob Storage not configured, document uploads will be disabled');
       this.blobServiceClient = null;
       this.containerClient = null;
     }
@@ -169,7 +169,7 @@ class ContractorReportService {
       try {
         embedding = await this.generateEmbedding(reportText);
       } catch (embeddingError) {
-        console.warn('⚠️  Could not generate embedding, saving without it:', embeddingError.message);
+        console.warn('️  Could not generate embedding, saving without it:', embeddingError.message);
       }
 
       // Insert report with embedding and AI analysis

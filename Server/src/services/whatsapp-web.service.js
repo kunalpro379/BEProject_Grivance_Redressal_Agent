@@ -14,7 +14,7 @@ class WhatsAppWebService {
    */
   async initialize() {
     try {
-      console.log('🔄 Initializing WhatsApp Web...');
+      console.log('Initializing WhatsApp Web...');
 
       this.client = new Client({
         authStrategy: new LocalAuth({
@@ -36,38 +36,38 @@ class WhatsAppWebService {
 
       // QR Code event
       this.client.on('qr', (qr) => {
-        console.log('\n📱 Scan this QR code with WhatsApp:\n');
+        console.log('\nScan this QR code with WhatsApp:\n');
         qrcode.generate(qr, { small: true });
         console.log('\nOr visit: https://web.whatsapp.com and scan manually\n');
       });
 
       // Ready event
       this.client.on('ready', () => {
-        console.log('✅ WhatsApp Web is ready!');
+        console.log('WhatsApp Web is ready!');
         this.isReady = true;
       });
 
       // Authenticated event
       this.client.on('authenticated', () => {
-        console.log('✅ WhatsApp authenticated successfully');
+        console.log('WhatsApp authenticated successfully');
       });
 
       // Auth failure event
       this.client.on('auth_failure', (msg) => {
-        console.error('❌ WhatsApp authentication failed:', msg);
-        console.log('💡 Tip: Delete .wwebjs_auth folder and scan QR code again');
+        console.error('WhatsApp authentication failed:', msg);
+        console.log('Tip: Delete .wwebjs_auth folder and scan QR code again');
       });
 
       // Disconnected event
       this.client.on('disconnected', (reason) => {
-        console.log('⚠️  WhatsApp disconnected:', reason);
+        console.log('WhatsApp disconnected:', reason);
         this.isReady = false;
         
         // Try to reconnect after 5 seconds
         setTimeout(() => {
-          console.log('🔄 Attempting to reconnect...');
+          console.log('Attempting to reconnect...');
           this.initialize().catch(err => {
-            console.error('❌ Reconnection failed:', err.message);
+            console.error('Reconnection failed:', err.message);
           });
         }, 5000);
       });
@@ -81,11 +81,11 @@ class WhatsAppWebService {
       await this.client.initialize();
       
     } catch (error) {
-      console.error('❌ WhatsApp initialization error:', error.message);
+      console.error('WhatsApp initialization error:', error.message);
       
       // If session is corrupted, suggest cleanup
       if (error.message.includes('Execution context was destroyed')) {
-        console.log('\n💡 Session corrupted. To fix:');
+        console.log('\nSession corrupted. To fix:');
         console.log('   1. Stop the server');
         console.log('   2. Delete .wwebjs_auth folder');
         console.log('   3. Restart and scan QR code again\n');
@@ -100,7 +100,7 @@ class WhatsAppWebService {
    */
   async handleMessage(message) {
     try {
-      console.log('\n📨 Incoming WhatsApp message:');
+      console.log('\nIncoming WhatsApp message:');
       console.log('  From:', message.from);
       console.log('  Body:', message.body);
       console.log('  Type:', message.type);
@@ -116,14 +116,14 @@ class WhatsAppWebService {
       const phoneNumber = message.from.replace('@c.us', '');
       const userName = contact.pushname || contact.name || phoneNumber;
 
-      console.log(`  📱 Processing message from ${userName} (${phoneNumber})`);
+      console.log(`  Processing message from ${userName} (${phoneNumber})`);
 
       // Send typing indicator
       const chat = await message.getChat();
       await chat.sendStateTyping();
 
       // Process message through agent service
-      console.log('  🤖 Sending to agent service...');
+      console.log('   Sending to agent service...');
       const response = await agentService.processMessage({
         userId: phoneNumber,
         userName: userName,
@@ -133,14 +133,14 @@ class WhatsAppWebService {
         media: message.hasMedia ? await this.downloadMedia(message) : null
       });
 
-      console.log('  ✅ Agent response:', response.text.substring(0, 100) + '...');
+      console.log('  Agent response:', response.text.substring(0, 100) + '...');
 
       // Stop typing
       await chat.clearState();
 
       // Send response
       await message.reply(response.text);
-      console.log('  ✅ Response sent!');
+      console.log('  Response sent!');
 
       // Send attachments if any
       if (response.attachments) {
@@ -152,12 +152,12 @@ class WhatsAppWebService {
       }
 
     } catch (error) {
-      console.error('❌ Error handling WhatsApp message:', error);
+      console.error('Error handling WhatsApp message:', error);
       console.error('   Stack:', error.stack);
       try {
         await message.reply('Sorry, I encountered an error. Please try again.');
       } catch (replyError) {
-        console.error('❌ Error sending error message:', replyError);
+        console.error('Error sending error message:', replyError);
       }
     }
   }
@@ -192,7 +192,7 @@ class WhatsAppWebService {
       // Format phone number (remove + and add @c.us)
       const chatId = phoneNumber.replace('+', '') + '@c.us';
       await this.client.sendMessage(chatId, text);
-      console.log(`✅ Message sent to ${phoneNumber}`);
+      console.log(`Message sent to ${phoneNumber}`);
     } catch (error) {
       console.error('Error sending message:', error);
       throw error;
@@ -203,7 +203,7 @@ class WhatsAppWebService {
    * Send daily report reminder
    */
   async sendDailyReportReminder(phoneNumber, userName) {
-    const message = `Hi ${userName}! 👋\n\nTime for your daily progress report.\n\nPlease share:\n1. Work completed today\n2. Site/location\n3. Hours worked\n4. Any challenges faced\n5. Photos/proof of work (optional)\n\nReply with your update!`;
+    const message = `Hi ${userName}!\n\nTime for your daily progress report.\n\nPlease share:\n1. Work completed today\n2. Site/location\n3. Hours worked\n4. Any challenges faced\n5. Photos/proof of work (optional)\n\nReply with your update!`;
     
     return await this.sendMessage(phoneNumber, message);
   }
@@ -212,7 +212,7 @@ class WhatsAppWebService {
    * Send grievance update notification
    */
   async sendGrievanceUpdate(phoneNumber, grievanceId, status, message) {
-    const text = `🔔 Grievance Update\n\nGrievance #${grievanceId}\nStatus: ${status}\n\n${message}`;
+    const text = `Grievance Update\n\nGrievance #${grievanceId}\nStatus: ${status}\n\n${message}`;
     
     return await this.sendMessage(phoneNumber, text);
   }

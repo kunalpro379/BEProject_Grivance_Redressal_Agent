@@ -1,5 +1,4 @@
 import { TrendingUp, Clock, Users, CheckCircle, Award, Target } from "lucide-react";
-import dashboardPreview from "../../../assets/dashboard-preview.jpg";
 
 const statistics = [
   {
@@ -54,89 +53,90 @@ const statistics = [
 
 const StatisticsSection = () => {
   return (
-    <section id="statistics" className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <section id="statistics" className="py-24 bg-gradient-to-br from-yellow-100 via-amber-50 to-yellow-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-white/80 text-black rounded-full px-5 py-2.5 text-sm font-bold mb-6 border border-gray-200">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-black rounded-full px-5 py-2.5 text-sm font-bold mb-6 shadow-lg">
             <TrendingUp className="h-4 w-4" />
             <span>Platform Impact</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
             Driving Real{" "}
-            <span className="text-gray-700 font-black">
+            <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent font-black">
               Impact & Results
             </span>
           </h2>
-          <p className="text-xl text-gray-700 font-bold max-w-3xl mx-auto">
+          <p className="text-xl text-gray-800 font-bold max-w-3xl mx-auto">
             Our platform has transformed how citizens and officials interact, 
             creating a more transparent and efficient governance system.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Statistics Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {statistics.map((stat, index) => {
+        {/* Scrolling Stats Row */}
+        <div className="mb-12 overflow-hidden">
+          <div className="flex gap-6 animate-scroll-vertical">
+            {[...statistics, ...statistics].map((stat, index) => {
               const IconComponent = stat.icon;
               return (
                 <div 
                   key={index}
-                  className="bg-white/80 p-8 rounded-xl border border-gray-200 hover:border-black hover:shadow-lg transition-all duration-300"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="flex-shrink-0 bg-white/80 px-6 py-4 rounded-xl border border-gray-200 hover:border-black hover:shadow-lg transition-all duration-300 flex items-center gap-4 min-w-[300px]"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="inline-flex p-2 rounded-lg bg-black text-white">
-                      <IconComponent className="h-5 w-5" />
-                    </div>
-                    <div className={`flex items-center text-sm font-bold ${
-                      stat.trendUp ? 'text-black' : 'text-gray-600'
-                    }`}>
-                      <TrendingUp className="h-4 w-4 mr-1" />
-                      {stat.trend}
-                    </div>
+                  <div className="inline-flex p-2 rounded-lg bg-black text-white">
+                    <IconComponent className="h-5 w-5" />
                   </div>
-                  <div className="text-3xl font-black text-black mb-1">{stat.number}</div>
-                  <div className="text-sm font-bold text-gray-700 mb-1">{stat.label}</div>
-                  <div className="text-xs font-semibold text-gray-600">{stat.description}</div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <div className="text-2xl font-black text-black">{stat.number}</div>
+                      <div className={`flex items-center text-xs font-bold ${
+                        stat.trendUp ? 'text-black' : 'text-gray-600'
+                      }`}>
+                        <TrendingUp className="h-3 w-3 mr-1" />
+                        {stat.trend}
+                      </div>
+                    </div>
+                    <div className="text-sm font-bold text-gray-700">{stat.label}</div>
+                    <div className="text-xs font-semibold text-gray-600">{stat.description}</div>
+                  </div>
                 </div>
               );
             })}
           </div>
+        </div>
 
-          {/* Dashboard Preview */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white p-2">
-              <img 
-                src={dashboardPreview} 
-                alt="Dashboard preview showing analytics and charts" 
-                className="w-full h-auto rounded-xl"
-              />
-              {/* Overlay Elements */}
-              <div className="absolute top-6 left-6 bg-white rounded-xl p-4 shadow-lg border border-gray-200">
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-black rounded-full animate-pulse"></div>
-                  <span className="text-sm font-bold text-black">Live Dashboard</span>
-                </div>
-                <div className="text-xs font-semibold text-gray-700 mt-1">Real-time updates</div>
+        {/* Large Dashboard Preview */}
+        <div className="relative max-w-6xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden border-2 border-gray-200 bg-white p-4 shadow-2xl">
+            <img 
+              src="/image.png" 
+              alt="Dashboard preview showing analytics and charts" 
+              className="w-full h-auto rounded-xl"
+            />
+            {/* Overlay Elements */}
+            <div className="absolute top-8 left-8 bg-white rounded-xl p-5 shadow-xl border border-gray-200">
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-black rounded-full animate-pulse"></div>
+                <span className="text-base font-bold text-black">Live Dashboard</span>
               </div>
-              
-              <div className="absolute bottom-6 right-6 bg-white rounded-xl p-4 shadow-lg border border-gray-200">
-                <div className="text-2xl font-black text-black">98.5%</div>
-                <div className="text-xs font-bold text-gray-700">Resolution Rate</div>
-              </div>
-            </div>
-
-            {/* Floating Badges */}
-            <div className="absolute -top-4 -right-4 bg-black text-white p-4 rounded-2xl shadow-xl">
-              <div className="text-2xl font-black">24/7</div>
-              <div className="text-xs font-bold opacity-90">Active Monitoring</div>
+              <div className="text-sm font-semibold text-gray-700 mt-1">Real-time updates</div>
             </div>
             
-            <div className="absolute -bottom-4 -left-4 bg-black text-white p-4 rounded-2xl shadow-xl">
-              <div className="text-2xl font-black">AI</div>
-              <div className="text-xs font-bold opacity-90">Powered</div>
+            <div className="absolute bottom-8 right-8 bg-white rounded-xl p-5 shadow-xl border border-gray-200">
+              <div className="text-3xl font-black text-black">98.5%</div>
+              <div className="text-sm font-bold text-gray-700">Resolution Rate</div>
             </div>
+          </div>
+
+          {/* Floating Badges */}
+          <div className="absolute -top-6 -right-6 bg-black text-white p-6 rounded-2xl shadow-xl">
+            <div className="text-3xl font-black">24/7</div>
+            <div className="text-sm font-bold opacity-90">Active Monitoring</div>
+          </div>
+          
+          <div className="absolute -bottom-6 -left-6 bg-black text-white p-6 rounded-2xl shadow-xl">
+            <div className="text-3xl font-black">AI</div>
+            <div className="text-sm font-bold opacity-90">Powered</div>
           </div>
         </div>
 
@@ -158,6 +158,25 @@ const StatisticsSection = () => {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scroll-vertical {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll-vertical {
+          animation: scroll-vertical 30s linear infinite;
+        }
+        
+        .animate-scroll-vertical:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };

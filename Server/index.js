@@ -47,17 +47,7 @@ import telegramBot from './src/services/telegram.bot.service.js';
 import telegramFieldWorkerBot from './src/services/telegram-fieldworker-bot.service.js';
 import telegramContractorBot from './src/services/telegram-contractor-bot.service.js';
 import whatsappScheduler from './src/services/whatsapp.scheduler.js';
-import runMigration from './src/migrations/fix_citizens_table.js';
-import addLocationToGrievances from './src/migrations/add_location_to_grievances.js';
-import fixDepartmentTrigger from './src/migrations/fix_department_trigger.js';
-import createWhatsAppTables from './src/migrations/create_whatsapp_tables.js';
-import createWorkerContractorTables from './src/migrations/create_worker_contractor_tables.js';
-import addContractorAnalysis from './src/migrations/add_contractor_analysis.js';
-import createFieldWorkerStatesTable from './src/migrations/create_fieldworker_states_table.js';
-import createUserStatesTable from './src/migrations/create_user_states_table.js';
-import createContractorReportsTable from './src/migrations/create_contractor_reports_table.js';
-import addPdfExtractionColumns from './src/migrations/add_pdf_extraction_columns.js';
-import { up as createDepartmentComplaintsAnalysisCache } from './src/migrations/create_department_complaints_analysis_cache.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -174,27 +164,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// MIGRATION
-(async () => {
-  try {
-    console.log('\nRunning database migrations...');
-    // Migrations temporarily disabled to prevent connection pool exhaustion
-    // await runMigration();
-    // await fixDepartmentTrigger();
-    // await addLocationToGrievances();
-    await createWhatsAppTables();
-    await createWorkerContractorTables();
-    await addContractorAnalysis();
-    await createFieldWorkerStatesTable();
-    await createUserStatesTable();
-    await createContractorReportsTable();
-    await addPdfExtractionColumns();
-    await createDepartmentComplaintsAnalysisCache();
-    console.log('✅ All migrations completed');
-  } catch (error) {
-    console.warn('⚠️  Database migration failed:', error.message);
-  }
-})();
+
 
 // Initialize Telegram Grievance Bot (Citizens)
 (async () => {
@@ -203,7 +173,7 @@ app.use((err, req, res, next) => {
     
     if (grievanceToken && !grievanceToken.includes('your_') && grievanceToken.length > 20) {
       await telegramBot.init();
-      console.log('✅ Telegram Grievance Bot initialized');
+      console.log(' Telegram Grievance Bot initialized');
     } else {
       console.log('⚠️  Telegram Grievance Bot token not configured - skipping initialization');
     }
@@ -220,7 +190,7 @@ app.use((err, req, res, next) => {
     
     if (fieldWorkerToken && !fieldWorkerToken.includes('your_') && fieldWorkerToken.length > 20) {
       await telegramFieldWorkerBot.initialize();
-      console.log('✅ Telegram Field Worker Bot initialized');
+      console.log(' Telegram Field Worker Bot initialized');
     } else {
       console.log('⚠️  Telegram Field Worker Bot token not configured - skipping initialization');
     }
@@ -238,7 +208,7 @@ app.use((err, req, res, next) => {
     // Only initialize if token is configured and not a placeholder
     if (contractorToken && !contractorToken.includes('your_') && contractorToken.length > 20) {
       telegramContractorBot.initialize();
-      console.log('✅ Telegram Contractor Bot initialized');
+      console.log(' Telegram Contractor Bot initialized');
     } else {
       console.log('⚠️  Telegram Contractor Bot token not configured - skipping initialization');
       console.log('   Add TELEGRAM_CONTRACTOR_BOT_TOKEN to .env to enable contractor bot');
@@ -258,7 +228,7 @@ if (process.env.WHATSAPP_ACCESS_TOKEN) {
     // Start weekly summaries on Friday at 5 PM
     whatsappScheduler.startWeeklySummary(5, 17, 0);
     
-    console.log('✅ WhatsApp scheduler initialized');
+    console.log(' WhatsApp scheduler initialized');
   } catch (error) {
     console.warn('⚠️  WhatsApp scheduler initialization failed:', error.message);
   }

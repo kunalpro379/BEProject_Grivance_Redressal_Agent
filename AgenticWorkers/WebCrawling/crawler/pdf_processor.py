@@ -107,7 +107,7 @@ class PDFProcessor:
             text = PDFProcessor.extract_text_pypdf2(pdf_bytes)
         
         if text and len(text.strip()) > 0:
-            logger.info(f"✅ Extracted {len(text)} characters from PDF")
+            logger.info(f" Extracted {len(text)} characters from PDF")
             return text
         else:
             logger.error(f"❌ No text extracted from PDF: {url}")

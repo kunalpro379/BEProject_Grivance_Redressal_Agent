@@ -30,7 +30,7 @@ class WhatsAppService {
         }
       );
 
-      console.log(`✅ Message sent to ${to}`);
+      console.log(`Message sent to ${to}`);
       return response.data;
     } catch (error) {
       console.error('Error sending WhatsApp message:', error.response?.data || error.message);
@@ -331,7 +331,7 @@ class WhatsAppService {
    * Send daily report reminder
    */
   async sendDailyReportReminder(phoneNumber, userName) {
-    const message = `Hi ${userName}! 👋\n\nTime for your daily progress report.\n\nPlease share:\n1. Work completed today\n2. Any challenges faced\n3. Photos/proof of work (optional)\n\nReply with your update!`;
+    const message = `Hi ${userName}!\n\nTime for your daily progress report.\n\nPlease share:\n1. Work completed today\n2. Any challenges faced\n3. Photos/proof of work (optional)\n\nReply with your update!`;
     
     return await this.sendMessage(phoneNumber, message);
   }
@@ -340,7 +340,7 @@ class WhatsAppService {
    * Send grievance update notification
    */
   async sendGrievanceUpdate(phoneNumber, grievanceId, status, message) {
-    const text = `🔔 Grievance Update\n\nGrievance #${grievanceId}\nStatus: ${status}\n\n${message}`;
+    const text = `Grievance Update\n\nGrievance #${grievanceId}\nStatus: ${status}\n\n${message}`;
     
     return await this.sendMessage(phoneNumber, text);
   }

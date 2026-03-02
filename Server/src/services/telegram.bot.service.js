@@ -577,7 +577,7 @@ class TelegramBotService {
                     fs.unlinkSync(tempFilePath);
                 }
                 return ctx.reply(
-                    '❌ Upload Failed\n\n' +
+                    'Upload Failed\n\n' +
                     'Failed to upload your document to cloud storage.\n\n' +
                     'Error: ' + uploadError.message + '\n\n' +
                     'Please try again or contact support if the issue persists.'
@@ -637,7 +637,7 @@ class TelegramBotService {
                 });
                 // Don't throw - grievance is saved, just notify user
                 await ctx.reply(
-                    '⚠️ Warning: Grievance saved but AI analysis queue failed.\n\n' +
+                    'Warning: Grievance saved but AI analysis queue failed.\n\n' +
                     `Submission ID: ${grievanceResult.grievance_id}\n\n` +
                     'Your grievance is saved and will be processed manually.\n' +
                     'You will receive updates soon.'

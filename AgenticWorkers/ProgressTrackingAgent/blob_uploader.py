@@ -22,7 +22,7 @@ class BlobUploader:
             self.blob_service_client = None
         else:
             self.blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
-            print("✅ Azure Blob Storage client initialized")
+            print(" Azure Blob Storage client initialized")
     
     def upload_report(self, report_path: str, department_id: str, department_name: str) -> str:
         """
@@ -47,7 +47,7 @@ class BlobUploader:
             # Ensure container exists
             try:
                 container_client.create_container()
-                print(f"✅ Created container: {self.container_name}")
+                print(f" Created container: {self.container_name}")
             except Exception:
                 # Container already exists
                 pass
@@ -101,7 +101,7 @@ class BlobUploader:
                 )
                 
                 blob_url = blob_client.url
-                print(f"   ✅ Uploaded to blob: {blob_name}")
+                print(f"    Uploaded to blob: {blob_name}")
             
             # Save URL to database
             self._save_url_to_database(

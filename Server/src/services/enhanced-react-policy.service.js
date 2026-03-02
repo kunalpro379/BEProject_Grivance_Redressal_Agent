@@ -1,4 +1,4 @@
-import { Pinecone } from '@pinecone-database/pinecone';
+﻿import { Pinecone } from '@pinecone-database/pinecone';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -27,19 +27,19 @@ class EnhancedReactPolicyAgent {
     if (this.initialized) return true;
     
     try {
-      console.log(`🔌 Connecting to Pinecone index: ${this.indexName}`);
+      console.log(` Connecting to Pinecone index: ${this.indexName}`);
       this.index = this.pinecone.index(this.indexName);
       
       // Verify connection by getting index stats
       const stats = await this.index.describeIndexStats();
-      console.log(`✅ Connected to Pinecone`);
+      console.log(` Connected to Pinecone`);
       console.log(`   Total vectors: ${stats.totalRecordCount || 0}`);
       console.log(`   Namespaces: ${Object.keys(stats.namespaces || {}).join(', ') || 'none'}`);
       
       this.initialized = true;
       return true;
     } catch (error) {
-      console.error(`❌ Failed to connect to Pinecone:`, error.message);
+      console.error(` Failed to connect to Pinecone:`, error.message);
       return false;
     }
   }
@@ -94,7 +94,7 @@ class EnhancedReactPolicyAgent {
     }
 
     if (!this.index) {
-      console.log(`   ⚠️  Pinecone not initialized`);
+      console.log(`   ️  Pinecone not initialized`);
       return [];
     }
 
@@ -102,20 +102,20 @@ class EnhancedReactPolicyAgent {
 
     try {
       // Method 1: Try to list all vectors and fetch with namespace
-      console.log(`   📋 Attempting to list vectors...`);
+      console.log(`    Attempting to list vectors...`);
       try {
         const listResult = await this.index.listPaginated({ limit: 100 });
         if (listResult.vectors && listResult.vectors.length > 0) {
-          console.log(`   ✓ Found ${listResult.vectors.length} vectors via list`);
+          console.log(`    Found ${listResult.vectors.length} vectors via list`);
           
           // Extract vector IDs properly
           const vectorIds = listResult.vectors.map(v => v.id).filter(id => id && id.length > 0);
-          console.log(`   📝 Extracted ${vectorIds.length} valid vector IDs`);
+          console.log(`    Extracted ${vectorIds.length} valid vector IDs`);
           
           if (vectorIds.length > 0) {
             // Get the namespace from list result
             const namespace = listResult.namespace || '__default__';
-            console.log(`   🔖 Using namespace: "${namespace}"`);
+            console.log(`    Using namespace: "${namespace}"`);
             
             // Use namespace-specific index for fetching
             const nsIndex = this.index.namespace(namespace);
@@ -125,12 +125,12 @@ class EnhancedReactPolicyAgent {
             for (let i = 0; i < vectorIds.length; i += batchSize) {
               const batch = vectorIds.slice(i, i + batchSize);
               try {
-                console.log(`   📦 Fetching batch ${Math.floor(i/batchSize) + 1} (${batch.length} IDs)...`);
+                console.log(`    Fetching batch ${Math.floor(i/batchSize) + 1} (${batch.length} IDs)...`);
                 const fetchResult = await nsIndex.fetch(batch);
                 
                 if (fetchResult.records && Object.keys(fetchResult.records).length > 0) {
                   const records = Object.values(fetchResult.records);
-                  console.log(`   ✓ Fetched ${records.length} records with metadata`);
+                  console.log(`    Fetched ${records.length} records with metadata`);
                   
                   // Filter by relevance to search query
                   const filtered = records.filter(record => {
@@ -152,7 +152,7 @@ class EnhancedReactPolicyAgent {
                     return searchWords.some(word => allText.includes(word)) || allText.length > 100;
                   });
 
-                  console.log(`   ✓ Filtered to ${filtered.length} relevant records from this batch`);
+                  console.log(`    Filtered to ${filtered.length} relevant records from this batch`);
                   
                   results.push(...filtered.map(record => ({
                     id: record.id,
@@ -160,27 +160,27 @@ class EnhancedReactPolicyAgent {
                     metadata: record.metadata || {}
                   })));
                 } else {
-                  console.log(`   ⚠️  Batch returned no records`);
+                  console.log(`   ️  Batch returned no records`);
                 }
               } catch (fetchErr) {
-                console.log(`   ⚠️  Batch fetch failed: ${fetchErr.message}`);
+                console.log(`   ️  Batch fetch failed: ${fetchErr.message}`);
               }
             }
           }
         }
       } catch (listErr) {
-        console.log(`   ⚠️  List method failed: ${listErr.message}`);
+        console.log(`   ️  List method failed: ${listErr.message}`);
       }
 
       // Method 2: Try namespace-based search (if Method 1 didn't work)
       if (results.length === 0) {
-        console.log(`   🔍 Checking namespaces...`);
+        console.log(`    Checking namespaces...`);
         try {
           const stats = await this.index.describeIndexStats();
           const namespaces = Object.keys(stats.namespaces || {});
           
           if (namespaces.length > 0) {
-            console.log(`   ✓ Found namespaces: ${namespaces.join(', ')}`);
+            console.log(`    Found namespaces: ${namespaces.join(', ')}`);
             
             for (const ns of namespaces) {
               try {
@@ -188,7 +188,7 @@ class EnhancedReactPolicyAgent {
                 const nsListResult = await nsIndex.listPaginated({ limit: topK });
                 
                 if (nsListResult.vectors && nsListResult.vectors.length > 0) {
-                  console.log(`   ✓ Found ${nsListResult.vectors.length} vectors in namespace "${ns}"`);
+                  console.log(`    Found ${nsListResult.vectors.length} vectors in namespace "${ns}"`);
                   
                   const vectorIds = nsListResult.vectors.map(v => v.id);
                   if (vectorIds.length > 0) {
@@ -206,17 +206,17 @@ class EnhancedReactPolicyAgent {
                   }
                 }
               } catch (nsErr) {
-                console.log(`   ⚠️  Namespace "${ns}" query failed: ${nsErr.message}`);
+                console.log(`   ️  Namespace "${ns}" query failed: ${nsErr.message}`);
               }
             }
           }
         } catch (statsErr) {
-          console.log(`   ⚠️  Stats check failed: ${statsErr.message}`);
+          console.log(`   ️  Stats check failed: ${statsErr.message}`);
         }
       }
 
     } catch (error) {
-      console.log(`   ❌ Search error: ${error.message}`);
+      console.log(`    Search error: ${error.message}`);
     }
 
     // Remove duplicates
@@ -238,14 +238,14 @@ class EnhancedReactPolicyAgent {
     // Check if we have any results
     if (allResults.length === 0) {
       if (iteration < this.maxIterations - 1) {
-        console.log(`   💭 Thought: No results yet. Will try different search strategy.`);
+        console.log(`    Thought: No results yet. Will try different search strategy.`);
         return {
           action: 'continue',
           reasoning: 'No results found, trying different approach',
           shouldContinue: true
         };
       } else {
-        console.log(`   💭 Thought: Exhausted all search strategies. Pinecone appears empty.`);
+        console.log(`    Thought: Exhausted all search strategies. Pinecone appears empty.`);
         return {
           action: 'stop',
           reasoning: 'No data found in Pinecone after exhaustive search',
@@ -269,14 +269,14 @@ class EnhancedReactPolicyAgent {
 
     if (withMetadata.length === 0) {
       if (iteration < this.maxIterations - 1) {
-        console.log(`   💭 Thought: Results lack content. Searching for better data.`);
+        console.log(`    Thought: Results lack content. Searching for better data.`);
         return {
           action: 'continue',
           reasoning: 'Results lack substantial content',
           shouldContinue: true
         };
       } else {
-        console.log(`   💭 Thought: Found results but they lack content. Using what we have.`);
+        console.log(`    Thought: Found results but they lack content. Using what we have.`);
         return {
           action: 'extract',
           reasoning: 'Using available results despite limited content',
@@ -287,8 +287,8 @@ class EnhancedReactPolicyAgent {
     }
 
     // We have good results!
-    console.log(`   💭 Thought: Found ${withMetadata.length} results with good content!`);
-    console.log(`   ✅ Decision: Extract and format policies`);
+    console.log(`    Thought: Found ${withMetadata.length} results with good content!`);
+    console.log(`    Decision: Extract and format policies`);
     
     return {
       action: 'extract',
@@ -320,13 +320,13 @@ class EnhancedReactPolicyAgent {
 
       // Generate search strategy for this iteration
       const strategy = this.generateSearchStrategies(departmentName, iteration);
-      console.log(`📋 Strategy: ${strategy.type} - ${strategy.description}`);
+      console.log(` Strategy: ${strategy.type} - ${strategy.description}`);
 
       // Execute search
       const results = await this.searchPinecone(strategy);
       
       if (results.length > 0) {
-        console.log(`   ✓ Found ${results.length} new results`);
+        console.log(`    Found ${results.length} new results`);
         allResults.push(...results);
         
         // Remove duplicates
@@ -341,10 +341,10 @@ class EnhancedReactPolicyAgent {
       if (!decision.shouldContinue) {
         console.log(`\n${'='.repeat(80)}`);
         if (decision.results && decision.results.length > 0) {
-          console.log(`✅ Search completed successfully`);
+          console.log(` Search completed successfully`);
           console.log(`   Found: ${decision.results.length} relevant documents`);
         } else {
-          console.log(`⚠️  Search completed with no results`);
+          console.log(`️  Search completed with no results`);
           console.log(`   Pinecone index appears to be empty`);
         }
         console.log('='.repeat(80));
@@ -357,7 +357,7 @@ class EnhancedReactPolicyAgent {
       await new Promise(resolve => setTimeout(resolve, 500));
     }
 
-    console.log(`\n⚠️  Reached maximum iterations (${this.maxIterations})`);
+    console.log(`\n️  Reached maximum iterations (${this.maxIterations})`);
     return allResults;
   }
 

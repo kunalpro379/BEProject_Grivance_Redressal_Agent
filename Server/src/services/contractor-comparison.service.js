@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+﻿import pool from '../config/database.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -9,7 +9,7 @@ class ContractorComparisonService {
    */
   async generateComparisonReport(departmentId = null, category = null) {
     try {
-      console.log('📊 Generating contractor comparison report...');
+      console.log(' Generating contractor comparison report...');
 
       // Fetch all contractors with analysis
       const contractors = await this.getContractorsWithAnalysis(departmentId, category);

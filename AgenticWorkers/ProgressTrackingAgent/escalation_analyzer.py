@@ -12,7 +12,7 @@ class EscalationAnalyzer:
     def __init__(self):
         self.ai_client = DeepSeekClient()
         self.db = DatabaseService()
-        print("✅ Escalation Analyzer initialized")
+        print(" Escalation Analyzer initialized")
     
     def analyze_escalation_needs(self, department_id: str, department_name: str, report_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -148,7 +148,7 @@ class EscalationAnalyzer:
             ai_recommendation = self._generate_escalation_recommendation(escalation_data, report_data)
             escalation_data["ai_recommendation"] = ai_recommendation
         else:
-            print("   ✅ No escalation needed - department performing adequately")
+            print("    No escalation needed - department performing adequately")
             escalation_data["ai_recommendation"] = "No escalation required. Department is managing grievances effectively."
         
         return escalation_data

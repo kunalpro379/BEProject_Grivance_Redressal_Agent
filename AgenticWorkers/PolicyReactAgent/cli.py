@@ -101,7 +101,7 @@ Examples:
     department_id = None if args.all else args.department
     
     if not args.json:
-        print(f"\n🤖 Policy REACT Agent")
+        print(f"\n Policy REACT Agent")
         print("=" * 80)
         if department_id:
             print(f"Searching for policies in department {department_id}...")
@@ -132,7 +132,7 @@ Examples:
         print("=" * 80)
         
         if result['success']:
-            print(f"✅ Success!")
+            print(f" Success!")
             print(f"   Found: {result['metadata']['total_policies_found']} policies")
             print(f"   Attempts: {result['metadata']['attempts']}")
             print(f"   Time: {result['metadata']['elapsed_time_seconds']}s")

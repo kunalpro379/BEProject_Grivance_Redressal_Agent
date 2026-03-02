@@ -81,7 +81,7 @@ class CrawlerWorker:
                     self.crawler.crawl_website(url, on_page_crawled=upload_page),
                     timeout=300  # 5 minutes timeout
                 )
-                logger.info(f"✅ Crawler finished, got {len(results)} results")
+                logger.info(f" Crawler finished, got {len(results)} results")
             except asyncio.TimeoutError:
                 logger.error(f"❌ Crawler timeout after 5 minutes for {url}")
                 # Even if timeout, we may have uploaded some pages
@@ -107,13 +107,13 @@ class CrawlerWorker:
                 logger.warning(f"  No results for job {job_id}")
                 return False
             
-            logger.info(f"✅ Upload complete: {uploaded_count}/{len(results)} pages uploaded to blob storage")
+            logger.info(f" Upload complete: {uploaded_count}/{len(results)} pages uploaded to blob storage")
             
             # Send to embeddings queue (once after all uploads)
             blob_folder = domain
             logger.info(f"📤 Sending to embeddings queue: {blob_folder}")
             self.queue_manager.send_to_embeddings_queue(job_id, url, blob_folder)
-            logger.info(f"✅ Sent to embeddings queue")
+            logger.info(f" Sent to embeddings queue")
             
             return True
             
@@ -146,13 +146,13 @@ class CrawlerWorker:
             
             # Upload to blob
             if self.blob_manager.upload_file(text_content, blob_path):
-                logger.info(f"✅ Uploaded PDF: {blob_path}")
+                logger.info(f" Uploaded PDF: {blob_path}")
                 logger.info(f"   Size: {len(text_content)} characters")
                 
                 # Send to embeddings queue
                 logger.info(f"📤 Sending to embeddings queue: {domain}")
                 self.queue_manager.send_to_embeddings_queue(job_id, url, domain)
-                logger.info(f"✅ Sent to embeddings queue")
+                logger.info(f" Sent to embeddings queue")
                 
                 return True
             else:
@@ -203,14 +203,14 @@ class CrawlerWorker:
                     
                     try:
                         self.queue_manager.delete_message(queue_client, message)
-                        logger.info(f"✅ Message deleted successfully")
+                        logger.info(f" Message deleted successfully")
                         processed_count += 1
                     except Exception as delete_error:
                         logger.error(f"❌ Failed to delete message: {delete_error}")
                         logger.error(f"   This message may reappear in queue")
                     
                     if success:
-                        logger.info(f"✅ Job {job_id} completed and dequeued")
+                        logger.info(f" Job {job_id} completed and dequeued")
                     else:
                         logger.warning(f"⚠️  Job {job_id} failed but dequeued to prevent retry")
                     

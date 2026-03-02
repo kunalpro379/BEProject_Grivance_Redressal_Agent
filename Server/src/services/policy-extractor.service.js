@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import db from '../config/database.js';
 
 class PolicyExtractorService {
@@ -12,14 +12,14 @@ class PolicyExtractorService {
    */
   async extractPolicies(category = 'all', departmentId = null) {
     try {
-      console.log(`🔍 Extracting policies - Category: ${category}, Department: ${departmentId || 'all'}`);
+      console.log(` Extracting policies - Category: ${category}, Department: ${departmentId || 'all'}`);
 
       // Query database for policy documents
       const documents = await this.queryPolicyDocuments(departmentId);
       
       // If no documents in DB, try Pinecone
       if (documents.length === 0) {
-        console.log('📄 No documents in database, querying Pinecone...');
+        console.log(' No documents in database, querying Pinecone...');
         const pineconeDocuments = await this.queryPineconeForPolicies(departmentId);
         
         if (pineconeDocuments.length === 0) {
@@ -30,7 +30,7 @@ class PolicyExtractorService {
           };
         }
         
-        console.log(`📄 Found ${pineconeDocuments.length} documents from Pinecone, analyzing with DeepSeek...`);
+        console.log(` Found ${pineconeDocuments.length} documents from Pinecone, analyzing with DeepSeek...`);
         const analysis = await this.analyzeWithDeepSeek(pineconeDocuments, category);
         
         return {
@@ -46,7 +46,7 @@ class PolicyExtractorService {
         };
       }
 
-      console.log(`📄 Found ${documents.length} documents, analyzing with DeepSeek...`);
+      console.log(` Found ${documents.length} documents, analyzing with DeepSeek...`);
 
       // Analyze with DeepSeek AI
       const analysis = await this.analyzeWithDeepSeek(documents, category);
@@ -74,7 +74,7 @@ class PolicyExtractorService {
    */
   async queryPineconeForPolicies(departmentId = null) {
     try {
-      console.log('🔍 Querying Pinecone for policy documents...');
+      console.log(' Querying Pinecone for policy documents...');
       
       const { Pinecone } = await import('@pinecone-database/pinecone');
       
@@ -82,11 +82,11 @@ class PolicyExtractorService {
       const pineconeIndexName = process.env.PINECONE_INDEX_NAME || 'igrs1';
       
       if (!pineconeApiKey) {
-        console.warn('⚠️  Pinecone API key not configured');
+        console.warn('️  Pinecone API key not configured');
         return [];
       }
       
-      console.log(`📊 Using Pinecone index: ${pineconeIndexName}`);
+      console.log(` Using Pinecone index: ${pineconeIndexName}`);
       
       const pc = new Pinecone({
         apiKey: pineconeApiKey
@@ -106,7 +106,7 @@ class PolicyExtractorService {
       
       for (const query of queries) {
         try {
-          console.log(`🔎 Querying Pinecone: "${query}"`);
+          console.log(` Querying Pinecone: "${query}"`);
           
           // Query without embedding (Pinecone will handle it)
           const queryResults = await index.query({
@@ -115,7 +115,7 @@ class PolicyExtractorService {
           });
           
           if (queryResults.matches) {
-            console.log(`  ✓ Found ${queryResults.matches.length} matches`);
+            console.log(`   Found ${queryResults.matches.length} matches`);
             
             queryResults.matches.forEach(match => {
               if (match.metadata) {
@@ -133,7 +133,7 @@ class PolicyExtractorService {
             });
           }
         } catch (queryError) {
-          console.warn(`  ✗ Pinecone query failed for "${query}":`, queryError.message);
+          console.warn(`   Pinecone query failed for "${query}":`, queryError.message);
         }
       }
       
@@ -142,11 +142,11 @@ class PolicyExtractorService {
         new Map(allDocuments.map(doc => [doc.id, doc])).values()
       );
       
-      console.log(`📊 Retrieved ${uniqueDocs.length} unique documents from Pinecone`);
+      console.log(` Retrieved ${uniqueDocs.length} unique documents from Pinecone`);
       return uniqueDocs;
       
     } catch (error) {
-      console.error('❌ Pinecone query error:', error.message);
+      console.error(' Pinecone query error:', error.message);
       return [];
     }
   }
@@ -175,9 +175,9 @@ class PolicyExtractorService {
         LIMIT 100
       `;
 
-      console.log('📊 Querying all policy documents from database...');
+      console.log(' Querying all policy documents from database...');
       const result = await db.query(query);
-      console.log(`📄 Found ${result.rows.length} documents in database`);
+      console.log(` Found ${result.rows.length} documents in database`);
       
       return result.rows;
 

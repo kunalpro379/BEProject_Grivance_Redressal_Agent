@@ -1,4 +1,4 @@
-import { Pinecone } from '@pinecone-database/pinecone';
+﻿import { Pinecone } from '@pinecone-database/pinecone';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -18,12 +18,12 @@ class ReactPolicyAgent {
         this.index = this.pinecone.index(process.env.PINECONE_INDEX_NAME);
         this.enabled = true;
       } catch (error) {
-        console.warn('⚠️  Pinecone initialization failed:', error.message);
-        console.warn('⚠️  Policy similarity search will be disabled');
+        console.warn('  Pinecone initialization failed:', error.message);
+        console.warn('  Policy similarity search will be disabled');
         this.enabled = false;
       }
     } else {
-      console.warn('⚠️  PINECONE_API_KEY not configured - policy similarity search disabled');
+      console.warn('  PINECONE_API_KEY not configured - policy similarity search disabled');
       this.enabled = false;
     }
     this.maxIterations = 10;
@@ -229,11 +229,11 @@ class ReactPolicyAgent {
         });
         
         if (results.matches && results.matches.length > 0) {
-          console.log(`    ✓ Found ${results.matches.length} results via metadata filter`);
+          console.log(`     Found ${results.matches.length} results via metadata filter`);
           return results.matches;
         }
       } catch (filterError) {
-        console.log(`    ⚠ Metadata filter failed, trying namespace search...`);
+        console.log(`     Metadata filter failed, trying namespace search...`);
       }
 
       // Try namespace search
@@ -249,19 +249,19 @@ class ReactPolicyAgent {
           });
           
           if (results.matches && results.matches.length > 0) {
-            console.log(`    ✓ Found ${results.matches.length} results in namespace "${ns}"`);
+            console.log(`     Found ${results.matches.length} results in namespace "${ns}"`);
             return results.matches;
           }
         }
       } catch (nsError) {
-        console.log(`    ⚠ Namespace search failed:`, nsError.message);
+        console.log(`     Namespace search failed:`, nsError.message);
       }
 
       // Try listing vectors
       try {
         const listResults = await this.index.listPaginated({ limit: topK });
         if (listResults.vectors && listResults.vectors.length > 0) {
-          console.log(`    ✓ Found ${listResults.vectors.length} vectors via list`);
+          console.log(`     Found ${listResults.vectors.length} vectors via list`);
           
           // Fetch full vectors with metadata
           const ids = listResults.vectors.map(v => v.id);
@@ -277,12 +277,12 @@ class ReactPolicyAgent {
           }
         }
       } catch (listError) {
-        console.log(`    ⚠ List operation failed:`, listError.message);
+        console.log(`     List operation failed:`, listError.message);
       }
 
       return [];
     } catch (error) {
-      console.error(`    ✗ Search error:`, error.message);
+      console.error(`     Search error:`, error.message);
       return [];
     }
   }
@@ -293,7 +293,7 @@ class ReactPolicyAgent {
   async findPolicies(departmentName) {
     // Check if Pinecone is enabled
     if (!this.isEnabled()) {
-      console.warn(`⚠️  Pinecone not configured - returning default policy for ${departmentName}`);
+      console.warn(`  Pinecone not configured - returning default policy for ${departmentName}`);
       return [];
     }
 
@@ -332,7 +332,7 @@ class ReactPolicyAgent {
 
       if (!decision.shouldContinue) {
         if (decision.action === 'extract') {
-          console.log(`\n✅ Success! Found sufficient policy content`);
+          console.log(`\n Success! Found sufficient policy content`);
           return decision.results || uniqueResults;
         }
         break;
@@ -344,7 +344,7 @@ class ReactPolicyAgent {
       await new Promise(resolve => setTimeout(resolve, 500));
     }
 
-    console.log(`\n⚠️  Completed ${iteration + 1} iterations. Returning best available results.`);
+    console.log(`\n  Completed ${iteration + 1} iterations. Returning best available results.`);
     return allResults;
   }
 

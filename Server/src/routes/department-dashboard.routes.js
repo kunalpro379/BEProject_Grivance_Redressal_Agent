@@ -1717,7 +1717,7 @@ router.get('/:depId/citizen-complaints-analysis', authenticate, verifyDepartment
       );
 
       if (cachedAnalysis.rows.length > 0) {
-        console.log('✅ Using cached complaints analysis');
+        console.log(' Using cached complaints analysis');
         const cached = cachedAnalysis.rows[0];
         
         // Parse JSONB fields
@@ -1939,7 +1939,7 @@ Return ONLY valid JSON, no markdown or extra text.`;
           ]
         );
         
-        console.log('✅ Analysis saved to database');
+        console.log(' Analysis saved to database');
         console.log('   ID:', insertResult.rows[0].id);
         console.log('   Date:', insertResult.rows[0].analysis_date);
       } catch (saveError) {
@@ -2376,7 +2376,7 @@ router.get('/:depId/policies', authenticate, verifyDepartmentAccess, async (req,
     }
     
     const policies = result.rows[0].policies || '';
-    console.log('✅ Returning policies:', policies ? `${policies.length} characters` : 'empty');
+    console.log(' Returning policies:', policies ? `${policies.length} characters` : 'empty');
     
     res.json({ 
       success: true, 
@@ -2658,7 +2658,7 @@ router.post('/:depId/reload-policies', authenticate, verifyDepartmentAccess, asy
       [markdown, depId]
     );
     
-    console.log('✅ Policies saved to database:', markdown.length, 'characters');
+    console.log(' Policies saved to database:', markdown.length, 'characters');
     
     res.json({
       success: true,

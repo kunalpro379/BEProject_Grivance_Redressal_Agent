@@ -1,4 +1,4 @@
-import TelegramBot from 'node-telegram-bot-api';
+﻿import TelegramBot from 'node-telegram-bot-api';
 import agentService from './agent.service.js';
 import autonomousAIAgent from './autonomous-ai-agent.service.js';
 
@@ -17,7 +17,7 @@ class TelegramFieldWorkerBotService {
       const token = process.env.TELEGRAM_FIELDWORKER_BOT_TOKEN;
       
       if (!token) {
-        console.log('⚠️  TELEGRAM_FIELDWORKER_BOT_TOKEN not configured - Field Worker bot disabled');
+        console.log('  TELEGRAM_FIELDWORKER_BOT_TOKEN not configured - Field Worker bot disabled');
         return;
       }
 
@@ -28,7 +28,7 @@ class TelegramFieldWorkerBotService {
         console.error('Field Worker Bot polling error:', error.code);
         // Don't stop polling, just log the error
         if (error.code === 'ETELEGRAM' || error.code === 'EFATAL') {
-          console.log('⚠️  Stopping Field Worker Bot due to persistent errors');
+          console.log('  Stopping Field Worker Bot due to persistent errors');
           if (this.bot) {
             this.bot.stopPolling();
             this.bot = null;
@@ -55,14 +55,14 @@ class TelegramFieldWorkerBotService {
       // Remove the duplicate polling_error handler below
       
       this.isInitialized = true;
-      console.log('✅ Field Worker Telegram bot initialized successfully');
+      console.log(' Field Worker Telegram bot initialized successfully');
       
       // Get bot info
       const botInfo = await this.bot.getMe();
-      console.log(`🤖 Field Worker Bot: @${botInfo.username}`);
+      console.log(` Field Worker Bot: @${botInfo.username}`);
 
     } catch (error) {
-      console.error('❌ Failed to initialize Field Worker Telegram bot:', error);
+      console.error(' Failed to initialize Field Worker Telegram bot:', error);
       throw error;
     }
   }
@@ -77,7 +77,7 @@ class TelegramFieldWorkerBotService {
       const userName = msg.from.first_name || 'User';
       const message = msg.text || '';
 
-      console.log(`\n📨 Field Worker Bot - Incoming message:`);
+      console.log(`\n Field Worker Bot - Incoming message:`);
       console.log(`From: ${userName} (@${msg.from.username || 'no_username'})`);
       console.log(`Chat ID: ${chatId}`);
       console.log(`Message: ${message}`);
@@ -95,7 +95,7 @@ class TelegramFieldWorkerBotService {
       this.conversationHistory.set(userId, history);
 
       // Let autonomous AI handle everything - no hardcoded logic
-      console.log('🤖 Sending to autonomous AI agent...');
+      console.log(' Sending to autonomous AI agent...');
       const response = await autonomousAIAgent.processMessage({
         userId,
         userName,
@@ -106,18 +106,18 @@ class TelegramFieldWorkerBotService {
         conversationHistory: history
       });
 
-      console.log('✅ AI response:', response.text.substring(0, 100) + '...');
+      console.log(' AI response:', response.text.substring(0, 100) + '...');
 
       // Send response
       await this.sendMessage(chatId, response.text);
-      console.log('✅ Response sent!');
+      console.log(' Response sent!');
 
       // Add bot response to history
       history.push({ role: 'bot', message: response.text });
       this.conversationHistory.set(userId, history);
 
     } catch (error) {
-      console.error('❌ Error handling message:', error);
+      console.error(' Error handling message:', error);
       await this.sendMessage(
         msg.chat.id,
         'Sorry, I encountered an error. Please try again.'
@@ -134,7 +134,7 @@ class TelegramFieldWorkerBotService {
       const userId = msg.from.id.toString();
       const contact = msg.contact;
 
-      console.log(`\n📱 Contact shared:`);
+      console.log(`\n Contact shared:`);
       console.log(`User ID: ${userId}`);
       console.log(`Phone: ${contact.phone_number}`);
       console.log(`Name: ${contact.first_name} ${contact.last_name || ''}`);
@@ -148,11 +148,11 @@ class TelegramFieldWorkerBotService {
 
       await this.sendMessage(
         chatId,
-        `✅ Contact received!\n\nPhone: ${contact.phone_number}\n\nNow you can register as a field worker. Type "register" to continue.`
+        ` Contact received!\n\nPhone: ${contact.phone_number}\n\nNow you can register as a field worker. Type "register" to continue.`
       );
 
     } catch (error) {
-      console.error('❌ Error handling contact:', error);
+      console.error(' Error handling contact:', error);
       await this.sendMessage(
         chatId,
         'Sorry, I encountered an error processing your contact.'
@@ -169,7 +169,7 @@ class TelegramFieldWorkerBotService {
       const userId = msg.from.id.toString();
       const userName = msg.from.first_name || 'User';
 
-      console.log(`\n📸 Field Worker Bot - Photo received:`);
+      console.log(`\n Field Worker Bot - Photo received:`);
       console.log(`From: ${userName} (@${msg.from.username || 'no_username'})`);
       console.log(`Chat ID: ${chatId}`);
 
@@ -198,7 +198,7 @@ class TelegramFieldWorkerBotService {
       let history = this.conversationHistory.get(userId) || [];
       
       // Let autonomous AI handle photo with context
-      console.log('🤖 Sending photo to autonomous AI agent...');
+      console.log(' Sending photo to autonomous AI agent...');
       const response = await autonomousAIAgent.processMessage({
         userId,
         userName,
@@ -209,11 +209,11 @@ class TelegramFieldWorkerBotService {
         conversationHistory: history
       });
 
-      console.log('✅ AI response:', response.text.substring(0, 100) + '...');
+      console.log(' AI response:', response.text.substring(0, 100) + '...');
 
       // Send response
       await this.sendMessage(chatId, response.text);
-      console.log('✅ Response sent!');
+      console.log(' Response sent!');
 
       // Add to history
       history.push({ role: 'user', message: '[Photo uploaded]' });
@@ -222,7 +222,7 @@ class TelegramFieldWorkerBotService {
       this.conversationHistory.set(userId, history);
 
     } catch (error) {
-      console.error('❌ Error handling photo:', error);
+      console.error(' Error handling photo:', error);
       await this.sendMessage(
         msg.chat.id,
         'Sorry, I encountered an error processing your photo. Please try again.'
@@ -239,7 +239,7 @@ class TelegramFieldWorkerBotService {
         case '/start':
           await this.sendMessage(
             chatId,
-            `👋 Welcome to Field Worker Bot, ${userName}!\n\n` +
+            ` Welcome to Field Worker Bot, ${userName}!\n\n` +
             `This bot is for department field workers to submit daily work reports.\n\n` +
             `Commands:\n` +
             `/start - Show this message\n` +
@@ -254,7 +254,7 @@ class TelegramFieldWorkerBotService {
         case '/help':
           await this.sendMessage(
             chatId,
-            `📋 Field Worker Bot Help\n\n` +
+            ` Field Worker Bot Help\n\n` +
             `This bot helps you submit daily work reports.\n\n` +
             `How to submit a report:\n` +
             `1. Tell me what work you did\n` +
@@ -272,7 +272,7 @@ class TelegramFieldWorkerBotService {
         case '/status':
           await this.sendMessage(
             chatId,
-            `📊 Checking your status...\n\n` +
+            ` Checking your status...\n\n` +
             `This feature is coming soon!`
           );
           break;
@@ -283,7 +283,7 @@ class TelegramFieldWorkerBotService {
           
           await this.sendMessage(
             chatId,
-            `🔄 Conversation reset!\n\n` +
+            ` Conversation reset!\n\n` +
             `All your current workflow data has been cleared.\n\n` +
             `You can start fresh now. How can I help you?`
           );
@@ -295,11 +295,11 @@ class TelegramFieldWorkerBotService {
           
           await this.sendMessage(
             chatId,
-            `👋 Logged out successfully!\n\n` +
+            ` Logged out successfully!\n\n` +
             `All your conversation data has been cleared.\n\n` +
             `To start again, send /start`
           );
-          console.log(`🔄 User ${userId} logged out - all data cleared`);
+          console.log(` User ${userId} logged out - all data cleared`);
           break;
 
         default:
@@ -309,7 +309,7 @@ class TelegramFieldWorkerBotService {
           );
       }
     } catch (error) {
-      console.error('❌ Error handling command:', error);
+      console.error(' Error handling command:', error);
     }
   }
 
@@ -318,7 +318,7 @@ class TelegramFieldWorkerBotService {
    */
   async sendMessage(chatId, text, replyMarkup = null) {
     if (!this.isInitialized) {
-      console.error('❌ Field Worker bot not initialized');
+      console.error(' Field Worker bot not initialized');
       return;
     }
 
@@ -330,7 +330,7 @@ class TelegramFieldWorkerBotService {
 
       await this.bot.sendMessage(chatId, text, options);
     } catch (error) {
-      console.error('❌ Error sending message:', error);
+      console.error(' Error sending message:', error);
       throw error;
     }
   }
@@ -340,7 +340,7 @@ class TelegramFieldWorkerBotService {
    */
   async sendNotification(userId, message) {
     if (!this.isInitialized) {
-      console.error('❌ Field Worker bot not initialized');
+      console.error(' Field Worker bot not initialized');
       return false;
     }
 
@@ -348,7 +348,7 @@ class TelegramFieldWorkerBotService {
       await this.bot.sendMessage(userId, message);
       return true;
     } catch (error) {
-      console.error(`❌ Error sending notification to ${userId}:`, error.message);
+      console.error(` Error sending notification to ${userId}:`, error.message);
       return false;
     }
   }

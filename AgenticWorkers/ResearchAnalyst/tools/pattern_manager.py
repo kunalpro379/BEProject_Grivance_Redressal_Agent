@@ -105,7 +105,7 @@ class PatternManager:
                 pattern_id = cursor.fetchone()[0]
                 conn.commit()
                 
-                print(f"✅ Created new pattern: {pattern_name} ({pattern_id})")
+                print(f" Created new pattern: {pattern_name} ({pattern_id})")
                 return str(pattern_id)
                 
         except Exception as e:

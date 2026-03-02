@@ -436,81 +436,77 @@ const CitizenAuthPage = () => {
       {/* Home Button */}
       <button
         onClick={() => navigate('/')}
-        className="fixed top-4 left-4 md:top-6 md:left-6 z-20 p-2.5 md:p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:shadow-xl hover:scale-105 transition-all duration-300"
+        className="fixed top-4 left-4 z-20 p-2 bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200"
         aria-label="Go to home"
       >
-        <Home className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+        <Home className="w-5 h-5 text-gray-700" />
       </button>
 
       {/* Main Content - Clean, Professional Layout */}
-      <div className="relative z-10 w-full max-w-md px-4 sm:px-6 py-8 md:py-12">
-        <div className="space-y-8 md:space-y-10">
+      <div className="relative z-10 w-full max-w-md px-4 py-6">
+        <div className="bg-white rounded-2xl shadow-xl p-6 space-y-6">
           {/* Header */}
-          <div className="text-center">
-            <div className="space-y-3">
-              <p className="text-sm md:text-base font-semibold text-gray-800 tracking-wide">महाराष्ट्र शासन</p>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Citizen Portal</h1>
-              <p className="text-sm md:text-base text-gray-700 max-w-md mx-auto">Secure access to your grievance management account</p>
-            </div>
+          <div className="text-center space-y-2">
+            <p className="text-xs font-semibold text-gray-600 tracking-wide">महाराष्ट्र शासन</p>
+            <h1 className="text-2xl font-bold text-gray-900">Citizen Portal</h1>
+            <p className="text-xs text-gray-600">Secure access to your grievance management account</p>
           </div>
 
-          {/* Toggle Buttons - Fixed Position */}
-          <div className="sticky top-4 z-20 bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-1">
-            <div className="flex bg-gradient-to-r from-gray-100 to-gray-200 rounded-lg p-1">
-              <button
-                onClick={() => {
-                  setIsLogin(true);
-                  setCurrentStep(1);
-                }}
-                className={`flex-1 py-2.5 px-4 rounded-md text-sm md:text-base font-semibold transition-all duration-300 ${
-                  isLogin
-                    ? 'bg-gray-900 text-white shadow-md'
-                    : 'text-gray-700 hover:text-gray-900'
-                }`}
-              >
-                Sign In
-              </button>
-              <button
-                onClick={() => {
-                  setIsLogin(false);
-                  setCurrentStep(1);
-                }}
-                className={`flex-1 py-2.5 px-4 rounded-md text-sm md:text-base font-semibold transition-all duration-300 ${
-                  !isLogin
-                    ? 'bg-gray-900 text-white shadow-md'
-                    : 'text-gray-700 hover:text-gray-900'
-                }`}
-              >
-                Sign Up
-              </button>
-            </div>
+          {/* Toggle Buttons - Compact */}
+          <div className="bg-gray-100 rounded-lg p-1 flex">
+            <button
+              onClick={() => {
+                setIsLogin(true);
+                setCurrentStep(1);
+              }}
+              className={`flex-1 py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 ${
+                isLogin
+                  ? 'bg-gray-900 text-white shadow-sm'
+                  : 'text-gray-700 hover:text-gray-900'
+              }`}
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => {
+                setIsLogin(false);
+                setCurrentStep(1);
+              }}
+              className={`flex-1 py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 ${
+                !isLogin
+                  ? 'bg-gray-900 text-white shadow-sm'
+                  : 'text-gray-700 hover:text-gray-900'
+              }`}
+            >
+              Sign Up
+            </button>
           </div>
 
           {/* Form Content Area */}
-          <div className="space-y-6">
+          <div className="space-y-4">
 
             {/* Progress Steps for Sign Up */}
             {!isLogin && (
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-4">
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-3">
                   {[1, 2, 3, 4].map((step) => (
                     <div key={step} className="flex items-center flex-1">
-                      <div className={`flex items-center justify-center w-10 h-10 rounded-full font-semibold text-sm transition-all duration-300 ${
+                      <div className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold text-xs transition-all duration-200 ${
                         currentStep >= step 
-                          ? 'bg-gray-900 text-white shadow-lg' 
+                          ? 'bg-gray-900 text-white shadow-md' 
                           : 'bg-gray-200 text-gray-600'
                       }`}>
-                        {currentStep > step ? <CheckCircle className="w-5 h-5" /> : step}
+                        {currentStep > step ? <CheckCircle className="w-4 h-4" /> : step}
                       </div>
                       {step < 4 && (
-                        <div className={`flex-1 h-1 mx-2 rounded transition-all duration-300 ${
+                        <div className={`flex-1 h-0.5 mx-1.5 rounded transition-all duration-200 ${
                           currentStep > step ? 'bg-gray-900' : 'bg-gray-200'
                         }`} />
                       )}
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-between text-xs md:text-sm font-semibold">
+                <div className="flex justify-between text-xs font-semibold">
                   <span className={currentStep >= 1 ? 'text-gray-900' : 'text-gray-500'}>Personal</span>
                   <span className={currentStep >= 2 ? 'text-gray-900' : 'text-gray-500'}>Address</span>
                   <span className={currentStep >= 3 ? 'text-gray-900' : 'text-gray-500'}>Account</span>
@@ -520,29 +516,29 @@ const CitizenAuthPage = () => {
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/* Login Form */}
               {isLogin && (
-                <div className="space-y-5">
-                  <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700">Email Address</label>
+                <div className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-gray-700">Email Address</label>
                     <div className="relative">
-                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                       <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
+                        className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm"
                         placeholder="Enter your email"
                         required
                       />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700">Password</label>
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-gray-700">Password</label>
                     <div className="relative">
-                      <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                       <input
                         type={showPassword ? 'text' : 'password'}
                         name="password"

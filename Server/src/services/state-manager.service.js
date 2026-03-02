@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+﻿import pool from '../config/database.js';
 
 /**
  * State Manager Service
@@ -46,7 +46,7 @@ class StateManagerService {
       // No state found, return default
       return this.getDefaultState(userId, channel);
     } catch (error) {
-      console.error('❌ Error loading state:', error.message);
+      console.error(' Error loading state:', error.message);
       return this.getDefaultState(userId, channel);
     }
   }
@@ -75,7 +75,7 @@ class StateManagerService {
 
       return true;
     } catch (error) {
-      console.error('❌ Error saving state:', error.message);
+      console.error(' Error saving state:', error.message);
       return false;
     }
   }
@@ -94,10 +94,10 @@ class StateManagerService {
       // Clear from cache
       this.memoryCache.delete(userId);
 
-      console.log(`✅ Cleared state for user ${userId}`);
+      console.log(` Cleared state for user ${userId}`);
       return true;
     } catch (error) {
-      console.error('❌ Error clearing state:', error.message);
+      console.error(' Error clearing state:', error.message);
       return false;
     }
   }
@@ -111,7 +111,7 @@ class StateManagerService {
       const newState = { ...currentState, ...updates };
       return await this.saveState(userId, newState, channel);
     } catch (error) {
-      console.error('❌ Error updating state:', error.message);
+      console.error(' Error updating state:', error.message);
       return false;
     }
   }
@@ -124,7 +124,7 @@ class StateManagerService {
       const state = await this.getState(userId);
       return state.conversationHistory || [];
     } catch (error) {
-      console.error('❌ Error loading conversation history:', error.message);
+      console.error(' Error loading conversation history:', error.message);
       return [];
     }
   }
@@ -154,7 +154,7 @@ class StateManagerService {
       await this.saveState(userId, state, channel);
       return true;
     } catch (error) {
-      console.error('❌ Error adding to history:', error.message);
+      console.error(' Error adding to history:', error.message);
       return false;
     }
   }
@@ -167,7 +167,7 @@ class StateManagerService {
       const state = await this.getState(userId);
       return state.workflow || this.getDefaultWorkflowState();
     } catch (error) {
-      console.error('❌ Error loading workflow state:', error.message);
+      console.error(' Error loading workflow state:', error.message);
       return this.getDefaultWorkflowState();
     }
   }
@@ -188,7 +188,7 @@ class StateManagerService {
       await this.saveState(userId, state, channel);
       return true;
     } catch (error) {
-      console.error('❌ Error updating workflow state:', error.message);
+      console.error(' Error updating workflow state:', error.message);
       return false;
     }
   }
@@ -201,7 +201,7 @@ class StateManagerService {
       const state = await this.getState(userId);
       return state.collectedData || {};
     } catch (error) {
-      console.error('❌ Error loading collected data:', error.message);
+      console.error(' Error loading collected data:', error.message);
       return {};
     }
   }
@@ -222,7 +222,7 @@ class StateManagerService {
       await this.saveState(userId, state, channel);
       return true;
     } catch (error) {
-      console.error('❌ Error updating collected data:', error.message);
+      console.error(' Error updating collected data:', error.message);
       return false;
     }
   }
@@ -282,7 +282,7 @@ class StateManagerService {
       }, channel);
       return true;
     } catch (error) {
-      console.error('❌ Error completing workflow:', error.message);
+      console.error(' Error completing workflow:', error.message);
       return false;
     }
   }
@@ -298,7 +298,7 @@ class StateManagerService {
       await this.saveState(userId, state, channel);
       return true;
     } catch (error) {
-      console.error('❌ Error resetting workflow:', error.message);
+      console.error(' Error resetting workflow:', error.message);
       return false;
     }
   }
@@ -318,7 +318,7 @@ class StateManagerService {
       console.log(`🧹 Cleaned up ${result.rowCount} old states`);
       return result.rowCount;
     } catch (error) {
-      console.error('❌ Error cleaning up old states:', error.message);
+      console.error(' Error cleaning up old states:', error.message);
       return 0;
     }
   }
@@ -338,7 +338,7 @@ class StateManagerService {
       
       return result.rows[0];
     } catch (error) {
-      console.error('❌ Error getting stats:', error.message);
+      console.error(' Error getting stats:', error.message);
       return null;
     }
   }

@@ -58,7 +58,7 @@ class AzureQueueManager:
         try:
             logger.info(f"Attempting to delete message ID: {message.id}")
             queue_client.delete_message(message)
-            logger.info(f"✅ Successfully deleted message from queue")
+            logger.info(f" Successfully deleted message from queue")
             return True
         except Exception as e:
             logger.error(f"❌ Error deleting message: {e}")

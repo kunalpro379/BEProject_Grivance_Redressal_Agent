@@ -1,4 +1,4 @@
-import TelegramBot from 'node-telegram-bot-api';
+﻿import TelegramBot from 'node-telegram-bot-api';
 import pool from '../config/database.js';
 import contractorAnalysisService from './contractor-analysis.service.js';
 import deepseekAI from './deepseek-ai.service.js';
@@ -16,13 +16,13 @@ class TelegramContractorBot {
     const token = process.env.TELEGRAM_CONTRACTOR_BOT_TOKEN;
     
     if (!token) {
-      console.log('⚠️  Telegram Contractor Bot token not configured');
+      console.log('  Telegram Contractor Bot token not configured');
       return;
     }
 
     // Validate token format
     if (token.includes('your_') || token.length < 20) {
-      console.log('⚠️  Invalid Telegram Contractor Bot token - please configure a real token');
+      console.log('  Invalid Telegram Contractor Bot token - please configure a real token');
       return;
     }
 
@@ -34,7 +34,7 @@ class TelegramContractorBot {
         console.error('Telegram Contractor Bot polling error:', error.code);
         // Don't stop polling on temporary errors, only on fatal ones
         if (error.code === 'EFATAL' || (error.code === 'ETELEGRAM' && error.response?.statusCode === 401)) {
-          console.log('⚠️  Stopping Telegram Contractor Bot due to persistent errors');
+          console.log('  Stopping Telegram Contractor Bot due to persistent errors');
           if (this.bot) {
             this.bot.stopPolling();
             this.bot = null;
@@ -43,7 +43,7 @@ class TelegramContractorBot {
       });
 
       this.setupHandlers();
-      console.log('✅ Telegram Contractor Bot initialized');
+      console.log(' Telegram Contractor Bot initialized');
     } catch (error) {
       console.error('Failed to initialize Telegram Contractor Bot:', error.message);
       this.bot = null;
@@ -102,7 +102,7 @@ class TelegramContractorBot {
     const userId = msg.from.id.toString();
 
     const welcomeMessage = `
-🏗️ *Welcome to Contractor Portal*
+ *Welcome to Contractor Portal*
 
 I'll help you manage your contractor profile and submit project reports.
 
@@ -143,7 +143,7 @@ Let's get started! Use /register to begin or /report to submit a report.
 
     await this.bot.sendMessage(
       chatId,
-      '📝 Let\'s start your registration!\n\nPlease provide your *Company Name*:',
+      ' Let\'s start your registration!\n\nPlease provide your *Company Name*:',
       { parse_mode: 'Markdown' }
     );
   }
@@ -163,7 +163,7 @@ Let's get started! Use /register to begin or /report to submit a report.
     }
 
     let statusMessage = `
-📊 *Your Registration Status*
+ *Your Registration Status*
 
 Company: ${contractor.company_name}
 License: ${contractor.license_number}
@@ -172,7 +172,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
     `;
 
     if (contractor.ai_analysis) {
-      statusMessage += `\n\n✅ *AI Analysis Complete*`;
+      statusMessage += `\n\n *AI Analysis Complete*`;
       statusMessage += `\nScore: ${contractor.analysis_score}/100`;
       statusMessage += `\nRecommendation: ${contractor.ai_analysis.final_recommendation}`;
       statusMessage += `\nPriority: ${contractor.ai_analysis.priority_ranking}`;
@@ -186,13 +186,13 @@ Status: *${contractor.verification_status.toUpperCase()}*
     const userId = msg.from.id.toString();
 
     try {
-      console.log(`📝 /report command received from user ${userId}`);
+      console.log(` /report command received from user ${userId}`);
 
       // Check if contractor is registered
       const contractor = await this.getContractor(userId);
       
       if (!contractor) {
-        console.log(`❌ User ${userId} not registered as contractor`);
+        console.log(` User ${userId} not registered as contractor`);
         await this.bot.sendMessage(
           chatId,
           'You need to register first. Use /register to start registration.'
@@ -200,7 +200,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
         return;
       }
 
-      console.log(`✅ Contractor found: ${contractor.company_name}`);
+      console.log(` Contractor found: ${contractor.company_name}`);
 
       // Initialize report submission state
       const reportState = {
@@ -210,20 +210,20 @@ Status: *${contractor.verification_status.toUpperCase()}*
       };
       
       this.states.set(userId, reportState);
-      console.log(`📋 Report state initialized for user ${userId}:`, reportState);
+      console.log(` Report state initialized for user ${userId}:`, reportState);
 
-      console.log(`📋 Report flow started for user ${userId}`);
+      console.log(` Report flow started for user ${userId}`);
 
       await this.bot.sendMessage(
         chatId,
-        '📝 *Submit Project Report*\n\nLet\'s start with the project name.\n\nWhat is the project name?',
+        ' *Submit Project Report*\n\nLet\'s start with the project name.\n\nWhat is the project name?',
         { parse_mode: 'Markdown' }
       );
     } catch (error) {
-      console.error(`❌ Error in handleReportCommand for user ${userId}:`, error);
+      console.error(` Error in handleReportCommand for user ${userId}:`, error);
       await this.bot.sendMessage(
         chatId,
-        '❌ Error starting report submission. Please try again or contact support.'
+        ' Error starting report submission. Please try again or contact support.'
       );
     }
   }
@@ -249,12 +249,12 @@ Status: *${contractor.verification_status.toUpperCase()}*
       if (reports.length === 0) {
         await this.bot.sendMessage(
           chatId,
-          '📊 You haven\'t submitted any reports yet.\n\nUse /report to submit your first report!'
+          ' You haven\'t submitted any reports yet.\n\nUse /report to submit your first report!'
         );
         return;
       }
 
-      let message = `📊 *Your Reports Summary*\n\n`;
+      let message = ` *Your Reports Summary*\n\n`;
       message += `Total Reports: ${stats.total_reports}\n`;
       message += `Average Progress: ${Math.round(stats.avg_progress)}%\n`;
       message += `Active Projects: ${stats.active_projects}\n`;
@@ -274,7 +274,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
       console.error('Error fetching reports:', error);
       await this.bot.sendMessage(
         chatId,
-        '❌ Error fetching reports. Please try again.'
+        ' Error fetching reports. Please try again.'
       );
     }
   }
@@ -289,7 +289,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
 
     await this.bot.sendMessage(
       chatId,
-      '🔄 Registration reset!\n\nYou can start a fresh registration.\n\nUse /register to begin.'
+      ' Registration reset!\n\nYou can start a fresh registration.\n\nUse /register to begin.'
     );
   }
 
@@ -303,7 +303,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
 
     await this.bot.sendMessage(
       chatId,
-      '👋 Logged out successfully!\n\nAll your conversation data has been cleared.\n\nTo start again, send /start'
+      ' Logged out successfully!\n\nAll your conversation data has been cleared.\n\nTo start again, send /start'
     );
   }
 
@@ -319,7 +319,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
     const state = this.states.get(userId);
     
     if (state && state.mode === 'report') {
-      console.log(`📋 User ${userId} is in report flow, routing to handleReportFlow`);
+      console.log(` User ${userId} is in report flow, routing to handleReportFlow`);
       await this.handleReportFlow(msg, state);
       return;
     }
@@ -338,7 +338,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
     }
 
     // Use DeepSeek AI for natural conversation, but stay in domain
-    console.log(`🤖 User ${userId} chatting with DeepSeek AI`);
+    console.log(` User ${userId} chatting with DeepSeek AI`);
     let history = this.conversationHistory.get(userId) || [];
     history.push({ role: 'user', message: text });
     if (history.length > 10) history = history.slice(-10);
@@ -359,10 +359,10 @@ Status: *${contractor.verification_status.toUpperCase()}*
         // AI detected enough information to create a report
         await this.bot.sendMessage(
           chatId,
-          `✅ I've gathered the following information:\n\n` +
-          `📋 Project: ${reportData.project_name || 'Not specified'}\n` +
-          `📊 Progress: ${reportData.progress_percentage || 'Not specified'}%\n` +
-          `📝 Description: ${reportData.description || 'Not specified'}\n\n` +
+          ` I've gathered the following information:\n\n` +
+          ` Project: ${reportData.project_name || 'Not specified'}\n` +
+          ` Progress: ${reportData.progress_percentage || 'Not specified'}%\n` +
+          ` Description: ${reportData.description || 'Not specified'}\n\n` +
           `Would you like me to submit this report? Reply "yes" to confirm or continue chatting to add more details.`
         );
         
@@ -374,7 +374,7 @@ Status: *${contractor.verification_status.toUpperCase()}*
       }
 
     } catch (error) {
-      console.error('❌ Error handling message:', error);
+      console.error(' Error handling message:', error);
       await this.bot.sendMessage(
         chatId,
         'Sorry, I encountered an error. Please try again or use /report for a structured submission.'
@@ -384,11 +384,11 @@ Status: *${contractor.verification_status.toUpperCase()}*
 
   async submitExtractedReport(userId, chatId, extractedData) {
     try {
-      await this.bot.sendMessage(chatId, '⏳ Submitting your report...');
+      await this.bot.sendMessage(chatId, ' Submitting your report...');
 
       const contractor = await this.getContractor(userId);
       if (!contractor) {
-        await this.bot.sendMessage(chatId, '❌ You need to register first. Use /register');
+        await this.bot.sendMessage(chatId, ' You need to register first. Use /register');
         this.states.delete(userId);
         return;
       }
@@ -431,9 +431,9 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
 
       await this.bot.sendMessage(
         chatId,
-        `✅ *Report Submitted Successfully!*\n\n` +
-        `📋 Project: ${report.project_name}\n` +
-        `📊 Progress: ${report.progress_percentage}%\n\n` +
+        ` *Report Submitted Successfully!*\n\n` +
+        ` Project: ${report.project_name}\n` +
+        ` Progress: ${report.progress_percentage}%\n\n` +
         `Your report has been saved and will appear on the department dashboard.\n\n` +
         `Use /myreports to view all your reports.`,
         { parse_mode: 'Markdown' }
@@ -445,7 +445,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
 
     } catch (error) {
       console.error('Error submitting extracted report:', error);
-      await this.bot.sendMessage(chatId, '❌ Error submitting report. Please try again.');
+      await this.bot.sendMessage(chatId, ' Error submitting report. Please try again.');
     }
   }
 
@@ -454,7 +454,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
     const userId = msg.from.id.toString();
     const text = msg.text;
 
-    console.log(`📋 Report flow - Step: ${state.step}, User: ${userId}, Input: ${text}`);
+    console.log(` Report flow - Step: ${state.step}, User: ${userId}, Input: ${text}`);
 
     try {
       switch (state.step) {
@@ -463,7 +463,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           state.step = 'contract_id';
           await this.bot.sendMessage(
             chatId,
-            '✅ Project name saved!\n\nWhat is the Contract ID?'
+            ' Project name saved!\n\nWhat is the Contract ID?'
           );
           break;
 
@@ -472,7 +472,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           state.step = 'progress';
           await this.bot.sendMessage(
             chatId,
-            '✅ Contract ID saved!\n\nWhat is the current progress percentage? (0-100)'
+            ' Contract ID saved!\n\nWhat is the current progress percentage? (0-100)'
           );
           break;
 
@@ -481,7 +481,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           if (isNaN(progress) || progress < 0 || progress > 100) {
             await this.bot.sendMessage(
               chatId,
-              '❌ Please enter a valid number between 0 and 100.'
+              ' Please enter a valid number between 0 and 100.'
             );
             return;
           }
@@ -489,7 +489,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           state.step = 'description';
           await this.bot.sendMessage(
             chatId,
-            '✅ Progress saved!\n\nPlease provide a detailed description of the work completed:'
+            ' Progress saved!\n\nPlease provide a detailed description of the work completed:'
           );
           break;
 
@@ -498,7 +498,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           state.step = 'challenges';
           await this.bot.sendMessage(
             chatId,
-            '✅ Description saved!\n\nAre there any challenges or issues? (Type "none" if no challenges)'
+            ' Description saved!\n\nAre there any challenges or issues? (Type "none" if no challenges)'
           );
           break;
 
@@ -507,7 +507,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           state.step = 'next_steps';
           await this.bot.sendMessage(
             chatId,
-            '✅ Challenges noted!\n\nWhat are the next steps planned?'
+            ' Challenges noted!\n\nWhat are the next steps planned?'
           );
           break;
 
@@ -516,13 +516,13 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           state.step = 'documents';
           await this.bot.sendMessage(
             chatId,
-            '✅ Next steps saved!\n\nNow upload any supporting documents (photos, PDFs, certificates).\n\nSend documents one by one, or type "done" when finished.'
+            ' Next steps saved!\n\nNow upload any supporting documents (photos, PDFs, certificates).\n\nSend documents one by one, or type "done" when finished.'
           );
           break;
 
         case 'documents':
           if (text.toLowerCase() === 'done') {
-            console.log(`✅ Report submission complete for user ${userId}`);
+            console.log(` Report submission complete for user ${userId}`);
             await this.completeReportSubmission(userId, chatId, state.data);
           } else {
             await this.bot.sendMessage(
@@ -539,7 +539,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
       console.error('Error in report flow:', error);
       await this.bot.sendMessage(
         chatId,
-        '❌ Error processing your input. Please try again.'
+        ' Error processing your input. Please try again.'
       );
     }
   }
@@ -554,13 +554,13 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
     if (!contractor) {
       await this.bot.sendMessage(
         chatId,
-        '❌ You need to register first. Use /register to start registration.'
+        ' You need to register first. Use /register to start registration.'
       );
       return;
     }
 
     try {
-      await this.bot.sendMessage(chatId, '⏳ Processing document with AI analysis...');
+      await this.bot.sendMessage(chatId, ' Processing document with AI analysis...');
 
       // Get file info
       const fileId = msg.document.file_id;
@@ -580,7 +580,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
 
       // If PDF with extracted text, use DeepSeek AI to analyze it
       if (processedDoc.extractedText && processedDoc.extractedText.length > 50) {
-        await this.bot.sendMessage(chatId, '🤖 Analyzing report with AI...');
+        await this.bot.sendMessage(chatId, ' Analyzing report with AI...');
 
         // Analyze with DeepSeek AI
         const aiAnalysis = await deepseekAI.analyzeContractorReport(
@@ -588,7 +588,7 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
           ''
         );
 
-        console.log('🤖 AI Analysis completed:', JSON.stringify(aiAnalysis, null, 2));
+        console.log(' AI Analysis completed:', JSON.stringify(aiAnalysis, null, 2));
 
         // Auto-fill report data from AI analysis
         const reportData = {
@@ -615,53 +615,53 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
         const report = await contractorReportService.saveReport(reportData);
 
         // Send comprehensive response
-        let responseMessage = `✅ *Report Analyzed & Saved!*\n\n`;
-        responseMessage += `📄 *Document:* ${processedDoc.fileName}\n`;
-        responseMessage += `📝 *Text Extracted:* ${processedDoc.extractedText.length} characters\n\n`;
+        let responseMessage = ` *Report Analyzed & Saved!*\n\n`;
+        responseMessage += ` *Document:* ${processedDoc.fileName}\n`;
+        responseMessage += ` *Text Extracted:* ${processedDoc.extractedText.length} characters\n\n`;
         
-        responseMessage += `*📊 EXTRACTED DATA:*\n`;
+        responseMessage += `* EXTRACTED DATA:*\n`;
         if (aiAnalysis.project_name) {
-          responseMessage += `🏗️ Project: ${aiAnalysis.project_name}\n`;
+          responseMessage += ` Project: ${aiAnalysis.project_name}\n`;
         }
         if (aiAnalysis.contract_id) {
-          responseMessage += `📋 Contract ID: ${aiAnalysis.contract_id}\n`;
+          responseMessage += ` Contract ID: ${aiAnalysis.contract_id}\n`;
         }
         if (aiAnalysis.progress_percentage) {
-          responseMessage += `📈 Progress: ${aiAnalysis.progress_percentage}%\n`;
+          responseMessage += ` Progress: ${aiAnalysis.progress_percentage}%\n`;
         }
         if (aiAnalysis.quality_score) {
           responseMessage += `⭐ Quality: ${aiAnalysis.quality_score}/100\n`;
         }
         if (aiAnalysis.completeness) {
-          responseMessage += `✓ Completeness: ${aiAnalysis.completeness}/100\n`;
+          responseMessage += ` Completeness: ${aiAnalysis.completeness}/100\n`;
         }
         if (aiAnalysis.sentiment) {
-          responseMessage += `😊 Sentiment: ${aiAnalysis.sentiment}\n`;
+          responseMessage += ` Sentiment: ${aiAnalysis.sentiment}\n`;
         }
         
         if (aiAnalysis.key_insights && aiAnalysis.key_insights.length > 0) {
-          responseMessage += `\n*💡 KEY INSIGHTS:*\n`;
+          responseMessage += `\n* KEY INSIGHTS:*\n`;
           aiAnalysis.key_insights.slice(0, 3).forEach((insight, i) => {
             responseMessage += `${i + 1}. ${insight}\n`;
           });
         }
         
         if (aiAnalysis.recommendations && aiAnalysis.recommendations.length > 0) {
-          responseMessage += `\n*✨ RECOMMENDATIONS:*\n`;
+          responseMessage += `\n* RECOMMENDATIONS:*\n`;
           aiAnalysis.recommendations.slice(0, 3).forEach((rec, i) => {
             responseMessage += `${i + 1}. ${rec}\n`;
           });
         }
 
         if (aiAnalysis.risk_factors && aiAnalysis.risk_factors.length > 0) {
-          responseMessage += `\n*⚠️ RISK FACTORS:*\n`;
+          responseMessage += `\n* RISK FACTORS:*\n`;
           aiAnalysis.risk_factors.slice(0, 2).forEach((risk, i) => {
             responseMessage += `${i + 1}. ${risk}\n`;
           });
         }
 
-        responseMessage += `\n✅ *Report saved successfully!*`;
-        responseMessage += `\n📊 View it on the department dashboard`;
+        responseMessage += `\n *Report saved successfully!*`;
+        responseMessage += `\n View it on the department dashboard`;
 
         await this.bot.sendMessage(chatId, responseMessage, { parse_mode: 'Markdown' });
 
@@ -673,19 +673,19 @@ ${extractedData.next_steps ? `Next Steps:\n${extractedData.next_steps}` : ''}
         // Non-PDF or no text extracted
         await this.bot.sendMessage(
           chatId,
-          `✅ Document uploaded!\n📄 ${processedDoc.fileName}\n\n⚠️ Could not extract text from this document. Please upload a PDF with text content for AI analysis.`
+          ` Document uploaded!\n ${processedDoc.fileName}\n\n Could not extract text from this document. Please upload a PDF with text content for AI analysis.`
         );
       }
 
     } catch (error) {
       console.error('Error handling document:', error);
-      await this.bot.sendMessage(chatId, `❌ Error processing document: ${error.message}\n\nPlease try again or contact support.`);
+      await this.bot.sendMessage(chatId, ` Error processing document: ${error.message}\n\nPlease try again or contact support.`);
     }
   }
 
   async completeReportSubmission(userId, chatId, data) {
     try {
-      await this.bot.sendMessage(chatId, '⏳ Processing your report...');
+      await this.bot.sendMessage(chatId, ' Processing your report...');
 
       // Add user_id to data
       data.user_id = userId;
@@ -750,14 +750,14 @@ Provide a JSON analysis with:
       // Save report with embeddings
       const report = await contractorReportService.saveReport(data);
 
-      let responseMessage = `✅ *Report Submitted Successfully!*\n\n` +
+      let responseMessage = ` *Report Submitted Successfully!*\n\n` +
         `Project: ${report.project_name}\n` +
         `Contract: ${report.contract_id}\n` +
         `Progress: ${report.progress_percentage}%\n` +
         `Documents: ${data.document_urls?.length || 0}\n\n`;
 
       if (aiAnalysis && aiAnalysis.quality_score) {
-        responseMessage += `\n📊 *AI Analysis*\n`;
+        responseMessage += `\n *AI Analysis*\n`;
         responseMessage += `Quality Score: ${aiAnalysis.quality_score}/100\n`;
         responseMessage += `Completeness: ${aiAnalysis.completeness}/100\n`;
         if (aiAnalysis.sentiment) {
@@ -778,14 +778,14 @@ Provide a JSON analysis with:
       console.error('Error completing report submission:', error);
       await this.bot.sendMessage(
         chatId,
-        '❌ Error submitting report. Please try again or contact support.'
+        ' Error submitting report. Please try again or contact support.'
       );
     }
   }
 
   async completeRegistration(userId, chatId, data) {
     try {
-      await this.bot.sendMessage(chatId, '⏳ Processing your registration...');
+      await this.bot.sendMessage(chatId, ' Processing your registration...');
 
       // Save to database
       const result = await pool.query(
@@ -812,14 +812,14 @@ Provide a JSON analysis with:
       const contractorId = result.rows[0].id;
 
       // Trigger AI analysis
-      await this.bot.sendMessage(chatId, '🤖 Running AI analysis on your profile...');
+      await this.bot.sendMessage(chatId, ' Running AI analysis on your profile...');
       
       try {
         const analysis = await contractorAnalysisService.analyzeContractor(contractorId);
 
         await this.bot.sendMessage(
           chatId,
-          `✅ *Registration Complete!*\n\n` +
+          ` *Registration Complete!*\n\n` +
           `Your profile has been analyzed:\n` +
           `Score: ${analysis.score}/100\n` +
           `Recommendation: ${analysis.analysis.final_recommendation}\n` +
@@ -832,7 +832,7 @@ Provide a JSON analysis with:
         console.error('Analysis error:', analysisError);
         await this.bot.sendMessage(
           chatId,
-          '✅ Registration complete! Your profile will be analyzed shortly.\n\nUse /status to check your status.'
+          ' Registration complete! Your profile will be analyzed shortly.\n\nUse /status to check your status.'
         );
       }
 
@@ -843,7 +843,7 @@ Provide a JSON analysis with:
       console.error('Error completing registration:', error);
       await this.bot.sendMessage(
         chatId,
-        '❌ Error completing registration. Please try again or contact support.'
+        ' Error completing registration. Please try again or contact support.'
       );
     }
   }

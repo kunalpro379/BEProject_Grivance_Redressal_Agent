@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+﻿import nodemailer from 'nodemailer';
 
 class EmailService {
   constructor() {
@@ -107,7 +107,7 @@ class EmailService {
       console.log(`OTP email sent successfully to ${email}`);
       return { success: true, message: 'OTP sent successfully' };
     } catch (error) {
-      console.error('❌ Error sending OTP email:', error);
+      console.error(' Error sending OTP email:', error);
       // Log to console as fallback
       console.log(`\n📧 OTP Email (Fallback - email failed):`);
       console.log(`   To: ${email}`);

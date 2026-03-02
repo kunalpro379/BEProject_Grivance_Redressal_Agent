@@ -13,7 +13,7 @@ export const verifyWebhook = (req, res) => {
   const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'my_verify_token';
 
   if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-    console.log('✅ WhatsApp webhook verified');
+    console.log(' WhatsApp webhook verified');
     res.status(200).send(challenge);
   } else {
     console.error('❌ WhatsApp webhook verification failed');

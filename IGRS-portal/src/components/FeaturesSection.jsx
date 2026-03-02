@@ -17,58 +17,17 @@ const features = [
   {
     icon: Smartphone,
     title: "Easy Submission",
-    description: "Submit grievances anytime, anywhere with photos and location",
-    color: "text-blue-600",
-    bgColor: "bg-blue-50"
+    description: "Submit grievances anytime with photos and location"
   },
   {
     icon: Search,
     title: "Real-time Tracking",
-    description: "Track your grievance status with live updates and timeline",
-    color: "text-green-600",
-    bgColor: "bg-green-50"
+    description: "Track status with live updates and timeline"
   },
   {
     icon: Bot,
-    title: "Smart Chatbot",
-    description: "Get instant answers about your grievance status 24/7",
-    color: "text-purple-600",
-    bgColor: "bg-purple-50"
-  },
-  {
-    icon: BarChart,
-    title: "Community Dashboard",
-    description: "View resolved issues and community impact in your area",
-    color: "text-orange-600",
-    bgColor: "bg-orange-50"
-  },
-  {
-    icon: Megaphone,
-    title: "Voice Your Opinion",
-    description: "Participate in polls and surveys for better governance",
-    color: "text-pink-600",
-    bgColor: "bg-pink-50"
-  },
-  {
-    icon: Star,
-    title: "Feedback System",
-    description: "Rate and review the resolution process",
-    color: "text-yellow-600",
-    bgColor: "bg-yellow-50"
-  },
-  {
-    icon: Bell,
-    title: "Smart Notifications",
-    description: "Get timely updates at every step of resolution",
-    color: "text-indigo-600",
-    bgColor: "bg-indigo-50"
-  },
-  {
-    icon: Users,
-    title: "Community Support",
-    description: "Connect with others facing similar issues",
-    color: "text-teal-600",
-    bgColor: "bg-teal-50"
+    title: "AI-Powered",
+    description: "Smart routing and instant status updates"
   }
 ];
 
@@ -92,7 +51,7 @@ const FeaturesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="features" className="relative py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <section ref={sectionRef} id="features" className="relative py-24 bg-gradient-to-br from-amber-50 via-yellow-50 to-yellow-100">
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div 
@@ -100,25 +59,25 @@ const FeaturesSection = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="inline-flex items-center space-x-2 bg-white/80 text-black rounded-full px-5 py-2.5 text-sm font-bold mb-6 border border-gray-200 backdrop-blur-sm">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-black rounded-full px-5 py-2.5 text-sm font-bold mb-6 shadow-lg">
             <CheckCircle className="h-4 w-4" />
             <span>Platform Features</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
             Everything You Need for{" "}
-            <span className="text-gray-700 font-black">
+            <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent font-black">
               Effective Governance
             </span>
           </h2>
-          <p className="text-xl text-gray-700 font-bold max-w-3xl mx-auto">
+          <p className="text-xl text-gray-800 font-bold max-w-3xl mx-auto">
             Our AI-powered platform provides comprehensive tools for citizens and officials 
             to ensure transparent, efficient grievance resolution.
           </p>
         </div>
 
-        {/* Features Grid */}
+        {/* Features - No Cards, Light Golden Theme */}
         <div 
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 transition-all duration-700 ${
+          className={`flex flex-col md:flex-row items-center justify-center gap-12 mb-16 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
           style={{ transitionDelay: '200ms' }}
@@ -128,7 +87,7 @@ const FeaturesSection = () => {
             return (
               <div 
                 key={index}
-                className={`bg-white/80 p-8 rounded-xl border border-gray-200 hover:border-black hover:bg-white backdrop-blur-sm transition-all duration-300 ${
+                className={`flex flex-col items-center text-center max-w-xs transition-all duration-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
                 style={{ 
@@ -136,11 +95,11 @@ const FeaturesSection = () => {
                   animationDelay: `${index * 0.1}s` 
                 }}
               >
-                <div className="inline-flex p-3 rounded-lg bg-black mb-4">
-                  <IconComponent className="h-6 w-6 text-white" />
+                <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-400 mb-4 shadow-xl">
+                  <IconComponent className="h-8 w-8 text-black" />
                 </div>
-                <h3 className="font-bold text-black mb-2 text-lg">{feature.title}</h3>
-                <p className="text-gray-700 font-semibold text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="font-black text-black mb-2 text-xl">{feature.title}</h3>
+                <p className="text-gray-800 font-semibold text-base leading-relaxed">{feature.description}</p>
               </div>
             );
           })}
@@ -148,7 +107,7 @@ const FeaturesSection = () => {
 
         {/* Call to Action */}
         <div 
-          className={`text-center bg-white/80 rounded-2xl p-12 border border-gray-200 backdrop-blur-sm transition-all duration-700 ${
+          className={`text-center bg-white rounded-2xl p-12 shadow-2xl border border-gray-200 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
           style={{ transitionDelay: '1000ms' }}
@@ -156,13 +115,13 @@ const FeaturesSection = () => {
           <h3 className="text-3xl font-black text-black mb-4">
             Ready to Experience the Future of Governance?
           </h3>
-          <p className="text-gray-700 font-bold mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-800 font-bold mb-8 max-w-2xl mx-auto">
             Join thousands of citizens and officials already using our platform 
             to create transparent, efficient governance solutions.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button 
-              className="bg-black hover:bg-gray-800 text-white font-bold px-8 py-6 text-lg rounded-lg group transition-all duration-300 shadow-lg" 
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold px-8 py-6 text-lg rounded-lg group transition-all duration-300 shadow-lg" 
               onClick={() => window.location.href = '/citizen-portal/authentication'}
             >
               Get Started as Citizen

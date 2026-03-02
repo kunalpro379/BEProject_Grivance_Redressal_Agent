@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Progress Tracking Scheduler Service
  * 
  * Runs the Python ProgressTrackingAgent every hour to analyze department progress
@@ -33,12 +33,12 @@ class ProgressTrackingSchedulerService {
    */
   start() {
     if (this.isRunning) {
-      console.log('⚠️  Progress Tracking Scheduler is already running');
+      console.log('  Progress Tracking Scheduler is already running');
       return;
     }
 
-    console.log('\n🔄 Starting Progress Tracking Scheduler');
-    console.log(`📊 Analysis will run every ${this.intervalHours} hour(s)`);
+    console.log('\n Starting Progress Tracking Scheduler');
+    console.log(` Analysis will run every ${this.intervalHours} hour(s)`);
     
     // Run immediately on start
     this.runAnalysis();
@@ -49,7 +49,7 @@ class ProgressTrackingSchedulerService {
     }, this.intervalHours * 60 * 60 * 1000); // Convert hours to milliseconds
     
     this.isRunning = true;
-    console.log('✅ Progress Tracking Scheduler started successfully');
+    console.log(' Progress Tracking Scheduler started successfully');
   }
 
   /**
@@ -57,7 +57,7 @@ class ProgressTrackingSchedulerService {
    */
   stop() {
     if (!this.isRunning) {
-      console.log('⚠️  Progress Tracking Scheduler is not running');
+      console.log('  Progress Tracking Scheduler is not running');
       return;
     }
 
@@ -67,7 +67,7 @@ class ProgressTrackingSchedulerService {
     }
 
     this.isRunning = false;
-    console.log('🛑 Progress Tracking Scheduler stopped');
+    console.log(' Progress Tracking Scheduler stopped');
   }
 
   /**
@@ -75,14 +75,14 @@ class ProgressTrackingSchedulerService {
    */
   async runAnalysis() {
     console.log('\n' + '='.repeat(60));
-    console.log('📊 Running Progress Tracking Analysis');
-    console.log(`⏰ Time: ${new Date().toISOString()}`);
+    console.log(' Running Progress Tracking Analysis');
+    console.log(` Time: ${new Date().toISOString()}`);
     console.log('='.repeat(60));
 
     try {
       // Check if Python worker exists
       if (!fs.existsSync(this.pythonWorkerPath)) {
-        console.error(`❌ Python worker not found at: ${this.pythonWorkerPath}`);
+        console.error(` Python worker not found at: ${this.pythonWorkerPath}`);
         return;
       }
 
@@ -92,11 +92,11 @@ class ProgressTrackingSchedulerService {
       // Upload reports to Azure Blob Storage
       await this.uploadReportsToBlob();
 
-      console.log('✅ Progress Tracking Analysis completed successfully');
+      console.log(' Progress Tracking Analysis completed successfully');
       console.log('='.repeat(60) + '\n');
 
     } catch (error) {
-      console.error('❌ Error running progress tracking analysis:', error);
+      console.error(' Error running progress tracking analysis:', error);
       console.error('Stack trace:', error.stack);
     }
   }
@@ -106,7 +106,7 @@ class ProgressTrackingSchedulerService {
    */
   runPythonWorker() {
     return new Promise((resolve, reject) => {
-      console.log('🐍 Spawning Python worker process...');
+      console.log(' Spawning Python worker process...');
 
       // Spawn Python process
       const pythonProcess = spawn('python', [this.pythonWorkerPath, '--once'], {
@@ -137,17 +137,17 @@ class ProgressTrackingSchedulerService {
       // Handle process completion
       pythonProcess.on('close', (code) => {
         if (code === 0) {
-          console.log('✅ Python worker completed successfully');
+          console.log(' Python worker completed successfully');
           resolve({ stdout, stderr });
         } else {
-          console.error(`❌ Python worker exited with code ${code}`);
+          console.error(` Python worker exited with code ${code}`);
           reject(new Error(`Python worker failed with exit code ${code}\n${stderr}`));
         }
       });
 
       // Handle process errors
       pythonProcess.on('error', (error) => {
-        console.error('❌ Failed to start Python worker:', error);
+        console.error(' Failed to start Python worker:', error);
         reject(error);
       });
 
@@ -164,16 +164,16 @@ class ProgressTrackingSchedulerService {
    */
   async uploadReportsToBlob() {
     try {
-      console.log('\n📤 Uploading reports to Azure Blob Storage...');
+      console.log('\n Uploading reports to Azure Blob Storage...');
 
       if (!this.connectionString) {
-        console.error('❌ Azure Storage connection string not configured');
+        console.error(' Azure Storage connection string not configured');
         return;
       }
 
       // Check if reports directory exists
       if (!fs.existsSync(this.reportsDir)) {
-        console.log('⚠️  Reports directory not found, skipping upload');
+        console.log('  Reports directory not found, skipping upload');
         return;
       }
 
@@ -188,11 +188,11 @@ class ProgressTrackingSchedulerService {
         .sort((a, b) => b.stats.mtime - a.stats.mtime); // Sort by modification time (newest first)
 
       if (files.length === 0) {
-        console.log('⚠️  No markdown reports found');
+        console.log('  No markdown reports found');
         return;
       }
 
-      console.log(`📄 Found ${files.length} report file(s)`);
+      console.log(` Found ${files.length} report file(s)`);
 
       // Initialize Azure Blob Service Client
       const blobServiceClient = BlobServiceClient.fromConnectionString(this.connectionString);
@@ -213,7 +213,7 @@ class ProgressTrackingSchedulerService {
           const match = file.name.match(/department_(.+)_(\d{8})_(\d{6})\.md/);
           
           if (!match) {
-            console.log(`⚠️  Skipping ${file.name} - doesn't match expected format`);
+            console.log(`  Skipping ${file.name} - doesn't match expected format`);
             continue;
           }
 
@@ -228,7 +228,7 @@ class ProgressTrackingSchedulerService {
           );
 
           if (deptResult.rows.length === 0) {
-            console.log(`⚠️  Department not found: ${departmentName}`);
+            console.log(`  Department not found: ${departmentName}`);
             continue;
           }
 
@@ -257,7 +257,7 @@ class ProgressTrackingSchedulerService {
           });
 
           const blobUrl = blockBlobClient.url;
-          console.log(`✅ Uploaded: ${file.name} → ${blobName}`);
+          console.log(` Uploaded: ${file.name} → ${blobName}`);
 
           // Save URL to database in department_dashboards table
           await pool.query(
@@ -286,18 +286,18 @@ class ProgressTrackingSchedulerService {
             ]
           );
 
-          console.log(`💾 Saved URL to database for department: ${departmentName} (${departmentId})`);
+          console.log(` Saved URL to database for department: ${departmentName} (${departmentId})`);
           uploadedCount++;
 
         } catch (uploadError) {
-          console.error(`❌ Failed to upload ${file.name}:`, uploadError.message);
+          console.error(` Failed to upload ${file.name}:`, uploadError.message);
         }
       }
 
-      console.log(`\n✅ Successfully uploaded ${uploadedCount}/${files.length} report(s) to Azure Blob Storage`);
+      console.log(`\n Successfully uploaded ${uploadedCount}/${files.length} report(s) to Azure Blob Storage`);
 
     } catch (error) {
-      console.error('❌ Error uploading reports to blob:', error);
+      console.error(' Error uploading reports to blob:', error);
       throw error;
     }
   }

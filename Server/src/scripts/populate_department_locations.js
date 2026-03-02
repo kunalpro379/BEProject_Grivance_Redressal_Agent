@@ -115,7 +115,7 @@ async function populateLocations() {
         deptId
       ]);
       
-      console.log(`✅ Updated: ${dept.name}`);
+      console.log(` Updated: ${dept.name}`);
       console.log(`   Location: (${dept.latitude}, ${dept.longitude})`);
       console.log(`   Jurisdiction: ${dept.jurisdiction}`);
       console.log(`   Contact: ${dept.contact_information.phone}\n`);
@@ -146,7 +146,7 @@ async function populateLocations() {
       });
       console.log(`\n💡 Tip: Add their coordinates to DEPARTMENT_LOCATIONS array and run this script again.`);
     } else {
-      console.log(`\n✅ All departments have location data!`);
+      console.log(`\n All departments have location data!`);
     }
     
   } catch (error) {
@@ -203,7 +203,7 @@ async function addDepartmentLocation(departmentName) {
       departmentName
     ]);
     
-    console.log('\n✅ Location added successfully!');
+    console.log('\n Location added successfully!');
     
   } catch (error) {
     console.error('❌ Error:', error.message);

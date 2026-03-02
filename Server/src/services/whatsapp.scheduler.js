@@ -1,4 +1,4 @@
-import whatsappService from './whatsapp.service.js';
+﻿import whatsappService from './whatsapp.service.js';
 import pool from '../config/database.js';
 
 class WhatsAppScheduler {
@@ -11,7 +11,7 @@ class WhatsAppScheduler {
    * Sends reminder to all workers at specified time
    */
   startDailyReportReminders(hour = 18, minute = 0) {
-    console.log(`📅 Scheduling daily report reminders for ${hour}:${minute}`);
+    console.log(`Scheduling daily report reminders for ${hour}:${minute}`);
 
     // Calculate milliseconds until next scheduled time
     const scheduleTime = () => {
@@ -29,7 +29,7 @@ class WhatsAppScheduler {
 
     const runJob = async () => {
       try {
-        console.log('⏰ Running daily report reminder job...');
+        console.log(' Running daily report reminder job...');
         await this.sendDailyReportReminders();
         
         // Schedule next run
@@ -55,28 +55,28 @@ class WhatsAppScheduler {
     try {
       // Get all field workers with phone numbers
       const result = await pool.query(`
-        SELECT id, name, phone
+        SELECT id, full_name as name, phone
         FROM users
         WHERE role = 'field_worker'
           AND phone IS NOT NULL
           AND is_active = true
       `);
 
-      console.log(`📤 Sending daily report reminders to ${result.rows.length} field workers`);
+      console.log(`Sending daily report reminders to ${result.rows.length} field workers`);
 
       for (const worker of result.rows) {
         try {
           await whatsappService.sendDailyReportReminder(worker.phone, worker.name);
-          console.log(`✅ Reminder sent to ${worker.name}`);
+          console.log(`Reminder sent to ${worker.name}`);
           
           // Small delay to avoid rate limiting
           await this.sleep(1000);
         } catch (error) {
-          console.error(`❌ Failed to send reminder to ${worker.name}:`, error.message);
+          console.error(`Failed to send reminder to ${worker.name}:`, error.message);
         }
       }
 
-      console.log('✅ Daily report reminders completed');
+      console.log('Daily report reminders completed');
     } catch (error) {
       console.error('Error sending daily report reminders:', error);
       throw error;
@@ -90,7 +90,7 @@ class WhatsAppScheduler {
     try {
       // Get grievance details and citizen phone
       const result = await pool.query(`
-        SELECT g.id, g.title, g.status, u.phone, u.name
+        SELECT g.id, g.title, g.status, u.phone, u.full_name as name
         FROM grievances g
         JOIN users u ON g.user_id = u.id
         WHERE g.id = $1 AND u.phone IS NOT NULL
@@ -111,7 +111,7 @@ class WhatsAppScheduler {
         message
       );
 
-      console.log(`✅ Grievance update sent to ${grievance.name}`);
+      console.log(`Grievance update sent to ${grievance.name}`);
     } catch (error) {
       console.error('Error sending grievance update:', error);
     }
@@ -121,7 +121,7 @@ class WhatsAppScheduler {
    * Send weekly summary to department heads
    */
   startWeeklySummary(dayOfWeek = 5, hour = 17, minute = 0) {
-    console.log(`📅 Scheduling weekly summary for day ${dayOfWeek} at ${hour}:${minute}`);
+    console.log(`Scheduling weekly summary for day ${dayOfWeek} at ${hour}:${minute}`);
 
     const scheduleTime = () => {
       const now = new Date();
@@ -142,7 +142,7 @@ class WhatsAppScheduler {
 
     const runJob = async () => {
       try {
-        console.log('⏰ Running weekly summary job...');
+        console.log(' Running weekly summary job...');
         await this.sendWeeklySummaries();
         
         // Schedule next run (7 days)
@@ -167,7 +167,7 @@ class WhatsAppScheduler {
     try {
       // Get department heads with phone numbers
       const result = await pool.query(`
-        SELECT u.id, u.name, u.phone, u.department_id, d.name as department_name
+        SELECT u.id, u.full_name as name, u.phone, u.department_id, d.name as department_name
         FROM users u
         JOIN departments d ON u.department_id = d.id
         WHERE u.role = 'department'
@@ -175,7 +175,7 @@ class WhatsAppScheduler {
           AND u.is_active = true
       `);
 
-      console.log(`📤 Sending weekly summaries to ${result.rows.length} department heads`);
+      console.log(`Sending weekly summaries to ${result.rows.length} department heads`);
 
       for (const head of result.rows) {
         try {
@@ -184,15 +184,15 @@ class WhatsAppScheduler {
           const message = this.formatWeeklySummary(head.department_name, stats);
 
           await whatsappService.sendMessage(head.phone, message);
-          console.log(`✅ Weekly summary sent to ${head.name}`);
+          console.log(`Weekly summary sent to ${head.name}`);
           
           await this.sleep(1000);
         } catch (error) {
-          console.error(`❌ Failed to send summary to ${head.name}:`, error.message);
+          console.error(`Failed to send summary to ${head.name}:`, error.message);
         }
       }
 
-      console.log('✅ Weekly summaries completed');
+      console.log('Weekly summaries completed');
     } catch (error) {
       console.error('Error sending weekly summaries:', error);
       throw error;
@@ -226,21 +226,21 @@ class WhatsAppScheduler {
       ? ((stats.resolved / stats.total_grievances) * 100).toFixed(1)
       : 0;
 
-    return `📊 Weekly Summary - ${departmentName}\n\n` +
+    return `Weekly Summary - ${departmentName}\n\n` +
            `Total Grievances: ${stats.total_grievances}\n` +
-           `✅ Resolved: ${stats.resolved}\n` +
-           `🔄 In Progress: ${stats.in_progress}\n` +
-           `⏳ Pending: ${stats.pending}\n\n` +
+           `Resolved: ${stats.resolved}\n` +
+           `In Progress: ${stats.in_progress}\n` +
+           `Pending: ${stats.pending}\n\n` +
            `Resolution Rate: ${resolutionRate}%\n` +
            `Avg Resolution Time: ${stats.avg_resolution_days?.toFixed(1) || 'N/A'} days\n\n` +
-           `Keep up the great work! 💪`;
+           `Keep up the great work!`;
   }
 
   /**
    * Stop all scheduled jobs
    */
   stopAll() {
-    console.log('🛑 Stopping all WhatsApp scheduled jobs');
+    console.log('Stopping all WhatsApp scheduled jobs');
     for (const [name, timeout] of this.scheduledJobs) {
       clearTimeout(timeout);
       console.log(`Stopped job: ${name}`);

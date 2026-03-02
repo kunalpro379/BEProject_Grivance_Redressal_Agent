@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+﻿import pool from '../config/database.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ class ContractorAnalysisService {
    */
   async analyzeContractor(contractorId) {
     try {
-      console.log(`🔍 Analyzing contractor: ${contractorId}`);
+      console.log(` Analyzing contractor: ${contractorId}`);
 
       // Fetch contractor data
       const contractor = await this.getContractorData(contractorId);
@@ -44,7 +44,7 @@ class ContractorAnalysisService {
       // Save analysis to database
       await this.saveAnalysis(contractorId, aiAnalysis, analysisScore);
 
-      console.log(`✅ Contractor analysis complete. Score: ${analysisScore}/100`);
+      console.log(` Contractor analysis complete. Score: ${analysisScore}/100`);
 
       return {
         contractor_id: contractorId,
@@ -53,7 +53,7 @@ class ContractorAnalysisService {
       };
 
     } catch (error) {
-      console.error('❌ Error analyzing contractor:', error);
+      console.error(' Error analyzing contractor:', error);
       throw error;
     }
   }
@@ -283,7 +283,7 @@ Respond with ONLY valid JSON, no markdown formatting.`;
          AND ai_analysis IS NULL`
       );
 
-      console.log(`📊 Found ${result.rows.length} contractors to analyze`);
+      console.log(` Found ${result.rows.length} contractors to analyze`);
 
       const analyses = [];
       for (const row of result.rows) {

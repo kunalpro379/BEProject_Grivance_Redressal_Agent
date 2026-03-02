@@ -1,4 +1,4 @@
-import OpenAI from 'openai';
+﻿import OpenAI from 'openai';
 import pool from '../config/database.js';
 import stateManager from './state-manager.service.js';
 
@@ -18,8 +18,8 @@ class AutonomousAIAgent {
     try {
       const puterAuthToken = process.env.PUTER_AUTH_TOKEN;
       if (!puterAuthToken) {
-        console.warn('⚠️  PUTER_AUTH_TOKEN not configured - autonomous agent disabled');
-        console.log('💡 Get your token from: https://puter.com/dashboard');
+        console.warn('️  PUTER_AUTH_TOKEN not configured - autonomous agent disabled');
+        console.log(' Get your token from: https://puter.com/dashboard');
         return;
       }
 
@@ -29,9 +29,9 @@ class AutonomousAIAgent {
         apiKey: puterAuthToken,
       });
       
-      console.log('✅ Autonomous AI Agent initialized with Puter.js');
+      console.log(' Autonomous AI Agent initialized with Puter.js');
     } catch (error) {
-      console.error('❌ Failed to initialize Autonomous AI Agent:', error.message);
+      console.error(' Failed to initialize Autonomous AI Agent:', error.message);
     }
   }
 
@@ -67,7 +67,7 @@ class AutonomousAIAgent {
       return response;
 
     } catch (error) {
-      console.error('❌ Autonomous AI error:', error);
+      console.error(' Autonomous AI error:', error);
       return this.fallbackResponse(message);
     }
   }
@@ -197,7 +197,7 @@ Return ONLY valid JSON.`;
         throw new Error('No valid JSON found in response');
       }
     } catch (error) {
-      console.error('❌ Failed to get AI decision:', error.message);
+      console.error(' Failed to get AI decision:', error.message);
       return this.fallbackDecision(context);
     }
   }
@@ -206,7 +206,7 @@ Return ONLY valid JSON.`;
    * Execute AI's decision
    */
   async executeDecision(decision, context) {
-    console.log('🤖 AI Decision:', JSON.stringify(decision, null, 2));
+    console.log(' AI Decision:', JSON.stringify(decision, null, 2));
 
     // Update workflow state
     await stateManager.updateWorkflowState(context.user.id, {
@@ -291,11 +291,11 @@ Return ONLY valid JSON.`;
       await stateManager.completeWorkflow(context.user.id);
 
       return {
-        text: decision.response + '\n\n✅ Registration complete!',
+        text: decision.response + '\n\n Registration complete!',
         action: 'registration_complete'
       };
     } catch (error) {
-      console.error('❌ Registration error:', error);
+      console.error(' Registration error:', error);
       return {
         text: 'Sorry, there was an error completing your registration. Please try again.',
         action: 'error'
@@ -333,7 +333,7 @@ Return ONLY valid JSON.`;
     const analysis = await this.analyzeImageWithAI(context.media, context);
 
     return {
-      text: decision.response + `\n\n🤖 Image Analysis: ${analysis.description}`,
+      text: decision.response + `\n\n Image Analysis: ${analysis.description}`,
       action: 'image_analyzed',
       imageAnalysis: analysis
     };
@@ -352,11 +352,11 @@ Return ONLY valid JSON.`;
       }
 
       return {
-        text: decision.response + '\n\n✅ Submitted successfully!',
+        text: decision.response + '\n\n Submitted successfully!',
         action: 'submission_complete'
       };
     } catch (error) {
-      console.error('❌ Submission error:', error);
+      console.error(' Submission error:', error);
       return {
         text: 'Sorry, there was an error submitting. Please try again.',
         action: 'error'
@@ -410,7 +410,7 @@ Be specific and detailed.`;
         url: media.fileUrl
       };
     } catch (error) {
-      console.error('❌ Media analysis error:', error);
+      console.error(' Media analysis error:', error);
       return null;
     }
   }
@@ -451,7 +451,7 @@ Describe what you see and how it relates to their work.`;
         }
       } catch (err) {
         // Table might not exist or column name different, continue
-        console.log('⚠️  Contractors table query failed:', err.message);
+        console.log('️  Contractors table query failed:', err.message);
       }
 
       // For Telegram users, userId is a number string, not UUID
@@ -470,7 +470,7 @@ Describe what you see and how it relates to their work.`;
             return userResult.rows[0];
           }
         } catch (err) {
-          console.log('⚠️  Users table query failed:', err.message);
+          console.log('️  Users table query failed:', err.message);
         }
       }
 
@@ -496,14 +496,14 @@ Describe what you see and how it relates to their work.`;
             };
           }
         } catch (err) {
-          console.log('⚠️  Daily reports query failed:', err.message);
+          console.log('️  Daily reports query failed:', err.message);
         }
       }
 
       // New user - no profile yet
       return null;
     } catch (error) {
-      console.error('❌ Error fetching user profile:', error.message);
+      console.error(' Error fetching user profile:', error.message);
       return null;
     }
   }
@@ -547,7 +547,7 @@ Describe what you see and how it relates to their work.`;
    */
   async storeUserData(userId, data) {
     // Store in appropriate table based on data type
-    console.log('📦 Storing user data:', userId, data);
+    console.log(' Storing user data:', userId, data);
   }
 
   /**
@@ -570,9 +570,9 @@ Describe what you see and how it relates to their work.`;
         [userId, companyName, contactPerson, phone, email, specialization]
       );
       
-      console.log(`✅ Registered contractor: ${companyName} (${userId})`);
+      console.log(` Registered contractor: ${companyName} (${userId})`);
     } catch (error) {
-      console.error('❌ Error registering contractor:', error.message);
+      console.error(' Error registering contractor:', error.message);
       throw error;
     }
   }
@@ -630,7 +630,7 @@ Describe what you see and how it relates to their work.`;
           return `Status: ${status.is_active ? 'Active' : 'Inactive'}\nRegistered: ${new Date(status.created_at).toLocaleDateString()}`;
         }
       } catch (err) {
-        console.log('⚠️  Contractors status query failed:', err.message);
+        console.log('️  Contractors status query failed:', err.message);
       }
 
       // Check if this is a UUID
@@ -649,7 +649,7 @@ Describe what you see and how it relates to their work.`;
             return `Status: ${status.is_active ? 'Active' : 'Inactive'}\nRegistered: ${new Date(status.created_at).toLocaleDateString()}`;
           }
         } catch (err) {
-          console.log('⚠️  Users status query failed:', err.message);
+          console.log('️  Users status query failed:', err.message);
         }
       }
 
@@ -664,12 +664,12 @@ Describe what you see and how it relates to their work.`;
           return `Reports submitted: ${reportResult.rows[0].count}\nLast report: ${new Date(reportResult.rows[0].last_date).toLocaleDateString()}`;
         }
       } catch (err) {
-        console.log('⚠️  Reports status query failed:', err.message);
+        console.log('️  Reports status query failed:', err.message);
       }
       
       return 'No registration found. Would you like to register?';
     } catch (error) {
-      console.error('❌ Error checking status:', error.message);
+      console.error(' Error checking status:', error.message);
       return 'Unable to check status.';
     }
   }

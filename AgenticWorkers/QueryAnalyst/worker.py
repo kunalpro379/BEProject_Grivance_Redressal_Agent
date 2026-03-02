@@ -288,7 +288,7 @@ class QueryAnalystWorker:
                                 print(f"   ⏭️  Skipping message with status: {current_status}")
                                 # Delete the message so it doesn't keep getting picked up
                                 self.queue_client.delete_message(message_id, pop_receipt)
-                                print(f"   ✅ Message dequeued (already processed)\n")
+                                print(f"    Message dequeued (already processed)\n")
                                 continue
                             
                             # If no status or status is QueryAnalyst/pending, process it
@@ -309,7 +309,7 @@ class QueryAnalystWorker:
                             # Even if there's an error, we don't want to keep retrying the same message indefinitely
                             try:
                                 self.queue_client.delete_message(message_id, pop_receipt)
-                                print(f"   ✅ Message dequeued from QueryAnalyst queue")
+                                print(f"    Message dequeued from QueryAnalyst queue")
                             except Exception as del_err:
                                 print(f"   ⚠️  Warning: Could not delete message: {del_err}")
                             
@@ -328,7 +328,7 @@ class QueryAnalystWorker:
                             try:
                                 encoded_message = self.encode_message(updated_message)
                                 self.webcrawler_queue_client.send_message(encoded_message)
-                                print(f"   ✅ Pushed to webcrawler queue with status: {processing_status}")
+                                print(f"    Pushed to webcrawler queue with status: {processing_status}")
                                 print(f"   📱 Server will notify Telegram directly\n")
                             except Exception as push_err:
                                 print(f"   ❌ Error pushing to webcrawler queue: {push_err}\n")
@@ -340,7 +340,7 @@ class QueryAnalystWorker:
                             # Always try to delete the message to avoid infinite reprocessing
                             try:
                                 self.queue_client.delete_message(message_id, pop_receipt)
-                                print(f"   ✅ Message dequeued (after error) to prevent reprocessing\n")
+                                print(f"    Message dequeued (after error) to prevent reprocessing\n")
                             except Exception as del_err:
                                 print(f"   ⚠️  Could not delete message after error: {del_err}\n")
                     

@@ -158,7 +158,7 @@ router.post('/approve/:requestId', authenticateToken, authorizeRoles(['departmen
     // Send notification to user via Telegram
     if (registration.channel === 'telegram' && registration.telegram_user_id) {
       try {
-        const message = `✅ *Registration Approved!*\n\n` +
+        const message = ` *Registration Approved!*\n\n` +
                        `Congratulations ${registration.full_name}! Your field worker registration has been approved.\n\n` +
                        `📋 *Your Details:*\n` +
                        `• Staff ID: ${staffId}\n` +
@@ -169,7 +169,7 @@ router.post('/approve/:requestId', authenticateToken, authorizeRoles(['departmen
                        `You can now submit daily work reports through this bot. Just send me your daily progress!`;
         
         await telegramFieldWorkerBot.sendNotification(registration.telegram_user_id, message);
-        console.log(`✅ Approval notification sent to Telegram user ${registration.telegram_user_id}`);
+        console.log(` Approval notification sent to Telegram user ${registration.telegram_user_id}`);
       } catch (notifError) {
         console.error('⚠️  Failed to send Telegram notification:', notifError.message);
         // Don't fail the approval if notification fails
@@ -240,7 +240,7 @@ router.post('/reject/:requestId', authenticateToken, authorizeRoles(['department
                        `If you believe this is a mistake, please contact your department administrator.`;
         
         await telegramFieldWorkerBot.sendNotification(registration.telegram_user_id, message);
-        console.log(`✅ Rejection notification sent to Telegram user ${registration.telegram_user_id}`);
+        console.log(` Rejection notification sent to Telegram user ${registration.telegram_user_id}`);
       } catch (notifError) {
         console.error('⚠️  Failed to send Telegram notification:', notifError.message);
         // Don't fail the rejection if notification fails
