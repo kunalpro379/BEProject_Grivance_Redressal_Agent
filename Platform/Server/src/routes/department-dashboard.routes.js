@@ -1558,48 +1558,147 @@ router.get('/:depId/citizen-feedback', authenticate, verifyDepartmentAccess, asy
   }
 });
 
-// Predictive maintenance (equipment + predictivemaintenance for department)
+// Predictive maintenance - Grievance cost predictions based on historical analysis
 router.get('/:depId/predictive-maintenance', authenticate, verifyDepartmentAccess, async (req, res) => {
   try {
     const { depId } = req.params;
-    const departmentId = depId; // depId is actually department_id (UUID) now
+    const departmentId = depId;
     
+    // Get active/in-progress grievances for the department
     const result = await pool.query(
-      `SELECT p.id, p.risk_level, p.breakdown_probability, p.recommendation, p.preventive_cost, p.breakdown_cost,
-        p.utilization_rate, p.last_maintenance, p.next_scheduled_maintenance, p.is_overdue, p.overdue_days,
-        e.equipment_id, e.name as equipment_name
-       FROM predictivemaintenance p
-       JOIN equipment e ON e.id = p.equipment_id AND e.department_id = $1
-       ORDER BY CASE p.risk_level WHEN 'high' THEN 1 WHEN 'High' THEN 1 WHEN 'medium' THEN 2 ELSE 3 END
+      `SELECT 
+        g.id,
+        g.grievance_id,
+        g.category,
+        g.status,
+        g.priority,
+        g.created_at,
+        g.extracted_address as location,
+        g.zone,
+        g.ward
+       FROM usergrievance g
+       WHERE g.department_id = $1 
+         AND g.status::text IN ('submitted', 'pending', 'in_progress', 'assigned')
+       ORDER BY 
+         CASE g.priority 
+           WHEN 'Emergency' THEN 1 
+           WHEN 'Urgent' THEN 2 
+           WHEN 'High' THEN 3 
+           WHEN 'Medium' THEN 4 
+           ELSE 5 
+         END,
+         g.created_at DESC
        LIMIT 20`,
       [departmentId]
     );
     
-    // Transform to camelCase for frontend
-    const transformedData = result.rows.map(row => ({
-      id: row.id,
-      equipmentId: row.equipment_id,
-      equipmentType: row.equipment_name,
-      riskLevel: row.risk_level ? row.risk_level.charAt(0).toUpperCase() + row.risk_level.slice(1).toLowerCase() : 'Low',
-      breakdownProbability: row.breakdown_probability || 0,
-      recommendation: row.recommendation || 'No recommendation available',
-      preventiveCost: row.preventive_cost || '₹0',
-      breakdownCost: row.breakdown_cost || '₹0',
-      utilizationRate: row.utilization_rate || 0,
-      lastMaintenance: row.last_maintenance ? new Date(row.last_maintenance).toLocaleDateString() : 'N/A',
-      nextScheduledMaintenance: row.next_scheduled_maintenance ? new Date(row.next_scheduled_maintenance).toLocaleDateString() : 'N/A',
-      maintenanceOverdue: row.is_overdue || false,
-      overdueBy: row.overdue_days ? `${row.overdue_days} days` : null,
-      prediction: row.breakdown_probability > 70 ? 'High risk of breakdown within 30 days' :
-                  row.breakdown_probability > 40 ? 'Moderate risk - schedule maintenance soon' :
-                  'Equipment in good condition',
-      aiRecommendation: row.recommendation || 'Continue regular maintenance schedule'
+    // For each grievance, analyze similar historical cases to predict cost, resources, and time
+    const predictions = await Promise.all(result.rows.map(async (grievance) => {
+      try {
+        // Get category for comparison
+        const category = typeof grievance.category === 'object' 
+          ? grievance.category.primary 
+          : (typeof grievance.category === 'string' && grievance.category.startsWith('{') 
+            ? JSON.parse(grievance.category).primary 
+            : grievance.category);
+        
+        // Find similar resolved grievances (same category, same zone/ward if available)
+        const similarQuery = `
+          SELECT 
+            COUNT(*) as similar_count,
+            AVG(resolution_time) as avg_time,
+            AVG(CASE 
+              WHEN estimated_cost IS NOT NULL THEN estimated_cost 
+              ELSE 25000 
+            END) as avg_cost
+          FROM usergrievance
+          WHERE department_id = $1
+            AND status::text IN ('resolved', 'closed')
+            AND (
+              (category::text ILIKE $2) OR
+              (category->>'primary' ILIKE $2)
+            )
+            ${grievance.zone ? 'AND zone = $3' : ''}
+        `;
+        
+        const similarParams = grievance.zone 
+          ? [departmentId, `%${category}%`, grievance.zone]
+          : [departmentId, `%${category}%`];
+        
+        const similarResult = await pool.query(similarQuery, similarParams);
+        const similarData = similarResult.rows[0];
+        
+        const similarCount = parseInt(similarData.similar_count) || 0;
+        const avgTime = parseFloat(similarData.avg_time) || 3;
+        const avgCost = parseFloat(similarData.avg_cost) || 25000;
+        
+        // Calculate confidence based on number of similar cases
+        const confidence = Math.min(95, 50 + (similarCount * 3));
+        
+        // Determine resources based on category and cost
+        let resources = '2 workers, 1 vehicle, standard tools';
+        if (avgCost > 50000) {
+          resources = '3-4 workers, 2 vehicles, specialized equipment';
+        } else if (avgCost > 30000) {
+          resources = '2-3 workers, 1 vehicle, tools and materials';
+        } else if (avgCost < 15000) {
+          resources = '1-2 workers, basic tools';
+        }
+        
+        // Generate AI recommendation
+        let aiRecommendation = `Based on ${similarCount} similar cases: `;
+        if (similarCount > 10) {
+          aiRecommendation += `High confidence prediction. Average cost ₹${(avgCost/1000).toFixed(1)}K, time ${avgTime.toFixed(1)} days. ${
+            avgCost > 40000 ? 'Consider contractor involvement for cost efficiency.' : 'Internal team can handle efficiently.'
+          }`;
+        } else if (similarCount > 5) {
+          aiRecommendation += `Moderate confidence. Estimated cost ₹${(avgCost/1000).toFixed(1)}K, time ${avgTime.toFixed(1)} days. Monitor progress closely.`;
+        } else {
+          aiRecommendation += `Limited historical data. Estimated cost ₹${(avgCost/1000).toFixed(1)}K, time ${avgTime.toFixed(1)} days. Allocate resources conservatively.`;
+        }
+        
+        return {
+          id: grievance.id,
+          grievanceId: grievance.grievance_id,
+          category: category || 'General',
+          status: grievance.status,
+          priority: grievance.priority || 'Medium',
+          predictedCost: Math.round(avgCost),
+          resources: resources,
+          estimatedTime: Math.ceil(avgTime),
+          confidence: Math.round(confidence),
+          similarCases: similarCount,
+          aiRecommendation: aiRecommendation,
+          location: grievance.location || 'N/A',
+          zone: grievance.zone || 'N/A',
+          createdAt: grievance.created_at
+        };
+      } catch (err) {
+        console.error('Error analyzing grievance:', grievance.grievance_id, err);
+        // Return default prediction if analysis fails
+        return {
+          id: grievance.id,
+          grievanceId: grievance.grievance_id,
+          category: 'General',
+          status: grievance.status,
+          priority: grievance.priority || 'Medium',
+          predictedCost: 25000,
+          resources: '2 workers, 1 vehicle, standard tools',
+          estimatedTime: 3,
+          confidence: 50,
+          similarCases: 0,
+          aiRecommendation: 'Insufficient historical data for accurate prediction',
+          location: grievance.location || 'N/A',
+          zone: grievance.zone || 'N/A',
+          createdAt: grievance.created_at
+        };
+      }
     }));
     
-    res.json({ success: true, data: transformedData });
+    res.json({ success: true, data: predictions });
   } catch (error) {
-    console.error('Error fetching predictive maintenance:', error);
-    res.status(500).json({ error: 'Failed to fetch predictive maintenance' });
+    console.error('Error fetching grievance predictions:', error);
+    res.status(500).json({ error: 'Failed to fetch grievance predictions' });
   }
 });
 

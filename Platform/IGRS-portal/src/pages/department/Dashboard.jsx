@@ -1,18 +1,25 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LayoutDashboard, FileText, TrendingUp, Users, AlertTriangle, Activity,
   Clock, CheckCircle, Briefcase, MapPin, ChevronRight, Loader, DollarSign, BarChart3,
-  Eye, Pencil, Search, X, MessageSquare, Wrench, BookOpen, ScrollText, UserPlus, AlertCircle as AlertCircleIcon, Link as LinkIcon
+  Eye, Pencil, Search, X, MessageSquare, Wrench, BookOpen, ScrollText, UserPlus, AlertCircle as AlertCircleIcon, Link as LinkIcon,
+  Map as MapIcon, Maximize2, Minimize2, Calendar, Building2, Sparkles, ExternalLink, Image as ImageIcon
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import L from 'leaflet';
 import departmentDashboardService from '../../services/departmentDashboard.service';
 import { useAuth } from '../../context/AuthContext';
 import PremiumHeader from './components/PremiumHeader';
 import BudgetManagement from './components/BudgetManagement';
+import LocationDisplay from '../../components/LocationDisplay';
+import JsonRenderer from '../../components/JsonRenderer';
+import { grievanceService } from '../../services/grievance.service';
 
 // Fix default marker icon in react-leaflet
 const defaultIcon = L.icon({
@@ -48,6 +55,15 @@ const DepartmentDashboardNew = () => {
   const [selectedGrievanceId, setSelectedGrievanceId] = useState(null);
   const [grievanceDetail, setGrievanceDetail] = useState(null);
   const [grievanceDetailLoading, setGrievanceDetailLoading] = useState(false);
+  const [mapExpanded, setMapExpanded] = useState(false);
+  const [showCommentsModal, setShowCommentsModal] = useState(false);
+  const [newComment, setNewComment] = useState('');
+  const [submittingComment, setSubmittingComment] = useState(false);
+  
+  // Map refs
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const markersLayerRef = useRef(null);
   const [analyticsData, setAnalyticsData] = useState(null);
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [staff, setStaff] = useState([]);
@@ -78,6 +94,7 @@ const DepartmentDashboardNew = () => {
   const [officersLoading, setOfficersLoading] = useState(false);
   const [auditLogsList, setAuditLogsList] = useState([]);
   const [auditLogsLoading, setAuditLogsLoading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Helper function to handle auth errors and logout
   const handleAuthError = async (err) => {
@@ -158,9 +175,6 @@ const DepartmentDashboardNew = () => {
   }, [activeTab, depId]);
   useEffect(() => {
     if (activeTab === 'citizen-feedback') loadCitizenFeedback();
-  }, [activeTab, depId]);
-  useEffect(() => {
-    if (activeTab === 'predictive-maintenance') loadPredictiveMaintenance();
   }, [activeTab, depId]);
   useEffect(() => {
     if (activeTab === 'knowledge-base') loadKnowledgeBase();
@@ -491,7 +505,6 @@ const DepartmentDashboardNew = () => {
     { id: 'escalations', label: 'Escalations', icon: AlertTriangle },
     { id: 'ai-insights', label: 'AI Insights', icon: TrendingUp },
     { id: 'citizen-feedback', label: 'Citizen Feedback', icon: MessageSquare },
-    { id: 'predictive-maintenance', label: 'Predictive Maintenance', icon: Wrench },
     { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
     { id: 'officers', label: 'Officers', icon: Users },
     { id: 'audit-logs', label: 'Audit Logs', icon: ScrollText },
@@ -609,6 +622,186 @@ const DepartmentDashboardNew = () => {
     if (v === 'resolved' || v === 'closed') return 'bg-emerald-600 text-white';
     return 'bg-stone-200 text-stone-800';
   };
+
+  // Enhanced helper functions for citizen-like view
+  const formatDate = (d) => {
+    if (!d) return "—";
+    const date = new Date(d);
+    return date.toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const isImageUrl = (path) => {
+    if (!path || typeof path !== "string") return false;
+    const lower = path.toLowerCase();
+    return /\.(jpe?g|png|gif|webp)(\?|$)/i.test(lower) || lower.includes("blob") && !lower.includes(".pdf");
+  };
+
+  const formatStatus = (status, grievance = null) => {
+    const s = String(status || "").toLowerCase();
+    if (s === "resolved") return "Resolved";
+    if (s === "rejected") return "Rejected";
+    if (s === "in_progress") return "Under Working";
+    if (s === "assigned") return "Accepted by Department";
+    if (s === "submitted" || s === "pending" || !status) return "Submitted";
+    return status;
+  };
+
+  const getStatusColor = (status, grievance = null) => {
+    const display = formatStatus(status, grievance);
+    const d = String(display).toLowerCase();
+    if (d === "resolved") return "bg-green-100 text-green-800";
+    if (d === "accepted by department") return "bg-blue-100 text-blue-800";
+    if (d === "under working") return "bg-yellow-100 text-yellow-800";
+    if (d === "rejected") return "bg-red-100 text-red-800";
+    return "bg-gray-100 text-gray-800";
+  };
+
+  // Build enhanced timeline
+  const buildTimeline = (grievance) => {
+    const timeline = [];
+    
+    timeline.push({
+      stage: "submitted",
+      label: "Grievance Submitted",
+      description: "Grievance has been received",
+      at: grievance.created_at,
+      icon: FileText,
+      completed: true
+    });
+    
+    if (grievance.department_id || grievance.assigned_officer_id) {
+      timeline.push({
+        stage: "accepted",
+        label: "Accepted by Department",
+        description: grievance.department_name ? `Assigned to ${grievance.department_name}` : "Assigned to department",
+        at: grievance.updated_at,
+        icon: Building2,
+        completed: true
+      });
+    }
+    
+    const status = String(grievance.status || "").toLowerCase();
+    if (status === "in_progress" || status === "assigned") {
+      timeline.push({
+        stage: "working",
+        label: "Under Working",
+        description: grievance.officer_name ? `Being handled by ${grievance.officer_name}` : "Work in progress",
+        at: grievance.updated_at,
+        icon: Activity,
+        completed: status === "in_progress"
+      });
+    }
+    
+    if (status === "resolved") {
+      timeline.push({
+        stage: "resolved",
+        label: "Resolved",
+        description: "Grievance has been successfully resolved",
+        at: grievance.resolved_at || grievance.updated_at,
+        icon: CheckCircle,
+        completed: true
+      });
+    } else if (status === "rejected") {
+      timeline.push({
+        stage: "rejected",
+        label: "Rejected",
+        description: "Grievance was rejected",
+        at: grievance.updated_at,
+        icon: X,
+        completed: true
+      });
+    }
+    
+    return timeline;
+  };
+
+  // Map initialization and update functions
+  const initializeMap = (data) => {
+    if (mapInstanceRef.current || !mapRef.current) return;
+
+    const map = L.map(mapRef.current, {
+      center: [20.5937, 78.9629],
+      zoom: 5,
+      zoomControl: true,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    markersLayerRef.current = L.markerClusterGroup({
+      chunkedLoading: true,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      zoomToBoundsOnClick: true,
+      maxClusterRadius: 50
+    });
+
+    map.addLayer(markersLayerRef.current);
+    mapInstanceRef.current = map;
+
+    updateMapMarkers(data);
+  };
+
+  const updateMapMarkers = (data) => {
+    if (!markersLayerRef.current) return;
+
+    markersLayerRef.current.clearLayers();
+
+    const validGrievances = data.filter(g => 
+      g.latitude && g.longitude && 
+      !isNaN(g.latitude) && !isNaN(g.longitude) &&
+      g.latitude >= -90 && g.latitude <= 90 &&
+      g.longitude >= -180 && g.longitude <= 180
+    );
+
+    validGrievances.forEach(grievance => {
+      const marker = L.marker([grievance.latitude, grievance.longitude]);
+      
+      const popupContent = `
+        <div style="font-family: sans-serif; min-width: 200px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #1A1A1A;">
+            ${grievance.grievance_id || 'N/A'}
+          </h3>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B6B6B;">
+            <strong>Status:</strong> ${formatStatus(grievance.status, grievance)}
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B6B6B;">
+            <strong>Category:</strong> ${getCategoryLabel(grievance.category) || 'N/A'}
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B6B6B;">
+            <strong>Location:</strong> ${grievance.location || grievance.location_address || 'N/A'}
+          </p>
+          <button 
+            onclick="window.dispatchEvent(new CustomEvent('openGrievanceDetail', { detail: '${grievance.grievance_id}' }))"
+            style="margin-top: 8px; padding: 6px 12px; background: #7D6E5C; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; width: 100%;"
+          >
+            View Details
+          </button>
+        </div>
+      `;
+
+      marker.bindPopup(popupContent, { maxWidth: 250 });
+      markersLayerRef.current.addLayer(marker);
+    });
+
+    if (validGrievances.length > 0 && mapInstanceRef.current) {
+      const bounds = L.latLngBounds(
+        validGrievances.map(g => [g.latitude, g.longitude])
+      );
+      mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50] });
+    }
+  };
+
+  // Define filteredGrievances first before using it in useEffect
   const filteredGrievances = useMemo(() => {
     if (!grievanceSearch.trim()) return grievances;
     const q = grievanceSearch.trim().toLowerCase();
@@ -621,6 +814,35 @@ const DepartmentDashboardNew = () => {
         getCategoryLabel(g.category).toLowerCase().includes(q)
     );
   }, [grievances, grievanceSearch]);
+
+  // Listen for custom event to open detail modal from map
+  useEffect(() => {
+    const handleOpenDetail = (e) => {
+      setSelectedGrievanceId(e.detail);
+    };
+    window.addEventListener('openGrievanceDetail', handleOpenDetail);
+    return () => window.removeEventListener('openGrievanceDetail', handleOpenDetail);
+  }, []);
+
+  // Initialize map when grievances load
+  useEffect(() => {
+    if (activeTab === 'grievances' && grievances.length > 0 && mapRef.current) {
+      setTimeout(() => initializeMap(grievances), 100);
+    }
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [activeTab, grievances]);
+
+  // Update map when filtered grievances change
+  useEffect(() => {
+    if (mapInstanceRef.current && filteredGrievances.length > 0) {
+      updateMapMarkers(filteredGrievances);
+    }
+  }, [filteredGrievances]);
 
   if (loading) {
     return (
@@ -1084,56 +1306,6 @@ const DepartmentDashboardNew = () => {
         </div>
       )}
 
-      {/* Zone Performance Overview */}
-      {zonePerformance && zonePerformance.length > 0 && (
-        <div className="bg-white rounded-xl border border-stone-200 p-8 shadow-lg">
-          <h3 className="text-xl font-bold text-stone-900 mb-6">Zone Performance Overview</h3>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-stone-800 text-white">
-                <tr>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Zone</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Active</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Resolution Rate</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Avg Time</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Staff</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Utilization</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Risk Level</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-stone-200">
-                {zonePerformance.map((zone, idx) => (
-                  <tr key={idx} className="hover:bg-stone-50">
-                    <td className="px-4 py-3 text-sm font-semibold text-stone-900">{zone.zone}</td>
-                    <td className="px-4 py-3 text-sm text-stone-700">{zone.active}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-1 bg-stone-200 rounded-full h-2">
-                          <div className="bg-stone-800 h-2 rounded-full" style={{ width: `${zone.resolutionRate}%` }}></div>
-                        </div>
-                        <span className="text-sm text-stone-700">{zone.resolutionRate}%</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm text-stone-700">{zone.avgTime}</td>
-                    <td className="px-4 py-3 text-sm text-stone-700">{zone.staff}</td>
-                    <td className="px-4 py-3 text-sm text-stone-700">{zone.utilization}%</td>
-                    <td className="px-4 py-3">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded ${
-                        zone.riskLevel === 'High' ? 'bg-red-100 text-red-800' :
-                        zone.riskLevel === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-green-100 text-green-800'
-                      }`}>
-                        {zone.riskLevel}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
       {/* Critical Alerts & Risks */}
       {alertsRiskMonitoring && alertsRiskMonitoring.length > 0 && (
         <div className="bg-white rounded-xl border border-stone-200 p-8 shadow-lg">
@@ -1458,7 +1630,7 @@ const DepartmentDashboardNew = () => {
     if (analyticsLoading) {
       return (
         <div className="flex items-center justify-center py-24 bg-white rounded-xl border border-stone-200">
-          <Loader className="w-10 h-10 animate-spin text-stone-500" />
+          <Loader className="w-8 h-8 animate-spin text-stone-500" />
           <span className="ml-3 text-stone-600">Loading analytics...</span>
         </div>
       );
@@ -1467,44 +1639,139 @@ const DepartmentDashboardNew = () => {
     const byCategory = data.byCategory || [];
     const byZone = data.byZone || [];
     const monthly = data.monthly || [];
+    
+    // Find department data for selected category
+    const selectedDeptData = selectedCategory 
+      ? byZone.find(z => z.zone_name === selectedCategory) 
+      : null;
+    
     return (
       <div className="space-y-8">
         <h2 className="text-2xl font-bold text-stone-900">Analytics</h2>
-        <div className="bg-white rounded-xl p-6 border border-stone-200">
-          <h3 className="text-lg font-semibold text-stone-800 mb-4">Complaints by Category</h3>
-          {byCategory.length === 0 ? <p className="text-stone-500">No data</p> : (
-            <div className="space-y-3">
-              {byCategory.map((row, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="w-48 text-sm font-medium text-stone-700 truncate">{row.category_name || 'Uncategorized'}</div>
-                  <div className="flex-1 h-8 bg-stone-100 rounded overflow-hidden">
-                    <div className="h-full bg-stone-600 rounded" style={{ width: `${Math.min(100, (row.count / Math.max(1, byCategory[0]?.count || 1)) * 100)}%` }} />
+        
+        {/* Two Column Layout: Bars on Left, Department Card on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Left Column: Complaints by Category Bars */}
+          <div className="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 className="text-lg font-semibold text-stone-800 mb-4">Complaints by Category</h3>
+            {byCategory.length === 0 ? <p className="text-stone-500">No data</p> : (
+              <div className="space-y-3">
+                {byCategory.map((row, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-4 cursor-pointer hover:bg-stone-50 p-2 rounded-lg transition-colors"
+                    onClick={() => {
+                      // Find matching department in byZone
+                      const matchingDept = byZone.find(z => 
+                        z.zone_name.toLowerCase().includes(row.category_name.toLowerCase()) ||
+                        row.category_name.toLowerCase().includes(z.zone_name.toLowerCase())
+                      ) || byZone[i % byZone.length]; // Fallback to index-based matching
+                      
+                      setSelectedCategory(matchingDept?.zone_name || null);
+                    }}
+                  >
+                    <div className="w-48 text-sm font-medium text-stone-700 truncate">{row.category_name || 'Uncategorized'}</div>
+                    <div className="flex-1 h-8 bg-stone-100 rounded overflow-hidden">
+                      <div 
+                        className="h-full bg-stone-600 rounded hover:bg-stone-700 transition-colors" 
+                        style={{ width: `${Math.min(100, (row.count / Math.max(1, byCategory[0]?.count || 1)) * 100)}%` }} 
+                      />
+                    </div>
+                    <span className="text-sm font-semibold text-stone-900 w-16">{row.count}</span>
                   </div>
-                  <span className="text-sm font-semibold text-stone-900 w-16">{row.count}</span>
+                ))}
+              </div>
+            )}
+            <p className="text-xs text-stone-500 mt-4 italic">Click on a bar to view department details</p>
+          </div>
+          
+          {/* Right Column: Selected Department Card */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-stone-800">Department Details</h3>
+            {selectedDeptData ? (
+              <div className="bg-white rounded-xl p-6 border-2 border-[#D4AF37] shadow-lg">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-xl font-bold text-stone-900">{selectedDeptData.zone_name}</h4>
+                  <button 
+                    onClick={() => setSelectedCategory(null)}
+                    className="text-stone-400 hover:text-stone-600 transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
-              ))}
-            </div>
-          )}
+                <div className="mb-4">
+                  <span className="px-4 py-2 bg-stone-100 text-stone-700 text-sm font-semibold rounded-full">
+                    {selectedDeptData.total} Total Grievances
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-5 border-2 border-green-200">
+                    <p className="text-xs text-green-700 font-semibold mb-2 uppercase tracking-wide">Solved</p>
+                    <p className="text-4xl font-bold text-green-600">{selectedDeptData.resolved || 0}</p>
+                    <p className="text-xs text-green-600 mt-1">Grievances Resolved</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-5 border-2 border-amber-200">
+                    <p className="text-xs text-amber-700 font-semibold mb-2 uppercase tracking-wide">Pending</p>
+                    <p className="text-4xl font-bold text-amber-600">{(selectedDeptData.total || 0) - (selectedDeptData.resolved || 0)}</p>
+                    <p className="text-xs text-amber-600 mt-1">Grievances Left</p>
+                  </div>
+                </div>
+                {/* Progress Bar */}
+                <div className="bg-stone-50 rounded-lg p-4 border border-stone-200">
+                  <div className="flex items-center justify-between text-sm text-stone-700 mb-2">
+                    <span className="font-semibold">Resolution Rate</span>
+                    <span className="text-lg font-bold text-[#D4AF37]">
+                      {selectedDeptData.total > 0 ? Math.round((selectedDeptData.resolved / selectedDeptData.total) * 100) : 0}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-stone-200 rounded-full h-3">
+                    <div 
+                      className="h-3 bg-gradient-to-r from-green-500 to-green-600 rounded-full transition-all duration-500 shadow-sm" 
+                      style={{ width: `${selectedDeptData.total > 0 ? Math.round((selectedDeptData.resolved / selectedDeptData.total) * 100) : 0}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white rounded-xl p-12 border-2 border-dashed border-stone-300 text-center">
+                <svg className="w-16 h-16 text-stone-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <p className="text-stone-500 font-medium">Click on a category bar to view details</p>
+                <p className="text-xs text-stone-400 mt-2">Select a category from the left to see solved and pending grievances</p>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {byZone.map((z, i) => (
-            <div key={i} className="bg-white rounded-xl p-6 border border-stone-200">
-              <h3 className="text-sm font-semibold text-stone-600 uppercase mb-2">{z.zone_name}</h3>
-              <p className="text-3xl font-bold text-stone-900">{z.total}</p>
-              <p className="text-sm text-stone-500">{z.resolved} Resolved</p>
-            </div>
-          ))}
-          {byZone.length === 0 && <p className="text-stone-500 col-span-full">No zone data</p>}
-        </div>
+        
+        {/* Monthly Performance Table - Only Table, No Cards Below */}
         <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
           <h3 className="text-lg font-semibold text-stone-800 p-4 border-b border-stone-200">Monthly Performance</h3>
           <table className="w-full">
-            <thead className="bg-stone-50"><tr><th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Month</th><th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Received</th><th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Resolved</th><th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Avg Time</th></tr></thead>
+            <thead className="bg-stone-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Month</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Received</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Resolved</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase text-stone-600">Avg Time</th>
+              </tr>
+            </thead>
             <tbody className="divide-y divide-stone-200">
               {monthly.map((m, i) => (
-                <tr key={i}><td className="px-4 py-3 text-stone-800">{m.month_label}</td><td className="px-4 py-3">{m.received}</td><td className="px-4 py-3">{m.resolved}</td><td className="px-4 py-3">{m.avg_time_days != null ? `${m.avg_time_days} days` : '-'}</td></tr>
+                <tr key={i} className="hover:bg-stone-50 transition-colors">
+                  <td className="px-4 py-3 text-stone-800 font-medium">{m.month_label}</td>
+                  <td className="px-4 py-3 text-stone-700">{m.received}</td>
+                  <td className="px-4 py-3 text-stone-700">{m.resolved}</td>
+                  <td className="px-4 py-3 text-stone-700">{m.avg_time_days != null ? `${m.avg_time_days} days` : '-'}</td>
+                </tr>
               ))}
-              {monthly.length === 0 && <tr><td colSpan={4} className="px-4 py-8 text-center text-stone-500">No monthly data</td></tr>}
+              {monthly.length === 0 && (
+                <tr>
+                  <td colSpan={4} className="px-4 py-8 text-center text-stone-500">No monthly data</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -2288,7 +2555,7 @@ const DepartmentDashboardNew = () => {
         </div>
       );
     }
-    const { escalations, repeatPatterns } = escalationsData;
+    const { escalations } = escalationsData;
     return (
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-stone-900 uppercase tracking-wide">Escalations</h2>
@@ -2339,107 +2606,7 @@ const DepartmentDashboardNew = () => {
             })}
           </div>
         )}
-        {repeatPatterns.length > 0 && (
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">Repeat Grievance Detection & Predictive Maintenance</h3>
-            
-            {/* Premium Table Layout */}
-            <div className="bg-white rounded-2xl shadow-xl border-2 border-[#F5E6D3] overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gradient-to-r from-[#1a1a1a] to-[#000000] text-white">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Location</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Issue Type</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Priority</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Frequency</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Affected Citizens</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Pattern</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Est. Cost</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Potential Savings</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">AI Recommendation</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#F5E6D3]">
-                    {repeatPatterns.map((pattern, index) => (
-                      <tr key={pattern.id || index} className="hover:bg-[#FFF8F0] transition-colors">
-                        <td className="px-6 py-4">
-                          <div className="font-semibold text-gray-900">{pattern.zone || pattern.area || 'N/A'}</div>
-                          <div className="text-sm text-gray-600">{pattern.ward || ''}</div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="text-sm font-medium text-gray-900">{pattern.issue_type || 'General'}</span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                            pattern.priority === 'Emergency' ? 'bg-black text-white' :
-                            pattern.priority === 'High' ? 'bg-[#D4AF37] text-white' :
-                            pattern.priority === 'Medium' ? 'bg-[#FFF8F0] border-2 border-[#D4AF37] text-gray-900' :
-                            'bg-gray-200 text-gray-900'
-                          }`}>
-                            {pattern.priority || 'Medium'}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-bold text-[#D4AF37]">{pattern.complaint_count || 0} times</div>
-                          <div className="text-xs text-gray-600">in {pattern.time_period_days || 30} days</div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-semibold text-gray-900">{pattern.affected_citizens || 0}</div>
-                          <div className="text-xs text-gray-600">citizens</div>
-                        </td>
-                        <td className="px-6 py-4 max-w-xs">
-                          <p className="text-sm text-gray-700 line-clamp-2">{pattern.pattern_description || 'Recurring issue detected'}</p>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-bold text-gray-900">
-                            ₹{pattern.estimated_cost ? (pattern.estimated_cost / 100000).toFixed(2) + ' L' : 'TBD'}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-bold text-[#D4AF37]">
-                            ₹{pattern.estimated_savings ? (pattern.estimated_savings / 100000).toFixed(2) + ' L' : 'TBD'}
-                          </div>
-                          <div className="text-xs text-gray-600">vs repeated fixes</div>
-                        </td>
-                        <td className="px-6 py-4 max-w-md">
-                          <p className="text-sm text-gray-700 line-clamp-3">{pattern.ai_recommendation || 'Proactive maintenance recommended'}</p>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Summary Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="bg-gradient-to-br from-[#1a1a1a] to-[#000000] rounded-xl p-6 text-white">
-                <div className="text-sm opacity-90 mb-2">Total Patterns Detected</div>
-                <div className="text-3xl font-bold">{repeatPatterns.length}</div>
-              </div>
-              <div className="bg-white border-2 border-[#D4AF37] rounded-xl p-6">
-                <div className="text-sm text-gray-600 mb-2">Total Affected Citizens</div>
-                <div className="text-3xl font-bold text-gray-900">
-                  {repeatPatterns.reduce((sum, p) => sum + (p.affected_citizens || 0), 0)}
-                </div>
-              </div>
-              <div className="bg-[#FFF8F0] border-2 border-[#F5E6D3] rounded-xl p-6">
-                <div className="text-sm text-gray-600 mb-2">Estimated Total Cost</div>
-                <div className="text-3xl font-bold text-gray-900">
-                  ₹{(repeatPatterns.reduce((sum, p) => sum + (p.estimated_cost || 0), 0) / 100000).toFixed(2)} L
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-[#D4AF37] to-[#C5A028] rounded-xl p-6 text-white">
-                <div className="text-sm opacity-90 mb-2">Potential Savings</div>
-                <div className="text-3xl font-bold">
-                  ₹{(repeatPatterns.reduce((sum, p) => sum + (p.estimated_savings || 0), 0) / 100000).toFixed(2)} L
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        {escalations.length === 0 && repeatPatterns.length === 0 && (
+        {escalations.length === 0 && (
           <div className="bg-white rounded-xl border-2 border-[#F5E6D3] p-12 text-center">
             <CheckCircle className="w-16 h-16 text-[#D4AF37] mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 mb-2">No Escalations Found</h3>
@@ -2635,89 +2802,201 @@ const DepartmentDashboardNew = () => {
         </div>
       );
     }
+    
+    const { repeatPatterns } = escalationsData;
+    
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <h2 className="text-2xl font-bold text-stone-900 uppercase tracking-wide">Predictive Maintenance</h2>
-        {predictiveMaintenanceList.map((item) => {
-          const riskColors = {
-            'high': 'border-red-500 bg-red-50',
-            'High': 'border-red-500 bg-red-50',
-            'medium': 'border-orange-500 bg-orange-50',
-            'Medium': 'border-orange-500 bg-orange-50',
-            'low': 'border-green-500 bg-green-50',
-            'Low': 'border-green-500 bg-green-50'
-          };
-          const riskBadges = {
-            'high': 'bg-red-600 text-white',
-            'High': 'bg-red-600 text-white',
-            'medium': 'bg-orange-500 text-white',
-            'Medium': 'bg-orange-500 text-white',
-            'low': 'bg-green-500 text-white',
-            'Low': 'bg-green-500 text-white'
-          };
-          const risk = item.risk_level || 'medium';
-          return (
-            <div key={item.id} className={`bg-white rounded-xl border-2 ${riskColors[risk] || riskColors.medium} shadow-lg p-6`}>
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-bold text-stone-900">{item.equipment_name || 'Equipment'}</h3>
-                  <p className="text-sm text-stone-600">{item.equipment_id || 'N/A'}</p>
-                </div>
-                <span className={`px-3 py-1 rounded-lg text-xs font-semibold ${riskBadges[risk] || riskBadges.medium}`}>
-                  {risk.charAt(0).toUpperCase() + risk.slice(1)} Risk
-                </span>
-              </div>
-              <div className="grid grid-cols-3 gap-4 mb-4">
-                <div className="bg-white rounded-lg p-3">
-                  <p className="text-xs text-stone-500 mb-1">Utilization Rate</p>
-                  <p className="text-lg font-bold text-stone-900">{item.utilization_rate || 0}%</p>
-                  <div className="w-full bg-stone-200 rounded-full h-2 mt-2">
-                    <div className={`h-2 rounded-full ${risk === 'high' || risk === 'High' ? 'bg-red-500' : risk === 'medium' || risk === 'Medium' ? 'bg-orange-500' : 'bg-green-500'}`} style={{ width: `${item.utilization_rate || 0}%` }} />
-                  </div>
-                </div>
-                <div className="bg-white rounded-lg p-3">
-                  <p className="text-xs text-stone-500 mb-1">Last Maintenance</p>
-                  <p className="text-sm font-semibold text-stone-900">{item.last_maintenance ? new Date(item.last_maintenance).toLocaleDateString() : 'N/A'}</p>
-                </div>
-                <div className="bg-white rounded-lg p-3">
-                  <p className="text-xs text-stone-500 mb-1">Next Scheduled</p>
-                  <p className="text-sm font-semibold text-stone-900">{item.next_scheduled_maintenance ? new Date(item.next_scheduled_maintenance).toLocaleDateString() : 'N/A'}</p>
-                </div>
-              </div>
-              {item.is_overdue && (
-                <div className="bg-red-100 border border-red-500 rounded-lg p-3 mb-4">
-                  <p className="text-sm font-semibold text-red-800"> Maintenance Overdue by {item.overdue_days || 0} days</p>
-                </div>
-              )}
-              <div className="bg-purple-50 rounded-lg p-4 mb-4">
-                <p className="text-sm font-semibold text-purple-900 mb-1">AI Prediction:</p>
-                <p className="text-sm text-purple-800 mb-2">{item.breakdown_probability ? `${Math.round(item.breakdown_probability)}% probability of breakdown within 7 days` : 'N/A'}</p>
-                <p className="text-sm font-semibold text-purple-900">Recommendation: {item.recommendation || 'N/A'}</p>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="bg-green-100 rounded-lg p-3 text-center">
-                  <p className="text-xs text-green-800 mb-1">Preventive Cost</p>
-                  <p className="text-lg font-bold text-green-900">₹{item.preventive_cost ? item.preventive_cost.toLocaleString() : '0'}</p>
-                </div>
-                <div className="bg-red-100 rounded-lg p-3 text-center">
-                  <p className="text-xs text-red-800 mb-1">Breakdown Cost</p>
-                  <p className="text-lg font-bold text-red-900">₹{item.breakdown_cost ? item.breakdown_cost.toLocaleString() : '0'}</p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <button className="flex-1 px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold hover:bg-stone-800 transition-colors">
-                  SCHEDULE MAINTENANCE
-                </button>
-                <button className="flex-1 px-4 py-2 bg-white border-2 border-stone-300 text-stone-800 rounded-lg font-semibold hover:bg-stone-50 transition-colors">
-                  VIEW DETAILS
-                </button>
+        
+        {/* Equipment Predictive Maintenance Table */}
+        <div className="space-y-4">
+          <h3 className="text-xl font-bold text-gray-900 uppercase tracking-wide">Equipment Maintenance Predictions</h3>
+          
+          {predictiveMaintenanceList && predictiveMaintenanceList.length > 0 ? (
+            <div className="bg-white rounded-2xl shadow-xl border-2 border-stone-200 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gradient-to-r from-stone-800 to-stone-900 text-white">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Equipment ID</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Equipment Type</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Risk Level</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Breakdown Probability</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Last Maintenance</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Next Scheduled</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">AI Prediction</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Recommendation</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-stone-200">
+                    {predictiveMaintenanceList.map((item, index) => (
+                      <tr key={item.id || index} className="hover:bg-stone-50 transition-colors">
+                        <td className="px-6 py-4">
+                          <span className="text-sm font-bold text-stone-900">{item.equipmentId || 'N/A'}</span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-sm font-medium text-stone-900">{item.equipmentType || 'Unknown'}</span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            item.riskLevel === 'High' ? 'bg-red-100 text-red-800' :
+                            item.riskLevel === 'Medium' ? 'bg-amber-100 text-amber-800' :
+                            'bg-green-100 text-green-800'
+                          }`}>
+                            {item.riskLevel || 'Low'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1 bg-stone-200 rounded-full h-2 w-20">
+                              <div 
+                                className={`h-2 rounded-full ${
+                                  item.breakdownProbability > 70 ? 'bg-red-500' :
+                                  item.breakdownProbability > 40 ? 'bg-amber-500' :
+                                  'bg-green-500'
+                                }`}
+                                style={{ width: `${Math.min(100, item.breakdownProbability || 0)}%` }}
+                              />
+                            </div>
+                            <span className="text-sm font-bold text-stone-900">{item.breakdownProbability || 0}%</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-sm text-stone-700">{item.lastMaintenance || 'N/A'}</span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-sm text-stone-700">{item.nextScheduledMaintenance || 'Not scheduled'}</span>
+                        </td>
+                        <td className="px-6 py-4">
+                          {item.maintenanceOverdue ? (
+                            <div className="flex items-center gap-1">
+                              <span className="px-2 py-1 bg-red-100 text-red-800 text-xs font-bold rounded">OVERDUE</span>
+                              {item.overdueBy && <span className="text-xs text-red-600">{item.overdueBy}</span>}
+                            </div>
+                          ) : (
+                            <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-bold rounded">ON TRACK</span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 max-w-xs">
+                          <p className="text-sm text-stone-700 line-clamp-2">{item.prediction || 'Equipment in good condition'}</p>
+                        </td>
+                        <td className="px-6 py-4 max-w-md">
+                          <p className="text-sm text-stone-700 line-clamp-2">{item.aiRecommendation || 'Continue regular maintenance'}</p>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-          );
-        })}
-        {predictiveMaintenanceList.length === 0 && (
-          <div className="bg-white rounded-xl border border-stone-200 p-8 text-center">
-            <p className="text-stone-500">No predictive maintenance data available</p>
+          ) : (
+            <div className="bg-white rounded-xl border border-stone-200 p-8 text-center">
+              <p className="text-stone-500">No equipment maintenance predictions available</p>
+            </div>
+          )}
+        </div>
+        
+        {/* Repeat Grievance Detection & Predictive Maintenance Table */}
+        {repeatPatterns && repeatPatterns.length > 0 && (
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold text-gray-900 uppercase tracking-wide">Repeat Grievance Detection</h3>
+            
+            {/* Premium Table Layout */}
+            <div className="bg-white rounded-2xl shadow-xl border-2 border-[#F5E6D3] overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gradient-to-r from-[#1a1a1a] to-[#000000] text-white">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Location</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Issue Type</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Priority</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Frequency</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Affected Citizens</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Pattern</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Est. Cost</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Potential Savings</th>
+                      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">AI Recommendation</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#F5E6D3]">
+                    {repeatPatterns.map((pattern, index) => (
+                      <tr key={pattern.id || index} className="hover:bg-[#FFF8F0] transition-colors">
+                        <td className="px-6 py-4">
+                          <div className="font-semibold text-gray-900">{pattern.zone || pattern.area || 'N/A'}</div>
+                          <div className="text-sm text-gray-600">{pattern.ward || ''}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-sm font-medium text-gray-900">{pattern.issue_type || 'General'}</span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            pattern.priority === 'Emergency' ? 'bg-black text-white' :
+                            pattern.priority === 'High' ? 'bg-[#D4AF37] text-white' :
+                            pattern.priority === 'Medium' ? 'bg-[#FFF8F0] border-2 border-[#D4AF37] text-gray-900' :
+                            'bg-gray-200 text-gray-900'
+                          }`}>
+                            {pattern.priority || 'Medium'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-bold text-[#D4AF37]">{pattern.complaint_count || 0} times</div>
+                          <div className="text-xs text-gray-600">in {pattern.time_period_days || 30} days</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-semibold text-gray-900">{pattern.affected_citizens || 0}</div>
+                          <div className="text-xs text-gray-600">citizens</div>
+                        </td>
+                        <td className="px-6 py-4 max-w-xs">
+                          <p className="text-sm text-gray-700 line-clamp-2">{pattern.pattern_description || 'Recurring issue detected'}</p>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-bold text-gray-900">
+                            ₹{pattern.estimated_cost ? (pattern.estimated_cost / 100000).toFixed(2) + ' L' : 'TBD'}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-bold text-[#D4AF37]">
+                            ₹{pattern.estimated_savings ? (pattern.estimated_savings / 100000).toFixed(2) + ' L' : 'TBD'}
+                          </div>
+                          <div className="text-xs text-gray-600">vs repeated fixes</div>
+                        </td>
+                        <td className="px-6 py-4 max-w-md">
+                          <p className="text-sm text-gray-700 line-clamp-3">{pattern.ai_recommendation || 'Proactive maintenance recommended'}</p>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Summary Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-gradient-to-br from-[#1a1a1a] to-[#000000] rounded-xl p-6 text-white">
+                <div className="text-sm opacity-90 mb-2">Total Patterns Detected</div>
+                <div className="text-3xl font-bold">{repeatPatterns.length}</div>
+              </div>
+              <div className="bg-white border-2 border-[#D4AF37] rounded-xl p-6">
+                <div className="text-sm text-gray-600 mb-2">Total Affected Citizens</div>
+                <div className="text-3xl font-bold text-gray-900">
+                  {repeatPatterns.reduce((sum, p) => sum + (p.affected_citizens || 0), 0)}
+                </div>
+              </div>
+              <div className="bg-[#FFF8F0] border-2 border-[#F5E6D3] rounded-xl p-6">
+                <div className="text-sm text-gray-600 mb-2">Estimated Total Cost</div>
+                <div className="text-3xl font-bold text-gray-900">
+                  ₹{(repeatPatterns.reduce((sum, p) => sum + (p.estimated_cost || 0), 0) / 100000).toFixed(2)} L
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-[#D4AF37] to-[#C5A028] rounded-xl p-6 text-white">
+                <div className="text-sm opacity-90 mb-2">Potential Savings</div>
+                <div className="text-3xl font-bold">
+                  ₹{(repeatPatterns.reduce((sum, p) => sum + (p.estimated_savings || 0), 0) / 100000).toFixed(2)} L
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -3082,7 +3361,6 @@ const DepartmentDashboardNew = () => {
         {activeTab === 'escalations' && renderEscalations()}
         {activeTab === 'ai-insights' && renderAIInsights()}
         {activeTab === 'citizen-feedback' && renderCitizenFeedback()}
-        {activeTab === 'predictive-maintenance' && renderPredictiveMaintenance()}
         {activeTab === 'knowledge-base' && renderKnowledgeBase()}
         {activeTab === 'officers' && renderOfficers()}
         {activeTab === 'audit-logs' && renderAuditLogs()}

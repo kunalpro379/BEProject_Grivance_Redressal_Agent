@@ -139,7 +139,7 @@ function App() {
             path="/government/:officialId/*"
             element={
               <ProtectedRoute 
-                allowedRoles={['department_officer', 'department_head', 'ward_officer', 'city_commissioner', 'district_collector']} 
+                allowedRoles={['department_officer', 'department_head', 'ward_officer', 'city_commissioner', 'district_collector', 'government_official']} 
                 requireNoDepId={true}
               >
                 <OfficerLayout userRole="government_officer" onLogout={logout} userAuth={user} />
@@ -264,6 +264,10 @@ const getRoleBasedPath = (userOrRole, departmentName, depId) => {
       // Department officers WITHOUT department_id → government portal
       if (user?.id) return `/government/${user.id}/dashboard`;
       return '/officials-portal/authentication';
+    
+    case 'government_official':
+      // Government officials should NOT have department_id
+      return user?.id ? `/government/${user.id}` : '/officials-portal/authentication';
     
     case 'citizen':
       return user?.id ? `/citizen/${user.id}` : '/citizen';

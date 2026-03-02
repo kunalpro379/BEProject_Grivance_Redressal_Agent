@@ -218,6 +218,7 @@ CREATE TABLE public.contractors (
   documents jsonb,
   certifications jsonb,
   embedding USER-DEFINED,
+  ai_analysis jsonb DEFAULT '{}'::jsonb,
   CONSTRAINT contractors_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.department_dashboards (
@@ -1007,6 +1008,9 @@ CREATE TABLE public.usergrievance (
   resolved_at timestamp with time zone,
   resolved_by uuid,
   embedding_status text DEFAULT 'pending'::text,
+  latitude numeric,
+  longitude numeric,
+  location_address text,
   CONSTRAINT usergrievance_pkey PRIMARY KEY (id),
   CONSTRAINT usergrievance_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.users(id),
   CONSTRAINT usergrievance_citizen_id_fkey FOREIGN KEY (citizen_id) REFERENCES public.citizens(id),

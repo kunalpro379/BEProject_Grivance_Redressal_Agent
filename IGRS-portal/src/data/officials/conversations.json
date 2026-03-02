@@ -1,0 +1,1017 @@
+{
+    "conversations": [
+      {
+        "chat_id": "CITIZEN_DEPT_OFFICER_001",
+        "participants": [
+          { "role": "Citizen", "name": "Ramesh Kumar" },
+          { "role": "Department Officer", "name": "Ajay Sharma", "department": "Water Department" }
+        ],
+        "messages": [
+          {
+            "sender": "Citizen",
+            "time": "2025-09-22T08:10:00",
+            "text": "Good morning sir, the water supply in my area has been irregular since yesterday. Can you check?"
+          },
+          {
+            "sender": "Department Officer",
+            "time": "2025-09-22T08:15:00",
+            "text": "Good morning Ramesh. Thanks for reporting. The pipeline repair was completed, but I’ll send a team to verify your area specifically."
+          },
+          {
+            "sender": "Citizen",
+            "time": "2025-09-22T08:17:00",
+            "text": "Thank you, sir. Please ensure it’s resolved before evening."
+          }
+        ]
+      },
+      {
+        "chat_id": "DEPT_OFFICER_HEAD_001",
+        "participants": [
+          { "role": "Department Officer", "name": "Ajay Sharma", "department": "Water Department" },
+          { "role": "Department Head", "name": "District Officer", "department": "Administration" }
+        ],
+        "messages": [
+          {
+            "sender": "Department Officer",
+            "time": "2025-09-22T09:00:00",
+            "text": "Sir, pipeline repair is completed, but we are still receiving citizen complaints from Sector 12."
+          },
+          {
+            "sender": "Department Head",
+            "time": "2025-09-22T09:05:00",
+            "text": "Ajay, please coordinate with the field engineers and submit a status report by noon."
+          },
+          {
+            "sender": "Department Officer",
+            "time": "2025-09-22T09:07:00",
+            "text": "Noted, sir. I’ll update you post inspection."
+          }
+        ]
+      },
+      {
+        "chat_id": "HEAD_PANCHAYAT_001",
+        "participants": [
+          { "role": "Department Head", "name": "District Officer", "department": "Administration" },
+          { "role": "Panchayat Officer", "name": "Suresh Patel", "department": "Rural Development" }
+        ],
+        "messages": [
+          {
+            "sender": "Department Head",
+            "time": "2025-09-22T09:30:00",
+            "text": "Suresh, rural areas also reported water supply disruption. Please confirm if your teams are coordinating."
+          },
+          {
+            "sender": "Panchayat Officer",
+            "time": "2025-09-22T09:40:00",
+            "text": "Yes sir, our Gram Panchayat team is working with the engineers. We expect restoration by 4 PM."
+          },
+          {
+            "sender": "Department Head",
+            "time": "2025-09-22T09:42:00",
+            "text": "Good. Please document the resolution process for future audits."
+          }
+        ]
+      },
+      {
+        "chat_id": "HEAD_NAGARSEVAK_001",
+        "participants": [
+          { "role": "Department Head", "name": "District Officer", "department": "Administration" },
+          { "role": "Nagar Sevak", "name": "Anita Verma", "department": "Municipal Corporation" }
+        ],
+        "messages": [
+          {
+            "sender": "Department Head",
+            "time": "2025-09-22T10:00:00",
+            "text": "Anita ji, please coordinate with sanitation workers to ensure no waterlogging near repaired pipelines."
+          },
+          {
+            "sender": "Nagar Sevak",
+            "time": "2025-09-22T10:05:00",
+            "text": "Understood sir. I’ll assign cleaning staff immediately."
+          },
+          {
+            "sender": "Department Head",
+            "time": "2025-09-22T10:07:00",
+            "text": "Thank you. Keep me updated on progress."
+          }
+        ]
+      },
+      {
+        "chat_id": "HEAD_OTHER_HEADS_001",
+        "participants": [
+          { "role": "Department Head", "name": "District Officer", "department": "Administration" },
+          { "role": "Police Inspector", "name": "Rajesh Singh", "department": "Law Enforcement" }
+        ],
+        "messages": [
+          {
+            "sender": "Department Head",
+            "time": "2025-09-22T10:20:00",
+            "text": "Inspector Rajesh, please ensure traffic is managed near Sector 12 pipeline repair site during inspection."
+          },
+          {
+            "sender": "Police Inspector",
+            "time": "2025-09-22T10:25:00",
+            "text": "Yes sir, we’ll deploy a team at 2 PM during inspection hours."
+          }
+        ]
+      },
+      
+          {
+            "chat_id": "CITIZEN_DEPT_OFFICER_002",
+            "participants": [
+              { "role": "Citizen", "name": "Sunita Deshmukh" },
+              { "role": "Department Officer", "name": "Prakash Jadhav", "department": "Electricity Department" }
+            ],
+            "messages": [
+              {
+                "sender": "Citizen",
+                "time": "2025-09-22T07:50:00",
+                "text": "नमस्कार सर, आमच्या भागात काल रात्रीपासून वीज नाहीये. कृपया बघा."
+              },
+              {
+                "sender": "Department Officer",
+                "time": "2025-09-22T07:55:00",
+                "text": "नमस्कार मॅडम, तक्रार नोंदवली आहे. ट्रान्सफॉर्मरमध्ये फॉल्ट आला होता. टीम दुरुस्ती करत आहे."
+              },
+              {
+                "sender": "Citizen",
+                "time": "2025-09-22T07:57:00",
+                "text": "धन्यवाद सर, मुलांच्या अभ्यासाला त्रास होतोय."
+              }
+            ]
+          },
+          {
+            "chat_id": "DEPT_OFFICER_HEAD_002",
+            "participants": [
+              { "role": "Department Officer", "name": "Prakash Jadhav", "department": "Electricity Department" },
+              { "role": "Department Head", "name": "District Collector", "department": "Administration" }
+            ],
+            "messages": [
+              {
+                "sender": "Department Officer",
+                "time": "2025-09-22T08:30:00",
+                "text": "Sir, transformer in Ward 8 malfunctioned. Citizens are complaining about no electricity since night."
+              },
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T08:35:00",
+                "text": "Prakash, ensure temporary power backup. Hospitals and schools should not be affected."
+              },
+              {
+                "sender": "Department Officer",
+                "time": "2025-09-22T08:40:00",
+                "text": "Yes sir, generator supply arranged for hospital. Repairs expected by evening."
+              }
+            ]
+          },
+          {
+            "chat_id": "HEAD_PANCHAYAT_002",
+            "participants": [
+              { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+              { "role": "Panchayat Officer", "name": "Vilas More", "department": "Rural Development" }
+            ],
+            "messages": [
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T09:10:00",
+                "text": "More ji, please check rural feeders also. Reports say some villages have outages."
+              },
+              {
+                "sender": "Panchayat Officer",
+                "time": "2025-09-22T09:15:00",
+                "text": "जी सर. आमच्या पाच गावांमध्ये वीज पुरवठा खंडित आहे. लाईनमन साइटवर पोहोचले आहेत."
+              },
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T09:20:00",
+                "text": "ठीक है, कृपया restoration timeline send करें."
+              }
+            ]
+          },
+          {
+            "chat_id": "HEAD_NAGARSEVAK_002",
+            "participants": [
+              { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+              { "role": "Nagar Sevak", "name": "Meena Patil", "department": "Municipal Corporation" }
+            ],
+            "messages": [
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T09:40:00",
+                "text": "Meena ji, due to power cuts, water supply pumps might stop. Please ensure tankers are ready."
+              },
+              {
+                "sender": "Nagar Sevak",
+                "time": "2025-09-22T09:45:00",
+                "text": "Yes sir. टँकरची व्यवस्था केली आहे. नागरिकांना माहिती देत आहोत."
+              },
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T09:47:00",
+                "text": "Good work. Coordinate with Sanitation team also."
+              }
+            ]
+          },
+          {
+            "chat_id": "HEAD_POLICE_002",
+            "participants": [
+              { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+              { "role": "Police Inspector", "name": "Arun Singh", "department": "Law Enforcement" }
+            ],
+            "messages": [
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T10:00:00",
+                "text": "Inspector, during blackout some areas may face law & order issues. Deploy patrolling teams."
+              },
+              {
+                "sender": "Police Inspector",
+                "time": "2025-09-22T10:05:00",
+                "text": "जी सर, हमने already extra teams भेज दी हैं. हर sensitive इलाके में गश्त बढ़ा दी है."
+              },
+              {
+                "sender": "Department Head",
+                "time": "2025-09-22T10:07:00",
+                "text": "बहुत अच्छा. Keep me posted with hourly reports."
+              }
+            ]
+          },      
+
+         
+              {
+                "chat_id": "CITIZEN_WATER_003",
+                "participants": [
+                  { "role": "Citizen", "name": "Mohammed Irfan" },
+                  { "role": "Department Officer", "name": "Ravi Kulkarni", "department": "Water Department" }
+                ],
+                "messages": [
+                  {
+                    "sender": "Citizen",
+                    "time": "2025-09-22T06:30:00",
+                    "text": "Good morning sir, पानी का प्रेशर बहुत कम आ रहा है मेरे घर पर. Please check."
+                  },
+                  {
+                    "sender": "Department Officer",
+                    "time": "2025-09-22T06:35:00",
+                    "text": "Good morning Irfan ji. Main team bhej raha hoon, shayad valve adjust karna padega."
+                  },
+                  {
+                    "sender": "Citizen",
+                    "time": "2025-09-22T06:38:00",
+                    "text": "Thank you sir. आज नल बंद मत करना, बच्चों को स्कूल के लिए late हो जाएगा."
+                  }
+                ]
+              },
+              {
+                "chat_id": "DEPT_OFFICER_HEAD_ROADS_003",
+                "participants": [
+                  { "role": "Department Officer", "name": "Seema Joshi", "department": "Roads & Infrastructure" },
+                  { "role": "Department Head", "name": "District Collector", "department": "Administration" }
+                ],
+                "messages": [
+                  {
+                    "sender": "Department Officer",
+                    "time": "2025-09-22T07:10:00",
+                    "text": "Sir, highway expansion ka काम चल रहा hai. कुछ villagers ने protest kiya, bol rahe hain service road नहीं मिला."
+                  },
+                  {
+                    "sender": "Department Head",
+                    "time": "2025-09-22T07:15:00",
+                    "text": "Arrange a meeting with Gram Panchayat today. Villagers की concerns सुनो aur resolution nikaalo."
+                  },
+                  {
+                    "sender": "Department Officer",
+                    "time": "2025-09-22T07:20:00",
+                    "text": "ठीक है सर, मीटिंग आज दुपारी ३ वाजता ठेवली आहे."
+                  }
+                ]
+              },
+              {
+                "chat_id": "PANCHAYAT_SANITATION_003",
+                "participants": [
+                  { "role": "Panchayat Officer", "name": "Ganesh Pawar", "department": "Rural Development" },
+                  { "role": "Sanitation Officer", "name": "Neha Singh", "department": "Sanitation" }
+                ],
+                "messages": [
+                  {
+                    "sender": "Panchayat Officer",
+                    "time": "2025-09-22T08:00:00",
+                    "text": "Neha ji, गावात कचरा उचलला जात नाहीये तीन दिवसांपासून. Complaints वाढत आहेत."
+                  },
+                  {
+                    "sender": "Sanitation Officer",
+                    "time": "2025-09-22T08:05:00",
+                    "text": "Sorry sir. गाडीचा breakdown झाला होता. आज दुपारी साफसफाई होईल."
+                  },
+                  {
+                    "sender": "Panchayat Officer",
+                    "time": "2025-09-22T08:10:00",
+                    "text": "Please ensure की गटार blockage पण साफ झालं पाहिजे."
+                  }
+                ]
+              },
+              {
+                "chat_id": "NAGARSEVAK_HEALTHCARE_003",
+                "participants": [
+                  { "role": "Nagar Sevak", "name": "Rajesh Shinde", "department": "Municipal Corporation" },
+                  { "role": "Healthcare Officer", "name": "Dr. Anita Rao", "department": "Healthcare" }
+                ],
+                "messages": [
+                  {
+                    "sender": "Nagar Sevak",
+                    "time": "2025-09-22T09:20:00",
+                    "text": "Dr Rao, dengue cases बढ़ रहे हैं. कृपया immediate medical camp arrange कीजिए."
+                  },
+                  {
+                    "sender": "Healthcare Officer",
+                    "time": "2025-09-22T09:25:00",
+                    "text": "Yes sir, हम mobile van भेजेंगे. Blood test aur medicines onsite मिलेंगे."
+                  },
+                  {
+                    "sender": "Nagar Sevak",
+                    "time": "2025-09-22T09:28:00",
+                    "text": "ठीक है, announcement भी करवा दीजिए, लोग unaware हैं."
+                  }
+                ]
+              },
+              {
+                "chat_id": "HEAD_POLICE_003",
+                "participants": [
+                  { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+                  { "role": "Police Inspector", "name": "Sanjay Patil", "department": "Law Enforcement" }
+                ],
+                "messages": [
+                  {
+                    "sender": "Department Head",
+                    "time": "2025-09-22T10:00:00",
+                    "text": "Inspector Patil, आज pipeline inspection है. कृपया security व्यवस्था करें."
+                  },
+                  {
+                    "sender": "Police Inspector",
+                    "time": "2025-09-22T10:05:00",
+                    "text": "Yes sir. दोन constable आणि एक patrolling team site वर deploy केली आहे."
+                  },
+                  {
+                    "sender": "Department Head",
+                    "time": "2025-09-22T10:10:00",
+                    "text": "Good. Crowd control ka bhi ध्यान रखें."
+                  }
+                ]
+              },
+              {
+                "chat_id": "CITIZEN_HEALTHCARE_003",
+                "participants": [
+                  { "role": "Citizen", "name": "Kavita Patil" },
+                  { "role": "Healthcare Officer", "name": "Dr. Anita Rao", "department": "Healthcare" }
+                ],
+                "messages": [
+                  {
+                    "sender": "Citizen",
+                    "time": "2025-09-22T11:00:00",
+                    "text": "Doctor madam, माझ्या मुलाला fever आहे. Camp मध्ये येऊ शकतो का?"
+                  },
+                  {
+                    "sender": "Healthcare Officer",
+                    "time": "2025-09-22T11:05:00",
+                    "text": "Yes madam, please bring him. Blood test ho jayega aur medicines free मिलेंगे."
+                  },
+                  {
+                    "sender": "Citizen",
+                    "time": "2025-09-22T11:08:00",
+                    "text": "धन्यवाद 🙏"
+                  }
+                ]
+            },
+            
+                  {
+                    "chat_id": "CITIZEN_WATER_004",
+                    "participants": [
+                      { "role": "Citizen", "name": "Ravi Shukla" },
+                      { "role": "Department Officer", "name": "Ashok Patil", "department": "Water Department" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T06:10:00",
+                        "text": "Sir, पानी बिल्कुल नहीं आ रहा है सुबह से. Please urgent action."
+                      },
+                      {
+                        "sender": "Department Officer",
+                        "time": "2025-09-22T06:15:00",
+                        "text": "Ravi ji, main check kar raha hoon. शायद pump बंद हो गया है. Engineers site पर पहुँच रहे हैं."
+                      },
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T06:18:00",
+                        "text": "ठीक है sir, please जल्दी solve कीजिए. बच्चे school के लिए तैयार हो रहे हैं."
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "CITIZEN_ELECTRICITY_004",
+                    "participants": [
+                      { "role": "Citizen", "name": "Sakshi Gawande" },
+                      { "role": "Department Officer", "name": "Kiran More", "department": "Electricity Department" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T07:00:00",
+                        "text": "नमस्कार sir, आमच्या भागात वारंवार वीज जाते आहे. Please बघा ना."
+                      },
+                      {
+                        "sender": "Department Officer",
+                        "time": "2025-09-22T07:05:00",
+                        "text": "नमस्कार मॅडम. Line मध्ये overload आहे. आम्ही नवीन transformer लावतोय. उद्या पर्यंत stable होईल."
+                      },
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T07:08:00",
+                        "text": "धन्यवाद sir 🙏"
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "OFFICER_HEAD_ROADS_004",
+                    "participants": [
+                      { "role": "Department Officer", "name": "Meena Sharma", "department": "Roads & Infrastructure" },
+                      { "role": "Department Head", "name": "District Collector", "department": "Administration" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Department Officer",
+                        "time": "2025-09-22T08:10:00",
+                        "text": "Sir, road widening काम चालू है पर local shopkeepers encroachment हटाने से oppose कर रहे हैं."
+                      },
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T08:15:00",
+                        "text": "Meeting arrange karo shopkeepers ke saath. उनको alternate stalls provide करने का plan बनाओ."
+                      },
+                      {
+                        "sender": "Department Officer",
+                        "time": "2025-09-22T08:20:00",
+                        "text": "Yes sir, मीटिंग आज दुपारी ४ वाजता ठेवली आहे."
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "HEAD_PANCHAYAT_004",
+                    "participants": [
+                      { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+                      { "role": "Panchayat Officer", "name": "Ramesh Pawar", "department": "Rural Development" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T09:00:00",
+                        "text": "Pawar ji, ग्रामीण भागात अजूनही borewell चालू नाहीये. Please confirm."
+                      },
+                      {
+                        "sender": "Panchayat Officer",
+                        "time": "2025-09-22T09:05:00",
+                        "text": "Yes sir. Pump motor जळाली आहे. Replacement order केलं आहे. दोन दिवसांत ठीक होईल."
+                      },
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T09:07:00",
+                        "text": "ठीक है. तब तक टँकरची व्यवस्था करा."
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "HEAD_NAGARSEVAK_004",
+                    "participants": [
+                      { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+                      { "role": "Nagar Sevak", "name": "Anjali Deshmukh", "department": "Municipal Corporation" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T09:40:00",
+                        "text": "Anjali ji, city hospital ke आसपास garbage accumulate हो गया है. Please clear immediately."
+                      },
+                      {
+                        "sender": "Nagar Sevak",
+                        "time": "2025-09-22T09:45:00",
+                        "text": "Yes sir, मी already cleaning staff पाठवला आहे. १ तासात साफ होईल."
+                      },
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T09:47:00",
+                        "text": "Good. फोटो भेज दो after cleaning."
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "CITIZEN_HEALTHCARE_004",
+                    "participants": [
+                      { "role": "Citizen", "name": "Priya Yadav" },
+                      { "role": "Healthcare Officer", "name": "Dr. Vivek Kulkarni", "department": "Healthcare" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T10:00:00",
+                        "text": "Doctor sir, vaccination camp कब लगेगा ward 12 में?"
+                      },
+                      {
+                        "sender": "Healthcare Officer",
+                        "time": "2025-09-22T10:05:00",
+                        "text": "Priya ji, camp kal subah 9 baje se start hoga. Venue: Community Hall."
+                      },
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T10:08:00",
+                        "text": "बहुत अच्छा sir, dhanyavaad 🙏"
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "HEAD_POLICE_004",
+                    "participants": [
+                      { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+                      { "role": "Police Inspector", "name": "Vikram Singh", "department": "Law Enforcement" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T11:00:00",
+                        "text": "Inspector, आज किसान rally hai. Crowd control का arrangement?"
+                      },
+                      {
+                        "sender": "Police Inspector",
+                        "time": "2025-09-22T11:05:00",
+                        "text": "जी सर. Barricades लग रहे हैं. 50 constables तैनात किए हैं."
+                      },
+                      {
+                        "sender": "Department Head",
+                        "time": "2025-09-22T11:07:00",
+                        "text": "Good. कोई incident report तुरंत भेजना."
+                      }
+                    ]
+                  },
+                  {
+                    "chat_id": "CITIZEN_AGRICULTURE_004",
+                    "participants": [
+                      { "role": "Citizen", "name": "Shivaji Kale" },
+                      { "role": "Agriculture Officer", "name": "Sandeep Joshi", "department": "Agriculture" }
+                    ],
+                    "messages": [
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T12:00:00",
+                        "text": "सर, सोयाबीन पिकावर कीड आली आहे. औषध कसं वापरावं?"
+                      },
+                      {
+                        "sender": "Agriculture Officer",
+                        "time": "2025-09-22T12:05:00",
+                        "text": "काळजी करू नका. Neem based spray वापरा. मी उद्या शेतात येऊन guidance देईन."
+                      },
+                      {
+                        "sender": "Citizen",
+                        "time": "2025-09-22T12:07:00",
+                        "text": "धन्यवाद सर 🙏"
+                      }
+                    ]
+                  },
+                  
+                      {
+                        "chat_id": "CITIZEN_WATER_005",
+                        "participants": [
+                          { "role": "Citizen", "name": "Anil Gupta" },
+                          { "role": "Department Officer", "name": "Suresh Deshmukh", "department": "Water Department" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T06:15:00",
+                            "text": "Sir, पानी बहुत गंदा आ रहा है नल से. बच्चे बीमार पड़ सकते हैं."
+                          },
+                          {
+                            "sender": "Department Officer",
+                            "time": "2025-09-22T06:20:00",
+                            "text": "Anil ji, sample team भेज रहा हूँ. शायद pipeline में leakage हुआ है."
+                          },
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T06:22:00",
+                            "text": "Please जल्दी action लीजिए, health risk है."
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "CITIZEN_ELECTRICITY_005",
+                        "participants": [
+                          { "role": "Citizen", "name": "Smita Pawar" },
+                          { "role": "Department Officer", "name": "Rajendra Patil", "department": "Electricity Department" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T07:10:00",
+                            "text": "सर, आमच्या गावात रात्री सतत वीज जात होती. मुलांना त्रास होतोय."
+                          },
+                          {
+                            "sender": "Department Officer",
+                            "time": "2025-09-22T07:15:00",
+                            "text": "हो Smita tai, फॉल्ट line वर सापडला आहे. Technician काम करत आहे."
+                          },
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T07:18:00",
+                            "text": "ठीक आहे सर, please लवकर दुरुस्ती करा."
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "OFFICER_HEAD_ROADS_005",
+                        "participants": [
+                          { "role": "Department Officer", "name": "Pooja Nair", "department": "Roads & Infrastructure" },
+                          { "role": "Department Head", "name": "District Collector", "department": "Administration" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Department Officer",
+                            "time": "2025-09-22T08:20:00",
+                            "text": "Sir, flyover construction ke wajah se traffic jam बढ़ गया है."
+                          },
+                          {
+                            "sender": "Department Head",
+                            "time": "2025-09-22T08:25:00",
+                            "text": "Coordinate with police for traffic diversion plan."
+                          },
+                          {
+                            "sender": "Department Officer",
+                            "time": "2025-09-22T08:27:00",
+                            "text": "ठीक है सर, मी Inspector Patil ला संपर्क करतो."
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "HEAD_SANITATION_005",
+                        "participants": [
+                          { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+                          { "role": "Sanitation Officer", "name": "Arti Mishra", "department": "Sanitation" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Department Head",
+                            "time": "2025-09-22T09:00:00",
+                            "text": "Arti ji, dengue cases बढ़ रहे हैं. Please fogging immediately कराओ."
+                          },
+                          {
+                            "sender": "Sanitation Officer",
+                            "time": "2025-09-22T09:05:00",
+                            "text": "Yes sir, आज संध्याकाळी fogging machine full swing मध्ये काम करेल."
+                          },
+                          {
+                            "sender": "Department Head",
+                            "time": "2025-09-22T09:07:00",
+                            "text": "Report मुझे आज रात तक चाहिए."
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "CITIZEN_HEALTHCARE_005",
+                        "participants": [
+                          { "role": "Citizen", "name": "Farhan Khan" },
+                          { "role": "Healthcare Officer", "name": "Dr. Rekha Joshi", "department": "Healthcare" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T10:10:00",
+                            "text": "Doctor madam, mera father sugar patient hai. Free checkup camp कब लगेगा?"
+                          },
+                          {
+                            "sender": "Healthcare Officer",
+                            "time": "2025-09-22T10:15:00",
+                            "text": "Farhan ji, camp Sunday को Community Center में होगा. All tests free हैं."
+                          },
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T10:18:00",
+                            "text": "बहुत धन्यवाद madam 🙏"
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "HEAD_POLICE_005",
+                        "participants": [
+                          { "role": "Department Head", "name": "District Collector", "department": "Administration" },
+                          { "role": "Police Inspector", "name": "Nilesh Shinde", "department": "Law Enforcement" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Department Head",
+                            "time": "2025-09-22T11:20:00",
+                            "text": "Inspector, today farmers’ march is expected. सुरक्षा के पुख्ता इंतज़ाम करो."
+                          },
+                          {
+                            "sender": "Police Inspector",
+                            "time": "2025-09-22T11:25:00",
+                            "text": "Yes sir. 100 police staff तैनात कर रहे हैं और barricading शुरू है."
+                          },
+                          {
+                            "sender": "Department Head",
+                            "time": "2025-09-22T11:28:00",
+                            "text": "Good. Media को भी handle करना properly."
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "CITIZEN_AGRICULTURE_005",
+                        "participants": [
+                          { "role": "Citizen", "name": "Jyoti Mahajan" },
+                          { "role": "Agriculture Officer", "name": "Sunil Jadhav", "department": "Agriculture" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T12:15:00",
+                            "text": "सर, cotton crop ला pink bollworm attack झालाय. काय spray करावं?"
+                          },
+                          {
+                            "sender": "Agriculture Officer",
+                            "time": "2025-09-22T12:20:00",
+                            "text": "Neem oil spray करा. तसेच pheromone traps लावा. मी उद्या personally बघायला येतो."
+                          },
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T12:22:00",
+                            "text": "धन्यवाद सर."
+                          }
+                        ]
+                      },
+                      {
+                        "chat_id": "DISASTER_RELIEF_005",
+                        "participants": [
+                          { "role": "Citizen", "name": "Manoj Patil" },
+                          { "role": "Disaster Relief Officer", "name": "Anita Sharma", "department": "Disaster Management" }
+                        ],
+                        "messages": [
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T13:00:00",
+                            "text": "Madam, नदीला पूर आलाय. आमचं गाव isolate झालं आहे."
+                          },
+                          {
+                            "sender": "Disaster Relief Officer",
+                            "time": "2025-09-22T13:05:00",
+                            "text": "Don’t worry. Rescue टीम पोहोचली आहे. Relief camp school मध्ये उभारलं आहे."
+                          },
+                          {
+                            "sender": "Citizen",
+                            "time": "2025-09-22T13:08:00",
+                            "text": "धन्यवाद madam, please medicines चीही व्यवस्था करा."
+                          }
+                        ]
+                      },
+                     
+                          {
+                            "chat_id": "CITIZEN_WATER_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Ramesh Sharma" },
+                              { "role": "Water Dept Officer", "name": "Anil Patil" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T07:00:00", "text": "सर, हमारे इलाके में पानी सप्लाई बिलकुल बंद है सुबह से।" },
+                              { "sender": "Water Dept Officer", "time": "2025-09-22T07:05:00", "text": "Leakage repair चालू आहे. 2 वाजेपर्यंत पानी सुरू होईल." },
+                              { "sender": "Citizen", "time": "2025-09-22T07:08:00", "text": "ठीक है, धन्यवाद 🙏" }
+                            ]
+                          },
+                          {
+                            "chat_id": "CITIZEN_ELECTRICITY_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Savita Deshmukh" },
+                              { "role": "Electricity Officer", "name": "Rahul Kulkarni" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T08:10:00", "text": "भाई, रोज़ रात को लाइट जाती है. पढ़ाई पर असर हो रहा है." },
+                              { "sender": "Electricity Officer", "time": "2025-09-22T08:15:00", "text": "Yes madam, transformer overload है. नया लगने वाला है next week." },
+                              { "sender": "Citizen", "time": "2025-09-22T08:18:00", "text": "कृपया जल्दी कीजिए 🙏" }
+                            ]
+                          },
+                          {
+                            "chat_id": "OFFICER_HEAD_SANITATION_010",
+                            "participants": [
+                              { "role": "Sanitation Officer", "name": "Pooja Joshi" },
+                              { "role": "Department Head", "name": "District Collector" }
+                            ],
+                            "messages": [
+                              { "sender": "Sanitation Officer", "time": "2025-09-22T09:00:00", "text": "Sir, कचरा उचलणाऱ्या गाड्या breakdown झाल्या आहेत." },
+                              { "sender": "Department Head", "time": "2025-09-22T09:05:00", "text": "Arrange substitute trucks immediately. Public complaints बढ़ रही हैं." },
+                              { "sender": "Sanitation Officer", "time": "2025-09-22T09:10:00", "text": "हो sir, मी Nagar Sevak सोबत discuss करते." }
+                            ]
+                          },
+                          {
+                            "chat_id": "CITIZEN_HEALTH_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Farida Khan" },
+                              { "role": "Health Officer", "name": "Dr. Sneha More" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T10:15:00", "text": "Doctor ji, free vaccination camp कब है?" },
+                              { "sender": "Health Officer", "time": "2025-09-22T10:20:00", "text": "Camp kal 10 baje PHC में होगा. सब बच्चों के लिए free." },
+                              { "sender": "Citizen", "time": "2025-09-22T10:22:00", "text": "बहुत अच्छा 👏" }
+                            ]
+                          },
+                          {
+                            "chat_id": "HEAD_POLICE_010",
+                            "participants": [
+                              { "role": "Department Head", "name": "District Collector" },
+                              { "role": "Police Inspector", "name": "Vikram Singh" }
+                            ],
+                            "messages": [
+                              { "sender": "Department Head", "time": "2025-09-22T11:30:00", "text": "Inspector, market area mein protest expected hai." },
+                              { "sender": "Police Inspector", "time": "2025-09-22T11:35:00", "text": "जी सर, 50 police तैनात कर दिए हैं और CCTV monitoring चालू है." },
+                              { "sender": "Department Head", "time": "2025-09-22T11:40:00", "text": "Media ko भी update दीजिए timely." }
+                            ]
+                          },
+                          {
+                            "chat_id": "CITIZEN_AGRI_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Ganesh Pawar" },
+                              { "role": "Agriculture Officer", "name": "Sunil Jadhav" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T12:00:00", "text": "सर, paddy ला कीड लागलीये. काय spray करावं?" },
+                              { "sender": "Agriculture Officer", "time": "2025-09-22T12:05:00", "text": "Organic neem spray करा. जर जास्त damage असेल तर chemical वापरू." },
+                              { "sender": "Citizen", "time": "2025-09-22T12:08:00", "text": "धन्यवाद सर." }
+                            ]
+                          },
+                          {
+                            "chat_id": "DISASTER_FLOOD_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Meena Raut" },
+                              { "role": "Disaster Relief Officer", "name": "Anita Sharma" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T13:00:00", "text": "Madam, नदीला पूर आला आहे. आमचे घर पाण्यात गेले." },
+                              { "sender": "Disaster Relief Officer", "time": "2025-09-22T13:05:00", "text": "Stay safe. Boat team पोहोचली आहे. Shelter school मध्ये तयार आहे." },
+                              { "sender": "Citizen", "time": "2025-09-22T13:08:00", "text": "धन्यवाद, medicinesचीही गरज आहे 🙏" }
+                            ]
+                          },
+                          {
+                            "chat_id": "HEAD_NAGARSEVAK_010",
+                            "participants": [
+                              { "role": "Nagar Sevak", "name": "Ashok Shinde" },
+                              { "role": "Department Head", "name": "District Collector" }
+                            ],
+                            "messages": [
+                              { "sender": "Nagar Sevak", "time": "2025-09-22T14:10:00", "text": "Collector saab, माझ्या ward मध्ये drainage block झालंय." },
+                              { "sender": "Department Head", "time": "2025-09-22T14:15:00", "text": "Public works dept को बोलाइए, immediate cleaning होनी चाहिए." },
+                              { "sender": "Nagar Sevak", "time": "2025-09-22T14:20:00", "text": "ठीक आहे sir, मी त्यांना फोन करतो." }
+                            ]
+                          },
+                          {
+                            "chat_id": "CITIZEN_ROADS_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Prakash Yadav" },
+                              { "role": "Roads Officer", "name": "Mahesh Iyer" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T15:00:00", "text": "भाई, main road पर बड़े गड्ढे हैं. Accident का खतरा है." },
+                              { "sender": "Roads Officer", "time": "2025-09-22T15:05:00", "text": "Repair tender already sanctioned. काम परवा सुरू होईल." },
+                              { "sender": "Citizen", "time": "2025-09-22T15:10:00", "text": "बहुत बढ़िया sir 👏" }
+                            ]
+                          },
+                          {
+                            "chat_id": "CITIZEN_POLICE_010",
+                            "participants": [
+                              { "role": "Citizen", "name": "Shalini Verma" },
+                              { "role": "Police Inspector", "name": "Rajesh Nair" }
+                            ],
+                            "messages": [
+                              { "sender": "Citizen", "time": "2025-09-22T16:20:00", "text": "Inspector saab, रात में chain snatching हुई. FIR कैसे दर्ज करूँ?" },
+                              { "sender": "Police Inspector", "time": "2025-09-22T16:25:00", "text": "आप online FIR कर सकती हैं या सीधे police station आइए. तुरंत action होगा." },
+                              { "sender": "Citizen", "time": "2025-09-22T16:28:00", "text": "ठीक है sir, मैं आज ही station आऊँगी." }
+                            ]
+                          },{
+                            "conversations": [
+                              {
+                                "chat_id": "CITIZEN_WATER_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Vikram Kale" },
+                                  { "role": "Water Dept Officer", "name": "Sanjay Deshmukh" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T06:00:00", "text": "Sir, आज सुबह से पानी का टेंशन है, बिल्कुल supply नहीं हो रही।" },
+                                  { "sender": "Water Dept Officer", "time": "2025-09-22T06:05:00", "text": "Vikram ji, leakage repair चालू आहे. 1 hour मध्ये supply सुरू होईल." },
+                                  { "sender": "Citizen", "time": "2025-09-22T06:10:00", "text": "ठीक है sir, कृपया जल्दी fix करा." }
+                                ]
+                              },
+                              {
+                                "chat_id": "CITIZEN_ELECTRICITY_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Neha Patil" },
+                                  { "role": "Electricity Officer", "name": "Ramesh Jadhav" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T07:00:00", "text": "Sir, कल रात से बिजली नहीं है. घर में बच्चो को परेशानी हो रही है." },
+                                  { "sender": "Electricity Officer", "time": "2025-09-22T07:05:00", "text": "Neha tai, transformer में फॉल्ट है. Technician work चालू आहे." },
+                                  { "sender": "Citizen", "time": "2025-09-22T07:10:00", "text": "धन्यवाद sir, कृपया जल्दी ठीक करा." }
+                                ]
+                              },
+                              {
+                                "chat_id": "CITIZEN_SANITATION_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Ajay Kulkarni" },
+                                  { "role": "Sanitation Officer", "name": "Pooja Mishra" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T08:00:00", "text": "Nagar Sevak, street garbage का collection नहीं हुआ तीन दिन से." },
+                                  { "sender": "Sanitation Officer", "time": "2025-09-22T08:05:00", "text": "Yes sir, गाड्या breakdown झाल्या होत्या. आज clearing होईल." },
+                                  { "sender": "Citizen", "time": "2025-09-22T08:10:00", "text": "ठीक है, कृपया सुनिश्चित करा की smell भी ना हो." }
+                                ]
+                              },
+                              {
+                                "chat_id": "CITIZEN_HEALTHCARE_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Sunita Raut" },
+                                  { "role": "Healthcare Officer", "name": "Dr. Vivek Rao" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T09:00:00", "text": "Doctor sir, flu cases बढ़ रहे हैं. Camp कब लगेगा?" },
+                                  { "sender": "Healthcare Officer", "time": "2025-09-22T09:05:00", "text": "Sunita ji, camp आज Community Hall में सुबह 10 बजे लगेगा. Vaccines free मिलेंगे." },
+                                  { "sender": "Citizen", "time": "2025-09-22T09:10:00", "text": "धन्यवाद sir 🙏" }
+                                ]
+                              },
+                              {
+                                "chat_id": "OFFICER_HEAD_ROADS_011",
+                                "participants": [
+                                  { "role": "Roads Officer", "name": "Mahesh Iyer" },
+                                  { "role": "Department Head", "name": "District Collector" }
+                                ],
+                                "messages": [
+                                  { "sender": "Roads Officer", "time": "2025-09-22T10:00:00", "text": "Sir, road widening project में villagers oppose कर रहे हैं due to stall relocation." },
+                                  { "sender": "Department Head", "time": "2025-09-22T10:05:00", "text": "Arrange meeting with villagers. Provide alternate stalls." },
+                                  { "sender": "Roads Officer", "time": "2025-09-22T10:10:00", "text": "ठीक है sir, मी मीटिंग आज दुपारी 3 वाजता ठेवतो." }
+                                ]
+                              },
+                              {
+                                "chat_id": "HEAD_PANCHAYAT_011",
+                                "participants": [
+                                  { "role": "Department Head", "name": "District Collector" },
+                                  { "role": "Panchayat Officer", "name": "Ramesh Pawar" }
+                                ],
+                                "messages": [
+                                  { "sender": "Department Head", "time": "2025-09-22T11:00:00", "text": "Pawar ji, rural areas में water supply अभी भी disrupted है." },
+                                  { "sender": "Panchayat Officer", "time": "2025-09-22T11:05:00", "text": "Sir, pump motor खराब झाली आहे. Replacement हो रहा है, 2 दिन में fix हो जाएगा." },
+                                  { "sender": "Department Head", "time": "2025-09-22T11:10:00", "text": "ठीक है, तब तक water tankers भेजो." }
+                                ]
+                              },
+                              {
+                                "chat_id": "HEAD_NAGARSEVAK_011",
+                                "participants": [
+                                  { "role": "Nagar Sevak", "name": "Anjali Shinde" },
+                                  { "role": "Department Head", "name": "District Collector" }
+                                ],
+                                "messages": [
+                                  { "sender": "Nagar Sevak", "time": "2025-09-22T12:00:00", "text": "Collector saab, city hospital ke पास garbage overflow झाला आहे." },
+                                  { "sender": "Department Head", "time": "2025-09-22T12:05:00", "text": "Send cleaning crew immediately. Take photo after cleaning." },
+                                  { "sender": "Nagar Sevak", "time": "2025-09-22T12:10:00", "text": "ठीक आहे sir, मी staff dispatch करतो." }
+                                ]
+                              },
+                              {
+                                "chat_id": "CITIZEN_AGRICULTURE_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Shivaji More" },
+                                  { "role": "Agriculture Officer", "name": "Sunil Jadhav" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T13:00:00", "text": "Sir, soyabean crop ला कीड attack झाली आहे." },
+                                  { "sender": "Agriculture Officer", "time": "2025-09-22T13:05:00", "text": "Neem spray वापरा. जर जास्त damage असेल तर chemical spray करू." },
+                                  { "sender": "Citizen", "time": "2025-09-22T13:10:00", "text": "धन्यवाद sir." }
+                                ]
+                              },
+                              {
+                                "chat_id": "DISASTER_FLOOD_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Meena Raut" },
+                                  { "role": "Disaster Relief Officer", "name": "Anita Sharma" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T14:00:00", "text": "Madam, गावात flood आले आहे. घरात पाणी भरलं आहे." },
+                                  { "sender": "Disaster Relief Officer", "time": "2025-09-22T14:05:00", "text": "Rescue boat team already dispatched. Relief camp school मध्ये set up आहे." },
+                                  { "sender": "Citizen", "time": "2025-09-22T14:08:00", "text": "धन्यवाद madam. Medicines चीही व्यवस्था करा." }
+                                ]
+                              },
+                              {
+                                "chat_id": "CITIZEN_POLICE_011",
+                                "participants": [
+                                  { "role": "Citizen", "name": "Shalini Verma" },
+                                  { "role": "Police Inspector", "name": "Rajesh Nair" }
+                                ],
+                                "messages": [
+                                  { "sender": "Citizen", "time": "2025-09-22T15:00:00", "text": "Inspector saab, रात में chain snatching हुई. FIR कैसे दर्ज करूँ?" },
+                                  { "sender": "Police Inspector", "time": "2025-09-22T15:05:00", "text": "आप online FIR कर सकती हैं या सीधे police station आइए. Immediate action होगा." },
+                                  { "sender": "Citizen", "time": "2025-09-22T15:08:00", "text": "ठीक है sir, मैं आज ही station आऊँगी." }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                    }
+            

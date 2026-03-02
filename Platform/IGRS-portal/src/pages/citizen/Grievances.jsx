@@ -35,6 +35,8 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { grievanceService } from "../../services/grievance.service";
 import { useAuth } from "../../hooks/useAuth";
+import JsonRenderer from "../../components/JsonRenderer";
+import LocationDisplay from "../../components/LocationDisplay";
 import "./GrievancesEnhanced.css";
 
 // Fix for default marker icons in Leaflet
@@ -157,6 +159,9 @@ const Grievances = () => {
   const [detailId, setDetailId] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  const [showCommentsModal, setShowCommentsModal] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const [submittingComment, setSubmittingComment] = useState(false);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -595,6 +600,34 @@ const Grievances = () => {
         </div>
       </div>
 
+      {/* Map Section */}
+      {!loading && filteredGrievances.length > 0 && (
+        <div className={`map-section ${mapExpanded ? 'expanded' : ''}`}>
+          <div className="map-header">
+            <div className="map-title">
+              <MapIcon size={20} />
+              <h3>Grievances Map</h3>
+              <span className="map-count">{filteredGrievances.filter(g => g.latitude && g.longitude).length} locations</span>
+            </div>
+            <button 
+              className="map-expand-btn"
+              onClick={() => setMapExpanded(!mapExpanded)}
+              title={mapExpanded ? 'Minimize map' : 'Expand map'}
+            >
+              {mapExpanded ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
+            </button>
+          </div>
+          <div ref={mapRef} className="map-container"></div>
+        </div>
+      )}
+
+      {/* Section Title */}
+      {!loading && filteredGrievances.length > 0 && (
+        <div className="section-title">
+          <h3>All Grievances</h3>
+        </div>
+      )}
+
       {/* Loading State */}
       {loading ? (
         <div className="loading-container">
@@ -673,14 +706,31 @@ const Grievances = () => {
                         </span>
                       )}
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => openDetail(g.id)}
-                      className="view-details-btn"
-                    >
-                      <Eye size={16} />
-                      View Details
-                    </button>
+                    <div className="card-actions">
+                      <button
+                        type="button"
+                        onClick={() => openDetail(g.id)}
+                        className="view-details-btn"
+                      >
+                        <Eye size={16} />
+                        View Details
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openDetail(g.id);
+                          setTimeout(() => setShowCommentsModal(true), 300);
+                        }}
+                        className="card-comments-btn"
+                      >
+                        <MessageSquare size={16} />
+                        Comments
+                        {g.comments && Array.isArray(g.comments) && g.comments.length > 0 && (
+                          <span className="comments-badge">{g.comments.length}</span>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -757,10 +807,44 @@ const Grievances = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h3 className="modal-title">Grievance Details</h3>
-              <button type="button" onClick={() => setDetailId(null)} className="modal-close-btn">
-                <X size={20} />
-              </button>
+              <div className="modal-header-content">
+                <h3 className="modal-title">Grievance Details</h3>
+                <div className="grievance-header-info">
+                  <div className="header-item">
+                    <span className="header-label">ID:</span>
+                    <span className="header-value">{detail?.grievance?.grievance_id || "—"}</span>
+                  </div>
+                  <div className="header-item">
+                    <span className="header-label">Status:</span>
+                    <span className={`badge ${getStatusColor(detail?.grievance?.status, detail?.grievance)}`}>
+                      {formatStatus(detail?.grievance?.status, detail?.grievance)}
+                    </span>
+                  </div>
+                  <div className="header-item">
+                    <span className="header-label">Priority:</span>
+                    <span className={`priority-badge ${getPriorityColor(detail?.grievance?.priority)}`}>
+                      {(detail?.grievance?.priority || "medium").toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-header-actions">
+                <button 
+                  type="button" 
+                  onClick={() => setShowCommentsModal(true)} 
+                  className="comments-btn"
+                  title="View Comments"
+                >
+                  <MessageSquare size={18} />
+                  <span>Comments</span>
+                  {detail?.comments && detail.comments.length > 0 && (
+                    <span className="comments-count">{detail.comments.length}</span>
+                  )}
+                </button>
+                <button type="button" onClick={() => setDetailId(null)} className="modal-close-btn">
+                  <X size={20} />
+                </button>
+              </div>
             </div>
             
             <div className="modal-content">
@@ -775,26 +859,6 @@ const Grievances = () => {
                 </div>
               ) : detail && detail.grievance ? (
                 <>
-                  {/* Status and ID */}
-                  <div className="detail-section">
-                    <div className="detail-row">
-                      <span className="detail-label">Grievance ID</span>
-                      <span className="detail-value grievance-id">{detail.grievance.grievance_id || "—"}</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="detail-label">Status</span>
-                      <span className={`badge ${getStatusColor(detail.grievance.status, detail.grievance)}`}>
-                        {formatStatus(detail.grievance.status, detail.grievance)}
-                      </span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="detail-label">Priority</span>
-                      <span className={`priority-badge ${getPriorityColor(detail.grievance.priority)}`}>
-                        {(detail.grievance.priority || "medium").toUpperCase()}
-                      </span>
-                    </div>
-                  </div>
-
                   {/* Description */}
                   <div className="detail-section">
                     <h4 className="section-title">Description</h4>
@@ -859,6 +923,127 @@ const Grievances = () => {
                           </div>
                         )}
                       </div>
+                    </div>
+                  )}
+
+                  {/* Location Information */}
+                  {(detail.grievance.latitude || detail.grievance.location_address || detail.grievance.extracted_location) && (
+                    <div className="detail-section">
+                      <h4 className="section-title">
+                        <MapPin size={18} />
+                        Location Information
+                      </h4>
+                      
+                      {/* Smart Location Display */}
+                      {detail.grievance.extracted_location && typeof detail.grievance.extracted_location === 'object' ? (
+                        <LocationDisplay locationData={detail.grievance.extracted_location} />
+                      ) : detail.grievance.location_address ? (
+                        <LocationDisplay locationData={{ 
+                          address: detail.grievance.location_address,
+                          latitude: detail.grievance.latitude,
+                          longitude: detail.grievance.longitude
+                        }} />
+                      ) : (
+                        <span className="location-not-available">Location not available</span>
+                      )}
+
+                      {/* Coordinates (if available) */}
+                      {detail.grievance.latitude && detail.grievance.longitude && (
+                        <div className="detail-row">
+                          <span className="detail-label">Coordinates</span>
+                          <span className="detail-value coordinates">
+                            {detail.grievance.latitude}, {detail.grievance.longitude}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Zone and Ward */}
+                      {(detail.grievance.zone || detail.grievance.ward) && (
+                        <div className="location-admin">
+                          {detail.grievance.zone && (
+                            <div className="admin-item">
+                              <span className="admin-label">Zone:</span>
+                              <span className="admin-value">{detail.grievance.zone}</span>
+                            </div>
+                          )}
+                          {detail.grievance.ward && (
+                            <div className="admin-item">
+                              <span className="admin-label">Ward:</span>
+                              <span className="admin-value">{detail.grievance.ward}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* AI Analysis Results */}
+                  {detail.grievance.full_result && (
+                    <div className="detail-section">
+                      <h4 className="section-title">
+                        <Sparkles size={18} />
+                        AI Analysis
+                      </h4>
+                      <JsonRenderer 
+                        data={typeof detail.grievance.full_result === 'object' ? detail.grievance.full_result : JSON.parse(detail.grievance.full_result)} 
+                        title="Complete AI Analysis"
+                      />
+                    </div>
+                  )}
+
+                  {/* Validation Information */}
+                  {(detail.grievance.validation_status || detail.grievance.validation_score) && (
+                    <div className="detail-section">
+                      <h4 className="section-title">
+                        <CheckCircle size={18} />
+                        Validation
+                      </h4>
+                      {detail.grievance.validation_status && (
+                        <div className="detail-row">
+                          <span className="detail-label">Status</span>
+                          <span className="detail-value">{detail.grievance.validation_status}</span>
+                        </div>
+                      )}
+                      {detail.grievance.validation_score && (
+                        <div className="detail-row">
+                          <span className="detail-label">Score</span>
+                          <span className="detail-value">{detail.grievance.validation_score}</span>
+                        </div>
+                      )}
+                      {detail.grievance.validation_reasoning && (
+                        <div className="detail-row">
+                          <span className="detail-label">Reasoning</span>
+                          <span className="detail-value">{detail.grievance.validation_reasoning}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Additional JSONB Fields */}
+                  {(detail.grievance.category || detail.grievance.query_type || detail.grievance.patterns || detail.grievance.fraud) && (
+                    <div className="detail-section">
+                      <h4 className="section-title">
+                        <AlertCircle size={18} />
+                        Additional Analysis
+                      </h4>
+                      {detail.grievance.category && typeof detail.grievance.category === 'object' && (
+                        <JsonRenderer data={detail.grievance.category} title="Category Details" />
+                      )}
+                      {detail.grievance.query_type && (
+                        <JsonRenderer data={detail.grievance.query_type} title="Query Type" />
+                      )}
+                      {detail.grievance.patterns && (
+                        <JsonRenderer data={detail.grievance.patterns} title="Patterns" />
+                      )}
+                      {detail.grievance.fraud && (
+                        <JsonRenderer data={detail.grievance.fraud} title="Fraud Analysis" />
+                      )}
+                      {detail.grievance.severity && (
+                        <JsonRenderer data={detail.grievance.severity} title="Severity" />
+                      )}
+                      {detail.grievance.emotion && (
+                        <JsonRenderer data={detail.grievance.emotion} title="Emotion Analysis" />
+                      )}
                     </div>
                   )}
 
@@ -944,6 +1129,150 @@ const Grievances = () => {
                   <p className="error-message">Could not load this grievance.</p>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Instagram-Style Comments Modal */}
+      {showCommentsModal && detail && detail.grievance && (
+        <div className="comments-modal-overlay" onClick={() => setShowCommentsModal(false)}>
+          <div className="comments-modal-container" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="comments-modal-header">
+              <h3>Comments</h3>
+              <button onClick={() => setShowCommentsModal(false)} className="comments-modal-close">
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Modal Body - Split Layout */}
+            <div className="comments-modal-body">
+              {/* Left Side - Grievance Description */}
+              <div className="comments-left-panel">
+                <div className="grievance-summary">
+                  <div className="summary-header">
+                    <h4>Grievance Details</h4>
+                    <span className={`badge ${getStatusColor(detail.grievance.status, detail.grievance)}`}>
+                      {formatStatus(detail.grievance.status, detail.grievance)}
+                    </span>
+                  </div>
+                  
+                  <div className="summary-id">
+                    <span className="label">ID:</span>
+                    <span className="value">{detail.grievance.grievance_id}</span>
+                  </div>
+
+                  <div className="summary-description">
+                    <h5>Description</h5>
+                    <p>{detail.grievance.grievance_text || "No description provided"}</p>
+                  </div>
+
+                  {detail.grievance.image_path && (
+                    <div className="summary-image">
+                      <h5>Proof/Evidence</h5>
+                      {isImageUrl(detail.grievance.image_path) ? (
+                        <img src={detail.grievance.image_path} alt="Grievance proof" />
+                      ) : (
+                        <a href={detail.grievance.image_path} target="_blank" rel="noopener noreferrer" className="file-link">
+                          <FileText size={16} />
+                          View Attachment
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="summary-meta">
+                    <div className="meta-item">
+                      <Calendar size={14} />
+                      <span>{formatDate(detail.grievance.created_at)}</span>
+                    </div>
+                    {detail.grievance.location_address && (
+                      <div className="meta-item">
+                        <MapPin size={14} />
+                        <span>{detail.grievance.location_address}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Comments Section */}
+              <div className="comments-right-panel">
+                <div className="comments-list">
+                  {detail.comments && detail.comments.length > 0 ? (
+                    detail.comments.map((comment, index) => (
+                      <div key={index} className="comment-item">
+                        <div className="comment-avatar">
+                          <User size={20} />
+                        </div>
+                        <div className="comment-content">
+                          <div className="comment-header">
+                            <span className="comment-author">{comment.user_name || "User"}</span>
+                            <span className="comment-time">{formatDate(comment.timestamp)}</span>
+                          </div>
+                          <p className="comment-text">{comment.comment}</p>
+                          {comment.is_internal && (
+                            <span className="internal-badge">Internal</span>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="no-comments">
+                      <MessageSquare size={48} />
+                      <p>No comments yet</p>
+                      <span>Be the first to comment</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Comment Input */}
+                <div className="comment-input-container">
+                  <div className="comment-input-wrapper">
+                    <textarea
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                      placeholder="Add a comment..."
+                      rows="3"
+                      className="comment-input"
+                    />
+                    <button
+                      onClick={async () => {
+                        if (!newComment.trim() || submittingComment) return;
+                        
+                        setSubmittingComment(true);
+                        try {
+                          await grievanceService.addComment(detail.grievance.id, {
+                            comment: newComment.trim(),
+                            user_id: user?.id,
+                            user_name: user?.name || user?.email || "Anonymous",
+                            is_internal: false
+                          });
+                          
+                          // Refresh comments
+                          const updated = await grievanceService.getGrievanceById(detail.grievance.id);
+                          setDetail(updated);
+                          setNewComment("");
+                        } catch (error) {
+                          console.error("Error adding comment:", error);
+                          alert("Failed to add comment. Please try again.");
+                        } finally {
+                          setSubmittingComment(false);
+                        }
+                      }}
+                      disabled={!newComment.trim() || submittingComment}
+                      className="comment-submit-btn"
+                    >
+                      {submittingComment ? (
+                        <Loader2 size={18} className="spinning" />
+                      ) : (
+                        "Post"
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

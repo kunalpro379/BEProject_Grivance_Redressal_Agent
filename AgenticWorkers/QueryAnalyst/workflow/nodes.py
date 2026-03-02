@@ -223,21 +223,48 @@ def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
     policy_search = state.get("policy_search", {})
     queries = policy_search.get("queries", [])
     
-    # Also add category-specific searches
+    # Get location context
     category_info = state["agents_outputs"].get("category", {})
     location_info = state["agents_outputs"].get("location", {})
+    location_data = state.get("location_data", {})
     
+    # Build comprehensive location context for India
     main_category = category_info.get("main_category", "")
-    state_name = location_info.get("state", "India")
     
-    # Add additional real-time search queries
+    # Extract location details
+    city = location_data.get("location_details", {}).get("city") if isinstance(location_data.get("location_details"), dict) else None
+    state_name = location_info.get("state", "")
+    district = location_info.get("district", "")
+    
+    # Build location context string
+    location_parts = []
+    if city:
+        location_parts.append(city)
+    if district and district != city:
+        location_parts.append(district)
+    if state_name and state_name != "India":
+        location_parts.append(state_name)
+    location_parts.append("India")
+    
+    location_context = ", ".join(filter(None, location_parts))
+    
+    print(f"      Location context: {location_context}")
+    
+    # Add additional India-specific real-time search queries
     additional_queries = []
     if main_category:
-        additional_queries.append(f"{main_category} latest news {state_name}")
-        additional_queries.append(f"{main_category} government policy {state_name} 2024 2025")
-        additional_queries.append(f"{main_category} budget allocation {state_name}")
+        # Use specific location if available, otherwise use India
+        search_location = city or district or state_name or "India"
+        
+        additional_queries.append(f"{main_category} latest news {search_location} India")
+        additional_queries.append(f"{main_category} government policy scheme {search_location} India 2024 2025")
+        additional_queries.append(f"{main_category} municipal corporation {search_location} India")
+        
+        # Add state-specific query if state is known
+        if state_name and state_name != "India":
+            additional_queries.append(f"{main_category} {state_name} government initiative India")
     
-    all_queries = queries[:3] + additional_queries[:2]  # Limit to 5 total queries
+    all_queries = queries[:3] + additional_queries[:3]  # Limit to 6 total queries
     
     if not all_queries:
         print("      ⚠️ No search queries available, skipping Tavily search")
@@ -245,7 +272,11 @@ def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
         return state
     
     try:
-        search_results = tavily_engine.search_realtime_data(all_queries, max_results_per_query=3)
+        search_results = tavily_engine.search_realtime_data(
+            all_queries, 
+            max_results_per_query=3,
+            location_context=location_context
+        )
         state["tavily_search_results"] = search_results
         
         total_results = sum(len(r.get("results", [])) for r in search_results.values())
@@ -258,7 +289,7 @@ def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def NODE_allocate_department(state: Dict[str, Any]) -> Dict[str, Any]:
-    """Allocate department using Supabase embedding search."""
+    """Allocate department using Supabase embedding search + geographic distance."""
     print("   🏢 Allocating department from Supabase...")
     
     # Get required information
@@ -273,6 +304,10 @@ def NODE_allocate_department(state: Dict[str, Any]) -> Dict[str, Any]:
     category = category_info.get("main_category", "")
     embedding = state.get("embedding", [])
     
+    # Extract coordinates from location_data
+    latitude = location_data.get("latitude")
+    longitude = location_data.get("longitude")
+    
     if not embedding:
         print("      ⚠️ No embedding available, skipping department allocation")
         state["allocated_department"] = None
@@ -284,18 +319,25 @@ def NODE_allocate_department(state: Dict[str, Any]) -> Dict[str, Any]:
             recommended_department=recommended_dept,
             address=address,
             query_embedding=embedding,
-            category=category
+            category=category,
+            latitude=latitude,
+            longitude=longitude
         )
         
+        print(f"      DEBUG: allocated_dept returned: {allocated_dept}")
         state["allocated_department"] = allocated_dept
         
         if allocated_dept:
-            print(f"      ✓ Allocated to: {allocated_dept['name']}")
+            print(f"      ✓ Allocated to: {allocated_dept.get('name', 'N/A')} (ID: {allocated_dept.get('id', 'N/A')})")
+            if allocated_dept.get('distance_km'):
+                print(f"        Distance: {allocated_dept['distance_km']:.2f} km from grievance location")
         else:
-            print(f"      ⚠️ No department allocated")
+            print(f"      ⚠️ No department allocated (allocate_department returned None)")
             
     except Exception as e:
         print(f"      ❌ Error allocating department: {e}")
+        import traceback
+        traceback.print_exc()
         state["allocated_department"] = None
     
     return state   
@@ -427,6 +469,9 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
         "allocated_department": None
     }
     
+    print(f"   🏢 Building department field...")
+    print(f"      allocated_dept from state: {allocated_dept}")
+    
     if allocated_dept:
         department_field["allocated_department"] = {
             "id": allocated_dept.get("id"),
@@ -437,11 +482,13 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
         }
         department_field["contact_information"] = allocated_dept.get("contact_information")
         department_field["jurisdiction"] = allocated_dept.get("jurisdiction")
+        print(f"      ✓ Department field built with allocated_department id: {allocated_dept.get('id')}")
     else:
         # Fallback to AI-recommended department info
         dept_info = agents_outputs.get("department", {})
         department_field["contact_information"] = dept_info.get("contact_information")
         department_field["jurisdiction"] = dept_info.get("jurisdiction")
+        print(f"      ⚠️ No allocated_department, using AI recommendation only")
     
     case_study = {
         "grievance": {
@@ -508,6 +555,11 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     # Use enhanced_query_described for DB storage
     enhanced_for_db = enhanced_query_described or enhanced_query or text_for_db
 
+    print(f"   💾 Saving to Supabase...")
+    print(f"      grievance_id: {grievance_id}")
+    print(f"      citizen_id: {citizen_id}")
+    print(f"      case_study.department: {case_study.get('department', {})}")
+    
     insert_user_grievience(
         grievance_text=text_for_db,
         image_path=image_path,

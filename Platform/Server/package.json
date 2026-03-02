@@ -17,7 +17,8 @@
     "supabase:setup": "node scripts/setup-supabase.js",
     "generate:admin": "node scripts/generate-admin-hash.js",
     "seed:all-departments": "node scripts/seed-all-departments-complete.js",
-    "seed:water-sanitation": "node scripts/seed-water-sanitation-department-complete.js"
+    "seed:water-sanitation": "node scripts/seed-water-sanitation-department-complete.js",
+    "test:whatsapp": "node test-whatsapp.js"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.17.0",

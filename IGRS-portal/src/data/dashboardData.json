@@ -1,0 +1,74 @@
+{
+  "overallStats": {
+    "totalGrievances": 12458,
+    "resolvedGrievances": 10234,
+    "pendingGrievances": 2224,
+    "criticalIssues": 156,
+    "averageResolutionTime": "5.2 days",
+    "citizenSatisfactionScore": 4.2
+  },
+  "departmentPerformance": {
+    "police": {
+      "responseRate": 92,
+      "resolutionTime": 4.5,
+      "satisfactionScore": 4.1,
+      "pendingCases": 245
+    },
+    "municipal": {
+      "responseRate": 88,
+      "resolutionTime": 5.2,
+      "satisfactionScore": 4.0,
+      "pendingCases": 312
+    },
+    "health": {
+      "responseRate": 95,
+      "resolutionTime": 3.8,
+      "satisfactionScore": 4.4,
+      "pendingCases": 189
+    }
+  },
+  "criticalAlerts": [
+    {
+      "id": 1,
+      "type": "Flood",
+      "location": "Gomti Nagar",
+      "affectedArea": "2.5 km²",
+      "severity": "High",
+      "timestamp": "2024-03-15T08:30:00Z",
+      "status": "Active"
+    }
+  ],
+  "recentNotifications": [
+    {
+      "id": 1,
+      "title": "New Critical Issue Reported",
+      "message": "Flood alert in Gomti Nagar area",
+      "timestamp": "2024-03-15T08:30:00Z",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "Performance Report",
+      "message": "Monthly performance metrics updated",
+      "timestamp": "2024-03-14T15:45:00Z",
+      "read": true
+    }
+  ],
+  "timelineData": [
+    {
+      "date": "2024-03-15",
+      "newGrievances": 245,
+      "resolved": 238
+    },
+    {
+      "date": "2024-03-14",
+      "newGrievances": 212,
+      "resolved": 225
+    },
+    {
+      "date": "2024-03-13",
+      "newGrievances": 198,
+      "resolved": 205
+    }
+  ]
+}

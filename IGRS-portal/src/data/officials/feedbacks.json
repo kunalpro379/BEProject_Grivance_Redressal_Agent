@@ -1,0 +1,1495 @@
+{
+    "grievances": [
+      {
+        "category": "Drainage Issues",
+        "summary": {
+          "aiInsight": "Most citizens appreciated quick resolutions, but highlighted recurring blockages. Preventive maintenance is strongly recommended.",
+          "suggestion": "Schedule periodic cleaning of major drainage lines before monsoon."
+        },
+        "feedbacks": [
+          {
+            "id": "GR001",
+            "userName": "Ravi Kumar",
+            "region": "Andheri East, Mumbai",
+            "rating": 5,
+            "remark": "Issue was resolved quickly",
+            "aiSuggestion": "Similar drainage issues can be prevented with regular maintenance",
+            "receivedOn": "2024-01-20"
+          },
+          {
+            "id": "GR002",
+            "userName": "Anonymous",
+            "region": "Dadar West, Mumbai",
+            "rating": 3,
+            "remark": "Resolution took longer than expected",
+            "aiSuggestion": "Automate task delegation to reduce delay",
+            "receivedOn": "2024-01-19"
+          },
+          {
+            "id": "GR003",
+            "userName": "Sneha Patil",
+            "region": "Borivali, Mumbai",
+            "rating": 4,
+            "remark": "Good response but temporary fix",
+            "aiSuggestion": "Use durable materials for long-term repair",
+            "receivedOn": "2024-01-18"
+          },
+          {
+            "id": "GR004",
+            "userName": "Anonymous",
+            "region": "Kurla, Mumbai",
+            "rating": 2,
+            "remark": "Had to file complaint twice",
+            "aiSuggestion": "Introduce a reminder system for pending tasks",
+            "receivedOn": "2024-01-17"
+          },
+          {
+            "id": "GR005",
+            "userName": "Meera Shah",
+            "region": "Colaba, Mumbai",
+            "rating": 5,
+            "remark": "Excellent work done by the team",
+            "aiSuggestion": "Maintain service quality through routine checks",
+            "receivedOn": "2024-01-16"
+          }
+        ]
+      },
+      {
+        "category": "Road Maintenance",
+        "summary": {
+          "aiInsight": "Citizens reported both pothole issues and delayed repair. Quick patching was praised, but durability remains a concern.",
+          "suggestion": "Implement high-quality resurfacing materials for longer-lasting repairs."
+        },
+        "feedbacks": [
+          {
+            "id": "GR006",
+            "userName": "Arjun Mehta",
+            "region": "Bandra East, Mumbai",
+            "rating": 4,
+            "remark": "Pothole repaired within 48 hours",
+            "aiSuggestion": "Adopt similar quick response standards city-wide",
+            "receivedOn": "2024-01-15"
+          },
+          {
+            "id": "GR007",
+            "userName": "Anonymous",
+            "region": "Chembur, Mumbai",
+            "rating": 2,
+            "remark": "Same pothole reappeared after 2 weeks",
+            "aiSuggestion": "Use long-lasting asphalt mix",
+            "receivedOn": "2024-01-14"
+          },
+          {
+            "id": "GR008",
+            "userName": "Priya Nair",
+            "region": "Powai, Mumbai",
+            "rating": 5,
+            "remark": "Very quick and smooth work",
+            "aiSuggestion": "Standardize this process across all wards",
+            "receivedOn": "2024-01-13"
+          },
+          {
+            "id": "GR009",
+            "userName": "Anonymous",
+            "region": "Goregaon West, Mumbai",
+            "rating": 3,
+            "remark": "Repairs took a month to start",
+            "aiSuggestion": "Introduce escalation matrix for pending complaints",
+            "receivedOn": "2024-01-12"
+          },
+          {
+            "id": "GR010",
+            "userName": "Deepak Singh",
+            "region": "Mulund, Mumbai",
+            "rating": 4,
+            "remark": "Good work but poor traffic management during repair",
+            "aiSuggestion": "Coordinate with traffic police during roadwork",
+            "receivedOn": "2024-01-11"
+          }
+        ]
+      },
+      {
+        "category": "Water Supply",
+        "summary": {
+          "aiInsight": "Most citizens were concerned about irregular water timings and pressure issues. Transparency in schedules is missing.",
+          "suggestion": "Publish real-time water supply schedule and notify citizens via SMS."
+        },
+        "feedbacks": [
+          {
+            "id": "GR011",
+            "userName": "Ayesha Khan",
+            "region": "Mazgaon, Mumbai",
+            "rating": 3,
+            "remark": "Water supply was irregular this week",
+            "aiSuggestion": "Improve scheduling and inform citizens in advance",
+            "receivedOn": "2024-01-10"
+          },
+          {
+            "id": "GR012",
+            "userName": "Anonymous",
+            "region": "Santacruz East, Mumbai",
+            "rating": 4,
+            "remark": "Pressure improved after complaint",
+            "aiSuggestion": "Regular monitoring of pipelines recommended",
+            "receivedOn": "2024-01-09"
+          },
+          {
+            "id": "GR013",
+            "userName": "Rohit Verma",
+            "region": "Malad West, Mumbai",
+            "rating": 2,
+            "remark": "No water for 2 days without notice",
+            "aiSuggestion": "Send alerts for planned/unplanned outages",
+            "receivedOn": "2024-01-08"
+          },
+          {
+            "id": "GR014",
+            "userName": "Anonymous",
+            "region": "Byculla, Mumbai",
+            "rating": 5,
+            "remark": "Quick resolution by officials",
+            "aiSuggestion": "Keep response teams on standby for emergencies",
+            "receivedOn": "2024-01-07"
+          },
+          {
+            "id": "GR015",
+            "userName": "Neha Joshi",
+            "region": "Thane, Mumbai Metropolitan Region",
+            "rating": 4,
+            "remark": "Supply was restored quickly",
+            "aiSuggestion": "Introduce automated monitoring system",
+            "receivedOn": "2024-01-06"
+          }
+        ]
+      },
+      {
+        "category": "Garbage Collection",
+        "summary": {
+          "aiInsight": "Citizens highlighted irregular garbage pickup and lack of segregation. Efficiency improved in areas with GPS tracking.",
+          "suggestion": "Deploy IoT-enabled bins for monitoring fill levels."
+        },
+        "feedbacks": [
+          {
+            "id": "GR016",
+            "userName": "Anonymous",
+            "region": "Andheri West, Mumbai",
+            "rating": 2,
+            "remark": "Garbage not collected for 3 days",
+            "aiSuggestion": "Ensure daily pickups with tracking system",
+            "receivedOn": "2024-01-05"
+          },
+          {
+            "id": "GR017",
+            "userName": "Sanjay Gupta",
+            "region": "Sion, Mumbai",
+            "rating": 4,
+            "remark": "Collection improved after complaint",
+            "aiSuggestion": "Maintain consistency with route planning",
+            "receivedOn": "2024-01-04"
+          },
+          {
+            "id": "GR018",
+            "userName": "Anonymous",
+            "region": "Vile Parle East, Mumbai",
+            "rating": 3,
+            "remark": "Segregated waste not properly handled",
+            "aiSuggestion": "Train staff for waste segregation",
+            "receivedOn": "2024-01-03"
+          },
+          {
+            "id": "GR019",
+            "userName": "Anita Deshmukh",
+            "region": "Kandivali, Mumbai",
+            "rating": 5,
+            "remark": "Excellent punctual collection today",
+            "aiSuggestion": "Continue with digital monitoring system",
+            "receivedOn": "2024-01-02"
+          },
+          {
+            "id": "GR020",
+            "userName": "Anonymous",
+            "region": "Lower Parel, Mumbai",
+            "rating": 2,
+            "remark": "Bins overflowing near my street",
+            "aiSuggestion": "Install more bins in high-density areas",
+            "receivedOn": "2024-01-01"
+          }
+        ]
+      },
+      {
+        "category": "Public Transport",
+        "summary": {
+          "aiInsight": "Citizens found buses overcrowded during peak hours and complained about delays. Metro services received positive mentions.",
+          "suggestion": "Introduce more peak-hour buses and improve GPS tracking."
+        },
+        "feedbacks": [
+          {
+            "id": "GR021",
+            "userName": "Kiran Malhotra",
+            "region": "Dahisar, Mumbai",
+            "rating": 3,
+            "remark": "Bus overcrowded during office hours",
+            "aiSuggestion": "Add more buses in peak times",
+            "receivedOn": "2024-01-21"
+          },
+          {
+            "id": "GR022",
+            "userName": "Anonymous",
+            "region": "Ghatkopar East, Mumbai",
+            "rating": 4,
+            "remark": "Metro is punctual, very helpful",
+            "aiSuggestion": "Expand metro connectivity to suburbs",
+            "receivedOn": "2024-01-20"
+          },
+          {
+            "id": "GR023",
+            "userName": "Shweta Iyer",
+            "region": "Wadala, Mumbai",
+            "rating": 2,
+            "remark": "Bus route cancelled without notice",
+            "aiSuggestion": "Notify commuters before route changes",
+            "receivedOn": "2024-01-19"
+          },
+          {
+            "id": "GR024",
+            "userName": "Anonymous",
+            "region": "Khar West, Mumbai",
+            "rating": 5,
+            "remark": "Quick response to complaint about bus timing",
+            "aiSuggestion": "Integrate real-time tracking in apps",
+            "receivedOn": "2024-01-18"
+          },
+          {
+            "id": "GR025",
+            "userName": "Rahul Chavan",
+            "region": "Mira Road, Mumbai Metropolitan Region",
+            "rating": 3,
+            "remark": "Waiting time too long at night",
+            "aiSuggestion": "Increase late-night services in key routes",
+            "receivedOn": "2024-01-17"
+          }
+        ]
+      },
+
+      {
+        "category": "Drainage Issues",
+        "summary": {
+          "aiInsight": "Most citizens appreciated quick resolutions, but highlighted recurring blockages. Preventive maintenance is strongly recommended.",
+          "suggestion": "Schedule periodic cleaning of major drainage lines before monsoon."
+        },
+        "feedbacks": [
+          {
+            "id": "GR001",
+            "userName": "Ravi Kumar",
+            "region": "Andheri East, Mumbai",
+            "rating": 5,
+            "remark": "Issue was resolved quickly",
+            "aiSuggestion": "Similar drainage issues can be prevented with regular maintenance",
+            "receivedOn": "2024-01-20"
+          },
+          {
+            "id": "GR002",
+            "userName": "Anonymous",
+            "region": "Dadar West, Mumbai",
+            "rating": 3,
+            "remark": "Resolution took longer than expected",
+            "aiSuggestion": "Automate task delegation to reduce delay",
+            "receivedOn": "2024-01-19"
+          },
+          {
+            "id": "GR003",
+            "userName": "Sneha Patil",
+            "region": "Borivali, Mumbai",
+            "rating": 4,
+            "remark": "Good response but temporary fix",
+            "aiSuggestion": "Use durable materials for long-term repair",
+            "receivedOn": "2024-01-18"
+          },
+          {
+            "id": "GR004",
+            "userName": "Anonymous",
+            "region": "Kurla, Mumbai",
+            "rating": 2,
+            "remark": "Had to file complaint twice",
+            "aiSuggestion": "Introduce a reminder system for pending tasks",
+            "receivedOn": "2024-01-17"
+          },
+          {
+            "id": "GR005",
+            "userName": "Meera Shah",
+            "region": "Colaba, Mumbai",
+            "rating": 5,
+            "remark": "Excellent work done by the team",
+            "aiSuggestion": "Maintain service quality through routine checks",
+            "receivedOn": "2024-01-16"
+          }
+        ]
+      },
+      {
+        "category": "Road Maintenance",
+        "summary": {
+          "aiInsight": "Citizens reported both pothole issues and delayed repair. Quick patching was praised, but durability remains a concern.",
+          "suggestion": "Implement high-quality resurfacing materials for longer-lasting repairs."
+        },
+        "feedbacks": [
+          {
+            "id": "GR006",
+            "userName": "Arjun Mehta",
+            "region": "Bandra East, Mumbai",
+            "rating": 4,
+            "remark": "Pothole repaired within 48 hours",
+            "aiSuggestion": "Adopt similar quick response standards city-wide",
+            "receivedOn": "2024-01-15"
+          },
+          {
+            "id": "GR007",
+            "userName": "Anonymous",
+            "region": "Chembur, Mumbai",
+            "rating": 2,
+            "remark": "Same pothole reappeared after 2 weeks",
+            "aiSuggestion": "Use long-lasting asphalt mix",
+            "receivedOn": "2024-01-14"
+          },
+          {
+            "id": "GR008",
+            "userName": "Priya Nair",
+            "region": "Powai, Mumbai",
+            "rating": 5,
+            "remark": "Very quick and smooth work",
+            "aiSuggestion": "Standardize this process across all wards",
+            "receivedOn": "2024-01-13"
+          },
+          {
+            "id": "GR009",
+            "userName": "Anonymous",
+            "region": "Goregaon West, Mumbai",
+            "rating": 3,
+            "remark": "Repairs took a month to start",
+            "aiSuggestion": "Introduce escalation matrix for pending complaints",
+            "receivedOn": "2024-01-12"
+          },
+          {
+            "id": "GR010",
+            "userName": "Deepak Singh",
+            "region": "Mulund, Mumbai",
+            "rating": 4,
+            "remark": "Good work but poor traffic management during repair",
+            "aiSuggestion": "Coordinate with traffic police during roadwork",
+            "receivedOn": "2024-01-11"
+          }
+        ]
+      },
+      {
+        "category": "Water Supply",
+        "summary": {
+          "aiInsight": "Most citizens were concerned about irregular water timings and pressure issues. Transparency in schedules is missing.",
+          "suggestion": "Publish real-time water supply schedule and notify citizens via SMS."
+        },
+        "feedbacks": [
+          {
+            "id": "GR011",
+            "userName": "Ayesha Khan",
+            "region": "Mazgaon, Mumbai",
+            "rating": 3,
+            "remark": "Water supply was irregular this week",
+            "aiSuggestion": "Improve scheduling and inform citizens in advance",
+            "receivedOn": "2024-01-10"
+          },
+          {
+            "id": "GR012",
+            "userName": "Anonymous",
+            "region": "Santacruz East, Mumbai",
+            "rating": 4,
+            "remark": "Pressure improved after complaint",
+            "aiSuggestion": "Regular monitoring of pipelines recommended",
+            "receivedOn": "2024-01-09"
+          },
+          {
+            "id": "GR013",
+            "userName": "Rohit Verma",
+            "region": "Malad West, Mumbai",
+            "rating": 2,
+            "remark": "No water for 2 days without notice",
+            "aiSuggestion": "Send alerts for planned/unplanned outages",
+            "receivedOn": "2024-01-08"
+          },
+          {
+            "id": "GR014",
+            "userName": "Anonymous",
+            "region": "Byculla, Mumbai",
+            "rating": 5,
+            "remark": "Quick resolution by officials",
+            "aiSuggestion": "Keep response teams on standby for emergencies",
+            "receivedOn": "2024-01-07"
+          },
+          {
+            "id": "GR015",
+            "userName": "Neha Joshi",
+            "region": "Thane, Mumbai Metropolitan Region",
+            "rating": 4,
+            "remark": "Supply was restored quickly",
+            "aiSuggestion": "Introduce automated monitoring system",
+            "receivedOn": "2024-01-06"
+          }
+        ]
+      },
+      {
+        "category": "Garbage Collection",
+        "summary": {
+          "aiInsight": "Citizens highlighted irregular garbage pickup and lack of segregation. Efficiency improved in areas with GPS tracking.",
+          "suggestion": "Deploy IoT-enabled bins for monitoring fill levels."
+        },
+        "feedbacks": [
+          {
+            "id": "GR016",
+            "userName": "Anonymous",
+            "region": "Andheri West, Mumbai",
+            "rating": 2,
+            "remark": "Garbage not collected for 3 days",
+            "aiSuggestion": "Ensure daily pickups with tracking system",
+            "receivedOn": "2024-01-05"
+          },
+          {
+            "id": "GR017",
+            "userName": "Sanjay Gupta",
+            "region": "Sion, Mumbai",
+            "rating": 4,
+            "remark": "Collection improved after complaint",
+            "aiSuggestion": "Maintain consistency with route planning",
+            "receivedOn": "2024-01-04"
+          },
+          {
+            "id": "GR018",
+            "userName": "Anonymous",
+            "region": "Vile Parle East, Mumbai",
+            "rating": 3,
+            "remark": "Segregated waste not properly handled",
+            "aiSuggestion": "Train staff for waste segregation",
+            "receivedOn": "2024-01-03"
+          },
+          {
+            "id": "GR019",
+            "userName": "Anita Deshmukh",
+            "region": "Kandivali, Mumbai",
+            "rating": 5,
+            "remark": "Excellent punctual collection today",
+            "aiSuggestion": "Continue with digital monitoring system",
+            "receivedOn": "2024-01-02"
+          },
+          {
+            "id": "GR020",
+            "userName": "Anonymous",
+            "region": "Lower Parel, Mumbai",
+            "rating": 2,
+            "remark": "Bins overflowing near my street",
+            "aiSuggestion": "Install more bins in high-density areas",
+            "receivedOn": "2024-01-01"
+          }
+        ]
+      },
+      {
+        "category": "Public Transport",
+        "summary": {
+          "aiInsight": "Citizens found buses overcrowded during peak hours and complained about delays. Metro services received positive mentions.",
+          "suggestion": "Introduce more peak-hour buses and improve GPS tracking."
+        },
+        "feedbacks": [
+          {
+            "id": "GR021",
+            "userName": "Kiran Malhotra",
+            "region": "Dahisar, Mumbai",
+            "rating": 3,
+            "remark": "Bus overcrowded during office hours",
+            "aiSuggestion": "Add more buses in peak times",
+            "receivedOn": "2024-01-21"
+          },
+          {
+            "id": "GR022",
+            "userName": "Anonymous",
+            "region": "Ghatkopar East, Mumbai",
+            "rating": 4,
+            "remark": "Metro is punctual, very helpful",
+            "aiSuggestion": "Expand metro connectivity to suburbs",
+            "receivedOn": "2024-01-20"
+          },
+          {
+            "id": "GR023",
+            "userName": "Shweta Iyer",
+            "region": "Wadala, Mumbai",
+            "rating": 2,
+            "remark": "Bus route cancelled without notice",
+            "aiSuggestion": "Notify commuters before route changes",
+            "receivedOn": "2024-01-19"
+          },
+          {
+            "id": "GR024",
+            "userName": "Anonymous",
+            "region": "Khar West, Mumbai",
+            "rating": 5,
+            "remark": "Quick response to complaint about bus timing",
+            "aiSuggestion": "Integrate real-time tracking in apps",
+            "receivedOn": "2024-01-18"
+          },
+          {
+            "id": "GR025",
+            "userName": "Rahul Chavan",
+            "region": "Mira Road, Mumbai Metropolitan Region",
+            "rating": 3,
+            "remark": "Waiting time too long at night",
+            "aiSuggestion": "Increase late-night services in key routes",
+            "receivedOn": "2024-01-17"
+          }
+        ]
+      },
+      {
+        "category": "Street Lighting",
+        "summary": {
+          "aiInsight": "Frequent complaints about dark areas leading to safety concerns. Positive feedback where LED replacements were done.",
+          "suggestion": "Install smart LED lights with remote monitoring."
+        },
+        "feedbacks": [
+          {
+            "id": "GR026",
+            "userName": "Anonymous",
+            "region": "Jogeshwari, Mumbai",
+            "rating": 2,
+            "remark": "Street light not working for 1 week",
+            "aiSuggestion": "Introduce automated fault detection",
+            "receivedOn": "2024-01-16"
+          },
+          {
+            "id": "GR027",
+            "userName": "Amit Sharma",
+            "region": "Fort, Mumbai",
+            "rating": 5,
+            "remark": "New LED lights are very effective",
+            "aiSuggestion": "Replace all old lights with LEDs",
+            "receivedOn": "2024-01-15"
+          },
+          {
+            "id": "GR028",
+            "userName": "Anonymous",
+            "region": "Kurla West, Mumbai",
+            "rating": 3,
+            "remark": "Some poles still without lights",
+            "aiSuggestion": "Check coverage regularly",
+            "receivedOn": "2024-01-14"
+          },
+          {
+            "id": "GR029",
+            "userName": "Pooja Shetty",
+            "region": "Malabar Hill, Mumbai",
+            "rating": 4,
+            "remark": "Lights repaired within 2 days",
+            "aiSuggestion": "Maintain quick response times",
+            "receivedOn": "2024-01-13"
+          },
+          {
+            "id": "GR030",
+            "userName": "Anonymous",
+            "region": "Chakala, Mumbai",
+            "rating": 3,
+            "remark": "Light flickers constantly",
+            "aiSuggestion": "Ensure quality control in installations",
+            "receivedOn": "2024-01-12"
+          }
+        ]
+      },
+      {
+        "category": "Health Services",
+        "summary": {
+          "aiInsight": "Complaints focused on overcrowded municipal hospitals, but praise for vaccination drives was high.",
+          "suggestion": "Expand digital appointment systems and deploy more doctors during rush hours."
+        },
+        "feedbacks": [
+          {
+            "id": "GR031",
+            "userName": "Anonymous",
+            "region": "Charni Road, Mumbai",
+            "rating": 2,
+            "remark": "Long waiting hours at OPD",
+            "aiSuggestion": "Digital appointment slotting system required",
+            "receivedOn": "2024-01-11"
+          },
+          {
+            "id": "GR032",
+            "userName": "Ramesh Yadav",
+            "region": "Kalyan, Mumbai Metropolitan Region",
+            "rating": 5,
+            "remark": "Vaccination drive was very smooth",
+            "aiSuggestion": "Maintain similar coordination for future drives",
+            "receivedOn": "2024-01-10"
+          },
+          {
+            "id": "GR033",
+            "userName": "Anonymous",
+            "region": "Grant Road, Mumbai",
+            "rating": 3,
+            "remark": "Doctors are helpful but staff shortage",
+            "aiSuggestion": "Recruit more supporting staff",
+            "receivedOn": "2024-01-09"
+          },
+          {
+            "id": "GR034",
+            "userName": "Anonymous",
+            "region": "Sewri, Mumbai",
+            "rating": 4,
+            "remark": "Emergency response was good",
+            "aiSuggestion": "Enhance ambulance tracking",
+            "receivedOn": "2024-01-08"
+          },
+          {
+            "id": "GR035",
+            "userName": "Neelam Kapoor",
+            "region": "Bhandup, Mumbai",
+            "rating": 5,
+            "remark": "Doctors treated my mother very well",
+            "aiSuggestion": "Maintain patient-centric approach",
+            "receivedOn": "2024-01-07"
+          }
+        ]
+      },
+      {
+        "category": "Air Pollution",
+        "summary": {
+          "aiInsight": "Air quality complaints rise during winter. Positive mentions for smog checks near highways.",
+          "suggestion": "Deploy more air quality monitors and enforce vehicle checks."
+        },
+        "feedbacks": [
+          {
+            "id": "GR036",
+            "userName": "Anonymous",
+            "region": "Mulund East, Mumbai",
+            "rating": 2,
+            "remark": "Air quality very poor this week",
+            "aiSuggestion": "Increase tree plantation drives",
+            "receivedOn": "2024-01-06"
+          },
+          {
+            "id": "GR037",
+            "userName": "Sameer Khan",
+            "region": "Colaba, Mumbai",
+            "rating": 4,
+            "remark": "AQI updates are helpful",
+            "aiSuggestion": "Send SMS alerts to citizens",
+            "receivedOn": "2024-01-05"
+          },
+          {
+            "id": "GR038",
+            "userName": "Anonymous",
+            "region": "Bhandup West, Mumbai",
+            "rating": 3,
+            "remark": "Smog still heavy at night",
+            "aiSuggestion": "Introduce night-time vehicle checks",
+            "receivedOn": "2024-01-04"
+          },
+          {
+            "id": "GR039",
+            "userName": "Anonymous",
+            "region": "Marine Lines, Mumbai",
+            "rating": 5,
+            "remark": "Smog check campaign well executed",
+            "aiSuggestion": "Do this regularly",
+            "receivedOn": "2024-01-03"
+          },
+          {
+            "id": "GR040",
+            "userName": "Ritika Jain",
+            "region": "Sion West, Mumbai",
+            "rating": 3,
+            "remark": "Dust near construction sites",
+            "aiSuggestion": "Mandate covers at construction areas",
+            "receivedOn": "2024-01-02"
+          }
+        ]
+      },
+      {
+        "category": "Traffic Management",
+        "summary": {
+          "aiInsight": "Heavy congestion during office hours is a common grievance. Citizens liked the new one-way system in some areas.",
+          "suggestion": "Deploy AI-based traffic signal optimization."
+        },
+        "feedbacks": [
+          {
+            "id": "GR041",
+            "userName": "Anonymous",
+            "region": "Sakinaka, Mumbai",
+            "rating": 2,
+            "remark": "Signal timing too long",
+            "aiSuggestion": "AI-controlled adaptive signals required",
+            "receivedOn": "2024-01-01"
+          },
+          {
+            "id": "GR042",
+            "userName": "Ravi Shankar",
+            "region": "Dadar East, Mumbai",
+            "rating": 4,
+            "remark": "One-way system reduced jams",
+            "aiSuggestion": "Expand this to other areas",
+            "receivedOn": "2024-01-02"
+          },
+          {
+            "id": "GR043",
+            "userName": "Anonymous",
+            "region": "Worli, Mumbai",
+            "rating": 3,
+            "remark": "Traffic police missing during peak",
+            "aiSuggestion": "Ensure staff presence at choke points",
+            "receivedOn": "2024-01-03"
+          },
+          {
+            "id": "GR044",
+            "userName": "Pankaj Sharma",
+            "region": "Churchgate, Mumbai",
+            "rating": 5,
+            "remark": "Smooth traffic flow after changes",
+            "aiSuggestion": "Maintain monitoring",
+            "receivedOn": "2024-01-04"
+          },
+          {
+            "id": "GR045",
+            "userName": "Anonymous",
+            "region": "Vashi, Navi Mumbai",
+            "rating": 2,
+            "remark": "Heavy jams near toll plaza",
+            "aiSuggestion": "Expand FASTag-only lanes",
+            "receivedOn": "2024-01-05"
+          }
+        ]
+      },
+      {
+        "category": "Public Parks",
+        "summary": {
+          "aiInsight": "Cleanliness and maintenance were key concerns, but citizens praised newly installed play equipment.",
+          "suggestion": "Assign ward-wise staff for regular inspection and upkeep."
+        },
+        "feedbacks": [
+          {
+            "id": "GR046",
+            "userName": "Anonymous",
+            "region": "Kharghar, Navi Mumbai",
+            "rating": 3,
+            "remark": "Park is clean but grass overgrown",
+            "aiSuggestion": "Maintain weekly trimming schedule",
+            "receivedOn": "2024-01-06"
+          },
+          {
+            "id": "GR047",
+            "userName": "Manoj Pandey",
+            "region": "Borivali West, Mumbai",
+            "rating": 5,
+            "remark": "Kids love the new swings",
+            "aiSuggestion": "Expand equipment in other parks",
+            "receivedOn": "2024-01-07"
+          },
+          {
+            "id": "GR048",
+            "userName": "Anonymous",
+            "region": "Goregaon East, Mumbai",
+            "rating": 2,
+            "remark": "Broken benches not repaired",
+            "aiSuggestion": "Quickly fix damaged infrastructure",
+            "receivedOn": "2024-01-08"
+          },
+          {
+            "id": "GR049",
+            "userName": "Anonymous",
+            "region": "Andheri East, Mumbai",
+            "rating": 4,
+            "remark": "Morning walkers happy with cleanliness",
+            "aiSuggestion": "Keep same standards",
+            "receivedOn": "2024-01-09"
+          },
+          {
+            "id": "GR050",
+            "userName": "Sunita Rane",
+            "region": "Matunga, Mumbai",
+            "rating": 3,
+            "remark": "Fountains not working",
+            "aiSuggestion": "Schedule regular checks for amenities",
+            "receivedOn": "2024-01-10"
+          }
+        ]
+      },
+          {
+            "category": "Drainage Issues",
+            "summary": {
+              "aiInsight": "Citizens are frustrated with recurring blockages and slow response. Complaints are increasingly negative in tone.",
+              "suggestion": "Implement rapid-response drainage teams and regular maintenance schedules."
+            },
+            "feedbacks": [
+              {
+                "id": "GR051",
+                "userName": "Anonymous",
+                "region": "Andheri East, Mumbai",
+                "rating": 1,
+                "remark": "Bloody drains overflowing again! This is ridiculous 😡",
+                "aiSuggestion": "Schedule urgent inspection and cleaning in high-risk areas",
+                "receivedOn": "2024-02-01"
+              },
+              {
+                "id": "GR052",
+                "userName": "Rakesh Tiwari",
+                "region": "Borivali, Mumbai",
+                "rating": 1,
+                "remark": "What the hell is happening? Water everywhere, zero action!",
+                "aiSuggestion": "Deploy rapid repair crews and notify citizens of timelines",
+                "receivedOn": "2024-02-01"
+              },
+              {
+                "id": "GR053",
+                "userName": "Anonymous",
+                "region": "Dadar West, Mumbai",
+                "rating": 2,
+                "remark": "Ugh! Drains clogged AGAIN. I’m fed up!",
+                "aiSuggestion": "Prioritize recurring blockage zones and monitor weekly",
+                "receivedOn": "2024-02-02"
+              },
+              {
+                "id": "GR054",
+                "userName": "Sneha Patil",
+                "region": "Kurla, Mumbai",
+                "rating": 1,
+                "remark": "Seriously, how many times do we have to report this sh*t?",
+                "aiSuggestion": "Introduce accountability system for delayed resolutions",
+                "receivedOn": "2024-02-02"
+              },
+              {
+                "id": "GR055",
+                "userName": "Anonymous",
+                "region": "Colaba, Mumbai",
+                "rating": 1,
+                "remark": "Sick of this! Streets are puddles every damn time 😤",
+                "aiSuggestion": "Reassess drainage capacity and upgrade where needed",
+                "receivedOn": "2024-02-03"
+              }
+            ]
+          },
+          {
+            "category": "Road Maintenance",
+            "summary": {
+              "aiInsight": "Citizens are frustrated with potholes reappearing and slow repairs. Language used in complaints is harsh and slang-heavy.",
+              "suggestion": "Use durable road materials and reduce repair turnaround time."
+            },
+            "feedbacks": [
+              {
+                "id": "GR056",
+                "userName": "Anonymous",
+                "region": "Bandra West, Mumbai",
+                "rating": 1,
+                "remark": "F***ing potholes everywhere! My bike nearly crashed!",
+                "aiSuggestion": "Implement rapid pothole repair squads",
+                "receivedOn": "2024-02-04"
+              },
+              {
+                "id": "GR057",
+                "userName": "Rajesh Singh",
+                "region": "Chembur, Mumbai",
+                "rating": 1,
+                "remark": "Repair takes forever. Are you guys asleep or what?!",
+                "aiSuggestion": "Introduce timeline-based escalation system for complaints",
+                "receivedOn": "2024-02-04"
+              },
+              {
+                "id": "GR058",
+                "userName": "Anonymous",
+                "region": "Mulund, Mumbai",
+                "rating": 2,
+                "remark": "Streets look like a f***ing crater field. Pathetic!",
+                "aiSuggestion": "Use stronger asphalt and monitor roads monthly",
+                "receivedOn": "2024-02-05"
+              },
+              {
+                "id": "GR059",
+                "userName": "Priya Nair",
+                "region": "Goregaon East, Mumbai",
+                "rating": 1,
+                "remark": "I can’t even drive properly without hitting a pothole. Wtf!",
+                "aiSuggestion": "Plan immediate patching and permanent resurfacing",
+                "receivedOn": "2024-02-05"
+              },
+              {
+                "id": "GR060",
+                "userName": "Anonymous",
+                "region": "Powai, Mumbai",
+                "rating": 1,
+                "remark": "These roads are sh*t! Fix them already!",
+                "aiSuggestion": "Upgrade key roads with high-quality materials",
+                "receivedOn": "2024-02-06"
+              }
+            ]
+          },
+          {
+            "category": "Drainage Issues",
+            "summary": {
+              "aiInsight": "Citizens are highly frustrated with repeated blockages. Complaints often contain slang and angry expressions.",
+              "suggestion": "Deploy rapid response teams, schedule preventive cleaning, and notify citizens proactively."
+            },
+            "feedbacks": [
+              {
+                "id": "GR061",
+                "userName": "Anonymous",
+                "region": "Andheri East, Mumbai",
+                "rating": 1,
+                "remark": "Arre yaar, phat-pat drain saaf karo! Roz hi flood 😡 #bklp",
+                "language": "Hindi",
+                "aiSuggestion": "Immediate cleaning and inspection required in high-risk zones",
+                "receivedOn": "2024-02-10"
+              },
+              {
+                "id": "GR062",
+                "userName": "Ravi Kumar",
+                "region": "Borivali, Mumbai",
+                "rating": 1,
+                "remark": "Haay re! Pani ghari bharla, tumhi kay kartay bhai?! 😤",
+                "language": "Marathi",
+                "aiSuggestion": "Set up weekly drain maintenance in this area",
+                "receivedOn": "2024-02-10"
+              },
+              {
+                "id": "GR063",
+                "userName": "Anonymous",
+                "region": "Kurla, Mumbai",
+                "rating": 2,
+                "remark": "Bloody drains, full tangad! Fix it ASAP 🤬",
+                "language": "English",
+                "aiSuggestion": "Assign rapid response and monitor recurring blockages",
+                "receivedOn": "2024-02-11"
+              },
+              {
+                "id": "GR064",
+                "userName": "Sneha Patil",
+                "region": "Dadar West, Mumbai",
+                "rating": 1,
+                "remark": "Bakchodi band kara, drain bharla paryant kaay delay 😡",
+                "language": "Marathi",
+                "aiSuggestion": "Introduce accountability system for delayed repairs",
+                "receivedOn": "2024-02-11"
+              },
+              {
+                "id": "GR065",
+                "userName": "Anonymous",
+                "region": "Colaba, Mumbai",
+                "rating": 1,
+                "remark": "Arey yaar, baar baar flooding! F***ing useless maintenance 😤",
+                "language": "Hindi-English",
+                "aiSuggestion": "Reassess drainage capacity & schedule preventive maintenance",
+                "receivedOn": "2024-02-12"
+              }
+            ]
+          },
+          {
+            "category": "Road Maintenance",
+            "summary": {
+              "aiInsight": "Citizens are furious with potholes and slow repairs. Many use slangs and mild galiya to express frustration.",
+              "suggestion": "Use durable materials, implement rapid repair squads, and inform citizens about repair timelines."
+            },
+            "feedbacks": [
+              {
+                "id": "GR066",
+                "userName": "Anonymous",
+                "region": "Bandra West, Mumbai",
+                "rating": 1,
+                "remark": "Saale potholes! Roz hi crash ho jaata 😡",
+                "language": "Hindi",
+                "aiSuggestion": "Immediate patching in high-traffic zones",
+                "receivedOn": "2024-02-13"
+              },
+              {
+                "id": "GR067",
+                "userName": "Rajesh Singh",
+                "region": "Chembur, Mumbai",
+                "rating": 1,
+                "remark": "Haay re, hi street ekdam bhayankar! F***ing disaster!",
+                "language": "Marathi-English",
+                "aiSuggestion": "Plan resurfacing & schedule regular inspection",
+                "receivedOn": "2024-02-13"
+              },
+              {
+                "id": "GR068",
+                "userName": "Anonymous",
+                "region": "Mulund, Mumbai",
+                "rating": 2,
+                "remark": "Ye road ka scene hi kharab hai, bloody pit holes 🤬",
+                "language": "Hindi-English",
+                "aiSuggestion": "Assign rapid repair team and monitor recurring potholes",
+                "receivedOn": "2024-02-14"
+              },
+              {
+                "id": "GR069",
+                "userName": "Priya Nair",
+                "region": "Goregaon East, Mumbai",
+                "rating": 1,
+                "remark": "Maza bike almost todla re saala road war! 😡",
+                "language": "Marathi",
+                "aiSuggestion": "Immediate repair & permanent resurfacing needed",
+                "receivedOn": "2024-02-14"
+              },
+              {
+                "id": "GR070",
+                "userName": "Anonymous",
+                "region": "Powai, Mumbai",
+                "rating": 1,
+                "remark": "F***ing roads, full tangad! When will this sh*t get fixed?",
+                "language": "English",
+                "aiSuggestion": "Upgrade key roads with quality asphalt & monitor condition",
+                "receivedOn": "2024-02-15"
+              }
+            ]
+          },
+          {
+            "category": "Water Supply",
+            "summary": {
+              "aiInsight": "Citizens are angry due to irregular water supply. Remarks contain slangs, casual galiya, and frustrated tone.",
+              "suggestion": "Publish real-time supply schedule, automate alerts, and deploy rapid response teams."
+            },
+            "feedbacks": [
+              {
+                "id": "GR071",
+                "userName": "Ayesha Khan",
+                "region": "Santacruz East, Mumbai",
+                "rating": 1,
+                "remark": "Pani hi nahi aa raha! Saala system hi kharaab 😡",
+                "language": "Hindi",
+                "aiSuggestion": "Check pipelines & restore supply urgently",
+                "receivedOn": "2024-02-15"
+              },
+              {
+                "id": "GR072",
+                "userName": "Anonymous",
+                "region": "Mazgaon, Mumbai",
+                "rating": 2,
+                "remark": "Arre yaar, 2 din se tap band, kaay bakchodi hai? 🤬",
+                "language": "Hindi",
+                "aiSuggestion": "Investigate outage & inform citizens proactively",
+                "receivedOn": "2024-02-16"
+              },
+              {
+                "id": "GR073",
+                "userName": "Rohit Verma",
+                "region": "Malad West, Mumbai",
+                "rating": 1,
+                "remark": "Haay re! Pani nahi milta re saale, mast frustration 😤",
+                "language": "Marathi",
+                "aiSuggestion": "Restore supply immediately & monitor daily",
+                "receivedOn": "2024-02-16"
+              },
+              {
+                "id": "GR074",
+                "userName": "Anonymous",
+                "region": "Byculla, Mumbai",
+                "rating": 1,
+                "remark": "F***ing tap se paani nahi aa raha, chutiya system 🤬",
+                "language": "Hindi-English",
+                "aiSuggestion": "Repair system & alert citizens about issues",
+                "receivedOn": "2024-02-17"
+              },
+              {
+                "id": "GR075",
+                "userName": "Neha Joshi",
+                "region": "Thane, Mumbai Metropolitan Region",
+                "rating": 2,
+                "remark": "Pani ka pressure zero hai re saala! Full frustration 😡",
+                "language": "Hindi-Marathi",
+                "aiSuggestion": "Check pumps and restore adequate water pressure",
+                "receivedOn": "2024-02-17"
+              }
+            ]
+          },
+
+          {
+            "category": "Drainage Issues",
+            "summary": {
+              "aiInsight": "Lok khup frustrated ahet, bar-bar water overflow hoto. Slangs ani galiya baher yet ahet.",
+              "suggestion": "Urgent cleaning team tya areas madhe, regular maintenance schedule theva."
+            },
+            "feedbacks": [
+              {
+                "id": "GR076",
+                "userName": "Anonymous",
+                "region": "Andheri East, Mumbai",
+                "rating": 1,
+                "remark": "Arre yaar, phat-pat drain saaf kara! Roz flooding hotey 😡",
+                "language": "Hindi",
+                "aiSuggestion": "High-risk areas madhe immediate cleaning kara",
+                "receivedOn": "2024-02-18"
+              },
+              {
+                "id": "GR077",
+                "userName": "Ravi Kumar",
+                "region": "Borivali, Mumbai",
+                "rating": 1,
+                "remark": "Haay re! Pani gharat bharla, tumhi kay kartay bhai? 😤",
+                "language": "Marathi",
+                "aiSuggestion": "Weekly drain maintenance schedule kara",
+                "receivedOn": "2024-02-18"
+              },
+              {
+                "id": "GR078",
+                "userName": "Anonymous",
+                "region": "Dadar West, Mumbai",
+                "rating": 2,
+                "remark": "Bakchodi band kara, drain bharla paryant kaay delay 😡",
+                "language": "Marathi",
+                "aiSuggestion": "Delayed repairs sathi accountability system implement kara",
+                "receivedOn": "2024-02-19"
+              },
+              {
+                "id": "GR079",
+                "userName": "Sneha Patil",
+                "region": "Kurla, Mumbai",
+                "rating": 1,
+                "remark": "Arey yaar, baar baar flooding! F***ing useless maintenance 😤",
+                "language": "Hindi-English",
+                "aiSuggestion": "Reassess drainage capacity & schedule preventive maintenance",
+                "receivedOn": "2024-02-19"
+              },
+              {
+                "id": "GR080",
+                "userName": "Anonymous",
+                "region": "Colaba, Mumbai",
+                "rating": 1,
+                "remark": "Saala drains full tangad! Roz hi pani bharla 😡",
+                "language": "Hindi-Marathi",
+                "aiSuggestion": "Immediate cleaning & inspection kara",
+                "receivedOn": "2024-02-20"
+              }
+            ]
+          },
+          {
+            "category": "Road Maintenance",
+            "summary": {
+              "aiInsight": "Potholes ani slow repair mule lok khup frustrated ahet, slangs ani thodi shivya comment madhe yet ahet.",
+              "suggestion": "Durable asphalt use kara, rapid repair squads implement kara, citizens la info dya repair timeline cha."
+            },
+            "feedbacks": [
+              {
+                "id": "GR081",
+                "userName": "Anonymous",
+                "region": "Bandra West, Mumbai",
+                "rating": 1,
+                "remark": "Saale potholes! Roz crash hotey 😡",
+                "language": "Hindi",
+                "aiSuggestion": "High-traffic zones madhe immediate patching kara",
+                "receivedOn": "2024-02-20"
+              },
+              {
+                "id": "GR082",
+                "userName": "Rajesh Singh",
+                "region": "Chembur, Mumbai",
+                "rating": 1,
+                "remark": "Haay re, hi street ekdam bhayankar! F***ing disaster!",
+                "language": "Marathi-English",
+                "aiSuggestion": "Resurfacing plan kara & regular inspection schedule kara",
+                "receivedOn": "2024-02-21"
+              },
+              {
+                "id": "GR083",
+                "userName": "Anonymous",
+                "region": "Mulund, Mumbai",
+                "rating": 2,
+                "remark": "Ye road ka scene hi kharab hai, bloody pit holes 🤬",
+                "language": "Hindi-English",
+                "aiSuggestion": "Assign rapid repair team & monitor recurring potholes",
+                "receivedOn": "2024-02-21"
+              },
+              {
+                "id": "GR084",
+                "userName": "Priya Nair",
+                "region": "Goregaon East, Mumbai",
+                "rating": 1,
+                "remark": "Maza bike almost todla re saala road war! 😡",
+                "language": "Marathi",
+                "aiSuggestion": "Immediate repair & permanent resurfacing kara",
+                "receivedOn": "2024-02-22"
+              },
+              {
+                "id": "GR085",
+                "userName": "Anonymous",
+                "region": "Powai, Mumbai",
+                "rating": 1,
+                "remark": "F***ing roads, full tangad! Kab fix karoge yaar?",
+                "language": "Hindi-English",
+                "aiSuggestion": "Key roads upgrade kara & monitor condition",
+                "receivedOn": "2024-02-22"
+              }
+            ]
+          },
+          {
+            "category": "Water Supply",
+            "summary": {
+              "aiInsight": "Irregular water supply mule citizens frustrated ahet. Remarks madhe slangs, galiya, emojis ahot.",
+              "suggestion": "Real-time supply schedule, automated alerts & rapid response teams deploy kara."
+            },
+            "feedbacks": [
+              {
+                "id": "GR086",
+                "userName": "Ayesha Khan",
+                "region": "Santacruz East, Mumbai",
+                "rating": 1,
+                "remark": "Pani hi nahi aa raha! Saala system kharaab 😡",
+                "language": "Hindi",
+                "aiSuggestion": "Check pipelines & restore supply immediately",
+                "receivedOn": "2024-02-23"
+              },
+              {
+                "id": "GR087",
+                "userName": "Anonymous",
+                "region": "Mazgaon, Mumbai",
+                "rating": 2,
+                "remark": "Arre yaar, 2 din se tap band! Kaay bakchodi hai? 🤬",
+                "language": "Hindi",
+                "aiSuggestion": "Investigate outage & notify citizens",
+                "receivedOn": "2024-02-23"
+              },
+              {
+                "id": "GR088",
+                "userName": "Rohit Verma",
+                "region": "Malad West, Mumbai",
+                "rating": 1,
+                "remark": "Haay re! Pani nahi milta re saale, full frustration 😤",
+                "language": "Marathi",
+                "aiSuggestion": "Restore supply immediately & monitor daily",
+                "receivedOn": "2024-02-24"
+              },
+              {
+                "id": "GR089",
+                "userName": "Anonymous",
+                "region": "Byculla, Mumbai",
+                "rating": 1,
+                "remark": "F***ing tap se paani nahi aa raha, chutiya system 🤬",
+                "language": "Hindi-English",
+                "aiSuggestion": "Repair system & alert citizens",
+                "receivedOn": "2024-02-24"
+              },
+              {
+                "id": "GR090",
+                "userName": "Neha Joshi",
+                "region": "Thane, Mumbai Metropolitan Region",
+                "rating": 2,
+                "remark": "Pani ka pressure zero hai re saala! Full frustration 😡",
+                "language": "Hindi-Marathi",
+                "aiSuggestion": "Check pumps & restore adequate water pressure",
+                "receivedOn": "2024-02-25"
+              }
+            ]
+          },
+          {
+            "category": "Drainage Issues",
+            "summary": {
+              "aiInsight": "Lok khup frustrated ahet, bar-bar water overflow hotey. Remarks madhe slangs & mild galiya ahet.",
+              "suggestion": "Immediate cleaning teams deploy kara, preventive maintenance schedule theva."
+            },
+            "feedbacks": [
+              {
+                "id": "GR091",
+                "userName": "Anonymous",
+                "region": "Andheri East, Mumbai",
+                "rating": 1,
+                "remark": "Arre yaar, phat-pat drain saaf kara! Roz flooding hotey 😡",
+                "language": "Hindi",
+                "aiSuggestion": "High-risk areas madhe urgent cleaning kara",
+                "receivedOn": "2024-02-26"
+              },
+              {
+                "id": "GR092",
+                "userName": "Ravi Kumar",
+                "region": "Borivali, Mumbai",
+                "rating": 1,
+                "remark": "Haay re! Pani gharat bharla, tumhi kay kartay bhai? 😤",
+                "language": "Marathi",
+                "aiSuggestion": "Weekly drain maintenance schedule kara",
+                "receivedOn": "2024-02-26"
+              },
+              {
+                "id": "GR093",
+                "userName": "Anonymous",
+                "region": "Kurla, Mumbai",
+                "rating": 1,
+                "remark": "Bakchodi band kara, drain bharla paryant kaay delay 😡",
+                "language": "Marathi",
+                "aiSuggestion": "Delayed repairs sathi accountability system implement kara",
+                "receivedOn": "2024-02-27"
+              },
+              {
+                "id": "GR094",
+                "userName": "Sneha Patil",
+                "region": "Dadar West, Mumbai",
+                "rating": 1,
+                "remark": "Arey yaar, baar baar flooding! F***ing useless maintenance 😤",
+                "language": "Hindi-English",
+                "aiSuggestion": "Reassess drainage capacity & schedule preventive maintenance",
+                "receivedOn": "2024-02-27"
+              },
+              {
+                "id": "GR095",
+                "userName": "Anonymous",
+                "region": "Colaba, Mumbai",
+                "rating": 1,
+                "remark": "Saala drains full tangad! Roz hi pani bharla 😡",
+                "language": "Hindi-Marathi",
+                "aiSuggestion": "Immediate cleaning & inspection kara",
+                "receivedOn": "2024-02-28"
+              }
+            ]
+          },
+          {
+            "category": "Road Maintenance",
+            "summary": {
+              "aiInsight": "Potholes ani slow repair mule lok khup frustrated ahet, slangs ani thodi shivya yet ahet.",
+              "suggestion": "Durable asphalt use kara, rapid repair squads implement kara, citizens la info dya repair timeline cha."
+            },
+            "feedbacks": [
+              {
+                "id": "GR096",
+                "userName": "Anonymous",
+                "region": "Bandra West, Mumbai",
+                "rating": 1,
+                "remark": "Saale potholes! Roz crash hotey 😡",
+                "language": "Hindi",
+                "aiSuggestion": "High-traffic zones madhe immediate patching kara",
+                "receivedOn": "2024-02-28"
+              },
+              {
+                "id": "GR097",
+                "userName": "Rajesh Singh",
+                "region": "Chembur, Mumbai",
+                "rating": 1,
+                "remark": "Haay re, hi street ekdam bhayankar! F***ing disaster!",
+                "language": "Marathi-English",
+                "aiSuggestion": "Resurfacing plan kara & regular inspection schedule kara",
+                "receivedOn": "2024-03-01"
+              },
+              {
+                "id": "GR098",
+                "userName": "Anonymous",
+                "region": "Mulund, Mumbai",
+                "rating": 2,
+                "remark": "Ye road ka scene hi kharab hai, bloody pit holes 🤬",
+                "language": "Hindi-English",
+                "aiSuggestion": "Assign rapid repair team & monitor recurring potholes",
+                "receivedOn": "2024-03-01"
+              },
+              {
+                "id": "GR099",
+                "userName": "Priya Nair",
+                "region": "Goregaon East, Mumbai",
+                "rating": 1,
+                "remark": "Maza bike almost todla re saala road war! 😡",
+                "language": "Marathi",
+                "aiSuggestion": "Immediate repair & permanent resurfacing kara",
+                "receivedOn": "2024-03-02"
+              },
+              {
+                "id": "GR100",
+                "userName": "Anonymous",
+                "region": "Powai, Mumbai",
+                "rating": 1,
+                "remark": "F***ing roads, full tangad! Kab fix karoge yaar?",
+                "language": "Hindi-English",
+                "aiSuggestion": "Key roads upgrade kara & monitor condition",
+                "receivedOn": "2024-03-02"
+              }
+            ]
+          },
+          {
+            "category": "Water Supply",
+            "summary": {
+              "aiInsight": "Irregular water supply mule citizens frustrated ahet. Remarks madhe slangs, galiya, emojis ahot.",
+              "suggestion": "Real-time supply schedule, automated alerts & rapid response teams deploy kara."
+            },
+            "feedbacks": [
+              {
+                "id": "GR101",
+                "userName": "Ayesha Khan",
+                "region": "Santacruz East, Mumbai",
+                "rating": 1,
+                "remark": "Pani hi nahi aa raha! Saala system kharaab 😡",
+                "language": "Hindi",
+                "aiSuggestion": "Check pipelines & restore supply immediately",
+                "receivedOn": "2024-03-03"
+              },
+              {
+                "id": "GR102",
+                "userName": "Anonymous",
+                "region": "Mazgaon, Mumbai",
+                "rating": 2,
+                "remark": "Arre yaar, 2 din se tap band! Kaay bakchodi hai? 🤬",
+                "language": "Hindi",
+                "aiSuggestion": "Investigate outage & notify citizens",
+                "receivedOn": "2024-03-03"
+              },
+              {
+                "id": "GR103",
+                "userName": "Rohit Verma",
+                "region": "Malad West, Mumbai",
+                "rating": 1,
+                "remark": "Haay re! Pani nahi milta re saale, full frustration 😤",
+                "language": "Marathi",
+                "aiSuggestion": "Restore supply immediately & monitor daily",
+                "receivedOn": "2024-03-04"
+              },
+              {
+                "id": "GR104",
+                "userName": "Anonymous",
+                "region": "Byculla, Mumbai",
+                "rating": 1,
+                "remark": "F***ing tap se paani nahi aa raha, chutiya system 🤬",
+                "language": "Hindi-English",
+                "aiSuggestion": "Repair system & alert citizens",
+                "receivedOn": "2024-03-04"
+              },
+              {
+                "id": "GR105",
+                "userName": "Neha Joshi",
+                "region": "Thane, Mumbai Metropolitan Region",
+                "rating": 2,
+                "remark": "Pani ka pressure zero hai re saala! Full frustration 😡",
+                "language": "Hindi-Marathi",
+                "aiSuggestion": "Check pumps & restore adequate water pressure",
+                "receivedOn": "2024-03-05"
+              }
+            ]
+          },
+          {
+            "category": "Garbage Collection",
+            "summary": {
+              "aiInsight": "Irregular garbage collection mule lok khup angry ahet. Remarks madhe slangs, mild galiya ani emojis ahot.",
+              "suggestion": "IoT-enabled bins & ward-wise monitoring deploy kara, daily collection schedule maintain kara."
+            },
+            "feedbacks": [
+              {
+                "id": "GR106",
+                "userName": "Anonymous",
+                "region": "Andheri West, Mumbai",
+                "rating": 1,
+                "remark": "Saale kachra pickup nahi hota! Roz hi mess 🤬",
+                "language": "Hindi",
+                "aiSuggestion": "Ensure daily collection & track via GPS",
+                "receivedOn": "2024-03-05"
+              },
+              {
+                "id": "GR107",
+                "userName": "Sanjay Gupta",
+                "region": "Sion, Mumbai",
+                "rating": 2,
+                "remark": "Garbage ka scene hi kharab! Saala bakchodi 🤬",
+                "language": "Hindi",
+                "aiSuggestion": "Route planning improve kara & monitor collection",
+                "receivedOn": "2024-03-06"
+              },
+              {
+                "id": "GR108",
+                "userName": "Anonymous",
+                "region": "Vile Parle East, Mumbai",
+                "rating": 1,
+                "remark": "Kachra full tangad! Kab saaf karoge yaar 😡",
+                "language": "Hindi-Marathi",
+                "aiSuggestion": "Add more bins & track pickup digitally",
+                "receivedOn": "2024-03-06"
+              }
+            ]
+          }
+        ]
+      }
+      

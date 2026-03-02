@@ -1,0 +1,421 @@
+{
+  "government_schemes": [
+    {
+      "id": "PMAY",
+    "name": "प्रधानमंत्री आवास योजना (PMAY)",
+      "english_name": "Pradhan Mantri Awas Yojana",
+      "description": "गरीबों को सस्ते घर उपलब्ध कराने के लिए सरकार की प्रमुख योजना",
+      "category": "Housing",
+    "beneficiaries": "EWS, LIG, MIG वर्ग के लोग",
+    "features": [
+      "₹6 लाख तक की सब्सिडी",
+      "महिलाओं को प्राथमिकता",
+      "स्वच्छता और बुनियादी सुविधाएं"
+    ],
+      "image_url": "https://pmay-urban.gov.in/photogallery",
+      "official_website": "https://pmay-urban.gov.in/",
+      "launch_year": "2015"
+    },
+    {
+      "id": "PMKVY",
+    "name": "प्रधानमंत्री कौशल विकास योजना (PMKVY)",
+      "english_name": "Pradhan Mantri Kaushal Vikas Yojana",
+      "description": "युवाओं को कौशल प्रशिक्षण प्रदान करने वाली योजना",
+      "category": "Skill Development",
+    "beneficiaries": "18 से 35 वर्ष के युवा",
+    "features": [
+      "प्रमाणन प्रशिक्षण",
+      "इंटर्नशिप अवसर",
+      "वित्तीय सहायता"
+    ],
+      "image_url": "https://www.facebook.com/OfficialSkillIndia/photos/",
+      "official_website": "https://www.pmkvyofficial.org/",
+      "launch_year": "2015"
+    },
+    {
+      "id": "PMJAY",
+    "name": "आयुष्मान भारत योजना (PMJAY)",
+      "english_name": "Ayushman Bharat Yojana",
+      "description": "गरीब परिवारों को ₹5 लाख तक का स्वास्थ्य बीमा",
+      "category": "Healthcare",
+    "beneficiaries": "12 करोड़ से अधिक गरीब परिवार",
+    "features": [
+      "द्वितीयक और तृतीयक उपचार",
+      "पैन इंडिया कवरेज",
+      "कैशलेस उपचार"
+    ],
+      "image_url": "https://www.shutterstock.com/search/pmjay",
+      "official_website": "https://pmjay.gov.in/",
+      "launch_year": "2018"
+    },
+    {
+      "id": "PMMVY",
+    "name": "प्रधानमंत्री मातृ वंदना योजना (PMMVY)",
+      "english_name": "Pradhan Mantri Matru Vandana Yojana",
+      "description": "गर्भवती महिलाओं को ₹5,000 तक की वित्तीय सहायता",
+      "category": "Women Welfare",
+    "beneficiaries": "पहली बार गर्भवती महिलाएं",
+    "features": [
+      "गर्भावस्था के दौरान पोषण सहायता",
+      "प्रसव पूर्व और प्रसवोत्तर देखभाल",
+      "स्वास्थ्य जांच"
+    ],
+      "image_url": "https://www.facebook.com/PMMVY/",
+      "official_website": "https://wcd.nic.in/schemes/pradhan-mantri-matru-vandana-yojana",
+      "launch_year": "2017"
+    },
+    {
+      "id": "PM_KISAN",
+    "name": "प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)",
+      "english_name": "Pradhan Mantri Kisan Samman Nidhi",
+      "description": "किसानों को ₹6,000 वार्षिक सहायता",
+      "category": "Agriculture",
+    "beneficiaries": "छोटे और सीमांत किसान",
+    "features": [
+      "तीन समान किस्तों में भुगतान",
+      "डायरेक्ट बेनिफिट ट्रांसफर (DBT)",
+      "आधार आधारित सत्यापन"
+    ],
+      "image_url": "https://www.instagram.com/pmkisanofficial/",
+      "official_website": "https://pmkisan.gov.in/",
+      "launch_year": "2019"
+    },
+    {
+      "id": "PMFBY",
+    "name": "प्रधानमंत्री फसल बीमा योजना (PMFBY)",
+      "english_name": "Pradhan Mantri Fasal Bima Yojana",
+      "description": "किसानों को फसल नुकसान के लिए बीमा कवर",
+      "category": "Agriculture Insurance",
+    "beneficiaries": "सभी किसान",
+    "features": [
+      "सभी प्रकार की फसलों का बीमा",
+      "सस्ती प्रीमियम दरें",
+      "सरकारी सहायता"
+    ],
+      "image_url": "https://www.instagram.com/pmfasalbimayojana/",
+      "official_website": "https://pmfby.gov.in/",
+      "launch_year": "2016"
+    },
+    {
+      "id": "PMJDY",
+    "name": "प्रधानमंत्री जन धन योजना (PMJDY)",
+      "english_name": "Pradhan Mantri Jan Dhan Yojana",
+      "description": "हर भारतीय को बैंक खाता खोलने की सुविधा",
+      "category": "Financial Inclusion",
+    "beneficiaries": "सभी नागरिक",
+    "features": [
+      "बिना न्यूनतम बैलेंस के खाता",
+      "डायरेक्ट बेनिफिट ट्रांसफर",
+      "ऋण और बीमा सुविधाएं"
+    ],
+      "image_url": "https://www.pmjdy.gov.in/pmjdylogo",
+      "official_website": "https://www.pmjdy.gov.in/",
+      "launch_year": "2014"
+    },
+    {
+      "id": "PMJJBY",
+    "name": "प्रधानमंत्री जीवन ज्योति बीमा योजना (PMJJBY)",
+      "english_name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+      "description": "₹2 लाख का जीवन बीमा कवर",
+      "category": "Life Insurance",
+    "beneficiaries": "18 से 50 वर्ष के लोग",
+    "features": [
+      "सस्ती प्रीमियम दरें",
+      "सभी कारणों से मृत्यु पर कवर",
+      "ऑनलाइन आवेदन"
+    ],
+      "image_url": "https://www.myscheme.gov.in/schemes/pmjjby",
+      "official_website": "https://www.myscheme.gov.in/schemes/pmjjby",
+      "launch_year": "2015"
+    },
+    {
+      "id": "SBM",
+      "name": "स्वच्छ भारत मिशन (SBM)",
+      "english_name": "Swachh Bharat Mission",
+      "description": "स्वच्छता और खुले में शौच से मुक्ति के लिए अभियान",
+      "category": "Sanitation",
+      "beneficiaries": "ग्रामीण और शहरी क्षेत्रों के निवासी",
+      "features": [
+        "टॉयलेट निर्माण",
+        "स्वच्छता अभियान",
+        "जागरूकता कार्यक्रम"
+      ],
+      "image_url": "https://swachhbharatmission.gov.in/",
+      "official_website": "https://swachhbharatmission.gov.in/",
+      "launch_year": "2014"
+    },
+    {
+      "id": "APY",
+      "name": "अटल पेंशन योजना (APY)",
+      "english_name": "Atal Pension Yojana",
+      "description": "असंगठित क्षेत्र के श्रमिकों के लिए पेंशन योजना",
+      "category": "Pension",
+      "beneficiaries": "18 से 40 वर्ष के लोग",
+      "features": [
+        "गारंटीड पेंशन",
+        "सरकारी योगदान",
+        "न्यूनतम ₹1000 प्रति माह"
+      ],
+      "image_url": "https://www.npscra.nsdl.co.in/",
+      "official_website": "https://www.npscra.nsdl.co.in/",
+      "launch_year": "2015"
+    },
+    {
+      "id": "UJALA",
+      "name": "उजाला योजना (UJALA)",
+      "english_name": "Unnat Jyoti by Affordable LEDs for All",
+      "description": "सस्ते LED बल्ब उपलब्ध कराने की योजना",
+      "category": "Energy Efficiency",
+      "beneficiaries": "सभी घरेलू उपभोक्ता",
+    "features": [
+        "सस्ते LED बल्ब",
+        "ऊर्जा बचत",
+        "ऑनलाइन आवेदन"
+      ],
+      "image_url": "https://www.ujala.gov.in/",
+      "official_website": "https://www.ujala.gov.in/",
+      "launch_year": "2015"
+    },
+    {
+      "id": "DDUGKY",
+      "name": "दीन दयाल उपाध्याय ग्रामीण कौशल्य योजना (DDUGKY)",
+      "english_name": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+      "description": "ग्रामीण युवाओं को कौशल प्रशिक्षण",
+      "category": "Rural Skill Development",
+      "beneficiaries": "15 से 35 वर्ष के ग्रामीण युवा",
+    "features": [
+        "3 महीने का प्रशिक्षण",
+        "नौकरी गारंटी",
+      "वित्तीय सहायता"
+    ],
+      "image_url": "https://www.ddugky.gov.in/",
+      "official_website": "https://www.ddugky.gov.in/",
+      "launch_year": "2014"
+    },
+    {
+      "id": "PMGSY",
+      "name": "प्रधानमंत्री ग्राम सड़क योजना (PMGSY)",
+      "english_name": "Pradhan Mantri Gram Sadak Yojana",
+      "description": "ग्रामीण क्षेत्रों में सड़क निर्माण",
+      "category": "Infrastructure",
+      "beneficiaries": "ग्रामीण क्षेत्रों के निवासी",
+    "features": [
+        "गांवों को सड़क से जोड़ना",
+        "कनेक्टिविटी में सुधार",
+        "आर्थिक विकास"
+      ],
+      "image_url": "https://pmgsy.nic.in/",
+      "official_website": "https://pmgsy.nic.in/",
+      "launch_year": "2000"
+    },
+    {
+      "id": "MUDRA",
+      "name": "मुद्रा योजना (MUDRA)",
+      "english_name": "Micro Units Development and Refinance Agency",
+      "description": "छोटे व्यवसायों को ऋण सुविधा",
+      "category": "Micro Finance",
+      "beneficiaries": "छोटे और सूक्ष्म उद्यमी",
+    "features": [
+        "₹50,000 से ₹10 लाख तक ऋण",
+        "तीन श्रेणियां: शिशु, किशोर, तरुण",
+        "कम ब्याज दर"
+      ],
+      "image_url": "https://www.mudra.org.in/",
+      "official_website": "https://www.mudra.org.in/",
+      "launch_year": "2015"
+    },
+    {
+      "id": "PMUY",
+      "name": "प्रधानमंत्री उज्ज्वला योजना (PMUY)",
+      "english_name": "Pradhan Mantri Ujjwala Yojana",
+      "description": "गरीब महिलाओं को मुफ्त LPG कनेक्शन",
+      "category": "Clean Fuel",
+      "beneficiaries": "BPL परिवारों की महिलाएं",
+    "features": [
+        "मुफ्त LPG कनेक्शन",
+        "स्वास्थ्य लाभ",
+        "पर्यावरण सुरक्षा"
+      ],
+      "image_url": "https://www.pmuy.gov.in/",
+      "official_website": "https://www.pmuy.gov.in/",
+      "launch_year": "2016"
+    },
+    {
+      "id": "PMKMY",
+      "name": "प्रधानमंत्री कृषि मंत्री योजना (PMKMY)",
+      "english_name": "Pradhan Mantri Kisan Maan Dhan Yojana",
+      "description": "किसानों के लिए पेंशन योजना",
+      "category": "Farmer Pension",
+      "beneficiaries": "18 से 40 वर्ष के किसान",
+    "features": [
+        "₹3000 प्रति माह पेंशन",
+        "कम योगदान",
+      "सरकारी सहायता"
+    ],
+      "image_url": "https://www.pmkisan.gov.in/",
+      "official_website": "https://www.pmkisan.gov.in/",
+      "launch_year": "2019"
+    },
+    {
+      "id": "PMFME",
+      "name": "प्रधानमंत्री फॉर्मलाइजेशन योजना (PMFME)",
+      "english_name": "Pradhan Mantri Formalization of Micro Food Processing Enterprises",
+      "description": "सूक्ष्म खाद्य प्रसंस्करण उद्यमों का औपचारिकरण",
+      "category": "Food Processing",
+      "beneficiaries": "सूक्ष्म खाद्य प्रसंस्करण उद्यमी",
+      "features": [
+        "वित्तीय सहायता",
+        "तकनीकी सहायता",
+        "बाजार संपर्क"
+      ],
+      "image_url": "https://www.pmfme.gov.in/",
+      "official_website": "https://www.pmfme.gov.in/",
+      "launch_year": "2020"
+    },
+    {
+      "id": "PMEGP",
+      "name": "प्रधानमंत्री रोजगार सृजन कार्यक्रम (PMEGP)",
+      "english_name": "Prime Minister Employment Generation Programme",
+      "description": "स्वरोजगार के लिए वित्तीय सहायता",
+      "category": "Employment Generation",
+      "beneficiaries": "युवा उद्यमी",
+      "features": [
+        "₹25 लाख तक ऋण",
+        "सब्सिडी सहायता",
+        "प्रशिक्षण सहायता"
+      ],
+      "image_url": "https://www.kviconline.gov.in/",
+      "official_website": "https://www.kviconline.gov.in/",
+      "launch_year": "2008"
+    },
+    {
+      "id": "PMSSY",
+      "name": "प्रधानमंत्री स्वास्थ्य सुरक्षा योजना (PMSSY)",
+      "english_name": "Pradhan Mantri Swasthya Suraksha Yojana",
+      "description": "स्वास्थ्य सेवाओं का विस्तार",
+      "category": "Healthcare Infrastructure",
+    "beneficiaries": "सभी नागरिक",
+    "features": [
+        "नए मेडिकल कॉलेज",
+        "अस्पताल निर्माण",
+        "स्वास्थ्य सेवाएं"
+      ],
+      "image_url": "https://www.pmssy.nic.in/",
+      "official_website": "https://www.pmssy.nic.in/",
+      "launch_year": "2003"
+    },
+    {
+      "id": "PMSBY",
+      "name": "प्रधानमंत्री सुरक्षा बीमा योजना (PMSBY)",
+      "english_name": "Pradhan Mantri Suraksha Bima Yojana",
+      "description": "दुर्घटना बीमा कवर",
+      "category": "Accident Insurance",
+      "beneficiaries": "18 से 70 वर्ष के लोग",
+      "features": [
+        "₹2 लाख का कवर",
+        "कम प्रीमियम",
+        "ऑटो डेबिट"
+      ],
+      "image_url": "https://www.myscheme.gov.in/schemes/pmsby",
+      "official_website": "https://www.myscheme.gov.in/schemes/pmsby",
+      "launch_year": "2015"
+    },
+    {
+      "id": "PMAY_MUMBAI",
+      "name": "प्रधानमंत्री आवास योजना - मुंबई",
+      "english_name": "Pradhan Mantri Awas Yojana - Mumbai",
+      "description": "मुंबई शहरात आणि उपनगरांमध्ये किफायतशीर घरे उपलब्ध करण्यासाठीची योजना | Scheme for affordable housing in Mumbai city and suburbs",
+      "category": "गृहनिर्माण / Housing",
+      "beneficiaries": "EWS, LIG, MIG वर्गाचे लोक | People from EWS, LIG, MIG categories",
+      "features": [
+        "₹2.67 लाख पर्यंत सब्सिडी Mumbai साठी | Up to ₹2.67 lakh subsidy for Mumbai",
+        "महिला मालकीसाठी प्राधान्य | Priority for female ownership",
+        "स्लम पुनर्विकास प्रकल्प | Slum redevelopment projects",
+        "क्रेडिट लिंक्ड सब्सिडी स्कीम | Credit Linked Subsidy Scheme (CLSS)"
+      ],
+      "eligibility": [
+        "मुंबईत किमान ५ वर्षे राहणारे | Resident of Mumbai for at least 5 years",
+        "पारिवारिक उत्पन्न ₹3-18 लाख पर्यंत | Family income between ₹3-18 lakh",
+        "कोणतेही इतर घर नसणे | No other house ownership"
+      ],
+      "application_process": "ऑनलाइन अर्ज pmay-urban.gov.in वर | Online application on pmay-urban.gov.in",
+      "contact_mumbai": [
+        "MHADA Mumbai Office: 022-6792 3100",
+        "SRA Mumbai: 022-2659 2000",
+        "MCGM Awas Department: 022-2262 1212"
+      ],
+      "official_website": "https://pmay-urban.gov.in/",
+      "launch_year": "2015",
+      "mumbai_specific_updates": {
+        "last_updated": "2024-03-15",
+        "status": "चालू | Ongoing",
+        "completed_projects": "45,000+ घरे | Houses",
+        "ongoing_projects": "75,000+ घरे under construction"
+      }
+    },
+    {
+      "id": "MMRDA_HOUSING",
+      "name": "MMRDA अफोर्डेबल हाउसिंग प्रोजेक्ट",
+      "english_name": "MMRDA Affordable Housing Project",
+      "description": "मुंबई महानगर प्रदेश विकास प्राधिकरणाची किफायतशीर गृहयोजना | Mumbai Metropolitan Region Development Authority's affordable housing scheme",
+      "category": "गृहनिर्माण / Housing",
+      "beneficiaries": "मुंबईतील मध्यमवर्गीय आणि कनिष्ठ वर्ग | Middle and lower class of Mumbai",
+      "features": [
+        "मुंबई उपनगरांमध्ये प्रकल्प | Projects in Mumbai suburbs",
+        "₹15-40 लाख दरम्यानचे घर | Homes between ₹15-40 lakh",
+        "ई-लॉटरी प्रक्रिया | E-lottery process",
+        "मेट्रो आणि ट्रान्सपोर्ट नेटवर्कजोडले | Connected to metro and transport network"
+      ],
+      "official_website": "https://mmrda.maharashtra.gov.in/affordable-housing",
+      "launch_year": "2018"
+    },
+    {
+      "id": "MAHA_JOBS",
+      "name": "महाराष्ट्र रोजगार हमी योजना",
+      "english_name": "Maharashtra Employment Guarantee Scheme",
+      "description": "महाराष्ट्र सरकारची युवांसाठी रोजगार निर्मिती योजना | Maharashtra government's employment generation scheme for youth",
+      "category": "रोजगार / Employment",
+      "beneficiaries": "महाराष्ट्रातील २०-४० वर्षे वयोगटातील युवा | Youth aged 20-40 years in Maharashtra",
+      "features": [
+        "कौशल्य प्रशिक्षण कार्यक्रम | Skill training programs",
+        "स्टार्टअपसाठी सब्सिडी | Subsidy for startups",
+        "मुंबईत १००+ प्रशिक्षण केंद्रे | 100+ training centers in Mumbai",
+        "कंपन्यांसाठी प्रोत्साहन | Incentives for companies"
+      ],
+      "official_website": "https://mahaemy.maharashtra.gov.in/",
+      "launch_year": "2023"
+    },
+    {
+      "id": "MUMBAI_HEALTH",
+      "name": "मुंबई आरोग्य योजना",
+      "english_name": "Mumbai Health Scheme",
+      "description": "मुंबई महानगरपालिकेची सर्वांगीण आरोग्य सेवा योजना | Comprehensive health service scheme of Mumbai Municipal Corporation",
+      "category": "आरोग्य / Healthcare",
+      "beneficiaries": "मुंबईतील सर्व नागरिक | All citizens of Mumbai",
+      "features": [
+        "मोफत आपत्कालीन उपचार | Free emergency treatment",
+        "कैंसर आणि मधुमेह उपचार | Cancer and diabetes treatment",
+        "सर्व सार्वजनिक रुग्णालयांमध्ये लागू | Applicable in all public hospitals",
+        "आयुष्मान भारत योजनेशी एकीकृत | Integrated with Ayushman Bharat"
+      ],
+      "official_website": "https://www.portal.mcgm.gov.in/irj/portal/anonymous/qldhealthscheme",
+      "launch_year": "2022"
+    },
+    {
+      "id": "MUMBAI_WOMEN",
+      "name": "मुंबई महिला सक्षमीकरण योजना",
+      "english_name": "Mumbai Women Empowerment Scheme",
+      "description": "महिला उद्योजकता आणि सबलतीकरणासाठी MCGM ची योजना | MCGM's scheme for women entrepreneurship and empowerment",
+      "category": "महिला कल्याण / Women Welfare",
+      "beneficiaries": "मुंबईतील महिला उद्योजक | Women entrepreneurs in Mumbai",
+    "features": [
+        "महिला व्यवसायांसाठी आर्थिक सहाय्य | Financial assistance for women businesses",
+        "मार्गदर्शन आणि प्रशिक्षण | Mentorship and training",
+        "बाजारपेठ प्रवेश सहाय्य | Market access support",
+        "कर्ज सवलत योजना | Loan concession scheme"
+      ],
+      "official_website": "https://portal.mcgm.gov.in/irj/portal/anonymous/womenempowerment",
+      "launch_year": "2023"
+    }
+  ]
+}

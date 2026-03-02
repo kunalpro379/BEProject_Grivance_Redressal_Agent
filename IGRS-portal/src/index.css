@@ -1,0 +1,172 @@
+@import 'react-day-picker/dist/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cream & Light Theme Colors */
+    --cream-50: 30 40% 98%;
+    --cream-100: 30 40% 96%;
+    --cream-200: 30 35% 92%;
+    --cream-300: 30 30% 85%;
+    --cream-400: 30 25% 75%;
+    --cream-500: 30 20% 65%;
+    
+    --background: 30 40% 98%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 35% 92%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 30 35% 92%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 30 30% 85%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 25% 88%;
+    --input: 30 25% 88%;
+    --ring: 0 0% 0%;
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 64.9%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 83.9%;
+  }
+}
+
+/* Custom scrollbar styles */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    display: none;
+  }
+
+  .scrollbar-thin:hover::-webkit-scrollbar {
+    display: block;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #E5E7EB;
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #374151;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Cream gradient backgrounds */
+  .bg-cream-gradient {
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF5 50%, #FFF5E8 100%);
+  }
+  
+  .bg-cream-light {
+    background-color: #FFFBF5;
+  }
+  
+  .bg-cream-dark {
+    background-color: #F5E6D3;
+  }
+  
+  /* Black & White utilities */
+  .bg-black-gradient {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  }
+  
+  .text-cream {
+    color: #F5E6D3;
+  }
+  
+  .border-cream {
+    border-color: #F5E6D3;
+  }
+}
+
+/* Hero Section Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes logoRotate {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Animation utility classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-logo-rotate {
+  animation: logoRotate 10s linear infinite;
+}
+
+.animate-pulse-custom {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}

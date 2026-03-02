@@ -1,0 +1,210 @@
+/* JSON Renderer Styles - Document-style display */
+
+.json-object {
+  background: #FAFAF8;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin: 0.5rem 0;
+  border: 1px solid #E8E6E1;
+}
+
+.json-object.depth-0 {
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.json-object.depth-1 {
+  background: #F5F5F3;
+  margin-left: 0;
+}
+
+.json-object.depth-2 {
+  background: #FAFAF8;
+  margin-left: 0;
+}
+
+.json-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #D4AF37;
+  font-family: 'Georgia', serif;
+}
+
+.json-field {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #E8E6E1;
+}
+
+.json-field:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.json-key-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.json-key {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #4A4A4A;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.json-inline-value {
+  flex: 1;
+}
+
+.json-value {
+  margin-top: 0.5rem;
+  margin-left: 0;
+}
+
+/* Primitive Types */
+.json-string {
+  color: #2E7D32;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9375rem;
+  word-break: break-word;
+}
+
+.json-number {
+  color: #1565C0;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.json-boolean {
+  color: #C62828;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+}
+
+.json-null {
+  color: #757575;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-style: italic;
+  font-size: 0.9375rem;
+}
+
+.json-empty {
+  color: #9E9E9E;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9375rem;
+}
+
+.json-unknown {
+  color: #6A1B9A;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9375rem;
+}
+
+/* Arrays */
+.json-array {
+  background: #F8F8F6;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  border-left: 3px solid #D4AF37;
+}
+
+.json-array.depth-1 {
+  background: #FAFAF8;
+}
+
+.json-array.depth-2 {
+  background: #FCFCFB;
+}
+
+.json-array-item {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed #E0E0DE;
+}
+
+.json-array-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.json-array-index {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #7D6E5C;
+  font-family: 'Consolas', 'Monaco', monospace;
+  min-width: 2rem;
+  flex-shrink: 0;
+}
+
+.json-array-value {
+  flex: 1;
+}
+
+/* Nested depth styling */
+.depth-0 {
+  font-size: 1rem;
+}
+
+.depth-1 {
+  font-size: 0.9375rem;
+}
+
+.depth-2 {
+  font-size: 0.875rem;
+}
+
+.depth-3 {
+  font-size: 0.8125rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .json-object {
+    padding: 1rem;
+  }
+
+  .json-key-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .json-key {
+    min-width: auto;
+  }
+
+  .json-array {
+    padding: 0.5rem;
+  }
+
+  .json-array-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .json-object {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #E8E6E1;
+  }
+
+  .json-field {
+    break-inside: avoid;
+  }
+}

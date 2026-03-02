@@ -31,13 +31,18 @@ import dashboardRoutes from './src/routes/dashboard.routes.js';
 import chatRoutes from './src/routes/chat.routes.js';
 import rolesRoutes from './src/routes/roles.routes.js';
 import commentsRoutes from './src/routes/comments.routes.js';
+import whatsappRoutes from './src/routes/whatsapp.routes.js';
+import whatsappAdminRoutes from './src/routes/whatsapp-admin.routes.js';
 
 // Import services
 import pool from './src/config/database.js';
 import telegramBot from './src/services/telegram.bot.service.js';
+import whatsappScheduler from './src/services/whatsapp.scheduler.js';
 import runMigration from './src/migrations/fix_citizens_table.js';
 import addLocationToGrievances from './src/migrations/add_location_to_grievances.js';
 import fixDepartmentTrigger from './src/migrations/fix_department_trigger.js';
+import createWhatsAppTables from './src/migrations/create_whatsapp_tables.js';
+import createWorkerContractorTables from './src/migrations/create_worker_contractor_tables.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -122,6 +127,8 @@ app.use('/api/budget', budgetRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/roles', rolesRoutes);
+app.use('/api/whatsapp', whatsappRoutes);
+app.use('/api/whatsapp-admin', whatsappAdminRoutes);
 
 // 404 handler
 app.use((req, res) => {
@@ -153,7 +160,9 @@ app.use((err, req, res, next) => {
     // await runMigration();
     // await fixDepartmentTrigger();
     // await addLocationToGrievances();
-    console.log('✅ All migrations completed (skipped)');
+    await createWhatsAppTables();
+    await createWorkerContractorTables();
+    console.log('✅ All migrations completed');
   } catch (error) {
     console.warn('⚠️  Database migration failed:', error.message);
   }
@@ -170,6 +179,21 @@ app.use((err, req, res, next) => {
     console.warn('  Server will continue without Telegram bot');
   }
 })();
+
+// Initialize WhatsApp Scheduler
+if (process.env.WHATSAPP_ACCESS_TOKEN) {
+  try {
+    // Start daily report reminders at 6 PM
+    whatsappScheduler.startDailyReportReminders(18, 0);
+    
+    // Start weekly summaries on Friday at 5 PM
+    whatsappScheduler.startWeeklySummary(5, 17, 0);
+    
+    console.log('✅ WhatsApp scheduler initialized');
+  } catch (error) {
+    console.warn('⚠️  WhatsApp scheduler initialization failed:', error.message);
+  }
+}
 
 // Start server
 app.listen(PORT, () => {
@@ -188,12 +212,14 @@ app.listen(PORT, () => {
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, closing server...');
+  whatsappScheduler.stopAll();
   await pool.end();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('\nSIGINT received, closing server...');
+  whatsappScheduler.stopAll();
   await pool.end();
   process.exit(0);
 });

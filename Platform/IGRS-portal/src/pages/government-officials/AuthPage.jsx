@@ -531,6 +531,14 @@ const OfficialAuthPage = () => {
         if (data.user.role === 'admin') {
           redirectUrl = '/admin/dashboard';
         } else if (data.user.role === 'department_officer' || data.user.role === 'department_head') {
+          // Department officers should go to department portal if they have department_id
+          if (data.user.department_id) {
+            redirectUrl = `/department/${data.user.department_id}`;
+          } else {
+            redirectUrl = data.user.id ? `/government/${data.user.id}` : '/officials-portal/authentication';
+          }
+        } else if (data.user.role === 'government_official') {
+          // Government officials should go to government portal
           redirectUrl = data.user.id ? `/government/${data.user.id}` : '/officials-portal/authentication';
         } else if (data.user.role === 'citizen') {
           redirectUrl = '/citizen/dashboard';

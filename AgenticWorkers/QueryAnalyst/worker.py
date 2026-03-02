@@ -269,11 +269,15 @@ class QueryAnalystWorker:
                     message_processed = False
                     
                     for message in messages:
+                        message_id = message.id
+                        pop_receipt = message.pop_receipt
+                        
                         try:
                             # Decode message
                             message_data = self.decode_message(message.content)
                             
                             print(f"\n📨 Received message:")
+                            print(f"   Message ID: {message_id}")
                             print(f"   Fields: {list(message_data.keys())}")
                             
                             # Check current_status - if not present or is "QueryAnalyst", process it
@@ -283,7 +287,8 @@ class QueryAnalystWorker:
                             if current_status and current_status not in ["QueryAnalyst", "pending", None]:
                                 print(f"   ⏭️  Skipping message with status: {current_status}")
                                 # Delete the message so it doesn't keep getting picked up
-                                self.queue_client.delete_message(message.id, message.pop_receipt)
+                                self.queue_client.delete_message(message_id, pop_receipt)
+                                print(f"   ✅ Message dequeued (already processed)\n")
                                 continue
                             
                             # If no status or status is QueryAnalyst/pending, process it
@@ -296,29 +301,48 @@ class QueryAnalystWorker:
                             # Process the message (AI analysis + Supabase update)
                             updated_message = self.process_message(message_data)
                             
-                            # Only push to webcrawler when AI data was successfully saved to Supabase
-                            if updated_message.get("current_status") == "Error":
-                                print(f"     Not pushing to webcrawler: Supabase update failed. Message will retry after visibility timeout.\n")
-                                # Do not delete message - it will reappear for retry
+                            # Check if processing was successful
+                            processing_status = updated_message.get("current_status")
+                            print(f"   📊 Processing status: {processing_status}")
+                            
+                            # Always delete the message from queryanalyst queue to prevent reprocessing
+                            # Even if there's an error, we don't want to keep retrying the same message indefinitely
+                            try:
+                                self.queue_client.delete_message(message_id, pop_receipt)
+                                print(f"   ✅ Message dequeued from QueryAnalyst queue")
+                            except Exception as del_err:
+                                print(f"   ⚠️  Warning: Could not delete message: {del_err}")
+                            
+                            # Only push to webcrawler if processing was successful
+                            if processing_status == "Error":
+                                print(f"   ⚠️  Processing failed - NOT pushing to webcrawler queue")
+                                print(f"   Error: {updated_message.get('error', 'Unknown error')}\n")
                                 continue
                             
-                            # Delete original message from queryanalyst
-                            self.queue_client.delete_message(message.id, message.pop_receipt)
+                            if processing_status == "ValidationFailed":
+                                print(f"   ⚠️  Validation failed - NOT pushing to webcrawler queue")
+                                print(f"   Reason: {updated_message.get('validation_result', {}).get('reasoning', 'Unknown')}\n")
+                                continue
                             
                             # Push to webcrawler queue only after successful analysis + DB update
-                            encoded_message = self.encode_message(updated_message)
-                            self.webcrawler_queue_client.send_message(encoded_message)
-                            
-                            print(f"   AI data saved to Supabase. Pushed to webcrawler queue with status: {updated_message['current_status']}")
-                            print(f"   📱 Server will notify Telegram directly\n")
+                            try:
+                                encoded_message = self.encode_message(updated_message)
+                                self.webcrawler_queue_client.send_message(encoded_message)
+                                print(f"   ✅ Pushed to webcrawler queue with status: {processing_status}")
+                                print(f"   📱 Server will notify Telegram directly\n")
+                            except Exception as push_err:
+                                print(f"   ❌ Error pushing to webcrawler queue: {push_err}\n")
                             
                         except Exception as e:
                             print(f"   ❌ Error processing message: {e}")
-                            # Try to delete the message to avoid reprocessing
+                            import traceback
+                            traceback.print_exc()
+                            # Always try to delete the message to avoid infinite reprocessing
                             try:
-                                self.queue_client.delete_message(message.id, message.pop_receipt)
-                            except:
-                                pass
+                                self.queue_client.delete_message(message_id, pop_receipt)
+                                print(f"   ✅ Message dequeued (after error) to prevent reprocessing\n")
+                            except Exception as del_err:
+                                print(f"   ⚠️  Could not delete message after error: {del_err}\n")
                     
                     if not message_processed:
                         # No messages found, wait before next poll

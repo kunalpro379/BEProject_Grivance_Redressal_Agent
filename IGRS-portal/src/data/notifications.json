@@ -1,0 +1,256 @@
+{
+    "notifications": [
+      {
+        "id": 1,
+        "type": "response",
+        "title": "Official Response Received",
+        "content": "PWD_Officer has responded to your road repair issue",
+        "timestamp": "2025-09-26T14:30:00Z",
+        "read": false,
+        "link": "/discussion/2",
+        "priority": "high"
+      },
+      {
+        "id": 2, 
+        "type": "poll",
+        "title": "New Poll Available",
+        "content": "Vote for Public Transport Improvement priorities",
+        "timestamp": "2025-09-26T12:15:00Z",
+        "read": false,
+        "link": "/poll/5",
+        "priority": "medium"
+      },
+      {
+        "id": 3,
+        "type": "update",
+        "title": "Issue Resolved",
+        "content": "Water logging issue in Andheri has been resolved",
+        "timestamp": "2025-09-25T16:45:00Z",
+        "read": true,
+        "link": "/discussion/1",
+        "priority": "high"
+      },
+      {
+        "id": 4,
+        "type": "reminder",
+        "title": "Poll Ending Soon",
+        "content": "Healthcare facility timing poll ends in 2 hours",
+        "timestamp": "2025-09-26T10:30:00Z",
+        "read": false,
+        "link": "/poll/2",
+        "priority": "medium"
+      },
+      {
+        "id": 5,
+        "type": "response",
+        "title": "BMC Response Received",
+        "content": "BMC_Sanitation has addressed your garbage collection issue",
+        "timestamp": "2025-09-26T09:15:00Z",
+        "read": false,
+        "link": "/discussion/5",
+        "priority": "high"
+      },
+      {
+        "id": 6,
+        "type": "update",
+        "title": "Work In Progress",
+        "content": "Road repair work has started in Bandra West",
+        "timestamp": "2025-09-25T18:20:00Z",
+        "read": true,
+        "link": "/discussion/2",
+        "priority": "medium"
+      },
+      {
+        "id": 7,
+        "type": "announcement",
+        "title": "New Feature Launched",
+        "content": "Real-time issue tracking now available",
+        "timestamp": "2025-09-25T14:00:00Z",
+        "read": true,
+        "link": "/features",
+        "priority": "low"
+      },
+      {
+        "id": 8,
+        "type": "response",
+        "title": "Health Department Update",
+        "content": "Medical_Officer has provided update on healthcare center",
+        "timestamp": "2025-09-25T11:45:00Z",
+        "read": false,
+        "link": "/discussion/3",
+        "priority": "high"
+      },
+      {
+        "id": 9,
+        "type": "poll",
+        "title": "Your Vote Matters",
+        "content": "Participate in School Infrastructure Development poll",
+        "timestamp": "2025-09-24T16:30:00Z",
+        "read": true,
+        "link": "/poll/3",
+        "priority": "medium"
+      },
+      {
+        "id": 10,
+        "type": "update",
+        "title": "Issue Escalated",
+        "content": "Your local train complaint has been escalated to senior officials",
+        "timestamp": "2025-09-24T13:20:00Z",
+        "read": true,
+        "link": "/discussion/6",
+        "priority": "high"
+      },
+      {
+        "id": 11,
+        "type": "reminder",
+        "title": "Discussion Update",
+        "content": "5 new replies in Healthcare Center discussion",
+        "timestamp": "2025-09-24T10:15:00Z",
+        "read": false,
+        "link": "/discussion/3",
+        "priority": "medium"
+      },
+      {
+        "id": 12,
+        "type": "response",
+        "title": "Education Department Response",
+        "content": "Education_Dept has answered your query about digital classrooms",
+        "timestamp": "2025-09-23T17:40:00Z",
+        "read": true,
+        "link": "/discussion/14",
+        "priority": "high"
+      },
+      {
+        "id": 13,
+        "type": "achievement",
+        "title": "Top Contributor This Week",
+        "content": "You're among top 5 contributors with 15 resolved issues",
+        "timestamp": "2025-09-23T15:25:00Z",
+        "read": true,
+        "link": "/profile/achievements",
+        "priority": "low"
+      },
+      {
+        "id": 14,
+        "type": "update",
+        "title": "Budget Approved",
+        "content": "₹2.5Cr approved for drainage system upgrade in your area",
+        "timestamp": "2025-09-23T12:10:00Z",
+        "read": false,
+        "link": "/discussion/1",
+        "priority": "high"
+      },
+      {
+        "id": 15,
+        "type": "reminder",
+        "title": "Action Required",
+        "content": "Please provide feedback on resolved water supply issue",
+        "timestamp": "2025-09-22T19:05:00Z",
+        "read": true,
+        "link": "/resolution/11",
+        "priority": "medium"
+      },
+      {
+        "id": 16,
+        "type": "response",
+        "title": "Traffic Police Response",
+        "content": "Traffic_Police has addressed your signal synchronization suggestion",
+        "timestamp": "2025-09-22T16:50:00Z",
+        "read": true,
+        "link": "/discussion/24",
+        "priority": "medium"
+      },
+      {
+        "id": 17,
+        "type": "update",
+        "title": "Community Milestone",
+        "content": "Our platform has resolved 150+ issues this month",
+        "timestamp": "2025-09-22T14:35:00Z",
+        "read": true,
+        "link": "/community/stats",
+        "priority": "low"
+      },
+      {
+        "id": 18,
+        "type": "poll",
+        "title": "New Survey Live",
+        "content": "Share your opinion on Public Park facilities",
+        "timestamp": "2025-09-21T11:20:00Z",
+        "read": true,
+        "link": "/poll/6",
+        "priority": "medium"
+      },
+      {
+        "id": 19,
+        "type": "response",
+        "title": "RTO Official Update",
+        "content": "RTO_Official has implemented your school bus safety suggestions",
+        "timestamp": "2025-09-21T09:45:00Z",
+        "read": false,
+        "link": "/discussion/11",
+        "priority": "high"
+      },
+      {
+        "id": 20,
+        "type": "update",
+        "title": "Mobile Network Improved",
+        "content": "Tower installation completed in Malad West area",
+        "timestamp": "2025-09-20T18:30:00Z",
+        "read": true,
+        "link": "/discussion/9",
+        "priority": "medium"
+      },
+      {
+        "id": 21,
+        "type": "emergency",
+        "title": "Urgent: Monsoon Alert",
+        "content": "Heavy rainfall expected. Report waterlogging immediately",
+        "timestamp": "2025-09-20T15:15:00Z",
+        "read": false,
+        "link": "/emergency/monsoon",
+        "priority": "critical"
+      },
+      {
+        "id": 22,
+        "type": "response",
+        "title": "MSEDCL Action Taken",
+        "content": "Street light repairs completed in Chembur area",
+        "timestamp": "2025-09-20T13:00:00Z",
+        "read": true,
+        "link": "/discussion/8",
+        "priority": "medium"
+      },
+      {
+        "id": 23,
+        "type": "update",
+        "title": "New Official Joined",
+        "content": "FSSAI_Official is now available for food safety issues",
+        "timestamp": "2025-09-19T16:45:00Z",
+        "read": true,
+        "link": "/officials",
+        "priority": "low"
+      },
+      {
+        "id": 24,
+        "type": "reminder",
+        "title": "Weekly Digest",
+        "content": "Check what's happening in your neighborhood this week",
+        "timestamp": "2025-09-19T10:30:00Z",
+        "read": false,
+        "link": "/digest/weekly",
+        "priority": "low"
+      },
+      {
+        "id": 25,
+        "type": "response",
+        "title": "Water Department Update",
+        "content": "Pipeline repair completed, supply normalized in Virar",
+        "timestamp": "2025-09-18T17:20:00Z",
+        "read": true,
+        "link": "/discussion/12",
+        "priority": "high"
+      }
+    ],
+    "unreadCount": 8,
+    "lastChecked": "2025-09-26T10:00:00Z"
+  }

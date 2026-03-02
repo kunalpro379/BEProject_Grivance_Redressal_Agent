@@ -176,12 +176,17 @@ export const getGrievances = async (req, res) => {
     const userRole = req.user.role;
     const citizenLoadAll = userRole === 'citizen' && (allParam === 'true' || allParam === true);
 
-    // Citizens: optionally load all grievances (all=true); include full_result so frontend can show "Analyzed" and analysis.
+    // IMPORTANT: Enforce maximum limit to prevent connection exhaustion
+    const requestedLimit = parseInt(limit, 10) || 20;
+    const maxLimit = 50; // Maximum 50 items per request
+    const limitVal = Math.min(requestedLimit, maxLimit);
+
     let query = `
       SELECT g.id, g.grievance_id, g.citizen_id, g.grievance_text, g.status, g.priority, g.created_at, g.updated_at,
              g.department_id, g.assigned_officer_id, g.image_path, g.image_description,
              g.sla_deadline, g.resolution_time, g.enhanced_query,
              g.full_result, g.validation_status,
+             g.category, g.extracted_latitude as latitude, g.extracted_longitude as longitude, g.extracted_address as location_address,
              c.full_name as citizen_name, c.email as citizen_email,
              o.full_name as officer_name, d.name as department_name
       FROM usergrievance g
@@ -220,7 +225,6 @@ export const getGrievances = async (req, res) => {
       paramCount++;
     }
 
-    const limitVal = citizenLoadAll ? Math.min(parseInt(limit, 10) || 200, 500) : (parseInt(limit, 10) || 20);
     const offsetVal = (Math.max(1, parseInt(page, 10)) - 1) * limitVal;
     query += ` ORDER BY g.created_at DESC LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
     params.push(limitVal, offsetVal);
@@ -243,12 +247,22 @@ export const getGrievances = async (req, res) => {
 export const getGrievanceById = async (req, res) => {
   try {
     const { grievanceId } = req.params;
+    const { viewAll } = req.query; // Check if viewing from "all grievances" page
     const userId = req.user.id;
     const userRole = req.user.role;
 
+    console.log('[getGrievanceById]', { grievanceId, viewAll, userId, userRole });
+
     let query = `
-      SELECT g.*, c.full_name as citizen_name, c.email as citizen_email, c.phone as citizen_phone,
-             o.full_name as officer_name, d.name as department_name
+      SELECT g.*, 
+             g.extracted_latitude as latitude, 
+             g.extracted_longitude as longitude, 
+             g.extracted_address as location_address,
+             c.full_name as citizen_name, c.email as citizen_email, c.phone as citizen_phone,
+             o.full_name as officer_name, 
+             d.name as department_name, d.description as department_description,
+             d.address as department_address, d.contact_email as department_email,
+             d.contact_phone as department_phone
       FROM usergrievance g
       LEFT JOIN citizens c ON g.citizen_id = c.id
       LEFT JOIN users o ON g.assigned_officer_id = o.id
@@ -258,7 +272,9 @@ export const getGrievanceById = async (req, res) => {
 
     const params = [grievanceId];
 
-    if (userRole === 'citizen') {
+    // Citizens can view any grievance if viewAll=true (from "all grievances" page)
+    if (userRole === 'citizen' && viewAll !== 'true') {
+      console.log('[getGrievanceById] Adding citizen filter');
       query += ' AND g.citizen_id = $2';
       params.push(userId);
     } else if (userRole === 'department_officer') {

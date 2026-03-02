@@ -1,0 +1,257 @@
+{
+    "dashboard": {
+      "overview": {
+        "totalTasks": 248,
+        "completedTasks": 156,
+        "inProgressTasks": 64,
+        "escalatedTasks": 28,
+        "analytics": {
+          "totalTasksChange": "+12%",
+          "completedTasksChange": "+8%",
+          "inProgressTasksChange": "-5%",
+          "escalatedTasksChange": "+2%"
+        }
+      },
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Water Supply Emergency",
+          "description": "Critical water shortage in Sector 15",
+          "priority": "Urgent",
+          "deadline": "2025-09-23T14:00:00Z",
+          "assignedTo": "John Doe",
+          "department": "Water Department",
+          "status": "Active"
+        },
+        {
+          "id": 2,
+          "title": "Power Outage",
+          "description": "Multiple areas affected in Gomti Nagar",
+          "priority": "High",
+          "deadline": "2025-09-23T16:00:00Z",
+          "assignedTo": "Sarah Smith",
+          "department": "Electricity Department",
+          "status": "Active"
+        },
+        {
+          "id": 3,
+          "title": "Road Repair",
+          "description": "Fix potholes on MG Road",
+          "priority": "Medium",
+          "deadline": "2025-09-25T18:00:00Z",
+          "assignedTo": "Mike Johnson",
+          "department": "Public Works",
+          "status": "In Progress"
+        },
+        {
+          "id": 4,
+          "title": "Sanitation Check",
+          "description": "Inspect sanitation facilities in Sector 12",
+          "priority": "Low",
+          "deadline": "2025-09-28T12:00:00Z",
+          "assignedTo": "Sarah Smith",
+          "department": "Municipal Corporation",
+          "status": "Completed"
+        },
+        {
+          "id": 5,
+          "title": "Tree Plantation",
+          "description": "Plant trees along the riverbank",
+          "priority": "Low",
+          "deadline": "2025-09-30T10:00:00Z",
+          "assignedTo": "John Doe",
+          "department": "Environment Department",
+          "status": "Active"
+        },
+           {
+          "id": 1,
+          "title": "Water Logging",
+          "description": "Heavy water logging in Andheri West due to rains",
+          "priority": "Urgent",
+          "deadline": "2025-09-23T14:00:00Z",
+          "assignedTo": "Rohit Deshmukh",
+          "department": "Municipal Corporation",
+          "status": "Active",
+          "region": "Andheri West"
+        },
+        {
+          "id": 2,
+          "title": "Power Outage",
+          "description": "Power failure in Bandra East affecting 3 sectors",
+          "priority": "High",
+          "deadline": "2025-09-23T16:00:00Z",
+          "assignedTo": "Sneha Kulkarni",
+          "department": "Electricity Department",
+          "status": "Active",
+          "region": "Bandra East"
+        },
+        {
+          "id": 3,
+          "title": "Road Repair",
+          "description": "Repair potholes on Western Express Highway, Borivali",
+          "priority": "Medium",
+          "deadline": "2025-09-25T18:00:00Z",
+          "assignedTo": "Manish Sharma",
+          "department": "Public Works",
+          "status": "In Progress",
+          "region": "Borivali"
+        },
+        {
+          "id": 4,
+          "title": "Sanitation Drive",
+          "description": "Clean drains in Dadar West",
+          "priority": "High",
+          "deadline": "2025-09-24T12:00:00Z",
+          "assignedTo": "Anjali Mehta",
+          "department": "Municipal Corporation",
+          "status": "Completed",
+          "region": "Dadar West"
+        },
+        {
+          "id": 5,
+          "title": "Traffic Signal Repair",
+          "description": "Non-functioning traffic signals in Kurla",
+          "priority": "Medium",
+          "deadline": "2025-09-26T11:00:00Z",
+          "assignedTo": "Vikram Patil",
+          "department": "Transport Department",
+          "status": "In Progress",
+          "region": "Kurla"
+        },
+        {
+          "id": 6,
+          "title": "Garbage Collection Issue",
+          "description": "Overflowing bins in Chembur",
+          "priority": "High",
+          "deadline": "2025-09-24T15:00:00Z",
+          "assignedTo": "Rina Joshi",
+          "department": "Municipal Corporation",
+          "status": "Active",
+          "region": "Chembur"
+        },
+        {
+          "id": 7,
+          "title": "Water Supply Disruption",
+          "description": "Temporary water cut in Malad East due to pipeline maintenance",
+          "priority": "Medium",
+          "deadline": "2025-09-27T09:00:00Z",
+          "assignedTo": "Rohit Deshmukh",
+          "department": "Water Department",
+          "status": "Active",
+          "region": "Malad East"
+        },
+        {
+          "id": 8,
+          "title": "Street Light Maintenance",
+          "description": "Non-functional street lights in Juhu",
+          "priority": "Low",
+          "deadline": "2025-09-30T18:00:00Z",
+          "assignedTo": "Vikram Patil",
+          "department": "Electricity Department",
+          "status": "Active",
+          "region": "Juhu"
+        }
+      ],
+      "assignedOfficers": [
+        {
+          "name": "Rohit Deshmukh",
+          "department": "Water Department",
+          "activeTasks": 4,
+          "completedTasks": 10,
+          "taskCompletionRate": "90%"
+        },
+        {
+          "name": "Sneha Kulkarni",
+          "department": "Electricity Department",
+          "activeTasks": 3,
+          "completedTasks": 8,
+          "taskCompletionRate": "85%"
+        },
+        {
+          "name": "Manish Sharma",
+          "department": "Public Works",
+          "activeTasks": 5,
+          "completedTasks": 12,
+          "taskCompletionRate": "88%"
+        },
+        {
+          "name": "Anjali Mehta",
+          "department": "Municipal Corporation",
+          "activeTasks": 3,
+          "completedTasks": 9,
+          "taskCompletionRate": "86%"
+        },
+        {
+          "name": "Vikram Patil",
+          "department": "Transport Department",
+          "activeTasks": 2,
+          "completedTasks": 7,
+          "taskCompletionRate": "87%"
+        },
+        {
+            "name": "John Doe",
+            "department": "Water Department",
+            "activeTasks": 5,
+            "completedTasks": 12,
+            "taskCompletionRate": "92%"
+          },
+          {
+            "name": "Sarah Smith",
+            "department": "Municipal Corporation",
+            "activeTasks": 3,
+            "completedTasks": 8,
+            "taskCompletionRate": "88%"
+          },
+          {
+            "name": "Mike Johnson",
+            "department": "Electricity Department",
+            "activeTasks": 4,
+            "completedTasks": 15,
+            "taskCompletionRate": "95%"
+          }
+      ],
+      "calendar": {
+        "events": [
+          {
+            "date": "2025-09-23",
+            "event": "Water Logging",
+            "assignedTo": "Rohit Deshmukh",
+            "region": "Andheri West"
+          },
+          {
+            "date": "2025-09-23",
+            "event": "Power Outage",
+            "assignedTo": "Sneha Kulkarni",
+            "region": "Bandra East"
+          },
+          {
+            "date": "2025-09-25",
+            "event": "Road Repair",
+            "assignedTo": "Manish Sharma",
+            "region": "Borivali"
+          },
+          {
+            "date": "2025-09-23",
+            "event": "Water Supply Emergency",
+            "assignedTo": "John Doe"
+          },
+          {
+            "date": "2025-09-23",
+            "event": "Power Outage",
+            "assignedTo": "Sarah Smith"
+          },
+          {
+            "date": "2025-09-25",
+            "event": "Road Repair",
+            "assignedTo": "Mike Johnson"
+          }
+        ]
+      },
+      "resources": {
+        "vehicles": 20,
+        "equipment": 40,
+        "budgetRemaining": 250000
+      }
+    }
+  }
+    

@@ -1,0 +1,347 @@
+{
+    "users": [
+      {
+        "username": "Concerned_Mumbaikar",
+        "verified": true,
+        "joinDate": "2024-01-15",
+        "contributions": 15,
+        "issuesResolved": 8,
+        "location": "Andheri East"
+      },
+      {
+        "username": "RoadSafety_Advocate",
+        "verified": true,
+        "joinDate": "2024-03-22",
+        "contributions": 23,
+        "issuesResolved": 12,
+        "location": "Bandra West"
+      },
+      {
+        "username": "Dharavi_Resident",
+        "verified": false,
+        "joinDate": "2025-08-10",
+        "contributions": 5,
+        "issuesResolved": 2,
+        "location": "Dharavi"
+      },
+      {
+        "username": "MCGM_Engineer",
+        "verified": true,
+        "joinDate": "2024-01-10",
+        "contributions": 45,
+        "issuesResolved": 32,
+        "role": "Official",
+        "department": "Municipal Corporation"
+      },
+          {
+            "username": "Concerned_Mumbaikar",
+            "verified": true,
+            "joinDate": "2024-01-15",
+            "contributions": 15,
+            "issuesResolved": 8,
+            "location": "Andheri East",
+            "role": "Citizen",
+            "avatar": "👨‍💼"
+          },
+          {
+            "username": "RoadSafety_Advocate",
+            "verified": true,
+            "joinDate": "2024-03-22",
+            "contributions": 23,
+            "issuesResolved": 12,
+            "location": "Bandra West",
+            "role": "Activist",
+            "avatar": "👮‍♂️"
+          },
+          {
+            "username": "Dharavi_Resident",
+            "verified": false,
+            "joinDate": "2025-08-10",
+            "contributions": 5,
+            "issuesResolved": 2,
+            "location": "Dharavi",
+            "role": "Citizen",
+            "avatar": "👨‍🔧"
+          },
+          {
+            "username": "MCGM_Engineer",
+            "verified": true,
+            "joinDate": "2024-01-10",
+            "contributions": 45,
+            "issuesResolved": 32,
+            "role": "Official",
+            "department": "Municipal Corporation",
+            "avatar": "👷‍♂️"
+          },
+          {
+            "username": "Mumbai_Teacher",
+            "verified": true,
+            "joinDate": "2024-02-14",
+            "contributions": 18,
+            "issuesResolved": 9,
+            "location": "Dadar",
+            "role": "Educator",
+            "avatar": "👩‍🏫"
+          },
+          {
+            "username": "Health_Activist",
+            "verified": true,
+            "joinDate": "2024-04-05",
+            "contributions": 32,
+            "issuesResolved": 18,
+            "location": "Borivali",
+            "role": "Health Worker",
+            "avatar": "👨‍⚕️"
+          },
+          {
+            "username": "Tech_Professional",
+            "verified": false,
+            "joinDate": "2025-03-18",
+            "contributions": 12,
+            "issuesResolved": 6,
+            "location": "Malad West",
+            "role": "IT Professional",
+            "avatar": "👨‍💻"
+          },
+          {
+            "username": "Senior_Citizen",
+            "verified": false,
+            "joinDate": "2024-11-20",
+            "contributions": 8,
+            "issuesResolved": 3,
+            "location": "Colaba",
+            "role": "Senior Citizen",
+            "avatar": "👴"
+          },
+          {
+            "username": "Student_Leader",
+            "verified": true,
+            "joinDate": "2025-01-08",
+            "contributions": 14,
+            "issuesResolved": 7,
+            "location": "Vile Parle",
+            "role": "Student",
+            "avatar": "👨‍🎓"
+          },
+          {
+            "username": "Environmentalist_Mum",
+            "verified": true,
+            "joinDate": "2024-06-12",
+            "contributions": 27,
+            "issuesResolved": 15,
+            "location": "Powai",
+            "role": "Environmentalist",
+            "avatar": "🌱"
+          },
+          {
+            "username": "Local_Business",
+            "verified": true,
+            "joinDate": "2024-03-30",
+            "contributions": 9,
+            "issuesResolved": 4,
+            "location": "Crawford Market",
+            "role": "Business Owner",
+            "avatar": "👨‍💼"
+          },
+          {
+            "username": "Women_Safety_Group",
+            "verified": true,
+            "joinDate": "2024-08-15",
+            "contributions": 21,
+            "issuesResolved": 11,
+            "location": "Mumbai Central",
+            "role": "NGO Representative",
+            "avatar": "👩‍⚖️"
+          },
+          {
+            "username": "Cycling_Enthusiast",
+            "verified": false,
+            "joinDate": "2025-05-22",
+            "contributions": 6,
+            "issuesResolved": 2,
+            "location": "Worli",
+            "role": "Cycling Community",
+            "avatar": "🚴‍♂️"
+          },
+          {
+            "username": "PWD_Officer",
+            "verified": true,
+            "joinDate": "2024-01-08",
+            "contributions": 56,
+            "issuesResolved": 42,
+            "role": "Official",
+            "department": "Public Works Department",
+            "avatar": "👨‍🔧"
+          },
+          {
+            "username": "Medical_Officer",
+            "verified": true,
+            "joinDate": "2024-02-20",
+            "contributions": 38,
+            "issuesResolved": 28,
+            "role": "Official",
+            "department": "Health Department",
+            "avatar": "👩‍⚕️"
+          },
+          {
+            "username": "BMC_Commissioner",
+            "verified": true,
+            "joinDate": "2024-01-05",
+            "contributions": 67,
+            "issuesResolved": 51,
+            "role": "Official",
+            "department": "Municipal Corporation",
+            "avatar": "👨‍💼"
+          },
+          {
+            "username": "RTO_Official",
+            "verified": true,
+            "joinDate": "2024-03-15",
+            "contributions": 29,
+            "issuesResolved": 19,
+            "role": "Official",
+            "department": "Transport Department",
+            "avatar": "🚗"
+          },
+          {
+            "username": "Education_Dept",
+            "verified": true,
+            "joinDate": "2024-02-10",
+            "contributions": 41,
+            "issuesResolved": 32,
+            "role": "Official",
+            "department": "Education Department",
+            "avatar": "📚"
+          },
+          {
+            "username": "Traffic_Police",
+            "verified": true,
+            "joinDate": "2024-04-18",
+            "contributions": 33,
+            "issuesResolved": 24,
+            "role": "Official",
+            "department": "Traffic Police",
+            "avatar": "👮‍♂️"
+          },
+          {
+            "username": "WaterDept_Official",
+            "verified": true,
+            "joinDate": "2024-03-08",
+            "contributions": 27,
+            "issuesResolved": 18,
+            "role": "Official",
+            "department": "Water Department",
+            "avatar": "💧"
+          },
+          {
+            "username": "MSEDCL_Engineer",
+            "verified": true,
+            "joinDate": "2024-05-12",
+            "contributions": 22,
+            "issuesResolved": 15,
+            "role": "Official",
+            "department": "Electricity Board",
+            "avatar": "⚡"
+          },
+          {
+            "username": "Library_Dept",
+            "verified": true,
+            "joinDate": "2024-06-25",
+            "contributions": 18,
+            "issuesResolved": 12,
+            "role": "Official",
+            "department": "Library Department",
+            "avatar": "📖"
+          },
+          {
+            "username": "NGO_Health",
+            "verified": true,
+            "joinDate": "2024-07-30",
+            "contributions": 34,
+            "issuesResolved": 22,
+            "location": "Govandi",
+            "role": "NGO Worker",
+            "avatar": "🏥"
+          },
+          {
+            "username": "Parent_Association",
+            "verified": true,
+            "joinDate": "2024-09-14",
+            "contributions": 19,
+            "issuesResolved": 10,
+            "location": "Kandivali",
+            "role": "Parent Group",
+            "avatar": "👨‍👩‍👧‍👦"
+          },
+          {
+            "username": "Eco_Club",
+            "verified": true,
+            "joinDate": "2024-10-08",
+            "contributions": 25,
+            "issuesResolved": 14,
+            "location": "Chembur",
+            "role": "Environmental Group",
+            "avatar": "🌿"
+          },
+          {
+            "username": "Food_Safety",
+            "verified": true,
+            "joinDate": "2024-11-22",
+            "contributions": 16,
+            "issuesResolved": 8,
+            "role": "Official",
+            "department": "Food Safety Department",
+            "avatar": "🍽️"
+          },
+          {
+            "username": "IT_Education",
+            "verified": true,
+            "joinDate": "2024-12-15",
+            "contributions": 14,
+            "issuesResolved": 9,
+            "role": "Official",
+            "department": "IT Education",
+            "avatar": "💻"
+          },
+          {
+            "username": "BMC_Awareness",
+            "verified": true,
+            "joinDate": "2025-01-20",
+            "contributions": 21,
+            "issuesResolved": 13,
+            "role": "Official",
+            "department": "Awareness Campaign",
+            "avatar": "📢"
+          },
+          {
+            "username": "FSSAI_Official",
+            "verified": true,
+            "joinDate": "2025-02-18",
+            "contributions": 12,
+            "issuesResolved": 7,
+            "role": "Official",
+            "department": "Food Safety Authority",
+            "avatar": ""
+          },
+          {
+            "username": "NMMC_Officer",
+            "verified": true,
+            "joinDate": "2025-03-25",
+            "contributions": 8,
+            "issuesResolved": 5,
+            "role": "Official",
+            "department": "Navi Mumbai Corporation",
+            "avatar": "🏢"
+          }
+        ],
+        "statistics": {
+          "totalUsers": 30,
+          "verifiedUsers": 22,
+          "officialAccounts": 12,
+          "citizenAccounts": 18,
+          "topContributor": "BMC_Commissioner",
+          "mostIssuesResolved": "BMC_Commissioner",
+          "newUsersThisMonth": 4
+        }
+      }
+    

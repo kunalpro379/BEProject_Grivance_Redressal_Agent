@@ -5,7 +5,7 @@ from PIL import Image
 genai.configure(api_key="AIzaSyBKdYslBh7PCyZXuRWKstuuhdUFoDH_5SE")
 
 # Load Gemini Vision model
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-3.1-pro-preview")
 
 # Load image
 image = Image.open("garbage.jpeg")

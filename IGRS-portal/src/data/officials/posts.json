@@ -1,0 +1,480 @@
+{
+    "posts": [
+      {
+        "id": "POST-001",
+        "title": "Successfully Resolved: Water Logging Issue at Sion Circle",
+        "author": "Amit Deshpande",
+        "department": "BMC Storm Water Drains Department",
+        "content": {
+          "en": "The chronic water logging issue at Sion Circle has been successfully resolved with the completion of the new drainage pipeline. We thank citizens for their patience during the work.",
+          "hi": "सायन सर्कल पर लंबे समय से चले आ रहे जल भराव के मुद्दे को नई ड्रेनेज पाइपलाइन के पूरा होने के साथ सफलतापूर्वक हल कर दिया गया है। कार्य के दौरान नागरिकों के धैर्य के लिए हम आभार व्यक्त करते हैं।",
+          "mr": "सायन सर्कलवरील चिरंतन पाणी साचण्याच्या समस्येचे नवीन ड्रेनएज पाइपलाइनच्या पूर्णतेसह यशस्वीरित्या निराकरण करण्यात आले आहे. कामाच्या काळात नागरिकांच्या संयमाबद्दल आभारी आहोत."
+        },
+        "attachments": [
+          {
+            "name": "work-completion-sion.jpg",
+            "url": "https://bmc.gov.in/images/posts/post-001-completion.jpg"
+          }
+        ],
+        "views": 567,
+        "acknowledged": 0,
+        "created_at": "2024-02-14T16:45:00Z"
+      },
+      {
+        "id": "POST-002",
+        "title": "Clean-Up Drive at Juhu Beach This Sunday",
+        "author": "Current User",
+        "department": "Mumbai Cleanliness Drive Initiative",
+        "content": {
+          "en": "Join us for a mega clean-up drive at Juhu Beach this Sunday, February 25th, from 7 AM to 9 AM. Gloves and bags will be provided. Let's keep our city clean!",
+          "hi": "इस रविवार, 25 फरवरी को सुबह 7 बजे से 9 बजे तक जुहू बीच पर एक मेगा सफाई अभियान में हमारे साथ जुड़ें। दस्ताने और बैग उपलब्ध कराए जाएंगे। आइए अपने शहर को साफ रखें!",
+          "mr": "या रविवार, २५ फेब्रुवारी रोजी सकाळी ७ ते ९ वाजेपर्यंत जुहू बीच वर एक मेगा स्वच्छता अभियानात सहभागी व्हा. हातमोजे आणि पिशव्या पुरवल्या जातील. चला आपले शहर स्वच्छ ठेवूया!"
+        },
+        "attachments": [
+          {
+            "name": "cleanup-drive-poster.jpg",
+            "url": "https://mumbaiclean.gov.in/images/posts/post-002-poster.jpg"
+          }
+        ],
+        "views": 890,
+        "acknowledged": 0,
+        "created_at": "2024-02-19T11:20:00Z"
+      },
+      {
+        "id": "POST-003",
+        "title": "New Electric Buses Added to BEST Fleet",
+        "author": "Sanjay Kumar",
+        "department": "Brihanmumbai Electricity Supply and Transport (BEST)",
+        "content": {
+          "en": "50 new electric buses have been added to the BEST fleet on routes in South Mumbai. This is a step towards a greener and quieter Mumbai.",
+          "hi": "दक्षिण मुंबई की रूटों पर BEST बसों के बेड़े में 50 नई इलेक्ट्रिक बसें शामिल की गई हैं। यह एक हरित और शांत मुंबई की दिशा में एक कदम है।",
+          "mr": "दक्षिण मुंबईतल्या मार्गांवर बेस्ट बसच्या ताफ्यात ५० नव्या इलेक्ट्रिक बस जोडल्या आहेत. हिरव्या आणि शांत मुंबईसाठी हे एक पाऊल आहे."
+        },
+        "attachments": [
+          {
+            "name": "new-electric-bus.jpg",
+            "url": "https://bestundertaking.com/images/posts/post-003-bus.jpg"
+          },
+          {
+            "name": "route-list.jpg",
+            "url": "https://bestundertaking.com/images/posts/post-003-routes.jpg"
+          }
+        ],
+        "views": 1120,
+        "acknowledged": 0,
+        "created_at": "2024-02-12T13:10:00Z"
+      },
+      {
+        "id": "POST-001",
+        "title": "Water Logging Issue Resolved at Sion Circle",
+        "author": "Amit Deshpande",
+        "department": "BMC Storm Water Drains Department",
+        "content": {
+          "en": "The chronic water logging issue at Sion Circle has been successfully resolved with the completion of the new drainage pipeline. We thank citizens for their patience during the work.",
+          "hi": "सायन सर्कल पर लंबे समय से चले आ रहे जल भराव के मुद्दे को नई ड्रेनेज पाइपलाइन के पूरा होने के साथ सफलतापूर्वक हल कर दिया गया है। कार्य के दौरान नागरिकों के धैर्य के लिए हम आभार व्यक्त करते हैं।",
+          "mr": "सायन सर्कलवरील चिरंतन पाणी साचण्याच्या समस्येचे नवीन ड्रेनएज पाइपलाइनच्या पूर्णतेसह यशस्वीरित्या निराकरण करण्यात आले आहे. कामाच्या काळात नागरिकांच्या संयमाबद्दल आभारी आहोत."
+        },
+        "attachments": [
+          {
+            "name": "work-completion-sion.jpg",
+            "url": "https://bmc.gov.in/images/posts/post-001-completion.jpg"
+          }
+        ],
+        "views": 567,
+        "acknowledged": 0,
+        "created_at": "2024-02-14T16:45:00Z"
+      },
+      {
+        "id": "POST-002",
+        "title": "Clean-Up Drive at Juhu Beach This Sunday",
+        "author": "Current User",
+        "department": "Mumbai Cleanliness Drive Initiative",
+        "content": {
+          "en": "Join us for a mega clean-up drive at Juhu Beach this Sunday, February 25th, from 7 AM to 9 AM. Gloves and bags will be provided. Let's keep our city clean!",
+          "hi": "इस रविवार, 25 फरवरी को सुबह 7 बजे से 9 बजे तक जुहू बीच पर एक मेगा सफाई अभियान में हमारे साथ जुड़ें। दस्ताने और बैग उपलब्ध कराए जाएंगे। आइए अपने शहर को साफ रखें!",
+          "mr": "या रविवार, २५ फेब्रुवारी रोजी सकाळी ७ ते ९ वाजेपर्यंत जुहू बीच वर एक मेगा स्वच्छता अभियानात सहभागी व्हा. हातमोजे आणि पिशव्या पुरवल्या जातील. चला आपले शहर स्वच्छ ठेवूया!"
+        },
+        "attachments": [
+          {
+            "name": "cleanup-drive-poster.jpg",
+            "url": "https://mumbaiclean.gov.in/images/posts/post-002-poster.jpg"
+          }
+        ],
+        "views": 890,
+        "acknowledged": 0,
+        "created_at": "2024-02-19T11:20:00Z"
+      },
+      {
+        "id": "POST-003",
+        "title": "New Electric Buses Added to BEST Fleet",
+        "author": "Sanjay Kumar",
+        "department": "Brihanmumbai Electricity Supply and Transport (BEST)",
+        "content": {
+          "en": "50 new electric buses have been added to the BEST fleet on routes in South Mumbai. This is a step towards a greener and quieter Mumbai.",
+          "hi": "दक्षिण मुंबई की रूटों पर BEST बसों के बेड़े में 50 नई इलेक्ट्रिक बसें शामिल की गई हैं। यह एक हरित और शांत मुंबई की दिशा में एक कदम है।",
+          "mr": "दक्षिण मुंबईतल्या मार्गांवर बेस्ट बसच्या ताफ्यात ५० नव्या इलेक्ट्रिक बस जोडल्या आहेत. हिरव्या आणि शांत मुंबईसाठी हे एक पाऊल आहे."
+        },
+        "attachments": [
+          {
+            "name": "new-electric-bus.jpg",
+            "url": "https://bestundertaking.com/images/posts/post-003-bus.jpg"
+          },
+          {
+            "name": "route-list.jpg",
+            "url": "https://bestundertaking.com/images/posts/post-003-routes.jpg"
+          }
+        ],
+        "views": 1120,
+        "acknowledged": 0,
+        "created_at": "2024-02-12T13:10:00Z"
+      },
+      {
+        "id": "POST-004",
+        "title": "Tree Plantation Drive in Aarey Colony",
+        "author": "Green Mumbai Initiative",
+        "department": "Forest Department, MCGM",
+        "content": {
+          "en": "5000 saplings planted in Aarey Colony as part of the green Mumbai initiative. Citizens participated enthusiastically in the drive.",
+          "hi": "ग्रीन मुंबई पहल के तहत आरे कॉलोनी में 5000 पौधे लगाए गए। नागरिकों ने उत्साहपूर्वक इस अभियान में भाग लिया।",
+          "mr": "ग्रीन मुंबई उपक्रमाचा भाग म्हणून आरे कॉलनीत ५००० रोपे लावली. नागरिकांनी उत्साहाने या मोहिमेत सहभाग घेतला."
+        },
+        "attachments": [
+          {
+            "name": "plantation-event-1.jpg",
+            "url": "https://mumbaiforest.gov.in/images/posts/post-004-plant1.jpg"
+          },
+          {
+            "name": "plantation-event-2.jpg",
+            "url": "https://mumbaiforest.gov.in/images/posts/post-004-plant2.jpg"
+          }
+        ],
+        "views": 678,
+        "acknowledged": 0,
+        "created_at": "2024-02-18T17:30:00Z"
+      },
+      {
+        "id": "POST-005",
+        "title": "Mobile Health Clinic Launched in Dharavi",
+        "author": "Dr. Rajiv Malhotra",
+        "department": "Public Health Department, MCGM",
+        "content": {
+          "en": "New mobile health clinic started services in Dharavi area. Provides free basic health checkups and medicines. Operating from 9 AM to 5 PM daily.",
+          "hi": "धारावी क्षेत्र में नई मोबाइल हेल्थ क्लिनिक ने सेवाएं शुरू की हैं। निःशुल्क बुनियादी स्वास्थ्य जांच और दवाएं प्रदान करता है। दैनिक सुबह 9 बजे से शाम 5 बजे तक संचालित होता है।",
+          "mr": "धारावी भागात नवीन मोबाइल आरोग्य क्लिनिकची सेवा सुरू झाली आहे. विनामूल्य मूलभूत आरोग्य तपासणी आणि औषधे पुरवते. दररोज सकाळी ९ वाजता ते संध्याकाळी ५ वाजेपर्यंत चालते."
+        },
+        "attachments": [
+          {
+            "name": "mobile-clinic.jpg",
+            "url": "https://health.mcgm.gov.in/images/posts/post-005-clinic.jpg"
+          }
+        ],
+        "views": 445,
+        "acknowledged": 0,
+        "created_at": "2024-02-15T12:00:00Z"
+      },
+      {
+        "id": "POST-006",
+        "title": "Foot Over Bridge Repair Completed at Dadar Station",
+        "author": "Bridge Department",
+        "department": "BMC Bridges Department",
+        "content": {
+          "en": "The foot over bridge at Dadar Railway Station (West) has been repaired and strengthened. Now safe for public use with enhanced safety features.",
+          "hi": "दादर रेलवे स्टेशन (वेस्ट) पर फुट ओवर ब्रिज की मरम्मत और मजबूती की गई है। बेहतर सुरक्षा सुविधाओं के साथ अब जनता के उपयोग के लिए सुरक्षित है।",
+          "mr": "दादर रेल्वे स्टेशन (वेस्ट) येथील फुट ओव्हर ब्रिजची दुरुस्ती आणि बळकटी करण्यात आली आहे. वाढीव सुरक्षा वैशिष्ट्यांसह आता जनतेच्या वापरासाठी सुरक्षित."
+        },
+        "attachments": [
+          {
+            "name": "bridge-repair.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-006-bridge.jpg"
+          }
+        ],
+        "views": 789,
+        "acknowledged": 0,
+        "created_at": "2024-02-16T14:15:00Z"
+      },
+      {
+        "id": "POST-007",
+        "title": "Anti-Dengue Fogging Drive in Eastern Suburbs",
+        "author": "Health Inspector",
+        "department": "BMC Public Health Department",
+        "content": {
+          "en": "Intensive anti-dengue fogging drive conducted in Chembur, Ghatkopar, and Bhandup areas. Citizens requested to cooperate and keep windows open during fogging.",
+          "hi": "चेंबूर, घाटकोपर और भांडुप क्षेत्रों में गहन डेंगू रोधी फॉगिंग अभियान चलाया गया। नागरिकों से फॉगिंग के दौरान सहयोग करने और खिड़कियां खुली रखने का अनुरोध है।",
+          "mr": "चेंबूर, घाटकोपर आणि भांडूप भागात गहन डेंगू विरोधी फॉगिंग मोहीम पार पाडण्यात आली. फॉगिंग दरम्यान सहकार्य करण्यासाठी आणि खिडक्या उघड्या ठेवण्यासाठी नागरिकांना विनंती."
+        },
+        "attachments": [
+          {
+            "name": "fogging-drive.jpg",
+            "url": "https://health.mcgm.gov.in/images/posts/post-007-fogging.jpg"
+          }
+        ],
+        "views": 334,
+        "acknowledged": 0,
+        "created_at": "2024-02-17T10:30:00Z"
+      },
+      {
+        "id": "POST-008",
+        "title": "New Children's Park Inaugurated in Borivali",
+        "author": "Parks & Gardens Department",
+        "department": "BMC Gardens Department",
+        "content": {
+          "en": "New children's park with modern play equipment inaugurated in Borivali (West). Park features rubber flooring for safety and separate play zones for different age groups.",
+          "hi": "बोरीवली (वेस्ट) में आधुनिक खेल उपकरणों वाला नया चिल्ड्रन पार्क का उद्घाटन किया गया। पार्क में सुरक्षा के लिए रबर फ्लोरिंग और विभिन्न आयु वर्गों के लिए अलग-अलग खेल क्षेत्र हैं।",
+          "mr": "बोरीवली (वेस्ट) येथे आधुनिक खेळण्याच्या सामग्रीसह नवीन बालवाडी उद्घाटित करण्यात आली. पार्कमध्ये सुरक्षिततेसाठी रबर फ्लोरिंग आणि वेगवेगळ्या वयोगटासाठी स्वतंत्र खेळ क्षेत्रे आहेत."
+        },
+        "attachments": [
+          {
+            "name": "children-park-1.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-008-park1.jpg"
+          },
+          {
+            "name": "children-park-2.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-008-park2.jpg"
+          }
+        ],
+        "views": 556,
+        "acknowledged": 0,
+        "created_at": "2024-02-13T15:45:00Z"
+      },
+      {
+        "id": "POST-009",
+        "title": "Street Food Vendor Training Program",
+        "author": "Food Safety Officer",
+        "department": "Food Safety Department, MCGM",
+        "content": {
+          "en": "100 street food vendors completed hygiene and food safety training program. Certified vendors will display food safety certificates at their stalls.",
+          "hi": "100 स्ट्रीट फूड वेंडर्स ने स्वच्छता और खाद्य सुरक्षा प्रशिक्षण कार्यक्रम पूरा किया। प्रमाणित विक्रेता अपने स्टॉल पर खाद्य सुरक्षा प्रमाणपत्र प्रदर्शित करेंगे।",
+          "mr": "100 रस्ता अन्न विक्रेत्यांनी स्वच्छता आणि अन्न सुरक्षा प्रशिक्षण कार्यक्रम पूर्ण केला. प्रमाणित विक्रेत्यांनी त्यांच्या स्टॉलवर अन्न सुरक्षा प्रमाणपत्रे प्रदर्शित केली जातील."
+        },
+        "attachments": [
+          {
+            "name": "training-program.jpg",
+            "url": "https://foodsafety.mcgm.gov.in/images/posts/post-009-training.jpg"
+          }
+        ],
+        "views": 423,
+        "acknowledged": 0,
+        "created_at": "2024-02-19T13:20:00Z"
+      },
+      {
+        "id": "POST-010",
+        "title": "Solar Panel Installation on Municipal Buildings",
+        "author": "Energy Department",
+        "department": "BMC Energy Department",
+        "content": {
+          "en": "Solar panels installed on 50 municipal buildings including schools and hospitals. Expected to reduce electricity costs by 40% and carbon footprint significantly.",
+          "hi": "स्कूलों और अस्पतालों सहित 50 नगरपालिका भवनों पर सोलर पैनल लगाए गए। बिजली की लागत में 40% और कार्बन फुटप्रिंट में उल्लेखनीय कमी की उम्मीद है।",
+          "mr": "शाळा आणि रुग्णालयांसह ५० नगरपालिका इमारतींवर सौर पॅनेले स्थापित करण्यात आली आहेत. वीज खर्चात ४०% आणि कार्बन फुटप्रिंटमध्ये लक्षणीय घट होण्याची अपेक्षा आहे."
+        },
+        "attachments": [
+          {
+            "name": "solar-installation.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-010-solar.jpg"
+          }
+        ],
+        "views": 667,
+        "acknowledged": 0,
+        "created_at": "2024-02-11T11:00:00Z"
+      },
+      {
+        "id": "POST-011",
+        "title": "Waste to Energy Plant Operational",
+        "author": "Solid Waste Management",
+        "department": "BMC Solid Waste Management",
+        "content": {
+          "en": "The new waste-to-energy plant at Deonar is now fully operational. Can process 3000 tons of waste daily and generate 25 MW electricity for the city.",
+          "hi": "देओनार में नया वेस्ट-टू-एनर्जी प्लांट अब पूरी तरह से operational है। प्रतिदिन 3000 टन कचरे को प्रोसेस कर सकता है और शहर के लिए 25 MW बिजली generate कर सकता है।",
+          "mr": "देओनार येथील नवीन कचरा-ते-ऊर्जा प्रकल्प आता पूर्णपणे कार्यरत आहे. दररोज ३००० टन कचऱ्याची प्रक्रिया करू शकतो आणि शहरासाठी २५ मेगावॅट वीज निर्माण करू शकतो."
+        },
+        "attachments": [
+          {
+            "name": "energy-plant.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-011-plant.jpg"
+          }
+        ],
+        "views": 778,
+        "acknowledged": 0,
+        "created_at": "2024-02-20T12:30:00Z"
+      },
+      {
+        "id": "POST-012",
+        "title": "Digital Library Services Launched",
+        "author": "Library Department",
+        "department": "BMC Library Department",
+        "content": {
+          "en": "Digital library services launched across 30 municipal libraries. Citizens can access e-books, audiobooks, and online journals with their library membership.",
+          "hi": "30 नगरपालिका पुस्तकालयों में डिजिटल लाइब्रेरी सेवाएं शुरू की गईं। नागरिक अपने लाइब्रेरी सदस्यता के साथ ई-बुक्स, ऑडियोबुक्स और ऑनलाइन जर्नल तक पहुंच सकते हैं।",
+          "mr": "३० नगरपालिका ग्रंथालयांमध्ये डिजिटल ग्रंथालय सेवा सुरू करण्यात आल्या आहेत. नागरिक त्यांच्या ग्रंथालय सदस्यत्वासह इ-पुस्तके, ऑडिओपुस्तके आणि ऑनलाइन नियतकालिके प्रवेश करू शकतात."
+        },
+        "attachments": [
+          {
+            "name": "digital-library.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-012-library.jpg"
+          }
+        ],
+        "views": 445,
+        "acknowledged": 0,
+        "created_at": "2024-02-14T09:15:00Z"
+      },
+      {
+        "id": "POST-013",
+        "title": "Rainwater Harvesting in Municipal Schools",
+        "author": "Water Conservation Cell",
+        "department": "BMC Environment Department",
+        "content": {
+          "en": "Rainwater harvesting systems installed in 25 municipal schools. Expected to save 5 million liters of water annually and create awareness among students.",
+          "hi": "25 नगरपालिका स्कूलों में वर्षा जल संचयन प्रणाली लगाई गई। प्रति वर्ष 5 मिलियन लीटर पानी की बचत और छात्रों के बीच जागरूकता पैदा करने की उम्मीद है।",
+          "mr": "२५ नगरपालिका शाळांमध्ये पावसाचे पाणी संठेवण प्रणाली स्थापित करण्यात आली आहे. दरवर्षी ५ दशलक्ष लिटर पाणी वाचवण्याची आणि विद्यार्थ्यांमध्ये जागृती निर्माण करण्याची अपेक्षा आहे."
+        },
+        "attachments": [
+          {
+            "name": "rainwater-school.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-013-rainwater.jpg"
+          }
+        ],
+        "views": 389,
+        "acknowledged": 0,
+        "created_at": "2024-02-16T16:45:00Z"
+      },
+      {
+        "id": "POST-014",
+        "title": "Anti-Encroachment Drive in Western Express Highway",
+        "author": "Encroachment Department",
+        "department": "BMC Encroachment Department",
+        "content": {
+          "en": "Anti-encroachment drive conducted along Western Express Highway. 150 illegal structures removed to ensure smooth traffic flow and pedestrian safety.",
+          "hi": "वेस्टर्न एक्सप्रेस हाईवे के किनारे अतिक्रमण विरोधी अभियान चलाया गया। सुगम यातायात प्रवाह और पैदल यात्री सुरक्षा सुनिश्चित करने के लिए 150 अवैध संरचनाएं हटाई गईं।",
+          "mr": "वेस्टर्न एक्सप्रेस हायवेकडे अतिक्रमण विरोधी मोहीम राबवण्यात आली. सुरळीत वाहतूक प्रवाह आणि पादचारी सुरक्षा सुनिश्चित करण्यासाठी १५० बेकायदेशीर रचना काढण्यात आल्या."
+        },
+        "attachments": [
+          {
+            "name": "encroachment-drive.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-014-drive.jpg"
+          }
+        ],
+        "views": 512,
+        "acknowledged": 0,
+        "created_at": "2024-02-18T14:30:00Z"
+      },
+      {
+        "id": "POST-015",
+        "title": "New Community Hall Inaugurated in Kandivali",
+        "author": "Community Development",
+        "department": "BMC Community Services",
+        "content": {
+          "en": "New community hall with capacity for 200 people inaugurated in Kandivali (East). Available for public events and functions at nominal charges.",
+          "hi": "कांदिवली (ईस्ट) में 200 लोगों की क्षमता वाला नया कम्युनिटी हॉल का उद्घाटन किया गया। सार्वजनिक कार्यक्रमों और कार्यों के लिए नाममात्र शुल्क पर उपलब्ध है।",
+          "mr": "कांदिवली (ईस्ट) येथे २०० लोकांची क्षमता असलेले नवीन सामुदायिक भवन उद्घाटित करण्यात आले. नाममात्र शुल्कावर सार्वजनिक कार्यक्रम आणि कार्यासाठी उपलब्ध."
+        },
+        "attachments": [
+          {
+            "name": "community-hall.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-015-hall.jpg"
+          }
+        ],
+        "views": 334,
+        "acknowledged": 0,
+        "created_at": "2024-02-12T17:00:00Z"
+      },
+      {
+        "id": "POST-016",
+        "title": "Fire Safety Training for Shopkeepers",
+        "author": "Fire Safety Officer",
+        "department": "Mumbai Fire Brigade",
+        "content": {
+          "en": "500 shopkeepers from various markets completed fire safety training. Training included use of fire extinguishers and emergency evacuation procedures.",
+          "hi": "विभिन्न बाजारों के 500 दुकानदारों ने अग्नि सुरक्षा प्रशिक्षण पूरा किया। प्रशिक्षण में अग्निशामक यंत्रों के उपयोग और आपातकालीन निकासी प्रक्रियाओं को शामिल किया गया।",
+          "mr": "विविध बाजारपेठेतील ५०० दुकानदारांनी अग्निशामक सुरक्षा प्रशिक्षण पूर्ण केले. प्रशिक्षणात अग्निशामक यंत्रे वापर आणि आणीबाणी निघाण प्रक्रिया समाविष्ट होत्या."
+        },
+        "attachments": [
+          {
+            "name": "fire-training.jpg",
+            "url": "https://mumbaifire.gov.in/images/posts/post-016-training.jpg"
+          }
+        ],
+        "views": 289,
+        "acknowledged": 0,
+        "created_at": "2024-02-19T15:20:00Z"
+      },
+      {
+        "id": "POST-017",
+        "title": "Beach Cleanliness Monitoring System",
+        "author": "Coastal Management",
+        "department": "BMC Coastal Zone Management",
+        "content": {
+          "en": "New automated beach cleanliness monitoring system installed at Girgaon Chowpatty. Uses AI cameras to detect litter and alert cleaning staff immediately.",
+          "hi": "गिरगांव चौपाटी पर नई automated बीच स्वच्छता निगरानी प्रणाली स्थापित की गई। AI कैमरों का उपयोग करके कचरा का पता लगाता है और तुरंत सफाई कर्मचारियों को सचेत करता है।",
+          "mr": "गिरगाव चौपाटीवर नवीन स्वयंचलित बीच स्वच्छता निरीक्षण प्रणाली स्थापित करण्यात आली. AI कॅमेरे वापरून कचरा शोधते आणि त्वरित सफाई कर्मचाऱ्यांना सतर्क करते."
+        },
+        "attachments": [
+          {
+            "name": "beach-monitoring.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-017-monitoring.jpg"
+          }
+        ],
+        "views": 456,
+        "acknowledged": 0,
+        "created_at": "2024-02-15T13:45:00Z"
+      },
+      {
+        "id": "POST-018",
+        "title": "Disability-Friendly Infrastructure Updates",
+        "author": "Social Welfare Department",
+        "department": "BMC Social Welfare",
+        "content": {
+          "en": "50 public buildings including hospitals and schools made disability-friendly with ramps, tactile paths, and accessible toilets. More upgrades planned.",
+          "hi": "अस्पतालों और स्कूलों सहित 50 सार्वजनिक भवनों को रैंप, स्पर्श मार्ग और सुलभ शौचालयों के साथ दिव्यांग-अनुकूल बनाया गया। और उन्नयन की योजना है।",
+          "mr": "रुग्णालये आणि शाळांसह ५० सार्वजनिक इमारती रॅम्प, स्पर्श मार्ग आणि प्रवेशयोग्य शौचालयांसह अपंग-अनुकूल बनवण्यात आल्या आहेत. अधिक उन्नयनची योजना आखली आहे."
+        },
+        "attachments": [
+          {
+            "name": "disability-friendly.jpg",
+            "url": "https://portal.mcgm.gov.in/images/posts/post-018-friendly.jpg"
+          }
+        ],
+        "views": 378,
+        "acknowledged": 0,
+        "created_at": "2024-02-17T11:10:00Z"
+      },
+      {
+        "id": "POST-019",
+        "title": "Smart Parking System Launch in Fort Area",
+        "author": "Traffic Planning Department",
+        "department": "Mumbai Traffic Police",
+        "content": {
+          "en": "Smart parking system launched in Fort area with sensor-based parking slots. Mobile app shows real-time parking availability and enables digital payments.",
+          "hi": "फोर्ट क्षेत्र में सेंसर-आधारित पार्किंग स्लॉट के साथ स्मार्ट पार्किंग सिस्टम लॉन्च किया गया। मोबाइल ऐप real-time पार्किंग उपलब्धता दिखाता है और डिजिटल भुगतान सक्षम करता है।",
+          "mr": "सेन्सर-आधारित पार्किंग स्लॉटसह फोर्ट भागात स्मार्ट पार्किंग प्रणाली सुरू करण्यात आली. मोबाइल ॲप रिअल-टाइम पार्किंग उपलब्धता दर्शवते आणि डिजिटल पेमेंट सक्षम करते."
+        },
+        "attachments": [
+          {
+            "name": "smart-parking.jpg",
+            "url": "https://mumbaitraffic.gov.in/images/posts/post-019-parking.jpg"
+          }
+        ],
+        "views": 667,
+        "acknowledged": 0,
+        "created_at": "2024-02-14T10:30:00Z"
+      },
+      {
+        "id": "POST-020",
+        "title": "Cultural Festival at Gateway of India",
+        "author": "Tourism Department",
+        "department": "Maharashtra Tourism Department",
+        "content": {
+          "en": "3-day cultural festival celebrating Mumbai's diversity at Gateway of India from March 1st-3rd, 2024. Food, music, and art from different communities.",
+          "hi": "1-3 मार्च, 2024 तक गेटवे ऑफ इंडिया में मुंबई की विविधता का जश्न मनाता 3-दिवसीय सांस्कृतिक उत्सव। विभिन्न समुदायों के भोजन, संगीत और कला।",
+          "mr": "मुंबईच्या वैविध्यासाजरीचा ३-दिवसीय सांस्कृतिक उत्सव १-३ मार्च, २०२४ दरम्यान गेटवे ऑफ इंडिया येथे. विविध समुदायांचे अन्न, संगीत आणि कला."
+        },
+        "attachments": [
+          {
+            "name": "festival-poster.jpg",
+            "url": "https://maharashtratourism.gov.in/images/posts/post-020-festival.jpg"
+          }
+        ],
+        "views": 890,
+        "acknowledged": 0,
+        "created_at": "2024-02-20T14:00:00Z"
+      }
+    ]
+  }

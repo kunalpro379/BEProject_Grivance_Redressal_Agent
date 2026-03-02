@@ -18,14 +18,16 @@ class TavilySearchEngine:
     def search_realtime_data(
         self,
         queries: List[str],
-        max_results_per_query: int = 3
+        max_results_per_query: int = 3,
+        location_context: str = "India"
     ) -> Dict[str, Any]:
         """
-        Search for real-time data using Tavily.
+        Search for real-time data using Tavily with location context.
         
         Args:
             queries: List of search queries
             max_results_per_query: Maximum results per query
+            location_context: Location context to add to queries (default: "India")
             
         Returns:
             Dictionary with search results organized by query
@@ -34,9 +36,15 @@ class TavilySearchEngine:
         
         for query in queries:
             try:
-                print(f"   🔍 Searching: {query}")
+                # Add location context if not already in query
+                if location_context and location_context.lower() not in query.lower():
+                    contextualized_query = f"{query} {location_context}"
+                else:
+                    contextualized_query = query
+                
+                print(f"   🔍 Searching: {contextualized_query}")
                 response = self.client.search(
-                    query=query,
+                    query=contextualized_query,
                     max_results=max_results_per_query,
                     search_depth="advanced",
                     include_domains=[],
@@ -56,7 +64,8 @@ class TavilySearchEngine:
                 all_results[query] = {
                     "results": results,
                     "answer": response.get("answer", ""),
-                    "query": query
+                    "query": contextualized_query,
+                    "original_query": query
                 }
                 
                 print(f"      Found {len(results)} results")

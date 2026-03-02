@@ -1,0 +1,429 @@
+{
+  "workflowTimeline": [
+    {
+      "grievanceId": "GRV_WAT_2024_001",
+      "stages": [
+        {
+          "stage": "Submitted",
+          "timestamp": "2024-02-10T09:30:00Z",
+          "officer": "Priya Sharma (Citizen)",
+          "officerId": null,
+          "action": "Grievance submitted via citizen portal",
+          "notes": "No water supply for 3 days. Building residents facing severe hardship.",
+          "attachments": ["water_supply_issue_1.jpg"],
+          "status": "completed"
+        },
+        {
+          "stage": "Assigned",
+          "timestamp": "2024-02-10T11:00:00Z",
+          "officer": "Amit Patel",
+          "officerId": "OFF_001",
+          "action": "Assigned to field team",
+          "notes": "Assigned to Engineer Amit Patel for inspection",
+          "attachments": [],
+          "status": "completed"
+        },
+        {
+          "stage": "Accepted",
+          "timestamp": "2024-02-10T11:30:00Z",
+          "officer": "Amit Patel",
+          "officerId": "OFF_001",
+          "action": "Grievance accepted by officer",
+          "notes": "Accepted. Will conduct field inspection tomorrow.",
+          "attachments": [],
+          "status": "completed"
+        },
+        {
+          "stage": "Field Visit",
+          "timestamp": "2024-02-11T14:30:00Z",
+          "officer": "Field Worker 12",
+          "officerId": "FW_012",
+          "action": "Field inspection completed",
+          "notes": "Pipeline blockage identified at main junction. Requires excavation.",
+          "attachments": ["field_inspection_1.jpg", "field_inspection_2.jpg"],
+          "gpsLocation": { "lat": 19.1975, "lng": 73.1940 },
+          "status": "completed"
+        }
+        ,
+        {
+          "stage": "In Progress",
+          "timestamp": "2024-02-12T09:00:00Z",
+          "officer": "Field Worker 12",
+          "officerId": "FW_012",
+          "action": "Work started - excavation and pipe replacement",
+          "notes": "Excavation started. Old pipe removed. New pipe installation in progress.",
+          "attachments": ["work_progress_1.jpg"],
+          "progressPercentage": 60,
+          "status": "current"
+        },
+        {
+          "stage": "Work Completed",
+          "timestamp": null,
+          "officer": null,
+          "officerId": null,
+          "action": "Pending",
+          "notes": null,
+          "attachments": [],
+          "status": "pending"
+        },
+        {
+          "stage": "Verified",
+          "timestamp": null,
+          "officer": null,
+          "officerId": null,
+          "action": "Pending",
+          "notes": null,
+          "attachments": [],
+          "status": "pending"
+        },
+        {
+          "stage": "Closed",
+          "timestamp": null,
+          "officer": null,
+          "officerId": null,
+          "action": "Pending",
+          "notes": null,
+          "attachments": [],
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "costTracking": [
+    {
+      "grievanceId": "GRV_WAT_2024_001",
+      "laborCost": 5000,
+      "materialCost": 12000,
+      "equipmentCost": 3000,
+      "transportCost": 1500,
+      "totalCost": 21500,
+      "currency": "INR",
+      "breakdown": [
+        { "item": "Labor - 2 workers x 2 days", "cost": 5000 },
+        { "item": "PVC Pipes - 50 meters", "cost": 8000 },
+        { "item": "Fittings and connectors", "cost": 2000 },
+        { "item": "Cement and sand", "cost": 2000 },
+        { "item": "Excavator rental - 4 hours", "cost": 3000 },
+        { "item": "Transport and logistics", "cost": 1500 }
+      ],
+      "budgetAllocated": 25000,
+      "budgetRemaining": 3500,
+      "costStatus": "Within Budget"
+    },
+    {
+      "grievanceId": "GRV_WAT_2024_003",
+      "laborCost": 8000,
+      "materialCost": 15000,
+      "equipmentCost": 5000,
+      "transportCost": 2000,
+      "totalCost": 30000,
+      "currency": "INR",
+      "breakdown": [
+        { "item": "Labor - 3 workers x 3 days", "cost": 8000 },
+        { "item": "Steel pipes - 30 meters", "cost": 12000 },
+        { "item": "Welding materials", "cost": 3000 },
+        { "item": "Excavator rental - 6 hours", "cost": 5000 },
+        { "item": "Transport", "cost": 2000 }
+      ],
+      "budgetAllocated": 30000,
+      "budgetRemaining": 0,
+      "costStatus": "At Budget Limit"
+    }
+  ],
+  "citizenFeedback": [
+    {
+      "grievanceId": "GRV_WAT_2024_003",
+      "rating": 5,
+      "feedbackText": "Excellent work! Problem resolved completely. Workers were professional and cleaned up after work.",
+      "satisfactionStatus": "Highly Satisfied",
+      "submittedDate": "2024-02-12T10:00:00Z",
+      "citizenName": "Sunita Mehta",
+      "wouldRecommend": true,
+      "additionalComments": "Thank you for the quick resolution"
+    },
+    {
+      "grievanceId": "GRV_WAT_2024_007",
+      "rating": 2,
+      "feedbackText": "Problem reoccurred after 2 days. Poor quality work. Leakage started again.",
+      "satisfactionStatus": "Dissatisfied",
+      "submittedDate": "2024-02-13T15:30:00Z",
+      "citizenName": "Rajesh Kumar",
+      "wouldRecommend": false,
+      "additionalComments": "Need better quality materials and workmanship"
+    },
+    {
+      "grievanceId": "GRV_WAT_2024_008",
+      "rating": 4,
+      "feedbackText": "Good work but took longer than expected. Final result is satisfactory.",
+      "satisfactionStatus": "Satisfied",
+      "submittedDate": "2024-02-14T09:00:00Z",
+      "citizenName": "Meera Patil",
+      "wouldRecommend": true,
+      "additionalComments": "Please improve response time"
+    }
+  ],
+  "slaPolicy": [
+    { "priority": "Emergency", "slaHours": 24, "slaDescription": "Critical issues requiring immediate attention" },
+    { "priority": "Urgent", "slaHours": 48, "slaDescription": "High priority issues affecting multiple users" },
+    { "priority": "High", "slaHours": 72, "slaDescription": "Important issues requiring prompt resolution" },
+    { "priority": "Medium", "slaHours": 120, "slaDescription": "Standard issues - 5 days resolution" },
+    { "priority": "Low", "slaHours": 168, "slaDescription": "Routine issues - 7 days resolution" }
+  ],
+  "aiExplanations": [
+    {
+      "grievanceId": "GRV_WAT_2024_001",
+      "recommendation": "Assign 2 additional field workers",
+      "confidence": 0.87,
+      "reasons": [
+        "Similar to 45 previous complaints in this area",
+        "Worker overload in Ward 52 - current utilization 95%",
+        "Low equipment availability - only 1 excavator free",
+        "Historical data shows 2-worker teams complete 40% faster",
+        "SLA deadline risk - 60% progress with 2 days remaining"
+      ],
+      "dataPoints": {
+        "similarComplaints": 45,
+        "workerUtilization": "95%",
+        "equipmentAvailable": 1,
+        "avgCompletionTime": "3.2 days with 2 workers",
+        "slaRisk": "High"
+      },
+      "alternativeActions": [
+        "Reassign from Zone 1 (lower workload)",
+        "Approve overtime for current team",
+        "Rent additional equipment"
+      ]
+    }
+    ,
+    {
+      "grievanceId": "GRV_WAT_2024_005",
+      "recommendation": "Schedule comprehensive pipeline inspection in Zone 4",
+      "confidence": 0.92,
+      "reasons": [
+        "Zone 4 has 32% more complaints than average",
+        "15 pipeline leak complaints in last 30 days",
+        "Infrastructure age: 25+ years in this zone",
+        "Pattern detected: complaints cluster around main junction",
+        "Cost analysis: Preventive maintenance cheaper than reactive repairs"
+      ],
+      "dataPoints": {
+        "complaintsLastMonth": 15,
+        "infrastructureAge": "25 years",
+        "estimatedPreventiveCost": "₹5 Lakhs",
+        "estimatedReactiveCost": "₹12 Lakhs",
+        "savingsPotential": "₹7 Lakhs"
+      },
+      "alternativeActions": [
+        "Immediate emergency repairs only",
+        "Phased replacement over 6 months",
+        "Complete zone infrastructure overhaul"
+      ]
+    }
+  ],
+  "autoAssignments": [
+    {
+      "grievanceId": "GRV_WAT_2024_009",
+      "assignedWorker": "ENG023",
+      "workerName": "Rajesh Patil",
+      "assignmentReason": "AI Auto-Assignment",
+      "factors": {
+        "availability": "Available",
+        "skillMatch": "100% - Pipeline Repair Specialist",
+        "distance": "1.2 km from site",
+        "currentWorkload": "3 active tasks (Low)",
+        "performanceScore": "92%",
+        "avgResolutionTime": "3.8 days"
+      },
+      "alternativeCandidates": [
+        { "workerId": "ENG015", "score": 85, "reason": "Higher workload" },
+        { "workerId": "ENG028", "score": 78, "reason": "Further distance (3.5 km)" }
+      ]
+    }
+  ],
+  "escalations": [
+    {
+      "grievanceId": "GRV_WAT_2024_002",
+      "currentLevel": 2,
+      "escalationHistory": [
+        {
+          "level": 1,
+          "escalatedTo": "Supervisor - Ramesh Yadav",
+          "escalatedAt": "2024-02-14T10:00:00Z",
+          "reason": "SLA overdue by 1 day",
+          "action": "Assigned additional resources",
+          "status": "Escalated Further"
+        },
+        {
+          "level": 2,
+          "escalatedTo": "Department Head - Mr. Rajesh Kumar",
+          "escalatedAt": "2024-02-15T09:00:00Z",
+          "reason": "SLA overdue by 2 days, no significant progress",
+          "action": "Priority escalation - Emergency team deployed",
+          "status": "Active"
+        }
+      ],
+      "nextEscalationLevel": 3,
+      "nextEscalationTo": "Commissioner",
+      "nextEscalationIn": "24 hours",
+      "overdueBy": "48 hours"
+    }
+  ],
+  "repeatGrievances": [
+    {
+      "area": "Zone 4 - Shivaji Chowk Area",
+      "category": "Pipeline Leakage",
+      "count": 15,
+      "timeframe": "Last 30 days",
+      "affectedCitizens": 450,
+      "coordinates": { "lat": 19.1975, "lng": 73.1940 },
+      "pattern": "Recurring complaints from same junction point",
+      "aiRecommendation": "Permanent infrastructure repair required",
+      "estimatedCost": "₹8 Lakhs",
+      "estimatedSavings": "₹15 Lakhs (vs repeated repairs)",
+      "priority": "High",
+      "grievanceIds": ["GRV_WAT_2024_001", "GRV_WAT_2024_012", "GRV_WAT_2024_018"]
+    },
+    {
+      "area": "Zone 2 - Nehru Nagar",
+      "category": "Water Quality Issue",
+      "count": 8,
+      "timeframe": "Last 30 days",
+      "affectedCitizens": 200,
+      "coordinates": { "lat": 19.1850, "lng": 73.1820 },
+      "pattern": "Water contamination complaints after rainfall",
+      "aiRecommendation": "Install water filtration system and seal drainage",
+      "estimatedCost": "₹5 Lakhs",
+      "estimatedSavings": "₹8 Lakhs",
+      "priority": "Emergency",
+      "grievanceIds": ["GRV_WAT_2024_002", "GRV_WAT_2024_015"]
+    }
+  ],
+  "predictiveMaintenance": [
+    {
+      "equipmentId": "EXC-001",
+      "equipmentType": "Excavator",
+      "utilizationRate": 95,
+      "lastMaintenance": "2024-01-15",
+      "nextScheduledMaintenance": "2024-02-15",
+      "maintenanceOverdue": true,
+      "overdueBy": "2 days",
+      "riskLevel": "High",
+      "prediction": "85% probability of breakdown within 7 days",
+      "aiRecommendation": "Immediate maintenance required",
+      "estimatedDowntime": "2-3 days if breakdown occurs",
+      "impactedGrievances": 5,
+      "preventiveCost": "₹15,000",
+      "breakdownCost": "₹80,000"
+    },
+    {
+      "equipmentId": "TANK-003",
+      "equipmentType": "Water Tanker",
+      "utilizationRate": 78,
+      "lastMaintenance": "2024-02-01",
+      "nextScheduledMaintenance": "2024-03-01",
+      "maintenanceOverdue": false,
+      "overdueBy": null,
+      "riskLevel": "Medium",
+      "prediction": "40% probability of issues within 30 days",
+      "aiRecommendation": "Schedule maintenance in next 2 weeks",
+      "estimatedDowntime": "1 day",
+      "impactedGrievances": 2,
+      "preventiveCost": "₹8,000",
+      "breakdownCost": "₹35,000"
+    }
+  ],
+  "documentProcessing": [
+    {
+      "documentId": "DOC_001",
+      "fileName": "Water_Supply_SOP.pdf",
+      "uploadDate": "2024-01-15T10:00:00Z",
+      "fileSize": "2.4 MB",
+      "status": "Completed",
+      "processingStages": [
+        { "stage": "Uploaded", "status": "Completed", "timestamp": "2024-01-15T10:00:00Z" },
+        { "stage": "Text Extraction", "status": "Completed", "timestamp": "2024-01-15T10:02:30Z", "pagesProcessed": 45 },
+        { "stage": "Embeddings Created", "status": "Completed", "timestamp": "2024-01-15T10:05:00Z", "vectorsGenerated": 156 },
+        { "stage": "Indexed in Vector DB", "status": "Completed", "timestamp": "2024-01-15T10:06:00Z" }
+      ],
+      "totalProcessingTime": "6 minutes",
+      "searchable": true,
+      "category": "Standard Operating Procedure"
+    }
+    ,
+    {
+      "documentId": "DOC_002",
+      "fileName": "Pipeline_Repair_Guidelines.pdf",
+      "uploadDate": "2024-01-20T14:30:00Z",
+      "fileSize": "1.8 MB",
+      "status": "Processing",
+      "processingStages": [
+        { "stage": "Uploaded", "status": "Completed", "timestamp": "2024-01-20T14:30:00Z" },
+        { "stage": "Text Extraction", "status": "Completed", "timestamp": "2024-01-20T14:32:00Z", "pagesProcessed": 32 },
+        { "stage": "Embeddings Created", "status": "In Progress", "timestamp": null, "progress": 65 },
+        { "stage": "Indexed in Vector DB", "status": "Pending", "timestamp": null }
+      ],
+      "totalProcessingTime": "In Progress",
+      "searchable": false,
+      "category": "Guidelines"
+    }
+  ],
+  "heatmapData": [
+    {
+      "zone": "Zone 4",
+      "area": "Shivaji Chowk",
+      "coordinates": { "lat": 19.1975, "lng": 73.1940 },
+      "complaintDensity": 95,
+      "complaintCount": 38,
+      "severity": "Critical",
+      "categories": {
+        "Pipeline Leakage": 15,
+        "Water Supply Disruption": 12,
+        "Water Quality": 8,
+        "Low Pressure": 3
+      },
+      "radius": 500
+    },
+    {
+      "zone": "Zone 2",
+      "area": "Nehru Nagar",
+      "coordinates": { "lat": 19.1850, "lng": 73.1820 },
+      "complaintDensity": 78,
+      "complaintCount": 28,
+      "severity": "High",
+      "categories": {
+        "Water Quality Issue": 18,
+        "Pipeline Leakage": 6,
+        "Low Pressure": 4
+      },
+      "radius": 400
+    },
+    {
+      "zone": "Zone 3",
+      "area": "Station Road",
+      "coordinates": { "lat": 19.2010, "lng": 73.1980 },
+      "complaintDensity": 62,
+      "complaintCount": 22,
+      "severity": "Medium",
+      "categories": {
+        "Pipeline Leakage": 10,
+        "Water Supply Disruption": 8,
+        "Meter Issues": 4
+      },
+      "radius": 350
+    },
+    {
+      "zone": "Zone 1",
+      "area": "Gandhi Nagar",
+      "coordinates": { "lat": 19.1890, "lng": 73.1850 },
+      "complaintDensity": 45,
+      "complaintCount": 15,
+      "severity": "Low",
+      "categories": {
+        "Low Pressure": 8,
+        "Meter Issues": 5,
+        "Water Quality": 2
+      },
+      "radius": 300
+    }
+  ]
+}

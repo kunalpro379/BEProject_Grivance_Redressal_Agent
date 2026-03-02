@@ -88,20 +88,33 @@ def insert_user_grievience(
 
     # Extract department_id from full_result.department.allocated_department
     department_id_val = None
+    print(f"[Supabase] DEBUG: full_result type: {type(full_result)}")
+    print(f"[Supabase] DEBUG: full_result keys: {list(full_result.keys()) if isinstance(full_result, dict) else 'N/A'}")
+    
     if full_result and isinstance(full_result, dict):
         dept_section = full_result.get("department", {})
+        print(f"[Supabase] DEBUG: dept_section type: {type(dept_section)}")
+        print(f"[Supabase] DEBUG: dept_section keys: {list(dept_section.keys()) if isinstance(dept_section, dict) else 'N/A'}")
+        
         if isinstance(dept_section, dict):
             allocated_dept = dept_section.get("allocated_department")
+            print(f"[Supabase] DEBUG: allocated_dept: {allocated_dept}")
+            
             if allocated_dept and isinstance(allocated_dept, dict):
                 department_id_val = allocated_dept.get("id")
-                print(f"[Supabase] Extracted department_id: {department_id_val} from allocated_department")
+                print(f"[Supabase] ✓ Extracted department_id: {department_id_val} from allocated_department")
+            else:
+                print(f"[Supabase] ⚠️ allocated_department is None or not a dict")
+        else:
+            print(f"[Supabase] ⚠️ dept_section is not a dict")
+    else:
+        print(f"[Supabase] ⚠️ full_result is None or not a dict")
     
     # Extract category and sub_category for separate columns
     category_val = None
-    sub_category_val = None
     if isinstance(category, dict):
-        category_val = category.get("main_category") or category.get("category")
-        sub_category_val = category.get("sub_category")
+        # Store the entire category dict as JSONB
+        category_val = json.dumps(category, ensure_ascii=False)
 
     def _json_safe(value: Any) -> Any:
         if isinstance(value, (dict, list)):
@@ -134,6 +147,7 @@ def insert_user_grievience(
     # query_type, category, similar_cases_summary, sentiment_priority, emotion, severity, patterns, fraud, department_info, policy_search, past_queries_summary
     # full_result, validation_status, validation_score, validation_reasoning, validation_timestamp
     # extracted_location, extracted_address, extracted_latitude, extracted_longitude, location_confidence
+    # latitude, longitude, location_address (existing columns for location)
     # processing_metadata, metadata, embedding, priority, zone, ward
 
     sql_with_metadata = f"""
@@ -148,7 +162,6 @@ def insert_user_grievience(
       ward = %(ward)s,
       department_id = %(department_id)s,
       category = %(category_val)s,
-      sub_category = %(sub_category_val)s,
       query_type = %(query_type)s,
       similar_cases_summary = %(similar_cases_summary)s,
       sentiment_priority = %(sentiment_priority)s,
@@ -168,6 +181,9 @@ def insert_user_grievience(
       extracted_address = %(extracted_address)s,
       extracted_latitude = %(extracted_latitude)s,
       extracted_longitude = %(extracted_longitude)s,
+      latitude = %(latitude)s,
+      longitude = %(longitude)s,
+      location_address = %(location_address)s,
       location_confidence = %(location_confidence)s,
       validation_timestamp = NOW(),
       processing_metadata = %(processing_metadata)s,
@@ -188,7 +204,6 @@ def insert_user_grievience(
       ward = %(ward)s,
       department_id = %(department_id)s,
       category = %(category_val)s,
-      sub_category = %(sub_category_val)s,
       query_type = %(query_type)s,
       similar_cases_summary = %(similar_cases_summary)s,
       sentiment_priority = %(sentiment_priority)s,
@@ -208,6 +223,9 @@ def insert_user_grievience(
       extracted_address = %(extracted_address)s,
       extracted_latitude = %(extracted_latitude)s,
       extracted_longitude = %(extracted_longitude)s,
+      latitude = %(latitude)s,
+      longitude = %(longitude)s,
+      location_address = %(location_address)s,
       location_confidence = %(location_confidence)s,
       validation_timestamp = NOW(),
       processing_metadata = %(processing_metadata)s,
@@ -226,7 +244,6 @@ def insert_user_grievience(
         "ward": ward_val,
         "department_id": department_id_val,
         "category_val": category_val,
-        "sub_category_val": sub_category_val,
         "query_type": _json_safe(query_type),
         "similar_cases_summary": _json_safe(similar_cases_summary),
         "sentiment_priority": _json_safe(sentiment_priority),
@@ -250,6 +267,9 @@ def insert_user_grievience(
         "extracted_address": location_data.get("address") if location_data else None,
         "extracted_latitude": location_data.get("latitude") if location_data else None,
         "extracted_longitude": location_data.get("longitude") if location_data else None,
+        "latitude": location_data.get("latitude") if location_data else None,
+        "longitude": location_data.get("longitude") if location_data else None,
+        "location_address": location_data.get("address") if location_data else None,
         "location_confidence": location_data.get("confidence") if location_data else None,
         "processing_metadata": json.dumps({
             "validation_confidence": validation_result.get("confidence") if validation_result else None,
@@ -261,11 +281,22 @@ def insert_user_grievience(
         "citizen_id": citizen_id,
         "grievance_id": grievance_id,
     }
+    
+    print(f"[Supabase] 📊 UPDATE parameters:")
+    print(f"   - grievance_id: {grievance_id}")
+    print(f"   - department_id: {department_id_val}")
+    print(f"   - priority: {priority_val}")
+    print(f"   - zone: {zone_val}")
+    print(f"   - ward: {ward_val}")
 
     try:
         cur.execute(sql_with_metadata, params)
         if cur.rowcount == 0:
-            print(f"[Supabase] WARNING: UPDATE matched 0 rows for grievance_id={grievance_id}. Check that the row exists and QueryAnalyst uses the same DB as the Platform.")
+            print(f"[Supabase] ⚠️ WARNING: UPDATE matched 0 rows for grievance_id={grievance_id}. Check that the row exists and QueryAnalyst uses the same DB as the Platform.")
+        else:
+            print(f"[Supabase] ✅ Successfully updated {cur.rowcount} row(s) for grievance_id={grievance_id}")
+            if department_id_val:
+                print(f"[Supabase] ✅ Department ID {department_id_val} assigned successfully")
     except psycopg2.ProgrammingError as e:
         err = str(e)
         if "metadata" in err or "column" in err.lower():
