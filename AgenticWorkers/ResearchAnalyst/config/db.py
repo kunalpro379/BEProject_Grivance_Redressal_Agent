@@ -87,18 +87,19 @@ class DatabaseManager:
         return None
     
     def get_grievances_by_type(self, grievance_type: str, limit: int = 10) -> List[Dict[str, Any]]:
-        """Fetch grievances by type/category"""
+        """Fetch grievances by type/category from grievance_processed"""
         try:
             conn = self.connect()
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                 cursor.execute("""
                     SELECT 
-                        id, grievance_id, grievance_text, category, 
-                        status, priority, created_at, department_info,
-                        extracted_location, zone, ward
-                    FROM usergrievance
-                    WHERE category::text ILIKE %s
-                    ORDER BY created_at DESC
+                        gp.id, gp.grievance_id, gp.grievance_text, gp.category, 
+                        ug.status, ug.priority, gp.created_at, gp.department_info,
+                        gp.extracted_location, ug.zone, ug.ward
+                    FROM grievance_processed gp
+                    INNER JOIN usergrievance ug ON gp.grievance_id = ug.grievance_id
+                    WHERE gp.category::jsonb::text ILIKE %s
+                    ORDER BY gp.created_at DESC
                     LIMIT %s
                 """, (f'%{grievance_type}%', limit))
                 return cursor.fetchall()
@@ -107,26 +108,33 @@ class DatabaseManager:
             return []
     
     def get_similar_grievances(self, grievance_id: str, limit: int = 5) -> List[Dict[str, Any]]:
-        """Fetch similar grievances based on embeddings"""
+        """Fetch similar grievances based on embeddings from grievance_processed"""
         try:
             conn = self.connect()
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                 cursor.execute("""
                     SELECT 
-                        g2.id, g2.grievance_id, g2.grievance_text, 
-                        g2.category, g2.status, g2.resolution_time
-                    FROM usergrievance g1
-                    CROSS JOIN usergrievance g2
-                    WHERE g1.grievance_id = %s 
-                    AND g2.id != g1.id
-                    AND g1.embedding IS NOT NULL 
-                    AND g2.embedding IS NOT NULL
-                    ORDER BY g1.embedding <-> g2.embedding
+                        gp2.id, gp2.grievance_id, gp2.grievance_text, 
+                        gp2.category, ug2.status, gp2.resolution_time
+                    FROM grievance_processed gp1
+                    CROSS JOIN grievance_processed gp2
+                    INNER JOIN usergrievance ug2 ON gp2.grievance_id = ug2.grievance_id
+                    WHERE gp1.grievance_id = %s 
+                    AND gp2.id != gp1.id
+                    AND gp1.embedding IS NOT NULL 
+                    AND gp2.embedding IS NOT NULL
+                    ORDER BY gp1.embedding <-> gp2.embedding
                     LIMIT %s
                 """, (grievance_id, limit))
                 return cursor.fetchall()
         except Exception as e:
             print(f"Error fetching similar grievances: {e}")
+            # Rollback transaction on error
+            try:
+                if conn:
+                    conn.rollback()
+            except:
+                pass
             return []
     
     def get_grievance_patterns(self, limit: int = 10) -> List[Dict[str, Any]]:
@@ -159,6 +167,12 @@ class DatabaseManager:
                 return cursor.fetchall()
         except Exception as e:
             print(f"  Pattern table not available: {e}")
+            # Rollback transaction on error
+            try:
+                if conn:
+                    conn.rollback()
+            except:
+                pass
             return []
     
     def save_research_result(self, grievance_id: str, research_data: Dict[str, Any]):
@@ -168,7 +182,7 @@ class DatabaseManager:
             conn = self.connect()
             with conn.cursor() as cursor:
                 cursor.execute("""
-                    UPDATE usergrievance
+                    UPDATE grievance_processed
                     SET processing_metadata = COALESCE(processing_metadata, '{}'::jsonb) || %s::jsonb,
                         updated_at = NOW()
                     WHERE grievance_id = %s

@@ -4,8 +4,8 @@ import multer from 'multer';
 import path from 'path';
 import * as grievanceController from '../controllers/grievance.controller.js';
 import { getGrievanceDetails } from '../controllers/grievance.details.controller.js';
-import { authenticate, authorize } from '../middleware/auth.js';
-import { validate, schemas } from '../middleware/validation.js';
+import { authenticate, authorize } from '../middleware/auth.mid.js';
+import { validate, schemas } from '../middleware/valid.mid.js';
 
 const router = express.Router();
 

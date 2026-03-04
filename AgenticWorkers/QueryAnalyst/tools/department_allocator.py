@@ -64,74 +64,11 @@ class DepartmentAllocator:
                         name,
                         description,
                         address,
-                        contact_information,
-                        jurisdiction,
-                        latitude,
-                        longitude,
-                        embedding <=> %s::vector AS embedding_distance,
-                        (
-                            6371 * acos(
-                                cos(radians(%s)) * cos(radians(COALESCE(latitude, 0))) *
-                                cos(radians(COALESCE(longitude, 0)) - radians(%s)) +
-                                sin(radians(%s)) * sin(radians(COALESCE(latitude, 0)))
-                            )
-                        ) AS geo_distance_km
+                        embedding <=> %s::vector AS embedding_distance
                     FROM departments
                     WHERE 
                         (LOWER(name) LIKE LOWER(%s) OR LOWER(description) LIKE LOWER(%s))
-                        AND (
-                            LOWER(address) LIKE LOWER(%s) 
-                            OR LOWER(jurisdiction) LIKE LOWER(%s)
-                        )
-                        AND latitude IS NOT NULL
-                        AND longitude IS NOT NULL
-                    ORDER BY 
-                        (embedding <=> %s::vector) * 0.6 + (geo_distance_km / 100) * 0.4
-                    LIMIT 1
-                """
-                
-                # Create search patterns
-                dept_pattern = f"%{recommended_department}%"
-                location_pattern = f"%{location}%"
-                
-                # Convert embedding to PostgreSQL vector format
-                embedding_str = "[" + ",".join(str(x) for x in query_embedding) + "]"
-                
-                cursor.execute(
-                    query,
-                    (
-                        embedding_str,
-                        latitude,
-                        longitude,
-                        latitude,
-                        dept_pattern,
-                        dept_pattern,
-                        location_pattern,
-                        location_pattern,
-                        embedding_str
-                    )
-                )
-            else:
-                # Fallback to embedding-only search if no coordinates
-                query = """
-                    SELECT 
-                        id,
-                        name,
-                        description,
-                        address,
-                        contact_information,
-                        jurisdiction,
-                        latitude,
-                        longitude,
-                        embedding <=> %s::vector AS embedding_distance,
-                        NULL AS geo_distance_km
-                    FROM departments
-                    WHERE 
-                        (LOWER(name) LIKE LOWER(%s) OR LOWER(description) LIKE LOWER(%s))
-                        AND (
-                            LOWER(address) LIKE LOWER(%s) 
-                            OR LOWER(jurisdiction) LIKE LOWER(%s)
-                        )
+                        AND LOWER(address) LIKE LOWER(%s)
                     ORDER BY embedding <=> %s::vector
                     LIMIT 1
                 """
@@ -150,6 +87,39 @@ class DepartmentAllocator:
                         dept_pattern,
                         dept_pattern,
                         location_pattern,
+                        embedding_str
+                    )
+                )
+            else:
+                # Fallback to embedding-only search if no coordinates
+                query = """
+                    SELECT 
+                        id,
+                        name,
+                        description,
+                        address,
+                        embedding <=> %s::vector AS embedding_distance
+                    FROM departments
+                    WHERE 
+                        (LOWER(name) LIKE LOWER(%s) OR LOWER(description) LIKE LOWER(%s))
+                        AND LOWER(address) LIKE LOWER(%s)
+                    ORDER BY embedding <=> %s::vector
+                    LIMIT 1
+                """
+                
+                # Create search patterns
+                dept_pattern = f"%{recommended_department}%"
+                location_pattern = f"%{location}%"
+                
+                # Convert embedding to PostgreSQL vector format
+                embedding_str = "[" + ",".join(str(x) for x in query_embedding) + "]"
+                
+                cursor.execute(
+                    query,
+                    (
+                        embedding_str,
+                        dept_pattern,
+                        dept_pattern,
                         location_pattern,
                         embedding_str
                     )
@@ -158,24 +128,17 @@ class DepartmentAllocator:
             result = cursor.fetchone()
             
             if result:
-                department_id, name, description, dept_address, contact_info, jurisdiction, dept_lat, dept_lon, emb_distance, geo_distance = result
+                department_id, name, description, dept_address, emb_distance = result
                 
                 print(f"      ✓ Matched: {name}")
                 print(f"        - Embedding distance: {emb_distance:.4f}")
-                if geo_distance is not None:
-                    print(f"        - Geographic distance: {geo_distance:.2f} km")
                 
                 return {
                     "id": str(department_id),
                     "name": name,
                     "description": description,
                     "address": dept_address,
-                    "contact_information": contact_info,
-                    "jurisdiction": jurisdiction,
-                    "latitude": float(dept_lat) if dept_lat else None,
-                    "longitude": float(dept_lon) if dept_lon else None,
-                    "match_score": float(1 - emb_distance) if emb_distance else 1.0,
-                    "distance_km": float(geo_distance) if geo_distance else None
+                    "match_score": float(1 - emb_distance) if emb_distance else 1.0
                 }
             else:
                 print(f"      ⚠️ No matching department found")
@@ -203,9 +166,7 @@ class DepartmentAllocator:
                     id,
                     name,
                     description,
-                    address,
-                    contact_information,
-                    jurisdiction
+                    address
                 FROM departments
                 WHERE id = %s
             """
@@ -214,14 +175,12 @@ class DepartmentAllocator:
             result = cursor.fetchone()
             
             if result:
-                department_id, name, description, address, contact_info, jurisdiction = result
+                department_id, name, description, address = result
                 return {
                     "id": str(department_id),
                     "name": name,
                     "description": description,
-                    "address": address,
-                    "contact_information": contact_info,
-                    "jurisdiction": jurisdiction
+                    "address": address
                 }
             return None
             

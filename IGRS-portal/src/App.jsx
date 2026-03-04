@@ -6,6 +6,7 @@ import { useAuth } from "./context/AuthContext";
 
 // Public pages
 import Landing from "./pages/Landing";
+import SubscribePage from "./pages/SubscribePage";
 import OfficialAuthPage from "./pages/government-officials/AuthPage";
 import CitizenAuthPage from "./pages/citizen/AuthPage";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -122,6 +123,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Landing />} />
+          <Route path="/subscribe" element={<SubscribePage />} />
           
           {/* Portal-specific Authentication Routes */}
           <Route 

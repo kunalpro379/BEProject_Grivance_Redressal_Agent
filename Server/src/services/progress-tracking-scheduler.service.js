@@ -202,7 +202,7 @@ class ProgressTrackingSchedulerService {
       await containerClient.createIfNotExists();
 
       // Import pool for database operations
-      const { default: pool } = await import('../config/database.js');
+      const { default: pool } = await import('../config/db.js');
 
       // Upload each file
       let uploadedCount = 0;

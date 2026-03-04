@@ -129,6 +129,60 @@ class QueryAnalystWorker:
             print(f"    Could not download blob via SDK: {e}")
             return None
 
+    def check_citizen_fraud_history(self, citizen_id: str) -> Dict[str, Any]:
+        """Check if citizen has history of spam/fake grievances in Supabase."""
+        if not citizen_id:
+            return {"has_fraud_history": False, "fraud_count": 0, "should_process": True}
+        
+        try:
+            import psycopg2
+            dsn = os.getenv("SUPABASE_DSN")
+            if not dsn:
+                print("   ⚠️ SUPABASE_DSN not configured - skipping fraud history check")
+                return {"has_fraud_history": False, "fraud_count": 0, "should_process": True}
+            
+            conn = psycopg2.connect(dsn)
+            cur = conn.cursor()
+            
+            # Check user's past grievances with rejected or invalid status
+            # Note: fraud column was removed from grievance_processed table
+            cur.execute("""
+                SELECT 
+                    COUNT(*) as total_count,
+                    COUNT(*) FILTER (WHERE status = 'rejected') as rejected_count,
+                    COUNT(*) FILTER (WHERE validation_status = 'invalid') as invalid_count
+                FROM usergrievance
+                WHERE citizen_id = %s
+                AND created_at > NOW() - INTERVAL '30 days'
+            """, (citizen_id,))
+            
+            result = cur.fetchone()
+            cur.close()
+            conn.close()
+            
+            if not result:
+                return {"has_fraud_history": False, "fraud_count": 0, "should_process": True}
+            
+            total_count = result[0] or 0
+            rejected_count = result[1] or 0
+            invalid_count = result[2] or 0
+            
+            # Decision logic: Skip if user has >5 rejected or >3 invalid in last 30 days
+            should_process = not (rejected_count >= 5 or invalid_count >= 3)
+            
+            return {
+                "has_fraud_history": rejected_count > 0 or invalid_count > 0,
+                "fraud_count": total_count,
+                "rejected_count": rejected_count,
+                "invalid_count": invalid_count,
+                "should_process": should_process,
+                "reason": "Too many spam/rejected grievances in last 30 days" if not should_process else None
+            }
+        except Exception as e:
+            print(f"   ⚠️ Error checking fraud history: {e}")
+            # On error, allow processing (fail-open to avoid blocking legitimate users)
+            return {"has_fraud_history": False, "fraud_count": 0, "should_process": True, "error": str(e)}
+
     def process_message(self, message_data: Dict[str, Any]) -> Dict[str, Any]:
         """Process a single grievance message."""
         # Handle different field names from Telegram vs API
@@ -150,10 +204,54 @@ class QueryAnalystWorker:
             message_data.get("imageUrl")
         )
         
+        # Extract Telegram location data from queue message
+        telegram_location_data = {
+            "latitude": message_data.get("latitude"),
+            "longitude": message_data.get("longitude"),
+            "location_address": message_data.get("location_address"),
+            "location_source": message_data.get("location_source"),  # 'telegram_share' or 'image_analysis'
+            "extracted_location_context": message_data.get("extracted_location_context"),
+            "image_location": message_data.get("image_location"),  # Additional location from image if available
+            "image_path": image_url  # Store blob URL
+        }
+        
         print(f"\n📋 Processing grievance: {grievance_id}")
         print(f"   Citizen ID: {citizen_id}")
         print(f"   Query: {(query or '')[:100]}...")
         print(f"   Image URL: {image_url}")
+        
+        # Log Telegram location data if available
+        if telegram_location_data.get("latitude") and telegram_location_data.get("longitude"):
+            print(f"   📍 Telegram Location: {telegram_location_data['latitude']}, {telegram_location_data['longitude']}")
+            print(f"      Source: {telegram_location_data.get('location_source', 'unknown')}")
+            if telegram_location_data.get("extracted_location_context"):
+                print(f"      Context: {telegram_location_data['extracted_location_context'][:100]}...")
+        
+        # 🔍 Step 1: Check citizen's fraud history BEFORE processing
+        print(f"\n🔍 Checking citizen fraud history...")
+        fraud_check = self.check_citizen_fraud_history(citizen_id)
+        print(f"   Fraud history: {fraud_check['fraud_count']} past issues")
+        print(f"   High spam: {fraud_check.get('high_spam_count', 0)}")
+        print(f"   Rejected: {fraud_check.get('rejected_count', 0)}")
+        print(f"   Invalid: {fraud_check.get('invalid_count', 0)}")
+        
+        if not fraud_check.get("should_process", True):
+            print(f"   ❌ SPAM USER DETECTED - Skipping processing")
+            print(f"      Reason: {fraud_check.get('reason')}")
+            return {
+                **message_data,
+                "current_status": "RejectedSpam",
+                "validation_result": {
+                    "is_valid": False,
+                    "reasoning": fraud_check.get("reason", "User has history of spam/fake grievances"),
+                    "validation_score": 0,
+                },
+                "fraud_check": fraud_check,
+                "error": "Citizen has too many spam/rejected grievances",
+                "error_at": datetime.utcnow().isoformat() + "Z",
+            }
+        
+        print(f"    Fraud check passed - proceeding with analysis")
 
         # For Azure blob URLs (private), download via SDK so image analysis can access it
         # Keep original URL for database storage
@@ -178,6 +276,7 @@ class QueryAnalystWorker:
                 original_image_url=original_image_url,
                 citizen_id=citizen_id,
                 grievance_id=grievance_id,
+                telegram_location_data=telegram_location_data,  # Pass Telegram location data
             )
             if original_image_url:
                 state["image_path"] = original_image_url
@@ -293,7 +392,7 @@ class QueryAnalystWorker:
                             
                             # If no status or status is QueryAnalyst/pending, process it
                             if not current_status:
-                                print(f"   📝 Message has no status field - processing as new grievance")
+                                print(f"    Message has no status field - processing as new grievance")
                                 message_data["current_status"] = "QueryAnalyst"
                             
                             message_processed = True
@@ -303,7 +402,7 @@ class QueryAnalystWorker:
                             
                             # Check if processing was successful
                             processing_status = updated_message.get("current_status")
-                            print(f"   📊 Processing status: {processing_status}")
+                            print(f"    Processing status: {processing_status}")
                             
                             # Always delete the message from queryanalyst queue to prevent reprocessing
                             # Even if there's an error, we don't want to keep retrying the same message indefinitely

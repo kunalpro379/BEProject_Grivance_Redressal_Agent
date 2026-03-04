@@ -89,7 +89,7 @@ const authService = {
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      console.log('💾 Stored in localStorage:', JSON.parse(localStorage.getItem('user')));
+      console.log(' Stored in localStorage:', JSON.parse(localStorage.getItem('user')));
     }
     
     return response.data;

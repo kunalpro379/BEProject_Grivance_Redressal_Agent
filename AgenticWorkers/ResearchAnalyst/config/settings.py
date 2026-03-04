@@ -25,6 +25,7 @@ class Config:
     # Azure Queue
     AZURE_STORAGE_CONNECTION_STRING = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
     WEBCRAWLER_QUEUE_NAME = os.getenv('WEBCRAWLER_QUEUE_NAME', 'webcrawler')
+    RESEARCHANALYST_QUEUE_NAME = os.getenv('AZURE_QUEUE_RESEARCHANALYST_NAME', 'researchanalyst')
     
     @classmethod
     def validate(cls):

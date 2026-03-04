@@ -1,6 +1,6 @@
 import express from 'express';
 import commentsAnalysisService from '../services/comments-analysis.service.js';
-import { authenticate, authorize } from '../middleware/auth.js';
+import { authenticate, authorize } from '../middleware/auth.mid.js';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.post('/grievance/:grievanceId/analyze', authenticate, async (req, res) =>
   try {
     const { grievanceId } = req.params;
 
-    console.log(`🔍 Analyzing comments for grievance: ${grievanceId}`);
+    console.log(`Analyzing comments for grievance: ${grievanceId}`);
 
     const result = await commentsAnalysisService.analyzeGrievanceComments(grievanceId);
 
@@ -85,7 +85,7 @@ router.post('/batch-analyze', authenticate, authorize(['admin', 'department_head
       });
     }
 
-    console.log(`📊 Batch analyzing ${grievanceIds.length} grievances`);
+    console.log(` Batch analyzing ${grievanceIds.length} grievances`);
 
     const results = await commentsAnalysisService.batchAnalyzeGrievances(grievanceIds);
 

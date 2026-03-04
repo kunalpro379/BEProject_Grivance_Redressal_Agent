@@ -1,5 +1,12 @@
 ﻿import { Pinecone } from '@pinecone-database/pinecone';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config();
 
 /**
@@ -202,120 +209,135 @@ class ReactPolicyAgent {
   }
 
   /**
-   * Search Pinecone with a specific query
+   * Search Pinecone with a specific query - GOVERNMENT INDEX ONLY
    */
-  async searchPinecone(query, topK = 10) {
-    // Check if Pinecone is enabled
+  async searchPinecone(query, topK = 50) {
     if (!this.isEnabled()) {
       return [];
     }
 
     try {
-      console.log(`  Searching for: "${query}"`);
+      console.log(`  🔍 Searching Pinecone government index for: "${query}"`);
       
-      // Try metadata filter first
+      // Strategy 1: List all vectors and fetch with metadata
       try {
-        const results = await this.index.query({
-          topK: topK,
-          includeMetadata: true,
-          filter: {
-            $or: [
-              { text: { $contains: query.toLowerCase() } },
-              { content: { $contains: query.toLowerCase() } },
-              { description: { $contains: query.toLowerCase() } },
-              { title: { $contains: query.toLowerCase() } }
-            ]
-          }
-        });
+        console.log(`     Attempting to list vectors...`);
+        const listResults = await this.index.listPaginated({ limit: 100 });
         
-        if (results.matches && results.matches.length > 0) {
-          console.log(`     Found ${results.matches.length} results via metadata filter`);
-          return results.matches;
+        if (listResults.vectors && listResults.vectors.length > 0) {
+          console.log(`     ✓ Found ${listResults.vectors.length} vectors in index`);
+          
+          // Fetch full vectors with metadata
+          const ids = listResults.vectors.map(v => v.id).slice(0, topK);
+          const fetchResults = await this.index.fetch(ids);
+          
+          if (fetchResults.records) {
+            const matches = Object.values(fetchResults.records)
+              .filter(record => {
+                const metadata = record.metadata || {};
+                const searchText = `${metadata.text || ''} ${metadata.content || ''} ${metadata.title || ''} ${metadata.description || ''}`.toLowerCase();
+                return searchText.includes(query.toLowerCase().split(' ')[0]);
+              })
+              .map(record => ({
+                id: record.id,
+                score: 0.85,
+                metadata: record.metadata || {}
+              }));
+            
+            console.log(`     ✓ Filtered to ${matches.length} relevant matches`);
+            return matches;
+          }
         }
-      } catch (filterError) {
-        console.log(`     Metadata filter failed, trying namespace search...`);
+      } catch (listError) {
+        console.log(`     ⚠ List operation failed: ${listError.message}`);
       }
 
-      // Try namespace search
+      // Strategy 2: Try namespace search
       try {
-        const namespaces = await this.index.describeIndexStats();
-        console.log(`    Available namespaces:`, Object.keys(namespaces.namespaces || {}));
+        const stats = await this.index.describeIndexStats();
+        const namespaces = Object.keys(stats.namespaces || {});
+        console.log(`     Available namespaces: ${namespaces.join(', ') || 'default'}`);
         
-        // Try each namespace
-        for (const ns of Object.keys(namespaces.namespaces || {})) {
-          const results = await this.index.namespace(ns).query({
+        let allMatches = [];
+        
+        // Search default namespace
+        try {
+          const results = await this.index.query({
             topK: topK,
             includeMetadata: true
           });
           
           if (results.matches && results.matches.length > 0) {
-            console.log(`     Found ${results.matches.length} results in namespace "${ns}"`);
-            return results.matches;
+            console.log(`     ✓ Found ${results.matches.length} results in default namespace`);
+            allMatches.push(...results.matches);
           }
+        } catch (e) {
+          console.log(`     ⚠ Default namespace query failed`);
+        }
+        
+        // Search each named namespace
+        for (const ns of namespaces) {
+          if (ns === '') continue;
+          try {
+            const results = await this.index.namespace(ns).query({
+              topK: topK,
+              includeMetadata: true
+            });
+            
+            if (results.matches && results.matches.length > 0) {
+              console.log(`     ✓ Found ${results.matches.length} results in namespace "${ns}"`);
+              allMatches.push(...results.matches);
+            }
+          } catch (e) {
+            console.log(`     ⚠ Namespace "${ns}" query failed`);
+          }
+        }
+        
+        if (allMatches.length > 0) {
+          return allMatches;
         }
       } catch (nsError) {
-        console.log(`     Namespace search failed:`, nsError.message);
+        console.log(`     ⚠ Namespace search failed: ${nsError.message}`);
       }
 
-      // Try listing vectors
-      try {
-        const listResults = await this.index.listPaginated({ limit: topK });
-        if (listResults.vectors && listResults.vectors.length > 0) {
-          console.log(`     Found ${listResults.vectors.length} vectors via list`);
-          
-          // Fetch full vectors with metadata
-          const ids = listResults.vectors.map(v => v.id);
-          const fetchResults = await this.index.fetch(ids);
-          
-          if (fetchResults.records) {
-            const matches = Object.values(fetchResults.records).map(record => ({
-              id: record.id,
-              score: 0.8, // Default score for listed vectors
-              metadata: record.metadata || {}
-            }));
-            return matches;
-          }
-        }
-      } catch (listError) {
-        console.log(`     List operation failed:`, listError.message);
-      }
-
+      console.log(`     ⚠ No results found for query`);
       return [];
     } catch (error) {
-      console.error(`     Search error:`, error.message);
+      console.error(`     ❌ Search error:`, error.message);
       return [];
     }
   }
 
   /**
-   * Main ReAct loop
+   * Main ReAct loop - Keep searching until we get comprehensive data
    */
   async findPolicies(departmentName) {
-    // Check if Pinecone is enabled
     if (!this.isEnabled()) {
-      console.warn(`  Pinecone not configured - returning default policy for ${departmentName}`);
+      console.warn(`  ⚠ Pinecone not configured - returning default policy for ${departmentName}`);
       return [];
     }
 
-    console.log(`\n${'='.repeat(70)}`);
-    console.log(`[ReAct Agent] Starting policy search for: ${departmentName}`);
-    console.log('='.repeat(70));
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`🤖 [ReAct Agent] FETCHING POLICIES FROM PINECONE GOVERNMENT INDEX`);
+    console.log(`📋 Department: ${departmentName}`);
+    console.log('='.repeat(80));
 
     let allResults = [];
     let iteration = 0;
 
     while (iteration < this.maxIterations) {
-      console.log(`\n--- Iteration ${iteration + 1}/${this.maxIterations} ---`);
+      console.log(`\n🔄 --- Iteration ${iteration + 1}/${this.maxIterations} ---`);
 
       // Generate queries for this iteration
       const queries = this.generateSearchQueries(departmentName, iteration);
-      console.log(`Generated ${queries.length} search queries`);
+      console.log(`📝 Generated ${queries.length} search queries`);
 
       // Search with each query
       for (const query of queries) {
         const results = await this.searchPinecone(query);
         if (results.length > 0) {
           allResults.push(...results);
+          console.log(`   ✓ Added ${results.length} results from query`);
         }
       }
 
@@ -324,15 +346,15 @@ class ReactPolicyAgent {
         new Map(allResults.map(r => [r.id, r])).values()
       );
 
-      console.log(`\nTotal unique results so far: ${uniqueResults.length}`);
+      console.log(`\n📊 Total unique results so far: ${uniqueResults.length}`);
 
       // Reason about results
       const decision = this.reason(uniqueResults, iteration, departmentName);
-      console.log(`Decision: ${decision.action} - ${decision.reasoning}`);
+      console.log(`🧠 Decision: ${decision.action} - ${decision.reasoning}`);
 
       if (!decision.shouldContinue) {
         if (decision.action === 'extract') {
-          console.log(`\n Success! Found sufficient policy content`);
+          console.log(`\n SUCCESS! Found sufficient policy content (${uniqueResults.length} documents)`);
           return decision.results || uniqueResults;
         }
         break;
@@ -341,26 +363,29 @@ class ReactPolicyAgent {
       iteration++;
       
       // Small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 300));
     }
 
-    console.log(`\n  Completed ${iteration + 1} iterations. Returning best available results.`);
+    console.log(`\n Completed ${iteration + 1} iterations. Returning ${allResults.length} results.`);
     return allResults;
   }
 
   /**
-   * Convert results to markdown
+   * Convert results to markdown and SAVE to file
    */
   convertToMarkdown(departmentName, results) {
     if (!results || results.length === 0) {
       return this.generateDefaultPolicy(departmentName);
     }
 
-    let markdown = `# ${departmentName} - Policies and Guidelines\n\n`;
-    markdown += `## Overview\n`;
-    markdown += `This document contains the key policies, guidelines, and regulations for ${departmentName}.\n\n`;
-    markdown += `*Retrieved from knowledge base on ${new Date().toLocaleDateString('en-IN')}*\n\n`;
+    let markdown = `# ${departmentName} - Government Policies and Guidelines\n\n`;
+    markdown += `> **Source:** Pinecone Government Index\n`;
+    markdown += `> **Retrieved:** ${new Date().toLocaleString('en-IN')}\n`;
+    markdown += `> **Total Documents:** ${results.length}\n\n`;
     markdown += `---\n\n`;
+    markdown += `## 📋 Overview\n\n`;
+    markdown += `This document contains comprehensive policies, guidelines, and regulations for ${departmentName} `;
+    markdown += `retrieved from the government knowledge base.\n\n`;
 
     // Group by category
     const categorized = {};
@@ -374,14 +399,16 @@ class ReactPolicyAgent {
       }
       
       const text = metadata.text || metadata.content || metadata.description || '';
-      const title = metadata.title || metadata.name || `Policy ${idx + 1}`;
-      const source = metadata.source || metadata.document_name || metadata.file_name || 'Internal Document';
+      const title = metadata.title || metadata.name || `Policy Document ${idx + 1}`;
+      const source = metadata.source || metadata.document_name || metadata.file_name || 'Government Document';
+      const date = metadata.date || metadata.created_at || metadata.updated_at || 'N/A';
       
       if (text.trim()) {
         categorized[category].push({
           title,
           text: text.trim(),
           source,
+          date,
           score: result.score || 0
         });
       }
@@ -389,12 +416,17 @@ class ReactPolicyAgent {
 
     // Add categorized content
     Object.keys(categorized).sort().forEach(category => {
-      markdown += `## ${category}\n\n`;
+      markdown += `## 📂 ${category}\n\n`;
       
       categorized[category]
-        .sort((a, b) => b.score - a.score) // Sort by relevance
+        .sort((a, b) => b.score - a.score)
         .forEach((item, idx) => {
-          markdown += `### ${item.title}\n\n`;
+          markdown += `### ${idx + 1}. ${item.title}\n\n`;
+          
+          // Add metadata
+          markdown += `**Source:** ${item.source}  \n`;
+          markdown += `**Date:** ${item.date}  \n`;
+          markdown += `**Relevance:** ${(item.score * 100).toFixed(1)}%\n\n`;
           
           // Format text into paragraphs
           const paragraphs = item.text.split('\n').filter(p => p.trim());
@@ -402,27 +434,70 @@ class ReactPolicyAgent {
             markdown += `${para.trim()}\n\n`;
           });
           
-          markdown += `*Source: ${item.source}* | *Relevance: ${(item.score * 100).toFixed(1)}%*\n\n`;
           markdown += `---\n\n`;
         });
     });
 
     // Add standard sections
-    markdown += `## Compliance and Monitoring\n\n`;
+    markdown += `## ⚖️ Compliance and Monitoring\n\n`;
     markdown += `- All policies must be followed strictly\n`;
     markdown += `- Regular audits will be conducted\n`;
     markdown += `- Non-compliance may result in disciplinary action\n`;
     markdown += `- Grievances related to policy violations should be reported immediately\n\n`;
     
-    markdown += `## Updates and Amendments\n\n`;
+    markdown += `## 🔄 Updates and Amendments\n\n`;
     markdown += `This policy document is subject to periodic review and updates. `;
     markdown += `All department staff must stay informed about the latest policy changes.\n\n`;
     
+    markdown += `## 📞 Contact Information\n\n`;
+    markdown += `For detailed policies or clarifications, please contact:\n`;
+    markdown += `- Department Head\n`;
+    markdown += `- Policy Compliance Officer\n`;
+    markdown += `- Government Helpline\n\n`;
+    
     markdown += `---\n\n`;
-    markdown += `*Document generated by ReAct Policy Agent*\n`;
-    markdown += `*Last Updated: ${new Date().toLocaleDateString('en-IN')}*\n`;
+    markdown += `*📄 Document generated from Pinecone Government Index*  \n`;
+    markdown += `*🤖 Generated by ReAct Policy Agent*  \n`;
+    markdown += `*📅 Last Updated: ${new Date().toLocaleString('en-IN')}*\n`;
+
+    // SAVE TO FILE
+    this.savePolicyDocument(departmentName, markdown);
 
     return markdown;
+  }
+
+  /**
+   * Save policy document to MD file
+   */
+  savePolicyDocument(departmentName, markdown) {
+    try {
+      // Create policies directory if it doesn't exist
+      const policiesDir = path.join(__dirname, '../../policies');
+      if (!fs.existsSync(policiesDir)) {
+        fs.mkdirSync(policiesDir, { recursive: true });
+        console.log(`📁 Created policies directory: ${policiesDir}`);
+      }
+
+      // Generate filename
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
+      const safeDeptName = departmentName.replace(/[^a-zA-Z0-9]/g, '_');
+      const filename = `${safeDeptName}_${timestamp}.md`;
+      const filepath = path.join(policiesDir, filename);
+
+      // Save file
+      fs.writeFileSync(filepath, markdown, 'utf8');
+      console.log(`\n Policy document saved: ${filepath}`);
+      console.log(`📄 File size: ${(markdown.length / 1024).toFixed(2)} KB`);
+      
+      // Also save as "latest" version
+      const latestFilename = `${safeDeptName}_LATEST.md`;
+      const latestFilepath = path.join(policiesDir, latestFilename);
+      fs.writeFileSync(latestFilepath, markdown, 'utf8');
+      console.log(` Latest version saved: ${latestFilepath}`);
+      
+    } catch (error) {
+      console.error(`❌ Failed to save policy document:`, error.message);
+    }
   }
 
   /**

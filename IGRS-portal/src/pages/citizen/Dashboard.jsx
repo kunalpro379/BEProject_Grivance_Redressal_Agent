@@ -402,7 +402,7 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
                       </div>
                       {recentGrievances.length > 0 && (
                         <div className="mt-2 pt-2 border-t border-[#E8E4DF]">
-                          <p className="text-xs premium-text-muted font-semibold mb-1">Recent (kab — kya)</p>
+                          <p className="text-xs premium-text-muted font-semibold mb-1">Recent Griviences</p>
                           <ul className="text-sm space-y-1">
                             {recentGrievances.map((g) => {
                               const title = (g.grievance_text && (g.grievance_text.split('\n').find(l => l.trim().startsWith('Title:')) || '').replace(/^Title:\s*/i, '').trim()) || g.grievance_text?.slice(0, 40) || 'Grievance';
@@ -581,20 +581,6 @@ const CitizenDashboard = ({ userAuth, onLogout }) => {
             </div>
           </div>
               </div>
-
-        {/* Grievance Redressal Process Flow */}
-        <div className="mb-4 md:mb-6">
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Grievance Redressal Process</h3>
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/50 hover:border-amber-300/70 transition-all duration-300 overflow-hidden">
-            <div className="p-4 pr-2">
-              <img 
-                src="/image.png" 
-                alt="Grievance Redressal Process Flow" 
-                className="w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-              />
-            </div>
-          </div>
-        </div>
 
         {/* Smart Services */}
         <div className="mb-4 md:mb-6">

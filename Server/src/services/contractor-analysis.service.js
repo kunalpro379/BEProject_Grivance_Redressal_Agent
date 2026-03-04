@@ -1,4 +1,4 @@
-﻿import pool from '../config/database.js';
+﻿import pool from '../config/db.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import axios from 'axios';
 

@@ -432,7 +432,7 @@ class KnowledgeBaseWorker:
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(result, f, indent=2, ensure_ascii=False)
             
-            print(f"   💾 Saved result locally: {filepath}")
+            print(f"    Saved result locally: {filepath}")
             
         except Exception as e:
             print(f"   ⚠️  Failed to save result locally: {e}")
@@ -561,7 +561,7 @@ class KnowledgeBaseWorker:
                             print(f"   Processing complete. Status: {result.get('status')}")
                             
                             # Update database via API
-                            print("   💾 Updating database...")
+                            print("    Updating database...")
                             self.update_database(result)
                             print("   Database updated")
                             

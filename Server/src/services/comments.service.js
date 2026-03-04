@@ -3,7 +3,7 @@
  * Handles all comment-related database operations
  */
 
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 class CommentsService {
   /**

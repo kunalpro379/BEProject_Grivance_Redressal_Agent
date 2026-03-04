@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   TrendingUp, Users, Clock, CheckCircle, CheckCircle2, AlertTriangle, 
   MapPin, DollarSign, BarChart3, Activity
 } from 'lucide-react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import 'leaflet.markercluster';
 
 const CityCommissionerDashboard = ({ data }) => {
   const [selectedView, setSelectedView] = useState('overview');
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const markersLayerRef = useRef(null);
 
   // Use API data
   const apiKpis = data?.dashboard?.kpis;
@@ -22,6 +30,125 @@ const CityCommissionerDashboard = ({ data }) => {
   const departmentPerformance = data?.dashboard?.departmentPerformance || [];
   const budget = data?.dashboard?.budget || {};
   const highPriorityIssues = data?.dashboard?.highPriorityIssues || [];
+  const mapGrievances = data?.dashboard?.mapGrievances || [];
+
+  // Initialize map
+  useEffect(() => {
+    if (!mapRef.current || mapInstanceRef.current || mapGrievances.length === 0) return;
+
+    // Create map centered on Ambernath
+    const map = L.map(mapRef.current, {
+      center: [19.20, 73.18],
+      zoom: 13,
+      zoomControl: true,
+      scrollWheelZoom: true
+    });
+
+    // Add tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Create marker cluster group
+    const markers = L.markerClusterGroup({
+      chunkedLoading: true,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      zoomToBoundsOnClick: true,
+      maxClusterRadius: 50
+    });
+
+    mapInstanceRef.current = map;
+    markersLayerRef.current = markers;
+    map.addLayer(markers);
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [mapGrievances.length]);
+
+  // Update markers when data changes
+  useEffect(() => {
+    if (!markersLayerRef.current || !mapGrievances.length) return;
+
+    markersLayerRef.current.clearLayers();
+
+    const getPriorityColor = (priority) => {
+      switch (priority?.toLowerCase()) {
+        case 'critical':
+        case 'emergency': return '#DC2626'; // Red
+        case 'high': return '#F97316'; // Orange
+        case 'urgent': return '#F59E0B'; // Amber
+        case 'medium': return '#EAB308'; // Yellow
+        case 'low': return '#22C55E'; // Green
+        default: return '#6B7280'; // Gray
+      }
+    };
+
+    const validGrievances = mapGrievances.filter(g => 
+      g.latitude && g.longitude && 
+      !isNaN(g.latitude) && !isNaN(g.longitude) &&
+      g.latitude >= -90 && g.latitude <= 90 &&
+      g.longitude >= -180 && g.longitude <= 180
+    );
+
+    validGrievances.forEach(grievance => {
+      const color = getPriorityColor(grievance.priority);
+      
+      const icon = L.divIcon({
+        className: 'custom-marker',
+        html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      });
+
+      const marker = L.marker([grievance.latitude, grievance.longitude], { icon });
+      
+      const popupContent = `
+        <div style="font-family: sans-serif; min-width: 250px; padding: 8px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #1A1A1A;">
+            ${grievance.grievance_id}
+          </h3>
+          <p style="margin: 4px 0; font-size: 13px; color: #374151; font-weight: 500;">
+            ${grievance.title || 'No description'}
+          </p>
+          <p style="margin: 6px 0; font-size: 12px; color: #6B7280;">
+            <strong>Category:</strong> ${grievance.category || 'N/A'}
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Department:</strong> ${grievance.department || 'N/A'}
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Ward:</strong> ${grievance.ward_name || 'N/A'}
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Priority:</strong> <span style="color: ${color}; font-weight: 600;">${grievance.priority?.toUpperCase() || 'N/A'}</span>
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Status:</strong> <span style="color: #059669;">${grievance.status || 'N/A'}</span>
+          </p>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Location:</strong> ${grievance.address || 'N/A'}
+          </p>
+        </div>
+      `;
+      
+      marker.bindPopup(popupContent, { maxWidth: 300 });
+      markersLayerRef.current.addLayer(marker);
+    });
+
+    // Fit bounds to show all markers
+    if (validGrievances.length > 0 && mapInstanceRef.current) {
+      const bounds = L.latLngBounds(
+        validGrievances.map(g => [g.latitude, g.longitude])
+      );
+      mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50] });
+    }
+  }, [mapGrievances]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F0] via-white to-[#FFF5E8] p-6">
@@ -82,6 +209,48 @@ const CityCommissionerDashboard = ({ data }) => {
             </motion.div>
           ))}
         </div>
+
+        {/* Area Heatmap */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8 bg-white rounded-2xl p-6 shadow-lg border-2 border-[#D4AF37]"
+        >
+          <h3 className="text-2xl font-bold text-black mb-4 flex items-center gap-2">
+            <MapPin className="w-6 h-6 text-[#D4AF37]" />
+            City Grievance Heatmap
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Showing {mapGrievances.length} grievances across all departments in the municipal corporation
+          </p>
+          <div className="bg-white rounded-xl border-2 border-stone-200 shadow-xl overflow-hidden">
+            <div className="w-full h-[600px] relative">
+              <div ref={mapRef} className="w-full h-full"></div>
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#DC2626] border-2 border-white shadow-md"></div>
+              <span className="text-sm text-gray-700 font-medium">Critical/Emergency</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#F97316] border-2 border-white shadow-md"></div>
+              <span className="text-sm text-gray-700 font-medium">High</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#F59E0B] border-2 border-white shadow-md"></div>
+              <span className="text-sm text-gray-700 font-medium">Urgent</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#EAB308] border-2 border-white shadow-md"></div>
+              <span className="text-sm text-gray-700 font-medium">Medium</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#22C55E] border-2 border-white shadow-md"></div>
+              <span className="text-sm text-gray-700 font-medium">Low</span>
+            </div>
+          </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Ward Performance */}

@@ -49,7 +49,20 @@ class VectorDBWorker:
             # Debug: show raw message content
             logger.info(f"Raw message: {message.content[:200]}")
             
-            message_data = json.loads(message.content)
+            # Try to decode if it's base64 encoded
+            import base64
+            message_text = message.content
+            try:
+                # Check if it looks like base64
+                if message_text.endswith('==') or message_text.endswith('=') or len(message_text) % 4 == 0:
+                    decoded = base64.b64decode(message_text).decode('utf-8')
+                    logger.info(f"Decoded from Base64: {decoded[:200]}")
+                    message_text = decoded
+            except Exception as decode_error:
+                logger.debug(f"Not Base64 encoded (or decode failed): {decode_error}")
+                # Continue with original message_text
+            
+            message_data = json.loads(message_text)
             job_id = message_data.get("job_id", "unknown")
             url = message_data.get("url", "")
             blob_folder = message_data.get("blob_folder", "")
@@ -126,7 +139,7 @@ class VectorDBWorker:
                         "file_path": file_path,
                         "chunk_index": i,
                         "total_chunks": len(chunks),
-                        "text": chunk[:500]  # Store first 500 chars of chunk
+                        "text": chunk[:300]  # Store first 300 chars (reduced from 500)
                     }
                 }
                 vectors.append(vector)

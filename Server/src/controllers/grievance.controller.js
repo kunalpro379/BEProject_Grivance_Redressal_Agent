@@ -1,5 +1,5 @@
 import fs from 'fs';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 import grievanceDBService from '../services/grievance.db.service.js';
 import azureQueryAnalystQueueService from '../services/azure.queue.queryanalyst.service.js';
 import azureStorageService from '../services/azure.storage.services.js';
@@ -182,14 +182,16 @@ export const getGrievances = async (req, res) => {
     const limitVal = Math.min(requestedLimit, maxLimit);
 
     let query = `
-      SELECT g.id, g.grievance_id, g.citizen_id, g.grievance_text, g.status, g.priority, g.created_at, g.updated_at,
-             g.department_id, g.assigned_officer_id, g.image_path, g.image_description,
-             g.sla_deadline, g.resolution_time, g.enhanced_query,
+      SELECT g.id, g.grievance_id, g.citizen_id, gp.grievance_text, g.status, g.priority, g.created_at, g.updated_at,
+             g.department_id, g.assigned_officer_id, gp.image_path, gp.image_description,
+             gp.sla_deadline, gp.resolution_time, gp.enhanced_query,
              g.full_result, g.validation_status,
-             g.category, g.extracted_latitude as latitude, g.extracted_longitude as longitude, g.extracted_address as location_address,
+             gp.category, glm.latitude, glm.longitude, glm.address as location_address,
              c.full_name as citizen_name, c.email as citizen_email,
              o.full_name as officer_name, d.name as department_name
       FROM usergrievance g
+      LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
+      LEFT JOIN grievance_location_mapping glm ON g.id = glm.grievance_id
       LEFT JOIN citizens c ON g.citizen_id = c.id
       LEFT JOIN users o ON g.assigned_officer_id = o.id
       LEFT JOIN departments d ON g.department_id = d.id
@@ -255,15 +257,18 @@ export const getGrievanceById = async (req, res) => {
 
     let query = `
       SELECT g.*, 
-             g.extracted_latitude as latitude, 
-             g.extracted_longitude as longitude, 
-             g.extracted_address as location_address,
+             gp.grievance_text, gp.image_path, gp.image_description,
+             gp.enhanced_query, gp.sla_deadline, gp.resolution_time,
+             gp.category, gp.resolved_at, gp.resolved_by,
+             glm.latitude, glm.longitude, glm.address as location_address,
              c.full_name as citizen_name, c.email as citizen_email, c.phone as citizen_phone,
              o.full_name as officer_name, 
              d.name as department_name, d.description as department_description,
              d.address as department_address, d.contact_email as department_email,
              d.contact_phone as department_phone
       FROM usergrievance g
+      LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
+      LEFT JOIN grievance_location_mapping glm ON g.id = glm.grievance_id
       LEFT JOIN citizens c ON g.citizen_id = c.id
       LEFT JOIN users o ON g.assigned_officer_id = o.id
       LEFT JOIN departments d ON g.department_id = d.id

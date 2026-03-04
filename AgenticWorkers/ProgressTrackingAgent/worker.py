@@ -287,7 +287,7 @@ class ProgressTrackingWorker:
         self.db.save_progress_report_insight(department_id, report_data)
         
         # ESCALATION ANALYSIS - Check if issues need escalation
-        print("\n🔍 Running Escalation Analysis...")
+        print("\nRunning Escalation Analysis...")
         escalation_data = self.escalation_analyzer.analyze_escalation_needs(
             department_id=department_id,
             department_name=department_name,
@@ -298,7 +298,7 @@ class ProgressTrackingWorker:
         if escalation_data.get("needs_escalation"):
             self.escalation_analyzer.save_escalation_to_database(escalation_data)
             print(f"   🚨 ESCALATION REQUIRED: {escalation_data.get('escalation_level').upper()}")
-            print(f"   📊 Triggers: {escalation_data.get('total_triggers')}")
+            print(f"    Triggers: {escalation_data.get('total_triggers')}")
             print(f"   📋 Grievances to escalate: {escalation_data.get('total_grievances_to_escalate')}")
         else:
             print("    No escalation needed")

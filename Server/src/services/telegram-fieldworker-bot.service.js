@@ -13,6 +13,12 @@ class TelegramFieldWorkerBotService {
    * Initialize the Field Worker Telegram bot
    */
   async initialize() {
+    // Prevent duplicate initialization
+    if (this.isInitialized && this.bot) {
+      console.log('  Field Worker Bot already initialized - skipping');
+      return;
+    }
+    
     try {
       const token = process.env.TELEGRAM_FIELDWORKER_BOT_TOKEN;
       
@@ -25,15 +31,23 @@ class TelegramFieldWorkerBotService {
       
       // Add error handler to prevent spam
       this.bot.on('polling_error', (error) => {
-        console.error('Field Worker Bot polling error:', error.code);
-        // Don't stop polling, just log the error
-        if (error.code === 'ETELEGRAM' || error.code === 'EFATAL') {
-          console.log('  Stopping Field Worker Bot due to persistent errors');
-          if (this.bot) {
-            this.bot.stopPolling();
-            this.bot = null;
-            this.isInitialized = false;
+        // Just log the error, don't stop the bot
+        // This prevents the server from crashing during grievance submissions
+        if (error.code === 'ETELEGRAM') {
+          console.log('  Telegram API temporary error (ignoring):', error.message);
+        } else if (error.code === 'EFATAL') {
+          console.error('  Field Worker Bot fatal error:', error.message);
+          // Only stop on truly fatal errors like invalid token
+          if (error.response?.statusCode === 401) {
+            console.log('  Invalid bot token - stopping Field Worker Bot');
+            if (this.bot) {
+              this.bot.stopPolling();
+              this.bot = null;
+              this.isInitialized = false;
+            }
           }
+        } else {
+          console.log('  Field Worker Bot polling error:', error.code);
         }
       });
       
@@ -88,39 +102,152 @@ class TelegramFieldWorkerBotService {
         return;
       }
 
-      // Get conversation history
-      let history = this.conversationHistory.get(userId) || [];
-      history.push({ role: 'user', message: message });
-      if (history.length > 10) history = history.slice(-10);
-      this.conversationHistory.set(userId, history);
+      // Get or initialize user session
+      let session = this.conversationHistory.get(userId) || { 
+        role: null, // 'field_worker' or 'contractor'
+        authenticated: false,
+        phone: null,
+        history: []
+      };
 
-      // Let autonomous AI handle everything - no hardcoded logic
-      console.log(' Sending to autonomous AI agent...');
-      const response = await autonomousAIAgent.processMessage({
-        userId,
-        userName,
-        message,
-        channel: 'telegram_fieldworker',
-        media: null,
-        userContext: null,
-        conversationHistory: history
-      });
+      // Step 1: Ask for role if not set
+      if (!session.role) {
+        if (message.toLowerCase().includes('field') || message.toLowerCase().includes('worker')) {
+          session.role = 'field_worker';
+          this.conversationHistory.set(userId, session);
+          
+          await this.sendMessage(chatId, 
+            '✅ Welcome Field Worker!\n\n' +
+            'Please share your phone number for authentication.\n\n' +
+            'Use the button below to share your contact.'
+          );
+          
+          // Send contact request button
+          await this.bot.sendMessage(chatId, 'Share your phone number:', {
+            reply_markup: {
+              keyboard: [[{ text: '📱 Share Phone Number', request_contact: true }]],
+              one_time_keyboard: true,
+              resize_keyboard: true
+            }
+          });
+          return;
+        } else if (message.toLowerCase().includes('contractor')) {
+          session.role = 'contractor';
+          session.authenticated = true; // Contractors don't need phone auth
+          this.conversationHistory.set(userId, session);
+          
+          await this.sendMessage(chatId,
+            '✅ Welcome Contractor!\n\n' +
+            'Please provide the following information:\n' +
+            '1. Your company name\n' +
+            '2. Contract ID or Project ID\n' +
+            '3. Brief description of work\n\n' +
+            'You can also upload reports or documents.'
+          );
+          return;
+        } else {
+          // Ask them to choose
+          await this.bot.sendMessage(chatId, 
+            '👋 Welcome! Please select your role:',
+            {
+              reply_markup: {
+                keyboard: [
+                  [{ text: '👷 Field Worker' }],
+                  [{ text: '🏗️ Contractor' }]
+                ],
+                one_time_keyboard: true,
+                resize_keyboard: true
+              }
+            }
+          );
+          return;
+        }
+      }
 
-      console.log(' AI response:', response.text.substring(0, 100) + '...');
+      // Step 2: Handle Field Worker flow
+      if (session.role === 'field_worker') {
+        if (!session.authenticated) {
+          await this.sendMessage(chatId,
+            '⚠️ Please share your phone number first for authentication.\n\n' +
+            'Use the "Share Phone Number" button.'
+          );
+          return;
+        }
 
-      // Send response
-      await this.sendMessage(chatId, response.text);
-      console.log(' Response sent!');
+        // Field worker is authenticated, handle their messages
+        session.history.push({ role: 'user', message: message });
+        if (session.history.length > 10) session.history = session.history.slice(-10);
+        this.conversationHistory.set(userId, session);
 
-      // Add bot response to history
-      history.push({ role: 'bot', message: response.text });
-      this.conversationHistory.set(userId, history);
+        // Use AI to extract work progress information
+        console.log(' Processing field worker update...');
+        const response = await autonomousAIAgent.processMessage({
+          userId,
+          userName,
+          message,
+          channel: 'telegram_fieldworker',
+          media: null,
+          userContext: { 
+            role: 'field_worker',
+            phone: session.phone,
+            authenticated: true
+          },
+          conversationHistory: session.history,
+          systemPrompt: `You are assisting a field worker. Ask detailed questions about:
+- Work progress and completion percentage
+- Any issues or obstacles faced
+- Materials used
+- Time spent
+- Request photos of completed work
+- Next steps or pending tasks
+Be conversational but thorough in extracting progress information.`
+        });
+
+        await this.sendMessage(chatId, response.text);
+        session.history.push({ role: 'bot', message: response.text });
+        this.conversationHistory.set(userId, session);
+        return;
+      }
+
+      // Step 3: Handle Contractor flow
+      if (session.role === 'contractor') {
+        session.history.push({ role: 'user', message: message });
+        if (session.history.length > 10) session.history = session.history.slice(-10);
+        this.conversationHistory.set(userId, session);
+
+        console.log(' Processing contractor information...');
+        const response = await autonomousAIAgent.processMessage({
+          userId,
+          userName,
+          message,
+          channel: 'telegram_contractor',
+          media: null,
+          userContext: { 
+            role: 'contractor',
+            authenticated: true
+          },
+          conversationHistory: session.history,
+          systemPrompt: `You are assisting a contractor. Collect:
+- Company name and registration details
+- Contract/Project ID
+- Work description and scope
+- Progress reports
+- Billing information
+- Documents and reports
+Be professional and ensure all necessary information is collected.`
+        });
+
+        await this.sendMessage(chatId, response.text);
+        session.history.push({ role: 'bot', message: response.text });
+        this.conversationHistory.set(userId, session);
+        return;
+      }
 
     } catch (error) {
       console.error(' Error handling message:', error);
       await this.sendMessage(
         msg.chat.id,
-        'Sorry, I encountered an error. Please try again.'
+        'Sorry, I encountered an error. Please try again or use /start to restart.'
       );
     }
   }
@@ -139,17 +266,54 @@ class TelegramFieldWorkerBotService {
       console.log(`Phone: ${contact.phone_number}`);
       console.log(`Name: ${contact.first_name} ${contact.last_name || ''}`);
 
-      // Store phone number
-      await agentService.storeUserPhone(
-        userId,
-        contact.phone_number,
-        `${contact.first_name} ${contact.last_name || ''}`.trim()
-      );
+      // Get user session
+      let session = this.conversationHistory.get(userId) || { 
+        role: null,
+        authenticated: false,
+        phone: null,
+        history: []
+      };
 
-      await this.sendMessage(
-        chatId,
-        ` Contact received!\n\nPhone: ${contact.phone_number}\n\nNow you can register as a field worker. Type "register" to continue.`
-      );
+      // Authenticate field worker
+      if (session.role === 'field_worker') {
+        session.phone = contact.phone_number;
+        session.authenticated = true;
+        this.conversationHistory.set(userId, session);
+
+        // Store phone number
+        await agentService.storeUserPhone(
+          userId,
+          contact.phone_number,
+          `${contact.first_name} ${contact.last_name || ''}`.trim()
+        );
+
+        await this.bot.sendMessage(chatId,
+          '✅ Authentication successful!\n\n' +
+          `Phone: ${contact.phone_number}\n\n` +
+          'Now you can report work progress. Please tell me:\n\n' +
+          '1. Which grievance/work are you updating?\n' +
+          '2. What is the current progress? (percentage or status)\n' +
+          '3. Any issues or obstacles?\n' +
+          '4. Please share photos of the work done',
+          {
+            reply_markup: {
+              remove_keyboard: true
+            }
+          }
+        );
+      } else {
+        // Not a field worker, store anyway
+        await agentService.storeUserPhone(
+          userId,
+          contact.phone_number,
+          `${contact.first_name} ${contact.last_name || ''}`.trim()
+        );
+
+        await this.sendMessage(
+          chatId,
+          ` Contact received!\n\nPhone: ${contact.phone_number}\n\nHow can I help you today?`
+        );
+      }
 
     } catch (error) {
       console.error(' Error handling contact:', error);

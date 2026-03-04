@@ -1,6 +1,6 @@
 import express from 'express';
 import contractorReportService from '../services/contractor-report.service.js';
-import { authenticateToken } from '../middleware/auth.middleware.js';
+import { authenticateToken } from '../middleware/auth.mid.js';
 
 const router = express.Router();
 

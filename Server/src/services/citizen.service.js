@@ -1,4 +1,4 @@
-import { query } from '../config/database.js';
+import { query } from '../config/db.js';
 
 // Detect which table name exists in the database
 let CITIZENS_TABLE = 'citizens'; // default lowercase
@@ -113,12 +113,28 @@ class CitizenService {
     }
 
     /**
-     * Get all grievances for a citizen
+     * Get all grievances for a citizen (simplified - no function call)
      */
     async getCitizenGrievances(telegram_id) {
         try {
+            // Direct query instead of function call
             const result = await query(
-                `SELECT * FROM get_citizen_grievances($1)`,
+                `SELECT 
+                    g.id,
+                    g.grievance_id,
+                    g.status,
+                    g.priority,
+                    g.validation_status,
+                    g.full_result->>'grievance_text' as grievance_text,
+                    g.department_id,
+                    d.name as department_name,
+                    g.created_at,
+                    g.updated_at
+                FROM ${GRIEVANCE_TABLE} g
+                LEFT JOIN departments d ON g.department_id = d.id
+                INNER JOIN ${CITIZENS_TABLE} c ON g.citizen_id = c.id
+                WHERE c.telegram_id = $1
+                ORDER BY g.created_at DESC`,
                 [telegram_id]
             );
 

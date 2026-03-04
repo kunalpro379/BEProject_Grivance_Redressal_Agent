@@ -5,9 +5,9 @@
  */
 
 import express from 'express';
-import { authenticateToken, authorizeRoles } from '../middleware/auth.middleware.js';
+import { authenticateToken, authorizeRoles } from '../middleware/auth.mid.js';
 import progressTrackingScheduler from '../services/progress-tracking-scheduler.service.js';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 const router = express.Router();
 

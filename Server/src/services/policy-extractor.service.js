@@ -1,5 +1,5 @@
 ﻿import axios from 'axios';
-import db from '../config/database.js';
+import db from '../config/db.js';
 
 class PolicyExtractorService {
   constructor() {
@@ -79,7 +79,7 @@ class PolicyExtractorService {
       const { Pinecone } = await import('@pinecone-database/pinecone');
       
       const pineconeApiKey = process.env.PINECONE_API_KEY;
-      const pineconeIndexName = process.env.PINECONE_INDEX_NAME || 'igrs1';
+      const pineconeIndexName = process.env.PINECONE_INDEX_NAME || 'department';
       
       if (!pineconeApiKey) {
         console.warn('️  Pinecone API key not configured');

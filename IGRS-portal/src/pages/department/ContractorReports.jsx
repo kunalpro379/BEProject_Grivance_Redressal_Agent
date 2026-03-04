@@ -139,7 +139,7 @@ export default function ContractorReports() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900">📊 Contractor Reports</h1>
+        <h1 className="text-3xl font-bold text-gray-900"> Contractor Reports</h1>
       </div>
 
       {error && (
@@ -156,7 +156,7 @@ export default function ContractorReports() {
 
       {/* Search Section */}
       <div className="bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-xl font-semibold mb-2">🔍 Semantic Search</h2>
+        <h2 className="text-xl font-semibold mb-2">Semantic Search</h2>
         <p className="text-sm text-gray-600 mb-4">
           Search reports using natural language (powered by AI embeddings)
         </p>

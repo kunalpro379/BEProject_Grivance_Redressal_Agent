@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 // Get role-specific dashboard data
 export const getRoleDashboard = async (req, res) => {
@@ -99,10 +99,11 @@ const getWardOfficerDashboard = async (user) => {
   const kpisQuery = await pool.query(
     `SELECT 
       COUNT(CASE WHEN ug.status IN ('submitted', 'in_progress', 'assigned') THEN 1 END) as active_complaints,
-      COUNT(CASE WHEN ug.sla_deadline < NOW() AND ug.status != 'closed' THEN 1 END) as overdue,
-      COUNT(CASE WHEN DATE(ug.sla_deadline) = CURRENT_DATE AND ug.status != 'closed' THEN 1 END) as due_today,
+      COUNT(CASE WHEN gp.sla_deadline < NOW() AND ug.status != 'closed' THEN 1 END) as overdue,
+      COUNT(CASE WHEN DATE(gp.sla_deadline) = CURRENT_DATE AND ug.status != 'closed' THEN 1 END) as due_today,
       COUNT(CASE WHEN ug.priority = 'high' OR ug.priority = 'critical' THEN 1 END) as high_priority
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     WHERE glm.ward_id = $1 AND ug.status != 'closed'`,
     [wardId]
@@ -139,12 +140,13 @@ const getWardOfficerDashboard = async (user) => {
   // Complaints Queue
   const complaintsQuery = await pool.query(
     `SELECT 
-      ug.id, ug.grievance_id, ug.grievance_text as title, 
-      ug.extracted_address as location, ug.priority, ug.status,
-      ug.category->>'main_category' as category,
-      EXTRACT(EPOCH FROM (ug.sla_deadline - NOW()))/3600 as sla_hours_remaining,
+      ug.id, ug.grievance_id, gp.grievance_text as title, 
+      glm.address as location, ug.priority, ug.status,
+      gp.category->>'main_category' as category,
+      EXTRACT(EPOCH FROM (gp.sla_deadline - NOW()))/3600 as sla_hours_remaining,
       u.full_name as assigned_to
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     LEFT JOIN users u ON ug.assigned_officer_id = u.id
     WHERE glm.ward_id = $1 AND ug.status != 'closed'
@@ -155,7 +157,7 @@ const getWardOfficerDashboard = async (user) => {
         WHEN 'medium' THEN 3 
         ELSE 4 
       END,
-      ug.sla_deadline ASC
+      gp.sla_deadline ASC
     LIMIT 10`,
     [wardId]
   );
@@ -164,13 +166,14 @@ const getWardOfficerDashboard = async (user) => {
   const alertsQuery = await pool.query(
     `SELECT 
       'sla' as type, 
-      'SLA breach in ' || ROUND(EXTRACT(EPOCH FROM (ug.sla_deadline - NOW()))/60) || ' minutes for ' || ug.grievance_id as message,
+      'SLA breach in ' || ROUND(EXTRACT(EPOCH FROM (gp.sla_deadline - NOW()))/60) || ' minutes for ' || ug.grievance_id as message,
       'high' as severity
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     WHERE glm.ward_id = $1 
       AND ug.status != 'closed'
-      AND ug.sla_deadline BETWEEN NOW() AND NOW() + INTERVAL '1 hour'
+      AND gp.sla_deadline BETWEEN NOW() AND NOW() + INTERVAL '1 hour'
     LIMIT 5`,
     [wardId]
   );
@@ -178,13 +181,14 @@ const getWardOfficerDashboard = async (user) => {
   // Category Analytics
   const categoryQuery = await pool.query(
     `SELECT 
-      ug.category->>'main_category' as category,
+      gp.category->>'main_category' as category,
       COUNT(*) as count
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     WHERE glm.ward_id = $1 
       AND ug.created_at >= NOW() - INTERVAL '30 days'
-    GROUP BY ug.category->>'main_category'
+    GROUP BY gp.category->>'main_category'
     ORDER BY count DESC
     LIMIT 5`,
     [wardId]
@@ -212,11 +216,12 @@ const getCityCommissionerDashboard = async (user) => {
   const kpisQuery = await pool.query(
     `SELECT 
       COUNT(CASE WHEN ug.status IN ('submitted', 'in_progress', 'assigned') THEN 1 END) as active_complaints,
-      COUNT(CASE WHEN ug.status = 'closed' AND ug.resolved_at >= NOW() - INTERVAL '30 days' THEN 1 END) as resolved_this_month,
-      COUNT(CASE WHEN ug.sla_deadline < NOW() AND ug.status != 'closed' THEN 1 END) as overdue,
-      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN ug.resolution_time END), 2) as avg_resolution_time,
+      COUNT(CASE WHEN ug.status = 'closed' AND gp.resolved_at >= NOW() - INTERVAL '30 days' THEN 1 END) as resolved_this_month,
+      COUNT(CASE WHEN gp.sla_deadline < NOW() AND ug.status != 'closed' THEN 1 END) as overdue,
+      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN gp.resolution_time END), 2) as avg_resolution_time,
       COUNT(CASE WHEN ug.priority = 'critical' THEN 1 END) as critical_issues
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     WHERE glm.city_id = $1`,
     [cityId]
@@ -228,11 +233,12 @@ const getCityCommissionerDashboard = async (user) => {
       w.ward_name, w.ward_number,
       COUNT(ug.id) as total_grievances,
       COUNT(CASE WHEN ug.status = 'closed' THEN 1 END) as resolved,
-      COUNT(CASE WHEN ug.sla_deadline < NOW() AND ug.status != 'closed' THEN 1 END) as overdue,
-      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN ug.resolution_time END), 2) as avg_resolution_time
+      COUNT(CASE WHEN gp.sla_deadline < NOW() AND ug.status != 'closed' THEN 1 END) as overdue,
+      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN gp.resolution_time END), 2) as avg_resolution_time
     FROM wards w
     LEFT JOIN grievance_location_mapping glm ON w.id = glm.ward_id
     LEFT JOIN usergrievance ug ON glm.grievance_id = ug.id
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     WHERE w.city_id = $1
     GROUP BY w.id, w.ward_name, w.ward_number
     ORDER BY total_grievances DESC`,
@@ -245,10 +251,11 @@ const getCityCommissionerDashboard = async (user) => {
       d.name as department,
       COUNT(ug.id) as total_grievances,
       COUNT(CASE WHEN ug.status = 'closed' THEN 1 END) as resolved,
-      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN ug.resolution_time END), 2) as avg_resolution_time,
+      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN gp.resolution_time END), 2) as avg_resolution_time,
       d.performance_score
     FROM departments d
     LEFT JOIN usergrievance ug ON d.id = ug.department_id
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     WHERE ug.created_at >= NOW() - INTERVAL '30 days'
     GROUP BY d.id, d.name, d.performance_score
     ORDER BY total_grievances DESC`,
@@ -273,11 +280,12 @@ const getCityCommissionerDashboard = async (user) => {
   // Recent High Priority Issues
   const highPriorityQuery = await pool.query(
     `SELECT 
-      ug.grievance_id, ug.grievance_text as title, ug.priority,
-      ug.extracted_address as location, ug.status,
+      ug.grievance_id, gp.grievance_text as title, ug.priority,
+      glm.address as location, ug.status,
       w.ward_name, d.name as department,
       ug.created_at
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     LEFT JOIN wards w ON glm.ward_id = w.id
     LEFT JOIN departments d ON ug.department_id = d.id
@@ -291,12 +299,34 @@ const getCityCommissionerDashboard = async (user) => {
     [cityId]
   );
 
+  // Get all city grievances with location data for map
+  const mapGrievancesQuery = await pool.query(
+    `SELECT 
+      ug.grievance_id, gp.grievance_text as title, ug.priority, ug.status,
+      glm.latitude, glm.longitude, glm.address,
+      gp.category->>'main_category' as category,
+      d.name as department,
+      w.ward_name
+    FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+    JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
+    LEFT JOIN departments d ON ug.department_id = d.id
+    LEFT JOIN wards w ON glm.ward_id = w.id
+    WHERE glm.city_id = $1 
+      AND glm.latitude IS NOT NULL 
+      AND glm.longitude IS NOT NULL
+    ORDER BY ug.created_at DESC
+    LIMIT 500`,
+    [cityId]
+  );
+
   return {
     kpis: kpisQuery.rows[0],
     wardPerformance: wardPerformanceQuery.rows,
     departmentPerformance: departmentQuery.rows,
     budget: budgetQuery.rows[0],
-    highPriorityIssues: highPriorityQuery.rows
+    highPriorityIssues: highPriorityQuery.rows,
+    mapGrievances: mapGrievancesQuery.rows
   };
 };
 
@@ -310,9 +340,10 @@ const getDistrictCollectorDashboard = async (user) => {
       COUNT(CASE WHEN ug.status IN ('submitted', 'in_progress', 'assigned') THEN 1 END) as active_complaints,
       COUNT(CASE WHEN ug.status = 'closed' THEN 1 END) as total_resolved,
       COUNT(CASE WHEN ug.is_escalated = true THEN 1 END) as escalated,
-      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN ug.resolution_time END), 2) as avg_resolution_days,
+      ROUND(AVG(CASE WHEN ug.status = 'closed' THEN gp.resolution_time END), 2) as avg_resolution_days,
       COUNT(DISTINCT glm.city_id) as cities_with_issues
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     WHERE glm.district_id = $1`,
     [districtId]
@@ -360,11 +391,12 @@ const getDistrictCollectorDashboard = async (user) => {
   // Escalated Issues
   const escalatedQuery = await pool.query(
     `SELECT 
-      ug.grievance_id, ug.grievance_text as title,
+      ug.grievance_id, gp.grievance_text as title,
       c.city_name, w.ward_name, d.name as department,
       ge.escalation_level, ge.reason, ge.created_at
     FROM grievanceescalations ge
     JOIN usergrievance ug ON ge.grievance_id = ug.id
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     LEFT JOIN cities c ON glm.city_id = c.id
     LEFT JOIN wards w ON glm.ward_id = w.id
@@ -425,20 +457,23 @@ const getDepartmentOfficerDashboard = async (user) => {
       COUNT(CASE WHEN ug.status IN ('submitted', 'assigned', 'in_progress') THEN 1 END) as active_tasks,
       COUNT(CASE WHEN ug.assigned_officer_id = $1 THEN 1 END) as my_assignments,
       COUNT(CASE WHEN ug.status = 'closed' AND ug.resolved_by = $1 THEN 1 END) as resolved_by_me,
-      ROUND(AVG(CASE WHEN ug.status = 'closed' AND ug.resolved_by = $1 THEN ug.resolution_time END), 2) as my_avg_resolution_time
+      ROUND(AVG(CASE WHEN ug.status = 'closed' AND ug.resolved_by = $1 THEN gp.resolution_time END), 2) as my_avg_resolution_time
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
     WHERE ug.department_id = $2`,
     [user.id, departmentId]
   );
 
   const myTasksQuery = await pool.query(
     `SELECT 
-      ug.grievance_id, ug.grievance_text as title, ug.priority, ug.status,
-      ug.extracted_address as location, ug.sla_deadline,
-      EXTRACT(EPOCH FROM (ug.sla_deadline - NOW()))/3600 as hours_remaining
+      ug.grievance_id, gp.grievance_text as title, ug.priority, ug.status,
+      glm.address as location, gp.sla_deadline,
+      EXTRACT(EPOCH FROM (gp.sla_deadline - NOW()))/3600 as hours_remaining
     FROM usergrievance ug
+    LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+    LEFT JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
     WHERE ug.assigned_officer_id = $1 AND ug.status != 'closed'
-    ORDER BY ug.sla_deadline ASC
+    ORDER BY gp.sla_deadline ASC
     LIMIT 10`,
     [user.id]
   );

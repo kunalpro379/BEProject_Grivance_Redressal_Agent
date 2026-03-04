@@ -2,8 +2,8 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import axios from 'axios';
-import pool from '../config/database.js';
-import { authenticate, verifyDepartmentAccess as authVerifyDepartmentAccess } from '../middleware/auth.js';
+import pool from '../config/db.js';
+import { authenticate, verifyDepartmentAccess as authVerifyDepartmentAccess } from '../middleware/auth.mid.js';
 import azureStorageService from '../services/azure.storage.services.js';
 import azureKnowledgeBaseQueueService from '../services/azure.queue.knowledgebase.service.js';
 import deepseekAIService from '../services/deepseek-ai.service.js';
@@ -132,13 +132,14 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
       statsResult = await pool.query(
         `SELECT
           COUNT(*)::int AS total_grievances,
-          COUNT(*) FILTER (WHERE status::text IN ('submitted', 'pending'))::int AS pending_grievances,
-          COUNT(*) FILTER (WHERE status::text = 'in_progress')::int AS in_progress_grievances,
-          COUNT(*) FILTER (WHERE status::text IN ('resolved', 'closed'))::int AS resolved_grievances,
-          COUNT(*) FILTER (WHERE sla_deadline IS NOT NULL AND sla_deadline < NOW() AND status::text NOT IN ('resolved', 'closed', 'rejected'))::int AS overdue_grievances,
-          COUNT(*) FILTER (WHERE priority IN ('Emergency', 'Urgent', 'emergency', 'urgent'))::int AS emergency_grievances
-        FROM usergrievance
-        WHERE department_id = $1`,
+          COUNT(*) FILTER (WHERE ug.status::text IN ('submitted', 'pending'))::int AS pending_grievances,
+          COUNT(*) FILTER (WHERE ug.status::text = 'in_progress')::int AS in_progress_grievances,
+          COUNT(*) FILTER (WHERE ug.status::text IN ('resolved', 'closed'))::int AS resolved_grievances,
+          COUNT(*) FILTER (WHERE gp.sla_deadline IS NOT NULL AND gp.sla_deadline < NOW() AND ug.status::text NOT IN ('resolved', 'closed', 'rejected'))::int AS overdue_grievances,
+          COUNT(*) FILTER (WHERE ug.priority IN ('Emergency', 'Urgent', 'emergency', 'urgent'))::int AS emergency_grievances
+        FROM usergrievance ug
+        LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+        WHERE ug.department_id = $1`,
         [departmentId]
       );
     } catch (statsErr) {
@@ -196,7 +197,10 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
     try {
       // Avg resolution time
       const resolutionTimeResult = await pool.query(
-        `SELECT AVG(resolution_time) as avg_time FROM usergrievance WHERE department_id = $1 AND resolution_time IS NOT NULL`,
+        `SELECT AVG(gp.resolution_time) as avg_time 
+         FROM usergrievance ug
+         JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+         WHERE ug.department_id = $1 AND gp.resolution_time IS NOT NULL`,
         [departmentId]
       );
       const avgTime = parseFloat(resolutionTimeResult.rows[0]?.avg_time || 0);
@@ -205,9 +209,11 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
       // SLA Compliance
       const slaResult = await pool.query(
         `SELECT 
-          COUNT(*) FILTER (WHERE sla_deadline IS NOT NULL AND (status::text IN ('resolved', 'closed') OR updated_at <= sla_deadline))::int as compliant,
-          COUNT(*) FILTER (WHERE sla_deadline IS NOT NULL)::int as total_with_sla
-        FROM usergrievance WHERE department_id = $1`,
+          COUNT(*) FILTER (WHERE gp.sla_deadline IS NOT NULL AND (ug.status::text IN ('resolved', 'closed') OR ug.updated_at <= gp.sla_deadline))::int as compliant,
+          COUNT(*) FILTER (WHERE gp.sla_deadline IS NOT NULL)::int as total_with_sla
+        FROM usergrievance ug
+        LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+        WHERE ug.department_id = $1`,
         [departmentId]
       );
       const compliant = parseInt(slaResult.rows[0]?.compliant || 0);
@@ -342,12 +348,15 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
     try {
       const zoneResult = await pool.query(
         `SELECT 
-          zone,
+          ug.zone,
           COUNT(*)::int as active,
-          COUNT(*) FILTER (WHERE status::text IN ('resolved', 'closed'))::int as resolved,
+          COUNT(*) FILTER (WHERE ug.status::text IN ('resolved', 'closed'))::int as resolved,
           COUNT(*)::int as total,
-          AVG(resolution_time) as avg_time
-        FROM usergrievance WHERE department_id = $1 AND zone IS NOT NULL GROUP BY zone`,
+          AVG(gp.resolution_time) as avg_time
+        FROM usergrievance ug
+        LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+        WHERE ug.department_id = $1 AND ug.zone IS NOT NULL 
+        GROUP BY ug.zone`,
         [departmentId]
       );
       const staffByZone = await pool.query(
@@ -388,9 +397,13 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
     try {
       const categoryResult = await pool.query(
         `SELECT 
-          COALESCE((category->>'primary')::text, (category#>>'{0}')::text, 'Uncategorized') as category_name,
+          COALESCE((gp.category->>'main_category')::text, (gp.category->>'primary')::text, 'Uncategorized') as category_name,
           COUNT(*)::int as count
-        FROM usergrievance WHERE department_id = $1 GROUP BY category->>'primary', category#>>'{0}' ORDER BY count DESC`,
+        FROM usergrievance ug
+        LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+        WHERE ug.department_id = $1 
+        GROUP BY gp.category->>'main_category', gp.category->>'primary' 
+        ORDER BY count DESC`,
         [departmentId]
       );
       const totalForPercent = categoryResult.rows.reduce((sum, r) => sum + parseInt(r.count || 0), 0);
@@ -409,28 +422,32 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
     let urgentGrievanceList = [];
     try {
       const emergencyResult = await pool.query(
-        `SELECT g.grievance_id, g.status, g.category, g.extracted_address as location, g.priority
-         FROM usergrievance g WHERE g.department_id = $1 AND g.priority IN ('Emergency', 'emergency')
-         ORDER BY g.created_at DESC LIMIT 5`,
+        `SELECT ug.grievance_id, ug.status, gp.category, gp.location_address as location, ug.priority
+         FROM usergrievance ug
+         LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+         WHERE ug.department_id = $1 AND ug.priority IN ('Emergency', 'emergency')
+         ORDER BY ug.created_at DESC LIMIT 5`,
         [departmentId]
       );
       emergencyGrievanceList = emergencyResult.rows.map(r => ({
         grievance_id: r.grievance_id,
         status: r.status,
-        category: typeof r.category === 'object' ? r.category.primary : (typeof r.category === 'string' && r.category.startsWith('{') ? JSON.parse(r.category).primary : r.category),
+        category: typeof r.category === 'object' ? (r.category.main_category || r.category.primary) : r.category,
         location: r.location
       }));
 
       const urgentResult = await pool.query(
-        `SELECT g.grievance_id, g.status, g.category, g.extracted_address as location, g.priority
-         FROM usergrievance g WHERE g.department_id = $1 AND g.priority IN ('Urgent', 'urgent')
-         ORDER BY g.created_at DESC LIMIT 5`,
+        `SELECT ug.grievance_id, ug.status, gp.category, gp.location_address as location, ug.priority
+         FROM usergrievance ug
+         LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+         WHERE ug.department_id = $1 AND ug.priority IN ('Urgent', 'urgent')
+         ORDER BY ug.created_at DESC LIMIT 5`,
         [departmentId]
       );
       urgentGrievanceList = urgentResult.rows.map(r => ({
         grievance_id: r.grievance_id,
         status: r.status,
-        category: typeof r.category === 'object' ? r.category.primary : (typeof r.category === 'string' && r.category.startsWith('{') ? JSON.parse(r.category).primary : r.category),
+        category: typeof r.category === 'object' ? (r.category.main_category || r.category.primary) : r.category,
         location: r.location
       }));
     } catch (e) {
@@ -441,14 +458,16 @@ router.get('/:depId/complete', authenticate, verifyDepartmentAccess, async (req,
     let recentGrievanceList = [];
     try {
       const recentResult = await pool.query(
-        `SELECT g.grievance_id, g.status, g.category, g.extracted_address as location, g.priority, g.created_at
-         FROM usergrievance g WHERE g.department_id = $1 ORDER BY g.created_at DESC LIMIT 5`,
+        `SELECT ug.grievance_id, ug.status, gp.category, gp.location_address as location, ug.priority, ug.created_at
+         FROM usergrievance ug
+         LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+         WHERE ug.department_id = $1 ORDER BY ug.created_at DESC LIMIT 5`,
         [departmentId]
       );
       recentGrievanceList = recentResult.rows.map(r => ({
         grievance_id: r.grievance_id,
         status: r.status,
-        category: typeof r.category === 'object' ? r.category.primary : (typeof r.category === 'string' && r.category.startsWith('{') ? JSON.parse(r.category).primary : r.category),
+        category: typeof r.category === 'object' ? (r.category.main_category || r.category.primary) : r.category,
         location: r.location,
         priority: r.priority,
         created_at: r.created_at
@@ -734,32 +753,31 @@ router.get('/:depId/grievances', authenticate, verifyDepartmentAccess, async (re
 
     let query = `
       SELECT 
-        g.id,
-        g.grievance_id,
-        g.grievance_text as title,
-        g.grievance_text as description,
-        g.category,
-        g.priority,
-        g.status,
-        g.extracted_address as location,
-        g.extracted_latitude,
-        g.extracted_longitude,
-        g.created_at,
-        g.updated_at,
-        g.comments,
-        g.workflow,
-        g.estimated_cost,
-        g.actual_cost,
-        g.escalation_level,
-        g.citizen_feedback,
+        ug.id,
+        ug.grievance_id,
+        COALESCE(gp.grievance_text, ug.full_result->>'grievance_text', 'No description') as title,
+        COALESCE(gp.grievance_text, ug.full_result->>'grievance_text', 'No description') as description,
+        gp.category,
+        ug.priority,
+        ug.status,
+        COALESCE(glm.address, ug.full_result->>'location_address') as location,
+        COALESCE(glm.latitude, (ug.full_result->>'latitude')::numeric) as extracted_latitude,
+        COALESCE(glm.longitude, (ug.full_result->>'longitude')::numeric) as extracted_longitude,
+        ug.created_at,
+        ug.updated_at,
+        gp.estimated_cost,
+        gp.actual_cost,
+        gp.escalation_level,
         c.full_name as citizen_name,
         c.phone as citizen_phone,
         c.email as citizen_email,
         u.full_name as officer_name
-      FROM usergrievance g
-      LEFT JOIN citizens c ON g.citizen_id = c.id
-      LEFT JOIN users u ON g.assigned_officer_id = u.id
-      WHERE g.department_id = $1
+      FROM usergrievance ug
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+      LEFT JOIN grievance_location_mapping glm ON ug.id = glm.grievance_id
+      LEFT JOIN citizens c ON ug.citizen_id = c.id
+      LEFT JOIN users u ON ug.assigned_officer_id = u.id
+      WHERE ug.department_id = $1
     `;
 
     const params = [depId];
@@ -767,13 +785,13 @@ router.get('/:depId/grievances', authenticate, verifyDepartmentAccess, async (re
 
     // Filter out undefined, null, 'all', and the string 'undefined'
     if (status && status !== 'all' && status !== 'undefined' && status !== 'null') {
-      query += ` AND g.status = $${paramCount}`;
+      query += ` AND ug.status = $${paramCount}`;
       params.push(status);
       paramCount++;
     }
 
     if (category && category !== 'all' && category !== 'undefined' && category !== 'null') {
-      query += ` AND g.category::text ILIKE $${paramCount}`;
+      query += ` AND gp.category::text ILIKE $${paramCount}`;
       params.push(`%${category}%`);
       paramCount++;
     }
@@ -833,22 +851,36 @@ router.get('/:depId/grievances/map', authenticate, verifyDepartmentAccess, async
 
     const result = await pool.query(
       `SELECT 
-        g.id,
-        g.grievance_id,
-        g.grievance_text as title,
-        g.status,
-        g.priority,
-        g.extracted_address as location,
-        g.extracted_latitude as lat,
-        g.extracted_longitude as lng,
-        g.created_at,
+        ug.id,
+        ug.grievance_id,
+        COALESCE(gp.grievance_text, ug.full_result->>'grievance_text', 'No description') as title,
+        ug.status,
+        ug.priority,
+        COALESCE(
+          gp.location_address, 
+          ug.full_result->>'location_address'
+        ) as location,
+        COALESCE(
+          gp.latitude, 
+          (ug.full_result->>'latitude')::numeric
+        ) as lat,
+        COALESCE(
+          gp.longitude, 
+          (ug.full_result->>'longitude')::numeric
+        ) as lng,
+        ug.created_at,
         c.full_name as citizen_name,
         u.full_name as officer_name
-      FROM usergrievance g
-      LEFT JOIN citizens c ON g.citizen_id = c.id
-      LEFT JOIN users u ON g.assigned_officer_id = u.id
-      WHERE g.department_id = $1
-      ORDER BY g.created_at DESC
+      FROM usergrievance ug
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+      LEFT JOIN citizens c ON ug.citizen_id = c.id
+      LEFT JOIN users u ON ug.assigned_officer_id = u.id
+      WHERE ug.department_id = $1
+        AND (
+          gp.latitude IS NOT NULL 
+          OR (ug.full_result->>'latitude') IS NOT NULL
+        )
+      ORDER BY ug.created_at DESC
       LIMIT $2`,
       [depId, limit]
     );
@@ -870,16 +902,25 @@ router.get('/:depId/grievances/:grievanceId', authenticate, verifyDepartmentAcce
     const { depId, grievanceId } = req.params;
     const result = await pool.query(
       `SELECT 
-        g.id, g.grievance_id, g.grievance_text as description, g.category, g.priority, g.status,
-        g.extracted_address as location, g.extracted_latitude, g.extracted_longitude,
-        g.created_at, g.updated_at, g.workflow, g.comments, g.sla_deadline, g.resolution_time,
-        g.estimated_cost, g.actual_cost,
+        ug.id, ug.grievance_id, 
+        COALESCE(gp.grievance_text, ug.full_result->>'grievance_text') as description, 
+        COALESCE(gp.category, ug.full_result->'category') as category, 
+        ug.priority, ug.status,
+        COALESCE(gp.location_address, ug.full_result->>'location_address') as location, 
+        COALESCE(gp.latitude, (ug.full_result->>'latitude')::numeric) as extracted_latitude, 
+        COALESCE(gp.longitude, (ug.full_result->>'longitude')::numeric) as extracted_longitude,
+        ug.created_at, ug.updated_at, 
+        COALESCE(gp.workflow, ug.full_result->'workflow') as workflow, 
+        COALESCE(gp.comments, '[]'::jsonb) as comments, 
+        gp.sla_deadline, gp.resolution_time,
+        gp.estimated_cost, gp.actual_cost,
         c.full_name as citizen_name, c.phone as citizen_phone, c.email as citizen_email,
         u.full_name as officer_name, u.id as assigned_officer_id
-      FROM usergrievance g
-      LEFT JOIN citizens c ON g.citizen_id = c.id
-      LEFT JOIN users u ON g.assigned_officer_id = u.id
-      WHERE g.department_id = $1 AND g.grievance_id = $2`,
+      FROM usergrievance ug
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+      LEFT JOIN citizens c ON ug.citizen_id = c.id
+      LEFT JOIN users u ON ug.assigned_officer_id = u.id
+      WHERE ug.department_id = $1 AND ug.grievance_id = $2`,
       [depId, grievanceId]
     );
     if (result.rows.length === 0) {
@@ -903,9 +944,10 @@ router.get('/:depId/cost-tracking', authenticate, verifyDepartmentAccess, async 
       `SELECT 
         c.id, c.grievance_id, c.labor_cost, c.material_cost, c.equipment_cost, c.transport_cost,
         c.total_cost, c.budget_allocated, c.budget_used, c.budget_remaining, c.cost_breakdown, c.status as budget_status,
-        g.grievance_id as grievance_display_id, g.grievance_text
+        g.grievance_id as grievance_display_id, gp.grievance_text
       FROM grievancecosttracking c
       INNER JOIN usergrievance g ON g.id = c.grievance_id
+      LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
       WHERE g.department_id = $1
       ORDER BY c.updated_at DESC`,
       [depId]
@@ -938,17 +980,70 @@ router.get('/:depId/cost-tracking', authenticate, verifyDepartmentAccess, async 
 router.get('/:depId/analytics', authenticate, verifyDepartmentAccess, async (req, res) => {
   try {
     const { depId } = req.params;
+    
+    // Get subcategory breakdown (more detailed)
+    const bySubcategory = await pool.query(
+      `SELECT 
+        CASE
+          -- Try sub_category from grievance_processed
+          WHEN gp.category->>'sub_category' IS NOT NULL AND gp.category->>'sub_category' != ''
+            THEN gp.category->>'sub_category'
+          WHEN gp.category->>'sub' IS NOT NULL AND gp.category->>'sub' != ''
+            THEN gp.category->>'sub'
+          WHEN gp.category->>'secondary' IS NOT NULL AND gp.category->>'secondary' != ''
+            THEN gp.category->>'secondary'
+          -- Try main_category as fallback
+          WHEN gp.category->>'main_category' IS NOT NULL AND gp.category->>'main_category' != ''
+            THEN gp.category->>'main_category'
+          WHEN gp.category->>'main' IS NOT NULL AND gp.category->>'main' != ''
+            THEN gp.category->>'main'
+          WHEN gp.category->>'primary' IS NOT NULL AND gp.category->>'primary' != ''
+            THEN gp.category->>'primary'
+          ELSE 'Uncategorized'
+        END as category_name,
+        CASE
+          -- Get main category for grouping
+          WHEN gp.category->>'main_category' IS NOT NULL AND gp.category->>'main_category' != ''
+            THEN gp.category->>'main_category'
+          WHEN gp.category->>'main' IS NOT NULL AND gp.category->>'main' != ''
+            THEN gp.category->>'main'
+          WHEN gp.category->>'primary' IS NOT NULL AND gp.category->>'primary' != ''
+            THEN gp.category->>'primary'
+          ELSE 'General'
+        END as main_category,
+        COUNT(*)::int as count
+      FROM usergrievance ug
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+      WHERE ug.department_id = $1
+      GROUP BY category_name, main_category
+      ORDER BY count DESC
+      LIMIT 30`,
+      [depId]
+    );
+    
+    // Get main category breakdown
     const byCategory = await pool.query(
       `SELECT 
-        COALESCE((category->>'primary')::text, (category#>>'{0}')::text, 'Uncategorized') as category_name,
+        CASE
+          -- Try main_category from grievance_processed
+          WHEN gp.category->>'main_category' IS NOT NULL AND gp.category->>'main_category' != ''
+            THEN gp.category->>'main_category'
+          WHEN gp.category->>'main' IS NOT NULL AND gp.category->>'main' != ''
+            THEN gp.category->>'main'
+          WHEN gp.category->>'primary' IS NOT NULL AND gp.category->>'primary' != ''
+            THEN gp.category->>'primary'
+          ELSE 'Uncategorized'
+        END as category_name,
         COUNT(*)::int as count
-      FROM usergrievance
-      WHERE department_id = $1
-      GROUP BY category->>'primary', category#>>'{0}'
+      FROM usergrievance ug
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+      WHERE ug.department_id = $1
+      GROUP BY category_name
       ORDER BY count DESC
       LIMIT 20`,
       [depId]
     );
+    
     const byZone = await pool.query(
       `SELECT 
         COALESCE(zone, ward, 'Unassigned') as zone_name,
@@ -963,14 +1058,15 @@ router.get('/:depId/analytics', authenticate, verifyDepartmentAccess, async (req
     );
     const monthly = await pool.query(
       `SELECT 
-        to_char(created_at, 'Mon YYYY') as month_label,
-        to_char(created_at, 'YYYY-MM') as month_key,
+        to_char(ug.created_at, 'Mon YYYY') as month_label,
+        to_char(ug.created_at, 'YYYY-MM') as month_key,
         COUNT(*)::int as received,
-        COUNT(*) FILTER (WHERE status::text IN ('resolved', 'closed'))::int as resolved,
-        ROUND(AVG(resolution_time)::numeric, 1) as avg_time_days
-      FROM usergrievance
-      WHERE department_id = $1 AND created_at >= NOW() - INTERVAL '12 months'
-      GROUP BY to_char(created_at, 'Mon YYYY'), to_char(created_at, 'YYYY-MM')
+        COUNT(*) FILTER (WHERE ug.status::text IN ('resolved', 'closed'))::int as resolved,
+        ROUND(AVG(gp.resolution_time)::numeric, 1) as avg_time_days
+      FROM usergrievance ug
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+      WHERE ug.department_id = $1 AND ug.created_at >= NOW() - INTERVAL '12 months'
+      GROUP BY to_char(ug.created_at, 'Mon YYYY'), to_char(ug.created_at, 'YYYY-MM')
       ORDER BY month_key DESC
       LIMIT 12`,
       [depId]
@@ -979,6 +1075,7 @@ router.get('/:depId/analytics', authenticate, verifyDepartmentAccess, async (req
       success: true,
       data: {
         byCategory: byCategory.rows,
+        bySubcategory: bySubcategory.rows,
         byZone: byZone.rows,
         monthly: monthly.rows
       }
@@ -1342,8 +1439,9 @@ router.get('/:depId/zone-allocation', authenticate, verifyDepartmentAccess, asyn
         COALESCE(g.zone, g.ward, 'Unassigned') as zone_name,
         COUNT(DISTINCT g.id)::int as active_grievances,
         COUNT(DISTINCT g.id) FILTER (WHERE g.status::text IN ('resolved', 'closed'))::int as resolved,
-        ROUND(AVG(g.resolution_time)::numeric, 1) as avg_resolution_days
+        ROUND(AVG(gp.resolution_time)::numeric, 1) as avg_resolution_days
       FROM usergrievance g
+      LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
       WHERE g.department_id = $1
       GROUP BY COALESCE(g.zone, g.ward, 'Unassigned')`,
       [departmentId]
@@ -1609,10 +1707,14 @@ router.get('/:depId/citizen-feedback', authenticate, verifyDepartmentAccess, asy
     const { depId } = req.params;
     const result = await pool.query(
       `SELECT f.id, f.grievance_id, f.rating, f.feedback_text, f.additional_comments, f.would_recommend, f.satisfaction_level, f.created_at,
-        g.grievance_id as grievance_display_id, g.grievance_text, g.category as grievance_category, g.extracted_address as grievance_location,
+        g.grievance_id as grievance_display_id, 
+        COALESCE(gp.grievance_text, g.full_result->>'grievance_text', g.full_result->>'description') as grievance_text,
+        COALESCE(gp.category, g.full_result->'category') as grievance_category, 
+        COALESCE(gp.location_address, g.full_result->>'location_address') as grievance_location,
         c.full_name as citizen_name
        FROM grievancefeedback f
        JOIN usergrievance g ON g.id = f.grievance_id AND g.department_id = $1
+       LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
        JOIN citizens c ON c.id = f.citizen_id
        ORDER BY f.created_at DESC
        LIMIT 100`,
@@ -1631,11 +1733,22 @@ router.get('/:depId/citizen-feedback', authenticate, verifyDepartmentAccess, asy
     );
     const catCounts = await pool.query(
       `SELECT
-        COALESCE((g.category->>'primary')::text, (g.category#>>'{0}')::text, 'Uncategorized') as category_name,
+        COALESCE(
+          (gp.category->>'primary')::text, 
+          (gp.category#>>'{0}')::text,
+          (g.full_result->'category'->>'primary')::text,
+          (g.full_result->'category'#>>'{0}')::text,
+          'Uncategorized'
+        ) as category_name,
         COUNT(*)::int as count
        FROM grievancefeedback f
        JOIN usergrievance g ON g.id = f.grievance_id AND g.department_id = $1
-       GROUP BY g.category->>'primary', g.category#>>'{0}'
+       LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
+       GROUP BY 
+         gp.category->>'primary', 
+         gp.category#>>'{0}',
+         g.full_result->'category'->>'primary',
+         g.full_result->'category'#>>'{0}'
        ORDER BY count DESC`,
       [depId]
     );
@@ -1705,12 +1818,12 @@ router.get('/:depId/citizen-complaints-analysis', authenticate, verifyDepartment
     const { depId } = req.params;
     const { forceRefresh = false } = req.query;
     
-    // Check if we have a recent analysis (less than 24 hours old)
+    // Check if we have a recent analysis (less than 2 days old)
     if (!forceRefresh) {
       const cachedAnalysis = await pool.query(
         `SELECT * FROM department_complaints_analysis 
          WHERE department_id = $1 
-         AND analysis_date > NOW() - INTERVAL '24 hours'
+         AND analysis_date > NOW() - INTERVAL '2 days'
          ORDER BY analysis_date DESC 
          LIMIT 1`,
         [depId]
@@ -1749,33 +1862,36 @@ router.get('/:depId/citizen-complaints-analysis', authenticate, verifyDepartment
       }
     }
 
-    console.log('🔄 Generating fresh complaints analysis...');
+    console.log(' Generating fresh complaints analysis...');
     
     // Fetch all grievances with feedback for this department
     const grievancesResult = await pool.query(
       `SELECT 
-        g.id,
-        g.grievance_id,
-        g.grievance_text,
-        g.category,
-        g.status,
-        g.priority,
-        g.created_at,
-        g.extracted_address as location,
-        g.zone,
-        g.ward,
+        ug.id,
+        ug.grievance_id,
+        COALESCE(gp.grievance_text, ug.full_result->>'grievance_text') as grievance_text,
+        COALESCE(gp.category, ug.full_result->'category') as category,
+        ug.status,
+        ug.priority,
+        ug.created_at,
+        COALESCE(gp.location_address, ug.full_result->>'location_address') as location,
+        ug.zone,
+        ug.ward,
         c.full_name as citizen_name,
         c.phone as citizen_phone,
         f.rating,
         f.feedback_text,
         f.satisfaction_level,
-        f.would_recommend
-       FROM usergrievance g
-       LEFT JOIN citizens c ON c.id = g.citizen_id
-       LEFT JOIN grievancefeedback f ON f.grievance_id = g.id
-       WHERE g.department_id = $1
-       ORDER BY g.created_at DESC
-       LIMIT 200`,
+        f.would_recommend,
+        d.name as department_name
+       FROM usergrievance ug
+       LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+       LEFT JOIN citizens c ON c.id = ug.citizen_id
+       LEFT JOIN grievancefeedback f ON f.grievance_id = ug.id
+       LEFT JOIN departments d ON d.id = ug.department_id
+       WHERE ug.department_id = $1
+       ORDER BY ug.created_at DESC
+       LIMIT 500`,
       [depId]
     );
 
@@ -1794,18 +1910,35 @@ router.get('/:depId/citizen-complaints-analysis', authenticate, verifyDepartment
       });
     }
 
-    // Prepare data for DeepSeek analysis
+    // Extract category and subcategory properly
     const complaintsData = grievances.map(g => {
-      const category = typeof g.category === 'object' 
-        ? g.category.primary 
-        : (typeof g.category === 'string' && g.category.startsWith('{') 
-          ? JSON.parse(g.category).primary 
-          : g.category);
+      let mainCategory = 'Uncategorized';
+      let subCategory = 'General';
+      
+      try {
+        if (g.category) {
+          if (typeof g.category === 'object') {
+            mainCategory = g.category.main_category || g.category.main || g.category.primary || 'Uncategorized';
+            subCategory = g.category.sub_category || g.category.sub || g.category.secondary || 'General';
+          } else if (typeof g.category === 'string') {
+            if (g.category.startsWith('{')) {
+              const parsed = JSON.parse(g.category);
+              mainCategory = parsed.main_category || parsed.main || parsed.primary || 'Uncategorized';
+              subCategory = parsed.sub_category || parsed.sub || parsed.secondary || 'General';
+            } else {
+              mainCategory = g.category;
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Error parsing category:', e);
+      }
       
       return {
         id: g.grievance_id,
-        text: g.grievance_text,
-        category: category || 'Uncategorized',
+        text: gp.grievance_text || 'No description',
+        mainCategory: mainCategory,
+        subCategory: subCategory,
         status: g.status,
         priority: g.priority,
         location: g.location,
@@ -1816,65 +1949,100 @@ router.get('/:depId/citizen-complaints-analysis', authenticate, verifyDepartment
         feedback: g.feedback_text,
         satisfaction: g.satisfaction_level,
         wouldRecommend: g.would_recommend,
-        createdAt: g.created_at
+        createdAt: g.created_at,
+        departmentName: g.department_name
       };
     });
 
-    // Use DeepSeek to analyze complaints
-    const analysisPrompt = `You are an expert government department analyst. Analyze these citizen complaints and provide comprehensive insights.
+    // Use OpenRouter with GPT-4 for PREDICTIVE ANALYTICS
+    const departmentName = complaintsData[0]?.departmentName || 'Department';
+    
+    const analysisPrompt = `You are an expert AI analyst specializing in predictive analytics for government departments.
 
+Analyze these ${complaintsData.length} citizen complaints for ${departmentName} and provide PREDICTIVE INSIGHTS.
+
+Department: ${departmentName}
 Total Complaints: ${complaintsData.length}
 
-Complaints Data:
-${JSON.stringify(complaintsData.slice(0, 50), null, 2)}
+Sample Complaints (first 30):
+${JSON.stringify(complaintsData.slice(0, 30).map(c => ({
+  id: c.id,
+  text: c.text?.substring(0, 200),
+  mainCategory: c.mainCategory,
+  subCategory: c.subCategory,
+  status: c.status,
+  priority: c.priority,
+  location: c.location,
+  zone: c.zone,
+  rating: c.rating,
+  createdAt: c.createdAt
+})), null, 2)}
 
-Provide a detailed JSON analysis with:
-1. summary: Brief overview of complaint patterns (2-3 sentences)
-2. totalComplaints: Total number of complaints analyzed
-3. categoryBreakdown: Array of {category, count, percentage} for top categories
-4. priorityDistribution: Array of {priority, count, percentage}
-5. statusDistribution: Array of {status, count, percentage}
-6. topIssues: Array of top 5 recurring issues with descriptions
-7. geographicHotspots: Array of zones/wards with most complaints
-8. sentimentAnalysis: {positive, neutral, negative} percentages based on feedback
-9. averageRating: Average citizen satisfaction rating
-10. keyInsights: Array of 5-7 actionable insights
-11. recommendations: Array of 5-7 specific recommendations for improvement
-12. trends: Array of 3-5 identified trends or patterns
-13. urgentMatters: Array of 3-5 issues requiring immediate attention
-14. citizenSatisfaction: Overall satisfaction assessment
+Provide a PREDICTIVE ANALYTICS report in JSON format with:
+
+1. summary: Executive summary with key predictions and insights (3-4 sentences)
+2. totalComplaints: ${complaintsData.length}
+3. departmentName: "${departmentName}"
+4. averageRating: Average citizen satisfaction rating
+5. sentimentAnalysis: {positive, neutral, negative} percentages based on feedback and complaint text
+6. trends: Array of 7-10 PREDICTIVE trends (e.g., "Water supply complaints expected to increase by 15% next month based on seasonal patterns")
+7. keyInsights: Array of 7-10 actionable insights with predictions (e.g., "Zone 3 shows 30% higher complaint rate - predict infrastructure failure within 2 weeks")
+8. recommendations: Array of 7-10 PROACTIVE recommendations to prevent future issues
+9. urgentMatters: Array of 5-7 issues requiring IMMEDIATE attention to prevent escalation
+10. geographicHotspots: Array of {zone, count, prediction} - zones with most complaints and future predictions
+11. riskAssessment: {high: [], medium: [], low: []} - categorize risks by severity with predictions
+12. resourceAllocation: Recommendations for optimal resource distribution based on predicted demand
+13. futureProjections: {nextWeek, nextMonth, nextQuarter} - predicted complaint volumes and types
+14. preventiveMeasures: Array of actions to take NOW to prevent future complaints
+
+CRITICAL REQUIREMENTS:
+- Focus on PREDICTIONS and FUTURE TRENDS, not just current statistics
+- Identify patterns that indicate future problems
+- Provide PROACTIVE recommendations, not reactive ones
+- Use data to predict resource needs, complaint volumes, and potential crises
+- Think like a predictive AI system, not a report generator
 
 Return ONLY valid JSON, no markdown or extra text.`;
 
     try {
-      const apiKey = process.env.DEEPSEEK_API_KEY;
+      const apiKey = process.env.OPENROUTER_API_KEY;
       
-      const response = await axios.post(
-        'https://api.deepseek.com/v1/chat/completions',
-        {
-          model: 'deepseek-chat',
-          messages: [
-            {
-              role: 'system',
-              content: 'You are an expert government department analyst. Always respond with valid JSON only.'
-            },
-            {
-              role: 'user',
-              content: analysisPrompt
-            }
-          ],
-          temperature: 0.3,
-          max_tokens: 3000
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json'
-          }
+      if (!apiKey) {
+        throw new Error('OPENROUTER_API_KEY not configured');
+      }
+      
+      console.log('🤖 Calling OpenRouter API (GPT-4) for predictive analytics...');
+      
+      // Use OpenRouter SDK
+      const { OpenRouter } = await import('@openrouter/sdk');
+      
+      const openRouter = new OpenRouter({
+        apiKey: apiKey,
+        defaultHeaders: {
+          'HTTP-Referer': process.env.SITE_URL || 'http://localhost:5173',
+          'X-OpenRouter-Title': 'IGRS Grievance Portal'
         }
-      );
+      });
+      
+      const completion = await openRouter.chat.send({
+        model: 'openai/gpt-4o',
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert AI analyst specializing in predictive analytics for government operations. You analyze patterns, predict future trends, identify risks before they escalate, and provide proactive recommendations. Always respond with valid JSON only. Focus on predictions and future insights, not just current statistics.'
+          },
+          {
+            role: 'user',
+            content: analysisPrompt
+          }
+        ],
+        temperature: 0.3,
+        max_tokens: 4000
+      });
 
-      const aiResponse = response.data.choices[0].message.content;
+      const aiResponse = completion.choices[0].message.content;
+      
+      console.log('✅ Received response from OpenRouter');
       
       // Parse JSON from response
       let analysisData;
@@ -1885,8 +2053,11 @@ Return ONLY valid JSON, no markdown or extra text.`;
         } else {
           analysisData = JSON.parse(aiResponse);
         }
+        
+        console.log('✅ Successfully parsed analysis data');
+        console.log(`   Subcategories analyzed: ${analysisData.subcategoryBreakdown?.length || 0}`);
       } catch (parseError) {
-        console.error('Failed to parse DeepSeek response:', aiResponse);
+        console.error('Failed to parse OpenRouter response:', aiResponse);
         analysisData = {
           summary: 'Analysis completed but response format was unexpected.',
           totalComplaints: complaintsData.length,
@@ -1897,7 +2068,7 @@ Return ONLY valid JSON, no markdown or extra text.`;
 
       // Save analysis to database for caching
       try {
-        console.log('💾 Saving analysis to database...');
+        console.log(' Saving analysis to database...');
         console.log('   Department ID:', depId);
         console.log('   Total Complaints:', analysisData.totalComplaints || complaintsData.length);
         
@@ -1955,23 +2126,39 @@ Return ONLY valid JSON, no markdown or extra text.`;
         cached: false
       });
 
-    } catch (deepseekError) {
-      console.error('DeepSeek API Error:', deepseekError.response?.data || deepseekError.message);
+    } catch (openRouterError) {
+      console.error('OpenRouter API Error:', openRouterError.message);
+      if (openRouterError.response) {
+        console.error('Response data:', openRouterError.response.data);
+      }
       
-      // Fallback to basic analysis if DeepSeek fails
+      // Fallback to basic analysis if OpenRouter fails
       const categoryCount = {};
+      const subcategoryCount = {};
       const statusCount = {};
       const priorityCount = {};
       
       complaintsData.forEach(c => {
-        categoryCount[c.category] = (categoryCount[c.category] || 0) + 1;
+        const key = `${c.mainCategory} - ${c.subCategory}`;
+        subcategoryCount[key] = (subcategoryCount[key] || 0) + 1;
+        categoryCount[c.mainCategory] = (categoryCount[c.mainCategory] || 0) + 1;
         statusCount[c.status] = (statusCount[c.status] || 0) + 1;
         priorityCount[c.priority] = (priorityCount[c.priority] || 0) + 1;
       });
 
       const fallbackAnalysis = {
-        summary: `Analyzed ${complaintsData.length} citizen complaints. AI analysis temporarily unavailable, showing basic statistics.`,
+        summary: `Analyzed ${complaintsData.length} citizen complaints for ${departmentName}. AI analysis temporarily unavailable, showing basic statistics.`,
         totalComplaints: complaintsData.length,
+        departmentName: departmentName,
+        subcategoryBreakdown: Object.entries(subcategoryCount).map(([key, count]) => {
+          const [mainCategory, subCategory] = key.split(' - ');
+          return {
+            subCategory,
+            mainCategory,
+            count,
+            percentage: Math.round((count / complaintsData.length) * 100)
+          };
+        }).sort((a, b) => b.count - a.count),
         categoryBreakdown: Object.entries(categoryCount).map(([category, count]) => ({
           category,
           count,
@@ -1989,11 +2176,13 @@ Return ONLY valid JSON, no markdown or extra text.`;
         })),
         keyInsights: [
           'Basic statistical analysis available',
-          'Enable DeepSeek API for detailed AI insights'
+          'Enable OpenRouter API for detailed AI insights',
+          `Most common subcategory: ${Object.entries(subcategoryCount).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A'}`
         ],
         recommendations: [
           'Review complaint patterns manually',
-          'Configure DeepSeek API key for advanced analysis'
+          'Configure OPENROUTER_API_KEY for advanced analysis',
+          'Focus on top subcategories for improvement'
         ]
       };
 
@@ -2020,18 +2209,19 @@ router.get('/:depId/predictive-maintenance', authenticate, verifyDepartmentAcces
     // Get active/in-progress grievances for the department
     const result = await pool.query(
       `SELECT 
-        g.id,
-        g.grievance_id,
-        g.category,
-        g.status,
-        g.priority,
-        g.created_at,
-        g.extracted_address as location,
-        g.zone,
-        g.ward
-       FROM usergrievance g
-       WHERE g.department_id = $1 
-         AND g.status::text IN ('submitted', 'pending', 'in_progress', 'assigned')
+        ug.id,
+        ug.grievance_id,
+        COALESCE(gp.category, ug.full_result->'category') as category,
+        ug.status,
+        ug.priority,
+        ug.created_at,
+        COALESCE(gp.location_address, ug.full_result->>'location_address') as location,
+        ug.zone,
+        ug.ward
+       FROM usergrievance ug
+       LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
+       WHERE ug.department_id = $1 
+         AND ug.status::text IN ('submitted', 'pending', 'in_progress', 'assigned')
        ORDER BY 
          CASE g.priority 
            WHEN 'Emergency' THEN 1 
@@ -2357,14 +2547,14 @@ router.get('/:depId/policies', authenticate, verifyDepartmentAccess, async (req,
   try {
     const { depId } = req.params;
     
-    console.log('🔍 Fetching policies for department ID:', depId);
+    console.log('Fetching policies for department ID:', depId);
     
     const result = await pool.query(
       `SELECT policies FROM departments WHERE id = $1`,
       [depId]
     );
     
-    console.log('📊 Query result:', {
+    console.log(' Query result:', {
       rowCount: result.rows.length,
       hasPolicies: result.rows[0]?.policies ? 'yes' : 'no',
       policyLength: result.rows[0]?.policies?.length || 0
@@ -2395,7 +2585,7 @@ router.post('/:depId/reload-policies', authenticate, verifyDepartmentAccess, asy
   try {
     const { depId } = req.params;
     
-    console.log('🔄 Reloading policies for department ID:', depId);
+    console.log(' Reloading policies for department ID:', depId);
     
     // Get department name
     const deptResult = await pool.query(
@@ -2413,269 +2603,111 @@ router.post('/:depId/reload-policies', authenticate, verifyDepartmentAccess, asy
     const departmentName = deptResult.rows[0].name;
     console.log('📋 Department name:', departmentName);
     
-    // Call DeepSeek policy extractor service
-    const policyExtractorService = (await import('../services/policy-extractor.service.js')).default;
-    const extractionResult = await policyExtractorService.extractPolicies('all', depId);
+    // Use Claude ReAct Agent via Puter.js (NO DeepSeek, NO JSON schema)
+    const claudePolicyAgent = (await import('../services/claude-policy-agent.service.js')).default;
+    const azureStorageService = (await import('../services/azure.storage.services.js')).default;
     
-    if (!extractionResult.success) {
+    console.log('🤖 Using Claude ReAct Agent to retrieve comprehensive policies...');
+    
+    const result = await claudePolicyAgent.retrievePolicies(departmentName, depId);
+    
+    if (!result.success) {
       return res.status(500).json({
         success: false,
-        message: 'Failed to extract policies',
-        error: extractionResult.message
+        message: 'Failed to retrieve policies with Claude',
+        error: result.error
       });
     }
     
-    // Format extracted policies as comprehensive README markdown
-    let markdown = `# ${departmentName} - Government Policies & Regulations\n\n`;
-    markdown += `> **Last Updated:** ${new Date().toLocaleString()}\n`;
-    markdown += `> **Total Documents Analyzed:** ${extractionResult.metadata.total_documents}\n`;
-    markdown += `> **Source:** ${extractionResult.metadata.source}\n\n`;
-    markdown += `---\n\n`;
+    // The policyDocument is already a comprehensive README in markdown format
+    const readmeContent = result.policyDocument;
     
-    markdown += `## 📋 Table of Contents\n\n`;
-    markdown += `1. [Rules & Regulations](#rules--regulations)\n`;
-    markdown += `2. [Policies & Guidelines](#policies--guidelines)\n`;
-    markdown += `3. [Development Plans & Initiatives](#development-plans--initiatives)\n`;
-    markdown += `4. [Budget Allocations & Financial Plans](#budget-allocations--financial-plans)\n`;
-    markdown += `5. [Full Document Repository](#full-document-repository)\n\n`;
-    markdown += `---\n\n`;
+    console.log(`📝 Generated comprehensive README: ${readmeContent.length} characters`);
     
-    const { rules, policies, plans, budgets } = extractionResult.data;
+    // Store README in Azure Blob Storage
+    const fs = await import('fs');
+    const path = await import('path');
+    const tempDir = './temp';
     
-    // Add Rules section with FULL content
-    if (rules && rules.length > 0) {
-      markdown += `## 📜 Rules & Regulations\n\n`;
-      markdown += `*Total: ${rules.length} documents*\n\n`;
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+    
+    const tempFilePath = path.join(tempDir, `policy_${depId}_${Date.now()}.md`);
+    fs.writeFileSync(tempFilePath, readmeContent, 'utf8');
+    
+    try {
+      const blobFileName = `policies/${depId}/README_${Date.now()}.md`;
+      const uploadResult = await azureStorageService.uploadFile(tempFilePath, blobFileName);
       
-      rules.forEach((rule, idx) => {
-        markdown += `### ${idx + 1}. ${rule.title}\n\n`;
-        
-        if (rule.department) {
-          markdown += `**Department:** ${rule.department}\n\n`;
-        }
-        
-        if (rule.date) {
-          markdown += `**Date:** ${rule.date}\n\n`;
-        }
-        
-        if (rule.importance) {
-          markdown += `**Importance:** ${rule.importance}\n\n`;
-        }
-        
-        markdown += `**Summary:**\n${rule.summary}\n\n`;
-        
-        if (rule.key_points && rule.key_points.length > 0) {
-          markdown += `**Key Points:**\n`;
-          rule.key_points.forEach(point => {
-            markdown += `- ${point}\n`;
-          });
-          markdown += `\n`;
-        }
-        
-        if (rule.category_tags && rule.category_tags.length > 0) {
-          markdown += `**Tags:** ${rule.category_tags.join(', ')}\n\n`;
-        }
-        
-        // Add full document content if available (NO TRUNCATION)
-        if (rule.full_document && rule.full_document.content) {
-          markdown += `**Full Content:**\n\n`;
-          markdown += `${rule.full_document.content}\n\n`;
-        }
-        
-        markdown += `---\n\n`;
-      });
-    }
-    
-    // Add Policies section with FULL content
-    if (policies && policies.length > 0) {
-      markdown += `## 📋 Policies & Guidelines\n\n`;
-      markdown += `*Total: ${policies.length} documents*\n\n`;
+      console.log(`README uploaded to Azure Blob: ${uploadResult.url}`);
       
-      policies.forEach((policy, idx) => {
-        markdown += `### ${idx + 1}. ${policy.title}\n\n`;
-        
-        if (policy.department) {
-          markdown += `**Department:** ${policy.department}\n\n`;
-        }
-        
-        if (policy.date) {
-          markdown += `**Date:** ${policy.date}\n\n`;
-        }
-        
-        if (policy.importance) {
-          markdown += `**Importance:** ${policy.importance}\n\n`;
-        }
-        
-        markdown += `**Summary:**\n${policy.summary}\n\n`;
-        
-        if (policy.key_points && policy.key_points.length > 0) {
-          markdown += `**Key Points:**\n`;
-          policy.key_points.forEach(point => {
-            markdown += `- ${point}\n`;
-          });
-          markdown += `\n`;
-        }
-        
-        if (policy.category_tags && policy.category_tags.length > 0) {
-          markdown += `**Tags:** ${policy.category_tags.join(', ')}\n\n`;
-        }
-        
-        // Add full document content if available (NO TRUNCATION)
-        if (policy.full_document && policy.full_document.content) {
-          markdown += `**Full Content:**\n\n`;
-          markdown += `${policy.full_document.content}\n\n`;
-        }
-        
-        markdown += `---\n\n`;
-      });
-    }
-    
-    // Add Plans section with FULL content
-    if (plans && plans.length > 0) {
-      markdown += `## 🎯 Development Plans & Initiatives\n\n`;
-      markdown += `*Total: ${plans.length} documents*\n\n`;
+      // Clean up temp file
+      fs.unlinkSync(tempFilePath);
       
-      plans.forEach((plan, idx) => {
-        markdown += `### ${idx + 1}. ${plan.title}\n\n`;
-        
-        if (plan.department) {
-          markdown += `**Department:** ${plan.department}\n\n`;
-        }
-        
-        if (plan.date) {
-          markdown += `**Date:** ${plan.date}\n\n`;
-        }
-        
-        if (plan.importance) {
-          markdown += `**Importance:** ${plan.importance}\n\n`;
-        }
-        
-        markdown += `**Summary:**\n${plan.summary}\n\n`;
-        
-        if (plan.key_points && plan.key_points.length > 0) {
-          markdown += `**Key Points:**\n`;
-          plan.key_points.forEach(point => {
-            markdown += `- ${point}\n`;
-          });
-          markdown += `\n`;
-        }
-        
-        if (plan.category_tags && plan.category_tags.length > 0) {
-          markdown += `**Tags:** ${plan.category_tags.join(', ')}\n\n`;
-        }
-        
-        // Add full document content if available (NO TRUNCATION)
-        if (plan.full_document && plan.full_document.content) {
-          markdown += `**Full Content:**\n\n`;
-          markdown += `${plan.full_document.content}\n\n`;
-        }
-        
-        markdown += `---\n\n`;
-      });
-    }
-    
-    // Add Budgets section with FULL content
-    if (budgets && budgets.length > 0) {
-      markdown += `## 💰 Budget Allocations & Financial Plans\n\n`;
-      markdown += `*Total: ${budgets.length} documents*\n\n`;
+      // Save to database with blob URL
+      await pool.query(
+        `UPDATE departments 
+         SET policies = $1, 
+             policy_blob_url = $2,
+             policies_updated_at = NOW() 
+         WHERE id = $3`,
+        [readmeContent, uploadResult.url, depId]
+      );
       
-      budgets.forEach((budget, idx) => {
-        markdown += `### ${idx + 1}. ${budget.title}\n\n`;
-        
-        if (budget.department) {
-          markdown += `**Department:** ${budget.department}\n\n`;
+      console.log(` Policies saved to database with blob URL`);
+      
+      res.json({
+        success: true,
+        message: 'Policies retrieved and stored successfully',
+        data: {
+          markdown: readmeContent,
+          blobUrl: uploadResult.url,
+          totalDocuments: result.totalDocuments,
+          iterations: result.iterations,
+          thoughtProcess: result.thoughtProcess
+        },
+        metadata: {
+          department: departmentName,
+          retrieved_at: new Date().toISOString(),
+          agent: 'claude-react',
+          model: 'claude-sonnet-4-6',
+          source: 'puter-api'
         }
-        
-        if (budget.date) {
-          markdown += `**Date:** ${budget.date}\n\n`;
+      });
+      
+    } catch (uploadError) {
+      console.error('❌ Azure upload error:', uploadError);
+      
+      // Still save to database even if blob upload fails
+      await pool.query(
+        `UPDATE departments 
+         SET policies = $1, 
+             policies_updated_at = NOW() 
+         WHERE id = $2`,
+        [readmeContent, depId]
+      );
+      
+      console.log(` Policies saved to database (blob upload failed)`);
+      
+      res.json({
+        success: true,
+        message: 'Policies retrieved and stored successfully (blob upload failed)',
+        data: {
+          markdown: readmeContent,
+          blobUrl: null,
+          totalDocuments: result.totalDocuments,
+          iterations: result.iterations
+        },
+        metadata: {
+          department: departmentName,
+          retrieved_at: new Date().toISOString(),
+          agent: 'claude-react',
+          model: 'claude-sonnet-4-6'
         }
-        
-        if (budget.importance) {
-          markdown += `**Importance:** ${budget.importance}\n\n`;
-        }
-        
-        markdown += `**Summary:**\n${budget.summary}\n\n`;
-        
-        if (budget.key_points && budget.key_points.length > 0) {
-          markdown += `**Key Points:**\n`;
-          budget.key_points.forEach(point => {
-            markdown += `- ${point}\n`;
-          });
-          markdown += `\n`;
-        }
-        
-        if (budget.category_tags && budget.category_tags.length > 0) {
-          markdown += `**Tags:** ${budget.category_tags.join(', ')}\n\n`;
-        }
-        
-        // Add full document content if available (NO TRUNCATION)
-        if (budget.full_document && budget.full_document.content) {
-          markdown += `**Full Content:**\n\n`;
-          markdown += `${budget.full_document.content}\n\n`;
-        }
-        
-        markdown += `---\n\n`;
       });
     }
-    
-    // Add Full Document Repository section
-    markdown += `## 📚 Full Document Repository\n\n`;
-    markdown += `*Complete list of all analyzed documents*\n\n`;
-    
-    const allDocs = [
-      ...(rules || []).map(r => ({ ...r, type: 'Rule' })),
-      ...(policies || []).map(p => ({ ...p, type: 'Policy' })),
-      ...(plans || []).map(p => ({ ...p, type: 'Plan' })),
-      ...(budgets || []).map(b => ({ ...b, type: 'Budget' }))
-    ];
-    
-    allDocs.forEach((doc, idx) => {
-      markdown += `${idx + 1}. **[${doc.type}]** ${doc.title}`;
-      if (doc.department) markdown += ` - ${doc.department}`;
-      if (doc.date) markdown += ` (${doc.date})`;
-      markdown += `\n`;
-    });
-    
-    // Add footer
-    markdown += `\n\n---\n\n`;
-    markdown += `## 📝 Document Information\n\n`;
-    markdown += `- **Generated:** ${new Date().toLocaleString()}\n`;
-    markdown += `- **Department:** ${departmentName}\n`;
-    markdown += `- **Total Documents:** ${extractionResult.metadata.total_documents}\n`;
-    markdown += `- **Rules:** ${rules?.length || 0}\n`;
-    markdown += `- **Policies:** ${policies?.length || 0}\n`;
-    markdown += `- **Plans:** ${plans?.length || 0}\n`;
-    markdown += `- **Budgets:** ${budgets?.length || 0}\n\n`;
-    markdown += `---\n\n`;
-    markdown += `*This comprehensive document was automatically generated using AI-powered policy extraction.*\n`;
-    markdown += `*For official verification, please refer to the original policy documents.*\n`;
-    
-    console.log(`📝 Generated comprehensive README: ${markdown.length} characters`);
-    
-    // Save to database
-    await pool.query(
-      `UPDATE departments SET policies = $1, updated_at = NOW() WHERE id = $2`,
-      [markdown, depId]
-    );
-    
-    console.log(' Policies saved to database:', markdown.length, 'characters');
-    
-    res.json({
-      success: true,
-      message: 'Policies reloaded and saved successfully',
-      data: {
-        policies: markdown
-      },
-      metadata: {
-        ...extractionResult.metadata,
-        total_items: (rules?.length || 0) + (policies?.length || 0) + (plans?.length || 0) + (budgets?.length || 0),
-        rules_count: rules?.length || 0,
-        policies_count: policies?.length || 0,
-        plans_count: plans?.length || 0,
-        budgets_count: budgets?.length || 0
-      }
-    });
-    
+        
   } catch (error) {
     console.error('❌ Error reloading department policies:', error);
     res.status(500).json({ 

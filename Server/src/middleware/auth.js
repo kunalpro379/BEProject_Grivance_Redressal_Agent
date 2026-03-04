@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 export const authenticate = async (req, res, next) => {
   try {

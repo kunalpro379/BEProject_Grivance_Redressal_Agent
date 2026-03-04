@@ -1,6 +1,7 @@
 ﻿import TelegramBot from 'node-telegram-bot-api';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 import contractorAnalysisService from './contractor-analysis.service.js';
+import contractorAIAnalyst from './contractor-ai-analyst.svc.js';
 import deepseekAI from './deepseek-ai.service.js';
 import contractorReportService from './contractor-report.service.js';
 import axios from 'axios';
@@ -13,6 +14,12 @@ class TelegramContractorBot {
   }
 
   initialize() {
+    // Prevent duplicate initialization
+    if (this.bot) {
+      console.log('  Telegram Contractor Bot already initialized - skipping');
+      return;
+    }
+    
     const token = process.env.TELEGRAM_CONTRACTOR_BOT_TOKEN;
     
     if (!token) {
@@ -31,14 +38,17 @@ class TelegramContractorBot {
       
       // Add error handler to prevent spam
       this.bot.on('polling_error', (error) => {
-        console.error('Telegram Contractor Bot polling error:', error.code);
-        // Don't stop polling on temporary errors, only on fatal ones
-        if (error.code === 'EFATAL' || (error.code === 'ETELEGRAM' && error.response?.statusCode === 401)) {
-          console.log('  Stopping Telegram Contractor Bot due to persistent errors');
+        // Just log the error, don't stop the bot unless it's a fatal auth error
+        if (error.code === 'ETELEGRAM') {
+          console.log('  Telegram API temporary error (ignoring):', error.message);
+        } else if (error.code === 'EFATAL' || error.response?.statusCode === 401) {
+          console.log('  Stopping Telegram Contractor Bot due to auth error');
           if (this.bot) {
             this.bot.stopPolling();
             this.bot = null;
           }
+        } else {
+          console.log('  Telegram Contractor Bot polling error:', error.code);
         }
       });
 
@@ -71,6 +81,9 @@ class TelegramContractorBot {
     // View reports command
     this.bot.onText(/\/myreports/, (msg) => this.handleMyReports(msg));
 
+    // Analyze contractors command
+    this.bot.onText(/\/analyze/, (msg) => this.handleAnalyzeCommand(msg));
+
     // Reset command
     this.bot.onText(/\/reset/, (msg) => this.handleReset(msg));
 
@@ -82,12 +95,19 @@ class TelegramContractorBot {
       // Skip if it's a command or document
       if (msg.text?.startsWith('/') || msg.document) return;
       
-      // Check if user is in report submission flow
+      // Check if user is in report submission flow or analysis flow
       const userId = msg.from.id.toString();
+      const chatId = msg.chat.id;
       const state = this.states.get(userId);
       
       if (state && state.mode === 'report') {
         // User is in report flow, handle it there
+        return;
+      }
+      
+      if (state && state.mode === 'analysis' && state.step === 'awaiting_analysis_input') {
+        // User is providing analysis input
+        this.handleAnalysisInput(msg, userId, chatId);
         return;
       }
       
@@ -111,6 +131,7 @@ I'll help you manage your contractor profile and submit project reports.
 /status - Check your registration status
 /report - Submit a new project report
 /myreports - View your submitted reports
+/analyze - Get AI analysis of all contractors
 /reset - Reset registration and start over
 /logout - Clear all data and logout
 
@@ -857,6 +878,122 @@ Provide a JSON analysis with:
     );
     
     return result.rows[0];
+  }
+
+  async handleAnalyzeCommand(msg) {
+    if (!this.bot) return;
+    const chatId = msg.chat.id;
+    const userId = msg.from.id.toString();
+
+    try {
+      console.log(` /analyze command received from user ${userId}`);
+
+      await this.bot.sendMessage(
+        chatId,
+        '🔍 *Contractor Analysis*\n\nPlease provide project details:\n\n' +
+        '1️⃣ Project Type (e.g., Road Construction, Water Supply)\n' +
+        '2️⃣ Budget (in Crores)\n' +
+        '3️⃣ Urgency (normal/urgent)\n\n' +
+        'Example: Road Construction, 2.5, urgent',
+        { parse_mode: 'Markdown' }
+      );
+
+      // Set state for analysis
+      this.states.set(userId, {
+        step: 'awaiting_analysis_input',
+        mode: 'analysis'
+      });
+
+    } catch (error) {
+      console.error('Error in analyze command:', error);
+      await this.bot.sendMessage(chatId, '❌ Error starting analysis. Please try again.');
+    }
+  }
+
+  async handleAnalysisInput(msg, userId, chatId) {
+    try {
+      const input = msg.text.trim();
+      const parts = input.split(',').map(p => p.trim());
+
+      if (parts.length < 2) {
+        await this.bot.sendMessage(
+          chatId,
+          '⚠️ Please provide at least Project Type and Budget.\n\n' +
+          'Example: Road Construction, 2.5, urgent'
+        );
+        return;
+      }
+
+      const projectType = parts[0];
+      const budget = parseFloat(parts[1]) * 10000000; // Convert Cr to rupees
+      const urgency = parts[2] || 'normal';
+
+      await this.bot.sendMessage(
+        chatId,
+        '🤖 Analyzing all contractors...\n\nThis may take a moment...'
+      );
+
+      // Generate comprehensive analysis
+      const analysisMessage = await contractorAIAnalyst.generateTelegramAnalysis(
+        projectType,
+        budget,
+        urgency
+      );
+
+      // Send analysis in chunks if too long
+      if (analysisMessage.length > 4096) {
+        const chunks = this.splitMessage(analysisMessage, 4096);
+        for (const chunk of chunks) {
+          await this.bot.sendMessage(chatId, chunk, { parse_mode: 'Markdown' });
+          await new Promise(resolve => setTimeout(resolve, 500)); // Small delay between messages
+        }
+      } else {
+        await this.bot.sendMessage(chatId, analysisMessage, { parse_mode: 'Markdown' });
+      }
+
+      // Clear state
+      this.states.delete(userId);
+
+    } catch (error) {
+      console.error('Error handling analysis input:', error);
+      await this.bot.sendMessage(
+        chatId,
+        '❌ Error generating analysis. Please try again with /analyze'
+      );
+      this.states.delete(userId);
+    }
+  }
+
+  splitMessage(message, maxLength) {
+    const chunks = [];
+    let currentChunk = '';
+    const lines = message.split('\n');
+
+    for (const line of lines) {
+      if ((currentChunk + line + '\n').length > maxLength) {
+        if (currentChunk) {
+          chunks.push(currentChunk.trim());
+          currentChunk = '';
+        }
+        
+        // If single line is too long, split it
+        if (line.length > maxLength) {
+          for (let i = 0; i < line.length; i += maxLength) {
+            chunks.push(line.substring(i, i + maxLength));
+          }
+        } else {
+          currentChunk = line + '\n';
+        }
+      } else {
+        currentChunk += line + '\n';
+      }
+    }
+
+    if (currentChunk) {
+      chunks.push(currentChunk.trim());
+    }
+
+    return chunks;
   }
 }
 

@@ -165,7 +165,7 @@ class BlobUploader:
             cur.close()
             conn.close()
             
-            print(f"   💾 Saved URL to database for department: {department_name} ({department_id})")
+            print(f"    Saved URL to database for department: {department_name} ({department_id})")
             
         except Exception as e:
             print(f"   ❌ Error saving URL to database: {e}")

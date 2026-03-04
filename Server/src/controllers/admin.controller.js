@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 // Generate unique department officer ID: DEP-XXXX-YYYY (pure random)
 const generateDepId = () => {

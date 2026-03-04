@@ -42,7 +42,7 @@ class TavilySearchEngine:
                 else:
                     contextualized_query = query
                 
-                print(f"   🔍 Searching: {contextualized_query}")
+                print(f"   Searching: {contextualized_query}")
                 response = self.client.search(
                     query=contextualized_query,
                     max_results=max_results_per_query,

@@ -5,6 +5,7 @@ Pillow
 requests
 google-generativeai
 groq
+openai
 langgraph
 reportlab
 azure-storage-queue

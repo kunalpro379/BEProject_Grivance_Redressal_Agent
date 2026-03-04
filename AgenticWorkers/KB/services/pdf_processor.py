@@ -68,7 +68,7 @@ class PDFProcessor:
     
     def process_pdf_url(self, url: str) -> Dict:
         """Download and process PDF from URL"""
-        print(f"   🔄 Processing PDF from URL...")
+        print(f"    Processing PDF from URL...")
         
         pdf_path = None
         try:

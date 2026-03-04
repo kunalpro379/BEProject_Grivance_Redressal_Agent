@@ -1,8 +1,8 @@
 import express from 'express';
 import whatsappService from '../services/whatsapp.service.js';
 import whatsappScheduler from '../services/whatsapp.scheduler.js';
-import { authenticateToken } from '../middleware/auth.middleware.js';
-import pool from '../config/database.js';
+import { authenticateToken } from '../middleware/auth.mid.js';
+import pool from '../config/db.js';
 
 const router = express.Router();
 

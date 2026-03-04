@@ -1,0 +1,15 @@
+{
+  "name": "db-migrations",
+  "version": "1.0.0",
+  "description": "Database migration scripts",
+  "main": "migration_preview.js",
+  "scripts": {
+    "preview": "node migration_preview.js",
+    "migrate": "node migration_remove_columns.js",
+    "rollback": "node migration_rollback.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "dotenv": "^16.3.1"
+  }
+}

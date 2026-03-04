@@ -1,4 +1,4 @@
-﻿import pool from '../config/database.js';
+﻿import pool from '../config/db.js';
 import { BlobServiceClient } from '@azure/storage-blob';
 import OpenAI from 'openai';
 import { createRequire } from 'module';

@@ -1,5 +1,5 @@
 ﻿import commentsService from '../services/comments.service.js';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 export const addComment = async (req, res) => {
   try {

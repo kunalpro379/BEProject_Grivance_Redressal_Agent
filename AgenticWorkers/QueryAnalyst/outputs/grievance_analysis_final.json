@@ -1,13 +1,24 @@
 {
   "grievance": {
-    "text": "Viefibwinwd",
-    "enhanced_query_described": "**Comprehensive Description of Citizen Grievance**\n\n**Original Complaint/Query:** The original complaint/query is unclear and cannot be deciphered due to the presence of nonsensical characters \"Viefibwinwd\". This makes it difficult to determine the specific nature of the grievance. However, it is possible that the complainant is experiencing technical difficulties or is seeking assistance with an issue related to the provided image analysis.\n\n**Visual Evidence and Location Information:** Unfortunately, the image analysis was unable to extract any meaningful information due to an error in the API key. The description of the image analysis indicates that the API key was reported as leaked, and a new key is required to proceed. As a result, no visual evidence or location information can be extracted from the provided image. The location details are also incomplete, with no address or landmarks available. The area type is listed as \"unknown\", which further complicates the situation.\n\n**Initial Category Assessment:** Based on the available information, it is challenging to categorize the grievance. However, it appears to be related to technical difficulties or a request for assistance with an image analysis issue. Further investigation is required to determine the root cause of the problem and to provide a more accurate category assessment. It is recommended to obtain a new API key and re-analyze the image to gather more information about the grievance.",
+    "text": "Garbage is not being collected for 3 months, leading to overflowing bins on the road.\n\n[Location: Latitude 19.045312, Longitude 72.888882]",
+    "enhanced_query_described": "**Citizen Grievance Description**\n\n**Original Complaint/Query:** The complainant has reported that garbage has not been collected for three months, resulting in overflowing bins on the road. This has led to a significant accumulation of litter and debris in the area.\n\n**Visual Evidence and Location Details:** An image analysis of the location reveals a roadside area cluttered with garbage, plastic bags, packets, and other forms of litter. The area appears to be unmanaged, with a significant buildup of rubbish against a metal fence in the background. The surrounding environment is dirty, and the overall scene is characterized by a lack of proper waste management. The location is situated at Latitude 19.045312 and Longitude 72.888882, although the address and surrounding landmarks are not identifiable.\n\n**Initial Category Assessment:** Based on the available information, the grievance falls under the category of \"Waste Management\" or \"Public Cleanliness.\" The complainant's query highlights a critical issue of uncollected garbage, which has resulted in a significant environmental and aesthetic impact on the area. Further investigation is required to determine the root cause of the issue, including the responsibility of the waste management agency and the potential impact on public health and safety.",
     "image": {
-      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmp60dlhj9q.jpg",
-      "description": "Error analyzing image: 403 Your API key was reported as leaked. Please use another API key.",
-      "key_objects": [],
-      "scene_type": "",
-      "extracted_text": ""
+      "path": "C:\\Users\\kunal\\AppData\\Local\\Temp\\tmpugf4kydg.jpg",
+      "description": "The image shows a roadside area cluttered with various forms of garbage and litter, including plastic bags, packets, and other debris scattered around. A metal fence is visible in the background, and there is a significant buildup of rubbish against it. The surrounding area looks unmanaged and dirty.",
+      "key_objects": [
+        "garbage",
+        "plastic bags",
+        "packets",
+        "metal fence"
+      ],
+      "scene_type": "roadside area",
+      "condition": "dirty",
+      "severity_indicators": [
+        "overflowing garbage",
+        "scattered litter"
+      ],
+      "extracted_text": "LAYS",
+      "reasoning": "The image supports the citizen's complaint as it clearly shows an accumulation of garbage, suggesting a lack of waste collection in the area."
     },
     "location": {
       "address": "Not extractable",
@@ -16,287 +27,160 @@
       "landmarks": [],
       "area_type": "unknown"
     },
-    "category": "Financial Fraud",
-    "sub_category": "Internet Banking Related Fraud"
+    "category": "Sanitation",
+    "sub_category": "Garbage Collection"
   },
   "analysis": {
     "query_type": {
-      "query_type": "Query",
-      "confidence": "Low"
+      "query_type": "Complaint",
+      "confidence": "High"
     },
     "emotion": {
-      "primary_emotion": "Neutral",
-      "secondary_emotions": [],
-      "emotion_intensity": 0,
-      "emotional_indicators": []
+      "primary_emotion": "Angry",
+      "secondary_emotions": [
+        "Frustrated",
+        "Sad"
+      ],
+      "emotion_intensity": 8,
+      "emotional_indicators": [
+        "Garbage is not being collected for 3 months",
+        "overflowing bins on the road",
+        "cluttered with various forms of garbage and litter",
+        "significant buildup of rubbish",
+        "unmanaged and dirty",
+        "LAYS"
+      ]
     },
     "severity": {
-      "severity_level": "Low",
-      "criticality_score": 2,
-      "impact_scope": "Individual",
+      "severity_level": "Critical",
+      "criticality_score": 9,
+      "impact_scope": "Community",
       "potential_consequences": [
-        "Minimal disruption to daily activities",
-        "No significant financial loss",
-        "No major impact on relationships"
+        "Spread of diseases due to uncollected garbage",
+        "Attracting pests and rodents",
+        "Negative impact on local environment and ecosystem",
+        "Loss of public health and safety",
+        "Negative impact on local economy and tourism"
       ]
     },
     "priority": {
-      "sentiment_score": 0,
-      "urgency_level": "Low",
-      "emotional_tone": "Neutral",
-      "key_emotional_indicators": [],
-      "priority_level": "Low",
-      "justification": "The text 'Viefibwinwd' appears to be nonsensical and does not convey any specific information or urgency, suggesting that it may not be a legitimate or actionable grievance.",
-      "expected_resolution_time": "Immediate",
-      "risk_assessment": "Low risk of significant consequences or impact, as the grievance does not appear to be related to any specific issue or concern."
+      "sentiment_score": 8,
+      "urgency_level": "High",
+      "emotional_tone": "Anger and Frustration",
+      "key_emotional_indicators": [
+        "Garbage is not being collected for 3 months",
+        "Overflowing bins on the road",
+        "Cluttered with various forms of garbage and litter",
+        "Significant buildup of rubbish against the metal fence",
+        "Unmanaged and dirty surrounding area"
+      ],
+      "priority_level": "High",
+      "justification": "The grievance has been ongoing for 3 months, affecting a significant number of people in the area, and poses a risk to public health and safety due to the accumulation of garbage and litter. The image provided shows a severe buildup of rubbish, indicating a critical situation that requires immediate attention.",
+      "expected_resolution_time": "Within 7-10 working days",
+      "risk_assessment": "High risk of disease transmission, pest infestation, and environmental pollution due to the prolonged accumulation of garbage. There is also a risk of accidents or injuries caused by the cluttered and dirty environment."
     },
     "patterns": {
-      "is_recurring_issue": false,
-      "similar_patterns_found": [],
-      "spam_likelihood": "Low",
-      "pattern_notes": "No recognizable patterns or spam detected in the provided text. The text appears to be random characters and does not match any known spam or recurring issue patterns."
+      "is_recurring_issue": true,
+      "similar_patterns_found": [
+        "Garbage collection not performed for 2 months in Mumbai",
+        "Overflowing bins on the road in Delhi due to lack of waste management",
+        "Residents complain of uncollected trash in Pune for over a month"
+      ],
+      "spam_likelihood": "Medium",
+      "pattern_notes": "The image shows a roadside area with a significant buildup of rubbish, and the visible text 'LAYS' suggests a potential brand-related issue. However, the recurring issue of garbage collection not being performed for an extended period is a common problem in many cities. The similarity in patterns and the lack of specific details about the location or the brand 'LAYS' being involved in the issue suggest a moderate likelihood of spam."
     },
     "historical_trends": {
       "top_3_similar_cases": [
         {
-          "id": "2382",
-          "summary": "Dear Sir, Kindly refer to the enclosed attachment."
+          "id": "11080",
+          "summary": "Garbage not being collected for 3 months in Bangalore, leading to overflowing bins on the road."
         },
         {
-          "id": "8218",
-          "summary": "Application Attach - khasra number 1156 ger mumkin rasta se atikarman hatane babat"
+          "id": "5263",
+          "summary": "Illegal construction activity going on in front of Forest County in Pune, causing noise and disturbance."
         },
         {
-          "id": "8192",
-          "summary": "APPLICATION ATTACH - KHASRA NO 1149 GER MUMKIN TALAB SE ATIKARAN HATANE BABAT , AVAIDH NIRMAN KO HATANE BABAT"
+          "id": "3480",
+          "summary": "Electrical maintenance work not being done properly in Delhi, leading to power outages and other issues."
         }
       ],
       "common_resolutions": [
         {
-          "resolution": "Resolution Date: Not Available",
-          "description": "No resolution date is available for these cases."
+          "resolution": "Escalation to higher authorities",
+          "count": 5
         },
         {
-          "resolution": "Resolution Date: Not Available",
-          "description": "No resolution date is available for these cases."
+          "resolution": "Request for regular cleaning and maintenance",
+          "count": 4
         },
         {
-          "resolution": "Resolution Date: Not Available",
-          "description": "No resolution date is available for these cases."
+          "resolution": "Complaints filed with local authorities",
+          "count": 3
         }
       ],
       "patterns_identified": [
         {
-          "pattern": "Similar cases involve complaints about attachments and documents.",
-          "description": "All three cases involve complaints about attachments and documents, suggesting a pattern of similar issues."
+          "pattern": "Garbage not being collected for an extended period",
+          "count": 7
         },
         {
-          "pattern": "Cases are from different states and regions.",
-          "description": "The cases are from different states and regions, indicating that the issue is not limited to a specific area."
+          "pattern": "Noise and disturbance caused by construction or other activities",
+          "count": 2
         },
         {
-          "pattern": "Cases involve similar keywords and phrases.",
-          "description": "The cases involve similar keywords and phrases, such as 'khasra number', 'mumkin rasta', and 'atikarman hatane', suggesting a pattern of similar language and terminology."
+          "pattern": "Power outages and electrical issues",
+          "count": 2
         }
       ]
     },
     "fraud_risk": {
       "fraud_risk": "Low",
       "spam_indicators": [
-        "No image description available",
-        "Validation error: 403 Your API key was reported as leaked. Please use another API key.. Defaulting to valid."
+        {
+          "pattern": "Generic complaint",
+          "description": "The complaint does not provide specific details about the issue or the location."
+        },
+        {
+          "pattern": "Lack of concrete evidence",
+          "description": "The image provided does not contain any concrete evidence of the issue, such as a timestamp or a clear view of the garbage collection schedule."
+        }
       ],
       "authenticity_confidence": "Medium",
       "verification_recommendations": [
-        "Request additional information about the complaint",
-        "Verify the authenticity of the complaint through further investigation"
+        "Request additional information about the garbage collection schedule and the location's management.",
+        "Verify the location's coordinates to ensure they match the reported issue.",
+        "Request a more detailed image or video of the issue to confirm its existence."
       ]
     }
   },
   "department": {
-    "recommended_department": "Cyber Crime Cell",
-    "contact_information": "Contact the Cyber Crime Cell through their official website or by calling the National Cyber Crime Reporting Portal at +91-182-279-1111",
-    "jurisdiction": "All India",
+    "recommended_department": "BBMP (Bruhat Bengaluru Mahanagara Palike)",
+    "contact_information": "Contact the BBMP's Solid Waste Management Department at [email address] or [phone number] to report the issue and request assistance with garbage collection.",
+    "jurisdiction": "Bengaluru, Karnataka, India",
     "allocated_department": null
   },
   "real_time_data": {
     "search_results": {
-      "HDFC Bank internet banking fraud prevention policy": {
+      "sanitation government policy circular India site:gov.in OR site:nic.in": {
         "results": [
           {
-            "title": "[PDF] Customer Protection Policy – Version 2.4 - HDFC Bank",
-            "url": "https://www.hdfcbank.com/content/bbp/repositories/723fb80a-2dde-42a3-9793-7ae1be57c87f/?path=/Footer/Useful%20Links/Our%20Corporate%20Commitment/pdfs/Customer_Protection_policy_Version_2_4.pdf",
-            "content": "In order to enable the same, the Bank has over the years invested in technology and has robust security systems and fraud detection and prevention mechanisms in place to ensure safe and secure banking experience for its customers. As entailed in the Citizen’s Charter, Bank already has in place policies such as Grievance Redressal Policy, Comprehensive Deposit Policy, Customer Rights Policy and Customer Compensation policy. Keeping in mind the increasing thrust on financial inclusion & customer protection, the Reserve Bank of India had issued a circular on Customer Protection – Limiting Liability of Customers in Unauthorised Electronic Banking Transactions. (RBI/2017-18/15 DBR.No.Leg.BC.78/09.07.005/2017-18 dated July 6, 2017) which inter-alia requires Banks to formulate a Board approved [...] Protection Policy – Electronic Banking Transactions ______________________________________________________________________________________________________ Customer Protection Policy – Version 2.4 Page 7 of 7 Classification - Internal Annexure -1 Unauthorised Transaction due to Bank’s negligence Time taken to report the fraudulent transaction from the date of receiving communication from the Bank Customer’s Maximum Liability (Rs.) Customer to report as soon as possible to prevent future losses Zero Liability Unauthorised Transaction due to Customer’s negligence Time taken to report the fraudulent transaction from the date of receiving communication from the Bank Customer’s Maximum Liability (Rs.) Customer to report as soon as possible to prevent future losses 100% liability till it is [...] currency if any shall be converted to Indian currency for the purpose of this policy as per bank’s policies on conversion at card rate net of commission. 6. Points covered under the policy: Customer shall be compensated in line with this policy in case of loss occurring due to unauthorized electronic banking transaction as below: a) Zero Liability of customer i) Customer shall be entitled to full compensation of real loss in the event of contributory fraud/ negligence/ deficiency on the part of the bank (irrespective of whether or not the transaction is reported by the customer) ii) Customer has Zero Liability in all cases of third-party breach where the deficiency lies neither with the bank nor with the customer but lies elsewhere in the system, and the customer notifies the bank within",
-            "score": 0.83710164,
-            "published_date": ""
-          },
-          {
-            "title": "HDFC Bank's campaign in The Times of India to combat digital fraud",
-            "url": "https://www.linkedin.com/posts/prasannalohar_india-cybersecurity-risk-activity-7396053756603301889-6KTC",
-            "content": "🔔 Important Update for All Bank Customers! The Reserve Bank of India (RBI) has directed all banks in India to migrate their official websites to the new “.bank.in” domain. 💡 This change is being made to enhance online security and protect customers from phishing, fraud, and fake banking websites.  Many major banks have already updated their URLs — for example: SBI ➜ sbi.bank.in HDFC Bank ➜ hdfc.bank.in ICICI Bank ➜ icici.bank.in PNB ➜ pnb.bank.in 📅 The deadline for all banks to complete this transition is 31st October 2025. 🔒 The “.bank.in” domain is exclusive to RBI-regulated banks, ensuring that when you visit a website ending with .bank.in, it’s officially verified and secure. 👉 Tip for customers: Always check your bank’s URL before logging in. Avoid clicking on links shared through [...] any payment.  Use only official banking and UPI apps.  Never share your UPI PIN or OTP with anyone.  Enable transaction alerts and report suspicious activity immediately. Digital banking is empowering, but only if used wisely. Let’s pledge to be alert, aware, and responsible. Because in the digital world, your safety is in your hands! 💙 #FraudAwareness #DigitalBanking #StaySafeOnline #UPISecurity #CyberSafetyIndia [...] click. Here's how you can stay safe: 1️⃣ Ignore messages without valid headers. 2️⃣ Never click suspicious links. 3️⃣ Contact your bank only through its official website. 4️⃣ Report cyber-frauds on 1930 or cybercrime.gov.in.  In wealth management, protecting your money is just as important as growing it. Stay alert. Stay secure. 🔒",
-            "score": 0.79293,
-            "published_date": ""
-          },
-          {
-            "title": "Best Safety Measures for Secure Online Banking Experience",
-            "url": "https://www.hdfc.bank.in/security",
-            "content": "| Do's | Don't |\n --- |\n| Visit Official Sites: Always use the official HDFC Bank website  for reliable customer care and helpline numbers (India: 1800 1600, 1800 2600; Overseas: 022-61606160). | Avoid Suspicious Links: Ignore messages claiming your accounts will be blocked if you don't update your KYC/PAN/Aadhaar details. These are likely scams. |\n| Stay Alert: Keep your contact details updated with the Bank and subscribe for transaction alerts. Regularly check your email and messages for any alerts and report unauthorized transactions immediately to the Bank to prevent further loss. | Ignore Lucrative Offers: Do not respond to emails or messages with offers that seem too good to be true. They could be traps. | [...] या गोष्टी करा:\n\nअधिकृत साइट्सला भेट द्या: विश्वासार्ह ग्राहक सेवा आणि हेल्पलाइन नंबरसाठी नेहमीच HDFC बँकेची अधिकृत वेबसाइट  वापरा (भारत: 1800 1600, 1800 2600; परदेशी: 022 -61606160).\n\nसतर्क रहा: तुमचे संपर्क तपशील बँकेकडे अद्ययावत ठेवा आणि व्यवहाराच्या सुचनांसाठी सदस्यता घ्या. कोणत्याही सुचनांसाठीसाठी आपले ईमेल आणि संदेश नियमितपणे तपासा आणि पुढील नुकसान टाळण्यासाठी बँकेकडे अनधिकृत व्यवहारांची तक्रार त्वरित करा.\n\nपैसे देण्यापूर्वी पडताळणी करा: पेमेंट करण्यापूर्वी प्रेषकाचे तपशील नेहमी तपासा. लक्षात ठेवा, UPI पेमेंट्स मिळवण्यासाठी PIN प्रविष्ट करणे किंवा QR कोड स्कॅन करणे आवश्यक नाही.\n\nतुमचे कार्ड्स संरक्षित करा: तुमच्या खर्चाच्या वर्तनावर आधारित व्यवहार मर्यादा सेट करा आणि देशांतर्गत/आंतरराष्ट्रीय वापरासाठी कार्ड्स सक्रिय किंवा निष्क्रिय करा. [...] શું કરવું:\n\nસત્તાવાર સાઇટ્સની મુલાકાત લો: વિશ્વસનીય ગ્રાહક સંભાળ અને હેલ્પલાઇન નંબરો માટે હંમેશા સત્તાવાર HDFC બેંકની વેબસાઇટ  નો ઉપયોગ કરો (ભારત: 1800 1600, 1800 2600; ઓવરસીઝ: 022-61606160).\n\nસાવચેત  રહો: તમારી સંપર્ક વિગતો બેંક સાથે અપડેટ રાખો અને ટ્રાન્ઝેક્શન ચેતવણીઓ માટે સબ્સ્ક્રાઇબ કરો. કોઈપણ ચેતવણીઓ માટે નિયમિતપણે તમારા ઇમેઇલ અને સંદેશાઓ તપાસો અને   \nવધુ નુકસાન ન થાય તે માટે તરત જ બેંકને અનધિકૃત વ્યવહારોની જાણ કરો.\n\nચુકવણી કરતા પહેલા ચકાસો: ચુકવણી કરતા પહેલા હંમેશા પ્રેષકની વિગતો તપાસો. યાદ રાખો,UPI ચુકવણી પ્રાપ્ત કરવા માટે PIN દાખલ કરવાની અથવા  \n QR કોડ સ્કેન કરવાની જરૂર નથી.\n\nતમારા કાર્ડ્સને સુરક્ષિત કરો: તમારા ખર્ચના વર્તનને આધારે ટ્રાન્ઝેક્શનની મર્યાદા સેટ કરો અને ઘરેલું/આંતરરાષ્ટ્રીય ઉપયોગ માટે કાર્ડ્સને સક્રિય અથવા નિષ્ક્રિય કરો.",
-            "score": 0.72884524,
+            "title": "[PDF] National Urban Sanitation Policy",
+            "url": "https://www.mohua.gov.in/upload/uploadfiles/files/NUSP_0.pdf",
+            "content": "Government of India Support Ministry of Housing and Poverty Alleviation (HUPA) is administering a Centrally Sponsored Scheme for Integrated Low Cost Sanitation (ILCS). Under this scheme, central subsidy to the extent of 75%, state subsidy to the extent of 15% and beneficiary contribution to the extent of 2 In this context, it may be noted that the interpretation and translation of the National Policy in the special states in the North-Eastern States, Andaman and Nicobar Islands, and Lakshadweep, will take account of their situation (especially community institutions and financial arrangements) and make special and/or additional provisions supporting by Government of India. [...] Institutional Roles The Govt. of India will support clear assignment of roles and responsibilities, resources and capacities and institutional incentives in relation to setting standards, planning and financing, implementation, knowledge development, capacity building and training, Monitoring & Evaluation (M&E), and regulatory arrangements. The government will help states and cities in ensuring sanitation as a core responsibility of Urban Local Bodies as 3 Investments in proper sanitation facilities (arrangements right up to treatment and safe disposal) must become a compliance requirement for any investments in infrastructure (e.g. urban transport, railways, airlines, etc.), and health and education sectors. For instance, urban transport investments must become 100 percent sanitation [...] Capacity Building Govt. of India will help formulate and implement a National level strategy on capacity building and training to support states and cities to build their personnel capacities and organizational systems for delivery of sanitation services.\nFinancing The Govt. of India, wherever possible, will explore possibilities of providing assistance for funding projects proposed as part of City Sanitation Plans through its schemes like JNNURM, UIDSSMT, 10% Lump Sum for NE States, Satellite Township Scheme, etc.\nHowever, the emphasis will be on improving the efficiency of existing sanitation infrastructure and service delivery.",
+            "score": 0.99979013,
             "published_date": ""
           }
-        ],
-        "answer": null,
-        "query": "HDFC Bank internet banking fraud prevention policy India",
-        "original_query": "HDFC Bank internet banking fraud prevention policy"
-      },
-      "how to report online banking fraud HDFC Bank": {
-        "results": [
-          {
-            "title": "How to File Complaints for Bank Fraud in India | HDFC Bank",
-            "url": "https://v.hdfcbank.com/vigil-aunty/blog/how-to-complain-about-a-bank-fraud.html",
-            "content": "### Blocking your Debit Card / Credit Card through NetBanking\n\n Log in to NetBanking using your customer ID and password. Click here to access HDFC Bank NetBanking.\n Navigate to the \"Cards\" tab.\n Select \"Request\" under either \"Credit Card\" or \"Debit Card,\" depending on your situation.\n Opt for \"Credit Card Hotlisting\" or \"Debit Card Hotlisting,\" as appropriate.\n\n### Blocking Prepaid Cards via Prepaid Card NetBanking\n\n Choose the card variant you wish to block. Click here for a selection.\n Access Prepaid Card NetBanking using your user ID and password.\n Under the \"My Request\" tab, select \"Hotlist Card\".\n Confirm your selection by choosing the card number.\n\n### Reporting unfamiliar transactions\n\nFor NetBanking transactions:   \n Keep the following details ready: [...] Vigil Aunty Logo\n\n Home\n Top Frauds\n About Us\n Videos\n Blog\n Quiz\n\nloader\n\n# Banking Fraud Complaint\n\nOct 10, 2023\n\nIn today's digital age, online banking fraud is a growing threat. As your financial activities go digital, you must report bank fraud promptly for self-empowerment against these risks.  \n This article focuses on simplifying the process when you file complaints for online banking fraud. We will also discuss the necessary steps that will help you take the correct actions and safeguard your account. Navigate the world of bank fraud complaints with ease and keep your money safe from online scams.\n\n### Reporting bank fraud complaints: Act quickly\n\nFollow the steps given below to promptly report unauthorised transactions and ensure your financial security: [...] Customer ID\n Account number\n Transaction date\n Transaction amount\n Type of transaction (e.g., NEFT/RTGS)\n\nCall the bank fraud complaint number for residents or the bank fraud complaint number for non-residents.  \n For Debit Card/ATM transactions:   \n Keep the following details ready:\n\n Debit Card or ATM Card number\n Transaction type (e.g., online, in-store, cash withdrawal)\n Date of transaction\n Transaction amount\n\nReach out to the bank fraud complaint number for Debit Card/ATM.  \n For Credit Card transactions:   \n Ensure you have these details:\n\n Credit Card number\n Transaction type (e.g., online, in-store)\n Date of transaction\n Transaction amount\n\nContact bank fraud complaint number for Credit Card.  \n For Prepaid Card transactions:   \n Have the following information ready:",
-            "score": 0.85825616,
-            "published_date": ""
-          },
-          {
-            "title": "Contact your bank to report fraud",
-            "url": "https://support.google.com/pay/india/answer/11125962?hl=en",
-            "content": "| Bank | Bank section | Contact details |\n --- \n| SBI Bank | Customer complaints | 1800 11 2211  1800 425 3800  080 2659 9990  1800 1234  Customer care |\n| Grievance redressal | Grievance complaints  Grievance redressal policy |\n| Report unauthorized transactions | 1800 11 1109  Customer request and complaints |\n| ICICI Bank | Customer complaints | 1800 1080  1860 120 7777  1800 2662  Customer care  Complaints |\n| Grievance redressal | Grievance complaints |\n| HDFC Bank | Customer complaints | 1800 1600  1800 2600  Customer care   Complaints |\n| Grievance redressal | Grievance complaints |\n| Axis Bank | Customer complaints | 1860 419 5555  1860 500 5555  1800 419 5577  Customer care |\n| Grievance redressal | Grievance complaints | [...] | Grievance redressal | Grievance complaints |\n| Punjab National Bank | Customer complaints | 1800 180 2222  1800 180 2345  Customer care |\n| Grievance redressal | Grievance complaints |\n| Central Bank of India | Customer complaints | 1800 221 911  1800 202 1911 |\n| Grievance redressal | Grievance complaints |\n| Canara Bank | Customer complaints | 1800 425 0018  1800 103 0018  1800 208 3333  Customer care |\n| Grievance redressal | Grievance complaints |\n| Kotak Mahindra Bank | Customer complaints | 1860 266 2666  1800 209 0000  Customer complaints |\n| Grievance redressal | Grievance complaints |\n| CITI Bank | Customer complaints | 1860 210 2484  Customer complaints |\n| Grievance redressal | Redressal complaints  Redressal policy | [...] If you contacted your bank to report the fraudulent transaction and didn’t get a response, file a complaint to the RBI Ombudsman.\n\nIf your bank isn’t in this list, visit your nearest branch or check your bank website for their customer care phone number.\n\n## Need more help?\n\n### Try these next steps:\n\nContact us Tell us more and we’ll help you get there\n\ntrue\n\nSearch\n\nClear search\n\nClose search\n\nGoogle apps\n\nMain menu\n\ntrue\n\nSearch Help Center\n\ntrue\n\ntrue\n\nfalse\n\ntrue\n\ntrue\n\nfalse\n\nfalse\n\nfalse\n\nfalse",
-            "score": 0.6506676,
-            "published_date": ""
-          },
-          {
-            "title": "HDFC Bank Contact Details - Customer Care, Queries, Feedback",
-            "url": "https://www.hdfc.bank.in/contact-us",
-            "content": "Call Us\n\nOur customer care team is ready to help regarding any banking issue that you are facing: 1800 1600 / 1800 2600.\n\nVisit Us\n\nYou can also visit your Branch and contact your Branch Manager to get your query resolved.\n\nWrite to Us\n\nGet the information you need or let us know about any concerns by writing to us\n\n \n\nChat with Us\n\nOur customer care team is ready to help regarding any banking issue that you are facing\n\nReport unauthorised e-transactions\n\nBlocking or reporting unauthorised transactions (those not done by you)\n\nCredit Card Miselling\n\nFor any sales queries on mis-selling / harassment / complaints, please write to cardsales.complaint@hdfc.bank.in or call at 044 - 61084900\n\nInvestor grievance redressal mechanism for demat account [...] Investor grievance redressal mechanism for demat account\n\nEscalation Matrix for Demat Account related grievances\n\neHDFC Helpline Numbers\n\n \n\n## Grievance Redressal\n\nIn case you are not satisfied with the response, you can contact our Grievance Redressal Officer\n\ncontact our Grievance Redressal\n\n## Raise a Dispute\n\nIn addition to reporting unauthorized credit card transactions or electronic banking transactions to the bank, you can also report the incident to National Cyber Crime Helpline Number at 1930.\n\nRaise a Dispute\n\n## HDFC Bank Services Online/ Insta Services\n\n#### Address Change\n\n#### Stop PaymentCheque\n\n#### PAN Updation\n\n#### Re-KYC\n\n#### Update/ModifyNominee\n\n#### Request forCheque book\n\n#### Debit Card Insta PIN\n\n#### Form 15 G/H\n\n### \n\n### For Credit Card, mail us at:",
-            "score": 0.49465415,
-            "published_date": ""
-          }
-        ],
-        "answer": null,
-        "query": "how to report online banking fraud HDFC Bank India",
-        "original_query": "how to report online banking fraud HDFC Bank"
-      },
-      "internet banking security measures HDFC Bank": {
-        "results": [
-          {
-            "title": "Security Measures - HDFC Bank GIFT City",
-            "url": "https://www.hdfcbankgiftcity.com/gc/personal/security/security-measures",
-            "content": "Session Security:\n\nAccess to the customers are provided through a secure webpage that encrypts the session between the customer's computer and the webpage using 128-bit encryption so that the communication between the customer's computers and the webpage cannot be intercepted by anyone over the internet.\n\nHDFC Bank systems time out the customer's login sessions to his NetBanking account upon prolonged inactivity for protection against misuse.\n\nDigital Certificate:\n\nThe webpage of the HDFC Bank's internet banking server is identified by means of a digital certificate provided by Verisign to ensure its customer that they are on the correct site and protect themselves from revealing their confidential account information on some fake website. [...] Saving Account \n    - FAQs\n Invest\n  + Menu Close\n  + OffShore Bonds & Mutual Funds. \n    - Bonds\n    - Mutual Funds\n\n    Demat \n    - Demat Account Online\n\n    Insurance\n\n Personal\n Security\n Security Measures\n\nclose\n\nOK CANCEL\n\nfalse\n\nfalse\n\nfalse\n\nclose\n\nclose\n\nclose\n\ntrue\n\nfalse\n\nfalse\n\nclose\n\nclose\n\nPERSONAL LOGIN\n\nSecurity Measures\n\n# Security Measures\n\nInternet Banking System Security:\n\nLogin Security:\n\nAccess to customer's NetBanking account is granted using a Customer ID and IPIN (internet banking password) that is privy to the customer. Without a valid IPIN corresponding to the customer ID, access to customer account cannot be gained by anyone.\n\nIPIN Security: [...] Taking internet security to a new level and to prevent frauds, HDFC Bank has enhanced its NetBanking security by obtaining the Extended Validation Secure Sockets Layer Certificate (hereby referred to as “the EVSSL certificate” or “the certificate”).",
-            "score": 0.87218446,
-            "published_date": ""
-          },
-          {
-            "title": "Best Safety Measures for Secure Online Banking Experience",
-            "url": "https://www.hdfc.bank.in/security",
-            "content": "શું કરવું:\n\nસત્તાવાર સાઇટ્સની મુલાકાત લો: વિશ્વસનીય ગ્રાહક સંભાળ અને હેલ્પલાઇન નંબરો માટે હંમેશા સત્તાવાર HDFC બેંકની વેબસાઇટ  નો ઉપયોગ કરો (ભારત: 1800 1600, 1800 2600; ઓવરસીઝ: 022-61606160).\n\nસાવચેત  રહો: તમારી સંપર્ક વિગતો બેંક સાથે અપડેટ રાખો અને ટ્રાન્ઝેક્શન ચેતવણીઓ માટે સબ્સ્ક્રાઇબ કરો. કોઈપણ ચેતવણીઓ માટે નિયમિતપણે તમારા ઇમેઇલ અને સંદેશાઓ તપાસો અને   \nવધુ નુકસાન ન થાય તે માટે તરત જ બેંકને અનધિકૃત વ્યવહારોની જાણ કરો.\n\nચુકવણી કરતા પહેલા ચકાસો: ચુકવણી કરતા પહેલા હંમેશા પ્રેષકની વિગતો તપાસો. યાદ રાખો,UPI ચુકવણી પ્રાપ્ત કરવા માટે PIN દાખલ કરવાની અથવા  \n QR કોડ સ્કેન કરવાની જરૂર નથી.\n\nતમારા કાર્ડ્સને સુરક્ષિત કરો: તમારા ખર્ચના વર્તનને આધારે ટ્રાન્ઝેક્શનની મર્યાદા સેટ કરો અને ઘરેલું/આંતરરાષ્ટ્રીય ઉપયોગ માટે કાર્ડ્સને સક્રિય અથવા નિષ્ક્રિય કરો. [...] सुरक्षित बैंकिंग अभ्यास: क्या करें और क्या न करें\n\nHDFC बैंक में, आपकी सुरक्षा हमारी सर्वोच्च प्राथमिकता है। अपनी बैंकिंग जानकारी को सुरक्षित रखने के लिए इन आसान दिशानिर्देशों का पालन करें\n\nक्या करें:\n\nआधिकारिक साइट्स पर जाएं: हमेशा विश्वसनीय ग्राहक देखभाल और हेल्पलाइन नंबरों (भारत: 1800 1600, 1800 2600; विदेश के लिए: 022-61606160) के लिए आधिकारिक HDFC बैंक वेबसाइट  का उपयोग करें।\n\nअलर्ट रहें: अपने कांटैक्ट डिटेल्स को बैंक के साथ अपडेट रखें और ट्रांजैक्शन अलर्ट के लिए सबस्क्राइब करें। किसी भी अलर्ट के लिए नियमित रूप से अपने ईमेल और मैसेज की जांच करें और आगे के नुकसान को रोकने के लिए बैंक को तुरंत अनधिकृत ट्रांजैक्शन की रिपोर्ट  \n करें। [...] | Do's | Don't |\n --- |\n| Visit Official Sites: Always use the official HDFC Bank website  for reliable customer care and helpline numbers (India: 1800 1600, 1800 2600; Overseas: 022-61606160). | Avoid Suspicious Links: Ignore messages claiming your accounts will be blocked if you don't update your KYC/PAN/Aadhaar details. These are likely scams. |\n| Stay Alert: Keep your contact details updated with the Bank and subscribe for transaction alerts. Regularly check your email and messages for any alerts and report unauthorized transactions immediately to the Bank to prevent further loss. | Ignore Lucrative Offers: Do not respond to emails or messages with offers that seem too good to be true. They could be traps. |",
-            "score": 0.86441374,
-            "published_date": ""
-          },
-          {
-            "title": "[PDF] Customer Protection Policy – Version 2.4 - HDFC Bank",
-            "url": "https://www.hdfcbank.com/content/bbp/repositories/723fb80a-2dde-42a3-9793-7ae1be57c87f/?path=/Footer/Useful%20Links/Our%20Corporate%20Commitment/pdfs/Customer_Protection_policy_Version_2_4.pdf",
-            "content": "In order to enable the same, the Bank has over the years invested in technology and has robust security systems and fraud detection and prevention mechanisms in place to ensure safe and secure banking experience for its customers. As entailed in the Citizen’s Charter, Bank already has in place policies such as Grievance Redressal Policy, Comprehensive Deposit Policy, Customer Rights Policy and Customer Compensation policy. Keeping in mind the increasing thrust on financial inclusion & customer protection, the Reserve Bank of India had issued a circular on Customer Protection – Limiting Liability of Customers in Unauthorised Electronic Banking Transactions. (RBI/2017-18/15 DBR.No.Leg.BC.78/09.07.005/2017-18 dated July 6, 2017) which inter-alia requires Banks to formulate a Board approved [...] vi) Customer must protect his/her device as per best practices specified on the Bank’s website, including updation of latest antivirus software on the device (Device includes smart phone, feature phone, laptop, desktop and Tab) vii) Customer shall abide by the tips and safeguards mentioned on the Bank’s website on Secured Banking available at  viii) Customer shall go through various instructions and awareness communication sent by the bank on secured banking ix) Customer must set transaction limits to ensure minimized exposure from time to time and also update overseas travel plans so that bank is aware of the customer whereabouts for transaction confirmation. x) Customer must verify transaction details from time to time in his/her bank statement and/or credit card statement and raise [...] The Bank shall also ensure that existing customers are individually informed about the bank’s policy. b) The Bank will conduct awareness on carrying out safe electronic banking transactions to its customers and staff. Information of Safe Banking practices will be made available through campaigns on any or all of the following - website, emails, ATMs, Phone Banking, Net Banking, Mobile Banking etc. Such information will include rights and obligation of the customers as well as non-disclosure of sensitive information e.g., accounts/ cards details, password, PIN, OTP, date of birth, etc. c) The Bank shall communicate to its customers in getting their mobile numbers registered with the bank to receive SMS alerts. The Bank will send SMS alerts to all valid registered mobile numbers for all",
-            "score": 0.69795954,
-            "published_date": ""
-          }
-        ],
-        "answer": null,
-        "query": "internet banking security measures HDFC Bank India",
-        "original_query": "internet banking security measures HDFC Bank"
-      },
-      "Financial Fraud latest news India India": {
-        "results": [
-          {
-            "title": "Latest News on Fraud - Times of India",
-            "url": "https://timesofindia.indiatimes.com/topic/fraud/news",
-            "content": "Bhatli police arrested a 35-year-old man in Bargarh for operating mule bank accounts and facilitating illegal financial transactions. The accused, Chandrakanta Sahu, used others' accounts for illicit dealings linked to online gaming and cyber fraud. Police seized debit cards and cheque books during the arrest.\n\nHaryana's State Vigilance and Anti-Corruption Bureau has arrested four individuals, including two former IDFC First Bank employees and two private partners, in connection with a Rs 590 crore fraud. The bank disclosed the fraud involving its employees and external parties in accounts linked to the Haryana government. [...] Rourkela police apprehended a 43-year-old man for operating a mule account that processed over Rs 3 crore from suspicious origins, linked to cyber and cryptocurrency scams. The accused confessed to using the account to receive and route illicit funds. Investigations revealed the account's involvement in widespread cryptocurrency fraud, with numerous complaints filed nationwide.\n\nNuapada police have arrested six individuals as part of Operation Cyber Kavach, dismantling a cyber fraud syndicate responsible for transactions totaling nearly Rs 3 crore. The operation, targeting mule accounts, uncovered a structured network operating through multiple bank accounts within the district. Police are now investigating inter-state connections. [...] Belpahar police have busted an inter-state cyber fraud syndicate, arresting seven individuals involved in laundering over Rs 14 crore through mule bank accounts and cryptocurrency wallets. The operation also led to the arrest of a bank employee for facilitating account openings to conceal fraud proceeds.\n\nFollowing the disclosure of the fraud involving Haryana government accounts, the state government removed IDFC First Bank and AU Small Finance Bank from its empanelled list for handling government business.",
-            "score": 0.9998118,
-            "published_date": ""
-          },
-          {
-            "title": "Bank fraud in India: Who's really at risk?",
-            "url": "https://www.livemint.com/industry/banking/idfc-first-bank-fraud-banking-fraud-india-11772185625754.html",
-            "content": "Thus, for instance, the total value of reported frauds tripled in 2024-25 over the previous year, when measured by the reporting date rather than when the crimes actually occurred. A large chunk of the increase related to cases that had occurred in previous years.\n\n## No risk to banking system\n\nAt the sector level, frauds do not pose a threat to the banking system. As of 2024-25, the total value of frauds reported by banks was ₹34,771 crore. This amounted to about 0.14% of the ₹241 trillion in deposits held by banks as of 31 March 2025. Seen another way, the value of reported fraud was about 5% of the total operating profit of all banks in 2024-25. [...] ## Shifting data\n\nIndian banks reported 11,615 cases of fraud involving ₹3,497 crore in 2024-25. Both figures were lower in 2023-24. The biggest category was loans (33% of the total amount involved), followed by deposits (about 10%). In terms of number of cases, card and internet fraud accounted for two-thirds.\n\nHowever, data on fraud reporting needs to be interpreted carefully because banks can classify a case as fraud and subsequently change that classification. This has happened to a considerable extent in recent years, mainly because of a 2023 Supreme Court judgement on an earlier RBI order on how to classify cases as fraud. As a result, banks were forced to re-examine cases. [...] However, in the context of total UPI transactions, the number of cases of fraud and the amount involved are minuscule. In the right months to November 2025, there were about a million UPI fraud cases involving around ₹805 crore. This amounts to 0.00068% of total UPI transactions by volume and 0.0039% by value over this period. Incidentally, it's not clear if UPI fraud forms part of the overall fraud data reported by the RBI as occurring within banks.\n\n## Low recoveries",
-            "score": 0.9990601,
-            "published_date": ""
-          },
-          {
-            "title": "Three held by Gurugram Police for routing digital fraud ...",
-            "url": "https://www.hindustantimes.com/cities/gurugram-news/three-held-by-gurugram-police-for-routing-digital-fraud-funds-via-43-mule-bank-accounts-101772331013121.html",
-            "content": "Eleven phones, 40 SIM cards and multiple debit cards were seized; one accused allegedly earned  ₹7 lakh in three months on 30% commission. (File photo)\")\n\nThe accused were identified as Saurav Kumar Meena, 27, an electrical engineering graduate from IIT-Jodhpur in 2022 and a resident of Jaipur, along with Abhishek Bishnoi, 20, a nursing student from Falodi, and Lakshman alias Lucky, 22, a Masters of Arts graduate from Nagor.\n\nPolice recovered 11 mobile phones, 40 SIM cards, 43 debit cards, 15 passbooks and seven cheque books from them.They added that detailed transaction records from banks have been sought to ascertain the total amount routed through the 43 accounts and identify the beneficiaries. [...] Comscore tracker\n\nHindustan Times News\nepaper\nSign In\n\nSubscribe Now! Get features like\n\nAd lite experience\nPremium articles\nQuick read\nE-paper\nSubscription features\ncrown\nFacebook\nTwitter\nWhatsApp\nLinkedIn\nCricket in L1\n\n# Three held by Gurugram Police for routing digital fraud funds via 43 mule bank accounts\n\n## Police said over 700 victims were targeted nationwide, with proceeds converted into USDT and sent abroad after a Gurugram man lost ₹3.13 lakh.\n\nShare\nfacebook\ntwitter\nlinkedin\nwhatsapp\ncopy link\n\nThree men were arrested from Jaipur, Rajasthan, on Thursday for allegedly operating at least 43 mule bank accounts to help a cyber crime gang based abroad remit money duped from over 700 victims across the country, police said on Saturday. [...] Their role surfaced after Cambodia-based cyber criminals allegedly duped a Gurugram resident of ₹3.13 lakh in a Telegram task-based fraud. An FIR for cheating and impersonation was registered at Cybercrime police station (West) on January 1.\n\nPriyanshu Dewan, ACP (cybercrime), said the defrauded money was traced to accounts operated by the trio. “His only work was to operate mule bank accounts whose kits he used to receive via various sources including courier,” Dewan said about Meena, adding he received 30% commission and earned ₹7 lakh in three months.\n\nDewan said the money was converted into USDT (Tether) cryptocurrency and remitted abroad. Investigation is on to identify suppliers of mule account kits.",
-            "score": 0.70740473,
-            "published_date": ""
-          }
-        ],
-        "answer": null,
-        "query": "Financial Fraud latest news India India",
-        "original_query": "Financial Fraud latest news India India"
-      },
-      "Financial Fraud government policy scheme India India 2024 2025": {
-        "results": [
-          {
-            "title": "Data shows Indian fraud cases tripled in 2024",
-            "url": "https://www.biocatch.com/press-release/indian-fraud-cases-tripled-in-2024",
-            "content": "MUMBAI (May 28, 2025) —  A new report from BioCatch which prevents financial crime by recognizing patterns in human behavior, shows its Indian customers reported three times more fraud cases in 2024 than they did in 2023. This follows the Reserve Bank of India’s (RBI’s) December announcement that fraud losses in the first half of this Indian fiscal year (April 1-March 31) grew by a factor of eight to Rs 21,367 crore or $2.56 billion, from the same period the year before. That would put India on pace to lose more to fraud in 2024/2025 (Rs 43,571 crore or $5.22 billion) than in any fiscal year since 2021/2022. [...] “Only 48% of fraud cases reported to the RBI between April and September of 2024 occurred during the same fiscal year,” BioCatch Director of Global Fraud Intelligence Tom Peacock said. “Those cases that did take place during this fiscal year represent just 5% of the year’s total losses. So, while that 715% increase in reported fraud losses in the first half of this fiscal year might appear to suggest a massive uptick in fraud in India, reporting delays mean we likely won’t know the true scale of India’s present fraud problem for several years.”\n\nThe report, 2025 Digital Banking Fraud Trends in India, includes deep dives on both Know Your Customer (KYC) scams enabled by recent regulatory changes, and the more than 100,000 digital arrest scams reported in India last year. [...] “Social engineering scams now account for nearly a third of all reported fraud in India,” BioCatch Global Advisory Director for APAC Edgar Zayas said. “As India continues its digital transformation, the battle between security enhancements and exploitation of these very systems for fraudulent purposes will likely intensify, requiring ongoing education, awareness, and technological countermeasures.”\n\nOther key report findings:",
-            "score": 0.99968255,
-            "published_date": ""
-          },
-          {
-            "title": "India's New Financial Fraud Regulations: A Guide for ...",
-            "url": "https://www.linkedin.com/posts/j-s-held_understanding-indias-evolving-legal-and-activity-7361728350932885504-yqFd",
-            "content": "💡 Are banks always right in financial crime cases? Recent UK data shows: • In 2024/25, the Financial Ombudsman Service (FOS) upheld about 34% of escalated complaints — meaning roughly 1 in 3 decisions were found unfair to the customer. • Internally, banks resolved 57% of complaints in favor of the consumer.  Key takeaway: Most decisions are correct, but a high uphold rate signals room for improvement. 💡 What banks can do: • Regular employee training on AML/fraud policies • Clear internal guidance for investigators • Strong communication with customers ⚖️ Balancing regulatory compliance and customer fairness isn’t easy — but getting it right builds trust and reduces complaints. #FinancialCrime #FraudPrevention #AML #CustomerExperience #Banking #FOS #QualityAssurance #RiskManagement [...] Regulatory Insight from Integritas³ FinCEN Clarifies Suspicious Activity Reporting (SAR) Requirements On October 9, 2025, the Financial Crimes Enforcement Network (FinCEN)—together with the Federal Reserve, FDIC, NCUA, and OCC—released updated FAQs on Suspicious Activity Reporting (SAR) obligations under the Bank Secrecy Act (BSA). The guidance aims to help financial institutions streamline compliance efforts while maintaining effective anti-money laundering and countering the financing of terrorism (AML/CFT) programs that provide the greatest value to law enforcement and regulators. Key Updates: 1. Structuring: Transactions near the $10,000 CTR threshold do not automatically require a SAR. A report is necessary only when the institution knows, suspects, or has reason to suspect an [...] Regulatory Insight from Integritas³ FinCEN Clarifies Suspicious Activity Reporting (SAR) Requirements On October 9, 2025, the Financial Crimes Enforcement Network (FinCEN)—together with the Federal Reserve, FDIC, NCUA, and OCC—released updated FAQs on Suspicious Activity Reporting (SAR) obligations under the Bank Secrecy Act (BSA). The guidance aims to help financial institutions streamline compliance efforts while maintaining effective anti-money laundering and countering the financing of terrorism (AML/CFT) programs that provide the greatest value to law enforcement and regulators. Key Updates: 1. Structuring: Transactions near the $10,000 CTR threshold do not automatically require a SAR. A report is necessary only when the institution knows, suspects, or has reason to suspect an",
-            "score": 0.9994429,
-            "published_date": ""
-          },
-          {
-            "title": "2025 DOJ Fraud Section Year in Review",
-            "url": "https://www.wiley.law/alert-2025-DOJ-Fraud-Section-Year-in-Review",
-            "content": "The Market, Government, and Consumer Fraud (MGC) Unit focuses on sophisticated financial fraud, schemes to defraud federal benefit programs, tariff‑evasion schemes, procurement fraud, and complex consumer‑fraud matters. The Unit’s name change—from Market Integrity and Major Frauds (MIMF) Unit—reflects the breadth of its enforcement portfolio and expanding role in the Fraud Section’s enforcement strategy. The MGC Unit charged 62 individuals last year and obtained 75 convictions, including 10 trial convictions. While these figures represent a decrease in total charges and trials from 2024, they also reflect an increase in overall resolutions when plea agreements are included. The Unit also resolved five corporate matters, including two Voluntary Self‑Disclosure resolutions under the",
-            "score": 0.9993013,
-            "published_date": ""
-          }
-        ],
-        "answer": null,
-        "query": "Financial Fraud government policy scheme India India 2024 2025",
-        "original_query": "Financial Fraud government policy scheme India India 2024 2025"
-      },
-      "Financial Fraud municipal corporation India India": {
-        "results": [
-          {
-            "title": "Inside Haryana's Rs 590 crore bank fraud - ThePrint",
-            "url": "https://theprint.in/india/governance/rs-578-crore-for-housing-scheme-vanishes-from-haryana-govt-bank-accounts-back-in-24-hrs-what-fir-says/2862761/",
-            "content": "### AU Small Finance Bank’s non-cooperation\n\nThe FIR records that AU Small Finance Bank was “non-cooperative” and did not provide relevant documents and records to the inquiry committee. The account statement that was obtained, however, showed various transactions made to an entity called “Swastik Desh Projects”, details of which are described in the FIR as “not known”.\n\nThe account statements of IDFC First Bank also showed that transactions had been made involving accounts of the Haryana State Pollution Control Board and Municipal Corporation, Panchkula.\n\nThe committee said these transactions were “inexplicable”, which raised the possibility that accounts of other government departments and entities may have been similarly compromised. [...] The FIR further records that a total of Rs 46,56,00,000 (forty-six crore fifty-six lakh) was transferred from the IDFC First Bank account to an AU Small Finance Bank account on the basis of these cheques and debit notes.\n\n### The Superintendent’s phone number\n\nThe bank produced call and SMS logs showing that transaction alerts and confirmations from the IDFC First Bank account were being sent to mobile number 91-9812433350.\n\nThe number was found to be registered in the name of Prince, Superintendent, in the Office of the Director, Panchayats. The inquiry committee sought a statement from him regarding the log details of his registered number, which is recorded as an annexure to the inquiry report.\n\n### AU Small Finance Bank’s non-cooperation [...] The FIR records that no approvals for utilisation of funds from either account were ever issued by any competent authority, and the entire money was meant to simply sit in the accounts.\n\nWhat happened instead is at the heart of the fraud.\n\n### The closure request that unravelled everything\n\nIt was the finance department’s request on 13 January 2026, directing the banks to close the accounts and transfer the full amounts to an Axis Bank account that unravelled the fraud.\n\nWhile AU Small Finance Bank complied, and transferred Rs 25,45,84,863 to Axis Bank and closed the account on 16 January 2026, IDFC First Bank did not. It transferred only Rs 1,27,44,689 to Axis Bank and then proceeded to close the account.",
-            "score": 0.32739994,
-            "published_date": ""
-          },
-          {
-            "title": "Broker, another held for cheating Udupi City Municipal Council of ...",
-            "url": "https://www.thehindu.com/news/cities/Mangalore/broker-another-held-for-cheating-udupi-city-municipal-council/article70663397.ece",
-            "content": "Mr. Mahanthesh also checked the property tax payment website and found the tax to be pending. He then called Shalini, who admitted to accepting ₹34,730 from Mr. Suvarna on October 16, 2025 and issuing him a fake challan containing the Union Bank of India seal, without remitting the amount to the municipal council.\n\nAfter Mr. Suvarna paid ₹35,213 to the council, Mahanthesh filed a complaint accusing Shalini and others of cheating the Municipal Council out of ₹34,730. The complaint was registered under Sections 336(2), 336(3), 340(2), and 318(4) of Bharatiya Nyaya Sanhita. [...] In a press note, the police said one Anand Suvarna approached the Commissioner of the Municipal Council, Mahanthesh, on February 16, with a challan for ₹34,730 related to property tax for the period of 12 years of his building in Kalmady. He told Mr. Mahanthesh that he had paid the amount on October 16, 2025, to Shalini, a broker who sits in front of the Municipal Council. Shalini handed him the challan containing the seal of the Union Bank of India.\n\nFollowing the announcement by the council that a criminal case will be filed against those who have not paid property tax, Mr. Suvarna checked the Municipal Council website online, where it showed that the property tax was pending. [...] February 23, 2026e-Paper\n\n# Broker, another held for cheating Udupi City Municipal Council of property tax\n\n## Shalini was acting as a broker for the payment of property and other taxes to the council for the past eight years. Ganesh’s services were outsourced by Union Bank of India, the police said\n\nUpdated  - February 23, 2026 09:41 am IST - MANGALURU\n\nGoogle Preferred Source\nB. Shalini is among the two persons arrested by the Udupi Town Police in connection with cheating the Udupi City Municipal Council of over ₹34,000.\n\nB. Shalini is among the two persons arrested by the Udupi Town Police in connection with cheating the Udupi City Municipal Council of over ₹34,000.",
-            "score": 0.1735545,
-            "published_date": ""
-          },
-          {
-            "title": "Audit report highlighting Rs 200 cr 'scam' in Ayodhya ...",
-            "url": "https://m.economictimes.com/news/politics-and-nation/audit-report-highlighting-rs-200-cr-scam-in-ayodhya-triggers-political-slugfest-in-up/articleshow/124584241.cms",
-            "content": "Image for Arvind Kejriwal, Manish Sisodia cleared\n\nArvind Kejriwal, Manish Sisodia cleared in Delhi excise policy case by Rouse Avenue court\n\nImage for DK Shivakumar camp renews push\n\nDK Shivakumar camp renews push for leadership change\n\nprint edition\nprint edition title\n\n## Browse Company\n\n## Hot on Web\n\n## In Case you missed it\n\n## Top Searched Companies\n\n## Top Story Listing\n\n## Top Definitions\n\n## Top Performing MF\n\n## Top Commodities\n\n## Top Prime Articles\n\n## Top Slideshow\n\n## Other useful Links\n\n## Latest News\n\n### download et app\n\n### follow us on\n\nepaper icon\n\nepaper icon [...] image6\nGoogle preferences in ET\n\n### Read more news on\n\n(Catch all the Business News, Breaking News and Latest News Updates on The Economic Times.)\n\nSubscribe to The Economic Times Prime and read the ET ePaper online.\n\nMore\n\n### NEXT READ\n\nImage for Delhi Police detains Congress workers\n\nDelhi Police detains Congress workers over protest against arrest of IYC Chief Uday Bhanu Chib\n\nImage for Delhi Excise Policy Case: CBI\n\nDelhi Excise Policy Case: CBI to move Delhi High Court, challenging order discharging Kejriwal, Sisodia\n\nImage for 'Conspiracy Theory': Why court gave\n\n'Conspiracy Theory': Why court gave clean chit to Arvind Kejriwal, Manish Sisodia in liquor scam case\n\nImage for From loyalist to power player: [...] Image for From loyalist to power player:\n\nFrom loyalist to power player: OPS’s dramatic political odyssey culminates in DMK switch\n\nImage for PM Modi flags capex climb\n\nPM Modi flags capex climb to ₹12 lakh crore in a decade, ties infra push to long-term growth\n\nImage for Sharad Pawar's hospitalisation weighs on\n\nSharad Pawar's hospitalisation weighs on MVA's Rajya Sabha seat negotiations\n\nImage for ‘Truth always prevails’: Sunita Kejriwal\n\n‘Truth always prevails’: Sunita Kejriwal after court clears Arvind Kejriwal in Delhi excise 'scam' case\n\nImage for Arvind Kejriwal breaks down after\n\nArvind Kejriwal breaks down after discharge in Delhi excise policy case; watch video\n\nImage for Arvind Kejriwal, Manish Sisodia cleared",
-            "score": 0.06254268,
-            "published_date": ""
-          }
-        ],
-        "answer": null,
-        "query": "Financial Fraud municipal corporation India India",
-        "original_query": "Financial Fraud municipal corporation India India"
+        ]
       }
     },
     "policy_queries": [
-      "HDFC Bank internet banking fraud prevention policy",
-      "how to report online banking fraud HDFC Bank",
-      "internet banking security measures HDFC Bank",
-      "HDFC Bank online banking fraud complaint process",
-      "HDFC Bank internet banking security features",
-      "HDFC Bank online banking fraud prevention tips"
+      "garbage collection services not available in Thane West Mumbai",
+      "Municipal Corporation of Greater Mumbai garbage collection policy",
+      "how to report garbage not collected in Mumbai",
+      "MCGM sanitation department contact number",
+      "reasons for delayed garbage collection in Mumbai",
+      "Mumbai civic body garbage collection rules and regulations"
     ]
-  }
+  },
+  "case_study_report": "Thought: I now can give a great answer\n\n# Government Grievance Assessment Report\n\n## Case Identification\n\nGrievance ID: G-2023-02-20-001\nDate of submission: on or around February 20, 2023\nNature of grievance: Complaint\nCategory & Subcategory: Sanitation, Garbage Collection\nReported priority: High\n\n## Detailed Assessment and Case Study\n\nThe grievance reported by a citizen on or around February 20, 2023, pertains to the non-collection of garbage for three months in a specific location, resulting in overflowing bins on the road. The issue is situated in a roadside area with a significant buildup of rubbish, as evident from the provided image. The surrounding area appears unmanaged and dirty, with scattered litter and plastic bags visible. The citizen's complaint expresses frustration and anger, indicating a critical situation that requires immediate attention. The image analysis supports the citizen's complaint, showing a clear accumulation of garbage and litter. The severity indicators suggest a high level of severity, with overflowing garbage and scattered litter posing a risk to public health and safety. The similar cases data reveals a recurring pattern of garbage collection not being performed for an extended period, affecting multiple cities. The department recommended for resolution is the BBMP (Bruhat Bengaluru Mahanagara Palike), and the contact information for the Solid Waste Management Department is provided. The sentiment priority indicates a high urgency level, with the citizen expressing anger and frustration due to the prolonged accumulation of garbage. The expected resolution time is within 7-10 working days, and the risk assessment highlights a high risk of disease transmission, pest infestation, and environmental pollution. The citizen's complaint is a clear indication of a systemic failure in garbage collection, and immediate action is required to address the issue. The responsible department should take necessary measures to ensure regular garbage collection, and the citizen should be informed of the progress and resolution of the issue. The long-term corrective measures should include improving the garbage collection system, increasing the frequency of collection, and providing adequate infrastructure for waste management. The municipal grievance portal and the ward office should be informed of the issue, and the competent authority should take necessary action to resolve the grievance."
 }

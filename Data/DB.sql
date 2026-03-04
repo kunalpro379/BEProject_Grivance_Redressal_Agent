@@ -20,8 +20,8 @@ CREATE TABLE public.aiinsights (
   dismissed_reason text,
   embedding USER-DEFINED,
   CONSTRAINT aiinsights_pkey PRIMARY KEY (id),
-  CONSTRAINT aiinsights_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
-  CONSTRAINT aiinsights_accepted_by_officer_id_fkey FOREIGN KEY (accepted_by_officer_id) REFERENCES public.users(id)
+  CONSTRAINT aiinsights_accepted_by_officer_id_fkey FOREIGN KEY (accepted_by_officer_id) REFERENCES public.users(id),
+  CONSTRAINT aiinsights_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
 CREATE TABLE public.auditlog (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -47,7 +47,7 @@ CREATE TABLE public.budget_alerts (
   allocation_id uuid,
   grievance_id uuid,
   alert_type character varying NOT NULL,
-  severity character varying CHECK (severity::text = ANY (ARRAY['Low'::character varying, 'Medium'::character varying, 'High'::character varying, 'Critical'::character varying]::text[])),
+  severity character varying CHECK (severity::text = ANY (ARRAY['Low'::character varying::text, 'Medium'::character varying::text, 'High'::character varying::text, 'Critical'::character varying::text])),
   title character varying NOT NULL,
   description text,
   alert_data jsonb DEFAULT '{}'::jsonb,
@@ -58,8 +58,8 @@ CREATE TABLE public.budget_alerts (
   notified_officers jsonb DEFAULT '[]'::jsonb,
   is_acknowledged boolean DEFAULT false,
   CONSTRAINT budget_alerts_pkey PRIMARY KEY (id),
-  CONSTRAINT budget_alerts_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
   CONSTRAINT budget_alerts_allocation_id_fkey FOREIGN KEY (allocation_id) REFERENCES public.budget_allocations(id),
+  CONSTRAINT budget_alerts_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
   CONSTRAINT budget_alerts_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
   CONSTRAINT budget_alerts_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.users(id)
 );
@@ -76,9 +76,9 @@ CREATE TABLE public.budget_allocations (
   allocation_purpose text,
   allocated_by character varying,
   approval_authority character varying,
-  budget_type character varying CHECK (budget_type::text = ANY (ARRAY['Operational'::character varying, 'Emergency'::character varying, 'Maintenance'::character varying, 'Infrastructure'::character varying]::text[])),
-  budget_source character varying CHECK (budget_source::text = ANY (ARRAY['State Government'::character varying, 'Central Government'::character varying, 'Municipal Corporation'::character varying, 'Special Grant'::character varying]::text[])),
-  status character varying DEFAULT 'Active'::character varying CHECK (status::text = ANY (ARRAY['Active'::character varying, 'Exhausted'::character varying, 'Cancelled'::character varying, 'On Hold'::character varying]::text[])),
+  budget_type character varying CHECK (budget_type::text = ANY (ARRAY['Operational'::character varying::text, 'Emergency'::character varying::text, 'Maintenance'::character varying::text, 'Infrastructure'::character varying::text])),
+  budget_source character varying CHECK (budget_source::text = ANY (ARRAY['State Government'::character varying::text, 'Central Government'::character varying::text, 'Municipal Corporation'::character varying::text, 'Special Grant'::character varying::text])),
+  status character varying DEFAULT 'Active'::character varying CHECK (status::text = ANY (ARRAY['Active'::character varying::text, 'Exhausted'::character varying::text, 'Cancelled'::character varying::text, 'On Hold'::character varying::text])),
   documents jsonb DEFAULT '[]'::jsonb,
   remarks text,
   is_active boolean DEFAULT true,
@@ -142,7 +142,7 @@ CREATE TABLE public.cities (
   taluka_id uuid,
   city_code character varying NOT NULL UNIQUE,
   city_name character varying NOT NULL,
-  city_type character varying CHECK (city_type::text = ANY (ARRAY['Municipal Corporation'::character varying, 'Municipality'::character varying, 'Nagar Panchayat'::character varying, 'Town'::character varying]::text[])),
+  city_type character varying CHECK (city_type::text = ANY (ARRAY['Municipal Corporation'::character varying::text, 'Municipality'::character varying::text, 'Nagar Panchayat'::character varying::text, 'Town'::character varying::text])),
   population bigint,
   area_sq_km numeric,
   is_active boolean DEFAULT true,
@@ -195,8 +195,45 @@ CREATE TABLE public.city_officials (
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
   embedding USER-DEFINED,
+  city_id uuid,
+  district_id uuid,
+  reports_to uuid,
+  department_id uuid,
   CONSTRAINT city_officials_pkey PRIMARY KEY (id),
+  CONSTRAINT city_officials_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
+  CONSTRAINT city_officials_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT city_officials_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
+  CONSTRAINT city_officials_reports_to_fkey FOREIGN KEY (reports_to) REFERENCES public.government_officials(id),
   CONSTRAINT city_officials_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+CREATE TABLE public.contractor_reports (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  contractor_id uuid NOT NULL,
+  user_id character varying NOT NULL,
+  project_name text NOT NULL,
+  contract_id text NOT NULL,
+  progress_percentage integer CHECK (progress_percentage >= 0 AND progress_percentage <= 100),
+  description text NOT NULL,
+  challenges text,
+  next_steps text,
+  document_urls ARRAY,
+  report_text text,
+  embedding USER-DEFINED,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  document_metadata jsonb,
+  extracted_texts ARRAY,
+  ai_analysis jsonb,
+  conversation_history jsonb,
+  CONSTRAINT contractor_reports_pkey PRIMARY KEY (id),
+  CONSTRAINT contractor_reports_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id)
+);
+CREATE TABLE public.contractor_states (
+  id integer NOT NULL DEFAULT nextval('contractor_states_id_seq'::regclass),
+  user_id character varying NOT NULL UNIQUE,
+  state_data jsonb NOT NULL,
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT contractor_states_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.contractors (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -219,7 +256,68 @@ CREATE TABLE public.contractors (
   certifications jsonb,
   embedding USER-DEFINED,
   ai_analysis jsonb DEFAULT '{}'::jsonb,
+  analysis_score double precision CHECK (analysis_score >= 0::double precision AND analysis_score <= 100::double precision),
+  analyzed_at timestamp without time zone,
+  experience_years integer,
+  specializations ARRAY,
+  past_projects jsonb DEFAULT '[]'::jsonb,
+  contact_info jsonb,
+  contractor_report_id uuid,
   CONSTRAINT contractors_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.daily_reports (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  date date NOT NULL,
+  description text NOT NULL,
+  site text NOT NULL,
+  hours integer CHECK (hours >= 1 AND hours <= 24),
+  blockers text,
+  proof_urls ARRAY,
+  proof_verified boolean DEFAULT false,
+  productivity_score double precision CHECK (productivity_score >= 0::double precision AND productivity_score <= 10::double precision),
+  created_at timestamp without time zone DEFAULT now(),
+  ai_summary text,
+  ai_analysis jsonb,
+  sentiment character varying,
+  quality_score numeric,
+  tasks_completed ARRAY,
+  materials_used ARRAY,
+  issues_found ARRAY,
+  status character varying DEFAULT 'submitted'::character varying,
+  reviewed_by uuid,
+  reviewed_at timestamp without time zone,
+  reviewer_notes text,
+  channel character varying,
+  message_id character varying,
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT daily_reports_pkey PRIMARY KEY (id),
+  CONSTRAINT daily_reports_reviewed_by_fkey FOREIGN KEY (reviewed_by) REFERENCES public.users(id),
+  CONSTRAINT daily_reports_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+CREATE TABLE public.department_complaints_analysis (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  department_id uuid NOT NULL,
+  analysis_date timestamp with time zone DEFAULT now(),
+  total_complaints integer DEFAULT 0,
+  average_rating numeric,
+  summary text,
+  sentiment_analysis jsonb,
+  category_breakdown jsonb,
+  status_distribution jsonb,
+  priority_distribution jsonb,
+  top_issues jsonb,
+  geographic_hotspots jsonb,
+  key_insights jsonb,
+  recommendations jsonb,
+  trends jsonb,
+  urgent_matters jsonb,
+  citizen_satisfaction character varying,
+  analyzed_by character varying DEFAULT 'DeepSeek AI'::character varying,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT department_complaints_analysis_pkey PRIMARY KEY (id),
+  CONSTRAINT department_complaints_analysis_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
 );
 CREATE TABLE public.department_dashboards (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -252,11 +350,11 @@ CREATE TABLE public.department_hierarchy (
   metadata jsonb DEFAULT '{}'::jsonb,
   CONSTRAINT department_hierarchy_pkey PRIMARY KEY (id),
   CONSTRAINT department_hierarchy_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
-  CONSTRAINT department_hierarchy_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id),
-  CONSTRAINT department_hierarchy_head_official_id_fkey FOREIGN KEY (head_official_id) REFERENCES public.government_officials(id),
   CONSTRAINT department_hierarchy_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT department_hierarchy_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
+  CONSTRAINT department_hierarchy_head_official_id_fkey FOREIGN KEY (head_official_id) REFERENCES public.government_officials(id),
   CONSTRAINT department_hierarchy_state_id_fkey FOREIGN KEY (state_id) REFERENCES public.states(id),
-  CONSTRAINT department_hierarchy_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id)
+  CONSTRAINT department_hierarchy_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id)
 );
 CREATE TABLE public.departmentknowledgebase (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -302,9 +400,17 @@ CREATE TABLE public.departmentofficers (
   skills jsonb,
   certifications jsonb,
   embedding USER-DEFINED,
+  city_id uuid,
+  ward_id uuid,
+  reports_to_city_official_id uuid,
+  reports_to_ward_officer_id uuid,
   CONSTRAINT departmentofficers_pkey PRIMARY KEY (id),
+  CONSTRAINT departmentofficers_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
+  CONSTRAINT departmentofficers_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT departmentofficers_reports_to_city_official_fkey FOREIGN KEY (reports_to_city_official_id) REFERENCES public.city_officials(id),
+  CONSTRAINT departmentofficers_reports_to_ward_officer_fkey FOREIGN KEY (reports_to_ward_officer_id) REFERENCES public.ward_officers(id),
   CONSTRAINT departmentofficers_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
-  CONSTRAINT departmentofficers_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
+  CONSTRAINT departmentofficers_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id)
 );
 CREATE TABLE public.departments (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -324,6 +430,9 @@ CREATE TABLE public.departments (
   performance_score numeric,
   embedding USER-DEFINED,
   address text,
+  policies text,
+  policy_blob_url text,
+  policies_updated_at timestamp without time zone,
   CONSTRAINT departments_pkey PRIMARY KEY (id),
   CONSTRAINT departments_head_officer_id_fkey FOREIGN KEY (head_officer_id) REFERENCES public.departmentofficers(id)
 );
@@ -384,8 +493,8 @@ CREATE TABLE public.equipment (
   maintenance_history jsonb DEFAULT '[]'::jsonb,
   embedding USER-DEFINED,
   CONSTRAINT equipment_pkey PRIMARY KEY (id),
-  CONSTRAINT equipment_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
-  CONSTRAINT equipment_assigned_to_officer_id_fkey FOREIGN KEY (assigned_to_officer_id) REFERENCES public.users(id)
+  CONSTRAINT equipment_assigned_to_officer_id_fkey FOREIGN KEY (assigned_to_officer_id) REFERENCES public.users(id),
+  CONSTRAINT equipment_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
 );
 CREATE TABLE public.escalation_rules (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -393,10 +502,10 @@ CREATE TABLE public.escalation_rules (
   updated_at timestamp with time zone DEFAULT now(),
   rule_name character varying NOT NULL,
   rule_description text,
-  trigger_type character varying CHECK (trigger_type::text = ANY (ARRAY['SLA Breach'::character varying, 'No Response'::character varying, 'Priority'::character varying, 'Category'::character varying, 'Manual'::character varying]::text[])),
+  trigger_type character varying CHECK (trigger_type::text = ANY (ARRAY['SLA Breach'::character varying::text, 'No Response'::character varying::text, 'Priority'::character varying::text, 'Category'::character varying::text, 'Manual'::character varying::text])),
   trigger_conditions jsonb DEFAULT '{}'::jsonb,
-  from_role_level character varying CHECK (from_role_level::text = ANY (ARRAY['Ward'::character varying, 'City'::character varying, 'Taluka'::character varying, 'District'::character varying, 'State'::character varying]::text[])),
-  to_role_level character varying CHECK (to_role_level::text = ANY (ARRAY['Ward'::character varying, 'City'::character varying, 'Taluka'::character varying, 'District'::character varying, 'State'::character varying, 'Central'::character varying]::text[])),
+  from_role_level character varying CHECK (from_role_level::text = ANY (ARRAY['Ward'::character varying::text, 'City'::character varying::text, 'Taluka'::character varying::text, 'District'::character varying::text, 'State'::character varying::text])),
+  to_role_level character varying CHECK (to_role_level::text = ANY (ARRAY['Ward'::character varying::text, 'City'::character varying::text, 'Taluka'::character varying::text, 'District'::character varying::text, 'State'::character varying::text, 'Central'::character varying::text])),
   is_automatic boolean DEFAULT false,
   requires_approval boolean DEFAULT false,
   notify_officials boolean DEFAULT true,
@@ -424,17 +533,17 @@ CREATE TABLE public.expense_approvals (
   head_notes text,
   paid_at timestamp with time zone,
   payment_reference character varying,
-  current_status character varying DEFAULT 'Created'::character varying CHECK (current_status::text = ANY (ARRAY['Created'::character varying, 'Verified'::character varying, 'Approved'::character varying, 'Paid'::character varying, 'Rejected'::character varying]::text[])),
+  current_status character varying DEFAULT 'Created'::character varying CHECK (current_status::text = ANY (ARRAY['Created'::character varying::text, 'Verified'::character varying::text, 'Approved'::character varying::text, 'Paid'::character varying::text, 'Rejected'::character varying::text])),
   rejected_by uuid,
   rejected_at timestamp with time zone,
   rejection_reason text,
   CONSTRAINT expense_approvals_pkey PRIMARY KEY (id),
-  CONSTRAINT expense_approvals_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
-  CONSTRAINT expense_approvals_created_by_fkey FOREIGN KEY (created_by) REFERENCES public.users(id),
-  CONSTRAINT expense_approvals_verified_by_fkey FOREIGN KEY (verified_by) REFERENCES public.users(id),
   CONSTRAINT expense_approvals_approved_by_finance_fkey FOREIGN KEY (approved_by_finance) REFERENCES public.users(id),
   CONSTRAINT expense_approvals_approved_by_head_fkey FOREIGN KEY (approved_by_head) REFERENCES public.users(id),
-  CONSTRAINT expense_approvals_rejected_by_fkey FOREIGN KEY (rejected_by) REFERENCES public.users(id)
+  CONSTRAINT expense_approvals_created_by_fkey FOREIGN KEY (created_by) REFERENCES public.users(id),
+  CONSTRAINT expense_approvals_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
+  CONSTRAINT expense_approvals_rejected_by_fkey FOREIGN KEY (rejected_by) REFERENCES public.users(id),
+  CONSTRAINT expense_approvals_verified_by_fkey FOREIGN KEY (verified_by) REFERENCES public.users(id)
 );
 CREATE TABLE public.faqs (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -450,6 +559,28 @@ CREATE TABLE public.faqs (
   is_active boolean DEFAULT true,
   CONSTRAINT faqs_pkey PRIMARY KEY (id),
   CONSTRAINT faqs_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
+);
+CREATE TABLE public.field_worker_states (
+  id integer NOT NULL DEFAULT nextval('field_worker_states_id_seq'::regclass),
+  user_id uuid NOT NULL,
+  date date NOT NULL,
+  state_data jsonb NOT NULL,
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT field_worker_states_pkey PRIMARY KEY (id),
+  CONSTRAINT field_worker_states_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+CREATE TABLE public.fieldworker_states (
+  id integer NOT NULL DEFAULT nextval('fieldworker_states_id_seq'::regclass),
+  user_id character varying NOT NULL,
+  date date NOT NULL DEFAULT CURRENT_DATE,
+  status character varying DEFAULT 'collecting'::character varying,
+  current_question character varying,
+  missing_fields ARRAY,
+  report jsonb DEFAULT '{}'::jsonb,
+  proofs ARRAY,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT fieldworker_states_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.government_officials (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -472,7 +603,7 @@ CREATE TABLE public.government_officials (
   office_email character varying,
   appointment_date date,
   joining_date date,
-  status character varying DEFAULT 'Active'::character varying CHECK (status::text = ANY (ARRAY['Active'::character varying, 'On Leave'::character varying, 'Transferred'::character varying, 'Retired'::character varying, 'Suspended'::character varying]::text[])),
+  status character varying DEFAULT 'Active'::character varying CHECK (status::text = ANY (ARRAY['Active'::character varying::text, 'On Leave'::character varying::text, 'Transferred'::character varying::text, 'Retired'::character varying::text, 'Suspended'::character varying::text])),
   access_level integer DEFAULT 1,
   can_approve_grievances boolean DEFAULT false,
   can_allocate_budget boolean DEFAULT false,
@@ -483,16 +614,16 @@ CREATE TABLE public.government_officials (
   metadata jsonb DEFAULT '{}'::jsonb,
   is_active boolean DEFAULT true,
   CONSTRAINT government_officials_pkey PRIMARY KEY (id),
-  CONSTRAINT government_officials_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT government_officials_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
+  CONSTRAINT government_officials_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT government_officials_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
+  CONSTRAINT government_officials_gram_panchayat_id_fkey FOREIGN KEY (gram_panchayat_id) REFERENCES public.gram_panchayats(id),
+  CONSTRAINT government_officials_reports_to_fkey FOREIGN KEY (reports_to) REFERENCES public.government_officials(id),
   CONSTRAINT government_officials_role_id_fkey FOREIGN KEY (role_id) REFERENCES public.government_roles(id),
   CONSTRAINT government_officials_state_id_fkey FOREIGN KEY (state_id) REFERENCES public.states(id),
-  CONSTRAINT government_officials_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
   CONSTRAINT government_officials_taluka_id_fkey FOREIGN KEY (taluka_id) REFERENCES public.talukas(id),
-  CONSTRAINT government_officials_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
-  CONSTRAINT government_officials_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id),
-  CONSTRAINT government_officials_gram_panchayat_id_fkey FOREIGN KEY (gram_panchayat_id) REFERENCES public.gram_panchayats(id),
-  CONSTRAINT government_officials_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
-  CONSTRAINT government_officials_reports_to_fkey FOREIGN KEY (reports_to) REFERENCES public.government_officials(id)
+  CONSTRAINT government_officials_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT government_officials_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id)
 );
 CREATE TABLE public.government_roles (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -500,8 +631,8 @@ CREATE TABLE public.government_roles (
   updated_at timestamp with time zone DEFAULT now(),
   role_code character varying NOT NULL UNIQUE,
   role_name character varying NOT NULL,
-  role_level character varying NOT NULL CHECK (role_level::text = ANY (ARRAY['Central'::character varying, 'State'::character varying, 'District'::character varying, 'Taluka'::character varying, 'City'::character varying, 'Ward'::character varying, 'Gram Panchayat'::character varying]::text[])),
-  role_type character varying NOT NULL CHECK (role_type::text = ANY (ARRAY['Administrative'::character varying, 'Department'::character varying, 'Technical'::character varying, 'Support'::character varying]::text[])),
+  role_level character varying NOT NULL CHECK (role_level::text = ANY (ARRAY['Central'::character varying::text, 'State'::character varying::text, 'District'::character varying::text, 'Taluka'::character varying::text, 'City'::character varying::text, 'Ward'::character varying::text, 'Gram Panchayat'::character varying::text])),
+  role_type character varying NOT NULL CHECK (role_type::text = ANY (ARRAY['Administrative'::character varying::text, 'Department'::character varying::text, 'Technical'::character varying::text, 'Support'::character varying::text])),
   description text,
   permissions jsonb DEFAULT '[]'::jsonb,
   hierarchy_rank integer,
@@ -531,23 +662,23 @@ CREATE TABLE public.grievance_assignments (
   assigned_to_official_id uuid NOT NULL,
   assigned_by_official_id uuid,
   department_id uuid,
-  assignment_type character varying CHECK (assignment_type::text = ANY (ARRAY['Primary'::character varying, 'Secondary'::character varying, 'Escalated'::character varying, 'Transferred'::character varying, 'Collaborative'::character varying]::text[])),
-  status character varying DEFAULT 'Assigned'::character varying CHECK (status::text = ANY (ARRAY['Assigned'::character varying, 'Accepted'::character varying, 'In Progress'::character varying, 'Completed'::character varying, 'Rejected'::character varying, 'Transferred'::character varying]::text[])),
+  assignment_type character varying CHECK (assignment_type::text = ANY (ARRAY['Primary'::character varying::text, 'Secondary'::character varying::text, 'Escalated'::character varying::text, 'Transferred'::character varying::text, 'Collaborative'::character varying::text])),
+  status character varying DEFAULT 'Assigned'::character varying CHECK (status::text = ANY (ARRAY['Assigned'::character varying::text, 'Accepted'::character varying::text, 'In Progress'::character varying::text, 'Completed'::character varying::text, 'Rejected'::character varying::text, 'Transferred'::character varying::text])),
   assigned_at timestamp with time zone DEFAULT now(),
   accepted_at timestamp with time zone,
   completed_at timestamp with time zone,
   due_date timestamp with time zone,
-  priority character varying CHECK (priority::text = ANY (ARRAY['Low'::character varying, 'Medium'::character varying, 'High'::character varying, 'Critical'::character varying]::text[])),
+  priority character varying CHECK (priority::text = ANY (ARRAY['Low'::character varying::text, 'Medium'::character varying::text, 'High'::character varying::text, 'Critical'::character varying::text])),
   assignment_notes text,
   completion_notes text,
   sla_hours integer,
   is_sla_breached boolean DEFAULT false,
   is_active boolean DEFAULT true,
   CONSTRAINT grievance_assignments_pkey PRIMARY KEY (id),
-  CONSTRAINT grievance_assignments_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
-  CONSTRAINT grievance_assignments_assigned_to_official_id_fkey FOREIGN KEY (assigned_to_official_id) REFERENCES public.government_officials(id),
   CONSTRAINT grievance_assignments_assigned_by_official_id_fkey FOREIGN KEY (assigned_by_official_id) REFERENCES public.government_officials(id),
-  CONSTRAINT grievance_assignments_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
+  CONSTRAINT grievance_assignments_assigned_to_official_id_fkey FOREIGN KEY (assigned_to_official_id) REFERENCES public.government_officials(id),
+  CONSTRAINT grievance_assignments_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT grievance_assignments_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
 CREATE TABLE public.grievance_location_mapping (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -562,19 +693,108 @@ CREATE TABLE public.grievance_location_mapping (
   latitude numeric,
   longitude numeric,
   address text,
-  location_source character varying CHECK (location_source::text = ANY (ARRAY['GPS'::character varying, 'Address'::character varying, 'Manual'::character varying, 'IP'::character varying]::text[])),
+  location_source character varying CHECK (location_source::text = ANY (ARRAY['GPS'::character varying::text, 'Address'::character varying::text, 'Manual'::character varying::text, 'IP'::character varying::text])),
   is_verified boolean DEFAULT false,
   verified_by uuid,
   verified_at timestamp with time zone,
   CONSTRAINT grievance_location_mapping_pkey PRIMARY KEY (id),
+  CONSTRAINT grievance_location_mapping_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
+  CONSTRAINT grievance_location_mapping_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
+  CONSTRAINT grievance_location_mapping_gram_panchayat_id_fkey FOREIGN KEY (gram_panchayat_id) REFERENCES public.gram_panchayats(id),
   CONSTRAINT grievance_location_mapping_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
   CONSTRAINT grievance_location_mapping_state_id_fkey FOREIGN KEY (state_id) REFERENCES public.states(id),
-  CONSTRAINT grievance_location_mapping_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
   CONSTRAINT grievance_location_mapping_taluka_id_fkey FOREIGN KEY (taluka_id) REFERENCES public.talukas(id),
-  CONSTRAINT grievance_location_mapping_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
-  CONSTRAINT grievance_location_mapping_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id),
-  CONSTRAINT grievance_location_mapping_gram_panchayat_id_fkey FOREIGN KEY (gram_panchayat_id) REFERENCES public.gram_panchayats(id),
-  CONSTRAINT grievance_location_mapping_verified_by_fkey FOREIGN KEY (verified_by) REFERENCES public.government_officials(id)
+  CONSTRAINT grievance_location_mapping_verified_by_fkey FOREIGN KEY (verified_by) REFERENCES public.government_officials(id),
+  CONSTRAINT grievance_location_mapping_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id)
+);
+CREATE TABLE public.grievance_processed (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  grievance_id character varying NOT NULL UNIQUE,
+  grievance_text text,
+  image_path text,
+  image_description text,
+  enhanced_query text,
+  validation_score numeric,
+  validation_reasoning text,
+  validation_timestamp timestamp with time zone,
+  extracted_location jsonb,
+  latitude numeric,
+  longitude numeric,
+  location_address text,
+  query_type jsonb,
+  category jsonb,
+  similar_cases_summary text,
+  sentiment_priority jsonb,
+  emotion jsonb,
+  severity jsonb,
+  patterns jsonb,
+  fraud jsonb,
+  policy_search jsonb,
+  sla_deadline timestamp with time zone,
+  resolution_time numeric,
+  is_escalated boolean,
+  escalation_level USER-DEFINED,
+  escalated_at timestamp with time zone,
+  workflow jsonb,
+  estimated_cost numeric,
+  actual_cost numeric,
+  resolved_at timestamp with time zone,
+  resolved_by uuid,
+  embedding_status text,
+  processing_metadata jsonb,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  embedding USER-DEFINED,
+  CONSTRAINT grievance_processed_pkey PRIMARY KEY (id),
+  CONSTRAINT grievance_processed_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(grievance_id),
+  CONSTRAINT grievance_processed_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.users(id)
+);
+CREATE TABLE public.grievance_processed_backup_1772537858338 (
+  id uuid,
+  grievance_id character varying,
+  grievance_text text,
+  image_path text,
+  image_description text,
+  enhanced_query text,
+  validation_score numeric,
+  validation_reasoning text,
+  validation_timestamp timestamp with time zone,
+  extracted_location jsonb,
+  extracted_address text,
+  extracted_latitude numeric,
+  extracted_longitude numeric,
+  location_confidence character varying,
+  latitude numeric,
+  longitude numeric,
+  location_address text,
+  query_type jsonb,
+  category jsonb,
+  similar_cases_summary text,
+  sentiment_priority jsonb,
+  emotion jsonb,
+  severity jsonb,
+  patterns jsonb,
+  fraud jsonb,
+  department_info jsonb,
+  policy_search jsonb,
+  past_queries_summary text,
+  sla_deadline timestamp with time zone,
+  resolution_time numeric,
+  is_escalated boolean,
+  escalation_level USER-DEFINED,
+  escalated_at timestamp with time zone,
+  comments jsonb,
+  workflow jsonb,
+  estimated_cost numeric,
+  actual_cost numeric,
+  resolved_at timestamp with time zone,
+  resolved_by uuid,
+  citizen_feedback jsonb,
+  embedding_status text,
+  processing_metadata jsonb,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone,
+  embedding USER-DEFINED
 );
 CREATE TABLE public.grievancecomments (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -586,7 +806,6 @@ CREATE TABLE public.grievancecomments (
   attachments jsonb,
   embedding USER-DEFINED,
   CONSTRAINT grievancecomments_pkey PRIMARY KEY (id),
-  CONSTRAINT grievancecomments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
   CONSTRAINT grievancecomments_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
 CREATE TABLE public.grievancecosttracking (
@@ -609,13 +828,13 @@ CREATE TABLE public.grievancecosttracking (
   resource_usage jsonb DEFAULT '{"hours_worked": 0, "contractor_id": null, "equipment_used": [], "materials_used": [], "contractor_name": null, "workers_assigned": 0}'::jsonb,
   proof_documents jsonb DEFAULT '[]'::jsonb,
   approval_workflow jsonb DEFAULT '{"status": "Created", "created_by": null, "verified_by": null, "approved_by_head": null, "approved_by_finance": null}'::jsonb,
-  status character varying DEFAULT 'within_budget'::character varying CHECK (status::text = ANY (ARRAY['within_budget'::character varying, 'near_limit'::character varying, 'exceeded'::character varying, 'approved'::character varying, 'pending_approval'::character varying]::text[])),
+  status character varying DEFAULT 'within_budget'::character varying CHECK (status::text = ANY (ARRAY['within_budget'::character varying::text, 'near_limit'::character varying::text, 'exceeded'::character varying::text, 'approved'::character varying::text, 'pending_approval'::character varying::text])),
   work_location jsonb DEFAULT '{}'::jsonb,
   work_started_at timestamp with time zone,
   work_completed_at timestamp with time zone,
   CONSTRAINT grievancecosttracking_pkey PRIMARY KEY (id),
-  CONSTRAINT grievancecosttracking_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
-  CONSTRAINT grievancecosttracking_allocation_id_fkey FOREIGN KEY (allocation_id) REFERENCES public.budget_allocations(id)
+  CONSTRAINT grievancecosttracking_allocation_id_fkey FOREIGN KEY (allocation_id) REFERENCES public.budget_allocations(id),
+  CONSTRAINT grievancecosttracking_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
 CREATE TABLE public.grievanceescalations (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -632,9 +851,9 @@ CREATE TABLE public.grievanceescalations (
   next_escalation_at timestamp with time zone,
   embedding USER-DEFINED,
   CONSTRAINT grievanceescalations_pkey PRIMARY KEY (id),
-  CONSTRAINT grievanceescalations_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
+  CONSTRAINT grievanceescalations_escalated_by_officer_id_fkey FOREIGN KEY (escalated_by_officer_id) REFERENCES public.users(id),
   CONSTRAINT grievanceescalations_escalated_to_officer_id_fkey FOREIGN KEY (escalated_to_officer_id) REFERENCES public.users(id),
-  CONSTRAINT grievanceescalations_escalated_by_officer_id_fkey FOREIGN KEY (escalated_by_officer_id) REFERENCES public.users(id)
+  CONSTRAINT grievanceescalations_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
 CREATE TABLE public.grievancefeedback (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -649,8 +868,8 @@ CREATE TABLE public.grievancefeedback (
   feedback_data jsonb,
   embedding USER-DEFINED,
   CONSTRAINT grievancefeedback_pkey PRIMARY KEY (id),
-  CONSTRAINT grievancefeedback_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
-  CONSTRAINT grievancefeedback_citizen_id_fkey FOREIGN KEY (citizen_id) REFERENCES public.citizens(id)
+  CONSTRAINT grievancefeedback_citizen_id_fkey FOREIGN KEY (citizen_id) REFERENCES public.citizens(id),
+  CONSTRAINT grievancefeedback_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
 CREATE TABLE public.grievanceworkflow (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -713,9 +932,9 @@ CREATE TABLE public.official_activity_log (
   ip_address character varying,
   user_agent text,
   CONSTRAINT official_activity_log_pkey PRIMARY KEY (id),
-  CONSTRAINT official_activity_log_official_id_fkey FOREIGN KEY (official_id) REFERENCES public.government_officials(id),
-  CONSTRAINT official_activity_log_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
   CONSTRAINT official_activity_log_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT official_activity_log_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id),
+  CONSTRAINT official_activity_log_official_id_fkey FOREIGN KEY (official_id) REFERENCES public.government_officials(id),
   CONSTRAINT official_activity_log_related_official_id_fkey FOREIGN KEY (related_official_id) REFERENCES public.government_officials(id)
 );
 CREATE TABLE public.official_permissions (
@@ -723,24 +942,24 @@ CREATE TABLE public.official_permissions (
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
   official_id uuid NOT NULL,
-  permission_type character varying NOT NULL CHECK (permission_type::text = ANY (ARRAY['View'::character varying, 'Create'::character varying, 'Update'::character varying, 'Delete'::character varying, 'Approve'::character varying, 'Reject'::character varying, 'Assign'::character varying, 'Transfer'::character varying, 'Escalate'::character varying, 'Close'::character varying, 'Reopen'::character varying]::text[])),
-  resource_type character varying NOT NULL CHECK (resource_type::text = ANY (ARRAY['Grievance'::character varying, 'Budget'::character varying, 'Officer'::character varying, 'Department'::character varying, 'Report'::character varying, 'Task'::character varying, 'Announcement'::character varying, 'Document'::character varying]::text[])),
-  scope_level character varying CHECK (scope_level::text = ANY (ARRAY['Own'::character varying, 'Ward'::character varying, 'City'::character varying, 'Taluka'::character varying, 'District'::character varying, 'State'::character varying, 'All'::character varying]::text[])),
+  permission_type character varying NOT NULL CHECK (permission_type::text = ANY (ARRAY['View'::character varying::text, 'Create'::character varying::text, 'Update'::character varying::text, 'Delete'::character varying::text, 'Approve'::character varying::text, 'Reject'::character varying::text, 'Assign'::character varying::text, 'Transfer'::character varying::text, 'Escalate'::character varying::text, 'Close'::character varying::text, 'Reopen'::character varying::text])),
+  resource_type character varying NOT NULL CHECK (resource_type::text = ANY (ARRAY['Grievance'::character varying::text, 'Budget'::character varying::text, 'Officer'::character varying::text, 'Department'::character varying::text, 'Report'::character varying::text, 'Task'::character varying::text, 'Announcement'::character varying::text, 'Document'::character varying::text])),
+  scope_level character varying CHECK (scope_level::text = ANY (ARRAY['Own'::character varying::text, 'Ward'::character varying::text, 'City'::character varying::text, 'Taluka'::character varying::text, 'District'::character varying::text, 'State'::character varying::text, 'All'::character varying::text])),
   conditions jsonb DEFAULT '{}'::jsonb,
   granted_by uuid,
   granted_at timestamp with time zone DEFAULT now(),
   expires_at timestamp with time zone,
   is_active boolean DEFAULT true,
   CONSTRAINT official_permissions_pkey PRIMARY KEY (id),
-  CONSTRAINT official_permissions_official_id_fkey FOREIGN KEY (official_id) REFERENCES public.government_officials(id),
-  CONSTRAINT official_permissions_granted_by_fkey FOREIGN KEY (granted_by) REFERENCES public.government_officials(id)
+  CONSTRAINT official_permissions_granted_by_fkey FOREIGN KEY (granted_by) REFERENCES public.government_officials(id),
+  CONSTRAINT official_permissions_official_id_fkey FOREIGN KEY (official_id) REFERENCES public.government_officials(id)
 );
 CREATE TABLE public.official_relationships (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   created_at timestamp with time zone DEFAULT now(),
   official_id uuid NOT NULL,
   related_official_id uuid NOT NULL,
-  relationship_type character varying NOT NULL CHECK (relationship_type::text = ANY (ARRAY['Reports To'::character varying, 'Supervises'::character varying, 'Collaborates With'::character varying, 'Coordinates With'::character varying, 'Escalates To'::character varying, 'Delegates To'::character varying]::text[])),
+  relationship_type character varying NOT NULL CHECK (relationship_type::text = ANY (ARRAY['Reports To'::character varying::text, 'Supervises'::character varying::text, 'Collaborates With'::character varying::text, 'Coordinates With'::character varying::text, 'Escalates To'::character varying::text, 'Delegates To'::character varying::text])),
   can_view_data boolean DEFAULT false,
   can_assign_tasks boolean DEFAULT false,
   can_request_action boolean DEFAULT false,
@@ -750,6 +969,33 @@ CREATE TABLE public.official_relationships (
   CONSTRAINT official_relationships_pkey PRIMARY KEY (id),
   CONSTRAINT official_relationships_official_id_fkey FOREIGN KEY (official_id) REFERENCES public.government_officials(id),
   CONSTRAINT official_relationships_related_official_id_fkey FOREIGN KEY (related_official_id) REFERENCES public.government_officials(id)
+);
+CREATE TABLE public.pending_registrations (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  telegram_user_id character varying UNIQUE,
+  whatsapp_phone character varying UNIQUE,
+  full_name character varying NOT NULL,
+  user_type character varying NOT NULL,
+  department_id uuid,
+  company_name character varying,
+  license_number character varying,
+  gst_number character varying,
+  category character varying,
+  specialization character varying,
+  zone character varying,
+  ward character varying,
+  email character varying,
+  phone character varying,
+  status character varying DEFAULT 'pending'::character varying,
+  reviewed_by uuid,
+  reviewed_at timestamp without time zone,
+  rejection_reason text,
+  channel character varying NOT NULL,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT pending_registrations_pkey PRIMARY KEY (id),
+  CONSTRAINT pending_registrations_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT pending_registrations_reviewed_by_fkey FOREIGN KEY (reviewed_by) REFERENCES public.users(id)
 );
 CREATE TABLE public.policydocuments (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -786,6 +1032,24 @@ CREATE TABLE public.predictivemaintenance (
   embedding USER-DEFINED,
   CONSTRAINT predictivemaintenance_pkey PRIMARY KEY (id),
   CONSTRAINT predictivemaintenance_equipment_id_fkey FOREIGN KEY (equipment_id) REFERENCES public.equipment(id)
+);
+CREATE TABLE public.pricing_plans (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  plan_name character varying NOT NULL UNIQUE,
+  plan_type character varying NOT NULL CHECK (plan_type::text = ANY (ARRAY['monthly'::character varying, 'yearly'::character varying]::text[])),
+  base_price numeric NOT NULL,
+  currency character varying DEFAULT 'INR'::character varying,
+  included_users integer NOT NULL DEFAULT 20,
+  extra_user_price numeric NOT NULL DEFAULT 1000.00,
+  features jsonb NOT NULL DEFAULT '[]'::jsonb,
+  is_active boolean DEFAULT true,
+  display_order integer DEFAULT 0,
+  description text,
+  highlight_text character varying,
+  recommended boolean DEFAULT false,
+  CONSTRAINT pricing_plans_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.refreshtokens (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -834,6 +1098,14 @@ CREATE TABLE public.research_documents (
   CONSTRAINT research_documents_pkey PRIMARY KEY (id),
   CONSTRAINT research_documents_grievance_id_fkey FOREIGN KEY (grievance_id) REFERENCES public.usergrievance(id)
 );
+CREATE TABLE public.schema_migrations (
+  id integer NOT NULL DEFAULT nextval('schema_migrations_id_seq'::regclass),
+  migration_name character varying NOT NULL UNIQUE,
+  executed_at timestamp with time zone DEFAULT now(),
+  success boolean DEFAULT true,
+  error_message text,
+  CONSTRAINT schema_migrations_pkey PRIMARY KEY (id)
+);
 CREATE TABLE public.settings (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   created_at timestamp with time zone DEFAULT now(),
@@ -872,6 +1144,79 @@ CREATE TABLE public.states (
   metadata jsonb DEFAULT '{}'::jsonb,
   CONSTRAINT states_pkey PRIMARY KEY (id)
 );
+CREATE TABLE public.subscription_purchases (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  created_at timestamp with time zone DEFAULT now(),
+  subscription_id uuid NOT NULL,
+  purchase_type character varying NOT NULL CHECK (purchase_type::text = ANY (ARRAY['new_subscription'::character varying, 'renewal'::character varying, 'upgrade'::character varying, 'extra_users'::character varying]::text[])),
+  amount numeric NOT NULL,
+  tax_amount numeric DEFAULT 0.00,
+  discount_amount numeric DEFAULT 0.00,
+  final_amount numeric NOT NULL,
+  payment_method character varying,
+  payment_gateway character varying,
+  transaction_id character varying,
+  payment_status character varying DEFAULT 'pending'::character varying CHECK (payment_status::text = ANY (ARRAY['pending'::character varying, 'processing'::character varying, 'completed'::character varying, 'failed'::character varying, 'refunded'::character varying]::text[])),
+  payment_date timestamp with time zone,
+  invoice_number character varying UNIQUE,
+  invoice_url text,
+  purchased_by uuid,
+  metadata jsonb DEFAULT '{}'::jsonb,
+  CONSTRAINT subscription_purchases_pkey PRIMARY KEY (id),
+  CONSTRAINT subscription_purchases_subscription_id_fkey FOREIGN KEY (subscription_id) REFERENCES public.subscriptions(id),
+  CONSTRAINT subscription_purchases_purchased_by_fkey FOREIGN KEY (purchased_by) REFERENCES public.users(id)
+);
+CREATE TABLE public.subscription_users (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  subscription_id uuid NOT NULL,
+  user_id uuid NOT NULL,
+  user_type character varying NOT NULL CHECK (user_type::text = ANY (ARRAY['admin'::character varying, 'department_official'::character varying, 'government_official'::character varying, 'officer'::character varying]::text[])),
+  is_active boolean DEFAULT true,
+  is_extra_user boolean DEFAULT false,
+  deactivated_at timestamp with time zone,
+  deactivated_by uuid,
+  CONSTRAINT subscription_users_pkey PRIMARY KEY (id),
+  CONSTRAINT subscription_users_subscription_id_fkey FOREIGN KEY (subscription_id) REFERENCES public.subscriptions(id),
+  CONSTRAINT subscription_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT subscription_users_deactivated_by_fkey FOREIGN KEY (deactivated_by) REFERENCES public.users(id)
+);
+CREATE TABLE public.subscriptions (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  subscription_code character varying NOT NULL UNIQUE,
+  organization_name character varying NOT NULL,
+  city_name character varying NOT NULL,
+  state_name character varying,
+  pricing_plan_id uuid NOT NULL,
+  admin_user_id uuid,
+  included_users integer NOT NULL DEFAULT 20,
+  extra_users integer DEFAULT 0,
+  total_users_allowed integer DEFAULT (included_users + extra_users),
+  current_user_count integer DEFAULT 0,
+  start_date timestamp with time zone NOT NULL,
+  end_date timestamp with time zone NOT NULL,
+  billing_cycle character varying NOT NULL CHECK (billing_cycle::text = ANY (ARRAY['monthly'::character varying, 'yearly'::character varying]::text[])),
+  status character varying NOT NULL DEFAULT 'pending'::character varying CHECK (status::text = ANY (ARRAY['pending'::character varying, 'active'::character varying, 'suspended'::character varying, 'cancelled'::character varying, 'expired'::character varying]::text[])),
+  base_amount numeric NOT NULL,
+  extra_user_charges numeric DEFAULT 0.00,
+  total_amount numeric DEFAULT (base_amount + extra_user_charges),
+  payment_status character varying DEFAULT 'pending'::character varying CHECK (payment_status::text = ANY (ARRAY['pending'::character varying, 'paid'::character varying, 'failed'::character varying, 'refunded'::character varying]::text[])),
+  last_payment_date timestamp with time zone,
+  next_billing_date timestamp with time zone,
+  auto_renew boolean DEFAULT true,
+  cancelled_at timestamp with time zone,
+  cancelled_by uuid,
+  cancellation_reason text,
+  metadata jsonb DEFAULT '{}'::jsonb,
+  notes text,
+  CONSTRAINT subscriptions_pkey PRIMARY KEY (id),
+  CONSTRAINT subscriptions_pricing_plan_id_fkey FOREIGN KEY (pricing_plan_id) REFERENCES public.pricing_plans(id),
+  CONSTRAINT subscriptions_admin_user_id_fkey FOREIGN KEY (admin_user_id) REFERENCES public.users(id),
+  CONSTRAINT subscriptions_cancelled_by_fkey FOREIGN KEY (cancelled_by) REFERENCES public.users(id)
+);
 CREATE TABLE public.taluka_officials (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   user_id uuid NOT NULL UNIQUE,
@@ -895,7 +1240,7 @@ CREATE TABLE public.talukas (
   headquarters character varying,
   population bigint,
   area_sq_km numeric,
-  taluka_type character varying CHECK (taluka_type::text = ANY (ARRAY['Urban'::character varying, 'Rural'::character varying, 'Mixed'::character varying]::text[])),
+  taluka_type character varying CHECK (taluka_type::text = ANY (ARRAY['Urban'::character varying::text, 'Rural'::character varying::text, 'Mixed'::character varying::text])),
   is_active boolean DEFAULT true,
   metadata jsonb DEFAULT '{}'::jsonb,
   CONSTRAINT talukas_pkey PRIMARY KEY (id),
@@ -917,8 +1262,8 @@ CREATE TABLE public.tenderapplications (
   is_shortlisted boolean DEFAULT false,
   embedding USER-DEFINED,
   CONSTRAINT tenderapplications_pkey PRIMARY KEY (id),
-  CONSTRAINT tenderapplications_tender_id_fkey FOREIGN KEY (tender_id) REFERENCES public.tenders(id),
-  CONSTRAINT tenderapplications_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id)
+  CONSTRAINT tenderapplications_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id),
+  CONSTRAINT tenderapplications_tender_id_fkey FOREIGN KEY (tender_id) REFERENCES public.tenders(id)
 );
 CREATE TABLE public.tenders (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -940,9 +1285,9 @@ CREATE TABLE public.tenders (
   documents jsonb,
   embedding USER-DEFINED,
   CONSTRAINT tenders_pkey PRIMARY KEY (id),
-  CONSTRAINT tenders_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
+  CONSTRAINT tenders_awarded_to_contractor_id_fkey FOREIGN KEY (awarded_to_contractor_id) REFERENCES public.contractors(id),
   CONSTRAINT tenders_created_by_officer_id_fkey FOREIGN KEY (created_by_officer_id) REFERENCES public.users(id),
-  CONSTRAINT tenders_awarded_to_contractor_id_fkey FOREIGN KEY (awarded_to_contractor_id) REFERENCES public.contractors(id)
+  CONSTRAINT tenders_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
 );
 CREATE TABLE public.user_hierarchy (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -953,18 +1298,31 @@ CREATE TABLE public.user_hierarchy (
   updated_at timestamp with time zone DEFAULT now(),
   embedding USER-DEFINED,
   CONSTRAINT user_hierarchy_pkey PRIMARY KEY (id),
-  CONSTRAINT user_hierarchy_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
-  CONSTRAINT user_hierarchy_supervisor_id_fkey FOREIGN KEY (supervisor_id) REFERENCES public.users(id)
+  CONSTRAINT user_hierarchy_supervisor_id_fkey FOREIGN KEY (supervisor_id) REFERENCES public.users(id),
+  CONSTRAINT user_hierarchy_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+CREATE TABLE public.user_states (
+  id integer NOT NULL DEFAULT nextval('user_states_id_seq'::regclass),
+  user_id character varying NOT NULL,
+  channel character varying NOT NULL DEFAULT 'telegram'::character varying,
+  state_data jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT user_states_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.user_temp_data (
+  telegram_user_id character varying NOT NULL,
+  phone_number character varying,
+  full_name character varying,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT user_temp_data_pkey PRIMARY KEY (telegram_user_id)
 );
 CREATE TABLE public.usergrievance (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   grievance_id character varying NOT NULL UNIQUE,
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
-  grievance_text text,
-  image_path text,
-  image_description text,
-  enhanced_query text,
   embedding USER-DEFINED,
   citizen_id uuid,
   department_id uuid,
@@ -974,48 +1332,11 @@ CREATE TABLE public.usergrievance (
   status USER-DEFINED DEFAULT 'submitted'::grievance_status,
   priority character varying DEFAULT 'medium'::character varying,
   validation_status character varying DEFAULT 'pending'::character varying,
-  validation_score numeric,
-  validation_reasoning text,
-  extracted_location jsonb,
-  extracted_address text,
-  extracted_latitude numeric,
-  extracted_longitude numeric,
-  location_confidence character varying,
-  validation_timestamp timestamp with time zone,
-  processing_metadata jsonb,
-  query_type jsonb,
-  category jsonb,
-  similar_cases_summary text,
-  sentiment_priority jsonb,
-  emotion jsonb,
-  severity jsonb,
-  patterns jsonb,
-  fraud jsonb,
-  department_info jsonb,
-  policy_search jsonb,
-  past_queries_summary text,
   full_result jsonb,
-  sla_deadline timestamp with time zone,
-  resolution_time numeric,
-  is_escalated boolean DEFAULT false,
-  escalation_level USER-DEFINED,
-  comments jsonb DEFAULT '[]'::jsonb,
-  workflow jsonb DEFAULT '{"status": "pending", "history": [], "started_at": null, "assigned_at": null, "resolved_at": null, "current_stage": "submitted"}'::jsonb,
-  estimated_cost numeric,
-  actual_cost numeric,
-  escalated_at timestamp with time zone,
-  citizen_feedback jsonb,
-  resolved_at timestamp with time zone,
-  resolved_by uuid,
-  embedding_status text DEFAULT 'pending'::text,
-  latitude numeric,
-  longitude numeric,
-  location_address text,
   CONSTRAINT usergrievance_pkey PRIMARY KEY (id),
-  CONSTRAINT usergrievance_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.users(id),
+  CONSTRAINT usergrievance_assigned_officer_id_fkey FOREIGN KEY (assigned_officer_id) REFERENCES public.users(id),
   CONSTRAINT usergrievance_citizen_id_fkey FOREIGN KEY (citizen_id) REFERENCES public.citizens(id),
-  CONSTRAINT usergrievance_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
-  CONSTRAINT usergrievance_assigned_officer_id_fkey FOREIGN KEY (assigned_officer_id) REFERENCES public.users(id)
+  CONSTRAINT usergrievance_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id)
 );
 CREATE TABLE public.users (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -1044,9 +1365,13 @@ CREATE TABLE public.users (
   city character varying,
   embedding USER-DEFINED,
   verification_token_expiry timestamp with time zone,
+  is_active boolean DEFAULT true,
+  subscription_id uuid,
+  is_subscription_admin boolean DEFAULT false,
   CONSTRAINT users_pkey PRIMARY KEY (id),
+  CONSTRAINT users_approved_by_fkey FOREIGN KEY (approved_by) REFERENCES public.users(id),
   CONSTRAINT users_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departments(id),
-  CONSTRAINT users_approved_by_fkey FOREIGN KEY (approved_by) REFERENCES public.users(id)
+  CONSTRAINT users_subscription_id_fkey FOREIGN KEY (subscription_id) REFERENCES public.subscriptions(id)
 );
 CREATE TABLE public.ward_officers (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -1059,9 +1384,17 @@ CREATE TABLE public.ward_officers (
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
   embedding USER-DEFINED,
+  city_id uuid,
+  district_id uuid,
+  ward_id uuid,
+  reports_to_city_official_id uuid,
   CONSTRAINT ward_officers_pkey PRIMARY KEY (id),
+  CONSTRAINT ward_officers_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id),
+  CONSTRAINT ward_officers_district_id_fkey FOREIGN KEY (district_id) REFERENCES public.districts(id),
   CONSTRAINT ward_officers_reporting_to_fkey FOREIGN KEY (reporting_to) REFERENCES public.users(id),
-  CONSTRAINT ward_officers_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+  CONSTRAINT ward_officers_reports_to_city_official_fkey FOREIGN KEY (reports_to_city_official_id) REFERENCES public.city_officials(id),
+  CONSTRAINT ward_officers_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT ward_officers_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES public.wards(id)
 );
 CREATE TABLE public.wards (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -1077,4 +1410,28 @@ CREATE TABLE public.wards (
   metadata jsonb DEFAULT '{}'::jsonb,
   CONSTRAINT wards_pkey PRIMARY KEY (id),
   CONSTRAINT wards_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id)
+);
+CREATE TABLE public.whatsapp_conversations (
+  id integer NOT NULL DEFAULT nextval('whatsapp_conversations_id_seq'::regclass),
+  user_id character varying NOT NULL,
+  user_name character varying,
+  message text NOT NULL,
+  channel character varying DEFAULT 'whatsapp'::character varying,
+  message_id character varying,
+  is_bot boolean DEFAULT false,
+  created_at timestamp without time zone DEFAULT now(),
+  metadata jsonb,
+  CONSTRAINT whatsapp_conversations_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.whatsapp_media (
+  id integer NOT NULL DEFAULT nextval('whatsapp_media_id_seq'::regclass),
+  conversation_id integer,
+  media_type character varying,
+  media_url text,
+  blob_url text,
+  mime_type character varying,
+  file_size integer,
+  created_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT whatsapp_media_pkey PRIMARY KEY (id),
+  CONSTRAINT whatsapp_media_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.whatsapp_conversations(id)
 );

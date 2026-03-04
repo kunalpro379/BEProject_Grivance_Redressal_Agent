@@ -114,6 +114,14 @@
     background-color: #FFFBF5;
   }
   
+  .bg-cream-50 {
+    background-color: #FFFBF5;
+  }
+  
+  .bg-cream-100 {
+    background-color: #FFF8F0;
+  }
+  
   .bg-cream-dark {
     background-color: #F5E6D3;
   }
@@ -129,6 +137,22 @@
   
   .border-cream {
     border-color: #F5E6D3;
+  }
+  
+  .border-cream-dark {
+    border-color: #F5E6D3;
+  }
+  
+  .from-cream-50 {
+    --tw-gradient-from: #FFFBF5;
+  }
+  
+  .via-cream-100 {
+    --tw-gradient-via: #FFF8F0;
+  }
+  
+  .to-cream-100 {
+    --tw-gradient-to: #FFF8F0;
   }
 }
 

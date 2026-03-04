@@ -339,7 +339,7 @@ This department requires escalation to higher authorities due to multiple perfor
             cur.close()
             conn.close()
             
-            print(f"   💾 Saved {saved_count} escalation(s) to database")
+            print(f"    Saved {saved_count} escalation(s) to database")
             return True
             
         except Exception as e:

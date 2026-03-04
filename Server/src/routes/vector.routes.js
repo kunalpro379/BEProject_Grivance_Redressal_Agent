@@ -1,6 +1,6 @@
 import express from 'express';
 import * as vectorController from '../controllers/vector.controller.js';
-import { authenticate, authorize } from '../middleware/auth.js';
+import { authenticate, authorize } from '../middleware/auth.mid.js';
 
 const router = express.Router();
 
@@ -12,12 +12,6 @@ router.post('/similar-resolved', vectorController.findSimilarResolved);
 router.post('/relevant-policies', vectorController.findRelevantPolicies);
 router.post('/relevant-faqs', vectorController.findRelevantFAQs);
 router.post('/search', vectorController.searchGrievances);
-
-// REACT Agent endpoint for guaranteed policy retrieval
-router.get('/policies/department/:departmentId/react',
-  authorize('admin', 'department_head', 'department_officer', 'citizen'),
-  vectorController.getDepartmentPoliciesReact
-);
 
 // Department analytics
 router.get('/clusters/:departmentId', 

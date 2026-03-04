@@ -77,7 +77,7 @@ async function populateLocations() {
   });
 
   try {
-    console.log('🔄 Populating department locations...\n');
+    console.log(' Populating department locations...\n');
     
     let updated = 0;
     let notFound = 0;
@@ -123,7 +123,7 @@ async function populateLocations() {
       updated++;
     }
     
-    console.log(`\n📊 Summary:`);
+    console.log(`\n Summary:`);
     console.log(`   Updated: ${updated} departments`);
     console.log(`   Not found: ${notFound} departments`);
     

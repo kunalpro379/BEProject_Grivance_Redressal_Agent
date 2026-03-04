@@ -47,8 +47,8 @@ const FloatingNavbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md border-b border-gray-200"
-          : "bg-gradient-to-r from-amber-50 via-orange-50 to-yellow-50 border-b border-gray-200"
+          ? "bg-white/95 backdrop-blur-md shadow-md border-b-2 border-cream-dark"
+          : "bg-cream-gradient border-b-2 border-cream-dark"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">

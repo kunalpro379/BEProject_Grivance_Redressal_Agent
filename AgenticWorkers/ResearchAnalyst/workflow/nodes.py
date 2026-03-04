@@ -130,6 +130,88 @@ class WorkflowNodes:
         
         return state
     
+    def search_policies(self, state: ResearchState) -> ResearchState:
+        """Node: Search for policies and regulations"""
+        print("📜 Searching policies and regulations...")
+        
+        category = state['grievance_data'].get('category', {})
+        category_str = str(category) if category else "general"
+        
+        results = self.search_tool.search_policies_and_regulations(category_str)
+        
+        # Validate results
+        validation = self.validator.validate_results(results)
+        state['policies_results'] = validation['valid_results']
+        
+        print(f"Found {len(results)} results, {validation['stats']['valid']} validated")
+        if validation['stats']['invalid'] > 0:
+            print(f"  ⚠️  Filtered out {validation['stats']['invalid']} invalid results")
+        
+        return state
+    
+    def search_case_studies(self, state: ResearchState) -> ResearchState:
+        """Node: Search for case studies and success stories"""
+        print("📊 Searching case studies...")
+        
+        category = state['grievance_data'].get('category', {})
+        location = state['grievance_data'].get('extracted_location', {})
+        
+        category_str = str(category) if category else "general"
+        location_str = location.get('city', '') if isinstance(location, dict) else ""
+        
+        results = self.search_tool.search_case_studies(category_str, location_str)
+        
+        # Validate results
+        validation = self.validator.validate_results(results)
+        state['case_studies_results'] = validation['valid_results']
+        
+        print(f"Found {len(results)} results, {validation['stats']['valid']} validated")
+        if validation['stats']['invalid'] > 0:
+            print(f"  ⚠️  Filtered out {validation['stats']['invalid']} invalid results")
+        
+        return state
+    
+    def search_tenders(self, state: ResearchState) -> ResearchState:
+        """Node: Search for tenders and projects"""
+        print("🏗️ Searching tenders and projects...")
+        
+        department = state['grievance_data'].get('department_info', {})
+        category = state['grievance_data'].get('category', {})
+        
+        dept_name = department.get('name', 'general') if isinstance(department, dict) else str(department)
+        category_str = str(category) if category else "infrastructure"
+        
+        results = self.search_tool.search_tenders_and_projects(dept_name, category_str)
+        
+        # Validate results
+        validation = self.validator.validate_results(results)
+        state['tenders_results'] = validation['valid_results']
+        
+        print(f"Found {len(results)} results, {validation['stats']['valid']} validated")
+        if validation['stats']['invalid'] > 0:
+            print(f"  ⚠️  Filtered out {validation['stats']['invalid']} invalid results")
+        
+        return state
+    
+    def search_ministries(self, state: ResearchState) -> ResearchState:
+        """Node: Search for relevant ministries and departments"""
+        print("🏛️ Searching ministries and departments...")
+        
+        category = state['grievance_data'].get('category', {})
+        category_str = str(category) if category else "general"
+        
+        results = self.search_tool.search_ministries_and_departments(category_str)
+        
+        # Validate results
+        validation = self.validator.validate_results(results)
+        state['ministries_results'] = validation['valid_results']
+        
+        print(f"Found {len(results)} results, {validation['stats']['valid']} validated")
+        if validation['stats']['invalid'] > 0:
+            print(f"  ⚠️  Filtered out {validation['stats']['invalid']} invalid results")
+        
+        return state
+    
     def analyze_results(self, state: ResearchState) -> ResearchState:
         """Node: Analyze all research results"""
         print("Analyzing research results...")
@@ -138,7 +220,11 @@ class WorkflowNodes:
             'schemes': state.get('schemes_results', []),
             'budget': state.get('budget_results', []),
             'development': state.get('development_results', []),
-            'resources': state.get('resources_results', [])
+            'resources': state.get('resources_results', []),
+            'policies': state.get('policies_results', []),
+            'case_studies': state.get('case_studies_results', []),
+            'tenders': state.get('tenders_results', []),
+            'ministries': state.get('ministries_results', [])
         }
         
         analysis = self.analyzer.analyze_research_results(
@@ -160,7 +246,11 @@ class WorkflowNodes:
             'schemes': state.get('schemes_results', []),
             'budget': state.get('budget_results', []),
             'development': state.get('development_results', []),
-            'resources': state.get('resources_results', [])
+            'resources': state.get('resources_results', []),
+            'policies': state.get('policies_results', []),
+            'case_studies': state.get('case_studies_results', []),
+            'tenders': state.get('tenders_results', []),
+            'ministries': state.get('ministries_results', [])
         }
         
         # Calculate validation statistics
@@ -176,7 +266,11 @@ class WorkflowNodes:
                 'schemes_count': len(search_results['schemes']),
                 'budget_count': len(search_results['budget']),
                 'development_count': len(search_results['development']),
-                'resources_count': len(search_results['resources'])
+                'resources_count': len(search_results['resources']),
+                'policies_count': len(search_results['policies']),
+                'case_studies_count': len(search_results['case_studies']),
+                'tenders_count': len(search_results['tenders']),
+                'ministries_count': len(search_results['ministries'])
             },
             'similar_grievances_count': len(state.get('similar_grievances', [])),
             'patterns_identified': len(state.get('patterns', [])),

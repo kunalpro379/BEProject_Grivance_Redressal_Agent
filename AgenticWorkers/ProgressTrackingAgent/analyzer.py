@@ -284,7 +284,7 @@ Respond with JSON in this format:
     def generate_comprehensive_department_report(self, department_data: Dict[str, Any]) -> str:
         """Generate a comprehensive natural language report using Gemini AI"""
         try:
-            print("   📝 Preparing data for AI analysis...")
+            print("    Preparing data for AI analysis...")
             
             # Prepare concise data for AI analysis
             report_input = {

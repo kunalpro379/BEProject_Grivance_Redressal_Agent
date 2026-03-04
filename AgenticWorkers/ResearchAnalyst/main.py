@@ -59,16 +59,17 @@ def process_single_grievance(workflow: ResearchWorkflow, db: DatabaseManager, gr
     """Process a single grievance"""
     print(f"\n Processing grievance: {grievance_id}")
     
-    # Fetch grievance data
+    # Fetch grievance data from grievance_processed table
     conn = db.connect()
     with conn.cursor() as cursor:
         cursor.execute("""
             SELECT 
-                id, grievance_id, grievance_text, category, 
-                status, priority, department_info, extracted_location,
-                zone, ward, created_at
-            FROM usergrievance
-            WHERE grievance_id = %s
+                gp.id, gp.grievance_id, gp.grievance_text, gp.category, 
+                ug.status, ug.priority, gp.department_info, gp.extracted_location,
+                ug.zone, ug.ward, gp.created_at
+            FROM grievance_processed gp
+            INNER JOIN usergrievance ug ON gp.grievance_id = ug.grievance_id
+            WHERE gp.grievance_id = %s
         """, (grievance_id,))
         
         row = cursor.fetchone()
@@ -105,15 +106,16 @@ def process_pending_grievances(workflow: ResearchWorkflow, db: DatabaseManager):
     
     conn = db.connect()
     with conn.cursor() as cursor:
-        # Find grievances without research data
+        # Find grievances with processed data but no research
         cursor.execute("""
-            SELECT grievance_id, grievance_text, category, 
-                   department_info, extracted_location
-            FROM usergrievance
-            WHERE status IN ('submitted', 'assigned')
-            AND (processing_metadata IS NULL 
-                 OR NOT processing_metadata ? 'research_analysis')
-            ORDER BY created_at DESC
+            SELECT gp.grievance_id, gp.grievance_text, gp.category, 
+                   gp.department_info, gp.extracted_location
+            FROM grievance_processed gp
+            INNER JOIN usergrievance ug ON gp.grievance_id = ug.grievance_id
+            WHERE ug.status IN ('submitted', 'assigned')
+            AND (gp.processing_metadata IS NULL 
+                 OR NOT gp.processing_metadata ? 'research_analysis')
+            ORDER BY gp.created_at DESC
             LIMIT 5
         """)
         

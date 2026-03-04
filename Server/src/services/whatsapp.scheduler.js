@@ -1,5 +1,5 @@
 ﻿import whatsappService from './whatsapp.service.js';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 class WhatsAppScheduler {
   constructor() {

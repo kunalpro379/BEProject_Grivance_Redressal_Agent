@@ -1,7 +1,7 @@
 ﻿import { BlobServiceClient } from '@azure/storage-blob';
 import fs from 'fs/promises';
 import path from 'path';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 class ProgressReportBlobService {
   constructor() {

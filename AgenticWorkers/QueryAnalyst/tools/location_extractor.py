@@ -2,21 +2,22 @@
 Location Extraction Tool
 Extracts address, landmarks, and geographic coordinates from images.
 Includes GPS/EXIF data extraction.
+OPTIMIZED: Uses Puter AI API for faster vision analysis.
 """
 from typing import Dict, Any, Optional
 import io
 import re
 import json
+import base64
 import requests
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 
-from LLMs.gemini_llm import GeminiClient
-
 
 class LocationExtractor:
     def __init__(self) -> None:
-        self.client = GeminiClient()
+        self.api_url = "https://api.puter.com/drivers/call"
+        self.model = "gemini-1.5-flash"  # Fast model
 
     def extract_gps_from_exif(self, image_path_or_url: str) -> Optional[Dict[str, float]]:
         """
@@ -120,27 +121,27 @@ class LocationExtractor:
     def _extract_via_vision(
         self, image_path_or_url: str, query_context: str = ""
     ) -> Dict[str, Any]:
-        """Vision-based location extraction using Gemini."""
+        """Vision-based location extraction using Puter AI (FAST)."""
         try:
-            # Load image
+            # Load and resize image
             if image_path_or_url.startswith("http"):
-                resp = requests.get(image_path_or_url, timeout=30)
+                resp = requests.get(image_path_or_url, timeout=10)
                 resp.raise_for_status()
                 image = Image.open(io.BytesIO(resp.content))
             else:
                 image = Image.open(image_path_or_url)
 
-            fmt = (image.format or "").upper()
-            mime_type = {
-                "JPEG": "image/jpeg",
-                "JPG": "image/jpeg",
-                "PNG": "image/png",
-                "WEBP": "image/webp",
-            }.get(fmt, "image/jpeg")
+            # Resize for faster processing
+            max_size = 1024
+            if image.width > max_size or image.height > max_size:
+                ratio = min(max_size / image.width, max_size / image.height)
+                new_size = (int(image.width * ratio), int(image.height * ratio))
+                image = image.resize(new_size, Image.Resampling.LANCZOS)
 
             with io.BytesIO() as buf:
-                image.save(buf, format=image.format or "PNG")
+                image.save(buf, format="JPEG", quality=85)
                 image_bytes = buf.getvalue()
+                image_b64 = base64.b64encode(image_bytes).decode('utf-8')
 
             # Location extraction prompt
             prompt = f"""
@@ -185,20 +186,55 @@ IMPORTANT:
 - Don't make up information - only extract what's visible
 """
 
-            response = self.client.vision_model.generate_content(
-                [prompt, {"mime_type": mime_type, "data": image_bytes}]
+            # Call Puter AI API
+            payload = {
+                "interface": "puter-chat-completion",
+                "driver": "openai",
+                "method": "complete",
+                "args": {
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": prompt},
+                                {
+                                    "type": "image_url",
+                                    "image_url": {
+                                        "url": f"data:image/jpeg;base64,{image_b64}"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "model": self.model
+                }
+            }
+            
+            response = requests.post(
+                self.api_url,
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=20
             )
-            raw = (response.text or "").strip()
+            response.raise_for_status()
+            
+            api_result = response.json()
+            raw = api_result.get("message", {}).get("content", "")
 
             # Parse JSON response
             try:
                 result = json.loads(raw)
             except json.JSONDecodeError:
-                match = re.search(r"\{.*\}", raw, re.DOTALL)
+                # Try markdown code blocks
+                match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", raw, re.DOTALL)
                 if match:
-                    result = json.loads(match.group())
+                    result = json.loads(match.group(1))
                 else:
-                    return self._empty_location_result("JSON parsing failed")
+                    match = re.search(r"\{.*\}", raw, re.DOTALL)
+                    if match:
+                        result = json.loads(match.group())
+                    else:
+                        return self._empty_location_result("JSON parsing failed")
 
             # Ensure required fields and clean data
             result.setdefault("address", "Not visible in image")

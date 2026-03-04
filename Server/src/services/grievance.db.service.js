@@ -1,4 +1,4 @@
-import { query } from '../config/database.js';
+import { query } from '../config/db.js';
 
 // Detect which table names exist in the database
 let CITIZENS_TABLE = 'citizens';
@@ -54,6 +54,7 @@ function normalizePriority(p) {
 class GrievanceDBService {
     /**
      * Submit grievance to UserGrievance table (Common for Web + Telegram)
+     * FIXED: Directly INSERT with correct schema (no submit_grievance function)
      */
     async submitGrievance(grievanceData) {
         const {
@@ -69,18 +70,36 @@ class GrievanceDBService {
         } = grievanceData;
 
         try {
+            // Generate unique grievance_id
+            const { v4: uuidv4 } = await import('uuid');
+            const grievance_id = uuidv4();
+
+            // Store all details in full_result JSONB
+            const full_result = {
+                grievance_text: grievance_text || '',
+                image_path: image_path || null,
+                image_description: image_description || null,
+                enhanced_query: enhanced_query || null,
+                latitude: latitude || null,
+                longitude: longitude || null,
+                location_address: location_address || null,
+                submitted_at: new Date().toISOString(),
+                source: 'telegram'
+            };
+
+            // Direct INSERT matching usergrievance schema
             const result = await query(
-                `SELECT submit_grievance($1, $2, $3, $4, $5, $6, $7, $8, $9) as grievance_id`,
+                `INSERT INTO ${GRIEVANCE_TABLE} 
+                (grievance_id, citizen_id, status, priority, validation_status, full_result, created_at, updated_at)
+                VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())
+                RETURNING id, grievance_id`,
                 [
+                    grievance_id,
                     citizen_id,
-                    grievance_text,
-                    image_path || null,
-                    image_description || null,
-                    enhanced_query || null,
-                    embedding || null,
-                    latitude || null,
-                    longitude || null,
-                    location_address || null
+                    'submitted',  // Default status
+                    'medium',     // Default priority
+                    'pending',    // Default validation_status
+                    JSON.stringify(full_result)
                 ]
             );
 
@@ -201,17 +220,17 @@ class GrievanceDBService {
             const result = await query(
                 `SELECT 
                     g.*,
-                    ug.grievance_text,
-                    ug.image_path,
-                    ug.image_description,
-                    ug.enhanced_query,
+                    gp.grievance_text,
+                    gp.image_path,
+                    gp.image_description,
+                    gp.enhanced_query,
                     c.telegram_id,
                     c.phone as citizen_phone,
                     c.full_name as citizen_name,
                     d.name as department_name,
                     u.full_name as officer_name
                 FROM ${GRIEVANCE_TABLE} g
-                JOIN ${GRIEVANCE_TABLE} ug ON g.grievance_id = ug.id
+                LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
                 JOIN ${CITIZENS_TABLE} c ON g.citizen_id = c.id
                 LEFT JOIN departments d ON g.department_id = d.id
                 LEFT JOIN users u ON g.assigned_officer_id = u.id
@@ -238,13 +257,13 @@ class GrievanceDBService {
             const result = await query(
                 `SELECT 
                     g.*,
-                    ug.grievance_text,
-                    ug.image_path,
+                    gp.grievance_text,
+                    gp.image_path,
                     c.full_name as citizen_name,
                     c.phone as citizen_phone,
                     d.name as department_name
                 FROM ${GRIEVANCE_TABLE} g
-                JOIN ${GRIEVANCE_TABLE} ug ON g.grievance_id = ug.id
+                LEFT JOIN grievance_processed gp ON g.grievance_id = gp.grievance_id
                 JOIN ${CITIZENS_TABLE} c ON g.citizen_id = c.id
                 LEFT JOIN departments d ON g.department_id = d.id
                 WHERE g.status = 'pending'

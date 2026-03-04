@@ -2,11 +2,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 import { mapRoleCodeToSystemRole } from './roles.controller.js';
 
 const generateTokens = (userId, userData = {}) => {
-  console.log('📝 generateTokens called with:', {
+  console.log(' generateTokens called with:', {
     userId,
     userData
   });
@@ -18,7 +18,7 @@ const generateTokens = (userId, userData = {}) => {
     department_id: userData.department_id
   };
   
-  console.log('📝 Token payload:', tokenPayload);
+  console.log(' Token payload:', tokenPayload);
   
   const accessToken = jwt.sign(
     tokenPayload,

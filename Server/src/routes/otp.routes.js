@@ -1,7 +1,7 @@
 import express from 'express';
-import emailService from '../services/emailService.js';
-import otpService from '../services/otpService.js';
-import pool from '../config/database.js';
+import emailService from '../services/email.svc.js';
+import otpService from '../services/otp.svc.js';
+import pool from '../config/db.js';
 
 const router = express.Router();
 

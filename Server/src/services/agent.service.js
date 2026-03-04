@@ -1,5 +1,5 @@
 ﻿import axios from 'axios';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 import { BlobServiceClient } from '@azure/storage-blob';
 import * as helpers from './agent.helpers.js';
 

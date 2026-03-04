@@ -1,0 +1,1003 @@
+[  {
+    "extracted_location": "Shiv Mandir Ambernath",
+    "latitude": 19.2096,
+    "longitude": 73.1868,
+    "location_address": "Ancient Shiv Mandir, Shivaji Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Ambernath Railway Station",
+    "latitude": 19.2090,
+    "longitude": 73.1860,
+    "location_address": "Ambernath Railway Station, Station Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Ulhas River Bridge Ambernath",
+    "latitude": 19.1935,
+    "longitude": 73.1842,
+    "location_address": "Ulhas River Bridge, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Forest Naka Ambernath",
+    "latitude": 19.2205,
+    "longitude": 73.1881,
+    "location_address": "Forest Naka, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Ordnance Factory Ambernath",
+    "latitude": 19.2081,
+    "longitude": 73.1705,
+    "location_address": "Ordnance Factory Estate, Ambernath West, Maharashtra 421502"
+  },
+  {
+    "extracted_location": "Ambernath MIDC",
+    "latitude": 19.1975,
+    "longitude": 73.1748,
+    "location_address": "MIDC Industrial Area, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Chikhloli Dam",
+    "latitude": 19.2284,
+    "longitude": 73.2105,
+    "location_address": "Chikhloli Village Road, Ambernath, Maharashtra 421503"
+  },
+  {
+    "extracted_location": "Shivaji Chowk Ambernath",
+    "latitude": 19.2058,
+    "longitude": 73.1889,
+    "location_address": "Shivaji Chowk, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Badlapur Road Junction",
+    "latitude": 19.2032,
+    "longitude": 73.2011,
+    "location_address": "Badlapur Road Junction, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Ambernath West Market",
+    "latitude": 19.2012,
+    "longitude": 73.1794,
+    "location_address": "Main Market Area, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Kansai Road Ambernath",
+    "latitude": 19.2141,
+    "longitude": 73.1823,
+    "location_address": "Kansai Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Waldhuni River Area",
+    "latitude": 19.1907,
+    "longitude": 73.1764,
+    "location_address": "Waldhuni River Bank, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "B Cabin Ambernath",
+    "latitude": 19.2101,
+    "longitude": 73.1834,
+    "location_address": "B Cabin Area, Near Railway Tracks, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Ambernath",
+    "latitude": 19.2155,
+    "longitude": 73.1920,
+    "location_address": "Sai Section Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Palegaon Ambernath",
+    "latitude": 19.1836,
+    "longitude": 73.1650,
+    "location_address": "Palegaon Village, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Navare Nagar Ambernath",
+    "latitude": 19.2184,
+    "longitude": 73.1935,
+    "location_address": "Navare Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Kher Section Ambernath",
+    "latitude": 19.2171,
+    "longitude": 73.1899,
+    "location_address": "Kher Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Chikhloli Village",
+    "latitude": 19.2260,
+    "longitude": 73.2080,
+    "location_address": "Chikhloli Village, Ambernath, Maharashtra 421503"
+  },
+  {
+    "extracted_location": "Belavali Ambernath",
+    "latitude": 19.1728,
+    "longitude": 73.1803,
+    "location_address": "Belavali Village, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Wangani Road Ambernath",
+    "latitude": 19.2109,
+    "longitude": 73.1994,
+    "location_address": "Wangani Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Additional Ambernath MIDC Phase II",
+    "latitude": 19.1950,
+    "longitude": 73.1695,
+    "location_address": "Additional MIDC Industrial Area, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Anand Nagar Ambernath",
+    "latitude": 19.2043,
+    "longitude": 73.1902,
+    "location_address": "Anand Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Datta Mandir Road",
+    "latitude": 19.2069,
+    "longitude": 73.1875,
+    "location_address": "Datta Mandir Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sukapur Road",
+    "latitude": 19.2137,
+    "longitude": 73.1968,
+    "location_address": "Sukapur Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "New Kher Section",
+    "latitude": 19.2192,
+    "longitude": 73.1910,
+    "location_address": "New Kher Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Hanuman Nagar Ambernath",
+    "latitude": 19.2075,
+    "longitude": 73.1849,
+    "location_address": "Hanuman Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Prabhat Colony",
+    "latitude": 19.2035,
+    "longitude": 73.1812,
+    "location_address": "Prabhat Colony, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Shanti Nagar Ambernath",
+    "latitude": 19.2028,
+    "longitude": 73.1780,
+    "location_address": "Shanti Nagar, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Shivaji Nagar Ambernath",
+    "latitude": 19.2089,
+    "longitude": 73.1872,
+    "location_address": "Shivaji Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Gandhi Chowk Ambernath",
+    "latitude": 19.2060,
+    "longitude": 73.1880,
+    "location_address": "Gandhi Chowk, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavali Section",
+    "latitude": 19.2162,
+    "longitude": 73.1945,
+    "location_address": "Vadavali Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Ambegaon Road Ambernath",
+    "latitude": 19.1989,
+    "longitude": 73.1775,
+    "location_address": "Ambegaon Road, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Bhoirwadi Ambernath",
+    "latitude": 19.2215,
+    "longitude": 73.1975,
+    "location_address": "Bhoirwadi, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Gaondevi Mandir Area",
+    "latitude": 19.2050,
+    "longitude": 73.1895,
+    "location_address": "Gaondevi Mandir Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vithalwadi Road Ambernath",
+    "latitude": 19.2000,
+    "longitude": 73.1825,
+    "location_address": "Vithalwadi Road, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Tulinj Road Ambernath",
+    "latitude": 19.2125,
+    "longitude": 73.1985,
+    "location_address": "Tulinj Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Omkar Nagar Ambernath",
+    "latitude": 19.2148,
+    "longitude": 73.1932,
+    "location_address": "Omkar Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Bhadgaon Road Ambernath",
+    "latitude": 19.1970,
+    "longitude": 73.1752,
+    "location_address": "Bhadgaon Road, Ambernath West, Maharashtra 421505"
+  },
+  {
+    "extracted_location": "Kalyan-Badlapur Road Ambernath",
+    "latitude": 19.2040,
+    "longitude": 73.1950,
+    "location_address": "Kalyan-Badlapur Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Ulhasnagar Border Ambernath",
+    "latitude": 19.1958,
+    "longitude": 73.1808,
+    "location_address": "Near Ulhasnagar Border Area, Ambernath West, Maharashtra 421505"
+  },
+  
+  {
+    "extracted_location": "Shiv Mandir Main Entrance",
+    "latitude": 19.2097,
+    "longitude": 73.1869,
+    "location_address": "Ancient Shiv Mandir Main Gate, Shivaji Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Parking Area",
+    "latitude": 19.2094,
+    "longitude": 73.1865,
+    "location_address": "Parking Area near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Back Road",
+    "latitude": 19.2101,
+    "longitude": 73.1873,
+    "location_address": "Backside Road of Shiv Mandir, Shivaji Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivaji Nagar Near Shiv Mandir",
+    "latitude": 19.2089,
+    "longitude": 73.1872,
+    "location_address": "Shivaji Nagar Area near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Gandhi Chowk Shiv Mandir Road",
+    "latitude": 19.2061,
+    "longitude": 73.1881,
+    "location_address": "Gandhi Chowk to Shiv Mandir Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Gaondevi Mandir Road",
+    "latitude": 19.2051,
+    "longitude": 73.1896,
+    "location_address": "Gaondevi Mandir Road, near Shiv Mandir Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Nagar Main Road",
+    "latitude": 19.2132,
+    "longitude": 73.1908,
+    "location_address": "Shivganga Nagar Main Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Society Lane 1",
+    "latitude": 19.2135,
+    "longitude": 73.1912,
+    "location_address": "Lane 1, Shivganga Society, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Society Lane 2",
+    "latitude": 19.2138,
+    "longitude": 73.1916,
+    "location_address": "Lane 2, Shivganga Society, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Garden Area",
+    "latitude": 19.2140,
+    "longitude": 73.1920,
+    "location_address": "Garden Area, Shivganga Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Main Road",
+    "latitude": 19.2156,
+    "longitude": 73.1921,
+    "location_address": "Sai Section Main Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Police Chowki Road",
+    "latitude": 19.2159,
+    "longitude": 73.1925,
+    "location_address": "Near Police Chowki, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Hanuman Mandir",
+    "latitude": 19.2162,
+    "longitude": 73.1928,
+    "location_address": "Hanuman Mandir, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Water Tank Area",
+    "latitude": 19.2165,
+    "longitude": 73.1930,
+    "location_address": "Municipal Water Tank, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Internal Lane 3",
+    "latitude": 19.2152,
+    "longitude": 73.1918,
+    "location_address": "Internal Lane 3, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga to Sai Section Connector Road",
+    "latitude": 19.2147,
+    "longitude": 73.1923,
+    "location_address": "Connecting Road between Shivganga Nagar and Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Datta Mandir Road Near Shiv Mandir",
+    "latitude": 19.2070,
+    "longitude": 73.1876,
+    "location_address": "Datta Mandir Road, near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Hanuman Nagar Near Shiv Mandir",
+    "latitude": 19.2076,
+    "longitude": 73.1850,
+    "location_address": "Hanuman Nagar Area near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Anand Nagar Near Shivganga",
+    "latitude": 19.2143,
+    "longitude": 73.1910,
+    "location_address": "Anand Nagar near Shivganga Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Navare Nagar Sai Section Side",
+    "latitude": 19.2170,
+    "longitude": 73.1936,
+    "location_address": "Navare Nagar adjoining Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Kher Section Near Shivganga",
+    "latitude": 19.2173,
+    "longitude": 73.1898,
+    "location_address": "Kher Section near Shivganga Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Market Line",
+    "latitude": 19.2092,
+    "longitude": 73.1867,
+    "location_address": "Market Line near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Bus Stop",
+    "latitude": 19.2098,
+    "longitude": 73.1870,
+    "location_address": "Bus Stop near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section School Road",
+    "latitude": 19.2154,
+    "longitude": 73.1922,
+    "location_address": "School Road, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Temple Lane",
+    "latitude": 19.2160,
+    "longitude": 73.1932,
+    "location_address": "Temple Lane, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Internal Road A",
+    "latitude": 19.2136,
+    "longitude": 73.1914,
+    "location_address": "Internal Road A, Shivganga Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Internal Road B",
+    "latitude": 19.2139,
+    "longitude": 73.1918,
+    "location_address": "Internal Road B, Shivganga Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Lake Side Road",
+    "latitude": 19.2103,
+    "longitude": 73.1874,
+    "location_address": "Lake Side Road near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Gandhi Chowk to Sai Section Road",
+    "latitude": 19.2075,
+    "longitude": 73.1892,
+    "location_address": "Connecting Road from Gandhi Chowk to Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivaji Nagar Extension Near Mandir",
+    "latitude": 19.2091,
+    "longitude": 73.1875,
+    "location_address": "Shivaji Nagar Extension near Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Municipal Office Lane",
+    "latitude": 19.2158,
+    "longitude": 73.1927,
+    "location_address": "Lane near Municipal Office, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Society Gate",
+    "latitude": 19.2134,
+    "longitude": 73.1911,
+    "location_address": "Main Gate, Shivganga Society, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Market Area",
+    "latitude": 19.2163,
+    "longitude": 73.1931,
+    "location_address": "Market Area, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Temple Road East",
+    "latitude": 19.2099,
+    "longitude": 73.1871,
+    "location_address": "Temple Road East Side, Shiv Mandir Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Temple Road West",
+    "latitude": 19.2093,
+    "longitude": 73.1866,
+    "location_address": "Temple Road West Side, Shiv Mandir Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Internal Lane 5",
+    "latitude": 19.2151,
+    "longitude": 73.1919,
+    "location_address": "Internal Lane 5, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Corner Junction",
+    "latitude": 19.2141,
+    "longitude": 73.1921,
+    "location_address": "Corner Junction, Shivganga Nagar, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shiv Mandir Footpath Area",
+    "latitude": 19.2096,
+    "longitude": 73.1868,
+    "location_address": "Footpath Area outside Shiv Mandir, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Sai Section Drainage Line Area",
+    "latitude": 19.2164,
+    "longitude": 73.1929,
+    "location_address": "Drainage Line Area, Sai Section, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Shivganga Temple Chowk",
+    "latitude": 19.2137,
+    "longitude": 73.1917,
+    "location_address": "Temple Chowk, Shivganga Nagar, Ambernath East, Maharashtra 421501"
+  },
+  
+  {
+    "extracted_location": "Vadavli Main Road",
+    "latitude": 19.2162,
+    "longitude": 73.1946,
+    "location_address": "Vadavli Main Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Gaon Entrance",
+    "latitude": 19.2170,
+    "longitude": 73.1952,
+    "location_address": "Vadavli Gaon Entrance Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Zilla Parishad School",
+    "latitude": 19.2168,
+    "longitude": 73.1948,
+    "location_address": "Near ZP School, Vadavli Village, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Hanuman Mandir",
+    "latitude": 19.2175,
+    "longitude": 73.1956,
+    "location_address": "Hanuman Mandir Road, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Lane 1",
+    "latitude": 19.2160,
+    "longitude": 73.1942,
+    "location_address": "Internal Lane 1, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Lane 2",
+    "latitude": 19.2164,
+    "longitude": 73.1950,
+    "location_address": "Internal Lane 2, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Water Tank Area",
+    "latitude": 19.2178,
+    "longitude": 73.1962,
+    "location_address": "Municipal Water Tank, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Sai Temple Road",
+    "latitude": 19.2158,
+    "longitude": 73.1944,
+    "location_address": "Sai Temple Road, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli to Green City Connector",
+    "latitude": 19.2182,
+    "longitude": 73.1975,
+    "location_address": "Connector Road between Vadavli and Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Bus Stop",
+    "latitude": 19.2169,
+    "longitude": 73.1953,
+    "location_address": "Vadavli Bus Stop, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Green City Main Gate",
+    "latitude": 19.2205,
+    "longitude": 73.2008,
+    "location_address": "Green City Main Entrance, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Phase 1",
+    "latitude": 19.2212,
+    "longitude": 73.2015,
+    "location_address": "Green City Phase 1 Residential Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Phase 2",
+    "latitude": 19.2218,
+    "longitude": 73.2021,
+    "location_address": "Green City Phase 2, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Garden Area",
+    "latitude": 19.2225,
+    "longitude": 73.2030,
+    "location_address": "Central Garden, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Club House Road",
+    "latitude": 19.2209,
+    "longitude": 73.2019,
+    "location_address": "Club House Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Internal Road A",
+    "latitude": 19.2215,
+    "longitude": 73.2025,
+    "location_address": "Internal Road A, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Internal Road B",
+    "latitude": 19.2220,
+    "longitude": 73.2035,
+    "location_address": "Internal Road B, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Temple Chowk",
+    "latitude": 19.2217,
+    "longitude": 73.2028,
+    "location_address": "Temple Chowk, Green City Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Shopping Complex",
+    "latitude": 19.2208,
+    "longitude": 73.2012,
+    "location_address": "Shopping Complex Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City School Road",
+    "latitude": 19.2228,
+    "longitude": 73.2038,
+    "location_address": "School Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Vadavli East Extension",
+    "latitude": 19.2180,
+    "longitude": 73.1968,
+    "location_address": "Vadavli East Extension Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Drainage Line Area",
+    "latitude": 19.2172,
+    "longitude": 73.1959,
+    "location_address": "Drainage Line Road, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Market Area",
+    "latitude": 19.2166,
+    "longitude": 73.1954,
+    "location_address": "Local Market Area, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Junction Chowk",
+    "latitude": 19.2179,
+    "longitude": 73.1965,
+    "location_address": "Junction Chowk, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Outer Ring Road",
+    "latitude": 19.2232,
+    "longitude": 73.2045,
+    "location_address": "Outer Ring Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Lake Side",
+    "latitude": 19.2238,
+    "longitude": 73.2050,
+    "location_address": "Lake Side Road, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Phase 3",
+    "latitude": 19.2229,
+    "longitude": 73.2042,
+    "location_address": "Green City Phase 3 Residential Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Water Tank Area",
+    "latitude": 19.2213,
+    "longitude": 73.2020,
+    "location_address": "Municipal Water Tank near Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Playground",
+    "latitude": 19.2224,
+    "longitude": 73.2033,
+    "location_address": "Children's Playground Area, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Internal Lane 5",
+    "latitude": 19.2219,
+    "longitude": 73.2031,
+    "location_address": "Internal Lane 5, Green City, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Vadavli-Green City Bridge Point",
+    "latitude": 19.2188,
+    "longitude": 73.1982,
+    "location_address": "Small Bridge connecting Vadavli and Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Open Ground",
+    "latitude": 19.2176,
+    "longitude": 73.1960,
+    "location_address": "Open Ground Area, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Lane 4",
+    "latitude": 19.2163,
+    "longitude": 73.1949,
+    "location_address": "Internal Lane 4, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Entry Road East",
+    "latitude": 19.2203,
+    "longitude": 73.2005,
+    "location_address": "East Entry Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Entry Road West",
+    "latitude": 19.2207,
+    "longitude": 73.2009,
+    "location_address": "West Entry Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Corner Junction",
+    "latitude": 19.2222,
+    "longitude": 73.2036,
+    "location_address": "Corner Junction, Green City Residential Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Temple Road",
+    "latitude": 19.2216,
+    "longitude": 73.2026,
+    "location_address": "Temple Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Village Center",
+    "latitude": 19.2173,
+    "longitude": 73.1957,
+    "location_address": "Village Center Area, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli North Extension",
+    "latitude": 19.2185,
+    "longitude": 73.1972,
+    "location_address": "North Extension Area, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Boundary Road",
+    "latitude": 19.2235,
+    "longitude": 73.2048,
+    "location_address": "Boundary Road, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Vadavli Internal Lane 6",
+    "latitude": 19.2167,
+    "longitude": 73.1951,
+    "location_address": "Internal Lane 6, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Lane 7",
+    "latitude": 19.2171,
+    "longitude": 73.1958,
+    "location_address": "Internal Lane 7, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Drainage Pump Area",
+    "latitude": 19.2174,
+    "longitude": 73.1961,
+    "location_address": "Drainage Pump Line Road, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Panchayat Office Road",
+    "latitude": 19.2169,
+    "longitude": 73.1955,
+    "location_address": "Near Panchayat Office, Vadavli Village, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Cremation Ground Road",
+    "latitude": 19.2183,
+    "longitude": 73.1970,
+    "location_address": "Cremation Ground Road, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Temple Junction",
+    "latitude": 19.2176,
+    "longitude": 73.1964,
+    "location_address": "Temple Junction, Vadavli Village, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli South End Road",
+    "latitude": 19.2159,
+    "longitude": 73.1943,
+    "location_address": "South End Road, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli East Side Pathway",
+    "latitude": 19.2180,
+    "longitude": 73.1976,
+    "location_address": "East Side Pathway, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Chowk A",
+    "latitude": 19.2172,
+    "longitude": 73.1959,
+    "location_address": "Internal Chowk A, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Chowk B",
+    "latitude": 19.2165,
+    "longitude": 73.1949,
+    "location_address": "Internal Chowk B, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Green City Phase 4",
+    "latitude": 19.2231,
+    "longitude": 73.2043,
+    "location_address": "Green City Phase 4 Residential Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Phase 5",
+    "latitude": 19.2240,
+    "longitude": 73.2052,
+    "location_address": "Green City Phase 5, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Phase 6",
+    "latitude": 19.2245,
+    "longitude": 73.2058,
+    "location_address": "Green City Phase 6 Residential Zone, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Main Boulevard",
+    "latitude": 19.2214,
+    "longitude": 73.2023,
+    "location_address": "Main Boulevard Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City East Corner",
+    "latitude": 19.2242,
+    "longitude": 73.2060,
+    "location_address": "East Corner Area, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City West Corner",
+    "latitude": 19.2209,
+    "longitude": 73.2007,
+    "location_address": "West Corner Junction, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City North End",
+    "latitude": 19.2250,
+    "longitude": 73.2063,
+    "location_address": "North End Road, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City South End",
+    "latitude": 19.2206,
+    "longitude": 73.2009,
+    "location_address": "South End Entry, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Internal Lane 7",
+    "latitude": 19.2223,
+    "longitude": 73.2034,
+    "location_address": "Internal Lane 7, Green City Residential Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Internal Lane 8",
+    "latitude": 19.2230,
+    "longitude": 73.2040,
+    "location_address": "Internal Lane 8, Green City, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Green City Park Side Road",
+    "latitude": 19.2227,
+    "longitude": 73.2037,
+    "location_address": "Park Side Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Community Hall Road",
+    "latitude": 19.2211,
+    "longitude": 73.2018,
+    "location_address": "Community Hall Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Drainage Line Road",
+    "latitude": 19.2234,
+    "longitude": 73.2046,
+    "location_address": "Drainage Line Road, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Water Supply Line Area",
+    "latitude": 19.2220,
+    "longitude": 73.2029,
+    "location_address": "Water Supply Line Area, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Transformer Point",
+    "latitude": 19.2238,
+    "longitude": 73.2055,
+    "location_address": "Electric Transformer Point, Green City, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Vadavli North Internal Lane",
+    "latitude": 19.2187,
+    "longitude": 73.1973,
+    "location_address": "North Internal Lane, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli West Pathway",
+    "latitude": 19.2163,
+    "longitude": 73.1945,
+    "location_address": "West Pathway Road, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Community Ground",
+    "latitude": 19.2179,
+    "longitude": 73.1967,
+    "location_address": "Community Ground Area, Vadavli, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Green City Approach Road",
+    "latitude": 19.2189,
+    "longitude": 73.1984,
+    "location_address": "Approach Road from Vadavli to Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli River Side Path",
+    "latitude": 19.2184,
+    "longitude": 73.1978,
+    "location_address": "River Side Walking Path, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Green City Sector A",
+    "latitude": 19.2217,
+    "longitude": 73.2027,
+    "location_address": "Sector A Block, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Sector B",
+    "latitude": 19.2226,
+    "longitude": 73.2035,
+    "location_address": "Sector B Residential Block, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Sector C",
+    "latitude": 19.2233,
+    "longitude": 73.2044,
+    "location_address": "Sector C Area, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Sector D",
+    "latitude": 19.2244,
+    "longitude": 73.2057,
+    "location_address": "Sector D Residential Zone, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Sector E",
+    "latitude": 19.2248,
+    "longitude": 73.2061,
+    "location_address": "Sector E End Area, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Vadavli Internal Road 10",
+    "latitude": 19.2170,
+    "longitude": 73.1956,
+    "location_address": "Internal Road 10, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Road 11",
+    "latitude": 19.2164,
+    "longitude": 73.1947,
+    "location_address": "Internal Road 11, Vadavli Village, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Internal Road 12",
+    "latitude": 19.2182,
+    "longitude": 73.1971,
+    "location_address": "Internal Road 12, Vadavli Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Internal Circle",
+    "latitude": 19.2221,
+    "longitude": 73.2030,
+    "location_address": "Central Circle Road, Green City, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Service Road",
+    "latitude": 19.2236,
+    "longitude": 73.2049,
+    "location_address": "Service Road, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+
+  {
+    "extracted_location": "Green City Exit Gate 2",
+    "latitude": 19.2204,
+    "longitude": 73.2006,
+    "location_address": "Exit Gate 2, Green City Residential Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Open Plot Area",
+    "latitude": 19.2241,
+    "longitude": 73.2054,
+    "location_address": "Open Plot Area, Green City Extension, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Green Belt Zone",
+    "latitude": 19.2186,
+    "longitude": 73.1979,
+    "location_address": "Green Belt Zone, Vadavli Area, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Vadavli Corner Signal",
+    "latitude": 19.2178,
+    "longitude": 73.1966,
+    "location_address": "Corner Signal Junction, Vadavli Road, Ambernath East, Maharashtra 421501"
+  },
+  {
+    "extracted_location": "Green City Perimeter Road",
+    "latitude": 19.2252,
+    "longitude": 73.2065,
+    "location_address": "Perimeter Road, Green City Outer Extension, Ambernath East, Maharashtra 421501"
+  }
+]

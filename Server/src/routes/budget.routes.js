@@ -1,5 +1,5 @@
 import express from 'express';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 const router = express.Router();
 
@@ -252,12 +252,13 @@ router.get('/:depId/usage-breakdown', async (req, res) => {
       `SELECT 
         gct.*,
         ug.grievance_id as grievance_display_id,
-        COALESCE(SUBSTRING(ug.grievance_text, 1, 100), 'No description') as grievance_title,
-        ug.category,
+        COALESCE(SUBSTRING(gp.grievance_text, 1, 100), 'No description') as grievance_title,
+        gp.category,
         ug.status as grievance_status,
         (SELECT COUNT(*) FROM budget_documents WHERE grievance_id = ug.id) as document_count
        FROM grievancecosttracking gct
        JOIN usergrievance ug ON gct.grievance_id = ug.id
+       LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
        WHERE ug.department_id = $1
        ORDER BY gct.created_at DESC
        LIMIT $2 OFFSET $3`,
@@ -299,8 +300,8 @@ router.get('/:depId/category-analytics', async (req, res) => {
       `SELECT 
         COALESCE(
           CASE 
-            WHEN ug.category::text LIKE '{%' THEN (ug.category::jsonb->>'primary')
-            ELSE ug.category::text
+            WHEN gp.category::text LIKE '{%' THEN (gp.category::jsonb->>'primary')
+            ELSE gp.category::text
           END,
           'Uncategorized'
         ) as category,
@@ -314,6 +315,7 @@ router.get('/:depId/category-analytics', async (req, res) => {
         SUM(gct.contractor_cost) as contractor_cost
        FROM grievancecosttracking gct
        JOIN usergrievance ug ON gct.grievance_id = ug.id
+       LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
        WHERE ug.department_id = $1
        GROUP BY category
        ORDER BY total_cost DESC`,
@@ -400,10 +402,11 @@ router.get('/:depId/resource-usage', async (req, res) => {
       `SELECT 
         gct.resource_usage,
         ug.grievance_id,
-        SUBSTRING(ug.grievance_text, 1, 100) as title,
+        SUBSTRING(gp.grievance_text, 1, 100) as title,
         gct.total_cost
        FROM grievancecosttracking gct
        JOIN usergrievance ug ON gct.grievance_id = ug.id
+       LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
        WHERE ug.department_id = $1
        AND gct.resource_usage IS NOT NULL
        ORDER BY gct.created_at DESC
@@ -431,11 +434,12 @@ router.get('/:depId/expense-approvals', async (req, res) => {
       SELECT 
         ea.*,
         ug.grievance_id,
-        SUBSTRING(ug.grievance_text, 1, 100) as grievance_title,
+        SUBSTRING(gp.grievance_text, 1, 100) as grievance_title,
         gct.total_cost
       FROM expense_approvals ea
       JOIN grievancecosttracking gct ON ea.cost_tracking_id = gct.id
       JOIN usergrievance ug ON ea.grievance_id = ug.id
+      LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
       WHERE ug.department_id = $1
     `;
 
@@ -470,8 +474,8 @@ router.get('/:depId/efficiency-metrics', async (req, res) => {
       `SELECT 
         COALESCE(
           CASE 
-            WHEN ug.category::text LIKE '{%' THEN (ug.category::jsonb->>'primary')
-            ELSE ug.category::text
+            WHEN gp.category::text LIKE '{%' THEN (gp.category::jsonb->>'primary')
+            ELSE gp.category::text
           END,
           'Uncategorized'
         ) as grievance_type,
@@ -481,6 +485,7 @@ router.get('/:depId/efficiency-metrics', async (req, res) => {
         COUNT(*) as count
        FROM grievancecosttracking gct
        JOIN usergrievance ug ON gct.grievance_id = ug.id
+       LEFT JOIN grievance_processed gp ON ug.grievance_id = gp.grievance_id
        WHERE ug.department_id = $1
        GROUP BY grievance_type
        ORDER BY avg_cost DESC`,

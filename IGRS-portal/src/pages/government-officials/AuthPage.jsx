@@ -239,7 +239,7 @@ const OfficialAuthPage = () => {
         toast.success('Email verified successfully!', {
           duration: 4000,
           position: 'top-center',
-          icon: '✅',
+          icon: '',
           style: {
             background: '#16A34A',
             color: '#fff',
@@ -427,7 +427,7 @@ const OfficialAuthPage = () => {
                   toast.success('Email verified successfully! Please login again.', {
                     duration: 4000,
                     position: 'top-center',
-                    icon: '✅',
+                    icon: '',
                     style: {
                       background: '#16A34A',
                       color: '#fff',
@@ -520,7 +520,7 @@ const OfficialAuthPage = () => {
         }
 
         // Store tokens and user data
-        console.log('✅ Login successful!');
+        console.log('Login successful!');
         console.log('Access Token:', data.accessToken ? 'Present' : 'MISSING');
         console.log('Refresh Token:', data.refreshToken ? 'Present' : 'MISSING');
         console.log('User:', data.user);
@@ -529,7 +529,7 @@ const OfficialAuthPage = () => {
         localStorage.setItem('refreshToken', data.refreshToken);
         localStorage.setItem('user', JSON.stringify(data.user));
         
-        console.log('✅ Tokens stored in localStorage');
+        console.log('Tokens stored in localStorage');
         console.log('localStorage accessToken:', localStorage.getItem('accessToken') ? 'Stored' : 'NOT STORED');
 
         // Success toast
@@ -633,7 +633,7 @@ const OfficialAuthPage = () => {
           toast.success('Registration Submitted Successfully!', {
             duration: 6000,
             position: 'top-center',
-            icon: '✅',
+            icon: '',
             style: {
               background: '#10B981',
               color: '#fff',

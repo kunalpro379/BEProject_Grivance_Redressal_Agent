@@ -3,7 +3,7 @@
  * Enhanced endpoint for detailed grievance view with full AI analysis
  */
 
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 import commentsService from '../services/comments.service.js';
 
 /**

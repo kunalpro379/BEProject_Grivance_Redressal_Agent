@@ -39,10 +39,10 @@ import pendingRegistrationsRoutes from './src/routes/pending-registrations.route
 import contractorAnalysisRoutes from './src/routes/contractor-analysis.routes.js';
 import contractorReportsRoutes from './src/routes/contractor-reports.routes.js';
 import commentsAnalysisRoutes from './src/routes/comments-analysis.routes.js';
-import governmentPoliciesRoutes from './src/routes/government-policies.routes.js';
+import subscriptionRoutes from './src/routes/subscription.routes.js';
 
 // Import services
-import pool from './src/config/database.js';
+import pool from './src/config/db.js';
 import telegramBot from './src/services/telegram.bot.service.js';
 import telegramFieldWorkerBot from './src/services/telegram-fieldworker-bot.service.js';
 import telegramContractorBot from './src/services/telegram-contractor-bot.service.js';
@@ -140,7 +140,7 @@ app.use('/api/pending-registrations', pendingRegistrationsRoutes);
 app.use('/api/contractor-analysis', contractorAnalysisRoutes);
 app.use('/api/contractor-reports', contractorReportsRoutes);
 app.use('/api/comments-analysis', commentsAnalysisRoutes);
-app.use('/api/government-policies', governmentPoliciesRoutes);
+app.use('/api/subscriptions', subscriptionRoutes);
 
 // 404 handler
 app.use((req, res) => {

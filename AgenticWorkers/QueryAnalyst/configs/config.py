@@ -10,24 +10,35 @@ class Config:
     TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY", "")
     SUPABASE_DB_PASSWORD = os.environ.get("SUPABASE_DB_PASSWORD", "")
 
-    SUPABASE_DB_HOST = os.environ.get("SUPABASE_DB_HOST", "aws-1-ap-southeast-1.pooler.supabase.com")
-    SUPABASE_DB_PORT = int(os.environ.get("SUPABASE_DB_PORT", "6543"))
-    SUPABASE_DB_USER = os.environ.get("SUPABASE_DB_USER", "postgres.hjpgyfowhrbciemdzqgn")
-    SUPABASE_DB_NAME = os.environ.get("SUPABASE_DB_NAME", "postgres")
+    # Use DATABASE_URL or SUPABASE_DSN from .env (correct connection string)
+    DATABASE_URL = os.environ.get("DATABASE_URL", "")
+    _SUPABASE_DSN = os.environ.get("SUPABASE_DSN", "")
+    
     # Table name: use usergrievance (lowercase) to match Platform DB
     GRIEVANCE_TABLE = os.environ.get("GRIEVANCE_TABLE", "usergrievance")
     
-    # Direct Supabase connection for department matching
+    # Direct Supabase connection - use DATABASE_URL or SUPABASE_DSN
     @classmethod
     def supabase_direct_url(cls) -> str:
-        return f"postgresql://postgres:{cls.SUPABASE_DB_PASSWORD}@db.hjpgyfowhrbciemdzqgn.supabase.co:5432/postgres"
+        # Priority: SUPABASE_DSN > DATABASE_URL > fallback
+        if cls._SUPABASE_DSN:
+            return cls._SUPABASE_DSN
+        elif cls.DATABASE_URL:
+            return cls.DATABASE_URL
+        else:
+            # Fallback to correct host from your .env
+            return f"postgresql://postgres.lfhjqgufftedcntcskch:{cls.SUPABASE_DB_PASSWORD}@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
 
     @classmethod
     def supabase_dsn(cls) -> str:
-        return (
-            f"postgresql://{cls.SUPABASE_DB_USER}:{cls.SUPABASE_DB_PASSWORD}@"
-            f"{cls.SUPABASE_DB_HOST}:{cls.SUPABASE_DB_PORT}/{cls.SUPABASE_DB_NAME}"
-        )
+        """Returns the main Supabase DSN for all database operations."""
+        # Priority: SUPABASE_DSN > DATABASE_URL
+        if cls._SUPABASE_DSN:
+            return cls._SUPABASE_DSN
+        elif cls.DATABASE_URL:
+            return cls.DATABASE_URL
+        else:
+            return f"postgresql://postgres.lfhjqgufftedcntcskch:{cls.SUPABASE_DB_PASSWORD}@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
 
     @classmethod
     def grievance_table(cls) -> str:

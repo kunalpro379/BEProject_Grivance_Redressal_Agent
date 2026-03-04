@@ -289,7 +289,7 @@ async function handleInteractiveMessage(phoneNumber, userName, interactive, mess
  */
 function handleStatusUpdates(statuses) {
   for (const status of statuses) {
-    console.log(`📊 Message ${status.id} status: ${status.status}`);
+    console.log(` Message ${status.id} status: ${status.status}`);
     // You can store this in DB for analytics
   }
 }

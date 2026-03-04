@@ -26,7 +26,7 @@ class Config:
     
     # Pinecone
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-    PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "igrs1")
+    PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "department")
     
     # Embedding Model
     EMBED_MODEL = os.getenv("EMBED_MODEL", "all-MiniLM-L6-v2")

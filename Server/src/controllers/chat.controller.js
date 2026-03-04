@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 // Get accessible users for chat based on hierarchy
 export const getAccessibleUsers = async (req, res) => {
@@ -107,9 +107,9 @@ export const createGrievanceRoom = async (req, res) => {
       });
     }
 
-    // Get grievance details
+    // Get grievance details (from full_result JSONB)
     const grievance = await pool.query(
-      `SELECT grievance_id, grievance_text FROM usergrievance WHERE id = $1`,
+      `SELECT grievance_id, full_result FROM usergrievance WHERE id = $1`,
       [grievanceId]
     );
 

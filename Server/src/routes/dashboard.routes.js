@@ -1,6 +1,6 @@
 import express from 'express';
 import { getRoleDashboard } from '../controllers/dashboard.controller.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate } from '../middleware/auth.mid.js';
 
 const router = express.Router();
 

@@ -26,7 +26,7 @@ def monitor_queue(interval=10, duration=300):
             settings.WEBCRAWLER_QUEUE
         )
         
-        print(f"\n📊 Queue: {settings.WEBCRAWLER_QUEUE}")
+        print(f"\n Queue: {settings.WEBCRAWLER_QUEUE}")
         print(f"⏱️  Checking every {interval} seconds")
         print(f"⏳ Duration: {duration} seconds ({duration//60} minutes)")
         print("\n" + "-"*70)
@@ -97,7 +97,7 @@ def monitor_queue(interval=10, duration=300):
             total_processed = prev_count - final_count if prev_count > final_count else 0
             
             print(f"\n⏱️  Total time: {elapsed_total//60}m {elapsed_total%60}s")
-            print(f"📊 Messages processed: {total_processed}")
+            print(f" Messages processed: {total_processed}")
             print(f"📉 Remaining: {final_count}")
             
             if total_processed > 0:

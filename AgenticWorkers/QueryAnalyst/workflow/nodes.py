@@ -1,5 +1,6 @@
 from typing import Dict, Any, Tuple
-from tools.image_analysis import ImageAnalysisEngine
+# from tools.image_analysis import ImageAnalysisEngine  # OLD: Slow Gemini API
+from tools.puter_image_analysis import puter_analyzer  # NEW: Fast Puter API
 from tools.image_validator import ImageQueryValidator
 from tools.location_extractor import LocationExtractor
 from tools.embeddings import EmbeddingEngine
@@ -12,7 +13,8 @@ from agents import grievance_agents as GA
 from configs.config import Config
 from LLMs.groq_llm import GroqLLM
 
-image_engine = ImageAnalysisEngine()
+# image_engine = ImageAnalysisEngine()  # OLD: Slow
+image_engine = puter_analyzer  # NEW: Fast Puter-based analyzer
 validator_engine = ImageQueryValidator()
 location_engine = LocationExtractor()
 tavily_engine = TavilySearchEngine()
@@ -169,7 +171,7 @@ Location Information:
 Create a detailed, professional description (2-3 paragraphs) that synthesizes all this information into a coherent grievance description. Focus on facts and observable details."""
 
     try:
-        print("   📝 Creating LLM-described query...")
+        print("    Creating LLM-described query...")
         described_query = groq_llm.generate(prompt)
         state["enhanced_query_described"] = described_query
         print(f"      ✓ Created described query ({len(described_query)} chars)")
@@ -216,20 +218,66 @@ def NODE_Policy_Queries(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
-    """Search for real-time data using Tavily (news, policies, government decisions, etc.)."""
-    print("   🌐 Searching real-time data with Tavily...")
+    """
+    OPTIMIZED: Conditional real-time search using Tavily.
+    - Skip for spam/trivial categories
+    - Limit queries for non-critical cases
+    - Focus on government policies and official sources only
+    """
+    print("   🌐 Checking if real-time search is needed...")
+    
+    # Get category and fraud info to decide if search is needed
+    category_info = state["agents_outputs"].get("category", {})
+    fraud_info = state["agents_outputs"].get("fraud", {})
+    severity_info = state["agents_outputs"].get("severity", {})
+    
+    main_category = category_info.get("main_category", "").lower()
+    sub_category = category_info.get("sub_category", "").lower()
+    fraud_risk = fraud_info.get("fraud_risk", "Low")
+    severity_level = severity_info.get("level", "Medium")
+    
+    # Decision logic: Skip Tavily search for:
+    # 1. High fraud risk cases (unless it's online fraud that needs Neon DB check)
+    # 2. Low severity + trivial categories
+    # 3. Spam likelihood > 50%
+    
+    skip_search = False
+    skip_reason = None
+    
+    if fraud_risk == "High":
+        # Check if it's online fraud - if yes, we'll use Neon DB instead
+        is_online_fraud = any(keyword in main_category or keyword in sub_category 
+                             for keyword in ["fraud", "scam", "banking", "internet", "online", "cyber"])
+        if is_online_fraud:
+            skip_search = True
+            skip_reason = "Online fraud case - will use Neon DB fraud vector search instead of Tavily"
+        else:
+            skip_search = True
+            skip_reason = "High fraud risk detected - skipping web search"
+    
+    spam_likelihood = fraud_info.get("spam_likelihood", "Low")
+    if spam_likelihood == "High":
+        skip_search = True
+        skip_reason = "High spam likelihood - skipping web search"
+    
+    # Skip for trivial/low-severity cases
+    trivial_categories = ["general query", "information request", "feedback", "suggestion"]
+    if severity_level == "Low" and any(cat in main_category for cat in trivial_categories):
+        skip_search = True
+        skip_reason = "Low severity + trivial category - web search not needed"
+    
+    if skip_search:
+        print(f"      ⏭️  Skipping Tavily search: {skip_reason}")
+        state["tavily_search_results"] = {"skipped": True, "reason": skip_reason}
+        return state
     
     # Get search queries from policy_search
     policy_search = state.get("policy_search", {})
     queries = policy_search.get("queries", [])
     
     # Get location context
-    category_info = state["agents_outputs"].get("category", {})
     location_info = state["agents_outputs"].get("location", {})
     location_data = state.get("location_data", {})
-    
-    # Build comprehensive location context for India
-    main_category = category_info.get("main_category", "")
     
     # Extract location details
     city = location_data.get("location_details", {}).get("city") if isinstance(location_data.get("location_details"), dict) else None
@@ -250,21 +298,26 @@ def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
     
     print(f"      Location context: {location_context}")
     
-    # Add additional India-specific real-time search queries
+    # OPTIMIZED: Reduce queries based on severity
+    # High severity: 2 policy queries + 2 additional = 4 total
+    # Medium/Low: 1 policy query + 1 additional = 2 total
+    max_policy_queries = 2 if severity_level == "High" else 1
+    max_additional_queries = 2 if severity_level == "High" else 1
+    
+    # Add targeted India-specific queries ONLY for government sources
     additional_queries = []
     if main_category:
-        # Use specific location if available, otherwise use India
         search_location = city or district or state_name or "India"
         
-        additional_queries.append(f"{main_category} latest news {search_location} India")
-        additional_queries.append(f"{main_category} government policy scheme {search_location} India 2024 2025")
-        additional_queries.append(f"{main_category} municipal corporation {search_location} India")
+        # Focus on official government sources only
+        additional_queries.append(f"{main_category} government policy circular {search_location} site:gov.in OR site:nic.in")
         
-        # Add state-specific query if state is known
-        if state_name and state_name != "India":
-            additional_queries.append(f"{main_category} {state_name} government initiative India")
+        if severity_level == "High":
+            # Only for high severity cases, add one more query
+            if state_name and state_name != "India":
+                additional_queries.append(f"{main_category} {state_name} government scheme India site:gov.in")
     
-    all_queries = queries[:3] + additional_queries[:3]  # Limit to 6 total queries
+    all_queries = queries[:max_policy_queries] + additional_queries[:max_additional_queries]
     
     if not all_queries:
         print("      ⚠️ No search queries available, skipping Tavily search")
@@ -272,15 +325,29 @@ def NODE_tavily_search(state: Dict[str, Any]) -> Dict[str, Any]:
         return state
     
     try:
+        print(f"      🔍 Searching {len(all_queries)} queries (optimized for govt sources)")
         search_results = tavily_engine.search_realtime_data(
             all_queries, 
-            max_results_per_query=3,
+            max_results_per_query=2,  # Reduced from 3 to 2
             location_context=location_context
         )
-        state["tavily_search_results"] = search_results
         
-        total_results = sum(len(r.get("results", [])) for r in search_results.values())
-        print(f"      ✓ Found {total_results} real-time results across {len(search_results)} queries")
+        # Filter results: Keep only .gov.in, .nic.in, official sources
+        filtered_results = {}
+        for query, query_results in search_results.items():
+            results = query_results.get("results", [])
+            relevant_results = [
+                r for r in results 
+                if any(domain in r.get("url", "").lower() 
+                      for domain in [".gov.in", ".nic.in", "indianexpress.com", "thehindu.com", "pib.gov.in"])
+            ]
+            if relevant_results:
+                filtered_results[query] = {"results": relevant_results}
+        
+        state["tavily_search_results"] = filtered_results
+        
+        total_results = sum(len(r.get("results", [])) for r in filtered_results.values())
+        print(f"      ✓ Found {total_results} relevant govt/official results (filtered from {len(all_queries)} queries)")
     except Exception as e:
         print(f"      ❌ Error in Tavily search: {e}")
         state["tavily_search_results"] = {}
@@ -499,7 +566,10 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
                 "description": image_analysis.get("description", ""),
                 "key_objects": image_analysis.get("key_objects", []),
                 "scene_type": image_analysis.get("scene_type", ""),
+                "condition": image_analysis.get("condition", ""),
+                "severity_indicators": image_analysis.get("severity_indicators", []),
                 "extracted_text": image_analysis.get("extracted_text", ""),
+                "reasoning": image_analysis.get("reasoning", ""),
             },
             "location": {
                 "address": state.get("location_data", {}).get("address"),
@@ -525,6 +595,7 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
             "search_results": tavily_results,
             "policy_queries": policy_search.get("queries", []),
         },
+        "case_study_report": report_md,  # COMPLETE Government Grievance Assessment Report
     }
 
     state["json_result"] = case_study
@@ -545,7 +616,27 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     # grievance_text = original user query; enhanced_query_described = complete LLM-described version
     embedding = state.get("embedding", [])
     image_path = state.get("original_image_url") or state.get("image_path")
-    image_description = image_analysis.get("description", "")
+    
+    # Build comprehensive image description from all analysis fields
+    image_analysis_full = state.get("image_analysis", {})
+    image_description_parts = []
+    if image_analysis_full.get("description"):
+        image_description_parts.append(f"Description: {image_analysis_full['description']}")
+    if image_analysis_full.get("condition"):
+        image_description_parts.append(f"Condition: {image_analysis_full['condition']}")
+    if image_analysis_full.get("key_objects"):
+        image_description_parts.append(f"Key Objects: {', '.join(image_analysis_full['key_objects'])}")
+    if image_analysis_full.get("scene_type"):
+        image_description_parts.append(f"Scene Type: {image_analysis_full['scene_type']}")
+    if image_analysis_full.get("severity_indicators"):
+        image_description_parts.append(f"Severity Indicators: {', '.join(image_analysis_full['severity_indicators'])}")
+    if image_analysis_full.get("extracted_text"):
+        image_description_parts.append(f"Visible Text: {image_analysis_full['extracted_text']}")
+    if image_analysis_full.get("reasoning"):
+        image_description_parts.append(f"Analysis: {image_analysis_full['reasoning']}")
+    
+    image_description = " | ".join(image_description_parts) if image_description_parts else image_analysis.get("description", "")
+    
     validation_result = state.get("validation_result")
     location_data = state.get("location_data") or {}
     citizen_id = state.get("citizen_id")
@@ -555,10 +646,13 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
     # Use enhanced_query_described for DB storage
     enhanced_for_db = enhanced_query_described or enhanced_query or text_for_db
 
-    print(f"   💾 Saving to Supabase...")
+    print(f"    Saving to Supabase...")
     print(f"      grievance_id: {grievance_id}")
     print(f"      citizen_id: {citizen_id}")
     print(f"      case_study.department: {case_study.get('department', {})}")
+    
+    # Get telegram_location_data from state
+    telegram_location_data = state.get("telegram_location_data")
     
     insert_user_grievience(
         grievance_text=text_for_db,
@@ -573,6 +667,7 @@ def NODE_generate_report(state: Dict[str, Any]) -> Dict[str, Any]:
         citizen_id=citizen_id,
         grievance_id=grievance_id,
         image_analysis=state.get("image_analysis"),
+        telegram_location_data=telegram_location_data,  # Pass Telegram location data
     )
 
     return state

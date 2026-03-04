@@ -1,6 +1,6 @@
 import express from 'express';
-import pool from '../config/database.js';
-import { authenticateToken, authorizeRoles } from '../middleware/auth.middleware.js';
+import pool from '../config/db.js';
+import { authenticateToken, authorizeRoles } from '../middleware/auth.mid.js';
 import telegramFieldWorkerBot from '../services/telegram-fieldworker-bot.service.js';
 
 const router = express.Router();
@@ -10,7 +10,7 @@ const router = express.Router();
  */
 router.get('/pending', authenticateToken, authorizeRoles(['department_head', 'department_officer']), async (req, res) => {
   try {
-    console.log('🔍 Field worker requests - User data:', {
+    console.log('Field worker requests - User data:', {
       userId: req.user.userId,
       role: req.user.role,
       department_id: req.user.department_id,

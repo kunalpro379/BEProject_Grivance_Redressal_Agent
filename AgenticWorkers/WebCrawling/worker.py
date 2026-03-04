@@ -214,7 +214,7 @@ class CrawlerWorker:
                     else:
                         logger.warning(f"⚠️  Job {job_id} failed but dequeued to prevent retry")
                     
-                    logger.info(f"\n📊 Total processed: {processed_count}")
+                    logger.info(f"\n Total processed: {processed_count}")
                     logger.info(f"{'='*70}\n")
                     
                 else:
@@ -225,7 +225,7 @@ class CrawlerWorker:
                     
             except KeyboardInterrupt:
                 logger.info(f"\n👋 Worker stopped by user")
-                logger.info(f"📊 Total messages processed: {processed_count}")
+                logger.info(f" Total messages processed: {processed_count}")
                 break
             except Exception as e:
                 logger.error(f"❌ Worker error: {e}")

@@ -19,8 +19,7 @@ import { useAuth } from '../../context/AuthContext';
 import PremiumHeader from './components/PremiumHeader';
 import BudgetManagement from './components/BudgetManagement';
 import LocationDisplay from '../../components/LocationDisplay';
-import JsonRenderer from '../../components/JsonRenderer';
-import { grievanceService } from '../../services/grievance.service';
+import PolicyLoadingAnimation from '../../components/PolicyLoadingAnimation';
 
 // Fix default marker icon in react-leaflet
 const defaultIcon = L.icon({
@@ -186,12 +185,36 @@ const DepartmentDashboardNew = () => {
   }, [selectedGrievanceId, depId]);
 
   useEffect(() => {
-    if (activeTab === 'map') loadMapGrievances();
+    if (activeTab === 'map') {
+      loadMapGrievances();
+      // Initialize map after data loads
+      if (mapGrievances.length > 0 && mapRef.current && !mapInstanceRef.current) {
+        setTimeout(() => initializeMap(mapGrievances), 100);
+      }
+    }
+    return () => {
+      if (activeTab !== 'map' && mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
   }, [activeTab, depId]);
+  
+  // Initialize map when mapGrievances loads
+  useEffect(() => {
+    if (activeTab === 'map' && mapGrievances.length > 0 && mapRef.current && !mapInstanceRef.current) {
+      setTimeout(() => initializeMap(mapGrievances), 100);
+    }
+  }, [mapGrievances, activeTab]);
+  
   useEffect(() => {
     if (activeTab === 'analytics') {
       loadAnalytics();
       loadProgressReport();
+      // Also load complaints analysis for the Analytics tab
+      if (!complaintsAnalysis && !complaintsAnalysisLoading) {
+        loadCitizenFeedback(false);
+      }
     }
   }, [activeTab, depId]);
   useEffect(() => {
@@ -215,13 +238,13 @@ const DepartmentDashboardNew = () => {
   
   useEffect(() => {
     if (activeTab === 'policies') {
-      console.log('🔍 Loading policies for department:', depId);
+      console.log('Loading policies for department:', depId);
       setPoliciesLoading(true);
       departmentDashboardService.getDepartmentPolicies(depId, localStorage.getItem('accessToken'))
         .then(res => {
           console.log('📄 Policies response:', res);
           if (res.success && res.data) {
-            console.log('✅ Policies data:', res.data.policies ? `${res.data.policies.length} characters` : 'empty');
+            console.log('Policies data:', res.data.policies ? `${res.data.policies.length} characters` : 'empty');
             setPolicies(res.data.policies || '');
           } else {
             console.warn('⚠️ No policies in response');
@@ -312,7 +335,7 @@ const DepartmentDashboardNew = () => {
           });
           if (reportsRes.data.success) {
             const reportsData = reportsRes.data.data || [];
-            console.log('📊 Fetched Contractor Reports:', reportsData.length, 'contractors with reports');
+            console.log(' Fetched Contractor Reports:', reportsData.length, 'contractors with reports');
             setContractorReports(reportsData);
           }
         } catch (err) {
@@ -359,7 +382,7 @@ const DepartmentDashboardNew = () => {
       }
     } finally { setEscalationsLoading(false); }
   };
-  const loadCitizenFeedback = async () => {
+  const loadCitizenFeedback = async (forceRefresh = false) => {
     try {
       setCitizenFeedbackLoading(true);
       setComplaintsAnalysisLoading(true);
@@ -372,7 +395,7 @@ const DepartmentDashboardNew = () => {
       // Load both feedback data and AI analysis
       const [feedbackRes, analysisRes] = await Promise.all([
         departmentDashboardService.getCitizenFeedback(depId, token),
-        departmentDashboardService.getCitizenComplaintsAnalysis(depId, token)
+        departmentDashboardService.getCitizenComplaintsAnalysis(depId, token, forceRefresh)
       ]);
       
       if (feedbackRes.success) setCitizenFeedbackData({ data: feedbackRes.data || [], summary: feedbackRes.summary || {} });
@@ -541,7 +564,7 @@ const DepartmentDashboardNew = () => {
       const res = await departmentDashboardService.addFieldWorker(addFormData, token);
       
       if (res.success) {
-        alert(`✅ Field worker added successfully!\n\nStaff ID: ${res.data.staffId}\nName: ${res.data.full_name}\nPhone: ${res.data.phone}`);
+        alert(`Field worker added successfully!\n\nStaff ID: ${res.data.staffId}\nName: ${res.data.full_name}\nPhone: ${res.data.phone}`);
         setShowAddModal(false);
         setAddFormData({
           full_name: '',
@@ -793,6 +816,13 @@ const DepartmentDashboardNew = () => {
     [filteredMapGrievances]
   );
 
+  // Update map markers when filtered grievances change
+  useEffect(() => {
+    if (mapInstanceRef.current && filteredMapGrievances.length > 0) {
+      updateMapMarkers(filteredMapGrievances);
+    }
+  }, [filteredMapGrievances]);
+
   // Calculate bounds and center for auto-zoom
   const mapBounds = useMemo(() => {
     if (markersWithCoords.length === 0) return null;
@@ -996,45 +1026,59 @@ const DepartmentDashboardNew = () => {
     markersLayerRef.current.clearLayers();
 
     const validGrievances = data.filter(g => 
-      g.latitude && g.longitude && 
-      !isNaN(g.latitude) && !isNaN(g.longitude) &&
-      g.latitude >= -90 && g.latitude <= 90 &&
-      g.longitude >= -180 && g.longitude <= 180
+      g.lat && g.lng && 
+      !isNaN(g.lat) && !isNaN(g.lng) &&
+      g.lat >= -90 && g.lat <= 90 &&
+      g.lng >= -180 && g.lng <= 180
     );
 
     validGrievances.forEach(grievance => {
-      const marker = L.marker([grievance.latitude, grievance.longitude]);
+      // Color code markers by priority
+      let markerColor = '#64748b'; // Default slate
+      if (grievance.priority === 'Emergency' || grievance.priority === 'emergency') markerColor = '#dc2626'; // Red
+      else if (grievance.priority === 'Urgent' || grievance.priority === 'urgent') markerColor = '#ea580c'; // Orange
+      else if (grievance.priority === 'High') markerColor = '#f59e0b'; // Amber
+      else if (grievance.priority === 'Medium') markerColor = '#eab308'; // Yellow
+      else if (grievance.priority === 'Low') markerColor = '#22c55e'; // Green
+
+      const customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: `<div style="background-color: ${markerColor}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.4);"></div>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      });
+
+      const marker = L.marker([Number(grievance.lat), Number(grievance.lng)], { icon: customIcon });
       
       const popupContent = `
-        <div style="font-family: sans-serif; min-width: 200px;">
-          <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #1A1A1A;">
+        <div style="font-family: sans-serif; min-width: 250px; padding: 8px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #1A1A1A;">
             ${grievance.grievance_id || 'N/A'}
           </h3>
-          <p style="margin: 4px 0; font-size: 12px; color: #6B6B6B;">
-            <strong>Status:</strong> ${formatStatus(grievance.status, grievance)}
+          <p style="margin: 4px 0; font-size: 13px; color: #374151; font-weight: 500;">
+            ${grievance.title || 'No title'}
           </p>
-          <p style="margin: 4px 0; font-size: 12px; color: #6B6B6B;">
-            <strong>Category:</strong> ${getCategoryLabel(grievance.category) || 'N/A'}
+          <p style="margin: 6px 0; font-size: 12px; color: #6B7280;">
+            <strong>Status:</strong> <span style="color: #059669;">${grievance.status ? grievance.status.replace(/_/g, ' ') : 'N/A'}</span>
           </p>
-          <p style="margin: 4px 0; font-size: 12px; color: #6B6B6B;">
-            <strong>Location:</strong> ${grievance.location || grievance.location_address || 'N/A'}
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Priority:</strong> <span style="color: ${markerColor}; font-weight: 600;">${grievance.priority || 'N/A'}</span>
           </p>
-          <button 
-            onclick="window.dispatchEvent(new CustomEvent('openGrievanceDetail', { detail: '${grievance.grievance_id}' }))"
-            style="margin-top: 8px; padding: 6px 12px; background: #7D6E5C; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; width: 100%;"
-          >
-            View Details
-          </button>
+          <p style="margin: 4px 0; font-size: 12px; color: #6B7280;">
+            <strong>Location:</strong> ${grievance.location || 'N/A'}
+          </p>
+          ${grievance.citizen_name ? `<p style="margin: 4px 0; font-size: 12px; color: #6B7280;"><strong>Citizen:</strong> ${grievance.citizen_name}</p>` : ''}
+          ${grievance.officer_name ? `<p style="margin: 4px 0; font-size: 12px; color: #6B7280;"><strong>Officer:</strong> ${grievance.officer_name}</p>` : ''}
         </div>
       `;
 
-      marker.bindPopup(popupContent, { maxWidth: 250 });
+      marker.bindPopup(popupContent, { maxWidth: 300 });
       markersLayerRef.current.addLayer(marker);
     });
 
     if (validGrievances.length > 0 && mapInstanceRef.current) {
       const bounds = L.latLngBounds(
-        validGrievances.map(g => [g.latitude, g.longitude])
+        validGrievances.map(g => [Number(g.lat), Number(g.lng)])
       );
       mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50] });
     }
@@ -1832,6 +1876,33 @@ const DepartmentDashboardNew = () => {
     </div>
   );
 
+  const handleAnalyzeNow = async () => {
+    try {
+      setComplaintsAnalysisLoading(true);
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        await handleAuthError(new Error('No token'));
+        return;
+      }
+      
+      console.log('🔄 Forcing fresh analysis...');
+      const analysisRes = await departmentDashboardService.getCitizenComplaintsAnalysis(depId, token, true);
+      
+      if (analysisRes.success) {
+        setComplaintsAnalysis(analysisRes.data);
+        alert('✅ Fresh analysis completed successfully!');
+      }
+    } catch (e) {
+      const handled = await handleAuthError(e);
+      if (!handled) {
+        console.error('Error analyzing complaints:', e);
+        alert('❌ Failed to analyze complaints: ' + e.message);
+      }
+    } finally {
+      setComplaintsAnalysisLoading(false);
+    }
+  };
+
   const renderAnalytics = () => {
     if (analyticsLoading) {
       return (
@@ -1842,7 +1913,7 @@ const DepartmentDashboardNew = () => {
       );
     }
     const data = analyticsData || {};
-    const byCategory = data.byCategory || [];
+    const byCategory = data.bySubcategory || data.byCategory || [];
     const byZone = data.byZone || [];
     const monthly = data.monthly || [];
     
@@ -1853,13 +1924,32 @@ const DepartmentDashboardNew = () => {
     
     return (
       <div className="space-y-8">
-        <h2 className="text-2xl font-bold text-stone-900">Analytics</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-stone-900">Analytics</h2>
+          <button
+            onClick={handleAnalyzeNow}
+            disabled={complaintsAnalysisLoading}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+          >
+            {complaintsAnalysisLoading ? (
+              <>
+                <Loader className="w-4 h-4 animate-spin" />
+                <span>Analyzing...</span>
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-4 h-4" />
+                <span>Analyze Now</span>
+              </>
+            )}
+          </button>
+        </div>
         
         {/* Two Column Layout: Bars on Left, Department Card on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column: Complaints by Category Bars */}
           <div className="bg-white rounded-xl p-6 border border-stone-200">
-            <h3 className="text-lg font-semibold text-stone-800 mb-4">Complaints by Category</h3>
+            <h3 className="text-lg font-semibold text-stone-800 mb-4">Complaints by Subcategory</h3>
             {byCategory.length === 0 ? <p className="text-stone-500">No data</p> : (
               <div className="space-y-3">
                 {byCategory.map((row, i) => (
@@ -1876,7 +1966,12 @@ const DepartmentDashboardNew = () => {
                       setSelectedCategory(matchingDept?.zone_name || null);
                     }}
                   >
-                    <div className="w-48 text-sm font-medium text-stone-700 truncate">{row.category_name || 'Uncategorized'}</div>
+                    <div className="w-48">
+                      <div className="text-sm font-semibold text-stone-900 truncate">{row.category_name || 'Uncategorized'}</div>
+                      {row.main_category && row.main_category !== row.category_name && (
+                        <div className="text-xs text-stone-500 truncate">{row.main_category}</div>
+                      )}
+                    </div>
                     <div className="flex-1 h-8 bg-stone-100 rounded overflow-hidden">
                       <div 
                         className="h-full bg-stone-600 rounded hover:bg-stone-700 transition-colors" 
@@ -1888,7 +1983,7 @@ const DepartmentDashboardNew = () => {
                 ))}
               </div>
             )}
-            <p className="text-xs text-stone-500 mt-4 italic">Click on a bar to view department details</p>
+            <p className="text-xs text-stone-500 mt-4 italic">Showing subcategories for better insights</p>
           </div>
           
           {/* Right Column: Selected Department Card */}
@@ -1981,6 +2076,159 @@ const DepartmentDashboardNew = () => {
             </tbody>
           </table>
         </div>
+
+        {/* AI Predictive Analytics - Only show if AI has analyzed */}
+        {complaintsAnalysis && complaintsAnalysis.summary && !complaintsAnalysis.summary.includes('temporarily unavailable') && (
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200 overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6 text-white" />
+                <h3 className="text-xl font-bold text-white">AI Predictive Analytics</h3>
+              </div>
+              {complaintsAnalysis.cached && (
+                <span className="text-xs text-purple-100">
+                  Cached • Click "Analyze Now" to refresh
+                </span>
+              )}
+            </div>
+
+            <div className="p-6 space-y-6">
+              {/* Summary */}
+              <div className="bg-white rounded-lg p-4 border border-purple-200">
+                <h4 className="text-lg font-semibold text-stone-900 mb-2">Executive Summary</h4>
+                <p className="text-stone-700">{complaintsAnalysis.summary}</p>
+              </div>
+
+              {/* Key Metrics Grid */}
+              {complaintsAnalysis.totalComplaints && (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-white rounded-lg p-4 border border-purple-200">
+                    <p className="text-xs text-stone-600 font-semibold mb-1">Total Complaints</p>
+                    <p className="text-3xl font-bold text-purple-600">{complaintsAnalysis.totalComplaints}</p>
+                  </div>
+                  {complaintsAnalysis.averageRating && (
+                    <div className="bg-white rounded-lg p-4 border border-purple-200">
+                      <p className="text-xs text-stone-600 font-semibold mb-1">Avg Rating</p>
+                      <p className="text-3xl font-bold text-amber-600">{complaintsAnalysis.averageRating.toFixed(1)}/5</p>
+                    </div>
+                  )}
+                  {complaintsAnalysis.sentimentAnalysis && (
+                    <>
+                      <div className="bg-white rounded-lg p-4 border border-green-200">
+                        <p className="text-xs text-stone-600 font-semibold mb-1">Positive</p>
+                        <p className="text-3xl font-bold text-green-600">{complaintsAnalysis.sentimentAnalysis.positive || 0}%</p>
+                      </div>
+                      <div className="bg-white rounded-lg p-4 border border-red-200">
+                        <p className="text-xs text-stone-600 font-semibold mb-1">Negative</p>
+                        <p className="text-3xl font-bold text-red-600">{complaintsAnalysis.sentimentAnalysis.negative || 0}%</p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* Predictive Insights */}
+              {complaintsAnalysis.trends && complaintsAnalysis.trends.length > 0 && (
+                <div className="bg-white rounded-lg p-4 border border-purple-200">
+                  <h4 className="text-lg font-semibold text-stone-900 mb-3 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-purple-600" />
+                    Predictive Trends
+                  </h4>
+                  <ul className="space-y-2">
+                    {complaintsAnalysis.trends.map((trend, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-purple-600 mt-1">📈</span>
+                        <span className="text-stone-700">{trend}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Key Insights */}
+              {complaintsAnalysis.keyInsights && complaintsAnalysis.keyInsights.length > 0 && (
+                <div className="bg-white rounded-lg p-4 border border-purple-200">
+                  <h4 className="text-lg font-semibold text-stone-900 mb-3">Key Insights</h4>
+                  <ul className="space-y-2">
+                    {complaintsAnalysis.keyInsights.map((insight, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-purple-600 mt-1">•</span>
+                        <span className="text-stone-700">{insight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Urgent Matters */}
+              {complaintsAnalysis.urgentMatters && complaintsAnalysis.urgentMatters.length > 0 && (
+                <div className="bg-red-50 rounded-lg p-4 border-2 border-red-200">
+                  <h4 className="text-lg font-semibold text-red-900 mb-3 flex items-center gap-2">
+                    <AlertTriangle className="w-5 h-5 text-red-600" />
+                    Urgent Matters Requiring Attention
+                  </h4>
+                  <ul className="space-y-2">
+                    {complaintsAnalysis.urgentMatters.map((matter, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-red-600 mt-1">⚠️</span>
+                        <span className="text-red-900 font-medium">{matter}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Recommendations */}
+              {complaintsAnalysis.recommendations && complaintsAnalysis.recommendations.length > 0 && (
+                <div className="bg-white rounded-lg p-4 border border-purple-200">
+                  <h4 className="text-lg font-semibold text-stone-900 mb-3">AI Recommendations</h4>
+                  <ul className="space-y-2">
+                    {complaintsAnalysis.recommendations.map((rec, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-pink-600 mt-1">→</span>
+                        <span className="text-stone-700">{rec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Geographic Hotspots */}
+              {complaintsAnalysis.geographicHotspots && complaintsAnalysis.geographicHotspots.length > 0 && (
+                <div className="bg-white rounded-lg p-4 border border-purple-200">
+                  <h4 className="text-lg font-semibold text-stone-900 mb-3 flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-purple-600" />
+                    Geographic Hotspots
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {complaintsAnalysis.geographicHotspots.slice(0, 6).map((hotspot, idx) => (
+                      <div key={idx} className="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
+                        <span className="text-sm font-medium text-stone-900">{hotspot.zone || hotspot.location || hotspot}</span>
+                        {hotspot.count && (
+                          <span className="text-sm font-bold text-purple-600">{hotspot.count} complaints</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Show message to click Analyze Now if no AI analysis yet */}
+        {(!complaintsAnalysis || complaintsAnalysis.summary?.includes('temporarily unavailable')) && (
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200 p-8 text-center">
+            <Sparkles className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-stone-900 mb-2">AI Predictive Analytics</h3>
+            <p className="text-stone-600 mb-4">
+              Click the "Analyze Now" button above to generate AI-powered predictive analytics for your department.
+            </p>
+            <p className="text-sm text-stone-500">
+              AI will analyze all grievances and provide insights, trends, predictions, and recommendations.
+            </p>
+          </div>
+        )}
 
         {/* AI-Generated Progress Report */}
         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200 overflow-hidden">
@@ -2572,7 +2820,7 @@ const DepartmentDashboardNew = () => {
                         {/* Summary Header */}
                         <div className="p-4 bg-gradient-to-r from-amber-100 to-orange-100">
                           <div className="flex items-center justify-between mb-2">
-                            <h4 className="text-sm font-bold text-amber-900 uppercase tracking-wide">📊 Contractor Analysis & Reports</h4>
+                            <h4 className="text-sm font-bold text-amber-900 uppercase tracking-wide"> Contractor Analysis & Reports</h4>
                             <span className="px-3 py-1 bg-amber-600 text-white text-xs font-bold rounded-full">
                               {contractorReport.total_reports} Report{contractorReport.total_reports !== 1 ? 's' : ''}
                             </span>
@@ -2628,7 +2876,7 @@ const DepartmentDashboardNew = () => {
 
                             {/* Description */}
                             <div className="bg-white rounded-lg p-3 border border-blue-200">
-                              <p className="text-xs font-semibold text-blue-800 mb-1">📝 WORK DESCRIPTION</p>
+                              <p className="text-xs font-semibold text-blue-800 mb-1"> WORK DESCRIPTION</p>
                               <p className="text-xs text-stone-700">{latestReport.description}</p>
                             </div>
 
@@ -2785,7 +3033,7 @@ const DepartmentDashboardNew = () => {
 
                                 {latestReport.ai_analysis.key_insights && latestReport.ai_analysis.key_insights.length > 0 && (
                                   <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-                                    <p className="text-xs font-bold text-blue-800 mb-2">🔍 Key Insights:</p>
+                                    <p className="text-xs font-bold text-blue-800 mb-2">Key Insights:</p>
                                     <ul className="space-y-1">
                                       {latestReport.ai_analysis.key_insights.map((insight, idx) => (
                                         <li key={idx} className="text-xs text-blue-700 flex items-start gap-1">
@@ -3153,6 +3401,14 @@ const DepartmentDashboardNew = () => {
             >
               Clear Filters
             </button>
+            <button
+              onClick={() => setMapExpanded(!mapExpanded)}
+              className="px-4 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg flex items-center gap-2"
+              title={mapExpanded ? 'Minimize map' : 'Expand map'}
+            >
+              {mapExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              {mapExpanded ? 'Minimize' : 'Expand'}
+            </button>
           </div>
           <div className="mt-4 flex items-center gap-4 text-sm text-stone-600">
             <span className="font-semibold">Total: {mapGrievances.length}</span>
@@ -3170,68 +3426,8 @@ const DepartmentDashboardNew = () => {
           </div>
         ) : (
           <div className="bg-white rounded-xl border-2 border-stone-200 shadow-xl overflow-hidden">
-            <div className="h-[600px] w-full relative">
-              <MapContainer
-                center={defaultCenter}
-                zoom={defaultZoom}
-                style={{ height: '100%', width: '100%' }}
-                scrollWheelZoom={true}
-                key={`map-${markersWithCoords.length}-${defaultZoom}`}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {markersWithCoords.map((g) => {
-                  // Color code markers by priority
-                  let markerColor = '#64748b'; // Default slate
-                  if (g.priority === 'Emergency' || g.priority === 'emergency') markerColor = '#dc2626'; // Red
-                  else if (g.priority === 'Urgent' || g.priority === 'urgent') markerColor = '#ea580c'; // Orange
-                  else if (g.priority === 'High') markerColor = '#f59e0b'; // Amber
-                  else if (g.priority === 'Medium') markerColor = '#eab308'; // Yellow
-                  else if (g.priority === 'Low') markerColor = '#22c55e'; // Green
-
-                  const customIcon = L.divIcon({
-                    className: 'custom-marker',
-                    html: `<div style="background-color: ${markerColor}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
-                  });
-
-                  return (
-                    <Marker key={g.id} position={[Number(g.lat), Number(g.lng)]} icon={customIcon}>
-                      <Popup className="custom-popup">
-                        <div className="min-w-[250px] p-2">
-                          <p className="font-bold text-stone-900 text-base mb-2">{g.grievance_id}</p>
-                          <p className="text-sm text-stone-700 mt-1 line-clamp-2 font-medium">{g.title || 'No title'}</p>
-                          <p className="text-xs text-stone-500 mt-2 flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {g.location || 'No address'}
-                          </p>
-                          <div className="flex gap-2 mt-3 flex-wrap">
-                            <span className={`px-2 py-1 rounded text-xs font-semibold ${statusPillClass(g.status)}`}>
-                              {g.status ? g.status.replace(/_/g, ' ') : 'N/A'}
-                            </span>
-                            <span className={`px-2 py-1 rounded text-xs font-semibold ${priorityPillClass(g.priority)}`}>
-                              {g.priority || 'N/A'}
-                            </span>
-                          </div>
-                          {g.citizen_name && (
-                            <p className="text-xs text-stone-600 mt-2">
-                              <span className="font-medium">Citizen:</span> {g.citizen_name}
-                            </p>
-                          )}
-                          {g.officer_name && (
-                            <p className="text-xs text-stone-600 mt-1">
-                              <span className="font-medium">Officer:</span> {g.officer_name}
-                            </p>
-                          )}
-                        </div>
-                      </Popup>
-                    </Marker>
-                  );
-                })}
-              </MapContainer>
+            <div className={`w-full relative transition-all duration-300 ${mapExpanded ? 'h-[800px]' : 'h-[600px]'}`}>
+              <div ref={mapRef} className="w-full h-full"></div>
             </div>
             {mapGrievances.length > 0 && markersWithCoords.length === 0 && (
               <div className="p-6 border-t border-stone-200 bg-stone-50 text-center">
@@ -3423,39 +3619,50 @@ const DepartmentDashboardNew = () => {
 
     return (
       <div className="space-y-6">
+        {/* Header with Reload Button */}
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-stone-900 uppercase tracking-wide">Citizen Complaints Analysis</h2>
-          <div className="flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-lg">
-            <Sparkles className="w-5 h-5 text-purple-600" />
-            <span className="text-sm font-semibold text-purple-900">AI-Powered by DeepSeek</span>
+          <h2 className="text-2xl font-bold text-black uppercase tracking-wide">Citizen Complaints Analysis</h2>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => loadCitizenFeedback()}
+              disabled={complaintsAnalysisLoading}
+              className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <RefreshIcon className={`w-4 h-4 ${complaintsAnalysisLoading ? 'animate-spin' : ''}`} />
+              <span className="text-sm font-semibold">Reload Analysis</span>
+            </button>
+            <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-lg border border-yellow-300">
+              <Sparkles className="w-5 h-5 text-yellow-700" />
+              <span className="text-sm font-semibold text-yellow-900"></span>
+            </div>
           </div>
         </div>
 
         {/* Summary Section */}
-        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl border-2 border-purple-200 p-6">
-          <h3 className="text-lg font-bold text-purple-900 mb-3 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-stone-50 to-neutral-100 rounded-xl border-2 border-stone-300 p-6">
+          <h3 className="text-lg font-bold text-black mb-3 flex items-center gap-2">
             <MessageSquare className="w-5 h-5" />
             Executive Summary
           </h3>
           <p className="text-stone-700 leading-relaxed">{analysis.summary}</p>
           <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-lg p-4 text-center">
+            <div className="bg-white rounded-lg p-4 text-center border border-stone-200">
               <p className="text-xs font-semibold text-stone-500 uppercase mb-1">Total Complaints</p>
-              <p className="text-3xl font-bold text-stone-900">{analysis.totalComplaints || 0}</p>
+              <p className="text-3xl font-bold text-black">{analysis.totalComplaints || 0}</p>
             </div>
             {analysis.averageRating && (
-              <div className="bg-white rounded-lg p-4 text-center">
-                <p className="text-xs font-semibold text-stone-500 uppercase mb-1">Avg Rating</p>
-                <p className="text-3xl font-bold text-yellow-600">{analysis.averageRating}★</p>
+              <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-lg p-4 text-center border border-yellow-300">
+                <p className="text-xs font-semibold text-yellow-800 uppercase mb-1">Avg Rating</p>
+                <p className="text-3xl font-bold text-yellow-700">{analysis.averageRating}★</p>
               </div>
             )}
             {analysis.sentimentAnalysis && (
               <>
-                <div className="bg-green-50 rounded-lg p-4 text-center">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 text-center border border-green-300">
                   <p className="text-xs font-semibold text-green-800 uppercase mb-1">Positive</p>
                   <p className="text-3xl font-bold text-green-700">{analysis.sentimentAnalysis.positive || 0}%</p>
                 </div>
-                <div className="bg-red-50 rounded-lg p-4 text-center">
+                <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-4 text-center border border-red-300">
                   <p className="text-xs font-semibold text-red-800 uppercase mb-1">Negative</p>
                   <p className="text-3xl font-bold text-red-700">{analysis.sentimentAnalysis.negative || 0}%</p>
                 </div>
@@ -3464,49 +3671,59 @@ const DepartmentDashboardNew = () => {
           </div>
         </div>
 
-        {/* Category Breakdown */}
+        {/* Category Breakdown with Chart */}
         {analysis.categoryBreakdown && analysis.categoryBreakdown.length > 0 && (
-          <div className="bg-white rounded-xl border-2 border-stone-200 p-6">
-            <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
+          <div className="bg-white rounded-xl border-2 border-stone-300 p-6">
+            <h3 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
               <BarChart3 className="w-5 h-5" />
               Category Breakdown
             </h3>
             <div className="space-y-3">
-              {analysis.categoryBreakdown.slice(0, 5).map((cat, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="flex-1">
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm font-semibold text-stone-700">{cat.category}</span>
-                      <span className="text-sm text-stone-600">{cat.count} ({cat.percentage}%)</span>
-                    </div>
-                    <div className="w-full bg-stone-200 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all"
-                        style={{ width: `${cat.percentage}%` }}
-                      />
+              {analysis.categoryBreakdown.slice(0, 5).map((cat, idx) => {
+                // Color scheme: black, cream, golden
+                const colors = [
+                  'from-black to-gray-800',
+                  'from-amber-600 to-yellow-600',
+                  'from-stone-600 to-stone-800',
+                  'from-yellow-700 to-amber-700',
+                  'from-gray-700 to-gray-900'
+                ];
+                return (
+                  <div key={idx} className="flex items-center gap-3">
+                    <div className="flex-1">
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm font-semibold text-black">{cat.category}</span>
+                        <span className="text-sm text-stone-600">{cat.count} ({cat.percentage}%)</span>
+                      </div>
+                      <div className="w-full bg-stone-200 rounded-full h-3">
+                        <div 
+                          className={`bg-gradient-to-r ${colors[idx % colors.length]} h-3 rounded-full transition-all shadow-sm`}
+                          style={{ width: `${cat.percentage}%` }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
 
         {/* Top Issues */}
         {analysis.topIssues && analysis.topIssues.length > 0 && (
-          <div className="bg-white rounded-xl border-2 border-stone-200 p-6">
-            <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-orange-600" />
+          <div className="bg-white rounded-xl border-2 border-stone-300 p-6">
+            <h3 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-amber-600" />
               Top Recurring Issues
             </h3>
             <div className="space-y-3">
               {analysis.topIssues.map((issue, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-4 bg-orange-50 rounded-lg border border-orange-200">
-                  <div className="flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold">
+                <div key={idx} className="flex items-start gap-3 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-yellow-300">
+                  <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-600 to-yellow-600 text-white rounded-full flex items-center justify-center font-bold shadow-md">
                     {idx + 1}
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-stone-900">{typeof issue === 'string' ? issue : issue.description || issue.issue}</p>
+                    <p className="text-sm font-semibold text-black">{typeof issue === 'string' ? issue : issue.description || issue.issue}</p>
                     {typeof issue === 'object' && issue.count && (
                       <p className="text-xs text-stone-600 mt-1">Occurrences: {issue.count}</p>
                     )}
@@ -3537,16 +3754,16 @@ const DepartmentDashboardNew = () => {
 
         {/* Key Insights */}
         {analysis.keyInsights && analysis.keyInsights.length > 0 && (
-          <div className="bg-white rounded-xl border-2 border-stone-200 p-6">
-            <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-600" />
+          <div className="bg-white rounded-xl border-2 border-stone-300 p-6">
+            <h3 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-yellow-600" />
               Key Insights
             </h3>
             <div className="grid md:grid-cols-2 gap-3">
               {analysis.keyInsights.map((insight, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <Check className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-stone-800">{insight}</p>
+                <div key={idx} className="flex items-start gap-3 p-4 bg-gradient-to-br from-stone-50 to-neutral-100 rounded-lg border border-stone-300">
+                  <Check className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-black">{insight}</p>
                 </div>
               ))}
             </div>
@@ -3555,18 +3772,18 @@ const DepartmentDashboardNew = () => {
 
         {/* Recommendations */}
         {analysis.recommendations && analysis.recommendations.length > 0 && (
-          <div className="bg-green-50 rounded-xl border-2 border-green-300 p-6">
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 p-6">
             <h3 className="text-lg font-bold text-green-900 mb-4 flex items-center gap-2">
               <CheckCircle className="w-5 h-5" />
               AI Recommendations
             </h3>
             <div className="space-y-2">
               {analysis.recommendations.map((rec, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg">
+                <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg border border-green-200">
                   <div className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
                     {idx + 1}
                   </div>
-                  <p className="text-sm text-stone-800">{rec}</p>
+                  <p className="text-sm text-black">{rec}</p>
                 </div>
               ))}
             </div>
@@ -3575,16 +3792,16 @@ const DepartmentDashboardNew = () => {
 
         {/* Trends */}
         {analysis.trends && analysis.trends.length > 0 && (
-          <div className="bg-blue-50 rounded-xl border-2 border-blue-300 p-6">
-            <h3 className="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2">
+          <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl border-2 border-yellow-300 p-6">
+            <h3 className="text-lg font-bold text-yellow-900 mb-4 flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
               Identified Trends & Patterns
             </h3>
             <div className="space-y-2">
               {analysis.trends.map((trend, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg">
-                  <ChevronRight className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-stone-800">{trend}</p>
+                <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg border border-yellow-200">
+                  <ChevronRight className="w-5 h-5 text-yellow-700 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-black">{trend}</p>
                 </div>
               ))}
             </div>
@@ -4159,7 +4376,7 @@ const DepartmentDashboardNew = () => {
         return;
       }
 
-      console.log('🔄 Reloading policies for department:', depId);
+      console.log(' Reloading policies for department:', depId);
       
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
       const response = await axios.post(
@@ -4169,8 +4386,21 @@ const DepartmentDashboardNew = () => {
       );
 
       if (response.data.success) {
-        setPolicies(response.data.data.policies || '');
-        alert(`✅ Policies reloaded successfully!\n\nExtracted ${response.data.metadata.total_items} policy items in ${response.data.metadata.elapsed_time_seconds}s`);
+        // Claude ReAct agent returns markdown directly
+        const markdown = response.data.data.markdown || response.data.data.policies || '';
+        setPolicies(markdown);
+        
+        const metadata = response.data.metadata || {};
+        const totalDocs = response.data.data.totalDocuments || 0;
+        const iterations = response.data.data.iterations || 0;
+        
+        alert(
+          `Policies retrieved successfully!\n\n` +
+          `📚 Documents Found: ${totalDocs}\n` +
+          ` Search Iterations: ${iterations}\n` +
+          `🤖 Agent: ${metadata.agent || 'claude-react'}\n` +
+          `📝 Content Length: ${markdown.length} characters`
+        );
       } else {
         alert('Failed to reload policies: ' + response.data.message);
       }
@@ -4188,12 +4418,7 @@ const DepartmentDashboardNew = () => {
   // Render Policies tab
   const renderPolicies = () => {
     if (policiesLoading) {
-      return (
-        <div className="flex items-center justify-center py-24 bg-white rounded-xl border border-stone-200">
-          <Loader className="w-10 h-10 animate-spin text-stone-500" />
-          <span className="ml-3 text-stone-600">Loading policies...</span>
-        </div>
-      );
+      return <PolicyLoadingAnimation />;
     }
 
     if (!policies || policies.trim() === '') {

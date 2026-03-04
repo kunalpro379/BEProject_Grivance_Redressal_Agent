@@ -1,5 +1,5 @@
 ﻿import OpenAI from 'openai';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 import stateManager from './state-manager.service.js';
 
 /**

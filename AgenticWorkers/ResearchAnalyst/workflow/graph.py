@@ -22,18 +22,26 @@ class ResearchWorkflow:
         workflow.add_node("search_budget", self.nodes.search_budget)
         workflow.add_node("search_development", self.nodes.search_development_plans)
         workflow.add_node("search_resources", self.nodes.search_resources)
+        workflow.add_node("search_policies", self.nodes.search_policies)
+        workflow.add_node("search_case_studies", self.nodes.search_case_studies)
+        workflow.add_node("search_tenders", self.nodes.search_tenders)
+        workflow.add_node("search_ministries", self.nodes.search_ministries)
         workflow.add_node("analyze", self.nodes.analyze_results)
         workflow.add_node("generate_report", self.nodes.generate_report)
         workflow.add_node("handle_error", self.nodes.handle_error)
         
-        # Define edges
+        # Define edges - comprehensive search workflow
         workflow.set_entry_point("fetch_data")
         workflow.add_edge("fetch_data", "create_plan")
         workflow.add_edge("create_plan", "search_schemes")
         workflow.add_edge("search_schemes", "search_budget")
         workflow.add_edge("search_budget", "search_development")
         workflow.add_edge("search_development", "search_resources")
-        workflow.add_edge("search_resources", "analyze")
+        workflow.add_edge("search_resources", "search_policies")
+        workflow.add_edge("search_policies", "search_case_studies")
+        workflow.add_edge("search_case_studies", "search_tenders")
+        workflow.add_edge("search_tenders", "search_ministries")
+        workflow.add_edge("search_ministries", "analyze")
         workflow.add_edge("analyze", "generate_report")
         workflow.add_edge("generate_report", END)
         workflow.add_edge("handle_error", END)
@@ -53,6 +61,10 @@ class ResearchWorkflow:
                 budget_results=[],
                 development_results=[],
                 resources_results=[],
+                policies_results=[],
+                case_studies_results=[],
+                tenders_results=[],
+                ministries_results=[],
                 analysis=None,
                 final_report=None,
                 error=None

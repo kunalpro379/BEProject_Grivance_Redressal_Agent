@@ -20,6 +20,7 @@ def analysis(
     original_image_url: Optional[str] = None,
     citizen_id: Optional[str] = None,
     grievance_id: Optional[str] = None,
+    telegram_location_data: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     app = build_graph()
     initial_state = {
@@ -29,6 +30,7 @@ def analysis(
         "original_image_url": original_image_url or image_path,
         "citizen_id": citizen_id,
         "grievance_id": grievance_id,
+        "telegram_location_data": telegram_location_data,  # Pass Telegram location data to workflow
     }
     final_state=app.invoke(initial_state)
     return final_state

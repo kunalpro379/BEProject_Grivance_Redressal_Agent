@@ -28,7 +28,7 @@ class PolicyExtractorReactAgent:
         
         # Pinecone Configuration
         self.pinecone_api_key = os.getenv("PINECONE_API_KEY")
-        self.pinecone_index_name = os.getenv("PINECONE_INDEX_NAME", "igrs1")
+        self.pinecone_index_name = os.getenv("PINECONE_INDEX_NAME", "department")
         
         # Database Configuration
         self.db_url = os.getenv("DATABASE_URL")

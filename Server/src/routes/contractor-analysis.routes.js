@@ -1,7 +1,8 @@
 import express from 'express';
 import contractorAnalysisService from '../services/contractor-analysis.service.js';
 import contractorComparisonService from '../services/contractor-comparison.service.js';
-import { authenticateToken } from '../middleware/auth.middleware.js';
+import contractorAIAnalyst from '../services/contractor-ai-analyst.svc.js';
+import { authenticateToken } from '../middleware/auth.mid.js';
 
 const router = express.Router();
 
@@ -176,6 +177,63 @@ router.post('/compare', authenticateToken, async (req, res) => {
     console.error('Error comparing contractors:', error);
     res.status(500).json({ 
       error: 'Failed to compare contractors',
+      message: error.message 
+    });
+  }
+});
+
+/**
+ * AI-powered contractor analysis for project
+ * POST /api/contractor-analysis/ai-analyze
+ */
+router.post('/ai-analyze', authenticateToken, async (req, res) => {
+  try {
+    const { projectType, budget, urgency } = req.body;
+
+    if (!projectType || !budget) {
+      return res.status(400).json({ 
+        error: 'projectType and budget are required' 
+      });
+    }
+
+    const analysis = await contractorAIAnalyst.analyzeContractorsForProject(
+      projectType,
+      budget,
+      urgency || 'normal'
+    );
+
+    res.json(analysis);
+
+  } catch (error) {
+    console.error('Error in AI analysis:', error);
+    res.status(500).json({ 
+      error: 'Failed to generate AI analysis',
+      message: error.message 
+    });
+  }
+});
+
+/**
+ * Delete contractor
+ * DELETE /api/contractor-analysis/:contractorId
+ */
+router.delete('/:contractorId', authenticateToken, async (req, res) => {
+  try {
+    const { contractorId } = req.params;
+
+    // Only admins can delete contractors
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Unauthorized - Admin access required' });
+    }
+
+    const result = await contractorAIAnalyst.deleteContractor(contractorId);
+
+    res.json(result);
+
+  } catch (error) {
+    console.error('Error deleting contractor:', error);
+    res.status(500).json({ 
+      error: 'Failed to delete contractor',
       message: error.message 
     });
   }

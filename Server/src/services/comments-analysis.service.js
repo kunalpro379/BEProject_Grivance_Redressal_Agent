@@ -1,5 +1,5 @@
 ﻿import axios from 'axios';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 class CommentsAnalysisService {
   constructor() {

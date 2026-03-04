@@ -1,6 +1,6 @@
 import azureStorageService from '../services/azure.storage.services.js';
 import azureKnowledgeBaseQueueService from '../services/azure.queue.knowledgebase.service.js';
-import pool from '../config/database.js';
+import pool from '../config/db.js';
 
 class KnowledgeBaseController {
   async uploadPDF(req, res) {

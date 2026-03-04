@@ -1,0 +1,15 @@
+{
+  "name": "igrs-migration-runner",
+  "version": "1.0.0",
+  "description": "Database migration runner for IGRS project",
+  "type": "module",
+  "scripts": {
+    "migrate": "node migrate.js run",
+    "migrate:status": "node migrate.js status",
+    "migrate:rollback": "node migrate.js rollback",
+    "migrate:create": "node migrate.js create"
+  },
+  "keywords": ["migration", "database", "postgresql"],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,6 +1,6 @@
 import express from 'express';
 import * as citizenController from '../controllers/citizen.controller.js';
-import { authenticate, authorize } from '../middleware/auth.js';
+import { authenticate, authorize } from '../middleware/auth.mid.js';
 
 const router = express.Router();
 

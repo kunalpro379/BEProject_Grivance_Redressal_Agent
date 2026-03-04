@@ -370,7 +370,7 @@ const GrievanceMap = () => {
         </button>
 
         <button onClick={fetchGrievances} className="refresh-btn">
-          🔄 Refresh
+           Refresh
         </button>
       </div>
 

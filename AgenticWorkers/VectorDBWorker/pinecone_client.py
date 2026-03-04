@@ -13,7 +13,7 @@ class PineconeClient:
     
     def upsert_embeddings(self, vectors: List[Dict[str, Any]]) -> bool:
         """
-        Upsert embeddings to Pinecone
+        Upsert embeddings to Pinecone in batches to avoid size limits
         
         vectors format: [
             {
@@ -31,8 +31,25 @@ class PineconeClient:
         ]
         """
         try:
-            self.index.upsert(vectors=vectors)
-            logger.info(f"✓ Upserted {len(vectors)} vectors to Pinecone")
+            # Pinecone has a 4MB limit per request
+            # Split into smaller batches to avoid "message too large" error
+            batch_size = 50  # Reduced from 100 to avoid size limits
+            total_upserted = 0
+            
+            for i in range(0, len(vectors), batch_size):
+                batch = vectors[i:i + batch_size]
+                
+                # Truncate metadata text to reduce size
+                for vector in batch:
+                    if 'metadata' in vector and 'text' in vector['metadata']:
+                        # Limit text to 200 chars to reduce message size
+                        vector['metadata']['text'] = vector['metadata']['text'][:200]
+                
+                self.index.upsert(vectors=batch)
+                total_upserted += len(batch)
+                logger.info(f"  Batch {i//batch_size + 1}: Upserted {len(batch)} vectors")
+            
+            logger.info(f"✓ Total upserted {total_upserted} vectors to Pinecone")
             return True
         except Exception as e:
             logger.error(f"Error upserting to Pinecone: {e}")

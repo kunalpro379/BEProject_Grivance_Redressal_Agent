@@ -260,8 +260,12 @@ class DepartmentDashboardService {
     return await response.json();
   }
 
-  async getCitizenComplaintsAnalysis(depId, token) {
-    const response = await fetch(`${API_URL}/api/department-dashboard/${depId}/citizen-complaints-analysis`, {
+  async getCitizenComplaintsAnalysis(depId, token, forceRefresh = false) {
+    const url = forceRefresh 
+      ? `${API_URL}/api/department-dashboard/${depId}/citizen-complaints-analysis?forceRefresh=true`
+      : `${API_URL}/api/department-dashboard/${depId}/citizen-complaints-analysis`;
+    
+    const response = await fetch(url, {
       headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
     });
     if (!response.ok) throw new Error('Failed to fetch citizen complaints analysis');

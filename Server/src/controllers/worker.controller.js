@@ -27,8 +27,24 @@ class WorkerController {
             }
 
             // Prepare analysis result for notification
+            const isValid = validation_result?.is_valid === true;
+            const validationScore = validation_result?.validation_score || 0;
+            
+            // Determine status based on validation
+            let validationStatus = 'pending';
+            if (validation_result) {
+                if (isValid) {
+                    validationStatus = 'validated';
+                } else {
+                    validationStatus = 'rejected';
+                }
+            }
+            
             const analysisResult = {
-                validation_status: validation_result?.is_valid ? 'validated' : 'needs_review',
+                validation_status: validationStatus,
+                status: isValid ? 'submitted' : 'rejected',
+                validation_reasoning: validation_result?.reasoning || validation_result?.validation_reasoning || 'Validation criteria not met',
+                validation_score: validationScore,
                 department: { name: 'Being assigned' },
                 severity: { level: 'Medium' }
             };
@@ -36,7 +52,7 @@ class WorkerController {
             // Notify user via Telegram with detailed analysis
             await telegramBot.notifyQueryAnalyzed(tId, gId, analysisResult);
 
-            console.log(`QueryAnalyst callback: notified user ${tId} for grievance ${gId}`);
+            console.log(`QueryAnalyst callback: notified user ${tId} for grievance ${gId}, validation: ${validationStatus}`);
 
             res.json({
                 success: true,
